@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' https:">
+  <link rel="stylesheet" href="companion.css">
+  <title>Pokémon Companion</title>
+</head>
+<body>
+  <div id="bubble" role="status" aria-live="polite"></div>
+  <button id="pet-container" type="button" aria-label="Open Pokémon actions" aria-expanded="false" aria-controls="team-panel">
+    <span class="pet-aura"></span>
+    <img id="pet-image" alt="Pikachu">
+    <span id="work-prop" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <span id="state-badge">Ready</span>
+    <span class="spark spark-one"></span><span class="spark spark-two"></span><span class="spark spark-three"></span>
+  </button>
+  <section id="team-panel" aria-label="Pokémon actions" data-view="actions" hidden>
+    <header>
+      <button id="back-panel" class="round-button" type="button" aria-label="Back to actions" hidden>‹</button>
+      <div class="panel-title"><span class="eyebrow" id="panel-caption">YOUR PARTNER</span><h1><span id="active-name">Pikachu</span><span class="online-dot"></span></h1></div>
+      <button id="close-panel" class="round-button" type="button" aria-label="Close panel">×</button>
+    </header>
+    <div id="action-view">
+      <div class="action-buttons">
+        <button id="action-switch" class="action-button" type="button" aria-label="Switch Pokémon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h15m-4-4 4 4-4 4M20 17H5m4-4-4 4 4 4"/></svg><span>Switch</span>
+        </button>
+        <button id="action-talk" class="action-button" type="button" aria-label="Talk to Pokémon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8H4l1.8-4A8 8 0 1 1 20 11Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><span>Talk</span>
+        </button>
+        <button id="action-exit" class="action-button exit-action" type="button" aria-label="Exit application">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8M6.3 5.7a8 8 0 1 0 11.4 0"/></svg><span>Exit</span>
+        </button>
+      </div>
+    </div>
+    <div id="switch-view" hidden>
+    <div class="task-card"><span id="activity-icon" aria-hidden="true">✦</span><div><strong id="task-title">Ready when you are</strong><p id="task-message">Tell your AI what to do. I’ll be right here.</p></div></div>
+    <div class="roster-label"><h2>Choose your partner</h2><span>7 Pokémon</span></div>
+    <fieldset id="roster" aria-label="Choose Pokémon"></fieldset>
+    <div class="activity-label"><h2>Recent activity</h2><span id="action-count">0 actions</span></div>
+    <ol id="activity-log"><li>Waiting for your first task.</li></ol>
+    <footer><button id="pause-button" type="button">Pause control</button><span>Ctrl + Shift + P</span></footer>
+    </div>
+    <div id="talk-view" hidden>
+      <div id="chat-messages" role="log" aria-label="Conversation" aria-live="polite"></div>
+      <p id="chat-error" role="status" hidden></p>
+      <form id="chat-form">
+        <label class="visually-hidden" for="chat-input">Message your Pokémon</label>
+        <textarea id="chat-input" rows="2" maxlength="4000" placeholder="Say something…"></textarea>
+        <button id="chat-send" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14-8-4 16-3-6-7-2Z"/><path d="m12 14 7-10"/></svg></button>
+      </form>
+    </div>
+  </section>
+  <script type="module" src="companion.js"></script>
+</body>
+</html>

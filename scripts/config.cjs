@@ -1,0 +1,10 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const args = [path.join(root, 'backend/dist/main.js')];
+const directory = path.join(root, 'config');
+fs.mkdirSync(directory, {recursive: true});
+fs.writeFileSync(path.join(directory, 'claude-desktop.json'), JSON.stringify({mcpServers: {'pokemon-computer': {command: process.execPath, args}}}, null, 2) + '\n');
+const tomlQuote = (value) => JSON.stringify(value.replace(/\\/g, '/'));
+fs.writeFileSync(path.join(directory, 'codex.toml'), `[mcp_servers.pokemon_computer]\ncommand = ${tomlQuote(process.execPath)}\nargs = [${tomlQuote(args[0])}]\nstartup_timeout_sec = 30\ntool_timeout_sec = 60\n`);
+console.log('Created config/claude-desktop.json and config/codex.toml for this checkout.');

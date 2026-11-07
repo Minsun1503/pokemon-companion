@@ -1,0 +1,5 @@
+* text=auto
+frontend/** text=auto eol=crlf
+backend/** text=auto eol=lf
+*.ps1 text eol=crlf
+*.sh text eol=lf

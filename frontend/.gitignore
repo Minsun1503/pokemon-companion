@@ -1,0 +1,18 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+
+build/
+dist/
+.claude/
+node_modules/
+
+assets/*.png
+
+# Temporary source assets used by install:pet.
+assets/*/*.bundle.json
+assets/*/*_source.png
+assets/*/*-pet-assets.json
+assets/*/*_frames_debug.png
+_*/

@@ -1,0 +1,51 @@
+{
+  "id": "pikachu",
+  "name": "피카츄",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/pikachu.mp3",
+  "recallText": "피카!",
+  "responseCryKeywords": [
+    "피카",
+    "피카츄",
+    "찌릿",
+    "좋아",
+    "힘내",
+    "괜찮아"
+  ],
+  "greeting": "피카! 왔어?",
+  "thinkingText": "피카츄가 볼을 살짝 반짝이며 생각하는 중",
+  "fallbackText": "피카...? 잘 안 들렸어.",
+  "errorText": "피카츄... 전기가 잘 안 통하는 것 같아. 설정을 확인해줘.",
+"appearance": {
+  "width": 76,
+  "height": 84,
+  "imageWidth": 60,
+  "imageHeight": 68
+},
+  "movement": {
+    "speed": 0.9,
+    "jumpHeight": 10,
+    "jumpDuration": 18,
+    "walkFrameInterval": 6,
+    "idleFrameInterval": 6,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#f3c83c",
+    "accentHoverColor": "#dfb62f",
+    "accentGlowColor": "rgba(243, 200, 60, 0.72)",
+    "assistantBackground": "#fff4c7",
+    "assistantBorderColor": "#f1d772"
+  },
+  "idlePhrases": [
+    "피카!",
+    "피카츄?",
+    "찌릿찌릿!",
+    "같이 놀자!",
+    "괜찮아, 내가 있어.",
+    "기운 내!"
+  ]
+}

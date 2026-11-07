@@ -1,0 +1,13 @@
+{
+  "name": "pokemon-companion",
+  "description": "Animated Pokémon companions for Windows computer control.",
+  "owner": { "name": "Pokémon Companion contributors" },
+  "plugins": [
+    {
+      "name": "pokemon-companion",
+      "source": "./plugins/pokemon-companion",
+      "description": "Seven animated Pokémon for native Windows computer control.",
+      "category": "productivity"
+    }
+  ]
+}

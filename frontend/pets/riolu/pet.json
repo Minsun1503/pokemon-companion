@@ -1,0 +1,45 @@
+{
+  "id": "riolu",
+  "name": "리오르",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/riolu.mp3",
+  "recallText": "리오!",
+  "responseCryKeywords": ["리오", "파동", "반가", "안녕", "신남", "좋아", "같이"],
+  "greeting": "리오! 왔어? 파동으로 느껴졌어 ㅎㅎ 뭐 물어볼 거 있어?",
+  "thinkingText": "리오르가 파동을 모으는 중",
+  "fallbackText": "리오...문제가 생겼어!",
+  "errorText": "AI 모델에 연결되지 않는 파동이 느껴져... 설정과 API 키를 확인해줘!",
+  "appearance": {
+    "width": 120,
+    "height": 140,
+    "imageWidth": 96,
+    "imageHeight": 96
+  },
+  "movement": {
+    "speed": 1,
+    "jumpHeight": 14,
+    "jumpDuration": 18,
+    "walkFrameInterval": 6,
+    "idleFrameInterval": 6,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#4a90d9",
+    "accentHoverColor": "#357abd",
+    "accentGlowColor": "rgba(74, 144, 217, 0.7)",
+    "assistantBackground": "#e8f4fd",
+    "assistantBorderColor": "#c5e0f5"
+  },
+  "idlePhrases": [
+    "리오! 뭐해?",
+    "파동이 느껴지는데... 심심한 거 아니야?",
+    "같이 놀자! 리오리오~",
+    "나 여기 있어!",
+    "오늘 뭔가 특별한 파동이 느껴지는데?",
+    "리오... 배고프다",
+    "너 지금 피곤하지? 파동으로 다 느껴져"
+  ]
+}

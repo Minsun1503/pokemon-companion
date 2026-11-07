@@ -1,0 +1,11 @@
+release/
+.publish/
+**/node_modules/
+**/build/
+**/dist/
+**/.env
+**/.env.*
+!**/.env.example
+config/codex.toml
+config/claude-desktop.json
+*.log

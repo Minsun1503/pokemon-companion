@@ -1,0 +1,66 @@
+{
+  "name": "pokemon-pet",
+  "version": "0.0.2-5",
+  "description": "Pokemon desktop pet with LLM chat",
+  "main": "main.js",
+  "scripts": {
+    "build": "npm run generate:icons && tsc -p tsconfig.main.json && tsc -p tsconfig.renderer.json && npm run build:copy",
+    "build:copy": "node -e \"const fs=require('fs'); fs.mkdirSync('build/renderer',{recursive:true}); ['index.html','styles.css','companion.html','companion.css'].forEach(f=>fs.copyFileSync('src/renderer/'+f,'build/renderer/'+f))\"",
+    "check": "biome check . && tsc -p tsconfig.json",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "start": "npm run build && electron .",
+    "generate:icons": "node scripts/generate-icons.js",
+    "create:pet": "node scripts/create-pet.js",
+    "install:pet": "node scripts/install-pet-bundle.js",
+    "bundle:pet": "node scripts/bundle-pet.js",
+    "validate:pet": "node scripts/validate-pet.js",
+    "dist": "npm run build && electron-builder",
+    "dist:mac": "npm run build && electron-builder --mac --arm64"
+  },
+  "build": {
+    "appId": "com.pokemon.pet",
+    "productName": "Pokemon Pet",
+    "files": [
+      "main.js",
+      "build/**/*",
+      "assets/*.png",
+      "pets/**/*",
+      "config/**/*",
+      "!.env",
+      "!.env.*",
+      ".env.example"
+    ],
+    "publish": {
+      "provider": "github"
+    },
+    "mac": {
+      "icon": "assets/icon.png",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": "-"
+    },
+    "win": {
+      "icon": "assets/icon.png",
+      "target": "nsis"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": "AppImage"
+    }
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
+    "@types/node": "^22.0.0",
+    "electron": "^42.3.3",
+    "electron-builder": "^26.0.0",
+    "sharp": "^0.35.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  }
+}

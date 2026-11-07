@@ -1,0 +1,5 @@
+Pokemon Companion is an unofficial fan project.
+Includes modified MIT-licensed source from DEV-asdf-516/Pokemon-pets and domdomegg/computer-use-mcp.
+Original copyright notices are preserved in frontend/LICENSE and backend/LICENSE.
+Pokemon names and artwork belong to Nintendo / Creatures Inc. / GAME FREAK.
+See THIRD_PARTY.md for links, authors, imported base commits, and licensing details.

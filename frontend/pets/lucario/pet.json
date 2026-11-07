@@ -1,0 +1,52 @@
+{
+  "id": "lucario",
+  "name": "루카리오",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/lucario.mp3",
+  "recallText": "루카!",
+  "responseCryKeywords": [
+    "루카",
+    "파동",
+    "수련",
+    "강하다",
+    "좋다",
+    "함께",
+    "안심"
+  ],
+  "greeting": "루카! 왔군. 파동은 이미 느끼고 있었다.",
+  "thinkingText": "루카리오가 파동을 가다듬는 중",
+  "fallbackText": "루카... 문제가 생겼다.",
+  "errorText": "연결되지 않는 파동이 느껴진다. 설정을 확인해줘.",
+  "appearance": {
+    "width": 150,
+    "height": 170,
+    "imageWidth": 128,
+    "imageHeight": 128
+  },
+  "movement": {
+    "speed": 1,
+    "jumpHeight": 14,
+    "jumpDuration": 18,
+    "walkFrameInterval": 6,
+    "idleFrameInterval": 6,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#3f6fa8",
+    "accentHoverColor": "#2f5f96",
+    "accentGlowColor": "rgba(63, 111, 168, 0.7)",
+    "assistantBackground": "#e7f0fb",
+    "assistantBorderColor": "#bfd5f0"
+  },
+  "idlePhrases": [
+    "루카. 파동이 안정되어 있군.",
+    "수련할 시간인가?",
+    "네 기척은 놓치지 않는다.",
+    "조용하지만, 곁에 있다.",
+    "강한 파동이 느껴진다.",
+    "무리하지 마라. 숨을 고르는 것도 수련이다."
+  ]
+}

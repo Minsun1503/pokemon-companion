@@ -1,0 +1,380 @@
+{
+  "source_sheet": {
+    "filename": "rioru_4th_gen.png",
+    "size": {
+      "width": 438,
+      "height": 536
+    },
+    "sha256": "d28f53c77140bb9d3a6a07aa0e22f7e06606d857e2b61abaa4191b31c69bd5a6",
+    "background_rgba": [
+      112,
+      154,
+      209,
+      255
+    ]
+  },
+  "method": "back_* frames were re-extracted from explicit original sheet coordinates with 6px margin, exact background removal, then bottom-aligned onto a 56x64 transparent canvas. Non-back frames were repadded to the same canvas.",
+  "normalized_canvas": {
+    "width": 56,
+    "height": 64
+  },
+  "bottom_padding": 6,
+  "back_frames": {
+    "back_down": [
+      {
+        "index": 1,
+        "source_bbox": {
+          "left": 16,
+          "top": 280,
+          "right": 53,
+          "bottom": 323
+        },
+        "crop_box_with_margin": {
+          "left": 10,
+          "top": 274,
+          "right_exclusive": 60,
+          "bottom_exclusive": 330
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 2,
+        "source_bbox": {
+          "left": 91,
+          "top": 279,
+          "right": 127,
+          "bottom": 323
+        },
+        "crop_box_with_margin": {
+          "left": 85,
+          "top": 273,
+          "right_exclusive": 134,
+          "bottom_exclusive": 330
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 3,
+        "source_bbox": {
+          "left": 165,
+          "top": 280,
+          "right": 201,
+          "bottom": 323
+        },
+        "crop_box_with_margin": {
+          "left": 159,
+          "top": 274,
+          "right_exclusive": 208,
+          "bottom_exclusive": 330
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 4,
+        "source_bbox": {
+          "left": 238,
+          "top": 281,
+          "right": 275,
+          "bottom": 323
+        },
+        "crop_box_with_margin": {
+          "left": 232,
+          "top": 275,
+          "right_exclusive": 282,
+          "bottom_exclusive": 330
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 5,
+        "source_bbox": {
+          "left": 309,
+          "top": 282,
+          "right": 347,
+          "bottom": 323
+        },
+        "crop_box_with_margin": {
+          "left": 303,
+          "top": 276,
+          "right_exclusive": 354,
+          "bottom_exclusive": 330
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 6,
+        "source_bbox": {
+          "left": 381,
+          "top": 281,
+          "right": 419,
+          "bottom": 323
+        },
+        "crop_box_with_margin": {
+          "left": 375,
+          "top": 275,
+          "right_exclusive": 426,
+          "bottom_exclusive": 330
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      }
+    ],
+    "back_side": [
+      {
+        "index": 1,
+        "source_bbox": {
+          "left": 16,
+          "top": 347,
+          "right": 53,
+          "bottom": 390
+        },
+        "crop_box_with_margin": {
+          "left": 10,
+          "top": 341,
+          "right_exclusive": 60,
+          "bottom_exclusive": 397
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 2,
+        "source_bbox": {
+          "left": 89,
+          "top": 346,
+          "right": 127,
+          "bottom": 390
+        },
+        "crop_box_with_margin": {
+          "left": 83,
+          "top": 340,
+          "right_exclusive": 134,
+          "bottom_exclusive": 397
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 3,
+        "source_bbox": {
+          "left": 162,
+          "top": 347,
+          "right": 199,
+          "bottom": 390
+        },
+        "crop_box_with_margin": {
+          "left": 156,
+          "top": 341,
+          "right_exclusive": 206,
+          "bottom_exclusive": 397
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 4,
+        "source_bbox": {
+          "left": 235,
+          "top": 347,
+          "right": 272,
+          "bottom": 390
+        },
+        "crop_box_with_margin": {
+          "left": 229,
+          "top": 341,
+          "right_exclusive": 279,
+          "bottom_exclusive": 397
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 5,
+        "source_bbox": {
+          "left": 310,
+          "top": 346,
+          "right": 346,
+          "bottom": 390
+        },
+        "crop_box_with_margin": {
+          "left": 304,
+          "top": 340,
+          "right_exclusive": 353,
+          "bottom_exclusive": 397
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 6,
+        "source_bbox": {
+          "left": 384,
+          "top": 347,
+          "right": 420,
+          "bottom": 390
+        },
+        "crop_box_with_margin": {
+          "left": 378,
+          "top": 341,
+          "right_exclusive": 427,
+          "bottom_exclusive": 397
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      }
+    ],
+    "back_up": [
+      {
+        "index": 1,
+        "source_bbox": {
+          "left": 19,
+          "top": 415,
+          "right": 56,
+          "bottom": 457
+        },
+        "crop_box_with_margin": {
+          "left": 13,
+          "top": 409,
+          "right_exclusive": 63,
+          "bottom_exclusive": 464
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 2,
+        "source_bbox": {
+          "left": 91,
+          "top": 416,
+          "right": 128,
+          "bottom": 457
+        },
+        "crop_box_with_margin": {
+          "left": 85,
+          "top": 410,
+          "right_exclusive": 135,
+          "bottom_exclusive": 464
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 3,
+        "source_bbox": {
+          "left": 162,
+          "top": 412,
+          "right": 200,
+          "bottom": 454
+        },
+        "crop_box_with_margin": {
+          "left": 156,
+          "top": 406,
+          "right_exclusive": 207,
+          "bottom_exclusive": 461
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 4,
+        "source_bbox": {
+          "left": 235,
+          "top": 409,
+          "right": 272,
+          "bottom": 452
+        },
+        "crop_box_with_margin": {
+          "left": 229,
+          "top": 403,
+          "right_exclusive": 279,
+          "bottom_exclusive": 459
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 5,
+        "source_bbox": {
+          "left": 308,
+          "top": 410,
+          "right": 346,
+          "bottom": 454
+        },
+        "crop_box_with_margin": {
+          "left": 302,
+          "top": 404,
+          "right_exclusive": 353,
+          "bottom_exclusive": 461
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      },
+      {
+        "index": 6,
+        "source_bbox": {
+          "left": 381,
+          "top": 414,
+          "right": 418,
+          "bottom": 458
+        },
+        "crop_box_with_margin": {
+          "left": 375,
+          "top": 408,
+          "right_exclusive": 425,
+          "bottom_exclusive": 465
+        },
+        "output_canvas": {
+          "width": 56,
+          "height": 64
+        }
+      }
+    ]
+  },
+  "sprite_counts": {
+    "down": 6,
+    "side": 6,
+    "up": 6,
+    "back_down": 6,
+    "back_side": 6,
+    "back_up": 6
+  }
+}

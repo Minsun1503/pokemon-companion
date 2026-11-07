@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' https:">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="bubble"></div>
+<div id="chat-window">
+  <!-- 리사이즈 핸들 -->
+  <div class="resize-handle" id="rz-n"></div>
+  <div class="resize-handle" id="rz-s"></div>
+  <div class="resize-handle" id="rz-w"></div>
+  <div class="resize-handle" id="rz-e"></div>
+  <div class="resize-handle" id="rz-nw"></div>
+  <div class="resize-handle" id="rz-ne"></div>
+  <div class="resize-handle" id="rz-sw"></div>
+  <div class="resize-handle" id="rz-se"></div>
+
+  <div id="chat-header">
+    <div id="pet-name-wrap">
+      <span id="pet-name" title="클릭해서 닉네임 변경"></span>
+      <input id="pet-name-input" type="text" maxlength="20" aria-label="펫 닉네임">
+    </div>
+    <div id="pet-picker">
+      <button id="pet-picker-button" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span id="pet-picker-label"></span>
+        <span id="pet-picker-chevron" aria-hidden="true">▾</span>
+      </button>
+      <div id="pet-picker-menu" role="listbox" aria-label="포켓몬 선택"></div>
+    </div>
+    <span id="close-chat">✕</span>
+  </div>
+  <div id="messages"></div>
+  <div id="message-menu">
+    <button id="copy-message" type="button">복사</button>
+    <button id="resend-message" type="button">재전송</button>
+    <button id="delete-message" type="button">삭제</button>
+  </div>
+  <div id="input-area">
+    <textarea id="user-input" rows="1" placeholder="말 걸어봐..."></textarea>
+    <button id="send-btn" type="button">전송</button>
+  </div>
+</div>
+
+<div id="pet-container">
+  <img id="pet-image" alt="">
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

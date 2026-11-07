@@ -1,0 +1,49 @@
+{
+  "id": "charmander",
+  "name": "파이리",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/charmander.mp3",
+  "recallText": "파이!",
+  "responseCryKeywords": [
+    "파이",
+    "불꽃",
+    "좋아",
+    "힘내",
+    "괜찮아"
+  ],
+  "greeting": "파이! 왔어?",
+  "thinkingText": "파이리가 생각하는 중",
+  "fallbackText": "파이리...? 다시 말해줘.",
+  "errorText": "파이리... 연결이 잘 안 되는 것 같아. 설정을 확인해줘.",
+  "appearance": {
+    "width": 88,
+    "height": 88,
+    "imageWidth": 72,
+    "imageHeight": 72
+  },
+  "movement": {
+    "speed": 0.82,
+    "jumpHeight": 8,
+    "jumpDuration": 18,
+    "walkFrameInterval": 6,
+    "idleFrameInterval": 6,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#ff9b42",
+    "accentHoverColor": "#f28622",
+    "accentGlowColor": "rgba(255,155,66,0.72)",
+    "assistantBackground": "#fff0dd",
+    "assistantBorderColor": "#f2c28c"
+  },
+  "idlePhrases": [
+    "파이!",
+    "꼬리 불꽃이 뜨겁다!",
+    "같이 가자!",
+    "기운 내!",
+    "불꽃은 아직 안 꺼졌어."
+  ]
+}

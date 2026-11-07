@@ -1,0 +1,32 @@
+name: Windows release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.16.0'
+      - run: npm run setup
+      - run: npm run check
+      - run: npm test
+      - run: npm run package:windows
+      - name: Publish release assets
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $taskVersion = 'v' + (Get-Content package.json | ConvertFrom-Json).version
+          gh release view $taskVersion --repo $env:GITHUB_REPOSITORY *> $null
+          if ($LASTEXITCODE -ne 0) {
+            gh release create $taskVersion --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "Pokemon Companion $taskVersion" --generate-notes
+            if ($LASTEXITCODE -ne 0) { throw 'Could not create release.' }
+          }
+          gh release upload $taskVersion release/pokemon-companion-win32-x64.mcpb release/pokemon-companion-win32-x64.zip release/SHA256SUMS.txt --repo $env:GITHUB_REPOSITORY --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Could not upload release files.' }

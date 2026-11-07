@@ -1,0 +1,22 @@
+{
+  "name": "pokemon-computer-companion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An animated Pokémon desktop companion for AI computer use through MCP",
+  "scripts": {
+    "setup": "node scripts/repos.cjs install",
+    "build": "node scripts/repos.cjs run build",
+    "check": "node scripts/repos.cjs check",
+    "test": "node scripts/repos.cjs test && node --test scripts/chat.test.cjs",
+    "start": "node backend/dist/main.js",
+    "demo": "node scripts/demo.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "config": "node scripts/config.cjs",
+    "test:input": "node scripts/input-smoke.mjs",
+    "test:windows": "node scripts/windows-smoke.mjs",
+    "package:windows": "npm run build && node scripts/package-windows.cjs",
+    "test:package": "node scripts/package-smoke.mjs",
+    "test:installers": "node scripts/installer-smoke.cjs",
+    "test:marketplace": "node scripts/marketplace-smoke.mjs"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "pokemon-companion": {
+      "command": "powershell.exe",
+      "args": ["-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "./scripts/launch.ps1"],
+      "cwd": ".",
+      "startup_timeout_sec": 300,
+      "tool_timeout_sec": 60
+    }
+  }
+}

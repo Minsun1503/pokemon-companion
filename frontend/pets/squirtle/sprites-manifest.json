@@ -1,0 +1,37 @@
+{
+  "source_sheet": {
+    "filename": "squirtle_animated_sheet.png",
+    "notes": "Using original-size normalized canvas to avoid blur. Instruction text, status dots, and right-side watermark art were excluded."
+  },
+  "method": "Sprites were extracted directly from the uploaded source sheet by connected-component bbox detection. No color correction, palette reduction, resampling, or dot filtering was applied. This patch keeps the original-size normalized canvas to avoid blur.",
+  "counts": {
+    "front_frames": 18,
+    "back_frames": 18
+  },
+  "row_summary": [
+    {
+      "row_index": 0,
+      "count": 5
+    },
+    {
+      "row_index": 1,
+      "count": 12
+    },
+    {
+      "row_index": 2,
+      "count": 6
+    },
+    {
+      "row_index": 3,
+      "count": 5
+    },
+    {
+      "row_index": 4,
+      "count": 12
+    },
+    {
+      "row_index": 5,
+      "count": 6
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "pokemon-companion",
+  "version": "0.1.0",
+  "description": "Seven animated Pokémon for native Windows computer control.",
+  "author": { "name": "Minsun1503" },
+  "homepage": "https://github.com/Minsun1503/pokemon-companion",
+  "repository": "https://github.com/Minsun1503/pokemon-companion",
+  "license": "MIT",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Pokémon Companion",
+    "shortDescription": "Seven Pokémon for Windows computer control",
+    "developerName": "Minsun1503",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"]
+  }
+}

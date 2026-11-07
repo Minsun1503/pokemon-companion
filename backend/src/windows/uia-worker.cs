@@ -1,0 +1,199 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Automation;
+
+public static class PokemonWindowsAutomation {
+    [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc callback, IntPtr data);
+    [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr window);
+    [DllImport("user32.dll")] static extern bool IsWindow(IntPtr window);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr window, StringBuilder text, int count);
+    [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
+    [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr window);
+    [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window, int command);
+    delegate bool EnumProc(IntPtr window, IntPtr data);
+
+    class Snapshot {
+        public IntPtr Window;
+        public DateTime Created = DateTime.UtcNow;
+        public Dictionary<int, AutomationElement> Elements = new Dictionary<int, AutomationElement>();
+        public Dictionary<int, string> RuntimeIds = new Dictionary<int, string>();
+    }
+    class Visit {
+        public AutomationElement Element;
+        public int Depth;
+        public Visit(AutomationElement element, int depth) { Element = element; Depth = depth; }
+    }
+    static Dictionary<string, Snapshot> snapshots = new Dictionary<string, Snapshot>();
+    static Dictionary<string, object> Obj(params object[] values) {
+        var result = new Dictionary<string, object>();
+        for (int i = 0; i < values.Length; i += 2) result[(string)values[i]] = values[i + 1];
+        return result;
+    }
+    static string Clip(string value, int length) {
+        if (String.IsNullOrEmpty(value)) return "";
+        return value.Length > length ? value.Substring(0, length) + "…" : value;
+    }
+    static IntPtr Handle(string id) {
+        long value;
+        if (!Int64.TryParse(id, out value) || !IsWindow(new IntPtr(value))) throw new Exception("Window no longer exists. Call get_windows again.");
+        return new IntPtr(value);
+    }
+    static Dictionary<string, object> WindowInfo(IntPtr handle) {
+        var title = new StringBuilder(1024);
+        GetWindowText(handle, title, title.Capacity);
+        uint pid;
+        GetWindowThreadProcessId(handle, out pid);
+        string process = "";
+        try { process = Process.GetProcessById((int)pid).ProcessName; } catch { }
+        return Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process);
+    }
+    public static object Windows(string query) {
+        var windows = new List<object>();
+        EnumWindows(delegate(IntPtr handle, IntPtr unused) {
+            if (!IsWindowVisible(handle)) return true;
+            var info = WindowInfo(handle);
+            var title = (string)info["title"];
+            if (String.IsNullOrEmpty(title)) return true;
+            if (!String.IsNullOrEmpty(query) && (title + " " + info["process"]).IndexOf(query, StringComparison.OrdinalIgnoreCase) < 0) return true;
+            info["active"] = handle == GetForegroundWindow();
+            windows.Add(info);
+            return windows.Count < 100;
+        }, IntPtr.Zero);
+        return Obj("windows", windows);
+    }
+    static List<string> Actions(AutomationElement element) {
+        var actions = new List<string>();
+        if (!element.Current.IsEnabled || element.Current.IsPassword) return actions;
+        object pattern;
+        if (element.TryGetCurrentPattern(InvokePattern.Pattern, out pattern)) actions.Add("invoke");
+        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern) && !((ValuePattern)pattern).Current.IsReadOnly) actions.Add("set_value");
+        if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) actions.Add("select");
+        if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) actions.Add("toggle");
+        if (element.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out pattern)) { actions.Add("expand"); actions.Add("collapse"); }
+        if (element.TryGetCurrentPattern(ScrollPattern.Pattern, out pattern)) actions.Add("scroll");
+        if (element.TryGetCurrentPattern(TextPattern.Pattern, out pattern)) actions.Add("read_text");
+        if (element.Current.IsKeyboardFocusable) actions.Add("focus");
+        return actions;
+    }
+    static string Role(AutomationElement element) { return element.Current.ControlType.ProgrammaticName.Replace("ControlType.", ""); }
+    static string RuntimeId(AutomationElement element) { return String.Join(".", element.GetRuntimeId()); }
+    public static object UI(string windowId, string query, string roleFilter, int limit, int maxDepth) {
+        var handle = Handle(windowId);
+        var root = AutomationElement.FromHandle(handle);
+        if (root == null) throw new Exception("UI Automation is unavailable for this window. Use keyboard shortcuts or a screenshot fallback.");
+        var expired = new List<string>();
+        foreach (var entry in snapshots) if ((DateTime.UtcNow - entry.Value.Created).TotalSeconds > 120) expired.Add(entry.Key);
+        foreach (var key in expired) snapshots.Remove(key);
+        if (snapshots.Count >= 8) snapshots.Clear();
+        var snapshot = new Snapshot { Window = handle };
+        var snapshotId = Guid.NewGuid().ToString("N");
+        snapshots[snapshotId] = snapshot;
+        var nodes = new List<object>();
+        var pending = new Stack<Visit>();
+        pending.Push(new Visit(root, 0));
+        var watch = Stopwatch.StartNew();
+        int scanned = 0, matched = 0;
+        bool depthLimited = false;
+        while (pending.Count > 0 && scanned < 2500 && watch.ElapsedMilliseconds < 8000) {
+            var visit = pending.Pop();
+            scanned++;
+            try {
+                var element = visit.Element;
+                var info = element.Current;
+                if (info.IsOffscreen || info.IsPassword) continue;
+                string role = Role(element), name = info.Name ?? "", automationId = info.AutomationId ?? "";
+                var actions = Actions(element);
+                bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
+                bool matches = String.IsNullOrEmpty(query) || (name + " " + automationId).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+                if (useful && matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
+                    matched++;
+                    if (nodes.Count < limit) {
+                        int id = nodes.Count + 1;
+                        snapshot.Elements[id] = element;
+                        snapshot.RuntimeIds[id] = RuntimeId(element);
+                        var node = Obj("id", id, "role", role, "name", Clip(name, 160));
+                        if (actions.Count > 0) node["actions"] = actions;
+                        if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
+                        object pattern;
+                        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160);
+                        if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Current.ToggleState.ToString();
+                        if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Current.IsSelected;
+                        if (!info.IsEnabled) node["enabled"] = false;
+                        nodes.Add(node);
+                    }
+                }
+                if (visit.Depth < maxDepth) {
+                    var children = new List<AutomationElement>();
+                    var child = TreeWalker.ControlViewWalker.GetFirstChild(element);
+                    while (child != null && children.Count < 500 && watch.ElapsedMilliseconds < 8000) {
+                        children.Add(child);
+                        child = TreeWalker.ControlViewWalker.GetNextSibling(child);
+                    }
+                    for (int i = children.Count - 1; i >= 0; i--) pending.Push(new Visit(children[i], visit.Depth + 1));
+                } else depthLimited = true;
+            } catch (ElementNotAvailableException) { } catch (InvalidOperationException) { }
+        }
+        return Obj("window", WindowInfo(handle), "snapshot", snapshotId, "nodes", nodes, "matched", matched,
+            "truncated", matched > nodes.Count || pending.Count > 0 || depthLimited, "scanned", scanned);
+    }
+    public static object Activate(string windowId) {
+        var handle = Handle(windowId);
+        ShowWindow(handle, 9);
+        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows did not allow activation. Select the window manually.");
+        return Obj("ok", true);
+    }
+    public static object Act(string snapshotId, int id, string action, string text, string direction) {
+        Snapshot snapshot;
+        AutomationElement element;
+        if (String.IsNullOrEmpty(snapshotId) || !snapshots.TryGetValue(snapshotId, out snapshot) ||
+            (DateTime.UtcNow - snapshot.Created).TotalSeconds > 120 || !snapshot.Elements.TryGetValue(id, out element)) {
+            throw new Exception("Unknown or expired element. Call get_ui again; do not reuse an old element id with a new snapshot.");
+        }
+        if (!IsWindow(snapshot.Window) || RuntimeId(element) != snapshot.RuntimeIds[id]) throw new Exception("Element has changed. Call get_ui again.");
+        var root = element;
+        bool belongs = false;
+        for (int i = 0; root != null && i < 80; i++) {
+            if (root.Current.NativeWindowHandle == snapshot.Window.ToInt64()) { belongs = true; break; }
+            root = TreeWalker.RawViewWalker.GetParent(root);
+        }
+        if (!belongs) throw new Exception("Element no longer belongs to the selected window. Call get_ui again.");
+        if (element.Current.IsPassword) throw new Exception("Password controls are not exposed.");
+        if (action == "read_text") {
+            var pattern = (TextPattern)element.GetCurrentPattern(TextPattern.Pattern);
+            return Obj("text", Clip(pattern.DocumentRange.GetText(8000), 8000));
+        }
+        if (element.Current.IsOffscreen || !element.Current.IsEnabled) throw new Exception("Control is hidden or disabled. Call get_ui again.");
+        object value;
+        switch (action) {
+            case "focus": element.SetFocus(); break;
+            case "invoke": ((InvokePattern)element.GetCurrentPattern(InvokePattern.Pattern)).Invoke(); break;
+            case "set_value":
+                var editable = (ValuePattern)element.GetCurrentPattern(ValuePattern.Pattern);
+                if (editable.Current.IsReadOnly) throw new Exception("Control is read-only.");
+                editable.SetValue(text ?? ""); break;
+            case "select": ((SelectionItemPattern)element.GetCurrentPattern(SelectionItemPattern.Pattern)).Select(); break;
+            case "toggle": ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Toggle(); break;
+            case "expand": ((ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand(); break;
+            case "collapse": ((ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Collapse(); break;
+            case "scroll":
+                var scrolling = (ScrollPattern)element.GetCurrentPattern(ScrollPattern.Pattern);
+                ScrollAmount horizontal = ScrollAmount.NoAmount, vertical = ScrollAmount.NoAmount;
+                if (direction == "up") vertical = ScrollAmount.LargeDecrement;
+                else if (direction == "down") vertical = ScrollAmount.LargeIncrement;
+                else if (direction == "left") horizontal = ScrollAmount.LargeDecrement;
+                else if (direction == "right") horizontal = ScrollAmount.LargeIncrement;
+                else throw new Exception("Scroll requires up, down, left, or right.");
+                scrolling.Scroll(horizontal, vertical); break;
+            default: throw new Exception("Unsupported UI Automation action.");
+        }
+        var result = Obj("ok", true);
+        try {
+            if (element.TryGetCurrentPattern(ValuePattern.Pattern, out value)) result["value"] = Clip(((ValuePattern)value).Current.Value, 160);
+        } catch (ElementNotAvailableException) { }
+        return result;
+    }
+}

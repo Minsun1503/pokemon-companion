@@ -1,0 +1,29 @@
+{
+  "manifest_version": "0.3",
+  "name": "pokemon-companion",
+  "display_name": "Pokémon Companion",
+  "version": "0.1.0",
+  "description": "Seven animated Pokémon help your AI control Windows through native APIs, keyboard input, and screenshots when needed.",
+  "long_description": "Install, enable, and ask your AI to use Pokémon Companion. Includes Pikachu, Riolu, Lucario, Clodsire, Bulbasaur, Charmander, and Squirtle. Node, Electron, and native dependencies are included. Left-click the Pokémon to switch characters, open Talk, or exit. Talk remains a separate character conversation and does not forward messages to your AI chat.",
+  "author": { "name": "Minsun1503", "url": "https://github.com/Minsun1503" },
+  "repository": { "type": "git", "url": "https://github.com/Minsun1503/pokemon-companion" },
+  "homepage": "https://github.com/Minsun1503/pokemon-companion",
+  "icon": "icon.png",
+  "license": "MIT",
+  "server": {
+    "type": "binary",
+    "entry_point": "runtime/node.exe",
+    "mcp_config": {
+      "command": "${__dirname}/runtime/node.exe",
+      "args": ["${__dirname}/backend/dist/main.js"],
+      "env": { "MCP_TRANSPORT": "stdio", "POKEMON_FRONTEND_DIR": "${__dirname}/frontend" }
+    }
+  },
+  "tools": [
+    { "name": "windows", "description": "Preferred: read and operate compact Windows UI Automation controls without screenshots." },
+    { "name": "computer", "description": "Native mouse and keyboard actions, cursor position, and screenshot fallback." },
+    { "name": "pokemon", "description": "Switch Pokémon, announce tasks, show progress, and celebrate completion." }
+  ],
+  "prompts_generated": true,
+  "compatibility": { "platforms": ["win32"] }
+}

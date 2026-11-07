@@ -1,0 +1,45 @@
+{
+  "manifest_version": "0.3",
+  "name": "computer-use-mcp",
+  "display_name": "Pokémon Computer Companion",
+  "version": "{{VERSION}}",
+  "description": "💻 MCP server for Claude to control your computer. Implements computer use capabilities similar to Anthropic's official computer use guide.",
+  "icon": "icon.png",
+  "author": {
+    "name": "Adam Jones (domdomegg)",
+    "url": "https://github.com/domdomegg"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domdomegg/computer-use-mcp"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/main.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/main.js"]
+    }
+  },
+  "tools": [
+    {
+      "name": "computer",
+      "description": "Use a computer to complete tasks while an animated Pokémon shows the work. This tool can take screenshots, click, type, scroll, and more."
+    },
+    {
+      "name": "pokemon",
+      "description": "Select a Pokémon, announce tasks, show progress, and celebrate completion."
+    },
+    {
+      "name": "windows",
+      "description": "Preferred on Windows: read compact UI Automation controls and operate them through native APIs without screenshots."
+    }
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+  }
+}

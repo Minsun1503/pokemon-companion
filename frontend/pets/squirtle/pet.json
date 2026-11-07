@@ -1,0 +1,49 @@
+{
+  "id": "squirtle",
+  "name": "꼬부기",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/squirtle.mp3",
+  "recallText": "꼬북!",
+  "responseCryKeywords": [
+    "꼬북",
+    "물",
+    "좋아",
+    "괜찮아",
+    "함께"
+  ],
+  "greeting": "꼬북! 왔어?",
+  "thinkingText": "꼬부기가 생각하는 중",
+  "fallbackText": "꼬부기...? 다시 말해줘.",
+  "errorText": "꼬부기... 연결이 잘 안 되는 것 같아. 설정을 확인해줘.",
+  "appearance": {
+    "width": 88,
+    "height": 88,
+    "imageWidth": 72,
+    "imageHeight": 72
+  },
+  "movement": {
+    "speed": 0.74,
+    "jumpHeight": 8,
+    "jumpDuration": 18,
+    "walkFrameInterval": 6,
+    "idleFrameInterval": 6,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#58a9f0",
+    "accentHoverColor": "#3a93e2",
+    "accentGlowColor": "rgba(88,169,240,0.72)",
+    "assistantBackground": "#e4f3ff",
+    "assistantBorderColor": "#9acdf4"
+  },
+  "idlePhrases": [
+    "꼬북!",
+    "물가가 좋다.",
+    "천천히 가자.",
+    "물대포는 아직 참는 중!",
+    "괜찮아, 같이 있자."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "bulbasaur",
+  "name": "이상해씨",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/bulbasaur.mp3",
+  "recallText": "이상해씨!",
+  "responseCryKeywords": [
+    "이상",
+    "씨",
+    "햇빛",
+    "좋아",
+    "괜찮아"
+  ],
+  "greeting": "이상해씨! 왔어?",
+  "thinkingText": "이상해씨가 생각하는 중",
+  "fallbackText": "이상해씨...? 다시 말해줘.",
+  "errorText": "이상해씨... 연결이 잘 안 되는 것 같아. 설정을 확인해줘.",
+  "appearance": {
+    "width": 82,
+    "height": 78,
+    "imageWidth": 68,
+    "imageHeight": 64
+  },
+  "movement": {
+    "speed": 0.65,
+    "jumpHeight": 6,
+    "jumpDuration": 18,
+    "walkFrameInterval": 6,
+    "idleFrameInterval": 7,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#79b85a",
+    "accentHoverColor": "#679f4d",
+    "accentGlowColor": "rgba(121,184,90,0.72)",
+    "assistantBackground": "#e9f7df",
+    "assistantBorderColor": "#b9d8a6"
+  },
+  "idlePhrases": [
+    "이상해씨!",
+    "햇빛이 좋다.",
+    "천천히 가도 돼.",
+    "풀 냄새 좋지?",
+    "같이 쉬자."
+  ]
+}

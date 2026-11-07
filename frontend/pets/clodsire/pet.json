@@ -1,0 +1,51 @@
+{
+  "id": "clodsire",
+  "name": "토오",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "https://play.pokemonshowdown.com/audio/cries/clodsire.mp3",
+  "recallText": "두오...",
+  "responseCryKeywords": [
+    "도오",
+    "우웅",
+    "괜찮",
+    "느긋",
+    "좋아",
+    "천천히"
+  ],
+  "greeting": "도오... 왔어. 천천히 같이 있자.",
+  "thinkingText": "토오가 천천히 생각하는 중",
+  "fallbackText": "토오...? 뭔가 막혔어.",
+  "errorText": "토오... 연결이 잘 안 되는 것 같아. 설정을 확인해줘.",
+  "appearance": {
+    "width": 150,
+    "height": 120,
+    "imageWidth": 128,
+    "imageHeight": 96
+  },
+  "movement": {
+    "speed": 0.55,
+    "jumpHeight": 4,
+    "jumpDuration": 20,
+    "walkFrameInterval": 8,
+    "idleFrameInterval": 8,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#7b5d55",
+    "accentHoverColor": "#684c45",
+    "accentGlowColor": "rgba(123, 93, 85, 0.7)",
+    "assistantBackground": "#f3ebe8",
+    "assistantBorderColor": "#d9c3bb"
+  },
+  "idlePhrases": [
+    "토오...",
+    "천천히 해도 괜찮아.",
+    "우웅... 여기 있어.",
+    "오늘은 좀 느긋하게 가자.",
+    "바닥이 편해...",
+    "괜찮아. 급할 거 없어."
+  ]
+}
