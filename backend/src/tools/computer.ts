@@ -8,6 +8,7 @@ import {
 	Button,
 	imageToJimp,
 	Key,
+	providerRegistry,
 } from '@nut-tree-fork/nut-js';
 import {execFileSync} from 'node:child_process';
 import {readFileSync, unlinkSync} from 'node:fs';
@@ -230,6 +231,20 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							} finally {
 								await keyboard.releaseKey(Key.LeftControl, Key.V);
 								await runtime.companion.clipboard(null);
+							}
+						} else if (process.platform === 'win32' && [...text].every((character) => character.codePointAt(0)! > 0 && character.codePointAt(0)! <= 127)) {
+							// Bypass per-character JS waits while yielding for pause/cancellation between chunks.
+							for (let index = 0; index < text.length; index += 32) {
+								if (extra.signal.aborted || runtime.companion.state.paused) {
+									throw new Error('Computer action cancelled.');
+								}
+
+								// eslint-disable-next-line no-await-in-loop
+								await providerRegistry.getKeyboard().type(text.slice(index, index + 32));
+								// eslint-disable-next-line no-await-in-loop
+								await new Promise<void>((resolve) => {
+									setImmediate(resolve);
+								});
 							}
 						} else {
 							await keyboard.type(text);

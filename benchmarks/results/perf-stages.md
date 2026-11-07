@@ -45,3 +45,17 @@ Inspection caches properties and supported patterns, filters before collecting a
 [B2 samples](perf-b-cache.json): all 160 verified. Two incomplete attempts are preserved in [cached-value observations](perf-b-cache-stale.json) and [live-value observations](perf-b-cache-live-stale.json). One first read returned `Benchmark 42` after the DOM contained `Benchmark 43`; another strict batch observed 62 while expecting 63. Faster calls surfaced the already documented UIA proxy lag. Mutable values now use current reads, and a mismatched batch `get_ui` expectation re-reads once with pause/cancellation checked first. Inputs are never replayed. A persistent mismatch still emits the original error and stops subsequent steps. Atomic benchmark verification also includes one extra read in elapsed time when needed.
 
 Behavior differences: truncated `matched` is a lower bound (limit + one), not a complete count; a stale expected value may cause one additional native read. Both preserve ambiguity rejection. Validation: build, check, 58 unit tests (one existing skip), chat test, and Windows smoke passed. Smoke now checks an actual password field is hidden and verifies early element/depth limits. Added large-response bounds, stale-read recovery, and cancellation/pause-before-recheck tests.
+
+## C: plain Windows typing
+
+Uses the installed public keyboard provider to type ASCII in 32-character chunks, bypassing nut.js's JavaScript sleep for every character. Each chunk yields to process pause/cancellation before the next chunk. Keyboard/mouse calibration is unchanged. Unicode still uses the existing clipboard path; ASCII containing NUL retains the old per-character fallback so a C-string terminator cannot discard trailing text. No ASCII clipboard use was added.
+
+| Characters | Baseline on median / p95 ms | C on median / p95 ms | Baseline off median / p95 ms | C off median / p95 ms |
+|---|---:|---:|---:|---:|
+| 5 | 93.9 / 103.6 | 5.4 / 8.8 | 79.1 / 87.9 | 2.1 / 2.8 |
+| 50 | 793.6 / 804.1 | 19.4 / 21.8 | 781.6 / 784.9 | 13.1 / 15.6 |
+| 500 | 7812.3 / 7829.2 | 142.7 / 159.4 | 7790.0 / 7797.0 | 129.6 / 136.5 |
+
+The input implementation remained unchanged through A/B, so the baseline supplies its before measurement; A's smaller companion overhead also contributes a few milliseconds. [C samples](perf-c.json): all 120 verified, plus a separate 40-sample [five-character probe](perf-c-probe.json). No global native delay was modified.
+
+Validation: build, check, 62 unit tests (one existing skip), chat, Windows smoke, and real input smoke passed. Input smoke now independently verifies a 500-character letter sequence (`qjzx ` repeated), then the existing Vietnamese/Unicode replacement and click. Tests cover ordering, unchanged calibration, native error identity, NUL fallback, and pause/cancellation between chunks. Cancellation may leave a typed prefix; it never replays or removes input. Other platforms retain their existing typing paths.
