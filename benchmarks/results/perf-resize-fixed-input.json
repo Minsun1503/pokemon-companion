@@ -1,0 +1,305 @@
+{
+  "complete": true,
+  "measured_at": "2026-11-07T16:06:25.443Z",
+  "source": {
+    "width": 1920,
+    "height": 1080
+  },
+  "output": {
+    "width": 1464,
+    "height": 823
+  },
+  "reference": "Jimp default two-pass downsampling; same raw desktop sample for every kernel. Pipeline trials alternate order, include identical crosshairs and PNG settings, and exclude metadata verification.",
+  "results": [
+    {
+      "kernel": "nearest",
+      "mean_absolute_error": 2.418732446268151,
+      "rmse": 10.878865107485444,
+      "max_channel_difference": 179
+    },
+    {
+      "kernel": "linear",
+      "mean_absolute_error": 0.3807220462699219,
+      "rmse": 1.7900931076335957,
+      "max_channel_difference": 34
+    },
+    {
+      "kernel": "cubic",
+      "mean_absolute_error": 0.4507878568567173,
+      "rmse": 1.79159800033236,
+      "max_channel_difference": 32
+    },
+    {
+      "kernel": "lanczos2",
+      "mean_absolute_error": 0.48268972416433725,
+      "rmse": 1.939162099232409,
+      "max_channel_difference": 33
+    },
+    {
+      "kernel": "lanczos3",
+      "mean_absolute_error": 0.8382132431218143,
+      "rmse": 3.227427875742426,
+      "max_channel_difference": 58
+    }
+  ],
+  "pipeline_summary": [
+    {
+      "name": "old",
+      "elapsed_ms": {
+        "median": 276.1226000000006,
+        "p95": 319.08179999999993
+      },
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "elapsed_ms": {
+        "median": 186.19785000000002,
+        "p95": 224.96990000000005
+      },
+      "bytes": 109776
+    }
+  ],
+  "timings": [
+    {
+      "name": "old",
+      "run": 0,
+      "elapsed_ms": 281.78949999999986,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 0,
+      "elapsed_ms": 174.37760000000003,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 1,
+      "elapsed_ms": 163.89689999999996,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 1,
+      "elapsed_ms": 249.06629999999996,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 2,
+      "elapsed_ms": 244.26340000000027,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 2,
+      "elapsed_ms": 170.01980000000003,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 3,
+      "elapsed_ms": 171.50599999999986,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 3,
+      "elapsed_ms": 241.66750000000002,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 4,
+      "elapsed_ms": 336.52210000000014,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 4,
+      "elapsed_ms": 200.91940000000022,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 5,
+      "elapsed_ms": 183.05109999999968,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 5,
+      "elapsed_ms": 276.70960000000014,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 6,
+      "elapsed_ms": 270.10350000000017,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 6,
+      "elapsed_ms": 190.88810000000012,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 7,
+      "elapsed_ms": 192.84310000000005,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 7,
+      "elapsed_ms": 265.98239999999987,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 8,
+      "elapsed_ms": 292.96499999999924,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 8,
+      "elapsed_ms": 186.28639999999996,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 9,
+      "elapsed_ms": 185.4322000000002,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 9,
+      "elapsed_ms": 283.28639999999996,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 10,
+      "elapsed_ms": 270.72630000000026,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 10,
+      "elapsed_ms": 199.3775000000005,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 11,
+      "elapsed_ms": 186.10930000000008,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 11,
+      "elapsed_ms": 295.41640000000007,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 12,
+      "elapsed_ms": 253.16139999999996,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 12,
+      "elapsed_ms": 196.8121000000001,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 13,
+      "elapsed_ms": 193.02390000000014,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 13,
+      "elapsed_ms": 274.79410000000007,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 14,
+      "elapsed_ms": 250.84050000000025,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 14,
+      "elapsed_ms": 183.77389999999923,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 15,
+      "elapsed_ms": 203.77589999999873,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 15,
+      "elapsed_ms": 299.59259999999995,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 16,
+      "elapsed_ms": 315.71620000000075,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 16,
+      "elapsed_ms": 180.59860000000117,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 17,
+      "elapsed_ms": 167.76980000000003,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 17,
+      "elapsed_ms": 289.9367999999995,
+      "bytes": 99051
+    },
+    {
+      "name": "old",
+      "run": 18,
+      "elapsed_ms": 319.08179999999993,
+      "bytes": 99051
+    },
+    {
+      "name": "sharp",
+      "run": 18,
+      "elapsed_ms": 250.0557000000008,
+      "bytes": 109776
+    },
+    {
+      "name": "sharp",
+      "run": 19,
+      "elapsed_ms": 224.96990000000005,
+      "bytes": 109776
+    },
+    {
+      "name": "old",
+      "run": 19,
+      "elapsed_ms": 275.53560000000107,
+      "bytes": 99051
+    }
+  ]
+}

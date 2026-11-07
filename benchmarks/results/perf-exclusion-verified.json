@@ -1,0 +1,1733 @@
+{
+  "complete": true,
+  "measured_at": "2026-11-07T16:00:03.210Z",
+  "windows_build": "10.0.26200",
+  "electron": "42.3.3",
+  "affinity": [
+    {
+      "handle": "853362",
+      "ok": true,
+      "affinity": 17
+    }
+  ],
+  "underlying_mismatches": 1,
+  "accepted": false,
+  "samples": [
+    {
+      "label": "unprotected-visible",
+      "elapsed_ms": 700.2604000000001,
+      "bytes": 164849,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 1422,
+      "center": [
+        18,
+        228,
+        167
+      ],
+      "marker": {
+        "x": 1010,
+        "y": 917
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "hide-show-fallback",
+      "elapsed_ms": 1018.0437000000002,
+      "bytes": 169458,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1010,
+        "y": 917
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "hidden-reference-0-0",
+      "elapsed_ms": 584.1616000000004,
+      "bytes": 169839,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        117,
+        119,
+        120
+      ],
+      "marker": {
+        "x": 629,
+        "y": 479
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-normal-0",
+      "elapsed_ms": 808.1179000000002,
+      "bytes": 162570,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 509,
+        "y": 340
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-1",
+      "elapsed_ms": 485.6879000000008,
+      "bytes": 161828,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        253,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-tray-1",
+      "elapsed_ms": 563.1466999999993,
+      "bytes": 166948,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        252,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        253,
+        253,
+        253
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-2",
+      "elapsed_ms": 523.4359999999997,
+      "bytes": 158020,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        239,
+        238,
+        238
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-normal-2",
+      "elapsed_ms": 529.5946000000004,
+      "bytes": 163531,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        236,
+        237,
+        237
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        239,
+        238,
+        238
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-3",
+      "elapsed_ms": 448.34970000000067,
+      "bytes": 158458,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        253,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-tray-3",
+      "elapsed_ms": 540.6141000000007,
+      "bytes": 159059,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        253,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        253,
+        253,
+        253
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-4",
+      "elapsed_ms": 507.52050000000054,
+      "bytes": 159652,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        236,
+        236,
+        236
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-normal-4",
+      "elapsed_ms": 468.84120000000075,
+      "bytes": 159890,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        238,
+        238,
+        237
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        236,
+        236,
+        236
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-5",
+      "elapsed_ms": 572.4403000000002,
+      "bytes": 164365,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        253,
+        253,
+        252
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-tray-5",
+      "elapsed_ms": 515.0372000000007,
+      "bytes": 158617,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        252,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        253,
+        253,
+        252
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-6",
+      "elapsed_ms": 492.33710000000065,
+      "bytes": 160117,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        237,
+        237,
+        237
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-normal-6",
+      "elapsed_ms": 526.7917999999991,
+      "bytes": 158924,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        236,
+        237,
+        237
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        237,
+        237,
+        237
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-7",
+      "elapsed_ms": 521.3868999999995,
+      "bytes": 160390,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        253,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-tray-7",
+      "elapsed_ms": 562.0909999999967,
+      "bytes": 158032,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        252,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        253,
+        253,
+        253
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-8",
+      "elapsed_ms": 477.6851999999999,
+      "bytes": 164591,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        237,
+        237,
+        237
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-normal-8",
+      "elapsed_ms": 543.5360999999975,
+      "bytes": 159715,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        237,
+        237,
+        237
+      ],
+      "marker": {
+        "x": 470,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        237,
+        237,
+        237
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-0-9",
+      "elapsed_ms": 553.754399999998,
+      "bytes": 166117,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        213,
+        214,
+        215
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-tray-9",
+      "elapsed_ms": 622.0262000000002,
+      "bytes": 161324,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 464,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        213,
+        214,
+        215
+      ],
+      "underlying_matches": false
+    },
+    {
+      "label": "hidden-reference-1-0",
+      "elapsed_ms": 504.0245000000032,
+      "bytes": 160533,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        223,
+        224,
+        224
+      ],
+      "marker": {
+        "x": 902,
+        "y": 540
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-normal-0",
+      "elapsed_ms": 571.6100000000006,
+      "bytes": 167743,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        252,
+        253,
+        253
+      ],
+      "marker": {
+        "x": 1003,
+        "y": 596
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        253,
+        253,
+        253
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-1",
+      "elapsed_ms": 449.2033999999985,
+      "bytes": 158574,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-tray-1",
+      "elapsed_ms": 511.10559999999896,
+      "bytes": 165401,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-2",
+      "elapsed_ms": 481.38740000000325,
+      "bytes": 165164,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-normal-2",
+      "elapsed_ms": 506.59130000000005,
+      "bytes": 162192,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-3",
+      "elapsed_ms": 473.7366000000002,
+      "bytes": 163726,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-tray-3",
+      "elapsed_ms": 550.4663999999975,
+      "bytes": 160200,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-4",
+      "elapsed_ms": 489.39370000000054,
+      "bytes": 165550,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-normal-4",
+      "elapsed_ms": 567.3321999999971,
+      "bytes": 159834,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-5",
+      "elapsed_ms": 537.0643999999993,
+      "bytes": 160861,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-tray-5",
+      "elapsed_ms": 483.6188000000002,
+      "bytes": 158445,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-6",
+      "elapsed_ms": 487.4304000000011,
+      "bytes": 167143,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-normal-6",
+      "elapsed_ms": 521.1975999999995,
+      "bytes": 167143,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-7",
+      "elapsed_ms": 440.12179999999717,
+      "bytes": 161520,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-tray-7",
+      "elapsed_ms": 463.1444000000047,
+      "bytes": 158401,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-8",
+      "elapsed_ms": 499.5237999999954,
+      "bytes": 159009,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-normal-8",
+      "elapsed_ms": 538.6434999999983,
+      "bytes": 159009,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1046,
+        "y": 619
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-1-9",
+      "elapsed_ms": 497.7792000000045,
+      "bytes": 157946,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-1-tray-9",
+      "elapsed_ms": 551.8554999999978,
+      "bytes": 158820,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1040,
+        "y": 625
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-0",
+      "elapsed_ms": 509.6223999999929,
+      "bytes": 161032,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1315,
+        "y": 392
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-normal-0",
+      "elapsed_ms": 574.739999999998,
+      "bytes": 166372,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1390,
+        "y": 329
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-1",
+      "elapsed_ms": 446.79379999999946,
+      "bytes": 160913,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-tray-1",
+      "elapsed_ms": 510.44260000000213,
+      "bytes": 160913,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-2",
+      "elapsed_ms": 466.3255999999965,
+      "bytes": 161646,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-normal-2",
+      "elapsed_ms": 588.5939999999973,
+      "bytes": 162963,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-3",
+      "elapsed_ms": 447.51060000000143,
+      "bytes": 161864,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-tray-3",
+      "elapsed_ms": 500.1915000000008,
+      "bytes": 161864,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-4",
+      "elapsed_ms": 562.9369000000006,
+      "bytes": 171255,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-normal-4",
+      "elapsed_ms": 518.2074999999968,
+      "bytes": 169718,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-5",
+      "elapsed_ms": 515.3873000000021,
+      "bytes": 159783,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-tray-5",
+      "elapsed_ms": 532.8649000000005,
+      "bytes": 157043,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-6",
+      "elapsed_ms": 454.4475999999995,
+      "bytes": 157933,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-normal-6",
+      "elapsed_ms": 475.74489999999787,
+      "bytes": 155789,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-7",
+      "elapsed_ms": 505.8779000000068,
+      "bytes": 159604,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-tray-7",
+      "elapsed_ms": 545.3928000000014,
+      "bytes": 157474,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-8",
+      "elapsed_ms": 465.36729999999807,
+      "bytes": 163477,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-normal-8",
+      "elapsed_ms": 758.075499999999,
+      "bytes": 166114,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 295
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-2-9",
+      "elapsed_ms": 636.1517999999996,
+      "bytes": 166179,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-2-tray-9",
+      "elapsed_ms": 561.1517999999996,
+      "bytes": 158417,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        246,
+        248,
+        250
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 301
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        246,
+        248,
+        250
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-0",
+      "elapsed_ms": 590.5529999999999,
+      "bytes": 166378,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1428,
+        "y": 647
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-normal-0",
+      "elapsed_ms": 535.1425999999992,
+      "bytes": 157850,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1429,
+        "y": 780
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-1",
+      "elapsed_ms": 597.126099999994,
+      "bytes": 161762,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-tray-1",
+      "elapsed_ms": 612.8724000000002,
+      "bytes": 161762,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-2",
+      "elapsed_ms": 582.9593999999997,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-normal-2",
+      "elapsed_ms": 710.9110999999975,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-3",
+      "elapsed_ms": 566.4404000000068,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-tray-3",
+      "elapsed_ms": 569.2895999999964,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-4",
+      "elapsed_ms": 507.48129999999946,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-normal-4",
+      "elapsed_ms": 534.7548999999999,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-5",
+      "elapsed_ms": 469.9519999999975,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-tray-5",
+      "elapsed_ms": 517.5302999999985,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-6",
+      "elapsed_ms": 519.2770999999993,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-normal-6",
+      "elapsed_ms": 558.1319000000003,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-7",
+      "elapsed_ms": 557.4957000000068,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-tray-7",
+      "elapsed_ms": 554.2189999999973,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-8",
+      "elapsed_ms": 739.5492000000086,
+      "bytes": 164307,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-normal-8",
+      "elapsed_ms": 659.6085999999923,
+      "bytes": 164999,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1430,
+        "y": 835
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    },
+    {
+      "label": "hidden-reference-3-9",
+      "elapsed_ms": 568.6781999999948,
+      "bytes": 164999,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-3-tray-9",
+      "elapsed_ms": 548.5127999999968,
+      "bytes": 164999,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "marker": {
+        "x": 1424,
+        "y": 840
+      },
+      "visible_windows": 1,
+      "reference_at_same_point": [
+        255,
+        255,
+        255
+      ],
+      "underlying_matches": true
+    }
+  ]
+}

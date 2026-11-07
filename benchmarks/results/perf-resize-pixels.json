@@ -1,0 +1,45 @@
+{
+  "complete": true,
+  "measured_at": "2026-11-07T15:49:42.988Z",
+  "source": {
+    "width": 1920,
+    "height": 1080
+  },
+  "output": {
+    "width": 1464,
+    "height": 823
+  },
+  "reference": "Jimp default two-pass downsampling; same raw desktop sample for every kernel.",
+  "results": [
+    {
+      "kernel": "nearest",
+      "mean_absolute_error": 3.747037859623263,
+      "rmse": 13.357239143361534,
+      "max_channel_difference": 161
+    },
+    {
+      "kernel": "linear",
+      "mean_absolute_error": 0.6042664006356415,
+      "rmse": 2.216435741269209,
+      "max_channel_difference": 35
+    },
+    {
+      "kernel": "cubic",
+      "mean_absolute_error": 0.6902846664763284,
+      "rmse": 2.2100783628550786,
+      "max_channel_difference": 34
+    },
+    {
+      "kernel": "lanczos2",
+      "mean_absolute_error": 0.7409201973321647,
+      "rmse": 2.3918409506651748,
+      "max_channel_difference": 40
+    },
+    {
+      "kernel": "lanczos3",
+      "mean_absolute_error": 1.2918077604924008,
+      "rmse": 3.9676012198259363,
+      "max_channel_difference": 62
+    }
+  ]
+}
