@@ -376,12 +376,8 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 
 						// Then resize to fit within API limits
 						const apiScaleFactor = getSizeToApiScale(image.getWidth(), image.getHeight());
-						if (apiScaleFactor < 1) {
-							measureSync('screenshot_resize', () => image.resize(
-								Math.floor(image.getWidth() * apiScaleFactor),
-								Math.floor(image.getHeight() * apiScaleFactor),
-							));
-						}
+						const imageWidth = Math.floor(image.getWidth() * apiScaleFactor);
+						const imageHeight = Math.floor(image.getHeight() * apiScaleFactor);
 
 						// Calculate cursor position in API image coordinates
 						// cursor is in logical coords, need to convert to API image coords
@@ -392,20 +388,19 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						// Draw a crosshair at cursor position (red color)
 						const crosshairSize = 20;
 						const crosshairColor = 0xFF0000FF; // Red with full opacity (RGBA)
-						const imageWidth = image.getWidth();
-						const imageHeight = image.getHeight();
+						const crosshair = new Jimp(imageWidth, imageHeight, 0x00000000);
 
 						// Draw horizontal line
 						for (let x = Math.max(0, cursorInImageX - crosshairSize); x <= Math.min(imageWidth - 1, cursorInImageX + crosshairSize); x++) {
 							if (cursorInImageY >= 0 && cursorInImageY < imageHeight) {
-								image.setPixelColor(crosshairColor, x, cursorInImageY);
+								crosshair.setPixelColor(crosshairColor, x, cursorInImageY);
 								// Make it thicker
 								if (cursorInImageY > 0) {
-									image.setPixelColor(crosshairColor, x, cursorInImageY - 1);
+									crosshair.setPixelColor(crosshairColor, x, cursorInImageY - 1);
 								}
 
 								if (cursorInImageY < imageHeight - 1) {
-									image.setPixelColor(crosshairColor, x, cursorInImageY + 1);
+									crosshair.setPixelColor(crosshairColor, x, cursorInImageY + 1);
 								}
 							}
 						}
@@ -413,22 +408,24 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						// Draw vertical line
 						for (let y = Math.max(0, cursorInImageY - crosshairSize); y <= Math.min(imageHeight - 1, cursorInImageY + crosshairSize); y++) {
 							if (cursorInImageX >= 0 && cursorInImageX < imageWidth) {
-								image.setPixelColor(crosshairColor, cursorInImageX, y);
+								crosshair.setPixelColor(crosshairColor, cursorInImageX, y);
 								// Make it thicker
 								if (cursorInImageX > 0) {
-									image.setPixelColor(crosshairColor, cursorInImageX - 1, y);
+									crosshair.setPixelColor(crosshairColor, cursorInImageX - 1, y);
 								}
 
 								if (cursorInImageX < imageWidth - 1) {
-									image.setPixelColor(crosshairColor, cursorInImageX + 1, y);
+									crosshair.setPixelColor(crosshairColor, cursorInImageX + 1, y);
 								}
 							}
 						}
 
-						// Encode the resized RGBA pixels once, keeping the same PNG compression.
+						// Resize before compositing so the calibrated crosshair stays sharp and three pixels thick.
 						const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(image.bitmap.data, {
-							raw: {width: imageWidth, height: imageHeight, channels: 4},
+							raw: {width: image.getWidth(), height: image.getHeight(), channels: 4},
 						})
+							.resize(imageWidth, imageHeight, {fit: 'fill', kernel: 'linear'})
+							.composite([{input: crosshair.bitmap.data, raw: {width: imageWidth, height: imageHeight, channels: 4}}])
 							.png({quality: 80, compressionLevel: 9})
 							.toBuffer());
 

@@ -19,6 +19,7 @@ assert(output.endsWith('.json'), 'Pass an output .json path.');
 const runs = 20;
 const only = new Set(process.argv.slice(3));
 const included = (scenario) => only.size === 0 || only.has(scenario);
+const needsKeyboard = only.size === 0 || [...only].some(scenario => scenario.startsWith('computer_type_') || scenario === 'computer_key');
 await mkdir(dirname(output), {recursive: true});
 const scratch = await mkdtemp(resolve(os.tmpdir(), 'pokemon-perf-'));
 const title = 'Pokemon Performance ' + randomUUID().slice(0, 8);
@@ -182,7 +183,7 @@ try {
   for (const ui of ['on', 'off']) {
     session = await openSession(ui, 'calibration-' + ui);
     const target = await windows({action: 'get_windows', query: title});
-    for (const size of [5, 5, 5]) {
+    for (const size of needsKeyboard ? [5, 5, 5] : []) {
       await prepare(target.windows[0].id);
       const value = '1234 '.repeat(size / 5);
       await record(ui, 'calibration', size, async () => session.api('computer', {action: 'type', text: value}), async () => expectText(value));
@@ -190,7 +191,7 @@ try {
     samples.splice(0, samples.length, ...samples.filter((sample) => sample.scenario !== 'calibration'));
     await session.client.close();
     session = undefined;
-    console.log('Verified typing calibration: ' + ui);
+    if (needsKeyboard) console.log('Verified typing calibration: ' + ui);
     for (let run = 1; included('cold_start') && run <= runs; run += 1) {
       const started = performance.now();
       session = await openSession(ui, 'cold-' + ui + '-' + run);
@@ -212,7 +213,7 @@ try {
     const listed = await windows({action: 'get_windows', query: title});
     assert.equal(listed.windows.length, 1);
     const window_id = listed.windows[0].id;
-    await windows({action: 'activate', window_id});
+    if (needsKeyboard || included('computer_left_click')) await windows({action: 'activate', window_id});
     const screenshot = await session.api('computer', {action: 'get_screenshot'});
     const imageSize = textResult(screenshot);
     const fixtureState = await state();

@@ -109,7 +109,6 @@ $blocked.Save()
   const started = performance.now();
   const browser = await api({action: 'batch', steps: [
     {action: 'launch', text: url, query: pageTitle, timeout_ms: 15000},
-    {action: 'activate', window_step: 0},
     {action: 'get_windows', query: pageTitle},
   ]});
   measurements.push({target: 'URL', ms: performance.now() - started});
@@ -130,7 +129,9 @@ $blocked.Save()
     // Close only the unique page this check opened, after a fresh activation/title check.
     const tabs = await api({action: 'get_windows', query: pageTitle});
     if (tabs.windows.length === 1) {
-      await api({action: 'activate', window_id: tabs.windows[0].id});
+      const document = await api({action: 'get_ui', window_id: tabs.windows[0].id, query: pageTitle, control_type: 'Document'});
+      assert.equal(document.nodes.length, 1);
+      await api({action: 'focus', snapshot: document.snapshot, element_id: document.nodes[0].id});
       const active = await api({action: 'get_windows', query: pageTitle});
       assert(active.windows[0]?.active && active.windows[0]?.title.includes(pageTitle));
       await session.call('computer', {action: 'key', text: 'ctrl+w'});
