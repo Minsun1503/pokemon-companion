@@ -16,13 +16,17 @@ export type WindowsRequest = {
 	element_id?: number | undefined;
 	text?: string | undefined;
 	direction?: string | undefined;
+	expect_value?: string | undefined;
+	timeout_ms?: number | undefined;
 };
+
+type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};
 
 export class WindowsAutomation {
 	private worker: ChildProcessWithoutNullStreams | undefined;
 	private sequence = 0;
 	private buffer = '';
-	private readonly pending = new Map<number, {resolve: (value: Record<string, unknown>) => void; reject: (error: Error) => void; timer: ReturnType<typeof setTimeout>}>();
+	private readonly pending = new Map<number, {resolve: (value: Record<string, unknown>) => void; reject: (error: Error) => void; cleanup: () => void}>();
 
 	warm(): void {
 		if (process.platform === 'win32') {
@@ -30,7 +34,7 @@ export class WindowsAutomation {
 		}
 	}
 
-	async request(args: WindowsRequest): Promise<Record<string, unknown>> {
+	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
 		if (process.platform !== 'win32') {
 			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');
 		}
@@ -41,9 +45,32 @@ export class WindowsAutomation {
 		const id = this.sequence;
 		const result = await new Promise<Record<string, unknown>>((resolveRequest, reject) => {
 			const timer = setTimeout(() => {
-				this.close(new Error('Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.'));
-			}, 20_000);
-			this.pending.set(id, {resolve: resolveRequest, reject, timer});
+				this.close(new Error(options?.timeoutError ?? 'Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.'));
+			}, options?.timeoutMs ?? 20_000);
+			const cancel = () => {
+				this.close(new Error('Computer action cancelled.'));
+			};
+
+			const pauseTimer = options
+				? setInterval(() => {
+					if (options.paused()) {
+						this.close(new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.'));
+					}
+				}, 100)
+				: undefined;
+			this.pending.set(id, {
+				resolve: resolveRequest, reject, cleanup() {
+					clearTimeout(timer);
+					clearInterval(pauseTimer);
+					options?.signal?.removeEventListener('abort', cancel);
+				},
+			});
+			options?.signal?.addEventListener('abort', cancel, {once: true});
+			if (options?.signal?.aborted) {
+				cancel();
+				return;
+			}
+
 			this.worker!.stdin.write(`${serialize({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
 		});
 		recordTiming('worker_round_trip', performance.now() - roundTrip);
@@ -91,7 +118,7 @@ export class WindowsAutomation {
 		this.buffer = '';
 		worker?.kill();
 		for (const item of this.pending.values()) {
-			clearTimeout(item.timer);
+			item.cleanup();
 			item.reject(error);
 		}
 
@@ -130,7 +157,7 @@ export class WindowsAutomation {
 						continue;
 					}
 
-					clearTimeout(item.timer);
+					item.cleanup();
 					this.pending.delete(response.id);
 					if (response.error) {
 						item.reject(new Error(response.error));

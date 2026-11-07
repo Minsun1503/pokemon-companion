@@ -50,6 +50,33 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 		expect(worker.kill).toHaveBeenCalledOnce();
 	});
 
+	it.each(['cancel', 'pause', 'timeout'])('interrupts a blocked native poll on %s and releases the worker', async (reason) => {
+		vi.useFakeTimers();
+		const worker = Object.assign(new EventEmitter(), {
+			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
+		});
+		vi.mocked(spawn).mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
+		const automation = new WindowsAutomation();
+		const controller = new AbortController();
+		try {
+			const pending = automation.request({action: 'get_ui', window_id: '123'}, {
+				signal: controller.signal, timeoutMs: 250, paused: () => reason === 'pause', timeoutError: 'wait_for timed out',
+			});
+			const checked = expect(pending).rejects.toThrow(reason === 'cancel' ? 'Computer action cancelled.' : reason === 'pause' ? 'paused by the user' : 'wait_for timed out');
+			if (reason === 'cancel') {
+				controller.abort();
+			}
+
+			await vi.advanceTimersByTimeAsync(300);
+			await checked;
+			expect(worker.kill).toHaveBeenCalledOnce();
+			expect(vi.getTimerCount()).toBe(0);
+		} finally {
+			automation.close();
+			vi.useRealTimers();
+		}
+	});
+
 	it.each([{nodes: captions}, {nodes: [{role: 'TitleBar', name: 'Test'}, ...captions]}])('hints when only caption controls are exposed: %j', async ({nodes}) => {
 		const result = await readUI({nodes, matched: nodes.length, truncated: false});
 		expect(result.hint).toBe('Only title-bar controls found. Call activate on this window and read again.');

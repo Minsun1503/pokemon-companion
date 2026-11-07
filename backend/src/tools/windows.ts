@@ -3,7 +3,7 @@ import {z} from 'zod';
 import {serialize, timedCall} from '../utils/timing.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import {
-	runWindowsBatch, validateWindowsRequest, windowsActions, windowsFields, windowsStepSchema,
+	runWindowsBatch, runWindowsRequest, validateWindowsRequest, windowsActions, windowsFields, windowsStepSchema,
 } from '../windows/batch.js';
 
 export function registerWindows(server: McpServer, runtime: PokemonRuntime): void {
@@ -13,7 +13,7 @@ export function registerWindows(server: McpServer, runtime: PokemonRuntime): voi
 
 	server.registerTool('windows', {
 		title: 'Windows API Control',
-		description: 'PREFERRED on Windows: Win32/UI Automation, compact text, no screenshots. Prefer action=batch for known sequences (1-16 sequential steps): discover an app/control, act, then get_ui to verify, in one call. Steps use atomic actions; window_step references an earlier zero-based get_windows (exactly one untruncated window) or get_ui; target_step references an earlier get_ui (exactly one untruncated control supporting the action). Example steps: get_windows(query), get_ui(window_step:0,query,control_type:Edit), set_value(target_step:1,text), get_ui(window_step:0,query,expect_value:text). Batch returns only the final result/count, or stops with failing step and diagnostics; completed steps are not rolled back. No retries of inputs. Use atomic calls when the next step depends on AI judgment. Filter query/name/control_type and keep max_chars small. If get_ui returns only title-bar buttons, call activate on the window first, then get_ui again (Electron/Chromium apps expose their controls only after activation). max_chars must be <= 16000. expect_value is limited to 160 chars; for long values use read_text. get_ui values can be clipped even when truncated=false; use read_text to get the full text of a field. After navigation or invoke, the first read may show the previous view; re-read once before concluding. Atomic actions use window_id from get_windows and snapshot + element_id from get_ui. invoke clicks through API; set_value fills; select chooses a tab/item. Re-read after changes. IDs expire after two minutes; never guess them. If a control lacks API support, use computer keyboard shortcuts, then screenshots only as necessary.',
+		description: 'PREFERRED on Windows: Win32/UI Automation, compact text, no screenshots. Prefer action=batch for known sequences (1-16 sequential steps): discover an app/control, act, then get_ui to verify, in one call. Steps use atomic actions; window_step references an earlier zero-based get_windows/launch (exactly one untruncated window) or get_ui/wait_for; target_step references an earlier get_ui/wait_for (exactly one untruncated control supporting the action). Example steps: get_windows(query), get_ui(window_step:0,query,control_type:Edit), set_value(target_step:1,text), get_ui(window_step:0,query,expect_value:text). Batch returns only the final result/count, or stops with failing step and diagnostics; completed steps are not rolled back. No retries of inputs. wait_for polls query/control_type (optionally expect_value) until timeout_ms (default 5000, max 15000). launch starts text as an executable name/path or http/https URL via the OS and waits for a window; URLs require query, and shell commands/arguments are unsupported. Both work in batch. Use atomic calls when the next step depends on AI judgment. Filter query/name/control_type and keep max_chars small. If get_ui returns only title-bar buttons, call activate on the window first, then get_ui again (Electron/Chromium apps expose their controls only after activation). max_chars must be <= 16000. expect_value is limited to 160 chars; for long values use read_text. get_ui values can be clipped even when truncated=false; use read_text to get the full text of a field. After navigation or invoke, the first read may show the previous view; re-read once before concluding. Atomic actions use window_id from get_windows and snapshot + element_id from get_ui. invoke clicks through API; set_value fills; select chooses a tab/item. Re-read after changes. IDs expire after two minutes; never guess them. If a control lacks API support, use computer keyboard shortcuts, then screenshots only as necessary.',
 		inputSchema: z.object({
 			action: z.enum([...windowsActions, 'batch']),
 			...windowsFields,
@@ -33,11 +33,15 @@ export function registerWindows(server: McpServer, runtime: PokemonRuntime): voi
 			throw new Error('steps are supported only with action=batch.');
 		}
 
+		if (args.expect_value !== undefined && args.action !== 'wait_for') {
+			throw new Error('expect_value is supported atomically only by wait_for; use batch for a get_ui expectation.');
+		}
+
 		validateWindowsRequest(args);
 
 		const activity = args.action === 'read_text' ? 'get_ui_text' : args.action;
 		return runtime.computer(activity, undefined, async () => {
-			const result = await runtime.windows.request(args);
+			const result = await runWindowsRequest(runtime, args, extra.signal);
 			return {content: [{type: 'text' as const, text: serialize(result)}]};
 		}, extra.signal);
 	}));

@@ -13,6 +13,7 @@ const labels: Record<string, string> = {
 	invoke: 'Using an app control', set_value: 'Filling a field', select: 'Selecting an item',
 	activate: 'Switching to your app', focus: 'Focusing a field', toggle: 'Toggling a control',
 	expand: 'Expanding a control', collapse: 'Collapsing a control',
+	wait_for: 'Waiting for an app control', launch: 'Opening your app',
 };
 
 export class PokemonRuntime {

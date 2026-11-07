@@ -70,3 +70,17 @@ Sharp now receives the resized Jimp RGBA bitmap directly instead of decoding an 
 | Off | 565.7 / 588.3 | 409.3 / 435.5 | 180006 |
 
 [Before](perf-d-before.json) and [after](perf-d-encode.json): 40/40 samples each verified. Payload sizes vary with screen content; no format change. Build, check, 62 unit tests (one existing skip), chat and Windows smoke passed.
+
+The companion capture guard and intentional compositor delay remain. A backend visibility check is insufficient: tray summons change frontend visibility independently. This pass removes duplicate encoding, without adding a separate overlay visibility protocol or changing capture/restore ordering.
+
+## E: bounded Windows wait and native launch
+
+`wait_for` polls a window's query/control_type every ~100 ms, optionally requiring an exact un-clipped value. Default timeout is 5000 ms, maximum 15000 ms. `launch` resolves an executable name through PATH/Start Menu or accepts a full .exe path or http/https URL, uses native ShellExecute, and polls for its window. URLs require a window query; executable queries default to the resolved filename. Shell command strings and arguments are unsupported; Start Menu shortcut arguments are ignored. No allowlist or dependencies were added.
+
+Both actions work inside an exclusive batch. Launch/wait discovery results can supply later window/control references with the existing ambiguity checks. A launch happens once; timeout messages report the started target. New native polling calls receive the remaining deadline and abort/pause handling, so an unresponsive UIA read cannot extend the action to the old 20-second timeout. Interrupting a blocked native poll closes the worker; callers must discover fresh snapshots afterward. Existing actions retain their timeout and error text.
+
+[Native measurements](perf-e.json), with companion on: PATH launch 581 ms, full path 286 ms, Start Menu 299 ms, URL launch+activation+title verification in a batch 346 ms (single observations, not distributions). Twenty alternating satisfied-condition samples: direct get_ui median/p95 42.9/52.5 ms; wait_for 42.0/48.2 ms. No pre-existing launch action exists to compare; keyboard Run-dialog launch was skipped to preserve user Run history.
+
+Validation: build, check, 79 unit tests (one existing skip), chat and expanded Windows smoke passed. Native smoke verifies three executable resolution routes, zero passed shortcut arguments, a delayed control, exact values, batch references, a 250 ms timeout, shell target rejection, and a local URL in the default browser. It removes only its fixture, temporary shortcut and uniquely titled browser page, using Windows API controls before the closing keyboard shortcut and no screenshots. Unit tests also cover pause/cancellation during blocked reads, timer/listener cleanup, response budgets, and no launch replay.
+
+Test difficulties: Windows short/long paths required realpath comparison; Win32 denied foreground activation of a native fixture. Native UIA actions worked in the background, so no activation or user handoff was needed for that fixture. The existing activation error remains unchanged.

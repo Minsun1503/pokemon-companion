@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Automation;
@@ -164,6 +166,56 @@ public static class PokemonWindowsAutomation {
         ShowWindow(handle, 9);
         if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows did not allow activation. Select the window manually.");
         return Obj("ok", true);
+    }
+    public static object Launch(string target) {
+        if (String.IsNullOrWhiteSpace(target) || target.IndexOfAny(new char[] { '"', '<', '>', '|', '\r', '\n', '\0' }) >= 0)
+            throw new Exception("launch requires an http/https URL or executable name/path, without shell commands or arguments.");
+        Uri url;
+        if (Uri.TryCreate(target, UriKind.Absolute, out url) && (url.Scheme == "http" || url.Scheme == "https")) {
+            Process.Start(new ProcessStartInfo(url.AbsoluteUri) { UseShellExecute = true });
+            return Obj("started", url.AbsoluteUri);
+        }
+        string executable = null;
+        if (target.IndexOfAny(new char[] { '\\', '/' }) >= 0 || Path.IsPathRooted(target)) {
+            if (Path.GetExtension(target).Equals(".exe", StringComparison.OrdinalIgnoreCase) && File.Exists(target)) executable = Path.GetFullPath(target);
+        } else {
+            string extension = Path.GetExtension(target);
+            if (extension != "" && !extension.Equals(".exe", StringComparison.OrdinalIgnoreCase))
+                throw new Exception("launch accepts only an http/https URL or executable name/path.");
+            string filename = extension == "" ? target + ".exe" : target;
+            foreach (string folder in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(';')) {
+                if (String.IsNullOrWhiteSpace(folder)) continue;
+                string candidate = Path.Combine(folder.Trim('"'), filename);
+                if (File.Exists(candidate)) { executable = Path.GetFullPath(candidate); break; }
+            }
+            if (executable == null) {
+                object shell = null;
+                try {
+                    Type shellType = Type.GetTypeFromProgID("WScript.Shell");
+                    shell = Activator.CreateInstance(shellType);
+                    foreach (Environment.SpecialFolder location in new Environment.SpecialFolder[] { Environment.SpecialFolder.StartMenu, Environment.SpecialFolder.CommonStartMenu }) {
+                        string folder = Environment.GetFolderPath(location);
+                        if (!Directory.Exists(folder)) continue;
+                        foreach (string shortcut in Directory.GetFiles(folder, "*.lnk", SearchOption.AllDirectories)) {
+                            if (!Path.GetFileNameWithoutExtension(shortcut).Equals(Path.GetFileNameWithoutExtension(target), StringComparison.OrdinalIgnoreCase)) continue;
+                            object link = shellType.InvokeMember("CreateShortcut", BindingFlags.InvokeMethod, null, shell, new object[] { shortcut });
+                            try {
+                                // Read TargetPath only: shortcut arguments must never become commands.
+                                string candidate = (string)link.GetType().InvokeMember("TargetPath", BindingFlags.GetProperty, null, link, null);
+                                if (!Path.GetExtension(candidate).Equals(".exe", StringComparison.OrdinalIgnoreCase) || !File.Exists(candidate)) continue;
+                                candidate = Path.GetFullPath(candidate);
+                                if (executable != null && !executable.Equals(candidate, StringComparison.OrdinalIgnoreCase))
+                                    throw new Exception("Multiple Start Menu executables match. Supply the full executable path.");
+                                executable = candidate;
+                            } finally { Marshal.FinalReleaseComObject(link); }
+                        }
+                    }
+                } finally { if (shell != null) Marshal.FinalReleaseComObject(shell); }
+            }
+        }
+        if (executable == null) throw new Exception("Executable not found in PATH or the Start Menu. Supply its full .exe path; shell commands and arguments are not supported.");
+        Process.Start(new ProcessStartInfo(executable) { UseShellExecute = true });
+        return Obj("started", executable, "query", Path.GetFileNameWithoutExtension(executable));
     }
     public static object Act(string snapshotId, int id, string action, string text, string direction) {
         Snapshot snapshot;

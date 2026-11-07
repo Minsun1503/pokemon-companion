@@ -25,6 +25,7 @@ while ($null -ne ($line = [Console]::ReadLine())) {
             'get_windows' { $result = [PokemonWindowsAutomation]::Windows($uiaArgs.query) }
             'get_ui' { $result = [PokemonWindowsAutomation]::UI($uiaArgs.window_id, $uiaArgs.query, $uiaArgs.control_type, $uiaArgs.max_elements, $uiaArgs.max_depth) }
             'activate' { $result = [PokemonWindowsAutomation]::Activate($uiaArgs.window_id) }
+            'launch' { $result = [PokemonWindowsAutomation]::Launch($uiaArgs.text) }
             default { $result = [PokemonWindowsAutomation]::Act($uiaArgs.snapshot, $uiaArgs.element_id, $uiaArgs.action, $uiaArgs.text, $uiaArgs.direction) }
         }
         [Console]::WriteLine((@{ id = $request.id; result = $result } | ConvertTo-Json -Depth 12 -Compress))
