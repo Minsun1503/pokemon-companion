@@ -54,6 +54,27 @@ Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window.
 
 Supported control actions include `invoke`, `set_value`, `select`, `toggle`, `expand`, `collapse`, `scroll`, `focus`, and `read_text`. Only use actions listed for the returned control. Re-read `get_ui` after changes to verify the result. IDs belong to their snapshot, expire after two minutes, and are never rebound to a different control. Password controls are omitted.
 
+For known sequences, prefer **`action: "batch"`** to reduce exchanges with the AI. The MCP runs up to 16 steps sequentially and returns just the final result and completed count. For example, finding a window, filling a field, pressing a button, and checking the field takes one MCP call:
+
+```json
+{
+  "action": "batch",
+  "max_chars": 2000,
+  "steps": [
+    {"action":"get_windows","query":"Pokémon Input Test"},
+    {"action":"get_ui","window_step":0,"query":"Test note","control_type":"Edit"},
+    {"action":"set_value","target_step":1,"text":"Hello from Pikachu!"},
+    {"action":"get_ui","window_step":0,"query":"Verify input","control_type":"Button"},
+    {"action":"invoke","target_step":3},
+    {"action":"get_ui","window_step":0,"query":"Test note","control_type":"Edit","expect_value":"Hello from Pikachu!"}
+  ]
+}
+```
+
+`window_step` and `target_step` are zero-based references to earlier results in the same batch. A window reference accepts a unique, untruncated `get_windows` result or the window from `get_ui`. A control reference requires exactly one untruncated `get_ui` match supporting the action. Explicit `window_id` or `snapshot`/`element_id` can also be used instead of references. `expect_value` on `get_ui` checks one control's exact value (up to 160 characters) before continuing. It verifies the field, not any later application side effect.
+
+The whole sequence excludes input from other MCP clients, checks user pauses and cancellation before each step, and stops on an error or ambiguous target. Failure output reports `completed`, `stopped_step`, `failed_step_started`, and bounded diagnostics. Earlier successful steps remain applied; a failed native step may also have applied its action. Inputs are never retried automatically. Inspect the failure before continuing. Top-level `max_chars` bounds the entire response, while each step has its own discovery budget; narrow filters if results are truncated. Use atomic calls when the next step requires the AI to interpret new information. Batching reduces model round trips; Windows API calls still execute individually on the computer.
+
 `computer` retains native mouse/keyboard input, cursor actions, and screenshot capture. Prefer keyboard shortcuts when UI Automation lacks a pattern, and screenshots when the task requires visual information (for example, canvas content). The tool descriptions and `pokemon-work` prompt specify this order: **Windows APIs → keyboard shortcuts → screenshots**. Both tools update the Pokémon before and after actions. Screenshots briefly hide the companion.
 
 `pokemon` controls presentation:
@@ -109,7 +130,9 @@ npm run test:input
 npm run test:windows
 ```
 
-The smoke test uses a real MCP SDK client, opens the real companion, selects all seven pets, captures a desktop screenshot, checks cursor output, and exercises task completion and visibility. It sends no clicks or keyboard input. `test:input` opens a disposable test window and verifies real clicks, Vietnamese text input, and keyboard shortcuts. `test:windows` uses a disposable accessible window to verify API field entry and button invocation, bounded text output, stale-id rejection, and zero screenshot images. Runtime tests cover serialized actions, user pauses, queued cancellation, and screenshot restoration on errors. Chat tests use an isolated local mock provider to verify requests, separate saved conversations, and failure handling.
+The smoke test uses a real MCP SDK client, opens the real companion, selects all seven pets, captures a desktop screenshot, checks cursor output, and exercises task completion and visibility. It sends no clicks or keyboard input. `test:input` opens a disposable test window and verifies real clicks, Vietnamese text input, and keyboard shortcuts. `test:windows` verifies six API steps in one MCP call, field entry and button invocation, atomic compatibility, bounded text output, stale-id rejection, and zero screenshot images. Batch tests cover ambiguity, unsupported actions, partial failures, value checks, pauses/cancellation between steps, and isolation from other clients. Runtime tests cover serialized actions, user pauses, queued cancellation, and screenshot restoration on errors. Chat tests use an isolated local mock provider to verify requests, separate saved conversations, and failure handling.
+
+Run `npm run benchmark:windows` to compare six atomic Windows API calls with one batch containing the same six steps. It verifies each workflow, separates fresh-worker startup from warm runs, alternates run order, and writes JSON samples plus a Markdown report. See [benchmark method and recorded results](benchmarks/README.md). Time and character/byte counts are measured locally; model inference and token costs are not measured.
 
 ## Structure
 

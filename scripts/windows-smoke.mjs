@@ -48,6 +48,22 @@ try {
   const fixtureState = await (await fetch(fixtureUrl)).json();
   assert.equal(fixtureState.text, text);
   assert.equal(fixtureState.clicks, 1);
+  const batchText = 'One call: Pokémon APIs fill and verify!';
+  const batch = await api({action: 'batch', max_chars: 2000, steps: [
+    {action: 'get_windows', query: title},
+    {action: 'get_ui', window_step: 0, query: 'Test note', control_type: 'Edit'},
+    {action: 'set_value', target_step: 1, text: batchText},
+    {action: 'get_ui', window_step: 0, query: 'Verify input', control_type: 'Button'},
+    {action: 'invoke', target_step: 3},
+    {action: 'get_ui', window_step: 0, query: 'Test note', control_type: 'Edit', expect_value: batchText},
+  ]});
+  assert.equal(batch.ok, true);
+  assert.equal(batch.completed, 6);
+  assert.equal(batch.result.nodes[0].value, batchText);
+  assert(JSON.stringify(batch).length <= 2000);
+  const batchState = await (await fetch(fixtureUrl)).json();
+  assert.equal(batchState.text, batchText);
+  assert.equal(batchState.clicks, 2);
   const small = await api({action: 'get_ui', window_id, max_elements: 1, max_chars: 1000});
   assert.equal(small.nodes.length, 1);
   assert.equal(small.truncated, true);
@@ -55,7 +71,7 @@ try {
   await assert.rejects(api({action: 'invoke', snapshot: '0'.repeat(32), element_id: 1}), /Unknown or expired/);
   assert.equal(screenshots, 0);
   await call('pokemon', {action: 'done', message: 'Windows API reading, typing, and buttons verified!'});
-  console.log(`PASS: Win32 windows, UIA field value and button invocation, Unicode/repeated characters, stale-id rejection, bounded ${JSON.stringify(buttons).length}-character response, zero screenshot images.`);
+  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
 } finally {
   if (fixtureUrl) await fetch(`${fixtureUrl}/quit`, {method: 'POST'}).catch(() => {});
   fixture?.kill();

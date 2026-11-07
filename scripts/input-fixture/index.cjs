@@ -8,6 +8,7 @@ app.whenReady().then(async () => {
   ipcMain.on('fixture:input', (_event, text) => { state.text = text; });
   ipcMain.on('fixture:click', () => { state.clicks += 1; });
   await win.loadFile(path.join(__dirname, 'index.html'));
+  if (process.env.POKEMON_INPUT_FIXTURE_TITLE) win.setTitle(process.env.POKEMON_INPUT_FIXTURE_TITLE);
   win.show();
   win.focus();
   const server = http.createServer((req, res) => {

@@ -31,42 +31,12 @@ export class PokemonRuntime {
 	}
 
 	async computer(action: string, coordinate: number[] | undefined, execute: () => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
-		return this.exclusive(async () => {
-			await this.companion.start();
-			if (signal?.aborted) {
-				throw new Error('Computer action cancelled.');
-			}
+		return this.exclusive(async () => this.executeComputer(action, coordinate, execute, signal));
+	}
 
-			if (this.companion.state.paused) {
-				throw new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
-			}
-
-			await this.companion.update({activity: action.startsWith('get_') ? 'thinking' : 'working', message: labels[action] || action, interactionLocked: true}, coordinate);
-			try {
-				if (action === 'get_screenshot') {
-					await this.companion.capture(true);
-				}
-
-				if (signal?.aborted || this.companion.state.paused) {
-					throw new Error('Computer action cancelled or paused before execution.');
-				}
-
-				const result = await execute();
-				if (result.isError) {
-					throw new Error(result.content.filter((c) => c.type === 'text').map((c) => c.text).join('\n'));
-				}
-
-				await this.companion.update({activity: this.companion.state.task ? 'working' : 'idle', completedActions: this.companion.state.completedActions + 1, interactionLocked: false});
-				return result;
-			} catch (error) {
-				await this.companion.update({activity: 'error', message: error instanceof Error ? error.message : String(error), interactionLocked: false});
-				throw error;
-			} finally {
-				if (action === 'get_screenshot') {
-					await this.companion.capture(false);
-				}
-			}
-		});
+	/** Keep a whole sequence exclusive while checking pause/cancellation before every step. */
+	async computerBatch(run: (perform: (action: string, execute: () => Promise<CallToolResult>) => Promise<CallToolResult>) => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
+		return this.exclusive(async () => run(async (action, execute) => this.executeComputer(action, undefined, execute, signal)));
 	}
 
 	async update(patch: Partial<PokemonState>): Promise<PokemonState> {
@@ -74,5 +44,42 @@ export class PokemonRuntime {
 			await this.companion.update(patch);
 			return {...this.companion.state};
 		});
+	}
+
+	private async executeComputer(action: string, coordinate: number[] | undefined, execute: () => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
+		await this.companion.start();
+		if (signal?.aborted) {
+			throw new Error('Computer action cancelled.');
+		}
+
+		if (this.companion.state.paused) {
+			throw new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
+		}
+
+		await this.companion.update({activity: action.startsWith('get_') ? 'thinking' : 'working', message: labels[action] || action, interactionLocked: true}, coordinate);
+		try {
+			if (action === 'get_screenshot') {
+				await this.companion.capture(true);
+			}
+
+			if (signal?.aborted || this.companion.state.paused) {
+				throw new Error('Computer action cancelled or paused before execution.');
+			}
+
+			const result = await execute();
+			if (result.isError) {
+				throw new Error(result.content.filter((c) => c.type === 'text').map((c) => c.text).join('\n'));
+			}
+
+			await this.companion.update({activity: this.companion.state.task ? 'working' : 'idle', completedActions: this.companion.state.completedActions + 1, interactionLocked: false});
+			return result;
+		} catch (error) {
+			await this.companion.update({activity: 'error', message: error instanceof Error ? error.message : String(error), interactionLocked: false});
+			throw error;
+		} finally {
+			if (action === 'get_screenshot') {
+				await this.companion.capture(false);
+			}
+		}
 	}
 }
