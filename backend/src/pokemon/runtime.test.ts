@@ -1,4 +1,6 @@
-import {describe, expect, it} from 'vitest';
+import {
+	describe, expect, it, vi,
+} from 'vitest';
 import type {Companion, PokemonState} from './companion.js';
 import {PokemonRuntime} from './runtime.js';
 import {jsonResult} from '../utils/response.js';
@@ -17,6 +19,10 @@ function fixture() {
 		},
 		async update(patch: Partial<PokemonState>) {
 			Object.assign(this.state, patch);
+			events.push(`lock:${String(patch.interactionLocked)}`);
+		},
+		animate(patch: Partial<PokemonState>) {
+			Object.assign(this.state, patch);
 			events.push(`state:${this.state.activity}`);
 		},
 		async capture(hidden: boolean) {
@@ -33,7 +39,7 @@ describe('Pokémon desktop execution', () => {
 			events.push('capture');
 			throw new Error('capture failed');
 		})).rejects.toThrow('capture failed');
-		expect(events).toEqual(['state:thinking', 'hide', 'capture', 'state:error', 'restore']);
+		expect(events).toEqual(['lock:true', 'state:thinking', 'hide', 'capture', 'state:error', 'lock:false', 'restore']);
 		expect(companion.state.interactionLocked).toBe(false);
 	});
 	it('never executes input while the user has paused', async () => {
@@ -64,7 +70,7 @@ describe('Pokémon desktop execution', () => {
 		await new Promise((resolve) => {
 			setTimeout(resolve, 0);
 		});
-		expect(events).toEqual(['state:working', 'first']);
+		expect(events).toEqual(['lock:true', 'state:working', 'first']);
 		expect(companion.state.interactionLocked).toBe(true);
 		finish();
 		await Promise.all([first, second]);
@@ -82,5 +88,50 @@ describe('Pokémon desktop execution', () => {
 			return jsonResult({ok: true});
 		}, controller.signal)).rejects.toThrow('cancelled');
 		expect(events).toEqual([]);
+	});
+
+	it.each(['reject', 'hang', 'throw'])('does not fail or wait for a cosmetic companion that can %s', async (failure) => {
+		const {runtime, companion, events} = fixture();
+		delete companion.animate;
+		const update = companion.update.bind(companion);
+		companion.update = vi.fn(async (patch) => {
+			if ('interactionLocked' in patch) {
+				return update(patch);
+			}
+
+			if (failure === 'throw') {
+				throw new Error('Cosmetic failure');
+			}
+
+			return failure === 'hang' ? new Promise(() => {/* Deliberately stalled cosmetic bridge. */}) : Promise.reject(new Error('Cosmetic failure'));
+		});
+		if (failure === 'throw') {
+			companion.animate = () => {
+				throw new Error('Cosmetic failure');
+			};
+		}
+
+		await runtime.computer('type', undefined, async () => {
+			expect(companion.state.interactionLocked).toBe(true);
+			events.push('input');
+			return jsonResult({ok: true});
+		});
+		expect(events).toEqual(['lock:true', 'input', 'lock:false']);
+		expect(companion.state.completedActions).toBe(1);
+	});
+
+	it('checks pause again after awaiting the safety lock', async () => {
+		const {runtime, companion, events} = fixture();
+		companion.update = async (patch) => {
+			Object.assign(companion.state, patch);
+			companion.state.paused = true;
+		};
+
+		await expect(runtime.computer('type', undefined, async () => {
+			events.push('input');
+			return jsonResult({ok: true});
+		})).rejects.toThrow('Computer action cancelled or paused before execution.');
+		expect(events).not.toContain('input');
+		expect(companion.state.interactionLocked).toBe(false);
 	});
 });

@@ -62,7 +62,8 @@ export class PokemonRuntime {
 			throw new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
 		}
 
-		await measure('companion_before', async () => this.companion.update({activity: action.startsWith('get_') ? 'thinking' : 'working', message: labels[action] || action, interactionLocked: true}, coordinate));
+		await measure('companion_before', async () => this.companion.update({interactionLocked: true}));
+		this.animate({activity: action.startsWith('get_') ? 'thinking' : 'working', message: labels[action] || action}, coordinate);
 		try {
 			if (action === 'get_screenshot') {
 				await measure('companion_before', async () => measure('capture_hide', async () => this.companion.capture(true)));
@@ -77,15 +78,30 @@ export class PokemonRuntime {
 				throw new Error(result.content.filter((c) => c.type === 'text').map((c) => c.text).join('\n'));
 			}
 
-			await measure('companion_after', async () => this.companion.update({activity: this.companion.state.task ? 'working' : 'idle', completedActions: this.companion.state.completedActions + 1, interactionLocked: false}));
+			this.animate({activity: this.companion.state.task ? 'working' : 'idle', completedActions: this.companion.state.completedActions + 1});
 			return result;
 		} catch (error) {
-			await measure('companion_after', async () => this.companion.update({activity: 'error', message: error instanceof Error ? error.message : String(error), interactionLocked: false}));
+			this.animate({activity: 'error', message: error instanceof Error ? error.message : String(error)});
 			throw error;
 		} finally {
-			if (action === 'get_screenshot') {
-				await measure('companion_after', async () => measure('capture_show', async () => this.companion.capture(false)));
+			try {
+				await measure('companion_after', async () => this.companion.update({interactionLocked: false}));
+			} finally {
+				if (action === 'get_screenshot') {
+					await measure('companion_after', async () => measure('capture_show', async () => this.companion.capture(false)));
+				}
 			}
 		}
+	}
+
+	private animate(patch: Partial<PokemonState>, coordinate?: number[]): void {
+		Object.assign(this.companion.state, patch);
+		try {
+			if (this.companion.animate) {
+				this.companion.animate(patch, coordinate);
+			} else {
+				void this.companion.update(patch, coordinate).catch(() => undefined);
+			}
+		} catch {/* Custom companions may throw synchronously on cosmetic updates. */}
 	}
 }

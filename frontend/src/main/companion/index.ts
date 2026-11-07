@@ -14,6 +14,7 @@ let activeDisplayId: number
 let tray: Tray
 let socket: net.Socket
 let capturing = false
+let refreshQueued = false
 let paused = false
 let clipboardBackup: Electron.Data | undefined
 let pastedText: string | undefined
@@ -52,6 +53,19 @@ function refresh(): void {
 
 function send(data: unknown): void {
   if (socket && !socket.destroyed) socket.write(`${JSON.stringify(data)}\n`)
+}
+
+function scheduleRefresh(): void {
+  if (refreshQueued) return
+  refreshQueued = true
+  setImmediate(() => {
+    refreshQueued = false
+    try {
+      refresh()
+    } catch (error) {
+      console.error(error)
+    }
+  })
 }
 
 function togglePause(): boolean {
@@ -236,8 +250,22 @@ app
             const command = JSON.parse(line)
             try {
               if (command.kind === 'state') {
-                if (!registry.list().some((pet) => pet.id === command.state?.pet)) throw new Error('Unknown Pokémon.')
-                state = { ...command.state, paused }
+                if (command.lock_only) {
+                  state.interactionLocked = Boolean(command.state?.interactionLocked)
+                  for (const win of windows.values()) {
+                    if (!win.isDestroyed() && !paused && state.interactionLocked)
+                      win.setIgnoreMouseEvents(true, { forward: true })
+                  }
+                  send({ kind: 'ack', id: command.id })
+                  return
+                }
+                if (
+                  (!command.cosmetic || command.state?.pet !== state.pet) &&
+                  !registry.list().some((pet) => pet.id === command.state?.pet)
+                )
+                  throw new Error('Unknown Pokémon.')
+                const interactionLocked = state.interactionLocked
+                state = { ...command.state, paused, ...(command.cosmetic ? { interactionLocked } : {}) }
                 if (
                   Array.isArray(command.coordinate) &&
                   command.coordinate.length === 2 &&
@@ -249,7 +277,8 @@ app
                   activeDisplayId = display.id
                   target = { x: logical.x - display.workArea.x + 36, y: logical.y - display.workArea.y + 24 }
                 }
-                refresh()
+                if (command.cosmetic) scheduleRefresh()
+                else refresh()
               } else if (command.kind === 'clipboard') {
                 if (typeof command.text === 'string') {
                   if (clipboardBackup) throw new Error('A paste is already in progress.')
