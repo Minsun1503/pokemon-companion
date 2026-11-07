@@ -166,8 +166,10 @@ export class WindowsAutomation {
 
 					item.cleanup();
 					this.pending.delete(response.id);
-					if (response.error) {
-						item.reject(new Error(response.error));
+					if (response.error !== undefined) {
+						item.reject(new Error(response.error || 'Windows UI Automation failed without an error message. Call get_ui again for fresh snapshots.'));
+					} else if (!response.result || typeof response.result !== 'object' || Array.isArray(response.result)) {
+						item.reject(new Error('Windows UI Automation returned an invalid response.'));
 					} else {
 						item.resolve(response.result);
 					}

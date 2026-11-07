@@ -26,6 +26,26 @@ async function readUI(result: Record<string, unknown>) {
 const captions = ['Minimize', 'Maximize', 'Close'].map((name) => ({role: 'Button', name}));
 
 describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
+	it.each([{error: ''}, {}, {result: null}, {result: []}])('rejects an empty error or missing object result without replay: %j', async (response) => {
+		const worker = Object.assign(new EventEmitter(), {
+			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
+		});
+		vi.mocked(spawn).mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
+		const automation = new WindowsAutomation();
+		try {
+			const pending = automation.request({action: 'get_ui', window_id: '123'});
+			const rejected = expect(pending).rejects.toThrow('error' in response ? 'failed without an error message' : 'invalid response');
+			worker.stdout.write(`${JSON.stringify({id: 1, ...response})}\n`);
+			await rejected;
+			expect(worker.stdin.read().toString().trim().split('\n')).toHaveLength(1);
+			const fresh = automation.request({action: 'get_ui', window_id: '123'});
+			worker.stdout.write(`${JSON.stringify({id: 2, result: {nodes: []}})}\n`);
+			expect(await fresh).toEqual({nodes: []});
+		} finally {
+			automation.close();
+		}
+	});
+
 	it('warms one persistent worker and reuses it for subsequent requests', async () => {
 		const worker = Object.assign(new EventEmitter(), {
 			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),

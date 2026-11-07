@@ -32,6 +32,9 @@ while ($null -ne ($line = [Console]::ReadLine())) {
         }
         [Console]::WriteLine((@{ id = $request.id; result = $result } | ConvertTo-Json -Depth 12 -Compress))
     } catch {
-        [Console]::WriteLine((@{ id = $request.id; error = $_.Exception.GetBaseException().Message } | ConvertTo-Json -Compress))
+        $cause = $_.Exception.GetBaseException()
+        $message = $cause.Message
+        if ([string]::IsNullOrWhiteSpace($message)) { $message = $cause.ToString() }
+        [Console]::WriteLine((@{ id = $request.id; error = $message } | ConvertTo-Json -Compress))
     }
 }

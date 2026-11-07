@@ -1,18 +1,18 @@
 {
-  "measured_at": "2026-11-07T16:51:04.656Z",
+  "measured_at": "2026-11-07T17:14:43.877Z",
   "companion": "on",
   "runs_per_mode": 40,
   "actions": "alternating key F8 and type 7",
   "counter": "F8 key-downs plus input events; raw DOM events retain extra IME Process wrappers",
   "guard": {
     "samples": 80,
-    "median_ms": 5.889099999999871,
-    "p95_ms": 7.6148999999995794
+    "median_ms": 6.776300000000447,
+    "p95_ms": 8.929399999999987
   },
   "get_windows": {
     "samples": 83,
-    "median_ms": 53.953599999999824,
-    "p95_ms": 68.95499999999993
+    "median_ms": 70.3126999999995,
+    "p95_ms": 97.96010000000024
   },
   "observed": [
     {
@@ -770,7 +770,7 @@
       "action": "type",
       "a": {
         "down": 2,
-        "up": 2,
+        "up": 3,
         "logical": 2,
         "events": [
           [
@@ -781,6 +781,11 @@
           [
             "up",
             "Process",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
             "Digit7"
           ]
         ]
@@ -802,11 +807,6 @@
         "up": 5,
         "logical": 3,
         "events": [
-          [
-            "up",
-            "7",
-            "Digit7"
-          ],
           [
             "down",
             "Process",
@@ -989,7 +989,7 @@
       "action": "type",
       "a": {
         "down": 11,
-        "up": 14,
+        "up": 15,
         "logical": 8,
         "events": [
           [
@@ -1000,6 +1000,11 @@
           [
             "up",
             "Process",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
             "Digit7"
           ]
         ]
@@ -1021,11 +1026,6 @@
         "up": 17,
         "logical": 9,
         "events": [
-          [
-            "up",
-            "7",
-            "Digit7"
-          ],
           [
             "down",
             "Process",
@@ -1354,7 +1354,7 @@
       "action": "type",
       "a": {
         "down": 26,
-        "up": 35,
+        "up": 34,
         "logical": 18,
         "events": [
           [
@@ -1365,11 +1365,6 @@
           [
             "up",
             "Process",
-            "Digit7"
-          ],
-          [
-            "up",
-            "7",
             "Digit7"
           ]
         ]
@@ -1391,6 +1386,11 @@
         "up": 37,
         "logical": 19,
         "events": [
+          [
+            "up",
+            "7",
+            "Digit7"
+          ],
           [
             "down",
             "Process",
@@ -1500,7 +1500,7 @@
       "action": "type",
       "a": {
         "down": 32,
-        "up": 42,
+        "up": 43,
         "logical": 22,
         "events": [
           [
@@ -1511,6 +1511,11 @@
           [
             "up",
             "Process",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
             "Digit7"
           ]
         ]
@@ -1532,11 +1537,6 @@
         "up": 45,
         "logical": 23,
         "events": [
-          [
-            "up",
-            "7",
-            "Digit7"
-          ],
           [
             "down",
             "Process",
@@ -1792,7 +1792,7 @@
       "action": "type",
       "a": {
         "down": 44,
-        "up": 59,
+        "up": 58,
         "logical": 30,
         "events": [
           [
@@ -1803,11 +1803,6 @@
           [
             "up",
             "Process",
-            "Digit7"
-          ],
-          [
-            "up",
-            "7",
             "Digit7"
           ]
         ]
@@ -1826,10 +1821,15 @@
       "action": "key",
       "a": {
         "down": 46,
-        "up": 61,
+        "up": 60,
         "logical": 31,
         "events": [
           [
+            "up",
+            "7",
+            "Digit7"
+          ],
+          [
             "down",
             "Process",
             "F8"
@@ -1842,11 +1842,6 @@
           [
             "up",
             "Process",
-            "F8"
-          ],
-          [
-            "up",
-            "F8",
             "F8"
           ]
         ]
@@ -1865,9 +1860,14 @@
       "action": "type",
       "a": {
         "down": 47,
-        "up": 62,
+        "up": 63,
         "logical": 32,
         "events": [
+          [
+            "up",
+            "F8",
+            "F8"
+          ],
           [
             "down",
             "Process",
@@ -1876,6 +1876,11 @@
           [
             "up",
             "Process",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
             "Digit7"
           ]
         ]
@@ -1897,11 +1902,6 @@
         "up": 65,
         "logical": 33,
         "events": [
-          [
-            "up",
-            "7",
-            "Digit7"
-          ],
           [
             "down",
             "Process",
@@ -2045,7 +2045,7 @@
       "action": "key",
       "a": {
         "down": 55,
-        "up": 73,
+        "up": 72,
         "logical": 37,
         "events": [
           [
@@ -2061,11 +2061,6 @@
           [
             "up",
             "Process",
-            "F8"
-          ],
-          [
-            "up",
-            "F8",
             "F8"
           ]
         ]
@@ -2087,6 +2082,11 @@
         "up": 74,
         "logical": 38,
         "events": [
+          [
+            "up",
+            "F8",
+            "F8"
+          ],
           [
             "down",
             "Process",
@@ -2157,7 +2157,7 @@
       "action": "type",
       "a": {
         "down": 59,
-        "up": 78,
+        "up": 79,
         "logical": 40,
         "events": [
           [
@@ -2168,6 +2168,11 @@
           [
             "up",
             "Process",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
             "Digit7"
           ]
         ]
@@ -2185,2405 +2190,2405 @@
     {
       "tool": "pokemon",
       "action": "task",
-      "total_ms": 408.68949999999995,
+      "total_ms": 376.8627999999999,
       "breakdown_ms": {
-        "queue_wait": 2.172900000000027,
-        "companion_before": 404.93090000000007,
+        "queue_wait": 0.25149999999985084,
+        "companion_before": 375.12519999999995,
         "action": 0,
         "companion_after": 0,
-        "serialization": 0.028199999999969805
+        "serialization": 0.035399999999981446
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 133.7424000000001,
+      "total_ms": 178.94119999999998,
       "breakdown_ms": {
-        "queue_wait": 0.016800000000102955,
-        "companion_before": 1.4355999999997948,
-        "action": 130.81760000000008,
-        "companion_after": 0.6786999999999352,
-        "serialization": 0.02889999999979409,
-        "worker_round_trip": 130.2213999999999,
-        "post_processing": 0.022799999999961074
+        "queue_wait": 0.02430000000003929,
+        "companion_before": 1.3560999999999694,
+        "action": 175.80279999999993,
+        "companion_after": 0.8269999999999982,
+        "serialization": 0.02790000000004511,
+        "worker_round_trip": 174.98249999999985,
+        "post_processing": 0.02359999999998763
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 76.32299999999987,
+      "total_ms": 89.08159999999998,
       "breakdown_ms": {
-        "queue_wait": 0.013900000000148793,
-        "companion_before": 2.703499999999849,
-        "action": 72.72860000000014,
-        "companion_after": 0.6979000000001179,
-        "serialization": 0.020400000000108776,
-        "worker_round_trip": 72.66679999999997,
-        "post_processing": 0.01389999999992142
+        "queue_wait": 0.05349999999998545,
+        "companion_before": 4.199700000000121,
+        "action": 82.79219999999987,
+        "companion_after": 1.7986000000000786,
+        "serialization": 0.07420000000047366,
+        "worker_round_trip": 82.7171000000003,
+        "post_processing": 0.015899999999874126
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 120.22780000000012,
+      "total_ms": 150.79169999999976,
       "breakdown_ms": {
-        "queue_wait": 0.012499999999818101,
-        "companion_before": 1.387699999999768,
-        "action": 116.19730000000027,
-        "companion_after": 2.119999999999891,
+        "queue_wait": 0.019200000000182627,
+        "companion_before": 1.6408000000001266,
+        "action": 147.36509999999998,
+        "companion_after": 1.2480999999997948,
         "serialization": 0.0397000000002663,
-        "worker_round_trip": 116.05670000000009,
-        "post_processing": 0.03789999999980864
+        "worker_round_trip": 147.2496000000001,
+        "post_processing": 0.03490000000010696
       }
     },
     {
       "tool": "windows",
       "action": "batch",
-      "total_ms": 197.529,
+      "total_ms": 331.7555000000002,
       "breakdown_ms": {
-        "queue_wait": 0.02539999999999054,
-        "companion_before": 4.876099999999951,
-        "action": 189.30549999999994,
-        "companion_after": 1.4648999999999432,
-        "serialization": 0.07750000000032742,
-        "worker_round_trip": 187.26330000000007,
-        "uia_tree_walk": 50.1327,
-        "post_processing": 0.10969999999997526
+        "queue_wait": 0.029799999999795546,
+        "companion_before": 7.266200000000026,
+        "action": 317.91730000000007,
+        "companion_after": 4.175999999999931,
+        "serialization": 0.14319999999952415,
+        "worker_round_trip": 313.5568999999996,
+        "uia_tree_walk": 78.8194,
+        "post_processing": 0.16409999999996217
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 64.64319999999998,
+      "total_ms": 78.67759999999998,
       "breakdown_ms": {
-        "queue_wait": 0.017400000000179716,
-        "companion_before": 2.8553000000001703,
-        "action": 61.14569999999958,
-        "companion_after": 0.4693999999999505,
-        "serialization": 0.022400000000288856,
-        "worker_round_trip": 61.08629999999994,
-        "post_processing": 0.011799999999766442
+        "queue_wait": 0.021200000000135333,
+        "companion_before": 3.159900000000107,
+        "action": 74.4670000000001,
+        "companion_after": 0.7519999999999527,
+        "serialization": 0.03429999999980282,
+        "worker_round_trip": 74.3701000000001,
+        "post_processing": 0.031899999999950523
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 10.378699999999753,
+      "total_ms": 13.605200000000423,
       "breakdown_ms": {
-        "queue_wait": 0.010600000000067666,
-        "companion_before": 0.6475000000000364,
-        "action": 8.77430000000004,
-        "companion_after": 0.5400999999997111,
-        "serialization": 0.0036000000000058208,
-        "worker_round_trip": 8.099900000000162,
-        "post_processing": 0.0035000000002582965,
-        "foreground_guard": 8.255099999999857
+        "queue_wait": 0.03749999999990905,
+        "companion_before": 1.1716999999994187,
+        "action": 10.330799999999726,
+        "companion_after": 0.5902000000000953,
+        "serialization": 0.011199999999917054,
+        "worker_round_trip": 8.475799999999708,
+        "post_processing": 0.003200000000106229,
+        "foreground_guard": 8.731199999999717
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 57.84870000000001,
-      "breakdown_ms": {
-        "queue_wait": 0.010700000000269938,
-        "companion_before": 1.3734999999996944,
-        "action": 55.776900000000296,
-        "companion_after": 0.5254999999997381,
-        "serialization": 0.01929999999993015,
-        "worker_round_trip": 55.695100000000366,
-        "post_processing": 0.018000000000029104
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 11.969699999999648,
-      "breakdown_ms": {
-        "queue_wait": 0.19610000000011496,
-        "companion_before": 0.8377000000000407,
-        "action": 10.105600000000322,
-        "companion_after": 0.5639000000001033,
-        "serialization": 0.021999999999934516,
-        "worker_round_trip": 9.500899999999547,
-        "post_processing": 0.018500000000130967,
-        "foreground_guard": 4.675099999999929
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 51.528999999999996,
-      "breakdown_ms": {
-        "queue_wait": 0.03220000000010259,
-        "companion_before": 1.0543000000002394,
-        "action": 49.51580000000013,
-        "companion_after": 0.6584000000002561,
-        "serialization": 0.012199999999666034,
-        "worker_round_trip": 49.429299999999785,
-        "post_processing": 0.019099999999980355
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 6.658500000000004,
-      "breakdown_ms": {
-        "queue_wait": 0.013699999999971624,
-        "companion_before": 0.7177999999994427,
-        "action": 5.361200000000281,
-        "companion_after": 0.3924000000001797,
-        "serialization": 0.010000000000218279,
-        "worker_round_trip": 5.246399999999994,
-        "post_processing": 0.0017000000002553861,
-        "foreground_guard": 5.318499999999858
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.29820000000018,
-      "breakdown_ms": {
-        "queue_wait": 0.022199999999884312,
-        "companion_before": 0.6552999999998974,
-        "action": 51.72569999999996,
-        "companion_after": 0.6716000000001259,
-        "serialization": 0.0123000000007778,
-        "worker_round_trip": 51.66830000000027,
-        "post_processing": 0.012100000000373257
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.345100000000002,
+      "total_ms": 97.96010000000024,
       "breakdown_ms": {
         "queue_wait": 0.018399999999928696,
-        "companion_before": 1.040899999999965,
-        "action": 6.39429999999993,
-        "companion_after": 0.716899999999896,
-        "serialization": 0.01470000000017535,
-        "worker_round_trip": 6.175699999999779,
-        "post_processing": 0.011700000000018917,
-        "foreground_guard": 5.020199999999932
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 59.19489999999996,
-      "breakdown_ms": {
-        "queue_wait": 0.01319999999986976,
-        "companion_before": 1.7070999999996275,
-        "action": 56.59360000000015,
-        "companion_after": 0.7605999999996129,
-        "serialization": 0.016499999999723514,
-        "worker_round_trip": 56.53399999999965,
-        "post_processing": 0.010000000000218279
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 9.770499999999629,
-      "breakdown_ms": {
-        "queue_wait": 0.015300000000024738,
-        "companion_before": 0.7513999999996486,
-        "action": 7.944899999999961,
-        "companion_after": 0.9115999999999076,
-        "serialization": 0.0052999999998064595,
-        "worker_round_trip": 7.825199999999768,
-        "post_processing": 0.0020999999997002305,
-        "foreground_guard": 7.911799999999857
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 68.95499999999993,
-      "breakdown_ms": {
-        "queue_wait": 0.008400000000165164,
-        "companion_before": 0.7438999999999396,
-        "action": 67.42990000000009,
-        "companion_after": 0.6846000000000458,
-        "serialization": 0.012099999999463762,
-        "worker_round_trip": 67.3768,
-        "post_processing": 0.010099999999965803
+        "companion_before": 1.211699999999837,
+        "action": 95.39339999999993,
+        "companion_after": 1.1262000000001535,
+        "serialization": 0.021700000000237196,
+        "worker_round_trip": 95.29780000000028,
+        "post_processing": 0.02719999999999345
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 9.339899999999943,
+      "total_ms": 17.339699999999993,
       "breakdown_ms": {
-        "queue_wait": 0.013799999999719148,
-        "companion_before": 1.0208000000002357,
-        "action": 7.608499999999822,
-        "companion_after": 0.5309000000002015,
-        "serialization": 0.022000000000389264,
-        "worker_round_trip": 7.430699999999433,
-        "post_processing": 0.0072000000000116415,
-        "foreground_guard": 6.117999999999938
+        "queue_wait": 0.11999999999989086,
+        "companion_before": 0.9493000000002212,
+        "action": 14.88760000000002,
+        "companion_after": 0.8503000000000611,
+        "serialization": 0.02260000000023865,
+        "worker_round_trip": 13.90079999999989,
+        "post_processing": 0.020799999999780994,
+        "foreground_guard": 6.943200000000161
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 55.48880000000008,
+      "total_ms": 75.69830000000002,
       "breakdown_ms": {
-        "queue_wait": 0.0158000000001266,
-        "companion_before": 0.9302999999999884,
-        "action": 53.90660000000025,
-        "companion_after": 0.5196000000000822,
-        "serialization": 0.01290000000017244,
-        "worker_round_trip": 53.851300000000265,
-        "post_processing": 0.009500000000116415
+        "queue_wait": 0.028800000000046566,
+        "companion_before": 1.4772000000002663,
+        "action": 72.97830000000022,
+        "companion_after": 0.9118999999996049,
+        "serialization": 0.02959999999984575,
+        "worker_round_trip": 72.7784999999999,
+        "post_processing": 0.06640000000015789
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 7.9074999999998,
+      "total_ms": 9.159900000000107,
       "breakdown_ms": {
-        "queue_wait": 0.010499999999865395,
-        "companion_before": 0.5309999999999491,
-        "action": 6.48680000000013,
-        "companion_after": 0.7436000000002423,
-        "serialization": 0.0037999999999556167,
-        "worker_round_trip": 6.391299999999774,
-        "post_processing": 0.002100000000154978,
-        "foreground_guard": 6.461800000000039
+        "queue_wait": 0.027100000000245927,
+        "companion_before": 1.1353999999996631,
+        "action": 7.104100000000017,
+        "companion_after": 0.6721999999999753,
+        "serialization": 0.006199999999807915,
+        "worker_round_trip": 6.985200000000077,
+        "post_processing": 0.0014000000001033186,
+        "foreground_guard": 7.065100000000257
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 59.39409999999998,
+      "total_ms": 105.0323000000003,
       "breakdown_ms": {
-        "queue_wait": 0.0041999999998552084,
-        "companion_before": 0.5074000000004162,
-        "action": 58.05659999999989,
-        "companion_after": 0.7197000000001026,
-        "serialization": 0.008800000000064756,
-        "worker_round_trip": 58.00019999999995,
-        "post_processing": 0.009199999999964348
+        "queue_wait": 0.0421000000001186,
+        "companion_before": 1.3578999999995176,
+        "action": 102.30539999999974,
+        "companion_after": 1.0282000000001972,
+        "serialization": 0.03790000000026339,
+        "worker_round_trip": 102.14799999999968,
+        "post_processing": 0.03290000000015425
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 7.545100000000275,
+      "total_ms": 12.17430000000013,
       "breakdown_ms": {
-        "queue_wait": 0.00709999999980937,
-        "companion_before": 0.8072999999999411,
-        "action": 6.143000000000029,
-        "companion_after": 0.4863000000000284,
-        "serialization": 0.0181999999999789,
-        "worker_round_trip": 5.984799999999723,
-        "post_processing": 0.004999999999654392,
-        "foreground_guard": 4.4934000000002925
+        "queue_wait": 0.03179999999974825,
+        "companion_before": 0.9223000000001775,
+        "action": 9.705899999999929,
+        "companion_after": 1.304399999999987,
+        "serialization": 0.01389999999992142,
+        "worker_round_trip": 9.43520000000035,
+        "post_processing": 0.013399999999364809,
+        "foreground_guard": 8.032999999999902
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 49.74890000000005,
+      "total_ms": 77.41719999999987,
       "breakdown_ms": {
-        "queue_wait": 0.0039000000001578883,
-        "companion_before": 0.7539000000001579,
-        "action": 48.0309000000002,
-        "companion_after": 0.8348000000000866,
-        "serialization": 0.02400000000034197,
-        "worker_round_trip": 47.91249999999991,
-        "post_processing": 0.025099999999838474
+        "queue_wait": 0.016499999999723514,
+        "companion_before": 1.0109999999995125,
+        "action": 75.3761000000004,
+        "companion_after": 0.8393000000000939,
+        "serialization": 0.030199999999695137,
+        "worker_round_trip": 75.23810000000003,
+        "post_processing": 0.03099999999994907
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 8.354899999999816,
+      "total_ms": 10.563799999999901,
       "breakdown_ms": {
-        "queue_wait": 0.1817999999998392,
-        "companion_before": 0.7636999999999716,
-        "action": 6.722699999999804,
-        "companion_after": 0.572400000000016,
-        "serialization": 0.004700000000411819,
-        "worker_round_trip": 6.382399999999961,
-        "post_processing": 0.0014999999998508429,
-        "foreground_guard": 6.45699999999988
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.93199999999979,
-      "breakdown_ms": {
-        "queue_wait": 0.003400000000056025,
-        "companion_before": 0.6561000000001513,
-        "action": 49.36839999999984,
-        "companion_after": 0.8206000000000131,
-        "serialization": 0.016300000000683212,
-        "worker_round_trip": 49.31089999999995,
-        "post_processing": 0.017899999999826832
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.045100000000275,
-      "breakdown_ms": {
-        "queue_wait": 0.01139999999986685,
-        "companion_before": 0.7154999999997926,
-        "action": 6.507800000000316,
-        "companion_after": 0.6774000000000342,
-        "serialization": 0.011099999999714782,
-        "worker_round_trip": 6.310399999999845,
-        "post_processing": 0.002800000000206637,
-        "foreground_guard": 5.605999999999767
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.84920000000011,
-      "breakdown_ms": {
-        "queue_wait": 0.005600000000413274,
-        "companion_before": 0.670900000000529,
-        "action": 49.654599999999846,
-        "companion_after": 0.45919999999978245,
-        "serialization": 0.011199999999917054,
-        "worker_round_trip": 49.61740000000009,
-        "post_processing": 0.010700000000269938
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.953500000000076,
-      "breakdown_ms": {
-        "queue_wait": 0.01139999999986685,
-        "companion_before": 0.835399999999936,
-        "action": 7.3966999999997824,
-        "companion_after": 0.6288000000004104,
-        "serialization": 0.0027000000000043656,
-        "worker_round_trip": 7.302200000000084,
-        "post_processing": 0.002100000000154978,
-        "foreground_guard": 7.359699999999975
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 49.45569999999998,
-      "breakdown_ms": {
-        "queue_wait": 0.0029999999997016857,
-        "companion_before": 0.5078000000003158,
-        "action": 48.04749999999967,
-        "companion_after": 0.8234999999999673,
-        "serialization": 0.015000000000327418,
-        "worker_round_trip": 47.98660000000018,
-        "post_processing": 0.016099999999823922
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 9.329600000000028,
-      "breakdown_ms": {
-        "queue_wait": 0.005999999999858119,
-        "companion_before": 0.5863000000003922,
-        "action": 7.863299999999981,
-        "companion_after": 0.7782999999999447,
-        "serialization": 0.006000000000312866,
-        "worker_round_trip": 7.716400000000249,
-        "post_processing": 0.0039000000001578883,
-        "foreground_guard": 7.07529999999997
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 51.866399999999885,
-      "breakdown_ms": {
-        "queue_wait": 0.005700000000160799,
-        "companion_before": 0.6813999999999396,
-        "action": 50.40520000000015,
-        "companion_after": 0.7027000000002772,
-        "serialization": 0.009099999999762076,
-        "worker_round_trip": 50.36899999999969,
-        "post_processing": 0.008599999999660213
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 6.628999999999905,
-      "breakdown_ms": {
-        "queue_wait": 0.011500000000069122,
-        "companion_before": 0.8558000000002721,
-        "action": 5.077500000000327,
-        "companion_after": 0.5896999999999935,
-        "serialization": 0.005500000000211003,
-        "worker_round_trip": 4.984100000000126,
-        "post_processing": 0.0018999999997504347,
-        "foreground_guard": 5.040799999999763
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.40059999999994,
-      "breakdown_ms": {
-        "queue_wait": 0.0039000000001578883,
-        "companion_before": 0.5877000000000407,
-        "action": 48.96270000000004,
-        "companion_after": 0.7602000000001681,
-        "serialization": 0.012600000000929867,
-        "worker_round_trip": 48.916899999999714,
-        "post_processing": 0.01290000000017244
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 7.958399999999983,
-      "breakdown_ms": {
-        "queue_wait": 0.006600000000162254,
-        "companion_before": 1.2516000000000531,
-        "action": 6.089899999999943,
-        "companion_after": 0.5010999999999513,
-        "serialization": 0.011099999999260035,
-        "worker_round_trip": 6.008500000000367,
-        "post_processing": 0.0031000000003587047,
-        "foreground_guard": 4.7762000000002445
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 49.68110000000024,
-      "breakdown_ms": {
-        "queue_wait": 0.002599999999802094,
-        "companion_before": 0.5511999999998807,
-        "action": 48.26299999999992,
-        "companion_after": 0.7937000000001717,
-        "serialization": 0.008200000000215368,
-        "worker_round_trip": 48.23139999999967,
-        "post_processing": 0.008200000000215368
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 5.989100000000235,
-      "breakdown_ms": {
-        "queue_wait": 0.0029999999997016857,
-        "companion_before": 0.6374000000005253,
-        "action": 4.822000000000116,
-        "companion_after": 0.46070000000008804,
-        "serialization": 0.0028999999999541615,
-        "worker_round_trip": 4.754100000000108,
-        "post_processing": 0.0016000000000531145,
-        "foreground_guard": 4.795599999999922
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 49.071300000000065,
-      "breakdown_ms": {
-        "queue_wait": 0.0030999999999039574,
-        "companion_before": 0.5142000000000735,
-        "action": 47.94830000000002,
-        "companion_after": 0.5533000000000357,
-        "serialization": 0.0091999999995096,
-        "worker_round_trip": 47.91670000000022,
-        "post_processing": 0.008800000000064756
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 9.160699999999906,
-      "breakdown_ms": {
-        "queue_wait": 0.0030999999999039574,
-        "companion_before": 1.460700000000088,
-        "action": 6.884300000000167,
-        "companion_after": 0.7027000000002772,
-        "serialization": 0.016700000000128057,
-        "worker_round_trip": 6.774400000000242,
-        "post_processing": 0.0036000000000058208,
-        "foreground_guard": 5.227400000000216
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.0029999999997,
-      "breakdown_ms": {
-        "queue_wait": 0.003200000000106229,
-        "companion_before": 0.4913000000001375,
-        "action": 50.7805000000003,
-        "companion_after": 0.6091000000001259,
-        "serialization": 0.009500000000116415,
-        "worker_round_trip": 50.747299999999996,
-        "post_processing": 0.009200000000419095
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 7.353200000000015,
-      "breakdown_ms": {
-        "queue_wait": 0.009800000000268483,
-        "companion_before": 1.6877000000004045,
-        "action": 5.051200000000335,
-        "companion_after": 0.5311999999998989,
-        "serialization": 0.005400000000008731,
-        "worker_round_trip": 4.953300000000127,
-        "post_processing": 0.0015999999995983671,
-        "foreground_guard": 5.0090000000000146
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.26590000000033,
-      "breakdown_ms": {
-        "queue_wait": 0.002199999999902502,
-        "companion_before": 0.44230000000015934,
-        "action": 51.96820000000025,
-        "companion_after": 0.7848000000003594,
-        "serialization": 0.01440000000047803,
-        "worker_round_trip": 51.91829999999982,
-        "post_processing": 0.016700000000128057
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 7.532900000000154,
-      "breakdown_ms": {
-        "queue_wait": 0.007700000000113505,
-        "companion_before": 1.2799999999997453,
-        "action": 5.734099999999671,
-        "companion_after": 0.43440000000009604,
-        "serialization": 0.0091999999995096,
-        "worker_round_trip": 5.640000000000327,
-        "post_processing": 0.0033999999996012775,
-        "foreground_guard": 4.505900000000111
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.343299999999545,
-      "breakdown_ms": {
-        "queue_wait": 0.0029999999997016857,
-        "companion_before": 1.130699999999706,
-        "action": 51.69599999999991,
-        "companion_after": 0.4493000000002212,
-        "serialization": 0.010800000000017462,
-        "worker_round_trip": 51.65949999999975,
-        "post_processing": 0.008900000000721775
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.246299999999792,
-      "breakdown_ms": {
-        "queue_wait": 0.007500000000618456,
-        "companion_before": 1.1805999999996857,
-        "action": 6.158499999999549,
-        "companion_after": 0.7830999999996493,
-        "serialization": 0.005099999999401916,
-        "worker_round_trip": 6.027900000000045,
-        "post_processing": 0.002599999999802094,
-        "foreground_guard": 6.107299999999668
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 56.406200000000354,
-      "breakdown_ms": {
-        "queue_wait": 0.002199999999902502,
-        "companion_before": 0.4283000000004904,
-        "action": 55.40699999999924,
-        "companion_after": 0.5149999999994179,
-        "serialization": 0.009599999999409192,
-        "worker_round_trip": 55.37490000000071,
-        "post_processing": 0.009799999999813735
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 7.487599999999475,
-      "breakdown_ms": {
-        "queue_wait": 0.005000000000109139,
-        "companion_before": 0.8883000000005268,
-        "action": 6.125700000000506,
-        "companion_after": 0.39429999999993015,
-        "serialization": 0.010000000001127773,
-        "worker_round_trip": 6.01549999999952,
-        "post_processing": 0.00889999999981228,
-        "foreground_guard": 4.640800000000127
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 54.80720000000019,
-      "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.4289999999991778,
-        "action": 53.51369999999952,
-        "companion_after": 0.7964000000001761,
-        "serialization": 0.014200000000528235,
-        "worker_round_trip": 53.46429999999964,
-        "post_processing": 0.016400000000430737
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 7.94840000000022,
-      "breakdown_ms": {
-        "queue_wait": 0.003499999999803549,
-        "companion_before": 1.3393999999998414,
-        "action": 5.9465000000000146,
-        "companion_after": 0.581199999999626,
-        "serialization": 0.003200000000106229,
-        "worker_round_trip": 5.855900000000474,
-        "post_processing": 0.002200000000811997,
-        "foreground_guard": 5.919799999999668
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 56.092500000000655,
-      "breakdown_ms": {
-        "queue_wait": 0.0036999999992985977,
-        "companion_before": 0.9701000000013664,
-        "action": 54.5654999999997,
-        "companion_after": 0.48430000000007567,
-        "serialization": 0.010300000000825094,
-        "worker_round_trip": 54.53060000000005,
-        "post_processing": 0.009500000000116415
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.369599999999991,
-      "breakdown_ms": {
-        "queue_wait": 0.004500000000007276,
-        "companion_before": 0.4279000000005908,
-        "action": 7.242199999999684,
-        "companion_after": 0.6234000000004016,
-        "serialization": 0.0065999999997075065,
-        "worker_round_trip": 7.146899999998823,
-        "post_processing": 0.0037000000002080924,
-        "foreground_guard": 6.253899999999703
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.53780000000006,
-      "breakdown_ms": {
-        "queue_wait": 0.0021000000006097252,
-        "companion_before": 0.4525999999996202,
-        "action": 52.50879999999961,
-        "companion_after": 0.5229999999992287,
-        "serialization": 0.009600000000318687,
-        "worker_round_trip": 52.47599999999966,
-        "post_processing": 0.009500000000116415
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 6.37670000000071,
-      "breakdown_ms": {
-        "queue_wait": 0.002800000000206637,
-        "companion_before": 0.6472000000003391,
-        "action": 4.905700000000252,
-        "companion_after": 0.726900000000569,
-        "serialization": 0.0030000000006111804,
-        "worker_round_trip": 4.747400000000198,
-        "post_processing": 0.0033999999996012775,
-        "foreground_guard": 4.852600000000166
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 58.66949999999997,
-      "breakdown_ms": {
-        "queue_wait": 0.0030999999999039574,
-        "companion_before": 0.5704999999989013,
-        "action": 57.313099999999395,
-        "companion_after": 0.695400000000518,
-        "serialization": 0.01840000000083819,
-        "worker_round_trip": 57.254400000000714,
-        "post_processing": 0.01569999999992433
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.846300000000156,
-      "breakdown_ms": {
-        "queue_wait": 0.0039999999999054126,
-        "companion_before": 0.5812999999998283,
-        "action": 6.596400000000358,
-        "companion_after": 1.524199999999837,
-        "serialization": 0.006600000000617001,
-        "worker_round_trip": 6.44879999999921,
-        "post_processing": 0.006999999999607098,
-        "foreground_guard": 5.772899999999936
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 51.968299999999545,
-      "breakdown_ms": {
-        "queue_wait": 0.0023999999993975507,
-        "companion_before": 0.5801999999994223,
-        "action": 50.842099999999846,
-        "companion_after": 0.48959999999988213,
-        "serialization": 0.010399999999208376,
-        "worker_round_trip": 50.8087000000005,
-        "post_processing": 0.009200000000419095
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.972600000000057,
-      "breakdown_ms": {
-        "queue_wait": 0.0029999999997016857,
-        "companion_before": 2.3367000000007465,
-        "action": 6.136000000000422,
-        "companion_after": 0.42339999999967404,
-        "serialization": 0.009500000000116415,
-        "worker_round_trip": 6.059799999999996,
-        "post_processing": 0.0015999999995983671,
-        "foreground_guard": 6.105900000000474
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.4980000000005,
-      "breakdown_ms": {
-        "queue_wait": 0.0020000000004074536,
-        "companion_before": 0.4219999999995707,
-        "action": 49.53030000000035,
-        "companion_after": 0.4940999999998894,
-        "serialization": 0.009500000000116415,
-        "worker_round_trip": 49.498899999999594,
-        "post_processing": 0.009299999999711872
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.25590000000011,
-      "breakdown_ms": {
-        "queue_wait": 0.004200000000309956,
-        "companion_before": 0.5091000000002168,
-        "action": 7.17410000000018,
-        "companion_after": 0.49459999999999127,
-        "serialization": 0.016300000000228465,
-        "worker_round_trip": 7.053200000000288,
-        "post_processing": 0.005700000000615546,
-        "foreground_guard": 5.528599999999642
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 55.07009999999991,
-      "breakdown_ms": {
-        "queue_wait": 0.002800000000206637,
-        "companion_before": 0.4890000000004875,
-        "action": 53.59429999999975,
-        "companion_after": 0.9170999999996639,
-        "serialization": 0.013499999999112333,
-        "worker_round_trip": 53.53909999999996,
-        "post_processing": 0.01239999999961583
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.05409999999938,
-      "breakdown_ms": {
-        "queue_wait": 0.002599999999802094,
-        "companion_before": 0.6464999999998327,
-        "action": 6.760700000000725,
-        "companion_after": 0.5609999999996944,
-        "serialization": 0.0036000000000058208,
-        "worker_round_trip": 6.665900000000875,
+        "queue_wait": 0.025799999999890133,
+        "companion_before": 1.2867999999998574,
+        "action": 8.351400000000012,
+        "companion_after": 0.746900000000096,
+        "serialization": 0.007000000000061846,
+        "worker_round_trip": 8.21369999999979,
         "post_processing": 0.002300000000104774,
-        "foreground_guard": 6.727799999999661
+        "foreground_guard": 8.303499999999985
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 49.65349999999944,
+      "total_ms": 73.88410000000022,
       "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 0.6027000000003682,
-        "action": 48.273699999999735,
-        "companion_after": 0.6918000000005122,
-        "serialization": 0.021800000000439468,
-        "worker_round_trip": 48.200700000000325,
-        "post_processing": 0.025399999999535794
+        "queue_wait": 0.016300000000228465,
+        "companion_before": 1.1354000000001179,
+        "action": 71.82610000000022,
+        "companion_after": 0.7716000000000349,
+        "serialization": 0.022399999999834108,
+        "worker_round_trip": 71.72899999999981,
+        "post_processing": 0.02080000000023574
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 7.829800000000432,
+      "total_ms": 10.578899999999976,
       "breakdown_ms": {
-        "queue_wait": 0.0027999999992971425,
-        "companion_before": 0.6030000000000655,
-        "action": 6.641099999999824,
-        "companion_after": 0.5085999999992055,
-        "serialization": 0.007799999999406282,
-        "worker_round_trip": 6.548499999999876,
-        "post_processing": 0.003299999999399006,
-        "foreground_guard": 5.489700000000084
+        "queue_wait": 0.01610000000027867,
+        "companion_before": 1.1408999999994194,
+        "action": 8.435899999999947,
+        "companion_after": 0.8229000000001179,
+        "serialization": 0.014400000000023283,
+        "worker_round_trip": 8.21270000000004,
+        "post_processing": 0.0041999999998552084,
+        "foreground_guard": 6.7140000000003965
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 52.44629999999961,
+      "total_ms": 109.02190000000019,
       "breakdown_ms": {
-        "queue_wait": 0.0039999999999054126,
-        "companion_before": 1.0455000000001746,
-        "action": 50.77179999999953,
-        "companion_after": 0.5470000000004802,
-        "serialization": 0.011599999999816646,
-        "worker_round_trip": 50.72789999999986,
-        "post_processing": 0.009200000000419095
+        "queue_wait": 0.009200000000419095,
+        "companion_before": 0.737699999999677,
+        "action": 107.01960000000054,
+        "companion_after": 1.1333999999997104,
+        "serialization": 0.020900000000438013,
+        "worker_round_trip": 106.91660000000002,
+        "post_processing": 0.019800000000032014
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 7.163700000000063,
+      "total_ms": 10.77639999999974,
       "breakdown_ms": {
-        "queue_wait": 0.003800000000410364,
-        "companion_before": 0.4898000000002867,
-        "action": 5.647500000000036,
-        "companion_after": 0.9176000000006752,
-        "serialization": 0.002800000000206637,
-        "worker_round_trip": 5.531500000000051,
-        "post_processing": 0.0037999999995008693,
-        "foreground_guard": 5.620499999999993
+        "queue_wait": 0.02419999999983702,
+        "companion_before": 1.9794000000001688,
+        "action": 7.7007000000003245,
+        "companion_after": 0.893699999999626,
+        "serialization": 0.00860000000011496,
+        "worker_round_trip": 7.52179999999953,
+        "post_processing": 0.002800000000206637,
+        "foreground_guard": 7.649400000000242
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 52.508599999999205,
+      "total_ms": 89.11650000000009,
       "breakdown_ms": {
-        "queue_wait": 0.002800000000206637,
-        "companion_before": 0.7093999999997322,
-        "action": 51.252300000000105,
-        "companion_after": 0.4831000000003769,
-        "serialization": 0.009799999999813735,
-        "worker_round_trip": 51.21780000000035,
-        "post_processing": 0.009000000000014552
+        "queue_wait": 0.010500000000320142,
+        "companion_before": 0.9539999999997235,
+        "action": 86.7516999999998,
+        "companion_after": 1.2367999999996755,
+        "serialization": 0.021200000000135333,
+        "worker_round_trip": 86.64509999999973,
+        "post_processing": 0.016499999999723514
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 10.412900000000263,
+      "total_ms": 12.688100000000304,
       "breakdown_ms": {
-        "queue_wait": 0.003899999999703141,
-        "companion_before": 1.1999000000005253,
-        "action": 8.64810000000034,
-        "companion_after": 0.4827999999997701,
-        "serialization": 0.01190000000042346,
-        "worker_round_trip": 8.53819999999996,
-        "post_processing": 0.004200000000309956,
-        "foreground_guard": 7.165100000000166
+        "queue_wait": 0.010399999999208376,
+        "companion_before": 2.3689000000003944,
+        "action": 9.064800000000105,
+        "companion_after": 1.0828000000001339,
+        "serialization": 0.014799999999922875,
+        "worker_round_trip": 8.838400000000547,
+        "post_processing": 0.004600000000209548,
+        "foreground_guard": 7.297499999999673
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 57.8742000000002,
+      "total_ms": 89.01260000000002,
       "breakdown_ms": {
-        "queue_wait": 0.001999999999497959,
-        "companion_before": 0.5311000000001513,
-        "action": 56.18260000000009,
-        "companion_after": 1.044699999999466,
-        "serialization": 0.030000000000654836,
-        "worker_round_trip": 56.08709999999974,
-        "post_processing": 0.033800000000155705
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.386999999999716,
-      "breakdown_ms": {
-        "queue_wait": 0.004300000000512227,
-        "companion_before": 1.3506999999990512,
-        "action": 6.414900000000671,
-        "companion_after": 0.5174999999999272,
-        "serialization": 0.006000000000312866,
-        "worker_round_trip": 6.317600000000311,
-        "post_processing": 0.001999999999497959,
-        "foreground_guard": 6.3747999999995955
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 62.54250000000047,
-      "breakdown_ms": {
-        "queue_wait": 0.0027000000000043656,
-        "companion_before": 0.6638000000002648,
-        "action": 61.30829999999969,
-        "companion_after": 0.50879999999961,
-        "serialization": 0.010600000000522414,
-        "worker_round_trip": 61.27089999999953,
-        "post_processing": 0.010000000000218279
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 7.264000000000124,
-      "breakdown_ms": {
-        "queue_wait": 0.004000000000814907,
-        "companion_before": 0.8379999999997381,
-        "action": 5.917399999999361,
-        "companion_after": 0.4375,
-        "serialization": 0.014000000000123691,
-        "worker_round_trip": 5.797900000000482,
-        "post_processing": 0.004399999999805004,
-        "foreground_guard": 4.695800000000418
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 54.802999999999884,
-      "breakdown_ms": {
-        "queue_wait": 0.005000000000109139,
-        "companion_before": 0.872599999999693,
-        "action": 53.36380000000008,
-        "companion_after": 0.49470000000019354,
-        "serialization": 0.011499999999614374,
-        "worker_round_trip": 53.32929999999942,
-        "post_processing": 0.009299999999711872
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.367500000000291,
-      "breakdown_ms": {
-        "queue_wait": 0.002599999999802094,
-        "companion_before": 0.7499000000007072,
-        "action": 6.901100000000042,
-        "companion_after": 0.6418000000003303,
-        "serialization": 0.0033000000003085006,
-        "worker_round_trip": 6.796999999999571,
-        "post_processing": 0.018000000000029104,
-        "foreground_guard": 6.8770999999997
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 54.227600000000166,
-      "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 0.500199999999495,
-        "action": 53.19250000000011,
-        "companion_after": 0.4723999999996522,
-        "serialization": 0.009299999999711872,
-        "worker_round_trip": 53.162500000000364,
-        "post_processing": 0.009100000000216824
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.972400000000562,
-      "breakdown_ms": {
-        "queue_wait": 0.003100000000813452,
-        "companion_before": 1.2776999999996406,
-        "action": 7.178100000000086,
-        "companion_after": 0.44470000000001164,
-        "serialization": 0.007700000000113505,
-        "worker_round_trip": 7.093400000000656,
-        "post_processing": 0.004200000000309956,
-        "foreground_guard": 6.033499999999549
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.821099999999205,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.4350000000004002,
-        "action": 49.84360000000015,
-        "companion_after": 0.49020000000018626,
-        "serialization": 0.009100000000216824,
-        "worker_round_trip": 49.8105000000005,
-        "post_processing": 0.01069999999981519
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 8.302499999999782,
-      "breakdown_ms": {
-        "queue_wait": 0.005100000000311411,
-        "companion_before": 1.3463000000001557,
-        "action": 6.484699999999975,
-        "companion_after": 0.37809999999990396,
-        "serialization": 0.009200000000419095,
-        "worker_round_trip": 6.410900000000765,
-        "post_processing": 0.001900000000205182,
-        "foreground_guard": 6.456500000000233
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 60.028699999999844,
-      "breakdown_ms": {
-        "queue_wait": 0.002900000000408909,
-        "companion_before": 0.6257000000005064,
-        "action": 58.60999999999967,
-        "companion_after": 0.7021000000004278,
-        "serialization": 0.020299999999224383,
-        "worker_round_trip": 58.54790000000048,
+        "queue_wait": 0.00830000000041764,
+        "companion_before": 0.8136999999996988,
+        "action": 87.1907000000001,
+        "companion_after": 0.8984000000000378,
+        "serialization": 0.023100000000340515,
+        "worker_round_trip": 87.08539999999994,
         "post_processing": 0.022199999999429565
       }
     },
     {
       "tool": "computer",
-      "action": "type",
-      "total_ms": 9.260599999999613,
+      "action": "key",
+      "total_ms": 10.927999999999884,
       "breakdown_ms": {
-        "queue_wait": 0.005000000000109139,
-        "companion_before": 0.9047999999993408,
-        "action": 6.873599999999897,
-        "companion_after": 1.3437999999996464,
-        "serialization": 0.007300000000213913,
-        "worker_round_trip": 6.721400000000358,
-        "post_processing": 0.004399999999805004,
-        "foreground_guard": 5.934500000000298
+        "queue_wait": 0.20100000000002183,
+        "companion_before": 2.810099999999693,
+        "action": 7.1314000000002125,
+        "companion_after": 0.6242000000002008,
+        "serialization": 0.007999999999810825,
+        "worker_round_trip": 6.576600000000326,
+        "post_processing": 0.002300000000104774,
+        "foreground_guard": 6.680200000000696
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 61.762399999999616,
+      "total_ms": 92.5610999999999,
       "breakdown_ms": {
-        "queue_wait": 0.0031999999991967343,
-        "companion_before": 0.6857999999992899,
-        "action": 60.12740000000031,
-        "companion_after": 0.8654999999998836,
-        "serialization": 0.015199999998912972,
-        "worker_round_trip": 60.072000000000116,
-        "post_processing": 0.01710000000002765
+        "queue_wait": 0.006199999999807915,
+        "companion_before": 1.1530000000002474,
+        "action": 90.3761999999997,
+        "companion_after": 0.8914999999997235,
+        "serialization": 0.025700000001052103,
+        "worker_round_trip": 90.29179999999997,
+        "post_processing": 0.02250000000003638
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.339799999999741,
+      "breakdown_ms": {
+        "queue_wait": 0.009900000000016007,
+        "companion_before": 1.1133000000008906,
+        "action": 8.38000000000011,
+        "companion_after": 0.6651999999994587,
+        "serialization": 0.011800000000221189,
+        "worker_round_trip": 8.104800000000068,
+        "post_processing": 0.0052999999998064595,
+        "foreground_guard": 7.0385000000005675
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 94.89789999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.010099999999511056,
+        "companion_before": 3.433899999999994,
+        "action": 90.48409999999967,
+        "companion_after": 0.8370000000004438,
+        "serialization": 0.022900000000845466,
+        "worker_round_trip": 90.34689999999955,
+        "post_processing": 0.01989999999932479
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 8.796299999999974,
+      "total_ms": 13.493499999999585,
       "breakdown_ms": {
-        "queue_wait": 0.002900000000408909,
-        "companion_before": 1.7461000000002969,
-        "action": 6.479699999999866,
-        "companion_after": 0.4850000000005821,
-        "serialization": 0.006900000000314321,
-        "worker_round_trip": 6.407500000000255,
-        "post_processing": 0.0014000000001033186,
-        "foreground_guard": 6.455500000000029
+        "queue_wait": 0.009399999999914144,
+        "companion_before": 3.816500000000815,
+        "action": 8.817600000000311,
+        "companion_after": 0.7069999999994252,
+        "serialization": 0.009399999999914144,
+        "worker_round_trip": 8.609600000000682,
+        "post_processing": 0.0018000000000029104,
+        "foreground_guard": 8.727300000000469
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 57.57250000000022,
+      "total_ms": 90.64150000000063,
       "breakdown_ms": {
-        "queue_wait": 0.002899999999499414,
-        "companion_before": 0.6484999999993306,
-        "action": 56.22019999999975,
-        "companion_after": 0.6356999999998152,
-        "serialization": 0.011300000000119326,
-        "worker_round_trip": 56.176800000000185,
-        "post_processing": 0.010200000000622822
+        "queue_wait": 0.009500000000116415,
+        "companion_before": 1.0145000000002256,
+        "action": 88.46159999999963,
+        "companion_after": 1.0455999999994674,
+        "serialization": 0.0227999999997337,
+        "worker_round_trip": 88.3813999999993,
+        "post_processing": 0.023200000000542786
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 10.962599999999838,
+      "total_ms": 15.41740000000027,
       "breakdown_ms": {
-        "queue_wait": 0.0046999999995023245,
-        "companion_before": 1.7473000000009051,
-        "action": 8.41150000000016,
-        "companion_after": 0.720499999999447,
-        "serialization": 0.011499999999614374,
-        "worker_round_trip": 8.323300000000017,
-        "post_processing": 0.003899999999703141,
-        "foreground_guard": 7.246299999999792
+        "queue_wait": 0.005500000000211003,
+        "companion_before": 5.197999999999411,
+        "action": 9.364700000000084,
+        "companion_after": 0.7296999999998661,
+        "serialization": 0.016099999999823922,
+        "worker_round_trip": 9.162199999999757,
+        "post_processing": 0.0036000000000058208,
+        "foreground_guard": 7.505799999999908
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 51.560999999999694,
+      "total_ms": 92.46950000000015,
       "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.4681000000000495,
-        "action": 50.54960000000028,
-        "companion_after": 0.4925999999995838,
-        "serialization": 0.009299999999711872,
-        "worker_round_trip": 50.519100000000435,
+        "queue_wait": 0.011599999999816646,
+        "companion_before": 1.2135999999991327,
+        "action": 90.5018,
+        "companion_after": 0.6442999999999302,
+        "serialization": 0.017600000001039007,
+        "worker_round_trip": 90.45870000000014,
         "post_processing": 0.009399999999914144
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 7.226200000000063,
+      "total_ms": 12.073199999999815,
       "breakdown_ms": {
-        "queue_wait": 0.003299999999399006,
-        "companion_before": 1.010099999999511,
-        "action": 5.72899999999936,
-        "companion_after": 0.4084999999995489,
-        "serialization": 0.004200000000309956,
-        "worker_round_trip": 5.6612999999997555,
-        "post_processing": 0.0015000000003055902,
-        "foreground_guard": 5.706599999999526
+        "queue_wait": 0.006200000000717409,
+        "companion_before": 3.8667999999997846,
+        "action": 7.356600000000071,
+        "companion_after": 0.7067999999999302,
+        "serialization": 0.013100000000122236,
+        "worker_round_trip": 7.196200000000317,
+        "post_processing": 0.0014999999993960955,
+        "foreground_guard": 7.289799999999559
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 54.00160000000051,
+      "total_ms": 90.90350000000035,
       "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.5834999999997308,
-        "action": 52.545500000000175,
-        "companion_after": 0.8078999999997905,
-        "serialization": 0.01540000000022701,
-        "worker_round_trip": 52.48350000000028,
-        "post_processing": 0.028500000000349246
+        "queue_wait": 0.01190000000042346,
+        "companion_before": 0.9906000000000859,
+        "action": 88.64649999999983,
+        "companion_after": 1.1283999999996013,
+        "serialization": 0.040600000000267755,
+        "worker_round_trip": 88.5576000000001,
+        "post_processing": 0.028100000000449654
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 7.614800000000287,
+      "total_ms": 11.087499999999636,
       "breakdown_ms": {
-        "queue_wait": 0.0034000000005107722,
-        "companion_before": 0.9631999999992331,
-        "action": 6.186799999999494,
-        "companion_after": 0.38550000000032014,
-        "serialization": 0.011999999999716238,
-        "worker_round_trip": 6.11239999999998,
-        "post_processing": 0.002800000000206637,
-        "foreground_guard": 4.944900000000416
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "batch",
-      "total_ms": 72.69210000000021,
-      "breakdown_ms": {
-        "queue_wait": 0.005000000000109139,
-        "companion_before": 6.173700000000281,
-        "action": 62.878200000001016,
-        "companion_after": 3.135699999999815,
-        "serialization": 0.06419999999798165,
-        "worker_round_trip": 62.323599999999715,
-        "uia_tree_walk": 29.5929,
-        "post_processing": 0.07740000000012515
+        "queue_wait": 0.004700000000411819,
+        "companion_before": 2.2105000000001382,
+        "action": 7.870999999999185,
+        "companion_after": 0.8572000000003754,
+        "serialization": 0.011799999999311694,
+        "worker_round_trip": 7.739500000000589,
+        "post_processing": 0.002899999999499414,
+        "foreground_guard": 6.246600000000399
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 69.46849999999995,
+      "total_ms": 79.08330000000024,
       "breakdown_ms": {
-        "queue_wait": 0.006000000000312866,
-        "companion_before": 3.2577999999994063,
-        "action": 65.40660000000025,
-        "companion_after": 0.6946000000007189,
-        "serialization": 0.020599999999831198,
-        "worker_round_trip": 65.34419999999955,
-        "post_processing": 0.014299999999821011
+        "queue_wait": 0.005500000000211003,
+        "companion_before": 0.7983000000003813,
+        "action": 77.41599999999926,
+        "companion_after": 0.7830999999996493,
+        "serialization": 0.011499999999614374,
+        "worker_round_trip": 77.3797999999997,
+        "post_processing": 0.010499999999410647
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 37.8141999999998,
+      "total_ms": 8.65020000000004,
       "breakdown_ms": {
-        "queue_wait": 0.003800000000410364,
-        "companion_before": 1.628099999999904,
-        "action": 35.36229999999978,
-        "companion_after": 0.7417999999997846,
-        "serialization": 0.011400000000321597,
-        "worker_round_trip": 6.996399999999994,
-        "post_processing": 0.0030999999999039574,
-        "foreground_guard": 7.016200000000026
+        "queue_wait": 0.007700000000113505,
+        "companion_before": 1.231699999999364,
+        "action": 6.7786000000005515,
+        "companion_after": 0.5165999999999258,
+        "serialization": 0.006000000000312866,
+        "worker_round_trip": 6.692399999999907,
+        "post_processing": 0.0011000000004059984,
+        "foreground_guard": 6.744400000000496
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 60.80739999999969,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.6298000000006141,
-        "action": 59.667199999999866,
-        "companion_after": 0.45650000000023283,
-        "serialization": 0.011500000000523869,
-        "worker_round_trip": 59.634799999999814,
-        "post_processing": 0.011000000000422006
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.327099999999518,
-      "breakdown_ms": {
-        "queue_wait": 0.003499999999803549,
-        "companion_before": 0.7352000000000771,
-        "action": 6.999200000000201,
-        "companion_after": 0.5410999999994601,
-        "serialization": 0.016599999999925785,
-        "worker_round_trip": 6.304699999999684,
-        "post_processing": 0.004500000000007276,
-        "foreground_guard": 5.217399999999543
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.824499999999716,
-      "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 0.4805999999998676,
-        "action": 51.808899999999994,
-        "companion_after": 0.4818999999997686,
-        "serialization": 0.009299999999711872,
-        "worker_round_trip": 51.76540000000023,
-        "post_processing": 0.009599999999409192
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 41.16700000000037,
-      "breakdown_ms": {
-        "queue_wait": 0.011700000000018917,
-        "companion_before": 0.8003000000007887,
-        "action": 39.33669999999984,
-        "companion_after": 0.9414000000006126,
-        "serialization": 0.015300000000934233,
-        "worker_round_trip": 6.234400000000278,
-        "post_processing": 0.0027000000000043656,
-        "foreground_guard": 6.2533000000003085
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.14249999999993,
-      "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.4572999999991225,
-        "action": 50.92950000000019,
-        "companion_after": 0.7056999999995242,
-        "serialization": 0.009399999999914144,
-        "worker_round_trip": 50.893299999999726,
-        "post_processing": 0.009300000000621367
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 9.740399999999681,
-      "breakdown_ms": {
-        "queue_wait": 0.0027000000000043656,
-        "companion_before": 1.4283000000004904,
-        "action": 7.472099999999955,
-        "companion_after": 0.7811000000001513,
-        "serialization": 0.030899999999746797,
-        "worker_round_trip": 6.884100000000217,
-        "post_processing": 0.006000000000312866,
-        "foreground_guard": 5.087400000000343
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 57.3735999999999,
-      "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 0.4547999999995227,
-        "action": 56.1260999999995,
-        "companion_after": 0.7308000000002721,
-        "serialization": 0.011000000000422006,
-        "worker_round_trip": 56.09240000000045,
-        "post_processing": 0.010399999999208376
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 49.035499999999956,
-      "breakdown_ms": {
-        "queue_wait": 0.0039000000006126356,
-        "companion_before": 0.5231000000003405,
-        "action": 47.66779999999926,
-        "companion_after": 0.7668000000003303,
-        "serialization": 0.012099999999009015,
-        "worker_round_trip": 6.744000000000597,
-        "post_processing": 0.003899999999703141,
-        "foreground_guard": 6.76720000000023
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 51.02860000000055,
-      "breakdown_ms": {
-        "queue_wait": 0.0027999999992971425,
-        "companion_before": 0.5626000000002023,
-        "action": 49.91309999999976,
-        "companion_after": 0.49469999999928405,
-        "serialization": 0.011200000000826549,
-        "worker_round_trip": 49.88000000000011,
-        "post_processing": 0.010000000000218279
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.206600000000435,
-      "breakdown_ms": {
-        "queue_wait": 0.003499999999803549,
-        "companion_before": 0.7586999999994077,
-        "action": 6.79529999999977,
-        "companion_after": 0.5915999999997439,
-        "serialization": 0.019500000000334694,
-        "worker_round_trip": 6.204899999999725,
-        "post_processing": 0.005400000000008731,
-        "foreground_guard": 5.341500000000451
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.70899999999983,
-      "breakdown_ms": {
-        "queue_wait": 0.001999999999497959,
-        "companion_before": 0.49790000000029977,
-        "action": 51.57179999999971,
-        "companion_after": 0.5828000000001339,
-        "serialization": 0.010600000000522414,
-        "worker_round_trip": 51.535899999999856,
-        "post_processing": 0.01239999999961583
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 37.208300000000236,
-      "breakdown_ms": {
-        "queue_wait": 0.0037999999995008693,
-        "companion_before": 0.781899999999041,
-        "action": 35.70510000000013,
-        "companion_after": 0.6558999999997468,
-        "serialization": 0.015000000000327418,
-        "worker_round_trip": 5.848899999999958,
-        "post_processing": 0.0024999999995998223,
-        "foreground_guard": 5.8708000000005995
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.953599999999824,
-      "breakdown_ms": {
-        "queue_wait": 0.0023999999993975507,
-        "companion_before": 0.4963000000007014,
-        "action": 52.8139000000001,
-        "companion_after": 0.5870000000004438,
-        "serialization": 0.009099999998397834,
-        "worker_round_trip": 52.782900000000154,
-        "post_processing": 0.009100000000216824
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 9.123199999999997,
-      "breakdown_ms": {
-        "queue_wait": 0.004899999999906868,
-        "companion_before": 1.0375999999996566,
-        "action": 7.485700000000179,
-        "companion_after": 0.5392999999994572,
-        "serialization": 0.017100000000937143,
-        "worker_round_trip": 7.001400000000103,
-        "post_processing": 0.004899999999906868,
-        "foreground_guard": 6.000099999999293
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.80580000000009,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.4684000000006563,
-        "action": 49.77819999999974,
-        "companion_after": 0.5056000000004133,
-        "serialization": 0.009900000000016007,
-        "worker_round_trip": 49.7465000000002,
-        "post_processing": 0.010099999999511056
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 36.3141999999998,
-      "breakdown_ms": {
-        "queue_wait": 0.005800000000817818,
-        "companion_before": 0.8389999999999418,
-        "action": 34.60099999999966,
-        "companion_after": 0.7894999999998618,
-        "serialization": 0.019699999999829743,
-        "worker_round_trip": 6.462300000000141,
-        "post_processing": 0.0039999999999054126,
-        "foreground_guard": 6.485700000000179
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.27589999999964,
-      "breakdown_ms": {
-        "queue_wait": 0.003200000000106229,
-        "companion_before": 0.5041000000001077,
-        "action": 51.232200000000375,
-        "companion_after": 0.4809000000004744,
-        "serialization": 0.01040000000011787,
-        "worker_round_trip": 51.185999999999694,
-        "post_processing": 0.010000000000218279
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 10.362699999999677,
-      "breakdown_ms": {
-        "queue_wait": 0.002599999999802094,
-        "companion_before": 1.0595000000002983,
-        "action": 8.6253999999999,
-        "companion_after": 0.6242000000002008,
-        "serialization": 0.023499999999330612,
-        "worker_round_trip": 7.920000000000073,
-        "post_processing": 0.007799999999406282,
-        "foreground_guard": 6.648799999999937
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 51.647899999999936,
-      "breakdown_ms": {
-        "queue_wait": 0.0020000000004074536,
-        "companion_before": 0.510799999999108,
-        "action": 50.573199999999815,
-        "companion_after": 0.5138000000006286,
-        "serialization": 0.009100000000216824,
-        "worker_round_trip": 50.540899999999965,
-        "post_processing": 0.009599999999409192
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 34.82129999999961,
-      "breakdown_ms": {
-        "queue_wait": 0.0027000000000043656,
-        "companion_before": 0.9368000000013126,
-        "action": 32.836600000000544,
-        "companion_after": 0.9830999999994674,
-        "serialization": 0.013800000000628643,
-        "worker_round_trip": 5.819500000000517,
-        "post_processing": 0.001900000000205182,
-        "foreground_guard": 5.83219999999983
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 54.91439999999966,
-      "breakdown_ms": {
-        "queue_wait": 0.0059999999994033715,
-        "companion_before": 0.9372000000003027,
-        "action": 53.40020000000004,
-        "companion_after": 0.4903999999996813,
-        "serialization": 0.012499999999818101,
-        "worker_round_trip": 53.36070000000018,
-        "post_processing": 0.010299999999915599
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.515200000000732,
-      "breakdown_ms": {
-        "queue_wait": 0.0036000000000058208,
-        "companion_before": 0.6225000000013097,
-        "action": 7.0108000000000175,
-        "companion_after": 0.8118999999996959,
-        "serialization": 0.028600000000551518,
-        "worker_round_trip": 6.165400000000773,
-        "post_processing": 0.005199999999604188,
-        "foreground_guard": 5.045999999999367
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.59240000000045,
-      "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 0.4742999999998574,
-        "action": 51.501900000000205,
-        "companion_after": 0.5587999999997919,
-        "serialization": 0.01239999999961583,
-        "worker_round_trip": 51.46400000000085,
-        "post_processing": 0.011599999999816646
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 53.846300000000156,
-      "breakdown_ms": {
-        "queue_wait": 0.004500000000007276,
-        "companion_before": 0.495600000000195,
-        "action": 50.274099999999635,
-        "companion_after": 2.9747999999999593,
-        "serialization": 0.026700000000346336,
-        "worker_round_trip": 7.600599999999758,
-        "post_processing": 0.002500000000509317,
-        "foreground_guard": 7.6148999999995794
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 51.37950000000001,
+      "total_ms": 77.87790000000041,
       "breakdown_ms": {
         "queue_wait": 0.0052999999998064595,
-        "companion_before": 0.7438999999994849,
-        "action": 50.00879999999961,
-        "companion_after": 0.5412000000005719,
-        "serialization": 0.012600000000020373,
-        "worker_round_trip": 49.96559999999954,
-        "post_processing": 0.014100000000325963
+        "companion_before": 0.8010999999996784,
+        "action": 75.7485999999999,
+        "companion_after": 1.2130000000006476,
+        "serialization": 0.023199999999633292,
+        "worker_round_trip": 75.67050000000017,
+        "post_processing": 0.023199999999633292
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 13.114000000000487,
+      "total_ms": 10.996399999999994,
       "breakdown_ms": {
-        "queue_wait": 0.002599999999802094,
-        "companion_before": 5.15729999999985,
-        "action": 6.947799999999916,
-        "companion_after": 0.9472999999998137,
-        "serialization": 0.02760000000034779,
-        "worker_round_trip": 6.198699999999917,
-        "post_processing": 0.005699999999706051,
-        "foreground_guard": 4.809899999999288
+        "queue_wait": 0.009300000000621367,
+        "companion_before": 2.1468000000004395,
+        "action": 7.711900000000242,
+        "companion_after": 1.0006000000003041,
+        "serialization": 0.01830000000063592,
+        "worker_round_trip": 7.564700000000812,
+        "post_processing": 0.003500000000713044,
+        "foreground_guard": 5.910100000000057
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 53.90140000000065,
+      "total_ms": 72.85159999999996,
       "breakdown_ms": {
-        "queue_wait": 0.004399999999805004,
-        "companion_before": 0.947200000000521,
-        "action": 52.003600000000006,
-        "companion_after": 0.8493000000007669,
-        "serialization": 0.01160000000072614,
-        "worker_round_trip": 51.960000000000036,
-        "post_processing": 0.009600000000318687
+        "queue_wait": 0.003499999999803549,
+        "companion_before": 0.5146000000004278,
+        "action": 71.47909999999956,
+        "companion_after": 0.7793999999994412,
+        "serialization": 0.015300000000024738,
+        "worker_round_trip": 71.43199999999979,
+        "post_processing": 0.014200000000528235
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 45.35909999999967,
+      "total_ms": 10.309499999999389,
       "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.4076999999997497,
-        "action": 44.19830000000002,
-        "companion_after": 0.6917999999996027,
-        "serialization": 0.012799999999515421,
-        "worker_round_trip": 5.227199999999357,
-        "post_processing": 0.002599999999802094,
-        "foreground_guard": 5.245499999999993
+        "queue_wait": 0.0052999999998064595,
+        "companion_before": 2.9236999999993714,
+        "action": 6.664600000000064,
+        "companion_after": 0.6182000000007974,
+        "serialization": 0.004199999999400461,
+        "worker_round_trip": 6.561499999999796,
+        "post_processing": 0.0014000000001033186,
+        "foreground_guard": 6.620600000000195
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 52.852600000000166,
+      "total_ms": 79.15580000000045,
       "breakdown_ms": {
-        "queue_wait": 0.005600000000413274,
-        "companion_before": 0.42770000000018626,
-        "action": 51.866399999999885,
-        "companion_after": 0.4952999999995882,
-        "serialization": 0.009299999999711872,
-        "worker_round_trip": 51.83230000000003,
-        "post_processing": 0.010299999999915599
+        "queue_wait": 0.0059000000001105946,
+        "companion_before": 0.8638000000009924,
+        "action": 77.3823999999995,
+        "companion_after": 0.8085000000000946,
+        "serialization": 0.01779999999962456,
+        "worker_round_trip": 77.32319999999982,
+        "post_processing": 0.01739999999972497
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 8.514799999999923,
+      "total_ms": 11.688699999999699,
       "breakdown_ms": {
-        "queue_wait": 0.004799999999704596,
-        "companion_before": 0.9363000000003012,
-        "action": 6.675300000000789,
-        "companion_after": 0.8343999999997322,
-        "serialization": 0.020899999999528518,
-        "worker_round_trip": 5.903199999999742,
-        "post_processing": 0.00559999999950378,
-        "foreground_guard": 4.722700000000259
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 1.0927000000001499,
+        "action": 9.660399999999754,
+        "companion_after": 0.7983000000003813,
+        "serialization": 0.014900000001034641,
+        "worker_round_trip": 9.450599999999213,
+        "post_processing": 0.004500000000007276,
+        "foreground_guard": 8.046000000000276
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 51.22730000000047,
+      "total_ms": 86.2563999999993,
       "breakdown_ms": {
-        "queue_wait": 0.0027000000000043656,
-        "companion_before": 0.7058000000006359,
-        "action": 49.965799999999945,
-        "companion_after": 0.4996000000001004,
-        "serialization": 0.011400000000321597,
-        "worker_round_trip": 49.93199999999979,
-        "post_processing": 0.010600000000522414
+        "queue_wait": 0.0065999999997075065,
+        "companion_before": 0.8680000000003929,
+        "action": 84.09799999999996,
+        "companion_after": 1.1754000000000815,
+        "serialization": 0.023299999999835563,
+        "worker_round_trip": 84.01929999999993,
+        "post_processing": 0.025300000000243017
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 37.409200000000055,
+      "total_ms": 12.50460000000021,
       "breakdown_ms": {
-        "queue_wait": 0.006199999999807915,
-        "companion_before": 0.6712999999999738,
-        "action": 35.67900000000009,
-        "companion_after": 0.9909999999999854,
-        "serialization": 0.015099999999620195,
-        "worker_round_trip": 6.0417999999999665,
-        "post_processing": 0.0026000000007115887,
-        "foreground_guard": 6.0547999999998865
+        "queue_wait": 0.016200000000026193,
+        "companion_before": 3.1896999999999025,
+        "action": 7.095499999999447,
+        "companion_after": 1.8257999999996173,
+        "serialization": 0.011199999999917054,
+        "worker_round_trip": 6.92699999999968,
+        "post_processing": 0.0023999999993975507,
+        "foreground_guard": 7.019800000000032
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 58.76509999999962,
-      "breakdown_ms": {
-        "queue_wait": 0.006999999999607098,
-        "companion_before": 1.617099999999482,
-        "action": 56.607600000000275,
-        "companion_after": 0.4503999999997177,
-        "serialization": 0.015400000001136505,
-        "worker_round_trip": 56.56890000000021,
-        "post_processing": 0.010299999999915599
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 10.330500000000029,
-      "breakdown_ms": {
-        "queue_wait": 0.00559999999950378,
-        "companion_before": 1.3079999999999927,
-        "action": 8.427800000000389,
-        "companion_after": 0.5279999999993379,
-        "serialization": 0.022199999999429565,
-        "worker_round_trip": 7.529500000000553,
-        "post_processing": 0.006500000001324224,
-        "foreground_guard": 5.855499999999665
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 49.99170000000049,
-      "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 0.48369999999977153,
-        "action": 48.90610000000015,
-        "companion_after": 0.544699999999466,
-        "serialization": 0.011499999999614374,
-        "worker_round_trip": 48.8715000000002,
-        "post_processing": 0.01040000000011787
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 39.246900000000096,
-      "breakdown_ms": {
-        "queue_wait": 0.0026000000007115887,
-        "companion_before": 3.131000000000313,
-        "action": 35.18239999999969,
-        "companion_after": 0.8424000000004526,
-        "serialization": 0.022100000000136788,
-        "worker_round_trip": 6.905899999999747,
-        "post_processing": 0.002199999999902502,
-        "foreground_guard": 6.921800000000076
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.02559999999994,
-      "breakdown_ms": {
-        "queue_wait": 0.003299999999399006,
-        "companion_before": 0.5818000000008396,
-        "action": 51.561899999999696,
-        "companion_after": 0.8015000000004875,
-        "serialization": 0.01420000000143773,
-        "worker_round_trip": 51.51900000000023,
-        "post_processing": 0.014799999999922875
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 10.23280000000068,
-      "breakdown_ms": {
-        "queue_wait": 0.0037000000002080924,
-        "companion_before": 1.6563000000005559,
-        "action": 7.912100000000464,
-        "companion_after": 0.6066000000000713,
-        "serialization": 0.0794000000005326,
-        "worker_round_trip": 7.354500000001281,
-        "post_processing": 0.004799999999704596,
-        "foreground_guard": 5.861700000000383
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.912100000000464,
-      "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.44460000000071886,
-        "action": 52.91150000000016,
-        "companion_after": 0.5054000000000087,
-        "serialization": 0.00969999999870197,
-        "worker_round_trip": 52.879000000000815,
-        "post_processing": 0.010500000000320142
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 36.46240000000034,
-      "breakdown_ms": {
-        "queue_wait": 0.0024000000003070454,
-        "companion_before": 1.1087999999999738,
-        "action": 34.40310000000045,
-        "companion_after": 0.8458999999993466,
-        "serialization": 0.01239999999961583,
-        "worker_round_trip": 5.992200000000594,
-        "post_processing": 0.0024999999995998223,
-        "foreground_guard": 6.009700000000521
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.261999999999716,
-      "breakdown_ms": {
-        "queue_wait": 0.0037999999995008693,
-        "companion_before": 0.49210000000039145,
-        "action": 49.21759999999995,
-        "companion_after": 0.48989999999957945,
-        "serialization": 0.010199999999713327,
-        "worker_round_trip": 49.17950000000019,
-        "post_processing": 0.010099999999511056
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 10.95719999999983,
+      "total_ms": 82.13699999999972,
       "breakdown_ms": {
         "queue_wait": 0.004500000000007276,
-        "companion_before": 2.203400000000329,
-        "action": 8.1233000000002,
-        "companion_after": 0.5441999999993641,
-        "serialization": 0.03060000000095897,
-        "worker_round_trip": 7.152499999999236,
-        "post_processing": 0.010599999999612919,
-        "foreground_guard": 5.884399999999914
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 53.64519999999993,
-      "breakdown_ms": {
-        "queue_wait": 0.0026000000007115887,
-        "companion_before": 2.2512000000006083,
-        "action": 50.482200000000375,
-        "companion_after": 0.8242000000000189,
-        "serialization": 0.021800000000439468,
-        "worker_round_trip": 50.362200000000485,
-        "post_processing": 0.013399999999819556
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 38.050500000000284,
-      "breakdown_ms": {
-        "queue_wait": 0.002500000000509317,
-        "companion_before": 0.4098999999996522,
-        "action": 34.82960000000003,
-        "companion_after": 2.7362999999995736,
-        "serialization": 0.018799999999828287,
-        "worker_round_trip": 6.865199999999277,
-        "post_processing": 0.0033999999996012775,
-        "foreground_guard": 6.882499999999709
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 50.48320000000058,
-      "breakdown_ms": {
-        "queue_wait": 0.004300000000512227,
-        "companion_before": 0.6858000000001994,
-        "action": 49.26050000000032,
-        "companion_after": 0.4728999999997541,
-        "serialization": 0.009900000000016007,
-        "worker_round_trip": 49.22689999999966,
-        "post_processing": 0.010200000000622822
+        "companion_before": 1.0831000000007407,
+        "action": 80.21000000000004,
+        "companion_after": 0.7502000000004045,
+        "serialization": 0.019800000000032014,
+        "worker_round_trip": 80.16490000000067,
+        "post_processing": 0.010499999999410647
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 9.360100000000784,
+      "total_ms": 15.075600000000122,
       "breakdown_ms": {
-        "queue_wait": 0.002199999999902502,
-        "companion_before": 0.4860999999991691,
-        "action": 7.939900000000307,
-        "companion_after": 0.8661999999994805,
-        "serialization": 0.021300000000337604,
-        "worker_round_trip": 7.050300000000789,
-        "post_processing": 0.00650000000041473,
-        "foreground_guard": 6.112300000000687
+        "queue_wait": 0.0030000000006111804,
+        "companion_before": 3.2460000000000946,
+        "action": 10.647600000000239,
+        "companion_after": 1.0480999999999767,
+        "serialization": 0.0202000000008411,
+        "worker_round_trip": 10.47649999999976,
+        "post_processing": 0.004400000000714499,
+        "foreground_guard": 8.735100000000784
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 60.0645999999997,
+      "total_ms": 79.91399999999976,
       "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.4732000000003609,
-        "action": 59.03940000000057,
-        "companion_after": 0.4993000000004031,
+        "queue_wait": 0.002599999999802094,
+        "companion_before": 0.8037000000012995,
+        "action": 78.3085000000001,
+        "companion_after": 0.7058999999999287,
+        "serialization": 0.0294000000003507,
+        "worker_round_trip": 78.22630000000026,
+        "post_processing": 0.02669999999943684
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 9.705199999999422,
+      "breakdown_ms": {
+        "queue_wait": 0.003499999999803549,
+        "companion_before": 1.3281999999999243,
+        "action": 7.647200000000339,
+        "companion_after": 0.6445999999996275,
+        "serialization": 0.004399999999805004,
+        "worker_round_trip": 7.543299999999363,
+        "post_processing": 0.0017000000007101335,
+        "foreground_guard": 7.6075999999993655
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 83.90100000000075,
+      "breakdown_ms": {
+        "queue_wait": 0.0059000000001105946,
+        "companion_before": 0.7160999999987325,
+        "action": 82.11639999999989,
+        "companion_after": 0.9638999999997395,
+        "serialization": 0.023499999999330612,
+        "worker_round_trip": 82.04479999999967,
+        "post_processing": 0.02250000000003638
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.83140000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.009599999999409192,
+        "companion_before": 1.7232999999996537,
+        "action": 7.98070000000007,
+        "companion_after": 1.0078000000003158,
+        "serialization": 0.011899999999513966,
+        "worker_round_trip": 7.843899999999849,
+        "post_processing": 0.0036000000000058208,
+        "foreground_guard": 6.576900000000023
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 87.34079999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.005400000000008731,
+        "companion_before": 1.5065999999997075,
+        "action": 84.95690000000013,
+        "companion_after": 0.7755000000006476,
+        "serialization": 0.019500000000334694,
+        "worker_round_trip": 84.89919999999984,
+        "post_processing": 0.014599999999518332
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 10.210500000000138,
+      "breakdown_ms": {
+        "queue_wait": 0.006400000000212458,
+        "companion_before": 0.6935999999996056,
+        "action": 8.513300000000527,
+        "companion_after": 0.8804000000000087,
+        "serialization": 0.0052999999998064595,
+        "worker_round_trip": 8.417900000000373,
+        "post_processing": 0.0014000000001033186,
+        "foreground_guard": 8.476900000000569
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 71.1248999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 3.2286999999996624,
+        "action": 66.92570000000069,
+        "companion_after": 0.8641999999999825,
+        "serialization": 0.020900000000438013,
+        "worker_round_trip": 66.86520000000019,
+        "post_processing": 0.018399999999928696
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.132599999999911,
+      "breakdown_ms": {
+        "queue_wait": 0.002899999999499414,
+        "companion_before": 2.7935999999999694,
+        "action": 6.662900000000263,
+        "companion_after": 0.5875000000005457,
         "serialization": 0.009200000000419095,
-        "worker_round_trip": 59.006900000000314,
-        "post_processing": 0.009600000000318687
+        "worker_round_trip": 6.557399999999689,
+        "post_processing": 0.0030000000006111804,
+        "foreground_guard": 5.501800000000003
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 69.61769999999979,
+      "breakdown_ms": {
+        "queue_wait": 0.004400000000714499,
+        "companion_before": 0.6466999999993277,
+        "action": 68.23089999999956,
+        "companion_after": 0.6548000000002503,
+        "serialization": 0.013999999999214197,
+        "worker_round_trip": 68.1850999999997,
+        "post_processing": 0.011700000000018917
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 44.089200000000346,
+      "total_ms": 8.629500000000007,
       "breakdown_ms": {
-        "queue_wait": 0.0039000000006126356,
-        "companion_before": 0.43910000000050786,
-        "action": 43.01299999999992,
-        "companion_after": 0.573500000000422,
-        "serialization": 0.010000000001127773,
-        "worker_round_trip": 4.9879000000000815,
-        "post_processing": 0.0021000000006097252,
-        "foreground_guard": 5.0003999999999
+        "queue_wait": 0.002599999999802094,
+        "companion_before": 0.8208000000004176,
+        "action": 7.065000000000509,
+        "companion_after": 0.649000000000342,
+        "serialization": 0.004799999999704596,
+        "worker_round_trip": 6.95470000000023,
+        "post_processing": 0.0016999999998006388,
+        "foreground_guard": 7.035499999999956
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 50.895799999999326,
+      "total_ms": 65.76410000000033,
       "breakdown_ms": {
-        "queue_wait": 0.004199999999400461,
-        "companion_before": 0.5316000000002532,
-        "action": 49.82369999999992,
-        "companion_after": 0.4797999999991589,
-        "serialization": 0.010500000000320142,
-        "worker_round_trip": 49.78900000000067,
-        "post_processing": 0.009700000000520959
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 8.632000000001426,
-      "breakdown_ms": {
-        "queue_wait": 0.0023999999993975507,
-        "companion_before": 0.39500000000225555,
-        "action": 7.550600000000486,
-        "companion_after": 0.6382999999987078,
-        "serialization": 0.01569999999992433,
-        "worker_round_trip": 7.09349999999904,
-        "post_processing": 0.004300000000512227,
-        "foreground_guard": 6.123399999998583
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 56.64420000000064,
-      "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.4473999999991065,
-        "action": 55.482600000001185,
-        "companion_after": 0.6355999999996129,
-        "serialization": 0.014599999998608837,
-        "worker_round_trip": 55.41650000000118,
-        "post_processing": 0.016700000000128057
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 34.65509999999995,
-      "breakdown_ms": {
-        "queue_wait": 0.0021999999989930075,
-        "companion_before": 0.4743000000016764,
-        "action": 33.46910000000025,
-        "companion_after": 0.6492999999991298,
-        "serialization": 0.012199999997392297,
-        "worker_round_trip": 5.7466999999996915,
-        "post_processing": 0.002300000000104774,
-        "foreground_guard": 5.76050000000032
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 67.45740000000114,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.5625999999974738,
-        "action": 66.26159999999982,
-        "companion_after": 0.5730999999996129,
-        "serialization": 0.012500000000727596,
-        "worker_round_trip": 66.22220000000016,
-        "post_processing": 0.012499999998908606
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 9.71309999999903,
-      "breakdown_ms": {
-        "queue_wait": 0.006100000000515138,
-        "companion_before": 1.5280999999995402,
-        "action": 7.55409999999938,
-        "companion_after": 0.5494999999991705,
-        "serialization": 0.02419999999983702,
-        "worker_round_trip": 7.073699999999008,
-        "post_processing": 0.005699999999706051,
-        "foreground_guard": 5.483299999999872
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 54.31579999999849,
-      "breakdown_ms": {
-        "queue_wait": 0.0020999999997002305,
-        "companion_before": 0.47630000000026484,
-        "action": 52.94330000000082,
-        "companion_after": 0.8409999999985303,
-        "serialization": 0.010099999999511056,
-        "worker_round_trip": 52.908800000001065,
-        "post_processing": 0.010999999998603016
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 34.561899999998786,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.4304999999985739,
-        "action": 33.2609999999986,
-        "companion_after": 0.7741000000005442,
-        "serialization": 0.02600000000165892,
-        "worker_round_trip": 5.878200000001016,
-        "post_processing": 0.002699999999094871,
-        "foreground_guard": 5.893799999999828
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 52.314000000000306,
-      "breakdown_ms": {
-        "queue_wait": 0.002699999999094871,
-        "companion_before": 0.4621000000006461,
-        "action": 51.251500000000306,
-        "companion_after": 0.5250000000014552,
-        "serialization": 0.009500000000116415,
-        "worker_round_trip": 51.20590000000084,
-        "post_processing": 0.018000000000029104
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 6.70969999999943,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.48810000000048603,
-        "action": 5.590600000001359,
-        "companion_after": 0.5767999999989115,
-        "serialization": 0.014699999999720603,
-        "worker_round_trip": 5.0856000000003405,
-        "post_processing": 0.012499999998908606,
-        "foreground_guard": 4.206700000000637
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 55.96639999999934,
-      "breakdown_ms": {
-        "queue_wait": 0.0020000000004074536,
-        "companion_before": 0.42520000000149594,
-        "action": 55.00760000000082,
-        "companion_after": 0.4812999999994645,
-        "serialization": 0.009099999999307329,
-        "worker_round_trip": 54.975500000000466,
-        "post_processing": 0.009200000000419095
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 35.40810000000056,
-      "breakdown_ms": {
-        "queue_wait": 0.0033999999996012775,
-        "companion_before": 1.6786000000010972,
-        "action": 32.66429999999855,
-        "companion_after": 0.9676999999992404,
-        "serialization": 0.02750000000014552,
-        "worker_round_trip": 6.071599999999307,
-        "post_processing": 0.0018999999992956873,
-        "foreground_guard": 6.086800000000949
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 63.00749999999971,
-      "breakdown_ms": {
-        "queue_wait": 0.004399999999805004,
-        "companion_before": 0.7770000000000437,
-        "action": 61.44050000000061,
-        "companion_after": 0.7131000000008498,
-        "serialization": 0.013100000001941225,
-        "worker_round_trip": 61.39719999999943,
-        "post_processing": 0.01239999999961583
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "type",
-      "total_ms": 14.007699999998295,
-      "breakdown_ms": {
-        "queue_wait": 0.004399999999805004,
-        "companion_before": 2.8700000000008004,
-        "action": 10.38550000000032,
-        "companion_after": 0.6684999999997672,
-        "serialization": 0.029500000002371962,
-        "worker_round_trip": 9.730399999998554,
-        "post_processing": 0.004000000000814907,
-        "foreground_guard": 8.402399999999034
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 56.3690000000006,
-      "breakdown_ms": {
-        "queue_wait": 0.002300000000104774,
-        "companion_before": 0.4849000000012893,
-        "action": 55.368899999999485,
-        "companion_after": 0.45830000000023574,
-        "serialization": 0.009700000000520959,
-        "worker_round_trip": 55.33640000000014,
-        "post_processing": 0.009299999999711872
-      }
-    },
-    {
-      "tool": "computer",
-      "action": "key",
-      "total_ms": 36.08419999999933,
-      "breakdown_ms": {
-        "queue_wait": 0.002800000000206637,
-        "companion_before": 0.41079999999965366,
-        "action": 34.39470000000074,
-        "companion_after": 1.2086999999992258,
-        "serialization": 0.016200000001845183,
-        "worker_round_trip": 6.957599999999729,
-        "post_processing": 0.003400000001420267,
-        "foreground_guard": 6.981499999999869
-      }
-    },
-    {
-      "tool": "windows",
-      "action": "get_windows",
-      "total_ms": 58.31840000000011,
-      "breakdown_ms": {
-        "queue_wait": 0.006099999998696148,
-        "companion_before": 1.0363999999990483,
-        "action": 56.58389999999963,
-        "companion_after": 0.5403000000005704,
-        "serialization": 0.01479999999901338,
-        "worker_round_trip": 56.53520000000026,
+        "queue_wait": 0.003200000000106229,
+        "companion_before": 0.5901999999996406,
+        "action": 64.55359999999928,
+        "companion_after": 0.5592999999998938,
+        "serialization": 0.010400000001027365,
+        "worker_round_trip": 64.52049999999963,
         "post_processing": 0.009500000000116415
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 10.566899999999805,
+      "total_ms": 9.800900000000183,
       "breakdown_ms": {
-        "queue_wait": 0.0029000000013184035,
-        "companion_before": 1.2129000000004453,
-        "action": 8.392700000000332,
-        "companion_after": 0.9101000000009662,
-        "serialization": 0.015499999999519787,
-        "worker_round_trip": 7.542300000000978,
-        "post_processing": 0.0036999999992985977,
-        "foreground_guard": 6.5604999999995925
+        "queue_wait": 0.010299999999915599,
+        "companion_before": 1.1527999999998428,
+        "action": 7.923600000000079,
+        "companion_after": 0.613999999999578,
+        "serialization": 0.007999999999810825,
+        "worker_round_trip": 7.836600000000544,
+        "post_processing": 0.002199999999902502,
+        "foreground_guard": 6.606799999999566
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 57.186100000000806,
+      "total_ms": 63.04250000000047,
       "breakdown_ms": {
-        "queue_wait": 0.003999999998995918,
-        "companion_before": 0.6017000000010739,
-        "action": 56.07239999999911,
-        "companion_after": 0.4517999999989115,
-        "serialization": 0.011700000002747402,
-        "worker_round_trip": 56.02689999999893,
-        "post_processing": 0.012200000001030276
+        "queue_wait": 0.0037000000002080924,
+        "companion_before": 0.6144999999996799,
+        "action": 61.786699999999655,
+        "companion_after": 0.568899999999303,
+        "serialization": 0.011999999999716238,
+        "worker_round_trip": 61.7485999999999,
+        "post_processing": 0.011199999999917054
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 41.16710000000057,
+      "total_ms": 7.7851999999993495,
       "breakdown_ms": {
-        "queue_wait": 0.002599999999802094,
-        "companion_before": 0.5084999999999127,
-        "action": 38.23750000000109,
-        "companion_after": 2.333200000000943,
-        "serialization": 0.021800000000439468,
-        "worker_round_trip": 4.894099999999526,
-        "post_processing": 0.0016000000014173565,
-        "foreground_guard": 4.907599999998638
+        "queue_wait": 0.003200000000106229,
+        "companion_before": 1.1725999999998749,
+        "action": 6.149500000000444,
+        "companion_after": 0.39829999999983556,
+        "serialization": 0.0030999999999039574,
+        "worker_round_trip": 6.083999999999833,
+        "post_processing": 0.0008000000007086783,
+        "foreground_guard": 6.127300000000105
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 55.556800000000294,
+      "total_ms": 69.36149999999998,
       "breakdown_ms": {
-        "queue_wait": 0.002200000000811997,
-        "companion_before": 0.44830000000001746,
-        "action": 54.51310000000012,
-        "companion_after": 0.5393000000003667,
-        "serialization": 0.009700000000520959,
-        "worker_round_trip": 54.48029999999926,
-        "post_processing": 0.010300000001734588
+        "queue_wait": 0.0024000000003070454,
+        "companion_before": 0.506600000000617,
+        "action": 68.10349999999926,
+        "companion_after": 0.6956000000000131,
+        "serialization": 0.012000000000625732,
+        "worker_round_trip": 68.0635999999995,
+        "post_processing": 0.011800000000221189
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 17.13090000000011,
+      "total_ms": 11.716199999999844,
       "breakdown_ms": {
-        "queue_wait": 0.011200000000826549,
-        "companion_before": 1.311600000000908,
-        "action": 14.659800000001269,
-        "companion_after": 1.031699999999546,
-        "serialization": 0.027400000000852742,
-        "worker_round_trip": 14.14929999999913,
-        "post_processing": 0.007499999997889972,
-        "foreground_guard": 12.358399999999165
+        "queue_wait": 0.0027000000000043656,
+        "companion_before": 1.959899999999834,
+        "action": 8.953199999999924,
+        "companion_after": 0.7141000000001441,
+        "serialization": 0.01569999999992433,
+        "worker_round_trip": 8.84020000000055,
+        "post_processing": 0.0027000000000043656,
+        "foreground_guard": 4.925500000000284
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 59.13459999999941,
+      "total_ms": 65.47170000000006,
       "breakdown_ms": {
-        "queue_wait": 0.0027000000009138603,
-        "companion_before": 0.591999999998734,
-        "action": 57.58730000000105,
-        "companion_after": 0.8770000000004075,
-        "serialization": 0.022700000003169407,
-        "worker_round_trip": 57.50639999999839,
-        "post_processing": 0.0305000000007567
+        "queue_wait": 0.002599999999802094,
+        "companion_before": 0.560500000000502,
+        "action": 64.21969999999965,
+        "companion_after": 0.6250999999992928,
+        "serialization": 0.015799999999217107,
+        "worker_round_trip": 64.16989999999987,
+        "post_processing": 0.016300000000228465
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 46.1846000000005,
+      "total_ms": 10.014799999999923,
       "breakdown_ms": {
-        "queue_wait": 0.0023999999993975507,
-        "companion_before": 0.48479999999835854,
-        "action": 44.859199999998964,
-        "companion_after": 0.7583999999988009,
-        "serialization": 0.018000000000029104,
-        "worker_round_trip": 5.276499999999942,
-        "post_processing": 0.0015999999995983671,
-        "foreground_guard": 5.287800000000061
+        "queue_wait": 0.002599999999802094,
+        "companion_before": 2.2156000000004497,
+        "action": 7.14639999999963,
+        "companion_after": 0.5646999999999025,
+        "serialization": 0.006400000000212458,
+        "worker_round_trip": 7.057700000000295,
+        "post_processing": 0.001299999999901047,
+        "foreground_guard": 7.1130999999995765
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 59.1166000000012,
+      "total_ms": 70.99029999999948,
       "breakdown_ms": {
-        "queue_wait": 0.008899999998902786,
-        "companion_before": 1.9504999999990105,
-        "action": 56.227999999999156,
-        "companion_after": 0.8438999999998487,
-        "serialization": 0.0150999999987107,
-        "worker_round_trip": 56.17989999999918,
+        "queue_wait": 0.0030999999999039574,
+        "companion_before": 0.6318999999994048,
+        "action": 69.21889999999985,
+        "companion_after": 1.0661000000000058,
+        "serialization": 0.01739999999972497,
+        "worker_round_trip": 69.16409999999996,
+        "post_processing": 0.01749999999992724
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.981700000000274,
+      "breakdown_ms": {
+        "queue_wait": 0.004700000000411819,
+        "companion_before": 1.4823999999998705,
+        "action": 9.316800000000512,
+        "companion_after": 1.07129999999961,
+        "serialization": 0.012300000000323053,
+        "worker_round_trip": 9.216300000000956,
+        "post_processing": 0.002599999999802094,
+        "foreground_guard": 7.98070000000007
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 72.37049999999999,
+      "breakdown_ms": {
+        "queue_wait": 0.0024000000003070454,
+        "companion_before": 0.5101000000004206,
+        "action": 70.98430000000008,
+        "companion_after": 0.8070000000006985,
+        "serialization": 0.013399999999819556,
+        "worker_round_trip": 70.94090000000051,
+        "post_processing": 0.0136000000002241
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 12.981999999999971,
+      "breakdown_ms": {
+        "queue_wait": 0.0023999999993975507,
+        "companion_before": 3.31670000000031,
+        "action": 8.975600000000668,
+        "companion_after": 0.5738000000001193,
+        "serialization": 0.011199999999917054,
+        "worker_round_trip": 8.850000000000364,
+        "post_processing": 0.002199999999902502,
+        "foreground_guard": 8.929399999999987
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 70.3126999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 1.7601000000004206,
+        "action": 67.65200000000004,
+        "companion_after": 0.663499999999658,
+        "serialization": 0.022599999999329157,
+        "worker_round_trip": 67.59720000000016,
+        "post_processing": 0.012799999999515421
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.16530000000057,
+      "breakdown_ms": {
+        "queue_wait": 0.004500000000007276,
+        "companion_before": 0.9907000000002881,
+        "action": 10.21480000000065,
+        "companion_after": 0.8445000000001528,
+        "serialization": 0.012299999999413558,
+        "worker_round_trip": 10.10570000000007,
+        "post_processing": 0.0025999999988925993,
+        "foreground_guard": 8.30159999999978
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 72.42699999999968,
+      "breakdown_ms": {
+        "queue_wait": 0.006300000000010186,
+        "companion_before": 0.8416999999999462,
+        "action": 70.82130000000052,
+        "companion_after": 0.6845999999995911,
+        "serialization": 0.01479999999901338,
+        "worker_round_trip": 70.77720000000045,
+        "post_processing": 0.0091999999995096
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 10.601000000000568,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 3.0943999999999505,
+        "action": 6.840199999999641,
+        "companion_after": 0.5727999999999156,
+        "serialization": 0.006399999999302963,
+        "worker_round_trip": 6.751600000000508,
+        "post_processing": 0.001299999999901047,
+        "foreground_guard": 6.807999999999993
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 86.76159999999982,
+      "breakdown_ms": {
+        "queue_wait": 0.002800000000206637,
+        "companion_before": 0.8919999999998254,
+        "action": 85.11419999999998,
+        "companion_after": 0.6790000000000873,
+        "serialization": 0.01860000000033324,
+        "worker_round_trip": 85.0600999999997,
+        "post_processing": 0.016099999999823922
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 13.342999999999847,
+      "breakdown_ms": {
+        "queue_wait": 0.009299999999711872,
+        "companion_before": 2.1310999999996056,
+        "action": 10.406299999999646,
+        "companion_after": 0.668800000000374,
+        "serialization": 0.01099999999951251,
+        "worker_round_trip": 10.214600000001155,
+        "post_processing": 0.005100000000311411,
+        "foreground_guard": 9.067299999999705
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 83.46019999999953,
+      "breakdown_ms": {
+        "queue_wait": 0.006300000000010186,
+        "companion_before": 0.8440000000000509,
+        "action": 81.76440000000002,
+        "companion_after": 0.7572000000000116,
+        "serialization": 0.015999999998712156,
+        "worker_round_trip": 81.71329999999944,
+        "post_processing": 0.016099999999823922
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 11.116699999999582,
+      "breakdown_ms": {
+        "queue_wait": 0.0046999999995023245,
+        "companion_before": 2.6403000000000247,
+        "action": 7.747400000000198,
+        "companion_after": 0.6237999999993917,
+        "serialization": 0.00559999999950378,
+        "worker_round_trip": 7.642899999999827,
+        "post_processing": 0.0015000000003055902,
+        "foreground_guard": 7.718800000000556
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 73.45300000000043,
+      "breakdown_ms": {
+        "queue_wait": 0.0027000000000043656,
+        "companion_before": 0.862900000000991,
+        "action": 71.8134,
+        "companion_after": 0.7056999999995242,
+        "serialization": 0.01630000000113796,
+        "worker_round_trip": 71.76360000000022,
+        "post_processing": 0.012299999999413558
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.276400000000649,
+      "breakdown_ms": {
+        "queue_wait": 0.0037000000002080924,
+        "companion_before": 0.541599999999562,
+        "action": 8.585200000000441,
+        "companion_after": 2.027999999999338,
+        "serialization": 0.009299999999711872,
+        "worker_round_trip": 8.404300000001058,
+        "post_processing": 0.004799999999704596,
+        "foreground_guard": 7.27140000000054
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.69470000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.0037000000002080924,
+        "companion_before": 0.6758999999992739,
+        "action": 63.06039999999939,
+        "companion_after": 0.8812000000007174,
+        "serialization": 0.015099999999620195,
+        "worker_round_trip": 63.01220000000012,
+        "post_processing": 0.01389999999992142
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 12.991899999999987,
+      "breakdown_ms": {
+        "queue_wait": 0.004600000000209548,
+        "companion_before": 2.2941000000000713,
+        "action": 8.596000000000458,
+        "companion_after": 1.975999999999658,
+        "serialization": 0.006400000000212458,
+        "worker_round_trip": 8.45549999999912,
+        "post_processing": 0.0024999999995998223,
+        "foreground_guard": 8.538700000000063
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.85400000000027,
+      "breakdown_ms": {
+        "queue_wait": 0.004399999999805004,
+        "companion_before": 0.5457999999998719,
+        "action": 67.5657000000001,
+        "companion_after": 0.6739999999999782,
+        "serialization": 0.013199999999415013,
+        "worker_round_trip": 67.52710000000025,
+        "post_processing": 0.012200000000120781
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.253200000000106,
+      "breakdown_ms": {
+        "queue_wait": 0.010800000000017462,
+        "companion_before": 3.278200000000652,
+        "action": 8.271999999999935,
+        "companion_after": 0.5785999999998239,
+        "serialization": 0.024500000000443833,
+        "worker_round_trip": 8.149499999999534,
+        "post_processing": 0.004799999998795101,
+        "foreground_guard": 6.330500000000029
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 67.21879999999965,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.6453999999994267,
+        "action": 65.8770999999997,
+        "companion_after": 0.6287000000002081,
+        "serialization": 0.013700000000426371,
+        "worker_round_trip": 65.83800000000065,
+        "post_processing": 0.011199999999917054
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.47860000000037,
+      "breakdown_ms": {
+        "queue_wait": 0.002599999999802094,
+        "companion_before": 0.8652000000001863,
+        "action": 6.122199999999793,
+        "companion_after": 0.4124000000001615,
+        "serialization": 0.006699999999909778,
+        "worker_round_trip": 6.0429000000003725,
+        "post_processing": 0.001299999999901047,
+        "foreground_guard": 6.095100000000457
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 66.59000000000015,
+      "breakdown_ms": {
+        "queue_wait": 0.003499999999803549,
+        "companion_before": 0.7246000000004642,
+        "action": 65.22339999999986,
+        "companion_after": 0.5673999999999069,
+        "serialization": 0.010000000000218279,
+        "worker_round_trip": 65.19260000000031,
+        "post_processing": 0.008800000000519503
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 9.715500000000247,
+      "breakdown_ms": {
+        "queue_wait": 0.0039999999999054126,
+        "companion_before": 1.8349000000007436,
+        "action": 7.089999999999236,
+        "companion_after": 0.6926000000003114,
+        "serialization": 0.01389999999992142,
+        "worker_round_trip": 6.978900000000067,
+        "post_processing": 0.0026000000007115887,
+        "foreground_guard": 5.427300000000287
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 87.82350000000042,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 6.780100000000857,
+        "action": 76.16630000000077,
+        "companion_after": 4.046400000000176,
+        "serialization": 0.06120000000100845,
+        "worker_round_trip": 75.63919999999962,
+        "uia_tree_walk": 38.348400000000005,
+        "post_processing": 0.11009999999987485
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 73.6948999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.004399999999805004,
+        "companion_before": 3.8359999999993306,
+        "action": 69.15639999999985,
+        "companion_after": 0.6246000000001004,
+        "serialization": 0.020700000000942964,
+        "worker_round_trip": 69.11260000000038,
+        "post_processing": 0.01209999999991851
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 36.50009999999929,
+      "breakdown_ms": {
+        "queue_wait": 0.00889999999981228,
+        "companion_before": 1.572400000000016,
+        "action": 34.33719999999994,
+        "companion_after": 0.5029000000004089,
+        "serialization": 0.014399999999113788,
+        "worker_round_trip": 8.063599999999497,
+        "post_processing": 0.0027999999992971425,
+        "foreground_guard": 8.08770000000004
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 69.22040000000015,
+      "breakdown_ms": {
+        "queue_wait": 0.0059000000001105946,
+        "companion_before": 0.9281999999993786,
+        "action": 67.44549999999981,
+        "companion_after": 0.7492000000002008,
+        "serialization": 0.021799999999529973,
+        "worker_round_trip": 67.38549999999941,
+        "post_processing": 0.019100000000435102
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.30369999999948,
+      "breakdown_ms": {
+        "queue_wait": 0.004500000000007276,
+        "companion_before": 1.781500000000051,
+        "action": 7.7762000000002445,
+        "companion_after": 0.6486999999997352,
+        "serialization": 0.02489999999943393,
+        "worker_round_trip": 6.915200000000368,
+        "post_processing": 0.004300000000512227,
+        "foreground_guard": 5.7432000000007974
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.90499999999975,
+      "breakdown_ms": {
+        "queue_wait": 0.003499999999803549,
+        "companion_before": 0.6632000000008702,
+        "action": 64.68170000000009,
+        "companion_after": 0.4977000000008047,
+        "serialization": 0.011299999999209831,
+        "worker_round_trip": 64.64800000000014,
+        "post_processing": 0.01040000000011787
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 39.52880000000005,
+      "breakdown_ms": {
+        "queue_wait": 0.0029999999997016857,
+        "companion_before": 2.045600000000377,
+        "action": 36.23959999999988,
+        "companion_after": 1.143000000000029,
+        "serialization": 0.019600000000536966,
+        "worker_round_trip": 9,
+        "post_processing": 0.001299999999901047,
+        "foreground_guard": 9.012399999999616
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.58899999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.0040999999991981895,
+        "companion_before": 0.7166000000006534,
+        "action": 67.19890000000032,
+        "companion_after": 0.6053000000001703,
+        "serialization": 0.011699999999109423,
+        "worker_round_trip": 67.16129999999976,
+        "post_processing": 0.012200000000120781
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.63630000000012,
+      "breakdown_ms": {
+        "queue_wait": 0.005799999999908323,
+        "companion_before": 2.4221999999999753,
+        "action": 8.374800000000505,
+        "companion_after": 0.7602999999999156,
+        "serialization": 0.01829999999881693,
+        "worker_round_trip": 7.804400000000896,
+        "post_processing": 0.002900000000408909,
+        "foreground_guard": 6.745099999999184
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 70.42569999999978,
+      "breakdown_ms": {
+        "queue_wait": 0.0033000000003085006,
+        "companion_before": 0.8946999999989202,
+        "action": 68.88340000000062,
+        "companion_after": 0.5724999999993088,
+        "serialization": 0.02779999999984284,
+        "worker_round_trip": 68.84389999999985,
+        "post_processing": 0.011800000000221189
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 45.60859999999957,
+      "breakdown_ms": {
+        "queue_wait": 0.005500000000211003,
+        "companion_before": 0.6845999999995911,
+        "action": 44.03049999999985,
+        "companion_after": 0.8132999999997992,
+        "serialization": 0.01130000000102882,
+        "worker_round_trip": 5.205699999999524,
+        "post_processing": 0.0016999999998006388,
+        "foreground_guard": 5.218899999999849
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.07559999999921,
+      "breakdown_ms": {
+        "queue_wait": 0.005799999999908323,
+        "companion_before": 0.9125000000003638,
+        "action": 62.2554999999993,
+        "companion_after": 0.806800000000294,
+        "serialization": 0.017199999999320426,
+        "worker_round_trip": 62.20650000000023,
+        "post_processing": 0.0150999999987107
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 13.224299999999857,
+      "breakdown_ms": {
+        "queue_wait": 0.011400000001231092,
+        "companion_before": 2.353900000000067,
+        "action": 10.054100000001199,
+        "companion_after": 0.7117999999991298,
+        "serialization": 0.0253999999986263,
+        "worker_round_trip": 9.350299999998242,
+        "post_processing": 0.005000000001018634,
+        "foreground_guard": 8.250899999999092
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.88630000000012,
+      "breakdown_ms": {
+        "queue_wait": 0.0032000000010157237,
+        "companion_before": 0.5401000000019849,
+        "action": 59.63770000000113,
+        "companion_after": 0.6391999999996187,
+        "serialization": 0.01510000000052969,
+        "worker_round_trip": 59.59679999999935,
+        "post_processing": 0.011599999999816646
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 44.92740000000049,
+      "breakdown_ms": {
+        "queue_wait": 0.010800000000017462,
+        "companion_before": 1.9798000000009779,
+        "action": 41.91699999999946,
+        "companion_after": 0.9222000000008848,
+        "serialization": 0.025900000000547152,
+        "worker_round_trip": 9.019100000001345,
+        "post_processing": 0.0018000000000029104,
+        "foreground_guard": 9.039200000001074
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.96140000000014,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 0.6093000000000757,
+        "action": 59.70429999999942,
+        "companion_after": 0.5824999999986176,
+        "serialization": 0.016500000003361492,
+        "worker_round_trip": 59.66120000000046,
+        "post_processing": 0.015299999999115244
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.601799999998548,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 2.0800000000017462,
+        "action": 8.689700000000812,
+        "companion_after": 0.7587000000003172,
+        "serialization": 0.02870000000075379,
+        "worker_round_trip": 8.034099999998944,
+        "post_processing": 0.0036000000000058208,
+        "foreground_guard": 6.754800000000614
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.83530000000064,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.8703000000023167,
+        "action": 67.07899999999972,
+        "companion_after": 0.7774000000008527,
+        "serialization": 0.013699999999516876,
+        "worker_round_trip": 67.02399999999943,
+        "post_processing": 0.02260000000023865
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 50.23830000000089,
+      "breakdown_ms": {
+        "queue_wait": 0.0030000000006111804,
+        "companion_before": 0.6231999999981781,
+        "action": 48.501500000000306,
+        "companion_after": 1.0347000000001572,
+        "serialization": 0.018599999999423744,
+        "worker_round_trip": 8.230900000000474,
+        "post_processing": 0.009799999999813735,
+        "foreground_guard": 8.260000000000218
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 78.3130000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.0033000000003085006,
+        "companion_before": 0.6162999999996828,
+        "action": 76.70390000000043,
+        "companion_after": 0.9122999999999593,
+        "serialization": 0.017699999998512794,
+        "worker_round_trip": 76.64969999999994,
+        "post_processing": 0.01779999999962456
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.08679999999913,
+      "breakdown_ms": {
+        "queue_wait": 0.005600000000413274,
+        "companion_before": 1.3847999999998137,
+        "action": 8.823599999999715,
+        "companion_after": 0.7934000000004744,
+        "serialization": 0.02750000000014552,
+        "worker_round_trip": 7.998799999999392,
+        "post_processing": 0.006699999998090789,
+        "foreground_guard": 6.80409999999938
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 82.6252999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.006400000000212458,
+        "companion_before": 0.9794000000001688,
+        "action": 80.80749999999898,
+        "companion_after": 0.7440999999998894,
+        "serialization": 0.013699999997697887,
+        "worker_round_trip": 80.76729999999952,
         "post_processing": 0.011200000000826549
       }
     },
     {
       "tool": "computer",
-      "action": "type",
-      "total_ms": 8.65860000000066,
+      "action": "key",
+      "total_ms": 50.01800000000003,
       "breakdown_ms": {
         "queue_wait": 0.0031999999991967343,
-        "companion_before": 1.0210000000006403,
-        "action": 6.834100000000035,
-        "companion_after": 0.7451999999993859,
-        "serialization": 0.023400000000037835,
-        "worker_round_trip": 6.218999999999141,
-        "post_processing": 0.005400000000008731,
-        "foreground_guard": 5.184600000000501
+        "companion_before": 0.5609999999996944,
+        "action": 48.02930000000015,
+        "companion_after": 1.3374000000003434,
+        "serialization": 0.024600000000646105,
+        "worker_round_trip": 8.14429999999993,
+        "post_processing": 0.0015999999995983671,
+        "foreground_guard": 8.161000000000058
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 55.80820000000131,
+      "total_ms": 97.02490000000034,
       "breakdown_ms": {
-        "queue_wait": 0.002200000000811997,
-        "companion_before": 0.4565999999995256,
-        "action": 54.85120000000097,
-        "companion_after": 0.4463999999989028,
-        "serialization": 0.009799999999813735,
-        "worker_round_trip": 54.81810000000041,
-        "post_processing": 0.009700000000520959
+        "queue_wait": 0.01929999999993015,
+        "companion_before": 1.1736000000000786,
+        "action": 95.17000000000007,
+        "companion_after": 0.5554999999985739,
+        "serialization": 0.01960000000144646,
+        "worker_round_trip": 95.1164000000008,
+        "post_processing": 0.013100000000122236
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.231400000000576,
+      "breakdown_ms": {
+        "queue_wait": 0.005699999999706051,
+        "companion_before": 1.110000000000582,
+        "action": 9.260000000000218,
+        "companion_after": 0.7858999999989464,
+        "serialization": 0.023699999997916166,
+        "worker_round_trip": 8.03269999999975,
+        "post_processing": 0.003299999998489511,
+        "foreground_guard": 7.0900000000001455
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 73.22270000000026,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 0.6311000000005151,
+        "action": 71.95859999999993,
+        "companion_after": 0.5555000000003929,
+        "serialization": 0.01389999999810243,
+        "worker_round_trip": 71.91479999999865,
+        "post_processing": 0.011800000000221189
       }
     },
     {
       "tool": "computer",
       "action": "key",
-      "total_ms": 41.19120000000112,
+      "total_ms": 45.04619999999886,
       "breakdown_ms": {
-        "queue_wait": 0.005499999999301508,
-        "companion_before": 0.7615000000005239,
-        "action": 39.47679999999855,
-        "companion_after": 0.86489999999867,
-        "serialization": 0.026999999998224666,
-        "worker_round_trip": 6.224400000000969,
+        "queue_wait": 0.003500000000713044,
+        "companion_before": 1.1636000000016793,
+        "action": 42.31679999999869,
+        "companion_after": 1.3475999999991473,
+        "serialization": 0.018599999999423744,
+        "worker_round_trip": 6.054299999999785,
         "post_processing": 0.0018000000000029104,
-        "foreground_guard": 6.240199999998367
+        "foreground_guard": 6.0702000000001135
       }
     },
     {
       "tool": "windows",
       "action": "get_windows",
-      "total_ms": 55.72609999999986,
+      "total_ms": 70.01660000000084,
       "breakdown_ms": {
-        "queue_wait": 0.004500000000916771,
-        "companion_before": 0.455100000001039,
-        "action": 54.22509999999966,
-        "companion_after": 0.9392000000007101,
-        "serialization": 0.016399999998611747,
-        "worker_round_trip": 54.17380000000048,
-        "post_processing": 0.01990000000114378
+        "queue_wait": 0.0030999999999039574,
+        "companion_before": 0.5878000000011525,
+        "action": 68.6851000000006,
+        "companion_after": 0.6548000000002503,
+        "serialization": 0.012200000001030276,
+        "worker_round_trip": 68.63070000000153,
+        "post_processing": 0.02050000000053842
       }
     },
     {
       "tool": "computer",
       "action": "type",
-      "total_ms": 6.85609999999906,
+      "total_ms": 10.087299999999232,
       "breakdown_ms": {
-        "queue_wait": 0.0029000000013184035,
-        "companion_before": 0.42079999999805295,
-        "action": 5.770499999998719,
-        "companion_after": 0.6139000000002852,
-        "serialization": 0.016700000000128057,
-        "worker_round_trip": 5.289699999997538,
-        "post_processing": 0.003999999998995918,
-        "foreground_guard": 4.43920000000071
+        "queue_wait": 0.0030999999999039574,
+        "companion_before": 0.4655000000002474,
+        "action": 8.75,
+        "companion_after": 0.8176000000003114,
+        "serialization": 0.023100000000340515,
+        "worker_round_trip": 7.918500000001586,
+        "post_processing": 0.024099999998725252,
+        "foreground_guard": 6.797800000000279
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 66.03589999999895,
+      "breakdown_ms": {
+        "queue_wait": 0.009800000001632725,
+        "companion_before": 0.8893000000007305,
+        "action": 64.07849999999962,
+        "companion_after": 0.9241000000001804,
+        "serialization": 0.02200000000084401,
+        "worker_round_trip": 64.00959999999941,
+        "post_processing": 0.023300000000745058
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 47.00590000000011,
+      "breakdown_ms": {
+        "queue_wait": 0.002699999999094871,
+        "companion_before": 0.6359000000011292,
+        "action": 44.875,
+        "companion_after": 1.403200000000652,
+        "serialization": 0.02410000000054424,
+        "worker_round_trip": 6.143500000000131,
+        "post_processing": 0.0026000000016210834,
+        "foreground_guard": 6.160599999999249
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 66.99250000000029,
+      "breakdown_ms": {
+        "queue_wait": 0.0021999999989930075,
+        "companion_before": 0.5496999999995751,
+        "action": 65.67549999999937,
+        "companion_after": 0.7068999999992229,
+        "serialization": 0.011800000002040179,
+        "worker_round_trip": 65.63749999999891,
+        "post_processing": 0.012000000000625732
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.467000000000553,
+      "breakdown_ms": {
+        "queue_wait": 0.0046999999995023245,
+        "companion_before": 0.7991999999994732,
+        "action": 8.847100000000864,
+        "companion_after": 0.7497000000003027,
+        "serialization": 0.019399999999222928,
+        "worker_round_trip": 8.23069999999825,
+        "post_processing": 0.003700000001117587,
+        "foreground_guard": 6.7488999999986845
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.08860000000095,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.566000000000713,
+        "action": 66.84040000000095,
+        "companion_after": 0.6157000000002881,
+        "serialization": 0.012500000000727596,
+        "worker_round_trip": 66.8018000000011,
+        "post_processing": 0.010999999998603016
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 35.52240000000165,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.8214000000007218,
+        "action": 33.57209999999941,
+        "companion_after": 1.060699999999997,
+        "serialization": 0.010500000000320142,
+        "worker_round_trip": 6.357099999999264,
+        "post_processing": 0.0015999999995983671,
+        "foreground_guard": 6.370600000000195
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 66.92569999999978,
+      "breakdown_ms": {
+        "queue_wait": 0.0036999999992985977,
+        "companion_before": 0.606499999999869,
+        "action": 65.76929999999993,
+        "companion_after": 0.48809999999866704,
+        "serialization": 0.013100000000122236,
+        "worker_round_trip": 65.72780000000057,
+        "post_processing": 0.008200000000215368
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.024600000000646,
+      "breakdown_ms": {
+        "queue_wait": 0.0030000000006111804,
+        "companion_before": 2.488200000001598,
+        "action": 8.471600000000763,
+        "companion_after": 0.9648999999990338,
+        "serialization": 0.03190000000176951,
+        "worker_round_trip": 7.8945999999996275,
+        "post_processing": 0.0032000000010157237,
+        "foreground_guard": 6.22649999999885
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.67950000000019,
+      "breakdown_ms": {
+        "queue_wait": 0.006299999999100692,
+        "companion_before": 1.0168000000012398,
+        "action": 63.94430000000102,
+        "companion_after": 0.623700000000099,
+        "serialization": 0.015500000001338776,
+        "worker_round_trip": 63.896199999999226,
+        "post_processing": 0.011599999999816646
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 37.716700000000856,
+      "breakdown_ms": {
+        "queue_wait": 0.004499999999097781,
+        "companion_before": 1.0762000000013359,
+        "action": 35.820300000001225,
+        "companion_after": 0.7247000000006665,
+        "serialization": 0.021200000001044828,
+        "worker_round_trip": 5.925600000000486,
+        "post_processing": 0.0017000000007101335,
+        "foreground_guard": 5.9408000000003085
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.29559999999947,
+      "breakdown_ms": {
+        "queue_wait": 0.002300000000104774,
+        "companion_before": 0.6429000000007363,
+        "action": 59.9974000000002,
+        "companion_after": 0.5915999999997439,
+        "serialization": 0.012600000000020373,
+        "worker_round_trip": 59.95900000000074,
+        "post_processing": 0.010800000000017462
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 9.564500000000407,
+      "breakdown_ms": {
+        "queue_wait": 0.0027000000009138603,
+        "companion_before": 0.5972000000001572,
+        "action": 8.033500000001368,
+        "companion_after": 0.86620000000039,
+        "serialization": 0.018299999999726424,
+        "worker_round_trip": 7.463999999999942,
+        "post_processing": 0.00240000000121654,
+        "foreground_guard": 6.347900000000664
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.52280000000064,
+      "breakdown_ms": {
+        "queue_wait": 0.003299999998489511,
+        "companion_before": 0.5247999999992317,
+        "action": 62.0674999999992,
+        "companion_after": 0.8495000000002619,
+        "serialization": 0.017000000001644366,
+        "worker_round_trip": 62.01560000000063,
+        "post_processing": 0.01689999999871361
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 49.722999999999956,
+      "breakdown_ms": {
+        "queue_wait": 0.004199999999400461,
+        "companion_before": 1.4486000000015338,
+        "action": 47.53049999999894,
+        "companion_after": 0.6724999999987631,
+        "serialization": 0.014700000001539593,
+        "worker_round_trip": 7.387699999999313,
+        "post_processing": 0.001399999999193824,
+        "foreground_guard": 7.422900000001391
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.19549999999981,
+      "breakdown_ms": {
+        "queue_wait": 0.0036999999992985977,
+        "companion_before": 2.2358000000003813,
+        "action": 65.40869999999995,
+        "companion_after": 0.4642999999996391,
+        "serialization": 0.02050000000235741,
+        "worker_round_trip": 65.34230000000025,
+        "post_processing": 0.02959999999984575
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.9395999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.005100000000311411,
+        "companion_before": 0.5413000000025932,
+        "action": 6.723500000000058,
+        "companion_after": 0.6070999999992637,
+        "serialization": 0.01749999999992724,
+        "worker_round_trip": 6.093799999998737,
+        "post_processing": 0.0030999999999039574,
+        "foreground_guard": 5.087900000000445
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.41710000000057,
+      "breakdown_ms": {
+        "queue_wait": 0.005299999998896965,
+        "companion_before": 0.6410999999989144,
+        "action": 62.1244999999999,
+        "companion_after": 0.5560000000004948,
+        "serialization": 0.01720000000204891,
+        "worker_round_trip": 61.97269999999844,
+        "post_processing": 0.011300000000119326
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 37.79449999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.005300000000715954,
+        "companion_before": 0.9257999999990716,
+        "action": 36.09089999999924,
+        "companion_after": 0.6944000000003143,
+        "serialization": 0.012799999998605927,
+        "worker_round_trip": 7.175000000001091,
+        "post_processing": 0.002699999999094871,
+        "foreground_guard": 7.198599999999715
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.50690000000031,
+      "breakdown_ms": {
+        "queue_wait": 0.0033999999996012775,
+        "companion_before": 0.6099000000012893,
+        "action": 63.15809999999874,
+        "companion_after": 0.6740000000008877,
+        "serialization": 0.011999999998806743,
+        "worker_round_trip": 63.1190000000006,
+        "post_processing": 0.01119999999900756
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.340500000000247,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.5136000000002241,
+        "action": 7.028699999998935,
+        "companion_after": 0.747799999999188,
+        "serialization": 0.019700000000739237,
+        "worker_round_trip": 6.4715999999989435,
+        "post_processing": 0.0032000000010157237,
+        "foreground_guard": 5.567599999998492
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.74120000000039,
+      "breakdown_ms": {
+        "queue_wait": 0.0030999999999039574,
+        "companion_before": 0.6430000000000291,
+        "action": 61.48660000000018,
+        "companion_after": 0.5400000000008731,
+        "serialization": 0.010500000000320142,
+        "worker_round_trip": 61.45290000000023,
+        "post_processing": 0.010500000000320142
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 46.66359999999986,
+      "breakdown_ms": {
+        "queue_wait": 0.002500000000509317,
+        "companion_before": 0.4213999999992666,
+        "action": 45.34890000000087,
+        "companion_after": 0.8351999999995314,
+        "serialization": 0.012600000000020373,
+        "worker_round_trip": 5.7827999999990425,
+        "post_processing": 0.0014000000010128133,
+        "foreground_guard": 5.795400000000882
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.538000000000466,
+      "breakdown_ms": {
+        "queue_wait": 0.006400000000212458,
+        "companion_before": 0.7088999999996304,
+        "action": 60.87510000000111,
+        "companion_after": 0.8680000000003929,
+        "serialization": 0.017100000002756133,
+        "worker_round_trip": 60.82469999999921,
+        "post_processing": 0.016099999998914427
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.012000000000626,
+      "breakdown_ms": {
+        "queue_wait": 0.007700000000113505,
+        "companion_before": 1.842899999999645,
+        "action": 8.17580000000089,
+        "companion_after": 0.9156999999995605,
+        "serialization": 0.027099999999336433,
+        "worker_round_trip": 7.514199999999619,
+        "post_processing": 0.002599999999802094,
+        "foreground_guard": 6.23319999999876
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.28989999999976,
+      "breakdown_ms": {
+        "queue_wait": 0.002800000000206637,
+        "companion_before": 0.5901000000012573,
+        "action": 62.94120000000112,
+        "companion_after": 0.6947000000000116,
+        "serialization": 0.00999999999839929,
+        "worker_round_trip": 62.905400000001464,
+        "post_processing": 0.008799999999610009
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 42.65359999999964,
+      "breakdown_ms": {
+        "queue_wait": 0.013500000000931323,
+        "companion_before": 1.4024000000008527,
+        "action": 40.34480000000076,
+        "companion_after": 0.8096999999997934,
+        "serialization": 0.01720000000022992,
+        "worker_round_trip": 6.575700000001234,
+        "post_processing": 0.0015000000003055902,
+        "foreground_guard": 6.593600000000151
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.11750000000029,
+      "breakdown_ms": {
+        "queue_wait": 0.0033999999996012775,
+        "companion_before": 0.6846000000005006,
+        "action": 62.76220000000103,
+        "companion_after": 0.6144000000003871,
+        "serialization": 0.010700000000724685,
+        "worker_round_trip": 62.726700000001074,
+        "post_processing": 0.010399999999208376
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 9.77009999999973,
+      "breakdown_ms": {
+        "queue_wait": 0.0023999999993975507,
+        "companion_before": 0.4271000000007916,
+        "action": 8.469100000000253,
+        "companion_after": 0.8230000000003201,
+        "serialization": 0.026499999999941792,
+        "worker_round_trip": 7.608200000000579,
+        "post_processing": 0.006000000001222361,
+        "foreground_guard": 6.154599999999846
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.830799999999726,
+      "breakdown_ms": {
+        "queue_wait": 0.016999999999825377,
+        "companion_before": 1.6435999999994237,
+        "action": 60.55229999999938,
+        "companion_after": 0.5214000000014494,
+        "serialization": 0.01779999999962456,
+        "worker_round_trip": 60.5007999999998,
+        "post_processing": 0.010599999999612919
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 44.13520000000062,
+      "breakdown_ms": {
+        "queue_wait": 0.006100000000515138,
+        "companion_before": 1.0159000000003289,
+        "action": 42.023699999999735,
+        "companion_after": 0.9791000000004715,
+        "serialization": 0.017600000001039007,
+        "worker_round_trip": 6.297699999999168,
+        "post_processing": 0.0018999999992956873,
+        "foreground_guard": 6.313700000000608
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.81239999999889,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 0.7974999999987631,
+        "action": 58.41649999999936,
+        "companion_after": 0.5279999999984284,
+        "serialization": 0.011299999998300336,
+        "worker_round_trip": 58.38050000000112,
+        "post_processing": 0.010699999998905696
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 9.85319999999956,
+      "breakdown_ms": {
+        "queue_wait": 0.002300000000104774,
+        "companion_before": 1.0506999999997788,
+        "action": 8.184400000000096,
+        "companion_after": 0.563799999999901,
+        "serialization": 0.020400000001245644,
+        "worker_round_trip": 7.514400000001842,
+        "post_processing": 0.005000000001018634,
+        "foreground_guard": 6.1943000000010215
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 66.27429999999913,
+      "breakdown_ms": {
+        "queue_wait": 0.00240000000121654,
+        "companion_before": 0.5069999999996071,
+        "action": 65.1280999999999,
+        "companion_after": 0.5820000000003347,
+        "serialization": 0.010799999998198473,
+        "worker_round_trip": 65.09330000000045,
+        "post_processing": 0.010600000001431908
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 45.20309999999881,
+      "breakdown_ms": {
+        "queue_wait": 0.006400000000212458,
+        "companion_before": 1.0277999999980238,
+        "action": 43.39440000000104,
+        "companion_after": 0.698499999998603,
+        "serialization": 0.013800000000628643,
+        "worker_round_trip": 5.7753000000011525,
+        "post_processing": 0.001299999999901047,
+        "foreground_guard": 5.789700000001176
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.146600000000035,
+      "breakdown_ms": {
+        "queue_wait": 0.0030999999999039574,
+        "companion_before": 0.5850000000009459,
+        "action": 59.90520000000106,
+        "companion_after": 0.5889999999999418,
+        "serialization": 0.011999999998806743,
+        "worker_round_trip": 59.86819999999898,
+        "post_processing": 0.011000000000422006
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.662900000001173,
+      "breakdown_ms": {
+        "queue_wait": 0.0046999999995023245,
+        "companion_before": 1.0987999999997555,
+        "action": 6.960300000000643,
+        "companion_after": 0.5383999999994558,
+        "serialization": 0.04289999999855354,
+        "worker_round_trip": 6.338200000000143,
+        "post_processing": 0.004099999998288695,
+        "foreground_guard": 4.8443999999999505
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.84950000000026,
+      "breakdown_ms": {
+        "queue_wait": 0.0042000000012194505,
+        "companion_before": 0.6527000000005501,
+        "action": 59.58480000000054,
+        "companion_after": 0.5454999999983556,
+        "serialization": 0.011500000000523869,
+        "worker_round_trip": 59.54809999999998,
+        "post_processing": 0.011099999999714782
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 41.605099999998856,
+      "breakdown_ms": {
+        "queue_wait": 0.007500000001527951,
+        "companion_before": 1.0290999999997439,
+        "action": 39.25799999999981,
+        "companion_after": 1.2043000000012398,
+        "serialization": 0.02329999999892607,
+        "worker_round_trip": 5.549199999999473,
+        "post_processing": 0.0015999999995983671,
+        "foreground_guard": 5.56420000000071
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.15920000000006,
+      "breakdown_ms": {
+        "queue_wait": 0.004300000000512227,
+        "companion_before": 0.73989999999867,
+        "action": 63.76010000000133,
+        "companion_after": 0.584499999999025,
+        "serialization": 0.013499999999112333,
+        "worker_round_trip": 63.72099999999955,
+        "post_processing": 0.010500000000320142
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 9.43289999999979,
+      "breakdown_ms": {
+        "queue_wait": 0.005199999999604188,
+        "companion_before": 1.778199999997014,
+        "action": 6.310199999999895,
+        "companion_after": 1.2591999999986,
+        "serialization": 0.025499999997919076,
+        "worker_round_trip": 5.484700000000885,
+        "post_processing": 0.0033999999996012775,
+        "foreground_guard": 4.559100000000399
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.33650000000125,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 0.5520000000014988,
+        "action": 62.134100000001126,
+        "companion_after": 0.5928000000003522,
+        "serialization": 0.008900000002540764,
+        "worker_round_trip": 62.10329999999885,
+        "post_processing": 0.010000000000218279
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 42.516600000000835,
+      "breakdown_ms": {
+        "queue_wait": 0.0059000000001105946,
+        "companion_before": 1.5014000000010128,
+        "action": 40.24659999999858,
+        "companion_after": 0.6851000000006024,
+        "serialization": 0.016099999998914427,
+        "worker_round_trip": 7.379800000000614,
+        "post_processing": 0.0018999999992956873,
+        "foreground_guard": 7.39390000000094
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 58.51389999999992,
+      "breakdown_ms": {
+        "queue_wait": 0.0030999999999039574,
+        "companion_before": 0.5094999999982974,
+        "action": 56.61459999999897,
+        "companion_after": 1.3057999999982712,
+        "serialization": 0.01449999999931606,
+        "worker_round_trip": 56.57729999999901,
+        "post_processing": 0.013700000001335866
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.275400000000445,
+      "breakdown_ms": {
+        "queue_wait": 0.0027000000009138603,
+        "companion_before": 0.528600000001461,
+        "action": 6.983000000000175,
+        "companion_after": 0.7003999999997177,
+        "serialization": 0.028300000001763692,
+        "worker_round_trip": 6.361800000002404,
+        "post_processing": 0.004299999998693238,
+        "foreground_guard": 5.393799999999828
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.543399999998655,
+      "breakdown_ms": {
+        "queue_wait": 0.0033000000003085006,
+        "companion_before": 0.5730000000003201,
+        "action": 58.84649999999965,
+        "companion_after": 1.0648999999993976,
+        "serialization": 0.010600000001431908,
+        "worker_round_trip": 58.8112000000001,
+        "post_processing": 0.010500000000320142
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 41.027500000000146,
+      "breakdown_ms": {
+        "queue_wait": 0.009299999999711872,
+        "companion_before": 0.8484999999982392,
+        "action": 39.36879999999837,
+        "companion_after": 0.7073999999993248,
+        "serialization": 0.016200000001845183,
+        "worker_round_trip": 5.4957999999987805,
+        "post_processing": 0.0020999999997002305,
+        "foreground_guard": 5.51379999999881
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.75010000000111,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 0.6268000000000029,
+        "action": 64.49909999999909,
+        "companion_after": 0.5615000000016153,
+        "serialization": 0.01089999999931024,
+        "worker_round_trip": 64.46409999999923,
+        "post_processing": 0.010099999999511056
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.197599999999511,
+      "breakdown_ms": {
+        "queue_wait": 0.005400000000008731,
+        "companion_before": 0.828799999999319,
+        "action": 9.185600000000704,
+        "companion_after": 1.1015999999999622,
+        "serialization": 0.030700000001161243,
+        "worker_round_trip": 8.5632999999998,
+        "post_processing": 0.006199999997988925,
+        "foreground_guard": 6.679000000000087
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 79.19490000000042,
+      "breakdown_ms": {
+        "queue_wait": 0.005199999999604188,
+        "companion_before": 0.8967999999986205,
+        "action": 77.38040000000001,
+        "companion_after": 0.8422999999984313,
+        "serialization": 0.01209999999809952,
+        "worker_round_trip": 77.33870000000024,
+        "post_processing": 0.012400000001434819
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 40.27609999999913,
+      "breakdown_ms": {
+        "queue_wait": 0.00240000000121654,
+        "companion_before": 1.2574000000004162,
+        "action": 38.35699999999997,
+        "companion_after": 0.5928000000003522,
+        "serialization": 0.018200000000433647,
+        "worker_round_trip": 10.064199999998891,
+        "post_processing": 0.002599999999802094,
+        "foreground_guard": 10.08730000000105
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 81.05539999999928,
+      "breakdown_ms": {
+        "queue_wait": 0.008799999999610009,
+        "companion_before": 0.8595000000004802,
+        "action": 79.26659999999902,
+        "companion_after": 0.7872999999999593,
+        "serialization": 0.020700000000942964,
+        "worker_round_trip": 79.19789999999921,
+        "post_processing": 0.018900000000940054
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.705200000000332,
+      "breakdown_ms": {
+        "queue_wait": 0.005300000000715954,
+        "companion_before": 0.6530999999995402,
+        "action": 9.725099999999657,
+        "companion_after": 1.246499999999287,
+        "serialization": 0.029399999999441206,
+        "worker_round_trip": 8.924599999998463,
+        "post_processing": 0.0067000000017287675,
+        "foreground_guard": 8.02850000000035
       }
     }
   ]

@@ -68,7 +68,8 @@ public static class PokemonWindowsAutomation {
             var title = (string)info["title"];
             if (String.IsNullOrEmpty(title)) return true;
             if (!String.IsNullOrEmpty(query) && (title + " " + info["process"]).IndexOf(query, StringComparison.OrdinalIgnoreCase) < 0) return true;
-            info["active"] = handle == GetForegroundWindow();
+            var foreground = GetForegroundWindow();
+            info["active"] = handle == foreground || handle == GetAncestor(foreground, 3);
             windows.Add(info);
             return windows.Count < 100;
         }, IntPtr.Zero);
@@ -172,7 +173,7 @@ public static class PokemonWindowsAutomation {
     public static object Activate(string windowId) {
         var handle = Handle(windowId);
         ShowWindow(handle, 9);
-        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. For caption-only UI, try computer key alt+tab, then get_ui again.");
+        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle && GetAncestor(GetForegroundWindow(), 3) != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. Re-read its UI and use windows focus on a known control when available.");
         return Obj("ok", true);
     }
     public static object Foreground() {
