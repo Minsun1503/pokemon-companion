@@ -8,6 +8,9 @@ import {performance} from 'node:perf_hooks';
 import {fileURLToPath} from 'node:url';
 import {setTimeout as delay} from 'node:timers/promises';
 import {connect} from './client.mjs';
+import {createRequire} from 'node:module';
+
+const sharp = createRequire(new URL('../backend/package.json', import.meta.url))('sharp');
 
 assert.equal(process.platform, 'win32', 'This benchmark requires a Windows desktop.');
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -81,6 +84,15 @@ async function openSession(ui, name) {
 
 function textResult(result) {
   return JSON.parse(result.content.find((item) => item.type === 'text').text);
+}
+async function verifyScreenshot(result) {
+  const image = result.content.find((item) => item.type === 'image');
+  assert.equal(image?.mimeType, 'image/png');
+  const metadata = await sharp(Buffer.from(image.data, 'base64')).metadata();
+  const dimensions = textResult(result);
+  assert.equal(metadata.format, 'png');
+  assert.equal(metadata.width, dimensions.image_width);
+  assert.equal(metadata.height, dimensions.image_height);
 }
 const windows = async (args) => textResult(await session.api('windows', args));
 const state = async () => (await fetch(fixtureUrl + '/state', {signal: AbortSignal.timeout(5000)})).json();
@@ -215,7 +227,7 @@ try {
       ...[5, 50, 500].map((size) => ['computer_type_' + size, null, null]),
       ['computer_key', null, null],
       ['computer_left_click', async () => session.api('computer', {action: 'left_click', coordinate: button}), async () => {clicks += 1; assert.equal((await state()).clicks, clicks);}],
-      ['computer_get_screenshot', async () => session.api('computer', {action: 'get_screenshot'}), (result) => {assert(result.content.some((item) => item.type === 'image' && item.mimeType === 'image/png'));}],
+      ['computer_get_screenshot', async () => session.api('computer', {action: 'get_screenshot'}), verifyScreenshot],
       ['pokemon_say', async () => session.api('pokemon', {action: 'say', message: 'Benchmark progress'}), (result) => assert.equal(textResult(result).message, 'Benchmark progress')],
     ];
     for (const name of only) assert(name === 'cold_start' || scenarios.some(([scenario]) => scenario === name), 'Unknown benchmark scenario: ' + name);

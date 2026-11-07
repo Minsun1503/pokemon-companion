@@ -59,3 +59,14 @@ Uses the installed public keyboard provider to type ASCII in 32-character chunks
 The input implementation remained unchanged through A/B, so the baseline supplies its before measurement; A's smaller companion overhead also contributes a few milliseconds. [C samples](perf-c.json): all 120 verified, plus a separate 40-sample [five-character probe](perf-c-probe.json). No global native delay was modified.
 
 Validation: build, check, 62 unit tests (one existing skip), chat, Windows smoke, and real input smoke passed. Input smoke now independently verifies a 500-character letter sequence (`qjzx ` repeated), then the existing Vietnamese/Unicode replacement and click. Tests cover ordering, unchanged calibration, native error identity, NUL fallback, and pause/cancellation between chunks. Cancellation may leave a typed prefix; it never replays or removes input. Other platforms retain their existing typing paths.
+
+## D1: encode screenshots once
+
+Sharp now receives the resized Jimp RGBA bitmap directly instead of decoding an intermediate Jimp PNG. The resize, cursor crosshair, PNG format, quality 80 and compression level 9 remain unchanged. Benchmark verification decodes every PNG and compares its dimensions to the returned coordinate space.
+
+| UI | Before median / p95 ms | After median / p95 ms | After image bytes (median) |
+|---|---:|---:|---:|
+| On | 702.2 / 774.8 | 587.7 / 635.8 | 180225 |
+| Off | 565.7 / 588.3 | 409.3 / 435.5 | 180006 |
+
+[Before](perf-d-before.json) and [after](perf-d-encode.json): 40/40 samples each verified. Payload sizes vary with screen content; no format change. Build, check, 62 unit tests (one existing skip), chat and Windows smoke passed.

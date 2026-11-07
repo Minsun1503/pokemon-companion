@@ -425,11 +425,10 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							}
 						}
 
-						// Get PNG buffer from Jimp
-						const pngBuffer = await measure('screenshot_encode_jimp', async () => image.getBufferAsync('image/png'));
-
-						// Compress PNG using sharp, to fit size limits
-						const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(pngBuffer)
+						// Encode the resized RGBA pixels once, keeping the same PNG compression.
+						const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(image.bitmap.data, {
+							raw: {width: imageWidth, height: imageHeight, channels: 4},
+						})
 							.png({quality: 80, compressionLevel: 9})
 							.toBuffer());
 
