@@ -10,7 +10,7 @@ let fixture;
 let fixtureUrl;
 try {
   const electron = resolve(root, 'frontend/node_modules/electron/dist/electron.exe');
-  const env = {...process.env};
+  const env = {...process.env, POKEMON_INPUT_FIXTURE_PASSWORD: '1'};
   delete env.ELECTRON_RUN_AS_NODE;
   fixture = spawn(electron, [resolve(root, 'scripts/input-fixture/index.cjs'), '--force-renderer-accessibility'], {env, windowsHide: true, stdio: ['ignore', 'pipe', 'inherit']});
   await new Promise((ready, reject) => {
@@ -35,6 +35,9 @@ try {
   const listed = await api({action: 'get_windows', query: title});
   assert.equal(listed.windows.length, 1);
   const window_id = listed.windows[0].id;
+  const secret = await api({action: 'get_ui', window_id, query: 'Secret password'});
+  assert.equal(secret.nodes.length, 0);
+  assert(!JSON.stringify(secret).includes('hidden-test-password'));
   const editors = await api({action: 'get_ui', window_id, control_type: 'Edit'});
   assert.equal(editors.nodes.length, 1);
   assert(editors.nodes[0].actions.includes('set_value'));
@@ -83,11 +86,16 @@ try {
   const small = await api({action: 'get_ui', window_id, max_elements: 1, max_chars: 1000});
   assert.equal(small.nodes.length, 1);
   assert.equal(small.truncated, true);
+  assert.equal(small.matched, 2);
+  assert(small.scanned < longEditor.scanned);
   assert(JSON.stringify(small).length <= 1000);
+  const shallow = await api({action: 'get_ui', window_id, max_depth: 1});
+  assert.equal(shallow.truncated, true);
+  assert(shallow.scanned < longEditor.scanned);
   await assert.rejects(api({action: 'invoke', snapshot: '0'.repeat(32), element_id: 1}), /Unknown or expired/);
   assert.equal(screenshots, 0);
   await call('pokemon', {action: 'done', message: 'Windows API reading, typing, and buttons verified!'});
-  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, clipping flags at 160/161 characters and full read_text, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
+  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, password hiding, early element/depth limits, clipping flags at 160/161 characters and full read_text, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
 } finally {
   if (fixtureUrl) await fetch(`${fixtureUrl}/quit`, {method: 'POST'}).catch(() => {});
   fixture?.kill();

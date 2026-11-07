@@ -113,11 +113,39 @@ describe('Windows batch execution', () => {
 
 	it('stops on a failed expectation and retains the observed value', async () => {
 		const {runtime, request} = fixture();
-		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce(control).mockResolvedValueOnce({ok: true}).mockResolvedValueOnce(control);
+		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce(control).mockResolvedValueOnce({ok: true}).mockResolvedValue(control);
 		const result = await runWindowsBatch(runtime, steps([...plan, {action: 'activate', window_step: 0}]), 2000);
 		expect(parse(result)).toMatchObject({
 			completed: 3, stopped_step: 3, result_step: 3, result: {nodes: [{value: ''}]},
 		});
+		expect(request).toHaveBeenCalledTimes(5);
+	});
+
+	it('rechecks a stale expected value without replaying the completed input', async () => {
+		const {runtime, request} = fixture();
+		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce(control).mockResolvedValueOnce({ok: true})
+			.mockResolvedValueOnce(control).mockResolvedValueOnce({...control, nodes: [{...control.nodes[0], value: 'Hello'}]});
+		const result = await runWindowsBatch(runtime, steps(), 2000);
+		expect(parse(result)).toMatchObject({ok: true, completed: 4, result: {nodes: [{value: 'Hello'}]}});
+		expect(request.mock.calls.filter(([args]) => args.action === 'set_value')).toHaveLength(1);
+		expect(request).toHaveBeenCalledTimes(5);
+	});
+
+	it.each(['pause', 'cancel'])('honors %s before rechecking a stale value', async (reason) => {
+		const {runtime, companion, request} = fixture();
+		const controller = new AbortController();
+		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce(control).mockResolvedValueOnce({ok: true})
+			.mockImplementationOnce(async () => {
+				if (reason === 'pause') {
+					companion.state.paused = true;
+				} else {
+					controller.abort();
+				}
+
+				return control;
+			});
+		const result = await runWindowsBatch(runtime, steps(), 2000, controller.signal);
+		expect(parse(result)).toMatchObject({completed: 3, stopped_step: 3, error: 'Computer action cancelled or paused before execution.'});
 		expect(request).toHaveBeenCalledTimes(4);
 	});
 

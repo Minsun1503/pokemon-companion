@@ -71,4 +71,14 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 		expect(JSON.stringify(result).length).toBeLessThanOrEqual(1000);
 		expect(result.truncated).toBe(true);
 	});
+
+	it('bounds a large tree while preserving its node prefix', async () => {
+		const nodes = Array.from({length: 250}, (_, index) => ({
+			id: index + 1, role: 'Edit', name: 'Test', value: 'x'.repeat(160),
+		}));
+		const result = await readUI({nodes: [...nodes], matched: nodes.length, truncated: false});
+		expect(JSON.stringify(result).length).toBeLessThanOrEqual(1000);
+		expect(result.truncated).toBe(true);
+		expect(result.nodes).toEqual(nodes.slice(0, (result.nodes as unknown[]).length));
+	});
 });

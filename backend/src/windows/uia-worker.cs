@@ -71,19 +71,18 @@ public static class PokemonWindowsAutomation {
     }
     static List<string> Actions(AutomationElement element) {
         var actions = new List<string>();
-        if (!element.Current.IsEnabled || element.Current.IsPassword) return actions;
+        if (!element.Cached.IsEnabled || element.Cached.IsPassword) return actions;
         object pattern;
-        if (element.TryGetCurrentPattern(InvokePattern.Pattern, out pattern)) actions.Add("invoke");
-        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern) && !((ValuePattern)pattern).Current.IsReadOnly) actions.Add("set_value");
-        if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) actions.Add("select");
-        if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) actions.Add("toggle");
-        if (element.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out pattern)) { actions.Add("expand"); actions.Add("collapse"); }
-        if (element.TryGetCurrentPattern(ScrollPattern.Pattern, out pattern)) actions.Add("scroll");
-        if (element.TryGetCurrentPattern(TextPattern.Pattern, out pattern)) actions.Add("read_text");
-        if (element.Current.IsKeyboardFocusable) actions.Add("focus");
+        if (element.TryGetCachedPattern(InvokePattern.Pattern, out pattern)) actions.Add("invoke");
+        if (element.TryGetCachedPattern(ValuePattern.Pattern, out pattern) && !((ValuePattern)pattern).Cached.IsReadOnly) actions.Add("set_value");
+        if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) actions.Add("select");
+        if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) actions.Add("toggle");
+        if (element.TryGetCachedPattern(ExpandCollapsePattern.Pattern, out pattern)) { actions.Add("expand"); actions.Add("collapse"); }
+        if (element.TryGetCachedPattern(ScrollPattern.Pattern, out pattern)) actions.Add("scroll");
+        if (element.TryGetCachedPattern(TextPattern.Pattern, out pattern)) actions.Add("read_text");
+        if (element.Cached.IsKeyboardFocusable) actions.Add("focus");
         return actions;
     }
-    static string Role(AutomationElement element) { return element.Current.ControlType.ProgrammaticName.Replace("ControlType.", ""); }
     static string RuntimeId(AutomationElement element) { return String.Join(".", element.GetRuntimeId()); }
     public static object UI(string windowId, string query, string roleFilter, int limit, int maxDepth) {
         var handle = Handle(windowId);
@@ -96,10 +95,21 @@ public static class PokemonWindowsAutomation {
         var snapshot = new Snapshot { Window = handle };
         var snapshotId = Guid.NewGuid().ToString("N");
         snapshots[snapshotId] = snapshot;
+        var watch = Stopwatch.StartNew();
+        var cache = new CacheRequest { TreeScope = TreeScope.Element };
+        foreach (var property in new AutomationProperty[] {
+            AutomationElement.IsOffscreenProperty, AutomationElement.IsPasswordProperty, AutomationElement.IsEnabledProperty,
+            AutomationElement.IsKeyboardFocusableProperty, AutomationElement.ControlTypeProperty, AutomationElement.NameProperty,
+            AutomationElement.AutomationIdProperty,
+            ValuePattern.IsReadOnlyProperty, TogglePattern.ToggleStateProperty, SelectionItemPattern.IsSelectedProperty
+        }) cache.Add(property);
+        foreach (var pattern in new AutomationPattern[] {
+            InvokePattern.Pattern, ValuePattern.Pattern, SelectionItemPattern.Pattern, TogglePattern.Pattern,
+            ExpandCollapsePattern.Pattern, ScrollPattern.Pattern, TextPattern.Pattern
+        }) cache.Add(pattern);
         var nodes = new List<object>();
         var pending = new Stack<Visit>();
-        pending.Push(new Visit(root, 0));
-        var watch = Stopwatch.StartNew();
+        pending.Push(new Visit(root.GetUpdatedCache(cache), 0));
         int scanned = 0, matched = 0;
         bool depthLimited = false;
         while (pending.Count > 0 && scanned < 2500 && watch.ElapsedMilliseconds < 8000) {
@@ -107,15 +117,22 @@ public static class PokemonWindowsAutomation {
             scanned++;
             try {
                 var element = visit.Element;
-                var info = element.Current;
+                // Queue one sibling at a time instead of fetching hundreds before inspecting any.
+                if (visit.Depth > 0) {
+                    var sibling = TreeWalker.ControlViewWalker.GetNextSibling(element, cache);
+                    if (sibling != null) pending.Push(new Visit(sibling, visit.Depth));
+                }
+                var info = element.Cached;
                 if (info.IsOffscreen || info.IsPassword) continue;
-                string role = Role(element), name = info.Name ?? "", automationId = info.AutomationId ?? "";
-                var actions = Actions(element);
-                bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
+                string role = info.ControlType.ProgrammaticName.Replace("ControlType.", ""), name = info.Name ?? "", automationId = info.AutomationId ?? "";
                 bool matches = String.IsNullOrEmpty(query) || (name + " " + automationId).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
-                if (useful && matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
-                    matched++;
-                    if (nodes.Count < limit) {
+                if (matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
+                    var actions = Actions(element);
+                    bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
+                    if (useful) {
+                        matched++;
+                        // One extra match proves truncation/ambiguity without walking the remaining tree.
+                        if (nodes.Count == limit) break;
                         int id = nodes.Count + 1;
                         snapshot.Elements[id] = element;
                         snapshot.RuntimeIds[id] = RuntimeId(element);
@@ -123,21 +140,17 @@ public static class PokemonWindowsAutomation {
                         if (actions.Count > 0) node["actions"] = actions;
                         if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
                         object pattern;
-                        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node);
-                        if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Current.ToggleState.ToString();
-                        if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Current.IsSelected;
+                        // Mutable field values stay live so fast reads preserve existing verification behavior.
+                        if (element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node);
+                        if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Cached.ToggleState.ToString();
+                        if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Cached.IsSelected;
                         if (!info.IsEnabled) node["enabled"] = false;
                         nodes.Add(node);
                     }
                 }
                 if (visit.Depth < maxDepth) {
-                    var children = new List<AutomationElement>();
-                    var child = TreeWalker.ControlViewWalker.GetFirstChild(element);
-                    while (child != null && children.Count < 500 && watch.ElapsedMilliseconds < 8000) {
-                        children.Add(child);
-                        child = TreeWalker.ControlViewWalker.GetNextSibling(child);
-                    }
-                    for (int i = children.Count - 1; i >= 0; i--) pending.Push(new Visit(children[i], visit.Depth + 1));
+                    var child = TreeWalker.ControlViewWalker.GetFirstChild(element, cache);
+                    if (child != null) pending.Push(new Visit(child, visit.Depth + 1));
                 } else depthLimited = true;
             } catch (ElementNotAvailableException) { } catch (InvalidOperationException) { }
         }

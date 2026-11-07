@@ -30,3 +30,18 @@ The Windows build compiles C# once into a 13,824-byte assembly. Workers load its
 See [before](perf-b-before.json) and [after](perf-b-startup.json). Both reports contain 200 verified samples, including warm reads and field updates, whose timings stayed broadly unchanged. Cold timing varies between desktop runs; the immediate comparison improves 23% on / 17% off, and the original baseline improves 6% / 13%. The after report includes the compiled assembly hash.
 
 Validation: build, check, 54 unit tests (one existing skip), chat test, and real Windows smoke passed. Warmup/reuse has a regression test. The Windows package already copies the whole backend output, so it includes the assembly without a packaging change. Non-Windows builds retain the source files and do not invoke the Windows compiler. No tool names, actions, or safety checks changed.
+
+## B2: cached inspection and bounded traversal
+
+Inspection caches properties and supported patterns, filters before collecting actions, and fetches siblings lazily. It stops at one extra useful match to prove truncation. Field values and snapshot identities remain live; action ownership, runtime ID, password, visibility, enabled, and read-only guards are unchanged. Response trimming serializes the full tree at most twice, then accounts for removed nodes individually.
+
+| Scenario | B1 on median / p95 ms | B2 on median / p95 ms | B1 off median / p95 ms | B2 off median / p95 ms |
+|---|---:|---:|---:|---:|
+| UI narrow | 68.2 / 82.3 | 26.6 / 39.0 | 54.0 / 92.7 | 19.7 / 31.3 |
+| UI wide | 71.3 / 83.0 | 25.3 / 27.4 | 59.1 / 63.9 | 19.3 / 20.9 |
+| Set + verify atomic | 96.8 / 116.6 | 45.3 / 54.5 | 76.5 / 106.4 | 31.4 / 52.8 |
+| Set + verify batch | 92.7 / 109.8 | 41.8 / 49.6 | 70.3 / 79.7 | 28.9 / 38.5 |
+
+[B2 samples](perf-b-cache.json): all 160 verified. Two incomplete attempts are preserved in [cached-value observations](perf-b-cache-stale.json) and [live-value observations](perf-b-cache-live-stale.json). One first read returned `Benchmark 42` after the DOM contained `Benchmark 43`; another strict batch observed 62 while expecting 63. Faster calls surfaced the already documented UIA proxy lag. Mutable values now use current reads, and a mismatched batch `get_ui` expectation re-reads once with pause/cancellation checked first. Inputs are never replayed. A persistent mismatch still emits the original error and stops subsequent steps. Atomic benchmark verification also includes one extra read in elapsed time when needed.
+
+Behavior differences: truncated `matched` is a lower bound (limit + one), not a complete count; a stale expected value may cause one additional native read. Both preserve ambiguity rejection. Validation: build, check, 58 unit tests (one existing skip), chat test, and Windows smoke passed. Smoke now checks an actual password field is hidden and verifies early element/depth limits. Added large-response bounds, stale-read recovery, and cancellation/pause-before-recheck tests.

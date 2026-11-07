@@ -8,6 +8,9 @@ app.whenReady().then(async () => {
   ipcMain.on('fixture:input', (_event, text) => { state.text = text; });
   ipcMain.on('fixture:click', () => { state.clicks += 1; });
   await win.loadFile(path.join(__dirname, 'index.html'));
+  if (process.env.POKEMON_INPUT_FIXTURE_PASSWORD === '1') {
+    await win.webContents.executeJavaScript('const secret = document.createElement("input"); secret.type = "password"; secret.setAttribute("aria-label", "Secret password"); secret.value = "hidden-test-password"; secret.style.top = "280px"; secret.style.width = "150px"; document.body.appendChild(secret);');
+  }
   if (process.env.POKEMON_INPUT_FIXTURE_TITLE) win.setTitle(process.env.POKEMON_INPUT_FIXTURE_TITLE);
   win.show();
   win.focus();

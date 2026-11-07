@@ -62,9 +62,15 @@ export class WindowsAutomation {
 		}
 
 		if (entries) {
-			while (entries.length > (args.max_elements ?? 60) || (serialize(result).length > maxChars && entries.length > 0)) {
-				entries.pop();
+			const limit = args.max_elements ?? 60;
+			let size = serialize(result).length;
+			if (entries.length > limit || (size > maxChars && entries.length > 0)) {
 				result.truncated = true;
+				size = serialize(result).length;
+				while (entries.length > limit || (size > maxChars && entries.length > 0)) {
+					const removed = entries.pop();
+					size -= serialize(removed).length + (entries.length > 0 ? 1 : 0);
+				}
 			}
 		} else if (typeof result.text === 'string') {
 			let {text} = result;

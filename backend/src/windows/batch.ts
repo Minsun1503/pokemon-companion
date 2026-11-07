@@ -165,8 +165,18 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 				await perform(step.action === 'read_text' ? 'get_ui_text' : step.action, async () => {
 					const request = resolveStep(step, results);
 					started = true;
-					const result = await runtime.windows.request(request);
+					let result = await runtime.windows.request(request);
 					results.push(result);
+					if (step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
+						if (signal?.aborted || runtime.companion.state.paused) {
+							throw new Error('Computer action cancelled or paused before execution.');
+						}
+
+						// UIA may still expose the previous view; re-read once, never replay the input.
+						result = await runtime.windows.request(request);
+						results[index] = result;
+					}
+
 					if (step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
 						throw new BatchReferenceError('Control value did not match expect_value; no subsequent steps were run.', result, index);
 					}

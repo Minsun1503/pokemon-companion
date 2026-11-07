@@ -231,7 +231,12 @@ try {
           const set = {action: 'set_value', snapshot: found.snapshot, element_id: found.nodes[0].id, text: value};
           const get = {action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'};
           await record(ui, scenario, run, async () => {
-            if (scenario.endsWith('atomic')) {await windows(set); return windows(get);}
+            if (scenario.endsWith('atomic')) {
+              await windows(set);
+              let result = await windows(get);
+              if (result.nodes[0]?.value !== value) result = await windows(get);
+              return result;
+            }
             const batch = await windows({action: 'batch', steps: [set, {...get, expect_value: value}]});
             assert.equal(batch.ok, true);
             return batch.result;
