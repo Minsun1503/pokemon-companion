@@ -42,6 +42,7 @@ try {
   await api({action: 'set_value', snapshot: editors.snapshot, element_id: editors.nodes[0].id, text});
   const filled = await api({action: 'get_ui', window_id, query: 'Test note'});
   assert.equal(filled.nodes[0].value, text);
+  assert.equal(filled.nodes[0].value_clipped, undefined);
   const buttons = await api({action: 'get_ui', window_id, query: 'Verify input', control_type: 'Button'});
   assert.equal(buttons.nodes.length, 1);
   await api({action: 'invoke', snapshot: buttons.snapshot, element_id: buttons.nodes[0].id});
@@ -64,6 +65,20 @@ try {
   const batchState = await (await fetch(fixtureUrl)).json();
   assert.equal(batchState.text, batchText);
   assert.equal(batchState.clicks, 2);
+  let longEditor = batch.result;
+  for (const longText of ['x'.repeat(160), 'x'.repeat(161), text.repeat(12)]) {
+    const changed = await api({action: 'set_value', snapshot: longEditor.snapshot, element_id: longEditor.nodes[0].id, text: longText});
+    assert.equal(changed.value_clipped, changed.value.length > 160 ? true : undefined);
+    const expectedPreview = longText.length > 160 ? longText.slice(0, 160) + '…' : longText;
+    let preview = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
+    if (preview.nodes[0]?.value !== expectedPreview) preview = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
+    assert.equal(preview.truncated, false);
+    assert.equal(preview.nodes[0].value, expectedPreview);
+    assert.equal(preview.nodes[0].value_clipped, longText.length > 160 ? true : undefined);
+    const full = await api({action: 'read_text', snapshot: preview.snapshot, element_id: preview.nodes[0].id});
+    assert.equal(full.text, longText);
+    longEditor = preview;
+  }
   const small = await api({action: 'get_ui', window_id, max_elements: 1, max_chars: 1000});
   assert.equal(small.nodes.length, 1);
   assert.equal(small.truncated, true);
@@ -71,7 +86,7 @@ try {
   await assert.rejects(api({action: 'invoke', snapshot: '0'.repeat(32), element_id: 1}), /Unknown or expired/);
   assert.equal(screenshots, 0);
   await call('pokemon', {action: 'done', message: 'Windows API reading, typing, and buttons verified!'});
-  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
+  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, clipping flags at 160/161 characters and full read_text, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
 } finally {
   if (fixtureUrl) await fetch(`${fixtureUrl}/quit`, {method: 'POST'}).catch(() => {});
   fixture?.kill();

@@ -35,6 +35,23 @@ describe('toKeys', () => {
 		expect(toKeys('Num_Lock')).toEqual([Key.NumLock]);
 	});
 
+	it.each([
+		[',', 'comma', Key.Comma],
+		['.', 'period', Key.Period],
+		['/', 'slash', Key.Slash],
+		[';', 'semicolon', Key.Semicolon],
+		['-', 'minus', Key.Minus],
+		['=', 'equal', Key.Equal],
+		['=', 'equals', Key.Equal],
+		['[', 'bracketleft', Key.LeftBracket],
+		[']', 'bracketright', Key.RightBracket],
+	] as const)('should convert punctuation %s and its alias %s', (literal, alias, key) => {
+		expect(toKeys(literal)).toEqual([key]);
+		expect(toKeys(alias)).toEqual([key]);
+		expect(toKeys(`ctrl+${literal}`)).toEqual([Key.LeftControl, key]);
+		expect(toKeys(`Control_L+Shift_L+${alias}`)).toEqual([Key.LeftControl, Key.LeftShift, key]);
+	});
+
 	it('should handle case insensitivity', () => {
 		expect(toKeys('RETURN')).toEqual([Key.Return]);
 		expect(toKeys('Return')).toEqual([Key.Return]);

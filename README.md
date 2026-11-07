@@ -47,6 +47,8 @@ On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate 
 
 Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window. Narrow `query` or `control_type` (such as `Button`, `Edit`, or `TabItem`) to return only relevant controls. Results default to 60 elements and 6,000 characters; lower `max_elements`/`max_chars` when possible. `truncated` indicates that you should narrow the query or increase the budget. For actions, pass the returned `snapshot` and `element_id`:
 
+`max_chars` must be at most 16,000. Field previews are limited to 160 characters and carry `value_clipped: true` when shortened, even if the tree has `truncated: false`; use `read_text` for the full field text. If only title-bar controls appear, call `activate` on the window and read again: Electron/Chromium may expose their controls only after activation. After navigation or `invoke`, the first read may still show the previous view; re-read once before concluding.
+
 ```json
 {"action":"get_ui","window_id":"12345","query":"Search","control_type":"Edit","max_chars":2000}
 {"action":"set_value","snapshot":"<returned snapshot>","element_id":1,"text":"Daft Punk"}

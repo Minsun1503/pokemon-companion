@@ -33,9 +33,13 @@ public static class PokemonWindowsAutomation {
         for (int i = 0; i < values.Length; i += 2) result[(string)values[i]] = values[i + 1];
         return result;
     }
-    static string Clip(string value, int length) {
+    static string Clip(string value, int length, Dictionary<string, object> node = null) {
         if (String.IsNullOrEmpty(value)) return "";
-        return value.Length > length ? value.Substring(0, length) + "…" : value;
+        if (value.Length > length) {
+            if (node != null) node["value_clipped"] = true;
+            return value.Substring(0, length) + "…";
+        }
+        return value;
     }
     static IntPtr Handle(string id) {
         long value;
@@ -119,7 +123,7 @@ public static class PokemonWindowsAutomation {
                         if (actions.Count > 0) node["actions"] = actions;
                         if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
                         object pattern;
-                        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160);
+                        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node);
                         if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Current.ToggleState.ToString();
                         if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Current.IsSelected;
                         if (!info.IsEnabled) node["enabled"] = false;
@@ -192,7 +196,7 @@ public static class PokemonWindowsAutomation {
         }
         var result = Obj("ok", true);
         try {
-            if (element.TryGetCurrentPattern(ValuePattern.Pattern, out value)) result["value"] = Clip(((ValuePattern)value).Current.Value, 160);
+            if (element.TryGetCurrentPattern(ValuePattern.Pattern, out value)) result["value"] = Clip(((ValuePattern)value).Current.Value, 160, result);
         } catch (ElementNotAvailableException) { }
         return result;
     }

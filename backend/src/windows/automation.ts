@@ -39,6 +39,12 @@ export class WindowsAutomation {
 		});
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;
+		// shortcut: match English caption names; add native caption IDs if localized apps need the hint.
+		if (args.action === 'get_ui' && !result.truncated && entries?.length && entries.every((node: Record<string, unknown>) => node.role === 'TitleBar'
+			|| (node.role === 'Button' && /^(Minimize|Maximize|Restore|Close)$/i.test(String(node.name))))) {
+			result.hint = 'Only title-bar controls found. Call activate on this window and read again.';
+		}
+
 		if (entries) {
 			while (entries.length > (args.max_elements ?? 60) || (JSON.stringify(result).length > maxChars && entries.length > 0)) {
 				entries.pop();
