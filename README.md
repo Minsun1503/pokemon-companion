@@ -81,6 +81,8 @@ The whole sequence excludes input from other MCP clients, checks user pauses and
 
 `computer` retains native mouse/keyboard input, cursor actions, and screenshot capture. Prefer keyboard shortcuts when UI Automation lacks a pattern, and screenshots when the task requires visual information (for example, canvas content). The tool descriptions and `pokemon-work` prompt specify this order: **Windows APIs → keyboard shortcuts → screenshots**. Both tools update the Pokémon before and after actions. Screenshots briefly hide the companion.
 
+A known direct shortcut can skip navigation after verifying the target is foreground: `ctrl+l` for the browser address bar, `ctrl+1..8` for an indexed browser tab (`ctrl+9` selects the last tab), `escape` to dismiss, or `ctrl+,` for settings where supported. Verify the result immediately. Never use `tab`, `ctrl+tab`, or `alt+tab` as blind navigation; use `windows focus` for a known control. Windows `computer key` and `type` accept optional `window_id` to reject input when another window is foreground. An owned dialog also matches its root owner's ID. The guard never activates a window, and focus can still change between the check and input. Calls without `window_id` retain their existing behavior.
+
 `pokemon` controls presentation:
 
 | Action | Inputs | Behavior |

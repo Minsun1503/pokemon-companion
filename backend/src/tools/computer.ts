@@ -143,7 +143,7 @@ const ActionEnum = z.enum([
 ]);
 
 const actionDescription = `The action to perform. The available actions are:
-* key: Press a key or key-combination on the keyboard.
+* key: Press one key or key-combination. Optional window_id blocks input if the target is not foreground (or root owner of foreground); it never activates the window.
 * type: Type a string of text on the keyboard. A Vietnamese/IME keyboard layout can alter typed letters (for example Telex). Prefer windows set_value for fields; after type, verify the field with read_text.
 * get_cursor_position: Get the current (x, y) pixel coordinate of the cursor on the screen.
 * mouse_move: Move the cursor to a specified (x, y) pixel coordinate on the screen.
@@ -155,7 +155,7 @@ const actionDescription = `The action to perform. The available actions are:
 * scroll: Scroll the screen in a specified direction. Requires coordinate (moves there first) and text parameter with direction: "up", "down", "left", or "right". Optionally append ":N" to scroll N pixels (default 300), e.g. "down:500".
 * get_screenshot: Take a screenshot of the screen.`;
 
-const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool for compact UI Automation inspection, control invocation, field values, and result verification. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses.';
+const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool for compact UI Automation inspection, control invocation, field values, and result verification. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses. Shortcuts: use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only after verifying the target is foreground, then verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation. Use windows focus for a known control.';
 
 const coordinateSchema = z
 	.array(z.number())
@@ -172,6 +172,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 				action: ActionEnum.describe(actionDescription),
 				coordinate: coordinateSchema.optional(),
 				text: z.string().optional().describe('Text to type or key command to execute'),
+				window_id: z.string().regex(/^\d+$/).optional().describe('Windows key/type only: require this foreground window or its owned dialog. No automatic activation. Focus can still change between the check and input; verify afterward.'),
 			}).strict(),
 			// Note: No outputSchema because this tool returns varying content types including images
 			annotations: {
@@ -179,7 +180,10 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 			},
 		},
 		async (args, extra) => timedCall('computer', args.action, async () => {
-			const {action, coordinate, text} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string};
+			const {action, coordinate, text, window_id: windowId} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string; window_id?: string};
+			if (windowId !== undefined && (process.platform !== 'win32' || !['key', 'type'].includes(action))) {
+				throw new Error('window_id is supported only for Windows key and type actions.');
+			}
 
 			// Scale coordinates from API image space to logical screen space
 			let scaledCoordinate = coordinate;
@@ -199,7 +203,24 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 			}
 
 			return runtime.computer(action, scaledCoordinate, async () => {
-			// Implement system actions using nut-js
+				const beforeInput = async () => {
+					if (extra.signal.aborted || runtime.companion.state.paused) {
+						throw new Error('Computer action cancelled or paused before execution.');
+					}
+
+					if (windowId !== undefined) {
+						// shortcut: focus can change after this check; use app APIs when atomic targeting is required.
+						await measure('foreground_guard', async () => runtime.windows.requireForeground(windowId, {
+							signal: extra.signal, timeoutMs: 20_000, paused: () => runtime.companion.state.paused, timeoutError: 'Foreground check timed out. No input was sent; read the window again before continuing.',
+						}));
+					}
+
+					if (extra.signal.aborted || runtime.companion.state.paused) {
+						throw new Error('Computer action cancelled or paused before execution.');
+					}
+				};
+
+				// Implement system actions using nut-js
 				switch (action) {
 					case 'key': {
 						if (!text) {
@@ -207,6 +228,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						}
 
 						const keys = toKeys(text);
+						await beforeInput();
 						await keyboard.pressKey(...keys);
 						await keyboard.releaseKey(...keys);
 
@@ -237,17 +259,24 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							xdotoolType(text);
 						} else if (process.platform === 'win32' && [...text].some((character) => character.codePointAt(0)! > 127) && runtime.companion.clipboard) {
 							await runtime.companion.clipboard(text);
+							let pasteStarted = false;
 							try {
+								await beforeInput();
+								pasteStarted = true;
 								await keyboard.pressKey(Key.LeftControl, Key.V);
 								await keyboard.releaseKey(Key.LeftControl, Key.V);
 								await new Promise<void>((resolve) => {
 									setTimeout(resolve, 200);
 								});
 							} finally {
-								await keyboard.releaseKey(Key.LeftControl, Key.V);
+								if (pasteStarted) {
+									await keyboard.releaseKey(Key.LeftControl, Key.V);
+								}
+
 								await runtime.companion.clipboard(null);
 							}
 						} else if (process.platform === 'win32' && [...text].every((character) => character.codePointAt(0)! > 0 && character.codePointAt(0)! <= 127)) {
+							await beforeInput();
 							// Bypass per-character JS waits while yielding for pause/cancellation between chunks.
 							for (let index = 0; index < text.length; index += 32) {
 								if (extra.signal.aborted || runtime.companion.state.paused) {
@@ -262,6 +291,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 								});
 							}
 						} else {
+							await beforeInput();
 							await keyboard.type(text);
 						}
 

@@ -13,7 +13,7 @@
     "smoke": "node scripts/smoke.mjs",
     "config": "node scripts/config.cjs",
     "test:input": "node scripts/input-smoke.mjs",
-    "test:windows": "node scripts/windows-smoke.mjs && node scripts/windows-fast-path-smoke.mjs",
+    "test:windows": "node scripts/windows-smoke.mjs && node scripts/windows-fast-path-smoke.mjs && node scripts/keyboard-guard-smoke.mjs",
     "benchmark:windows": "node scripts/windows-benchmark.mjs",
     "package:windows": "npm run build && node scripts/package-windows.cjs",
     "test:package": "node scripts/package-smoke.mjs",

@@ -34,6 +34,13 @@ export class WindowsAutomation {
 		}
 	}
 
+	async requireForeground(windowId: string, options: RequestOptions): Promise<void> {
+		const foreground = await this.request({action: 'foreground'}, options);
+		if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
+			throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
+		}
+	}
+
 	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
 		if (process.platform !== 'win32') {
 			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');

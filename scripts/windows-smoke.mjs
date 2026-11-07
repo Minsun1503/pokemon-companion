@@ -103,6 +103,13 @@ try {
   assert.equal(small.matched, 2);
   assert(small.scanned < longEditor.scanned);
   assert(JSON.stringify(small).length <= 1000);
+  let recent = longEditor;
+  for (let read = 0; read < 9; read += 1) {
+    const next = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
+    const previousText = await api({action: 'read_text', snapshot: recent.snapshot, element_id: recent.nodes[0].id});
+    assert.equal(previousText.text, text.repeat(12), 'Cache rollover must retain recent snapshots instead of clearing all IDs.');
+    recent = next;
+  }
   const shallow = await api({action: 'get_ui', window_id, max_depth: 1});
   assert.equal(shallow.truncated, true);
   assert(shallow.scanned < longEditor.scanned);

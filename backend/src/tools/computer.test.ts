@@ -14,15 +14,19 @@ afterEach(() => vi.restoreAllMocks());
 function fixture() {
 	const runtime = new PokemonRuntime();
 	vi.spyOn(runtime, 'computer').mockImplementation(async (_action, _coordinate, execute) => execute());
-	vi.spyOn(runtime.windows, 'request').mockResolvedValue({keyboard_layout: '00000409', language_id: '0409', imm_ime: false});
+	const request = vi.spyOn(runtime.windows, 'request').mockResolvedValue({keyboard_layout: '00000409', language_id: '0409', imm_ime: false});
 	const registerTool = vi.fn();
 	registerComputer({registerTool} as unknown as McpServer, runtime);
 	const handle = registerTool.mock.calls[0]![2];
 	const controller = new AbortController();
 	const native = vi.spyOn(providerRegistry.getKeyboard(), 'type').mockResolvedValue(undefined);
 	const wrapper = vi.spyOn(keyboard, 'type').mockResolvedValue(keyboard);
+	const press = vi.spyOn(keyboard, 'pressKey').mockResolvedValue(keyboard);
+	const release = vi.spyOn(keyboard, 'releaseKey').mockResolvedValue(keyboard);
 	return {
-		runtime, controller, native, wrapper, type: async (text: string) => handle({action: 'type', text}, {signal: controller.signal}),
+		runtime, controller, native, wrapper, request, press, release, handle, schema: registerTool.mock.calls[0]![1].inputSchema,
+		type: async (text: string) => handle({action: 'type', text}, {signal: controller.signal}),
+		input: async (action: 'key' | 'type', text: string, windowId: string) => handle({action, text, window_id: windowId}, {signal: controller.signal}),
 		screenshot: async () => handle({action: 'get_screenshot'}, {signal: controller.signal}),
 	};
 }
@@ -81,6 +85,92 @@ describe.runIf(process.platform === 'win32')('plain Windows typing', () => {
 		await type('one\0two');
 		expect(wrapper).toHaveBeenCalledWith('one\0two');
 		expect(native).toHaveBeenCalledTimes(1);
+	});
+});
+
+describe.runIf(process.platform === 'win32')('foreground input guard', () => {
+	it.each(['key', 'type'] as const)('blocks mismatched %s input without any key events', async (action) => {
+		const {request, input, press, release, native} = fixture();
+		request.mockResolvedValue({
+			id: '456', root_owner_id: '456', title: 'Other window', process: 'test',
+		});
+		await expect(input(action, action === 'key' ? 'f8' : '7', '123')).rejects.toThrow('Other window (test, window 456). No input was sent.');
+		expect(press).not.toHaveBeenCalled();
+		expect(release).not.toHaveBeenCalled();
+		expect(native).not.toHaveBeenCalled();
+		expect(request.mock.calls.filter(([args]) => args.action === 'foreground')).toHaveLength(1);
+	});
+
+	it.each(['key', 'type'] as const)('allows exact and root-owner matches for %s', async (action) => {
+		const {request, input, press, native} = fixture();
+		for (const id of ['123', '456']) {
+			request.mockResolvedValue({
+				id, root_owner_id: '123', title: 'Target window', process: 'test',
+			});
+			// eslint-disable-next-line no-await-in-loop
+			await input(action, action === 'key' ? 'f8' : '7', '123');
+		}
+
+		expect(action === 'key' ? press : native).toHaveBeenCalledTimes(2);
+	});
+
+	it.each(['key', 'type'] as const)('checks pause/cancellation before and after the %s guard', async (action) => {
+		for (const reason of ['pause', 'cancel']) {
+			for (const phase of ['before', 'after']) {
+				const {runtime, controller, request, input, press, native} = fixture();
+				const stop = () => {
+					if (reason === 'pause') {
+						runtime.companion.state.paused = true;
+					} else {
+						controller.abort();
+					}
+				};
+
+				request.mockImplementation(async (args) => {
+					if (args.action === 'foreground' && phase === 'after') {
+						stop();
+					}
+
+					return {id: '123', root_owner_id: '123'};
+				});
+				if (phase === 'before') {
+					stop();
+				}
+
+				// eslint-disable-next-line no-await-in-loop
+				await expect(input(action, action === 'key' ? 'f8' : '7', '123')).rejects.toThrow('cancelled or paused before execution');
+				expect(press).not.toHaveBeenCalled();
+				expect(native).not.toHaveBeenCalled();
+				expect(request.mock.calls.filter(([args]) => args.action === 'foreground')).toHaveLength(phase === 'before' ? 0 : 1);
+				vi.restoreAllMocks();
+			}
+		}
+	});
+
+	it('restores the Unicode clipboard without sending key-up events on a mismatch', async () => {
+		const {runtime, request, input, press, release} = fixture();
+		const clipboard = vi.spyOn(runtime.companion, 'clipboard').mockResolvedValue(undefined);
+		request.mockResolvedValue({id: '456', root_owner_id: '456'});
+		await expect(input('type', 'Pokémon', '123')).rejects.toThrow('No input was sent');
+		expect(clipboard.mock.calls).toEqual([['Pokémon'], [null]]);
+		expect(press).not.toHaveBeenCalled();
+		expect(release).not.toHaveBeenCalled();
+	});
+
+	it('does not replay a failed key press', async () => {
+		const {request, input, press} = fixture();
+		request.mockResolvedValue({id: '123', root_owner_id: '123'});
+		const error = new Error('Native press failed');
+		press.mockRejectedValueOnce(error);
+		await expect(input('key', 'f8', '123')).rejects.toBe(error);
+		expect(press).toHaveBeenCalledOnce();
+	});
+
+	it('keeps the old schema and rejects invalid or unsupported window_id use', async () => {
+		const {schema, handle, controller} = fixture();
+		expect(schema.parse({action: 'key', text: 'ctrl+tab'})).toEqual({action: 'key', text: 'ctrl+tab'});
+		expect(schema.safeParse({action: 'key', text: 'f8', window_id: 'invalid'}).success).toBe(false);
+		await expect(handle({action: 'get_cursor_position', window_id: '123'}, {signal: controller.signal})).rejects.toThrow('only for Windows key and type');
 	});
 });
 

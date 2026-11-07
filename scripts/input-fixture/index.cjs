@@ -3,6 +3,7 @@ const http = require('node:http');
 const path = require('node:path');
 let win;
 const state = {text: '', clicks: 0};
+if (process.env.POKEMON_INPUT_FIXTURE_DATA) app.setPath('userData', process.env.POKEMON_INPUT_FIXTURE_DATA);
 app.whenReady().then(async () => {
   win = new BrowserWindow({width: 600, height: 360, x: 40, y: 40, webPreferences: {preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false}});
   ipcMain.on('fixture:input', (_event, text) => { state.text = text; });
@@ -15,12 +16,15 @@ app.whenReady().then(async () => {
     await win.webContents.executeJavaScript('const blank = document.createElement("input"); blank.setAttribute("aria-label", "Blank field"); blank.style.top = "260px"; document.body.appendChild(blank);');
   }
   if (process.env.POKEMON_INPUT_FIXTURE_TITLE) win.setTitle(process.env.POKEMON_INPUT_FIXTURE_TITLE);
+  if (process.env.POKEMON_INPUT_FIXTURE_KEYCOUNT === '1') {
+    await win.webContents.executeJavaScript('window.__fixtureKeys = {down: 0, up: 0, logical: 0, events: []}; document.getElementById("note").addEventListener("input", () => { window.__fixtureKeys.logical += 1; }); for (const phase of ["down", "up"]) document.addEventListener("key" + phase, event => { window.__fixtureKeys.events.push([phase, event.key, event.code]); window.__fixtureKeys[phase] += 1; if (event.key === "F8") { event.preventDefault(); if (phase === "down") window.__fixtureKeys.logical += 1; } });');
+  }
   win.show();
   win.focus();
   const server = http.createServer(async (req, res) => {
     if (req.url === '/focus' && req.method === 'POST') { win.show(); win.focus(); }
     if (req.url === '/quit' && req.method === 'POST') { res.end('{}'); app.quit(); return; }
-    const editor = req.url === '/state' ? await win.webContents.executeJavaScript('({text: document.getElementById("note").value, focusedElement: document.activeElement.id, maxLength: document.getElementById("note").maxLength})') : {};
+    const editor = req.url === '/state' ? await win.webContents.executeJavaScript('({text: document.getElementById("note").value, focusedElement: document.activeElement.id, maxLength: document.getElementById("note").maxLength, keys: window.__fixtureKeys})') : {};
     const bounds = win.getContentBounds();
     const position = (x, y) => {
       const point = {x: bounds.x + x, y: bounds.y + y};

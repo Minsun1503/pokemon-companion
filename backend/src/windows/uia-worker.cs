@@ -14,6 +14,7 @@ public static class PokemonWindowsAutomation {
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr window, StringBuilder text, int count);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
     [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] static extern IntPtr GetAncestor(IntPtr window, uint flags);
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr window);
     [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window, int command);
     [DllImport("user32.dll")] static extern IntPtr GetKeyboardLayout(uint thread);
@@ -95,7 +96,12 @@ public static class PokemonWindowsAutomation {
         var expired = new List<string>();
         foreach (var entry in snapshots) if ((DateTime.UtcNow - entry.Value.Created).TotalSeconds > 120) expired.Add(entry.Key);
         foreach (var key in expired) snapshots.Remove(key);
-        if (snapshots.Count >= 8) snapshots.Clear();
+        if (snapshots.Count >= 8) {
+            string oldestId = null;
+            DateTime oldest = DateTime.MaxValue;
+            foreach (var entry in snapshots) if (entry.Value.Created < oldest) { oldest = entry.Value.Created; oldestId = entry.Key; }
+            snapshots.Remove(oldestId);
+        }
         var snapshot = new Snapshot { Window = handle };
         var snapshotId = Guid.NewGuid().ToString("N");
         snapshots[snapshotId] = snapshot;
@@ -168,6 +174,12 @@ public static class PokemonWindowsAutomation {
         ShowWindow(handle, 9);
         if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. For caption-only UI, try computer key alt+tab, then get_ui again.");
         return Obj("ok", true);
+    }
+    public static object Foreground() {
+        var handle = GetForegroundWindow();
+        var info = WindowInfo(handle);
+        info["root_owner_id"] = GetAncestor(handle, 3).ToInt64().ToString();
+        return info;
     }
     static void RejectScriptHost(string target) {
         string name = Path.GetFileNameWithoutExtension(target).ToLowerInvariant();
