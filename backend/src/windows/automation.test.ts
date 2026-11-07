@@ -60,15 +60,17 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 		const controller = new AbortController();
 		try {
 			const pending = automation.request({action: 'get_ui', window_id: '123'}, {
-				signal: controller.signal, timeoutMs: 250, paused: () => reason === 'pause', timeoutError: 'wait_for timed out',
+				signal: controller.signal, timeoutMs: 250, paused: () => reason === 'pause', timeoutError: 'wait_for timed out. After an interrupted wait, call get_ui again for fresh snapshots.',
 			});
 			const checked = expect(pending).rejects.toThrow(reason === 'cancel' ? 'Computer action cancelled.' : reason === 'pause' ? 'paused by the user' : 'wait_for timed out');
+			const fresh = expect(pending).rejects.toThrow('call get_ui again for fresh snapshots');
 			if (reason === 'cancel') {
 				controller.abort();
 			}
 
 			await vi.advanceTimersByTimeAsync(300);
 			await checked;
+			await fresh;
 			expect(worker.kill).toHaveBeenCalledOnce();
 			expect(vi.getTimerCount()).toBe(0);
 		} finally {

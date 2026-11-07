@@ -42,7 +42,7 @@ describe.runIf(process.platform === 'win32')('plain Windows typing', () => {
 				controller.abort();
 			}
 		});
-		await expect(type('1234 '.repeat(100))).rejects.toThrow('Computer action cancelled.');
+		await expect(type('1234 '.repeat(100))).rejects.toThrow('Computer action cancelled. Submitted 32 of 500 characters; input methods may transform them. Read the field before continuing; do not retype from the start.');
 		expect(native).toHaveBeenCalledTimes(1);
 	});
 

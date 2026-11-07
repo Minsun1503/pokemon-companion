@@ -48,6 +48,9 @@ $link = $shell.CreateShortcut($shortcut)
 $link.TargetPath = $executable
 $link.Arguments = 'must-not-be-passed'
 $link.Save()
+$blocked = $shell.CreateShortcut($shortcut.Replace(' Shortcut.lnk', ' Shell.lnk'))
+$blocked.TargetPath = Join-Path $env:SystemRoot 'System32/cmd.exe'
+$blocked.Save()
 `);
   execFileSync(powershell, ['-NoLogo', '-NoProfile', '-NonInteractive', '-File', compile, resolve(root, 'scripts/windows-fast-path-fixture.cs'), executable, shortcut], {windowsHide: true});
   session = await connect({env: {...process.env, PATH: scratch + ';' + process.env.PATH}});
@@ -94,7 +97,7 @@ $link.Save()
     assert(performance.now() - timeoutStart < 1500, 'Native reads must not fall back to a 20-second timeout.');
     await stopFixture();
   }
-  for (const text of ['cmd.exe /c echo unsafe', 'test.cmd', 'file:///C:/test.exe']) {
+  for (const text of ['cmd.exe /c echo unsafe', 'test.cmd', 'file:///C:/test.exe', title + ' Shell', ...['cmd', 'powershell', 'pwsh', 'wscript', 'cscript', 'mshta'].flatMap(name => [name, name + '.exe', resolve(process.env.SystemRoot, 'System32', name + '.exe')])]) {
     await assert.rejects(api({action: 'launch', text, query: title}));
   }
   browserServer = http.createServer((_req, res) => {

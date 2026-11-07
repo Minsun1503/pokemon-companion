@@ -167,6 +167,11 @@ public static class PokemonWindowsAutomation {
         if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows did not allow activation. Select the window manually.");
         return Obj("ok", true);
     }
+    static void RejectScriptHost(string target) {
+        string name = Path.GetFileNameWithoutExtension(target).ToLowerInvariant();
+        if (Array.IndexOf(new string[] { "cmd", "powershell", "pwsh", "wscript", "cscript", "mshta" }, name) >= 0)
+            throw new Exception("launch does not support command shells or script hosts.");
+    }
     public static object Launch(string target) {
         if (String.IsNullOrWhiteSpace(target) || target.IndexOfAny(new char[] { '"', '<', '>', '|', '\r', '\n', '\0' }) >= 0)
             throw new Exception("launch requires an http/https URL or executable name/path, without shell commands or arguments.");
@@ -175,6 +180,7 @@ public static class PokemonWindowsAutomation {
             Process.Start(new ProcessStartInfo(url.AbsoluteUri) { UseShellExecute = true });
             return Obj("started", url.AbsoluteUri);
         }
+        RejectScriptHost(target);
         string executable = null;
         if (target.IndexOfAny(new char[] { '\\', '/' }) >= 0 || Path.IsPathRooted(target)) {
             if (Path.GetExtension(target).Equals(".exe", StringComparison.OrdinalIgnoreCase) && File.Exists(target)) executable = Path.GetFullPath(target);
@@ -214,6 +220,7 @@ public static class PokemonWindowsAutomation {
             }
         }
         if (executable == null) throw new Exception("Executable not found in PATH or the Start Menu. Supply its full .exe path; shell commands and arguments are not supported.");
+        RejectScriptHost(executable);
         Process.Start(new ProcessStartInfo(executable) { UseShellExecute = true });
         return Obj("started", executable, "query", Path.GetFileNameWithoutExtension(executable));
     }

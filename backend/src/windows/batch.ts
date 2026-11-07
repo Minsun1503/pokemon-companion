@@ -63,6 +63,8 @@ export function validateWindowsRequest(args: WindowsRequest): void {
 			}
 		} else if (/[*?]/.test(target) || (/[\\/]/.test(target) && !/\.exe$/i.test(target)) || (/\.[^\\/.]+$/.test(target) && !/\.exe$/i.test(target)) || (target.includes(':') && !/^[a-z]:[\\/]/i.test(target))) {
 			throw new Error('launch accepts only an http/https URL or executable name/path.');
+		} else if (/(?:^|[\\/])(cmd|powershell|pwsh|wscript|cscript|mshta)(?:\.exe)?$/i.test(target)) {
+			throw new Error('launch does not support command shells or script hosts.');
 		}
 	}
 
@@ -245,14 +247,15 @@ export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRe
 	}
 
 	const deadline = performance.now() + (args.timeout_ms ?? 5000);
-	let timeoutError = `${args.action} timed out after ${args.timeout_ms ?? 5000} ms waiting for ${(args.query || args.control_type || args.text || '').slice(0, 200)}.`;
+	const refreshHint = ' After an interrupted wait, call get_ui again for fresh snapshots.';
+	let timeoutError = `${args.action} timed out after ${args.timeout_ms ?? 5000} ms waiting for ${(args.query || args.control_type || args.text || '').slice(0, 200)}.${refreshHint}`;
 	const check = () => {
 		if (signal?.aborted) {
-			throw new Error('Computer action cancelled.');
+			throw new Error(`Computer action cancelled.${refreshHint}`);
 		}
 
 		if (runtime.companion.state.paused) {
-			throw new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
+			throw new Error(`Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.${refreshHint}`);
 		}
 
 		if (performance.now() >= deadline) {
@@ -292,7 +295,7 @@ export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRe
 
 		// eslint-disable-next-line no-await-in-loop
 		await delay(Math.min(100, Math.max(1, deadline - performance.now())), undefined, {signal}).catch(() => {
-			throw new Error('Computer action cancelled.');
+			throw new Error(`Computer action cancelled.${refreshHint}`);
 		});
 	}
 }

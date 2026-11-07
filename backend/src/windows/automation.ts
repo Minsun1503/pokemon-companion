@@ -48,13 +48,13 @@ export class WindowsAutomation {
 				this.close(new Error(options?.timeoutError ?? 'Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.'));
 			}, options?.timeoutMs ?? 20_000);
 			const cancel = () => {
-				this.close(new Error('Computer action cancelled.'));
+				this.close(new Error('Computer action cancelled. After an interrupted wait, call get_ui again for fresh snapshots.'));
 			};
 
 			const pauseTimer = options
 				? setInterval(() => {
 					if (options.paused()) {
-						this.close(new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.'));
+						this.close(new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P. After an interrupted wait, call get_ui again for fresh snapshots.'));
 					}
 				}, 100)
 				: undefined;

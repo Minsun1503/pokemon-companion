@@ -49,6 +49,8 @@ Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window.
 
 `max_chars` must be at most 16,000. Field previews are limited to 160 characters and carry `value_clipped: true` when shortened, even if the tree has `truncated: false`; use `read_text` for the full field text. If only title-bar controls appear, call `activate` on the window and read again: Electron/Chromium may expose their controls only after activation. After navigation or `invoke`, the first read may still show the previous view; re-read once before concluding.
 
+`matched` is a lower bound when `truncated` is true. Use `wait_for` to poll controls or exact values with a bounded timeout (default 5 seconds, maximum 15 seconds). After an interrupted wait, call `get_ui` again for fresh snapshots. Use `launch` to start an executable name/path or HTTP(S) URL and wait for a window; URLs require a window-title/process `query`, and command shells, script hosts and arguments are unsupported. Interrupted Windows ASCII typing reports submitted characters; input methods may transform them, so inspect the field before continuing instead of retyping from the start.
+
 ```json
 {"action":"get_ui","window_id":"12345","query":"Search","control_type":"Edit","max_chars":2000}
 {"action":"set_value","snapshot":"<returned snapshot>","element_id":1,"text":"Daft Punk"}

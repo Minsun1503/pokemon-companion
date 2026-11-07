@@ -55,8 +55,10 @@ describe('Windows polling actions', () => {
 			action: 'wait_for', window_id: '123', query: 'Note', timeout_ms: 250,
 		}, controller.signal);
 		const checked = expect(pending).rejects.toThrow(reason === 'pause' ? 'paused by the user' : reason === 'cancel' ? 'Computer action cancelled.' : 'wait_for timed out after 250 ms');
+		const fresh = expect(pending).rejects.toThrow('call get_ui again for fresh snapshots');
 		await vi.advanceTimersByTimeAsync(300);
 		await checked;
+		await fresh;
 	});
 
 	it('passes the remaining deadline to native reads', async () => {
@@ -93,6 +95,12 @@ describe('Windows polling actions', () => {
 		expect(() => {
 			validateWindowsRequest({action: 'launch', text, query: 'Test'});
 		}).toThrow();
+	});
+
+	it.each(['cmd', 'powershell', 'pwsh', 'wscript', 'cscript', 'mshta'].flatMap((name) => [name, `${name}.exe`, `C:\\Windows\\System32\\${name.toUpperCase()}.EXE`]))('rejects a shell or script host by name/path: %s', (text) => {
+		expect(() => {
+			validateWindowsRequest({action: 'launch', text});
+		}).toThrow('command shells or script hosts');
 	});
 
 	it('requires a URL window query and bounds timeouts', () => {

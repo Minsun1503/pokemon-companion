@@ -236,7 +236,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							// Bypass per-character JS waits while yielding for pause/cancellation between chunks.
 							for (let index = 0; index < text.length; index += 32) {
 								if (extra.signal.aborted || runtime.companion.state.paused) {
-									throw new Error('Computer action cancelled.');
+									throw new Error(`Computer action cancelled. Submitted ${index} of ${text.length} characters; input methods may transform them. Read the field before continuing; do not retype from the start.`);
 								}
 
 								// eslint-disable-next-line no-await-in-loop
