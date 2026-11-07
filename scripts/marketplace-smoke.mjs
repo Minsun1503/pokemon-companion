@@ -1,18 +1,19 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {Client} from '../backend/node_modules/@modelcontextprotocol/sdk/dist/esm/client/index.js';
 import {StdioClientTransport} from '../backend/node_modules/@modelcontextprotocol/sdk/dist/esm/client/stdio.js';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const release = path.join(root, 'release');
-const isolated = fs.mkdtempSync(path.join(release, '.verify-marketplace-'));
+const isolated = fs.mkdtempSync(path.join(os.tmpdir(), 'pc-marketplace-'));
 const cache = path.join(isolated, 'pokemon-companion/packages/v0.1.0');
-fs.cpSync(path.join(release, 'pokemon-companion-win32-x64'), cache, {recursive: true});
+if (!process.argv.includes('--download')) fs.cpSync(path.join(release, 'pokemon-companion-win32-x64'), cache, {recursive: true});
 const client = new Client({name: 'pokemon-marketplace-test', version: '0.1.0'});
 const transport = new StdioClientTransport({command: 'powershell.exe', args: ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', path.join(root, 'plugins/pokemon-companion/scripts/launch.ps1')], env: {...process.env, LOCALAPPDATA: isolated, APPDATA: path.join(isolated, 'appdata')}, stderr: 'inherit'});
 try {
-  await client.connect(transport);
+  await client.connect(transport, {timeout: 300000});
   const tools = await client.listTools();
   assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', 'windows']);
   const selected = await client.callTool({name: 'pokemon', arguments: {action: 'select', pet: 'pikachu'}});
@@ -27,7 +28,7 @@ try {
   throw error;
 } finally {
   await client.close();
-  assert.equal(path.dirname(fs.realpathSync(isolated)), fs.realpathSync(release));
-  assert(path.basename(isolated).startsWith('.verify-marketplace-'));
+  assert.equal(path.dirname(fs.realpathSync(isolated)), fs.realpathSync(os.tmpdir()));
+  assert(path.basename(isolated).startsWith('pc-marketplace-'));
   fs.rmSync(isolated, {recursive: true, force: true, maxRetries: 12, retryDelay: 500});
 }

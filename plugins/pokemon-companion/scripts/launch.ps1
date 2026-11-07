@@ -15,19 +15,32 @@ try {
     [Console]::Error.WriteLine('Downloading Pokemon Companion for the first run...')
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     New-Item -ItemType Directory -Path $taskCacheBase -Force | Out-Null
-    $taskId = [Guid]::NewGuid().ToString('N')
-    $taskDownload = [IO.Path]::GetFullPath((Join-Path $taskCacheBase ('.download-' + $taskId + '.zip')))
-    $taskStage = [IO.Path]::GetFullPath((Join-Path $taskCacheBase ('.install-' + $taskId)))
+    $taskId = [Guid]::NewGuid().ToString('N').Substring(0, 8)
+    $taskDownload = [IO.Path]::GetFullPath((Join-Path $taskCacheBase ('.d-' + $taskId + '.zip')))
+    $taskStage = [IO.Path]::GetFullPath((Join-Path $taskCacheBase ('.i-' + $taskId)))
     if (-not $taskStage.StartsWith($taskCacheBase + '\', [StringComparison]::OrdinalIgnoreCase) -or -not $taskDownload.StartsWith($taskCacheBase + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Invalid staging path.' }
-    $taskSums = (Invoke-WebRequest -UseBasicParsing -Uri "$taskBaseUrl/SHA256SUMS.txt").Content
+    $taskSumsContent = (Invoke-WebRequest -UseBasicParsing -Uri "$taskBaseUrl/SHA256SUMS.txt").Content
+    $taskSums = if ($taskSumsContent -is [byte[]]) { [Text.Encoding]::UTF8.GetString($taskSumsContent) } else { [string]$taskSumsContent }
     $taskExpected = $null
     foreach ($taskLine in ($taskSums -split '\n')) {
       if ($taskLine -match '^([a-fA-F0-9]{64})\s+pokemon-companion-win32-x64\.zip\s*$') { $taskExpected = $Matches[1].ToLowerInvariant() }
     }
     if (-not $taskExpected) { throw 'Release checksum not found.' }
     Invoke-WebRequest -UseBasicParsing -Uri "$taskBaseUrl/$taskArchiveName" -OutFile $taskDownload
-    if ((Get-FileHash -LiteralPath $taskDownload -Algorithm SHA256).Hash.ToLowerInvariant() -ne $taskExpected) { throw 'Release checksum verification failed.' }
-    Expand-Archive -LiteralPath $taskDownload -DestinationPath $taskStage
+    $taskHashStream = [IO.File]::OpenRead($taskDownload)
+    $taskHasher = [Security.Cryptography.SHA256]::Create()
+    try { $taskActual = [BitConverter]::ToString($taskHasher.ComputeHash($taskHashStream)).Replace('-', '').ToLowerInvariant() }
+    finally { $taskHashStream.Dispose(); $taskHasher.Dispose() }
+    if ($taskActual -ne $taskExpected) { throw 'Release checksum verification failed.' }
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $taskZip = [IO.Compression.ZipFile]::OpenRead($taskDownload)
+    try {
+      foreach ($taskEntry in $taskZip.Entries) {
+        $taskEntryPath = [IO.Path]::GetFullPath((Join-Path $taskStage $taskEntry.FullName))
+        if (-not $taskEntryPath.StartsWith($taskStage + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Archive entry outside installation directory.' }
+      }
+    } finally { $taskZip.Dispose() }
+    [IO.Compression.ZipFile]::ExtractToDirectory($taskDownload, $taskStage)
     if (-not (Test-Path -LiteralPath (Join-Path $taskStage 'runtime\node.exe')) -or -not (Test-Path -LiteralPath (Join-Path $taskStage 'backend\dist\main.js'))) { throw 'Release package is incomplete.' }
     if (Test-Path -LiteralPath $taskPackage) { throw "An incomplete package exists at $taskPackage. Move it aside, then reconnect." }
     Move-Item -LiteralPath $taskStage -Destination $taskPackage
