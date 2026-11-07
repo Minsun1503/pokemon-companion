@@ -3,6 +3,7 @@ import {z} from 'zod';
 import {pokemonIds, type PokemonState} from '../pokemon/companion.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import {jsonResult} from '../utils/response.js';
+import {measure, timedCall} from '../utils/timing.js';
 
 export function registerPokemon(server: McpServer, runtime: PokemonRuntime): void {
 	server.registerTool('pokemon', {
@@ -14,9 +15,9 @@ export function registerPokemon(server: McpServer, runtime: PokemonRuntime): voi
 			message: z.string().trim().min(1).max(240).optional(),
 		}).strict(),
 		annotations: {readOnlyHint: false},
-	}, async ({action, pet, message}) => {
+	}, async ({action, pet, message}) => timedCall('pokemon', action, async () => {
 		if (action === 'status') {
-			await runtime.companion.start();
+			await measure('companion_before', async () => runtime.companion.start());
 			return jsonResult({...runtime.companion.state, availablePets: [...pokemonIds]});
 		}
 
@@ -44,7 +45,7 @@ export function registerPokemon(server: McpServer, runtime: PokemonRuntime): voi
 								? {message: message || 'Thinking about the next step…', activity: 'thinking' as const}
 								: {message: message!};
 		return jsonResult(await runtime.update(patch));
-	});
+	}));
 	server.registerPrompt('pokemon-work', {
 		title: 'Work with your Pokémon',
 		description: 'Use the desktop companion to narrate and animate computer work.',

@@ -11,9 +11,10 @@ app.whenReady().then(async () => {
   if (process.env.POKEMON_INPUT_FIXTURE_TITLE) win.setTitle(process.env.POKEMON_INPUT_FIXTURE_TITLE);
   win.show();
   win.focus();
-  const server = http.createServer((req, res) => {
+  const server = http.createServer(async (req, res) => {
     if (req.url === '/focus' && req.method === 'POST') { win.show(); win.focus(); }
     if (req.url === '/quit' && req.method === 'POST') { res.end('{}'); app.quit(); return; }
+    const editor = req.url === '/state' ? await win.webContents.executeJavaScript('({text: document.getElementById("note").value, focusedElement: document.activeElement.id, maxLength: document.getElementById("note").maxLength})') : {};
     const bounds = win.getContentBounds();
     const position = (x, y) => {
       const point = {x: bounds.x + x, y: bounds.y + y};
@@ -22,7 +23,7 @@ app.whenReady().then(async () => {
     const display = screen.getPrimaryDisplay();
     const size = {width: Math.round(display.size.width * display.scaleFactor), height: Math.round(display.size.height * display.scaleFactor)};
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({...state, focused: win.isFocused(), input: position(160, 120), button: position(150, 195), size}));
+    res.end(JSON.stringify({...state, ...editor, focused: win.isFocused(), input: position(160, 120), button: position(150, 195), size}));
   });
   server.listen(0, '127.0.0.1', () => console.log(JSON.stringify({port: server.address().port})));
   app.on('will-quit', () => server.close());

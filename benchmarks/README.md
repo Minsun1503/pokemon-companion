@@ -1,5 +1,11 @@
 # Windows MCP benchmarks
 
+For the full desktop latency baseline, run `node scripts/bench.mjs benchmarks/results/perf-baseline.json` after building. It runs 20 verified samples for each scenario with the companion on and off: cold startup, window discovery, narrow/wide UI reads, atomic/batched field updates, typing 5/50/500 characters, a key chord, clicking, screenshots, and Pokémon speech. Setup, focus settling and independent fixture checks are outside the timers. JSON checkpoints have `complete: false` until every scenario finishes; completed runs also produce a Markdown table and built-file hashes.
+
+For a focused comparison, append scenario names after the output path, for example `node scripts/bench.mjs benchmarks/results/perf-a.json windows_get_windows windows_get_ui_narrow pokemon_say`. Each selected scenario still runs 20 times per UI mode. Typing uses digits and spaces to avoid composition under the active Vietnamese input method. Report writes use staging files and bounded retries for transient Windows sharing errors; desktop inputs are never retried.
+
+`POKEMON_TIMING=1` enables one `[pokemon-timing]` JSON line per tool call on stderr. It reports queue wait, companion before/after, action, payload serialization, Windows worker round-trip, UIA tree walk, and response post-processing. Screenshot calls additionally report capture, resize, PNG encoding, base64, and overlay hide/show. Timing is off by default and never adds fields to MCP responses. These are nested spans: worker/tree/serialization are inside action, and hide/show are inside companion before/after. Client elapsed includes SDK framing and stdio; server total covers the tool handler.
+
 Build the project, then run the atomic versus batch benchmark in a Windows desktop session:
 
 ```powershell

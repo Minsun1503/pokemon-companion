@@ -40,7 +40,8 @@ try {
   assert(editors.nodes[0].actions.includes('set_value'));
   const text = 'Xin chào, mình là Pikachu! www.youtube.com';
   await api({action: 'set_value', snapshot: editors.snapshot, element_id: editors.nodes[0].id, text});
-  const filled = await api({action: 'get_ui', window_id, query: 'Test note'});
+  let filled = await api({action: 'get_ui', window_id, query: 'Test note'});
+  if (filled.nodes[0]?.value !== text) filled = await api({action: 'get_ui', window_id, query: 'Test note'});
   assert.equal(filled.nodes[0].value, text);
   assert.equal(filled.nodes[0].value_clipped, undefined);
   const buttons = await api({action: 'get_ui', window_id, query: 'Verify input', control_type: 'Button'});

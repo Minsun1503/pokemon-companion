@@ -141,8 +141,10 @@ public static class PokemonWindowsAutomation {
                 } else depthLimited = true;
             } catch (ElementNotAvailableException) { } catch (InvalidOperationException) { }
         }
-        return Obj("window", WindowInfo(handle), "snapshot", snapshotId, "nodes", nodes, "matched", matched,
+        var result = Obj("window", WindowInfo(handle), "snapshot", snapshotId, "nodes", nodes, "matched", matched,
             "truncated", matched > nodes.Count || pending.Count > 0 || depthLimited, "scanned", scanned);
+        if (Environment.GetEnvironmentVariable("POKEMON_TIMING") == "1") result["uia_tree_walk_ms"] = watch.Elapsed.TotalMilliseconds;
+        return result;
     }
     public static object Activate(string windowId) {
         var handle = Handle(windowId);

@@ -1,4 +1,5 @@
 import {z} from 'zod';
+import {serialize} from '../utils/timing.js';
 import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import type {WindowsRequest} from './automation.js';
@@ -33,7 +34,7 @@ const discoveryActions = ['get_windows', ...windowActions];
 
 // Match atomic Windows responses: one compact text payload, without duplicate structured data.
 function compactResult(data: Record<string, unknown>): CallToolResult {
-	return {content: [{type: 'text', text: JSON.stringify(data)}]};
+	return {content: [{type: 'text', text: serialize(data)}]};
 }
 
 export function validateWindowsRequest(args: WindowsRequest): void {
@@ -129,7 +130,7 @@ function bounded(outcome: Record<string, unknown>, maxChars: number): Record<str
 	const copy = structuredClone(outcome);
 	const result = copy.result as Record<string, unknown> | undefined;
 	const entries = Array.isArray(result?.nodes) ? result.nodes : Array.isArray(result?.windows) ? result.windows : undefined;
-	while (JSON.stringify(copy).length > maxChars) {
+	while (serialize(copy).length > maxChars) {
 		copy.truncated = true;
 		if (result) {
 			result.truncated = true;
@@ -138,12 +139,12 @@ function bounded(outcome: Record<string, unknown>, maxChars: number): Record<str
 		if (entries?.length) {
 			entries.pop();
 		} else if (typeof result?.text === 'string' && result.text.length) {
-			result.text = result.text.slice(0, Math.max(0, result.text.length - Math.max(1, JSON.stringify(copy).length - maxChars)));
+			result.text = result.text.slice(0, Math.max(0, result.text.length - Math.max(1, serialize(copy).length - maxChars)));
 		} else if (copy.result) {
 			delete copy.result;
 			copy.result_omitted = true;
 		} else if (typeof copy.error === 'string' && copy.error.length) {
-			copy.error = copy.error.slice(0, Math.max(0, copy.error.length - Math.max(1, JSON.stringify(copy).length - maxChars)));
+			copy.error = copy.error.slice(0, Math.max(0, copy.error.length - Math.max(1, serialize(copy).length - maxChars)));
 		} else {
 			break;
 		}

@@ -1,6 +1,8 @@
 import {spawn, type ChildProcessWithoutNullStreams} from 'node:child_process';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {performance} from 'node:perf_hooks';
+import {recordTiming, serialize} from '../utils/timing.js';
 
 export type WindowsRequest = {
 	action: string;
@@ -27,6 +29,7 @@ export class WindowsAutomation {
 			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');
 		}
 
+		const roundTrip = performance.now();
 		this.start();
 		this.sequence += 1;
 		const id = this.sequence;
@@ -35,8 +38,15 @@ export class WindowsAutomation {
 				this.close(new Error('Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.'));
 			}, 20_000);
 			this.pending.set(id, {resolve: resolveRequest, reject, timer});
-			this.worker!.stdin.write(`${JSON.stringify({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
+			this.worker!.stdin.write(`${serialize({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
 		});
+		recordTiming('worker_round_trip', performance.now() - roundTrip);
+		if (typeof result.uia_tree_walk_ms === 'number') {
+			recordTiming('uia_tree_walk', result.uia_tree_walk_ms);
+			delete result.uia_tree_walk_ms;
+		}
+
+		const postProcessing = performance.now();
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;
 		// shortcut: match English caption names; add native caption IDs if localized apps need the hint.
@@ -46,19 +56,20 @@ export class WindowsAutomation {
 		}
 
 		if (entries) {
-			while (entries.length > (args.max_elements ?? 60) || (JSON.stringify(result).length > maxChars && entries.length > 0)) {
+			while (entries.length > (args.max_elements ?? 60) || (serialize(result).length > maxChars && entries.length > 0)) {
 				entries.pop();
 				result.truncated = true;
 			}
 		} else if (typeof result.text === 'string') {
 			let {text} = result;
-			while (typeof text === 'string' && JSON.stringify(result).length > maxChars && text.length > 0) {
-				text = text.slice(0, Math.max(0, text.length - Math.max(1, JSON.stringify(result).length - maxChars)));
+			while (typeof text === 'string' && serialize(result).length > maxChars && text.length > 0) {
+				text = text.slice(0, Math.max(0, text.length - Math.max(1, serialize(result).length - maxChars)));
 				result.text = text;
 				result.truncated = true;
 			}
 		}
 
+		recordTiming('post_processing', performance.now() - postProcessing);
 		return result;
 	}
 

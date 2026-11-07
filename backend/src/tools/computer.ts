@@ -16,6 +16,9 @@ import {join} from 'node:path';
 import Jimp from 'jimp';
 import sharp from 'sharp';
 import {toKeys} from '../utils/xdotoolStringToKeys.js';
+import {
+	measure, measureSync, serialize, timedCall,
+} from '../utils/timing.js';
 import {jsonResult} from '../utils/response.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 
@@ -174,7 +177,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 				readOnlyHint: false,
 			},
 		},
-		async (args, extra) => {
+		async (args, extra) => timedCall('computer', args.action, async () => {
 			const {action, coordinate, text} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string};
 
 			// Scale coordinates from API image space to logical screen space
@@ -354,15 +357,15 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						const cursorPos = await mouse.getPosition();
 
 						// Capture the entire screen (may be at Retina resolution)
-						const image = await grabScreen();
+						const image = await measure('screenshot_capture', grabScreen);
 
 						// Then resize to fit within API limits
 						const apiScaleFactor = getSizeToApiScale(image.getWidth(), image.getHeight());
 						if (apiScaleFactor < 1) {
-							image.resize(
+							measureSync('screenshot_resize', () => image.resize(
 								Math.floor(image.getWidth() * apiScaleFactor),
 								Math.floor(image.getHeight() * apiScaleFactor),
-							);
+							));
 						}
 
 						// Calculate cursor position in API image coordinates
@@ -408,21 +411,21 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						}
 
 						// Get PNG buffer from Jimp
-						const pngBuffer = await image.getBufferAsync('image/png');
+						const pngBuffer = await measure('screenshot_encode_jimp', async () => image.getBufferAsync('image/png'));
 
 						// Compress PNG using sharp, to fit size limits
-						const optimizedBuffer = await sharp(pngBuffer)
+						const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(pngBuffer)
 							.png({quality: 80, compressionLevel: 9})
-							.toBuffer();
+							.toBuffer());
 
 						// Convert optimized buffer to base64
-						const base64Data = optimizedBuffer.toString('base64');
+						const base64Data = measureSync('screenshot_base64', () => optimizedBuffer.toString('base64'));
 
 						return {
 							content: [
 								{
 									type: 'text',
-									text: JSON.stringify({
+									text: serialize({
 									// Report the image dimensions - Claude should use coordinates within this space
 									// These may differ from the actual display due to scaling for API limits
 										image_width: imageWidth,
@@ -439,6 +442,6 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 					}
 				}
 			}, extra.signal);
-		},
+		}),
 	);
 }

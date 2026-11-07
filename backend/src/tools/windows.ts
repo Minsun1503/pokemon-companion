@@ -1,5 +1,6 @@
 import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {z} from 'zod';
+import {serialize, timedCall} from '../utils/timing.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import {
 	runWindowsBatch, validateWindowsRequest, windowsActions, windowsFields, windowsStepSchema,
@@ -19,7 +20,7 @@ export function registerWindows(server: McpServer, runtime: PokemonRuntime): voi
 			steps: z.array(windowsStepSchema).min(1).max(16).optional().describe('Required only for batch. Whole batch is exclusive; stops on ambiguity, errors, pause or cancellation. Top-level max_chars bounds the entire response.'),
 		}).strict(),
 		annotations: {readOnlyHint: false},
-	}, async (args, extra) => {
+	}, async (args, extra) => timedCall('windows', args.action, async () => {
 		if (args.action === 'batch') {
 			if (!args.steps) {
 				throw new Error('batch requires steps.');
@@ -37,7 +38,7 @@ export function registerWindows(server: McpServer, runtime: PokemonRuntime): voi
 		const activity = args.action === 'read_text' ? 'get_ui_text' : args.action;
 		return runtime.computer(activity, undefined, async () => {
 			const result = await runtime.windows.request(args);
-			return {content: [{type: 'text' as const, text: JSON.stringify(result)}]};
+			return {content: [{type: 'text' as const, text: serialize(result)}]};
 		}, extra.signal);
-	});
+	}));
 }
