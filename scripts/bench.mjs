@@ -261,7 +261,7 @@ try {
     const breakdown_ms = Object.fromEntries([...new Set(group.flatMap((sample) => Object.keys(sample.breakdown_ms)))].map((key) => [key, distribution(group.map((sample) => sample.breakdown_ms[key] || 0))]));
     summary.push({ui, scenario, elapsed_ms: distribution(group.map((sample) => sample.elapsed_ms)), breakdown_ms, payload_bytes: distribution(group.map((sample) => sample.payload_bytes)), verified_runs: group.filter((sample) => sample.verified).length});
   }
-  const built = ['pokemon/runtime.js', 'pokemon/companion.js', 'tools/computer.js', 'tools/windows.js', 'windows/automation.js', 'windows/uia-worker.cs', 'windows/uia-worker.ps1'];
+  const built = ['main.js', 'pokemon/runtime.js', 'pokemon/companion.js', 'tools/computer.js', 'tools/windows.js', 'windows/automation.js', 'windows/uia-worker.cs', 'windows/uia-worker.ps1', 'windows/uia-worker.dll'];
   const hashes = Object.fromEntries(await Promise.all(built.map(async (file) => [file, createHash('sha256').update(await readFile(resolve(root, 'backend/dist', file))).digest('hex')])));
   const report = {
     complete: true, measured_at: new Date().toISOString(), runs, typing_corpus: '1234 repeated with a trailing space: neutral ASCII under the active input method.', environment: {platform: process.platform, node: process.version, cpu: os.cpus()[0].model, transport: 'stdio'},

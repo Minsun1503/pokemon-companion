@@ -24,6 +24,12 @@ export class WindowsAutomation {
 	private buffer = '';
 	private readonly pending = new Map<number, {resolve: (value: Record<string, unknown>) => void; reject: (error: Error) => void; timer: ReturnType<typeof setTimeout>}>();
 
+	warm(): void {
+		if (process.platform === 'win32') {
+			this.start();
+		}
+	}
+
 	async request(args: WindowsRequest): Promise<Record<string, unknown>> {
 		if (process.platform !== 'win32') {
 			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');

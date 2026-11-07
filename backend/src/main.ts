@@ -35,6 +35,7 @@ function setupSignalHandlers(cleanup: () => Promise<void>): void {
 (async () => {
 	const transport = process.env.MCP_TRANSPORT || 'stdio';
 	const runtime = new PokemonRuntime();
+	runtime.windows.warm();
 
 	if (transport === 'stdio') {
 		const server = createServer(runtime);

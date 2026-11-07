@@ -26,6 +26,30 @@ async function readUI(result: Record<string, unknown>) {
 const captions = ['Minimize', 'Maximize', 'Close'].map((name) => ({role: 'Button', name}));
 
 describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
+	it('warms one persistent worker and reuses it for subsequent requests', async () => {
+		const worker = Object.assign(new EventEmitter(), {
+			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
+		});
+		vi.mocked(spawn).mockClear().mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
+		const automation = new WindowsAutomation();
+		try {
+			automation.warm();
+			automation.warm();
+			for (const id of [1, 2]) {
+				const pending = automation.request({action: 'get_windows'});
+				worker.stdout.write(`${JSON.stringify({id, result: {windows: []}})}\n`);
+				// eslint-disable-next-line no-await-in-loop
+				expect(await pending).toEqual({windows: []});
+			}
+
+			expect(spawn).toHaveBeenCalledTimes(1);
+		} finally {
+			automation.close();
+		}
+
+		expect(worker.kill).toHaveBeenCalledOnce();
+	});
+
 	it.each([{nodes: captions}, {nodes: [{role: 'TitleBar', name: 'Test'}, ...captions]}])('hints when only caption controls are exposed: %j', async ({nodes}) => {
 		const result = await readUI({nodes, matched: nodes.length, truncated: false});
 		expect(result.hint).toBe('Only title-bar controls found. Call activate on this window and read again.');
