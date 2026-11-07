@@ -1,6 +1,6 @@
 # Keyboard navigation and Custom Instructions report
 
-Branch `perf`. Addendum `0cd59e8` and all earlier changes retained. Foreground guard and shortcut guidance committed in `eb6424a`. No push or dependencies. The existing lockfile edit was preserved.
+Branch `perf`. Addendum `0cd59e8` and all earlier changes retained. Foreground guard and shortcut guidance committed in `eb6424a`; response handling and experiment evidence in `6ccf975`. No push or dependencies. The existing lockfile edit was preserved.
 
 ## Result and decision
 
@@ -21,12 +21,13 @@ ChatGPT failures were native `COMException (0x80040201)` while controls disappea
 
 ## Final source diff after eb6424a
 
-Four production/test files: 31 insertions, 5 deletions.
+Nine production/test/documentation files: 36 insertions, 10 deletions, excluding raw evidence and review notes.
 
 - `backend/src/windows/uia-worker.cs`: get_windows.active and activate recognize the root owner of Chromium foreground child windows. The activation error now recommends a known control through windows focus instead of blind Alt+Tab.
 - `backend/src/windows/automation.ts`: empty native errors and missing/null/array results reject before UI processing; no undefined result or input replay.
 - `backend/src/windows/uia-worker.ps1`: when the native error message is empty, retain its exception/HRESULT diagnostic.
 - `backend/src/windows/automation.test.ts`: four regressions for empty/malformed replies, zero replay, and a subsequent fresh read.
+- `backend/src/index.ts`, the three tool descriptions/prompts, and README: consistently use Windows APIs/batch first, use direct shortcuts only when no control or fitting UIA pattern exists, pass window_id on Windows, and verify results. Indexed tabs remain Ctrl+1..8; Ctrl+9 selects the last tab.
 
 The experiment script and raw JSON evidence are included. No batch keyboard API was added.
 
@@ -37,8 +38,13 @@ The experiment script and raw JSON evidence are included. No batch keyboard API 
 - npm run test: 117 backend tests passed, one existing skip; chat test passed.
 - npm run test:windows: all three scripts passed. Includes clipping at 160/161 characters, full read_text, password hiding, Unicode, stale IDs, batch references, launch/wait behavior, and native input guard.
 - Native guard: 40 mismatches sent zero events anywhere; 40 matches delivered exactly 20 F8 presses and 20 typed digits to A, none to B, with key releases verified.
-- Latest guard internal span: 6.776 ms median / 8.929 ms p95, 80 samples. Full get_windows calls: 70.313 / 97.960 ms, 83 samples. Different scopes; guard span is not total action latency.
+- Latest guard internal span: 6.607 ms median / 8.387 ms p95, 80 samples. Full get_windows calls: 74.770 / 96.177 ms, 83 samples. Different scopes; guard span is not total action latency.
 - git diff --check: passed.
+- All four required commands passed again after the final wording update. The Windows fixture printed nonfatal cache-access warnings; its assertions and cleanup passed. No user cache was cleared.
+
+## Claude stopping assessment
+
+Claude explicitly said, "Đủ. Nhiệm vụ điều hướng bàn phím dừng ở đây." Its assessment is based on the agent report, without independently reading the code. It agreed that neither shortcut path satisfies the gate, requested consistent API-first wording and one final validation run, and requested no further keyboard optimization. Both conditions are complete. The verbatim response is saved in `claude-keyboard-stopping-2026-11-07.md`. Its proposed GitHub logout/product campaign is outside this task and was not run.
 
 ## Custom Instructions: original and final, unchanged
 
@@ -66,13 +72,15 @@ The installed Pokémon connector reported desktop disconnected. The existing rep
 ## Hashes
 
 - dist/main.js: `71DC1E3F724BD87AC4A44E86A9B17C445EC8048EA605173921461F7429B0710B`
-- dist/tools/computer.js: `E5D1A270A5171336A4524DA4B30B0FF0FAC62FB1B94A437D64432341B54EF500`
+- dist/index.js: `92A1E213B3EE75BDE9087C836AB3D7BF6D8B6373D8DB03EFC241A808B6C59F8A`
+- dist/tools/computer.js: `10AC9B887E89904BEA381C9E24D94616D8143144713883783669886ADC9BFB85`
+- dist/tools/windows.js: `9307C40D67EC98D249517AB2D3547B2902A793FF9A0035D88E63D17AC2758D7C`
+- dist/tools/pokemon.js: `5915BCBAE4DF92F40E3D17E1323863E4A2E8B80BE0EFC3222138BF17847EE7CF`
 - dist/windows/automation.js: `7EBB17E43E64702AE66DFA50D484A852BD1332C60CBA00D106231C2FFE11D7BB`
-- dist/windows/uia-worker.dll: `EC6CF40A3ED0E48BEF53F3F2BB87A8566C24674986DB9C4EFCD82D21A3A7B004`
+- dist/windows/uia-worker.dll: `656B0E3272CE7B8E33B1A868310E6879F182641263D34513BF45C0630C9B8DD7`
 - Preserved backend/package-lock.json: `F0AAC8D794AE5458A52A23F93058AE27F182875C6D47A163619C19AAEF3461EA`
 
 An unchanged main.js hash does not imply unchanged behavior: it imports the changed modules.
 
 Skipped: batch key steps, broad benchmarks, another input/layout campaign, dependencies, and push.
 Risks: focus can change between the guard and input; Telex can transform typed text; native UIA reads can fail or lag during navigation. Prefer supported field APIs and verify results.
-
