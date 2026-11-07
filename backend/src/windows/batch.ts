@@ -272,17 +272,36 @@ export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRe
 		return result;
 	};
 
+	const urlLaunch = args.action === 'launch' && /^https?:/i.test(args.text ?? '');
+	const allWindows = {action: 'get_windows', max_elements: 250, max_chars: 16000};
+	const before = urlLaunch ? await read(allWindows) : undefined;
+	const previous = new Map(((before?.windows ?? []) as Record<string, unknown>[]).map((window) => [window.id, `${String(window.title)}/${String(window.process)}`]));
 	const launched = args.action === 'launch' ? await read(args) : undefined;
 	if (launched) {
 		timeoutError = `launch started ${String(launched.started).slice(0, 200)}; ${timeoutError}`;
 	}
 
 	const request = launched
-		? {...args, action: 'get_windows', query: args.query || String(launched.query)}
+		? urlLaunch ? allWindows : {...args, action: 'get_windows', query: args.query || String(launched.query)}
 		: {...args, action: 'get_ui'};
 	for (;;) {
 		// eslint-disable-next-line no-await-in-loop
-		const result = await read(request);
+		let result = await read(request);
+		if (urlLaunch) {
+			const windows = result.windows as Record<string, unknown>[];
+			const appeared = windows.filter((window) => previous.get(window.id) !== `${String(window.title)}/${String(window.process)}`)
+				.slice(0, 5).map((window) => ({title: String(window.title).slice(0, 60), process: String(window.process).slice(0, 25)}));
+			timeoutError = `URL launch succeeded, but its window query did not match within ${args.timeout_ms ?? 5000} ms. Use get_windows with the browser process name. New/changed windows: ${JSON.stringify(appeared)}. After an interrupted wait, call get_ui again for fresh snapshots.`;
+			if (result.truncated) {
+				// A broad diagnostic list cannot hide a matching browser beyond its budget.
+				// eslint-disable-next-line no-await-in-loop
+				result = await read({...args, action: 'get_windows'});
+			} else {
+				const query = args.query!.toLowerCase();
+				result = {...result, windows: windows.filter((window) => `${String(window.title)} ${String(window.process)}`.toLowerCase().includes(query))};
+			}
+		}
+
 		const entries = (launched ? result.windows : result.nodes) as Record<string, unknown>[];
 		const matches = entries.filter((node) => args.expect_value === undefined || (!node.value_clipped && node.value === args.expect_value));
 		if (matches.length) {

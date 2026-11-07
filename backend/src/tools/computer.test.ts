@@ -14,6 +14,7 @@ afterEach(() => vi.restoreAllMocks());
 function fixture() {
 	const runtime = new PokemonRuntime();
 	vi.spyOn(runtime, 'computer').mockImplementation(async (_action, _coordinate, execute) => execute());
+	vi.spyOn(runtime.windows, 'request').mockResolvedValue({keyboard_layout: '00000409', language_id: '0409', imm_ime: false});
 	const registerTool = vi.fn();
 	registerComputer({registerTool} as unknown as McpServer, runtime);
 	const handle = registerTool.mock.calls[0]![2];
@@ -31,10 +32,32 @@ describe.runIf(process.platform === 'win32')('plain Windows typing', () => {
 		const {native, wrapper, type} = fixture();
 		const text = '1234 '.repeat(100);
 		const delay = keyboard.config.autoDelayMs;
-		await type(text);
+		const result = await type(text);
+		expect(JSON.parse(result.content[0].text)).toMatchObject({verify: 'read the field to confirm the text; an active input method can alter letters', input_method: {keyboard_layout: '00000409', language_id: '0409', imm_ime: false}});
 		expect(native.mock.calls.map(([part]) => part).join('')).toBe(text);
 		expect(wrapper).not.toHaveBeenCalled();
 		expect(keyboard.config.autoDelayMs).toBe(delay);
+	});
+
+	it.each(['pause', 'cancel', 'failure'])('handles %s during input-method observation without replaying input', async (reason) => {
+		const {runtime, controller, native, type} = fixture();
+		vi.mocked(runtime.windows.request).mockImplementationOnce(async () => {
+			if (reason === 'pause') {
+				runtime.companion.state.paused = true;
+			} else if (reason === 'cancel') {
+				controller.abort();
+			}
+
+			throw new Error('Metadata unavailable');
+		});
+		if (reason === 'failure') {
+			const result = await type('12345');
+			expect(JSON.parse(result.content[0].text).input_method).toEqual({status: 'unavailable'});
+			expect(native).toHaveBeenCalledTimes(1);
+		} else {
+			await expect(type('12345')).rejects.toThrow('Computer action cancelled or paused before execution.');
+			expect(native).not.toHaveBeenCalled();
+		}
 	});
 
 	it.each(['pause', 'cancel'])('stops further input on %s between chunks', async (reason) => {

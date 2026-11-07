@@ -10,7 +10,7 @@ let fixture;
 let fixtureUrl;
 try {
   const electron = resolve(root, 'frontend/node_modules/electron/dist/electron.exe');
-  const env = {...process.env, POKEMON_INPUT_FIXTURE_PASSWORD: '1'};
+  const env = {...process.env, POKEMON_INPUT_FIXTURE_PASSWORD: '1', POKEMON_INPUT_FIXTURE_SINGLELINE: '1'};
   delete env.ELECTRON_RUN_AS_NODE;
   fixture = spawn(electron, [resolve(root, 'scripts/input-fixture/index.cjs'), '--force-renderer-accessibility'], {env, windowsHide: true, stdio: ['ignore', 'pipe', 'inherit']});
   await new Promise((ready, reject) => {
@@ -38,7 +38,21 @@ try {
   const secret = await api({action: 'get_ui', window_id, query: 'Secret password'});
   assert.equal(secret.nodes.length, 0);
   assert(!JSON.stringify(secret).includes('hidden-test-password'));
-  const editors = await api({action: 'get_ui', window_id, control_type: 'Edit'});
+  for (const text of ['', '  ', '\ufffc']) {
+    const blank = await api({action: 'batch', steps: [
+      {action: 'get_ui', window_id, query: 'Blank field', control_type: 'Edit'},
+      {action: 'set_value', target_step: 0, text},
+      {action: 'get_ui', window_id, query: 'Blank field', control_type: 'Edit', expect_value: text},
+      {action: 'read_text', target_step: 2},
+    ]});
+    assert.equal(blank.ok, true);
+    assert.equal(blank.result.text, text, 'Read the actual value, preserving whitespace and literal object markers.');
+  }
+  const document = await api({action: 'get_ui', window_id, control_type: 'Document'});
+  assert.equal(document.nodes.length, 1);
+  const documentText = await api({action: 'read_text', snapshot: document.snapshot, element_id: document.nodes[0].id});
+  assert(documentText.text.includes('Verify input'), 'Documents must retain their body text rather than returning only the URL.');
+  const editors = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
   assert.equal(editors.nodes.length, 1);
   assert(editors.nodes[0].actions.includes('set_value'));
   const text = 'Xin chào, mình là Pikachu! www.youtube.com';

@@ -16,6 +16,8 @@ public static class PokemonWindowsAutomation {
     [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr window);
     [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window, int command);
+    [DllImport("user32.dll")] static extern IntPtr GetKeyboardLayout(uint thread);
+    [DllImport("imm32.dll")] static extern bool ImmIsIME(IntPtr layout);
     delegate bool EnumProc(IntPtr window, IntPtr data);
 
     class Snapshot {
@@ -81,7 +83,7 @@ public static class PokemonWindowsAutomation {
         if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) actions.Add("toggle");
         if (element.TryGetCachedPattern(ExpandCollapsePattern.Pattern, out pattern)) { actions.Add("expand"); actions.Add("collapse"); }
         if (element.TryGetCachedPattern(ScrollPattern.Pattern, out pattern)) actions.Add("scroll");
-        if (element.TryGetCachedPattern(TextPattern.Pattern, out pattern)) actions.Add("read_text");
+        if (element.TryGetCachedPattern(TextPattern.Pattern, out pattern) || element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) actions.Add("read_text");
         if (element.Cached.IsKeyboardFocusable) actions.Add("focus");
         return actions;
     }
@@ -164,7 +166,7 @@ public static class PokemonWindowsAutomation {
     public static object Activate(string windowId) {
         var handle = Handle(windowId);
         ShowWindow(handle, 9);
-        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows did not allow activation. Select the window manually.");
+        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. For caption-only UI, try computer key alt+tab, then get_ui again.");
         return Obj("ok", true);
     }
     static void RejectScriptHost(string target) {
@@ -224,6 +226,13 @@ public static class PokemonWindowsAutomation {
         Process.Start(new ProcessStartInfo(executable) { UseShellExecute = true });
         return Obj("started", executable, "query", Path.GetFileNameWithoutExtension(executable));
     }
+    public static object InputMethod() {
+        var foreground = GetForegroundWindow();
+        if (foreground == IntPtr.Zero) return Obj("status", "unavailable");
+        uint process;
+        var layout = GetKeyboardLayout(GetWindowThreadProcessId(foreground, out process));
+        return Obj("keyboard_layout", unchecked((uint)layout.ToInt64()).ToString("X8"), "language_id", (layout.ToInt64() & 0xffff).ToString("X4"), "imm_ime", ImmIsIME(layout));
+    }
     public static object Act(string snapshotId, int id, string action, string text, string direction) {
         Snapshot snapshot;
         AutomationElement element;
@@ -241,6 +250,13 @@ public static class PokemonWindowsAutomation {
         if (!belongs) throw new Exception("Element no longer belongs to the selected window. Call get_ui again.");
         if (element.Current.IsPassword) throw new Exception("Password controls are not exposed.");
         if (action == "read_text") {
+            object editable;
+            if (element.Current.ControlType != ControlType.Document && element.TryGetCurrentPattern(ValuePattern.Pattern, out editable)) {
+                var full = ((ValuePattern)editable).Current.Value ?? "";
+                var readResult = Obj("text", Clip(full, 8000));
+                if (full.Length > 8000) readResult["truncated"] = true;
+                return readResult;
+            }
             var pattern = (TextPattern)element.GetCurrentPattern(TextPattern.Pattern);
             return Obj("text", Clip(pattern.DocumentRange.GetText(8000), 8000));
         }

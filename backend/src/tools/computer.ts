@@ -144,7 +144,7 @@ const ActionEnum = z.enum([
 
 const actionDescription = `The action to perform. The available actions are:
 * key: Press a key or key-combination on the keyboard.
-* type: Type a string of text on the keyboard.
+* type: Type a string of text on the keyboard. A Vietnamese/IME keyboard layout can alter typed letters (for example Telex). Prefer windows set_value for fields; after type, verify the field with read_text.
 * get_cursor_position: Get the current (x, y) pixel coordinate of the cursor on the screen.
 * mouse_move: Move the cursor to a specified (x, y) pixel coordinate on the screen.
 * left_click: Click the left mouse button. If coordinate is provided, moves to that position first.
@@ -218,6 +218,21 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							throw new Error('Text required for type');
 						}
 
+						let inputMethod: Record<string, unknown> | undefined;
+						if (process.platform === 'win32') {
+							try {
+								inputMethod = await runtime.windows.request({action: 'input_method'}, {
+									signal: extra.signal, timeoutMs: 200, paused: () => runtime.companion.state.paused, timeoutError: 'Input method observation timed out.',
+								});
+							} catch {
+								inputMethod = {status: 'unavailable'};
+							}
+						}
+
+						if (extra.signal.aborted || runtime.companion.state.paused) {
+							throw new Error('Computer action cancelled or paused before execution.');
+						}
+
 						if (process.platform === 'linux' && hasXdotool()) {
 							xdotoolType(text);
 						} else if (process.platform === 'win32' && [...text].some((character) => character.codePointAt(0)! > 127) && runtime.companion.clipboard) {
@@ -250,7 +265,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							await keyboard.type(text);
 						}
 
-						return jsonResult({ok: true});
+						return jsonResult({ok: true, verify: 'read the field to confirm the text; an active input method can alter letters', ...(inputMethod ? {input_method: inputMethod} : {})});
 					}
 
 					case 'get_cursor_position': {

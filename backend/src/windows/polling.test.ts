@@ -38,6 +38,38 @@ describe('Windows polling actions', () => {
 		expect(request.mock.calls[1]![0].query).toBe('Test');
 	});
 
+	it('reports successful URL launch and at most five new/changed windows on timeout', async () => {
+		vi.useFakeTimers();
+		const runtime = new PokemonRuntime();
+		const request = vi.spyOn(runtime.windows, 'request')
+			.mockResolvedValueOnce({windows: [{id: '1', title: 'Old page', process: 'msedge'}]})
+			.mockResolvedValueOnce({started: 'https://example.com'})
+			.mockResolvedValue({windows: Array.from({length: 7}, (_, index) => ({id: String(index + 1), title: `New page ${index}`, process: 'msedge'}))});
+		const pending = runWindowsRequest(runtime, {
+			action: 'launch', text: 'https://example.com', query: 'Missing title', timeout_ms: 250,
+		});
+		const checked = expect(pending).rejects.toThrow('URL launch succeeded');
+		const diagnostic = pending.catch((error: unknown) => error instanceof Error ? error.message : String(error));
+		await vi.advanceTimersByTimeAsync(300);
+		await checked;
+		const message = await diagnostic;
+		expect(message).toContain('browser process name');
+		expect(message).toContain('New page 4');
+		expect(message).not.toContain('New page 5');
+		expect(request.mock.calls.filter(([args]) => args.action === 'launch')).toHaveLength(1);
+	});
+
+	it('uses the original filtered lookup when a URL diagnostic list is truncated', async () => {
+		const runtime = new PokemonRuntime();
+		vi.spyOn(runtime.windows, 'request')
+			.mockResolvedValueOnce({windows: []})
+			.mockResolvedValueOnce({started: 'https://example.com'})
+			.mockResolvedValueOnce({windows: [{id: '1', title: 'Other', process: 'app'}], truncated: true})
+			.mockResolvedValueOnce({windows: [{id: '2', title: 'Browser', process: 'msedge'}], truncated: false});
+		const result = await runWindowsRequest(runtime, {action: 'launch', text: 'https://example.com', query: 'msedge'});
+		expect(result).toMatchObject({windows: [{id: '2'}], truncated: false});
+	});
+
 	it.each(['pause', 'cancel', 'timeout'])('stops polling on %s', async (reason) => {
 		vi.useFakeTimers();
 		const runtime = new PokemonRuntime();

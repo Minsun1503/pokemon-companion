@@ -11,6 +11,9 @@ app.whenReady().then(async () => {
   if (process.env.POKEMON_INPUT_FIXTURE_PASSWORD === '1') {
     await win.webContents.executeJavaScript('const secret = document.createElement("input"); secret.type = "password"; secret.setAttribute("aria-label", "Secret password"); secret.value = "hidden-test-password"; secret.style.top = "280px"; secret.style.width = "150px"; document.body.appendChild(secret);');
   }
+  if (process.env.POKEMON_INPUT_FIXTURE_SINGLELINE === '1') {
+    await win.webContents.executeJavaScript('const blank = document.createElement("input"); blank.setAttribute("aria-label", "Blank field"); blank.style.top = "260px"; document.body.appendChild(blank);');
+  }
   if (process.env.POKEMON_INPUT_FIXTURE_TITLE) win.setTitle(process.env.POKEMON_INPUT_FIXTURE_TITLE);
   win.show();
   win.focus();

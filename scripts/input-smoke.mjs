@@ -36,7 +36,14 @@ try {
   await call('computer', {action: 'type', text: 'Pikachu is working!'});
   await call('computer', {action: 'key', text: 'Control_L+a'});
   const plain = 'qjzx '.repeat(100);
-  await call('computer', {action: 'type', text: plain});
+  const typeResult = await call('computer', {action: 'type', text: plain});
+  const typeDetails = JSON.parse(typeResult.content.find(item => item.type === 'text').text);
+  assert.equal(typeDetails.verify, 'read the field to confirm the text; an active input method can alter letters');
+  if (process.platform === 'win32') {
+    assert.match(typeDetails.input_method.keyboard_layout, /^[0-9A-F]{8}$/);
+    assert.match(typeDetails.input_method.language_id, /^[0-9A-F]{4}$/);
+    assert.equal(typeof typeDetails.input_method.imm_ime, 'boolean');
+  }
   let typed = await read();
   const deadline = Date.now() + 1000;
   while (typed.text !== plain && Date.now() < deadline) {
