@@ -44,7 +44,7 @@ export function registerPokemon(server: McpServer, runtime: PokemonRuntime): voi
 							: action === 'think'
 								? {message: message || 'Thinking about the next step…', activity: 'thinking' as const}
 								: {message: message!};
-		return jsonResult(await runtime.update(patch));
+		return jsonResult(await runtime.update({...patch, action: undefined}));
 	}));
 	server.registerPrompt('pokemon-work', {
 		title: 'Work with your Pokémon',

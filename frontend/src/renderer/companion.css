@@ -426,9 +426,33 @@ footer span {
   background: #d8daca;
   border-radius: 1px;
 }
-body[data-activity="working"] #work-prop {
+body:not([data-pet="pikachu"])[data-activity="working"] #work-prop,
+body[data-pet="pikachu"] #pet-container[data-animation="typing"] #work-prop {
   display: grid;
   animation: keyboard-tap 0.5s infinite alternate;
+}
+#mouse-prop {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  right: 34px;
+  width: 13px;
+  height: 18px;
+  border: 1px solid #d8daca;
+  border-radius: 7px;
+  background: #45483e;
+  z-index: 4;
+}
+#mouse-prop::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 5px;
+  margin: 2px auto;
+  background: #d8daca;
+}
+body[data-pet="pikachu"] #pet-container[data-animation="clicking"] #mouse-prop {
+  display: block;
 }
 body[data-activity="working"] .pet-aura,
 body[data-activity="thinking"] .pet-aura {

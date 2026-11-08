@@ -7,7 +7,7 @@
     "setup": "node scripts/repos.cjs install",
     "build": "node scripts/repos.cjs run build",
     "check": "node scripts/repos.cjs check",
-    "test": "node scripts/repos.cjs test && node --test scripts/chat.test.cjs",
+    "test": "node scripts/repos.cjs test && node --test scripts/chat.test.cjs scripts/pikachu-animation.test.cjs",
     "start": "node backend/dist/main.js",
     "demo": "node scripts/demo.mjs",
     "smoke": "node scripts/smoke.mjs",

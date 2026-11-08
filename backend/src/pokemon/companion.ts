@@ -17,6 +17,7 @@ export type PokemonState = {
 	paused: boolean;
 	completedActions: number;
 	interactionLocked?: boolean;
+	action?: {animation: 'typing' | 'clicking'; id: number; active: boolean} | undefined;
 };
 
 export type Companion = {

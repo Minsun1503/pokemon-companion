@@ -19,6 +19,7 @@ const labels: Record<string, string> = {
 export class PokemonRuntime {
 	readonly windows = new WindowsAutomation();
 	private queue: Promise<unknown> = Promise.resolve();
+	private gestureSequence = 0;
 	constructor(readonly companion: Companion = new DesktopCompanion()) {}
 
 	async close(): Promise<void> {
@@ -64,7 +65,18 @@ export class PokemonRuntime {
 		}
 
 		await measure('companion_before', async () => this.companion.update({interactionLocked: true}));
-		this.animate({activity: action.startsWith('get_') ? 'thinking' : 'working', message: labels[action] || action}, coordinate);
+		const animation = ['key', 'type', 'set_value'].includes(action)
+			? 'typing' as const
+			: ['left_click', 'right_click', 'middle_click', 'double_click', 'left_click_drag', 'invoke', 'select', 'toggle', 'expand', 'collapse', 'scroll'].includes(action) ? 'clicking' as const : undefined;
+		if (animation) {
+			this.gestureSequence += 1;
+		}
+
+		const gesture = animation ? {animation, id: this.gestureSequence} : undefined;
+		this.animate({
+			activity: action.startsWith('get_') ? 'thinking' : 'working',
+			...(gesture ? {action: {...gesture, active: true}} : {}), message: labels[action] || action,
+		}, coordinate);
 		try {
 			if (action === 'get_screenshot') {
 				await measure('companion_before', async () => measure('capture_hide', async () => this.companion.capture(true)));
@@ -79,7 +91,10 @@ export class PokemonRuntime {
 				throw new Error(result.content.filter((c) => c.type === 'text').map((c) => c.text).join('\n'));
 			}
 
-			this.animate({activity: this.companion.state.task ? 'working' : 'idle', completedActions: this.companion.state.completedActions + 1});
+			this.animate({
+				activity: this.companion.state.task ? 'working' : 'idle',
+				...(gesture ? {action: {...gesture, active: false}} : {}), completedActions: this.companion.state.completedActions + 1,
+			});
 			return result;
 		} catch (error) {
 			this.animate({activity: 'error', message: error instanceof Error ? error.message : String(error)});

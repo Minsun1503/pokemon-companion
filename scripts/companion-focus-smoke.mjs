@@ -77,6 +77,42 @@ try {
   const covered = await fixture('/cover-bubble');
   assert.equal(hitWindow(covered.point), input[0].id, 'Decorative speech bubbles must pass clicks through to the app below.');
   assert.equal(after.petFocusable, false, 'Only the open Pokémon panel may accept keyboard focus.');
+  const waitAnimation = async expected => {
+    for (let read = 0; read < 60; read++) {
+      const current = await fixture('/state');
+      if (current.animation === expected && current.imageReady) return current;
+      await delay(50);
+    }
+    throw new Error(`Pikachu did not show ${expected}.`);
+  };
+  await fixture('/action?name=type&busy=1');
+  const typing = await waitAnimation('typing');
+  assert.match(typing.source, /typing\.gif$/);
+  assert.equal(typing.keyboard, true);
+  assert.equal(typing.mouse, false);
+  const frames = new Set();
+  for (let frame = 0; frame < 10; frame++) {
+    frames.add((await fixture('/frame')).hash);
+    await delay(100);
+  }
+  assert.ok(frames.size >= 4, 'The rendered GIF must show different paw poses, not a frozen first frame.');
+  assert.equal((await fixture('/state')).focused, true);
+  await fixture('/action?name=type&x=900&y=100');
+  const running = await waitAnimation('run');
+  assert.match(running.source, /run_back\.gif$/);
+  assert.equal(running.keyboard, false, 'Pikachu must run during travel, then use the keyboard after arriving.');
+  await waitAnimation('typing');
+  await fixture('/action?name=left_click');
+  const clicking = await waitAnimation('clicking');
+  assert.equal(clicking.keyboard, false);
+  assert.equal(clicking.mouse, true);
+  await fixture('/action?name=get_ui');
+  assert.match((await waitAnimation('thinking')).source, /thinking\.gif$/);
+  await fixture('/action?name=success');
+  assert.match((await waitAnimation('success')).source, /success\.gif$/);
+  await fixture('/action?name=error');
+  assert.match((await waitAnimation('error')).source, /error\.gif$/);
+  await fixture('/action?name=idle');
   const overlay = (await api({action: 'get_windows', query: 'Pokemon Focus Overlay'})).windows;
   assert.equal(overlay.length, 1);
   await api({action: 'batch', steps: [
@@ -88,6 +124,7 @@ try {
     {action: 'focus', target_step: 4},
   ]});
   assert.equal((await fixture('/state')).petFocusable, true);
+  assert.ok(!(await waitAnimation('paused')).source.endsWith('.gif'), 'Opening Talk during a task pauses the companion.');
   await session.call('computer', {action: 'key', text: '7', window_id: overlay[0].id});
   await delay(100);
   assert.equal((await fixture('/state')).text, '7', 'Opening Talk must still allow keyboard input.');
@@ -100,7 +137,7 @@ try {
   assert.equal(closed.panel, false);
   assert.equal(closed.petFocused, false);
   assert.equal(closed.petFocusable, false);
-  console.log('PASS: moving Pokémon retained background focus, keyboard and button input; native hit-testing passed through the overlay; Talk accepted input and closing released focus. Zero screenshots.');
+  console.log('PASS: moving Pokémon retained background focus, keyboard and button input; native hit-testing passed through the overlay; Pikachu rendered running, tapping, clicking, thinking, success and error animations; Talk accepted input and closing released focus. No desktop screenshots; animation frames were captured from the test renderer.');
 } finally {
   if (url) await fetch(url + '/quit').catch(() => {});
   child.kill();
