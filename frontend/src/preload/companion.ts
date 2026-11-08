@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('pokemonAPI', {
     send: (pet: string, text: string) => ipcRenderer.invoke('companion:chat-send', pet, text),
   },
   ignoreMouse: (ignore: boolean) => ipcRenderer.send('companion:ignore-mouse', ignore),
-  regions: (regions: { x: number; y: number; width: number; height: number }[]) =>
+  regions: (regions: { x: number; y: number; width: number; height: number; interactive: boolean }[]) =>
     ipcRenderer.send('companion:regions', regions),
   onState: (listener: (snapshot: CompanionSnapshot) => void) => {
     const wrapped = (_event: Electron.IpcRendererEvent, snapshot: CompanionSnapshot) => listener(snapshot)

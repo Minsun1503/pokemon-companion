@@ -18,7 +18,7 @@ declare global {
         send(pet: string, text: string): Promise<CompanionChatReply>
       }
       ignoreMouse(ignore: boolean): void
-      regions(regions: { x: number; y: number; width: number; height: number }[]): void
+      regions(regions: { x: number; y: number; width: number; height: number; interactive: boolean }[]): void
       onState(listener: (snapshot: CompanionSnapshot) => void): () => void
     }
   }
@@ -376,6 +376,7 @@ setInterval(() => {
         y: Math.max(0, Math.floor(bounds.top) - 8),
         width: Math.ceil(bounds.width) + 16,
         height: Math.ceil(bounds.height) + 16,
+        interactive: entry !== element('bubble'),
       }
     })
   window.pokemonAPI.regions(regions)

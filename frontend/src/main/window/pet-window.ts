@@ -9,12 +9,14 @@ export function createPetWindow({
   preloadPath,
   display,
   active,
+  focusable = true,
   rendererFile = 'index.html',
 }: {
   rootDir: string
   preloadPath: string
   display: Display
   active: boolean
+  focusable?: boolean
   rendererFile?: string
 }): PetWindow {
   const area = display.workArea
@@ -32,6 +34,7 @@ export function createPetWindow({
     resizable: false,
     skipTaskbar: true,
     show: false,
+    focusable,
     webPreferences: {
       preload: preloadPath,
       nodeIntegration: false,

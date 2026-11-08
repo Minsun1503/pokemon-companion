@@ -134,6 +134,7 @@ async function syncDisplays(): Promise<void> {
       display,
       active: display.id === activeDisplayId,
       rendererFile: 'companion.html',
+      focusable: false,
     })
     windows.set(display.id, win)
     await new Promise<void>((resolve, reject) => {
@@ -175,8 +176,13 @@ app
     ipcMain.handle('companion:select', (_event, pet: unknown) => selectPet(pet))
     ipcMain.handle('companion:pause', () => togglePause())
     ipcMain.on('companion:quit', () => app.quit())
-    ipcMain.on('companion:panel', (_event, open: unknown) => {
+    ipcMain.on('companion:panel', (event, open: unknown) => {
       if (open === true && !paused && (state.task || state.interactionLocked)) togglePause()
+      const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
+      if (!win || win.isDestroyed()) return
+      if (open !== true && win.isFocused()) win.blur()
+      win.setFocusable(open === true)
+      if (open === true) win.focus()
     })
     const chat = new CompanionChat(rootDir, app.getPath('userData'), registry)
     ipcMain.handle('companion:chat-history', (_event, pet: unknown) => {
@@ -192,7 +198,7 @@ app
     ipcMain.on('companion:ignore-mouse', (event, ignore: unknown) => {
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
       const busy = !paused && Boolean(state.interactionLocked)
-      win?.setIgnoreMouseEvents(process.platform === 'win32' ? busy : ignore !== false || busy, { forward: true })
+      win?.setIgnoreMouseEvents(ignore !== false || busy, { forward: true })
     })
     ipcMain.on('companion:regions', (event, regions: unknown) => {
       if (process.platform !== 'win32' || !Array.isArray(regions) || regions.length > 3) return
@@ -205,6 +211,7 @@ app
       if (
         !regions.every(
           (region) =>
+            typeof region.interactive === 'boolean' &&
             [region.x, region.y, region.width, region.height].every(Number.isInteger) &&
             region.x >= 0 &&
             region.y >= 0 &&
@@ -213,9 +220,20 @@ app
         )
       )
         return
-      win.setShape(regions)
+      win.setShape(regions.map(({ x, y, width, height }) => ({ x, y, width, height })))
+      const cursor = screen.getCursorScreenPoint()
+      const bounds = win.getBounds()
+      // The bubble must stay painted while clicks pass through it to the app below.
+      const inside = regions.some(
+        (region) =>
+          region.interactive &&
+          cursor.x >= bounds.x + region.x &&
+          cursor.x < bounds.x + region.x + region.width &&
+          cursor.y >= bounds.y + region.y &&
+          cursor.y < bounds.y + region.y + region.height,
+      )
       const busy = !paused && Boolean(state.interactionLocked)
-      win.setIgnoreMouseEvents(busy, { forward: true })
+      win.setIgnoreMouseEvents(!inside || busy, { forward: true })
     })
     await syncDisplays()
     globalShortcut.register('CommandOrControl+Shift+P', togglePause)
