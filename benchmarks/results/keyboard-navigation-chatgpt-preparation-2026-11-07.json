@@ -1,0 +1,44 @@
+{
+  "complete": false,
+  "failure": "Start with Settings closed.\n\n1 !== 0\n",
+  "diagnostics": [
+    "Computer Use MCP server running on stdio",
+    "(node:8792) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+    "(Use `node --trace-deprecation ...` to show where the warning was created)"
+  ],
+  "measured_at": "2026-11-07T17:07:39.508Z",
+  "app": "chatgpt",
+  "runs_per_path": 20,
+  "companion": "on",
+  "alternating_order": true,
+  "notes": "Preparation and verified restoration excluded. No Enter, screenshots, or AI inference. Edge numerical URL avoids known Telex alphabetic transformations; this does not establish alphabetic typing correctness.",
+  "summary": [
+    {
+      "path": "uia",
+      "correct": 0,
+      "runs": 0,
+      "foreground_mismatches": 0,
+      "mcp_calls": [],
+      "server": {
+        "median_ms": null
+      },
+      "client": {
+        "median_ms": null
+      }
+    },
+    {
+      "path": "shortcut",
+      "correct": 0,
+      "runs": 0,
+      "foreground_mismatches": 0,
+      "mcp_calls": [],
+      "server": {
+        "median_ms": null
+      },
+      "client": {
+        "median_ms": null
+      }
+    }
+  ],
+  "samples": []
+}

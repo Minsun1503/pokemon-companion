@@ -6,6 +6,7 @@ interface PetMotionControllerOptions {
   petContainer: HTMLElement
   initialPosition: { x: number; y: number }
   canWalk: () => boolean
+  getAnimation?: () => string
   getMinY?: () => number
   onPositionApplied: () => void
 }
@@ -56,6 +57,9 @@ export class PetMotionController {
   private jumpTick = 0
   private jumpCooldown = 0
   private target: { x: number; y: number } | null = null
+  private requestedAnimation: string | undefined
+  private animationTime = 0
+  private readonly reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')
   private readonly timer: ReturnType<typeof setInterval>
 
   constructor(private readonly opts: PetMotionControllerOptions) {
@@ -67,12 +71,21 @@ export class PetMotionController {
     this.resetRandomMoveVector()
     this.jumpCooldown = randomBetween(80, 220)
     this.applyPosition()
-    this.setFrame('walk', this.direction, 0)
+    this.setFrame(opts.petDefinition.sprites.idle ? 'idle' : 'walk', this.direction, 0)
     this.timer = setInterval(() => this.tick(), 30)
   }
 
   get position(): { x: number; y: number } {
     return { x: this.x, y: this.y }
+  }
+
+  get isPerformingAction(): boolean {
+    return this.animationTime > 0
+  }
+
+  playAnimation(animation: string | undefined, duration: number): void {
+    this.requestedAnimation = animation
+    this.animationTime = animation ? duration : 0
   }
 
   setPosition(x: number, y: number): void {
@@ -123,8 +136,22 @@ export class PetMotionController {
   }
 
   private tick(): void {
-    const canWalk = this.opts.canWalk() || this.target !== null
-    this.action = canWalk ? 'walk' : 'idle'
+    const activity = this.opts.getAnimation?.() ?? 'idle'
+    const animation =
+      activity !== 'paused' && this.requestedAnimation && this.animationTime > 0 ? this.requestedAnimation : activity
+    if (animation === 'paused') {
+      this.target = null
+      this.jumpTick = 0
+      this.playAnimation(undefined, 0)
+    }
+    const reducedMotion = Boolean(this.opts.petDefinition.sprites.run && this.reducedMotion?.matches)
+    if (reducedMotion && this.target) {
+      this.setPosition(this.target.x, this.target.y)
+      this.target = null
+    }
+    const canWalk = animation !== 'paused' && !reducedMotion && (this.opts.canWalk() || this.target !== null)
+    const previousX = this.x
+    const previousY = this.y
 
     if (canWalk) {
       if (this.target) {
@@ -142,20 +169,28 @@ export class PetMotionController {
       } else this.walk()
     }
 
+    const moving = this.x !== previousX || this.y !== previousY
+    if (!moving) this.animationTime = Math.max(0, this.animationTime - 30)
+    const action = moving ? (this.opts.petDefinition.sprites.run ? 'run' : 'walk') : animation
+    if (action !== this.action) {
+      this.action = action
+      this.frameIndex = 0
+      this.frameTick = 0
+    }
+    const direction = !moving && this.opts.getAnimation ? 'down' : this.direction
+
     if (this.jumpTick > 0) {
       this.jumpTick--
     }
 
     this.frameTick++
     const movement = this.opts.petDefinition.movement
-    const frameInterval = this.action === 'walk' ? movement.walkFrameInterval : movement.idleFrameInterval
+    const frameInterval = moving ? movement.walkFrameInterval : movement.idleFrameInterval
     if (this.frameTick >= frameInterval) {
       this.frameTick = 0
       this.frameIndex++
-      this.setFrame(this.action, this.direction, this.frameIndex)
-    } else {
-      this.updateSpriteTransform(this.action, this.direction, this.frameIndex)
     }
+    this.setFrame(this.action, direction, this.frameIndex)
   }
 
   private walk(): void {
@@ -186,7 +221,7 @@ export class PetMotionController {
     }
 
     this.jumpCooldown--
-    if (this.jumpCooldown <= 0) {
+    if (this.jumpCooldown <= 0 && !this.opts.petDefinition.sprites.run) {
       this.triggerJump()
       this.jumpCooldown = randomBetween(120, 320)
     }
@@ -264,11 +299,18 @@ export class PetMotionController {
   }
 
   private setFrame(action: string, dir: string, idx: number): void {
-    const frames = this.opts.petDefinition.sprites[this.getSpriteKey(dir)] ?? this.opts.petDefinition.sprites.down
+    const sprites = this.opts.petDefinition.sprites
+    const key = action === 'run' && dir.startsWith('up') && sprites.run_back ? 'run_back' : action
+    const reducedMotion = Boolean(sprites.run && this.reducedMotion?.matches)
+    const frames = (!reducedMotion ? sprites[key] : undefined) ?? sprites[this.getSpriteKey(dir)] ?? sprites.down
     if (!frames?.length) {
       return
     }
-    this.opts.petImage.src = frames[idx % frames.length]
+    const source = frames[action === 'paused' || reducedMotion ? 0 : idx % frames.length]
+    // Reassigning the same GIF restarts it, preventing the action from completing a cycle.
+    if (this.opts.petImage.src !== source) this.opts.petImage.src = source
+    this.opts.petContainer.dataset.animation = action
+    this.opts.petContainer.dataset.direction = dir
     this.updateSpriteTransform(action, dir, idx)
   }
 

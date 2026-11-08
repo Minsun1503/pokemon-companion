@@ -1,6 +1,8 @@
 import {spawn, type ChildProcessWithoutNullStreams} from 'node:child_process';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {performance} from 'node:perf_hooks';
+import {recordTiming, serialize} from '../utils/timing.js';
 
 export type WindowsRequest = {
 	action: string;
@@ -14,45 +16,106 @@ export type WindowsRequest = {
 	element_id?: number | undefined;
 	text?: string | undefined;
 	direction?: string | undefined;
+	expect_value?: string | undefined;
+	timeout_ms?: number | undefined;
 };
+
+type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};
 
 export class WindowsAutomation {
 	private worker: ChildProcessWithoutNullStreams | undefined;
 	private sequence = 0;
 	private buffer = '';
-	private readonly pending = new Map<number, {resolve: (value: Record<string, unknown>) => void; reject: (error: Error) => void; timer: ReturnType<typeof setTimeout>}>();
+	private readonly pending = new Map<number, {resolve: (value: Record<string, unknown>) => void; reject: (error: Error) => void; cleanup: () => void}>();
 
-	async request(args: WindowsRequest): Promise<Record<string, unknown>> {
+	warm(): void {
+		if (process.platform === 'win32') {
+			this.start();
+		}
+	}
+
+	async requireForeground(windowId: string, options: RequestOptions): Promise<void> {
+		const foreground = await this.request({action: 'foreground'}, options);
+		if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
+			throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
+		}
+	}
+
+	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
 		if (process.platform !== 'win32') {
 			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');
 		}
 
+		const roundTrip = performance.now();
 		this.start();
 		this.sequence += 1;
 		const id = this.sequence;
 		const result = await new Promise<Record<string, unknown>>((resolveRequest, reject) => {
 			const timer = setTimeout(() => {
-				this.close(new Error('Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.'));
-			}, 20_000);
-			this.pending.set(id, {resolve: resolveRequest, reject, timer});
-			this.worker!.stdin.write(`${JSON.stringify({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
+				this.close(new Error(options?.timeoutError ?? 'Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.'));
+			}, options?.timeoutMs ?? 20_000);
+			const cancel = () => {
+				this.close(new Error('Computer action cancelled. After an interrupted wait, call get_ui again for fresh snapshots.'));
+			};
+
+			const pauseTimer = options
+				? setInterval(() => {
+					if (options.paused()) {
+						this.close(new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P. After an interrupted wait, call get_ui again for fresh snapshots.'));
+					}
+				}, 100)
+				: undefined;
+			this.pending.set(id, {
+				resolve: resolveRequest, reject, cleanup() {
+					clearTimeout(timer);
+					clearInterval(pauseTimer);
+					options?.signal?.removeEventListener('abort', cancel);
+				},
+			});
+			options?.signal?.addEventListener('abort', cancel, {once: true});
+			if (options?.signal?.aborted) {
+				cancel();
+				return;
+			}
+
+			this.worker!.stdin.write(`${serialize({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
 		});
+		recordTiming('worker_round_trip', performance.now() - roundTrip);
+		if (typeof result.uia_tree_walk_ms === 'number') {
+			recordTiming('uia_tree_walk', result.uia_tree_walk_ms);
+			delete result.uia_tree_walk_ms;
+		}
+
+		const postProcessing = performance.now();
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;
+		// shortcut: match English caption names; add native caption IDs if localized apps need the hint.
+		if (args.action === 'get_ui' && !result.truncated && entries?.length && entries.every((node: Record<string, unknown>) => node.role === 'TitleBar'
+			|| (node.role === 'Button' && /^(Minimize|Maximize|Restore|Close)$/i.test(String(node.name))))) {
+			result.hint = 'Only title-bar controls found. Call activate on this window and read again.';
+		}
+
 		if (entries) {
-			while (entries.length > (args.max_elements ?? 60) || (JSON.stringify(result).length > maxChars && entries.length > 0)) {
-				entries.pop();
+			const limit = args.max_elements ?? 60;
+			let size = serialize(result).length;
+			if (entries.length > limit || (size > maxChars && entries.length > 0)) {
 				result.truncated = true;
+				size = serialize(result).length;
+				while (entries.length > limit || (size > maxChars && entries.length > 0)) {
+					const removed = entries.pop();
+					size -= serialize(removed).length + (entries.length > 0 ? 1 : 0);
+				}
 			}
 		} else if (typeof result.text === 'string') {
 			let {text} = result;
-			while (typeof text === 'string' && JSON.stringify(result).length > maxChars && text.length > 0) {
-				text = text.slice(0, Math.max(0, text.length - Math.max(1, JSON.stringify(result).length - maxChars)));
+			while (typeof text === 'string' && serialize(result).length > maxChars && text.length > 0) {
+				text = text.slice(0, Math.max(0, text.length - Math.max(1, serialize(result).length - maxChars)));
 				result.text = text;
 				result.truncated = true;
 			}
 		}
 
+		recordTiming('post_processing', performance.now() - postProcessing);
 		return result;
 	}
 
@@ -62,7 +125,7 @@ export class WindowsAutomation {
 		this.buffer = '';
 		worker?.kill();
 		for (const item of this.pending.values()) {
-			clearTimeout(item.timer);
+			item.cleanup();
 			item.reject(error);
 		}
 
@@ -101,10 +164,12 @@ export class WindowsAutomation {
 						continue;
 					}
 
-					clearTimeout(item.timer);
+					item.cleanup();
 					this.pending.delete(response.id);
-					if (response.error) {
-						item.reject(new Error(response.error));
+					if (response.error !== undefined) {
+						item.reject(new Error(response.error || 'Windows UI Automation failed without an error message. Call get_ui again for fresh snapshots.'));
+					} else if (!response.result || typeof response.result !== 'object' || Array.isArray(response.result)) {
+						item.reject(new Error('Windows UI Automation returned an invalid response.'));
 					} else {
 						item.resolve(response.result);
 					}

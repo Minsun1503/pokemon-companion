@@ -1,6 +1,8 @@
 import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import {type Companion, DesktopCompanion, type PokemonState} from './companion.js';
 import {WindowsAutomation} from '../windows/automation.js';
+import {performance} from 'node:perf_hooks';
+import {measure, recordTiming} from '../utils/timing.js';
 
 const labels: Record<string, string> = {
 	key: 'Using a keyboard shortcut', type: 'Typing', mouse_move: 'Moving to the target',
@@ -11,11 +13,13 @@ const labels: Record<string, string> = {
 	invoke: 'Using an app control', set_value: 'Filling a field', select: 'Selecting an item',
 	activate: 'Switching to your app', focus: 'Focusing a field', toggle: 'Toggling a control',
 	expand: 'Expanding a control', collapse: 'Collapsing a control',
+	wait_for: 'Waiting for an app control', launch: 'Opening your app',
 };
 
 export class PokemonRuntime {
 	readonly windows = new WindowsAutomation();
 	private queue: Promise<unknown> = Promise.resolve();
+	private gestureSequence = 0;
 	constructor(readonly companion: Companion = new DesktopCompanion()) {}
 
 	async close(): Promise<void> {
@@ -25,7 +29,11 @@ export class PokemonRuntime {
 
 	/** Serialize all input and character commands across clients sharing this desktop. */
 	async exclusive<T>(run: () => Promise<T>): Promise<T> {
-		const result = this.queue.then(run);
+		const queued = performance.now();
+		const result = this.queue.then(async () => {
+			recordTiming('queue_wait', performance.now() - queued);
+			return run();
+		});
 		this.queue = result.catch(() => undefined);
 		return result;
 	}
@@ -41,13 +49,13 @@ export class PokemonRuntime {
 
 	async update(patch: Partial<PokemonState>): Promise<PokemonState> {
 		return this.exclusive(async () => {
-			await this.companion.update(patch);
+			await measure('companion_before', async () => this.companion.update(patch));
 			return {...this.companion.state};
 		});
 	}
 
 	private async executeComputer(action: string, coordinate: number[] | undefined, execute: () => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
-		await this.companion.start();
+		await measure('companion_before', async () => this.companion.start());
 		if (signal?.aborted) {
 			throw new Error('Computer action cancelled.');
 		}
@@ -56,30 +64,60 @@ export class PokemonRuntime {
 			throw new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
 		}
 
-		await this.companion.update({activity: action.startsWith('get_') ? 'thinking' : 'working', message: labels[action] || action, interactionLocked: true}, coordinate);
+		await measure('companion_before', async () => this.companion.update({interactionLocked: true}));
+		const animation = ['key', 'type', 'set_value'].includes(action)
+			? 'typing' as const
+			: ['left_click', 'right_click', 'middle_click', 'double_click', 'left_click_drag', 'invoke', 'select', 'toggle', 'expand', 'collapse', 'scroll'].includes(action) ? 'clicking' as const : undefined;
+		if (animation) {
+			this.gestureSequence += 1;
+		}
+
+		const gesture = animation ? {animation, id: this.gestureSequence} : undefined;
+		this.animate({
+			activity: action.startsWith('get_') ? 'thinking' : 'working',
+			...(gesture ? {action: {...gesture, active: true}} : {}), message: labels[action] || action,
+		}, coordinate);
 		try {
 			if (action === 'get_screenshot') {
-				await this.companion.capture(true);
+				await measure('companion_before', async () => measure('capture_hide', async () => this.companion.capture(true)));
 			}
 
 			if (signal?.aborted || this.companion.state.paused) {
 				throw new Error('Computer action cancelled or paused before execution.');
 			}
 
-			const result = await execute();
+			const result = await measure('action', execute);
 			if (result.isError) {
 				throw new Error(result.content.filter((c) => c.type === 'text').map((c) => c.text).join('\n'));
 			}
 
-			await this.companion.update({activity: this.companion.state.task ? 'working' : 'idle', completedActions: this.companion.state.completedActions + 1, interactionLocked: false});
+			this.animate({
+				activity: this.companion.state.task ? 'working' : 'idle',
+				...(gesture ? {action: {...gesture, active: false}} : {}), completedActions: this.companion.state.completedActions + 1,
+			});
 			return result;
 		} catch (error) {
-			await this.companion.update({activity: 'error', message: error instanceof Error ? error.message : String(error), interactionLocked: false});
+			this.animate({activity: 'error', message: error instanceof Error ? error.message : String(error)});
 			throw error;
 		} finally {
-			if (action === 'get_screenshot') {
-				await this.companion.capture(false);
+			try {
+				await measure('companion_after', async () => this.companion.update({interactionLocked: false}));
+			} finally {
+				if (action === 'get_screenshot') {
+					await measure('companion_after', async () => measure('capture_show', async () => this.companion.capture(false)));
+				}
 			}
 		}
+	}
+
+	private animate(patch: Partial<PokemonState>, coordinate?: number[]): void {
+		Object.assign(this.companion.state, patch);
+		try {
+			if (this.companion.animate) {
+				this.companion.animate(patch, coordinate);
+			} else {
+				void this.companion.update(patch, coordinate).catch(() => undefined);
+			}
+		} catch {/* Custom companions may throw synchronously on cosmetic updates. */}
 	}
 }

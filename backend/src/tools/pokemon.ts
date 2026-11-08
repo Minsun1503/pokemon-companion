@@ -3,6 +3,7 @@ import {z} from 'zod';
 import {pokemonIds, type PokemonState} from '../pokemon/companion.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import {jsonResult} from '../utils/response.js';
+import {measure, timedCall} from '../utils/timing.js';
 
 export function registerPokemon(server: McpServer, runtime: PokemonRuntime): void {
 	server.registerTool('pokemon', {
@@ -14,9 +15,9 @@ export function registerPokemon(server: McpServer, runtime: PokemonRuntime): voi
 			message: z.string().trim().min(1).max(240).optional(),
 		}).strict(),
 		annotations: {readOnlyHint: false},
-	}, async ({action, pet, message}) => {
+	}, async ({action, pet, message}) => timedCall('pokemon', action, async () => {
 		if (action === 'status') {
-			await runtime.companion.start();
+			await measure('companion_before', async () => runtime.companion.start());
 			return jsonResult({...runtime.companion.state, availablePets: [...pokemonIds]});
 		}
 
@@ -43,10 +44,10 @@ export function registerPokemon(server: McpServer, runtime: PokemonRuntime): voi
 							: action === 'think'
 								? {message: message || 'Thinking about the next step…', activity: 'thinking' as const}
 								: {message: message!};
-		return jsonResult(await runtime.update(patch));
-	});
+		return jsonResult(await runtime.update({...patch, action: undefined}));
+	}));
 	server.registerPrompt('pokemon-work', {
 		title: 'Work with your Pokémon',
 		description: 'Use the desktop companion to narrate and animate computer work.',
-	}, () => ({messages: [{role: 'user', content: {type: 'text', text: 'Use pokemon to announce the task. On Windows, prefer windows action=batch for known sequences to reduce AI exchanges: get_windows, get_ui with narrow filters, supported API actions, and a final UI read or expect_value check. Use zero-based window_step and target_step references to earlier discovery steps; never select ambiguous/truncated matches or guess ids. Batches stop at the first failure and do not undo completed actions; inspect completed/stopped_step before continuing and never replay completed inputs blindly. Use atomic calls when the next action needs your judgment. Keep results compact and progress brief. If UI Automation is insufficient, use computer keyboard shortcuts; screenshots and coordinate clicks are a last resort. Screenshot coordinates use the supplied image dimensions. Mark done only after verifying results. Respect user pauses. Select my preferred Pokémon when asked.'}}]}));
+	}, () => ({messages: [{role: 'user', content: {type: 'text', text: 'Use pokemon to announce the task. On Windows, prefer windows action=batch for known sequences to reduce AI exchanges: get_windows, get_ui with narrow filters, supported API actions, and a final UI read or expect_value check. Use wait_for to poll a control or exact value until a bounded timeout. Use launch to start an executable name/path or http/https URL via the OS and wait for its window (URLs require query; no shell commands or arguments). Use zero-based window_step and target_step references to earlier discovery steps; never select ambiguous/truncated matches or guess ids. Batches stop at the first failure and do not undo completed actions; inspect completed/stopped_step before continuing and never replay completed inputs blindly. Use atomic calls when the next action needs your judgment. Keep results compact and progress brief. If UI Automation is insufficient, use computer keyboard shortcuts; screenshots and coordinate clicks are a last resort. Screenshot coordinates use the supplied image dimensions. Mark done only after verifying results. Respect user pauses. Select my preferred Pokémon when asked. Shortcuts: use windows focus/invoke/set_value and batch first. Use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only when no control is exposed or no UIA pattern fits; on Windows pass window_id for the foreground guard and verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation.'}}]}));
 }

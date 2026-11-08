@@ -10,7 +10,7 @@ let fixture;
 let fixtureUrl;
 try {
   const electron = resolve(root, 'frontend/node_modules/electron/dist/electron.exe');
-  const env = {...process.env};
+  const env = {...process.env, POKEMON_INPUT_FIXTURE_PASSWORD: '1', POKEMON_INPUT_FIXTURE_SINGLELINE: '1'};
   delete env.ELECTRON_RUN_AS_NODE;
   fixture = spawn(electron, [resolve(root, 'scripts/input-fixture/index.cjs'), '--force-renderer-accessibility'], {env, windowsHide: true, stdio: ['ignore', 'pipe', 'inherit']});
   await new Promise((ready, reject) => {
@@ -35,13 +35,32 @@ try {
   const listed = await api({action: 'get_windows', query: title});
   assert.equal(listed.windows.length, 1);
   const window_id = listed.windows[0].id;
-  const editors = await api({action: 'get_ui', window_id, control_type: 'Edit'});
+  const secret = await api({action: 'get_ui', window_id, query: 'Secret password'});
+  assert.equal(secret.nodes.length, 0);
+  assert(!JSON.stringify(secret).includes('hidden-test-password'));
+  for (const text of ['', '  ', '\ufffc']) {
+    const blank = await api({action: 'batch', steps: [
+      {action: 'get_ui', window_id, query: 'Blank field', control_type: 'Edit'},
+      {action: 'set_value', target_step: 0, text},
+      {action: 'get_ui', window_id, query: 'Blank field', control_type: 'Edit', expect_value: text},
+      {action: 'read_text', target_step: 2},
+    ]});
+    assert.equal(blank.ok, true);
+    assert.equal(blank.result.text, text, 'Read the actual value, preserving whitespace and literal object markers.');
+  }
+  const document = await api({action: 'get_ui', window_id, control_type: 'Document'});
+  assert.equal(document.nodes.length, 1);
+  const documentText = await api({action: 'read_text', snapshot: document.snapshot, element_id: document.nodes[0].id});
+  assert(documentText.text.includes('Verify input'), 'Documents must retain their body text rather than returning only the URL.');
+  const editors = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
   assert.equal(editors.nodes.length, 1);
   assert(editors.nodes[0].actions.includes('set_value'));
   const text = 'Xin chào, mình là Pikachu! www.youtube.com';
   await api({action: 'set_value', snapshot: editors.snapshot, element_id: editors.nodes[0].id, text});
-  const filled = await api({action: 'get_ui', window_id, query: 'Test note'});
+  let filled = await api({action: 'get_ui', window_id, query: 'Test note'});
+  if (filled.nodes[0]?.value !== text) filled = await api({action: 'get_ui', window_id, query: 'Test note'});
   assert.equal(filled.nodes[0].value, text);
+  assert.equal(filled.nodes[0].value_clipped, undefined);
   const buttons = await api({action: 'get_ui', window_id, query: 'Verify input', control_type: 'Button'});
   assert.equal(buttons.nodes.length, 1);
   await api({action: 'invoke', snapshot: buttons.snapshot, element_id: buttons.nodes[0].id});
@@ -64,14 +83,40 @@ try {
   const batchState = await (await fetch(fixtureUrl)).json();
   assert.equal(batchState.text, batchText);
   assert.equal(batchState.clicks, 2);
+  let longEditor = batch.result;
+  for (const longText of ['x'.repeat(160), 'x'.repeat(161), text.repeat(12)]) {
+    const changed = await api({action: 'set_value', snapshot: longEditor.snapshot, element_id: longEditor.nodes[0].id, text: longText});
+    assert.equal(changed.value_clipped, changed.value.length > 160 ? true : undefined);
+    const expectedPreview = longText.length > 160 ? longText.slice(0, 160) + '…' : longText;
+    let preview = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
+    if (preview.nodes[0]?.value !== expectedPreview) preview = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
+    assert.equal(preview.truncated, false);
+    assert.equal(preview.nodes[0].value, expectedPreview);
+    assert.equal(preview.nodes[0].value_clipped, longText.length > 160 ? true : undefined);
+    const full = await api({action: 'read_text', snapshot: preview.snapshot, element_id: preview.nodes[0].id});
+    assert.equal(full.text, longText);
+    longEditor = preview;
+  }
   const small = await api({action: 'get_ui', window_id, max_elements: 1, max_chars: 1000});
   assert.equal(small.nodes.length, 1);
   assert.equal(small.truncated, true);
+  assert.equal(small.matched, 2);
+  assert(small.scanned < longEditor.scanned);
   assert(JSON.stringify(small).length <= 1000);
+  let recent = longEditor;
+  for (let read = 0; read < 9; read += 1) {
+    const next = await api({action: 'get_ui', window_id, query: 'Test note', control_type: 'Edit'});
+    const previousText = await api({action: 'read_text', snapshot: recent.snapshot, element_id: recent.nodes[0].id});
+    assert.equal(previousText.text, text.repeat(12), 'Cache rollover must retain recent snapshots instead of clearing all IDs.');
+    recent = next;
+  }
+  const shallow = await api({action: 'get_ui', window_id, max_depth: 1});
+  assert.equal(shallow.truncated, true);
+  assert(shallow.scanned < longEditor.scanned);
   await assert.rejects(api({action: 'invoke', snapshot: '0'.repeat(32), element_id: 1}), /Unknown or expired/);
   assert.equal(screenshots, 0);
   await call('pokemon', {action: 'done', message: 'Windows API reading, typing, and buttons verified!'});
-  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
+  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, password hiding, early element/depth limits, clipping flags at 160/161 characters and full read_text, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
 } finally {
   if (fixtureUrl) await fetch(`${fixtureUrl}/quit`, {method: 'POST'}).catch(() => {});
   fixture?.kill();

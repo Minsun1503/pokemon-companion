@@ -1,0 +1,5746 @@
+{
+  "complete": false,
+  "runs": 20,
+  "samples": [
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 1,
+      "elapsed_ms": 137.80489999999918,
+      "breakdown_ms": {
+        "queue_wait": 0.007399999999961437,
+        "companion_before": 0.9329999999999927,
+        "action": 134.3158000000003,
+        "companion_after": 0.5423999999998159,
+        "serialization": 0.02639999999973952,
+        "worker_round_trip": 134.17339999999967,
+        "uia_tree_walk": 50.638400000000004,
+        "post_processing": 0.09359999999969659
+      },
+      "server_total_ms": 135.91179999999986,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 135.91179999999986,
+          "breakdown_ms": {
+            "queue_wait": 0.007399999999961437,
+            "companion_before": 0.9329999999999927,
+            "action": 134.3158000000003,
+            "companion_after": 0.5423999999998159,
+            "serialization": 0.02639999999973952,
+            "worker_round_trip": 134.17339999999967,
+            "uia_tree_walk": 50.638400000000004,
+            "post_processing": 0.09359999999969659
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 2,
+      "elapsed_ms": 31.110099999999875,
+      "breakdown_ms": {
+        "queue_wait": 0.007100000000264117,
+        "companion_before": 1.8312000000000808,
+        "action": 27.220200000000204,
+        "companion_after": 0.5449000000003252,
+        "serialization": 0.02080000000023574,
+        "worker_round_trip": 27.166600000000017,
+        "uia_tree_walk": 24.561500000000002,
+        "post_processing": 0.02040000000033615
+      },
+      "server_total_ms": 29.8145999999997,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 29.8145999999997,
+          "breakdown_ms": {
+            "queue_wait": 0.007100000000264117,
+            "companion_before": 1.8312000000000808,
+            "action": 27.220200000000204,
+            "companion_after": 0.5449000000003252,
+            "serialization": 0.02080000000023574,
+            "worker_round_trip": 27.166600000000017,
+            "uia_tree_walk": 24.561500000000002,
+            "post_processing": 0.02040000000033615
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 3,
+      "elapsed_ms": 32.74150000000009,
+      "breakdown_ms": {
+        "queue_wait": 0.005999999999858119,
+        "companion_before": 1.865299999999479,
+        "action": 25.745800000000145,
+        "companion_after": 2.875600000000304,
+        "serialization": 0.05480000000034124,
+        "worker_round_trip": 25.57420000000002,
+        "uia_tree_walk": 22.6703,
+        "post_processing": 0.06690000000025975
+      },
+      "server_total_ms": 30.67910000000029,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 30.67910000000029,
+          "breakdown_ms": {
+            "queue_wait": 0.005999999999858119,
+            "companion_before": 1.865299999999479,
+            "action": 25.745800000000145,
+            "companion_after": 2.875600000000304,
+            "serialization": 0.05480000000034124,
+            "worker_round_trip": 25.57420000000002,
+            "uia_tree_walk": 22.6703,
+            "post_processing": 0.06690000000025975
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 4,
+      "elapsed_ms": 26.17829999999958,
+      "breakdown_ms": {
+        "queue_wait": 0.006199999999807915,
+        "companion_before": 2.243199999999888,
+        "action": 22.138400000000274,
+        "companion_after": 0.48149999999986903,
+        "serialization": 0.021199999999680585,
+        "worker_round_trip": 22.078899999999976,
+        "uia_tree_walk": 19.7373,
+        "post_processing": 0.02209999999968204
+      },
+      "server_total_ms": 24.95189999999957,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.95189999999957,
+          "breakdown_ms": {
+            "queue_wait": 0.006199999999807915,
+            "companion_before": 2.243199999999888,
+            "action": 22.138400000000274,
+            "companion_after": 0.48149999999986903,
+            "serialization": 0.021199999999680585,
+            "worker_round_trip": 22.078899999999976,
+            "uia_tree_walk": 19.7373,
+            "post_processing": 0.02209999999968204
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 5,
+      "elapsed_ms": 26.922899999999572,
+      "breakdown_ms": {
+        "queue_wait": 0.008700000000317232,
+        "companion_before": 3.448199999999815,
+        "action": 21.808899999999994,
+        "companion_after": 0.4254000000000815,
+        "serialization": 0.025600000000395084,
+        "worker_round_trip": 21.74260000000004,
+        "uia_tree_walk": 19.147000000000002,
+        "post_processing": 0.025500000000192813
+      },
+      "server_total_ms": 25.872399999999743,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.872399999999743,
+          "breakdown_ms": {
+            "queue_wait": 0.008700000000317232,
+            "companion_before": 3.448199999999815,
+            "action": 21.808899999999994,
+            "companion_after": 0.4254000000000815,
+            "serialization": 0.025600000000395084,
+            "worker_round_trip": 21.74260000000004,
+            "uia_tree_walk": 19.147000000000002,
+            "post_processing": 0.025500000000192813
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 6,
+      "elapsed_ms": 26.19250000000011,
+      "breakdown_ms": {
+        "queue_wait": 0.008299999999962893,
+        "companion_before": 2.059900000000198,
+        "action": 21.783699999999953,
+        "companion_after": 0.8833999999997104,
+        "serialization": 0.026899999999386637,
+        "worker_round_trip": 21.706900000000132,
+        "uia_tree_walk": 19.119600000000002,
+        "post_processing": 0.03669999999965512
+      },
+      "server_total_ms": 25.03749999999991,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.03749999999991,
+          "breakdown_ms": {
+            "queue_wait": 0.008299999999962893,
+            "companion_before": 2.059900000000198,
+            "action": 21.783699999999953,
+            "companion_after": 0.8833999999997104,
+            "serialization": 0.026899999999386637,
+            "worker_round_trip": 21.706900000000132,
+            "uia_tree_walk": 19.119600000000002,
+            "post_processing": 0.03669999999965512
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 7,
+      "elapsed_ms": 26.648599999999533,
+      "breakdown_ms": {
+        "queue_wait": 0.009700000000066211,
+        "companion_before": 2.214599999999791,
+        "action": 22.997100000000046,
+        "companion_after": 0.439600000000155,
+        "serialization": 0.022500000000491127,
+        "worker_round_trip": 22.845100000000002,
+        "uia_tree_walk": 20.4192,
+        "post_processing": 0.025599999999940337
+      },
+      "server_total_ms": 25.78189999999995,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.78189999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.009700000000066211,
+            "companion_before": 2.214599999999791,
+            "action": 22.997100000000046,
+            "companion_after": 0.439600000000155,
+            "serialization": 0.022500000000491127,
+            "worker_round_trip": 22.845100000000002,
+            "uia_tree_walk": 20.4192,
+            "post_processing": 0.025599999999940337
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 8,
+      "elapsed_ms": 26.432799999999588,
+      "breakdown_ms": {
+        "queue_wait": 0.008299999999962893,
+        "companion_before": 2.079200000000128,
+        "action": 22.616999999999734,
+        "companion_after": 0.5127000000002226,
+        "serialization": 0.0215000000002874,
+        "worker_round_trip": 22.464899999999943,
+        "uia_tree_walk": 19.704700000000003,
+        "post_processing": 0.029799999999795546
+      },
+      "server_total_ms": 25.30540000000019,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.30540000000019,
+          "breakdown_ms": {
+            "queue_wait": 0.008299999999962893,
+            "companion_before": 2.079200000000128,
+            "action": 22.616999999999734,
+            "companion_after": 0.5127000000002226,
+            "serialization": 0.0215000000002874,
+            "worker_round_trip": 22.464899999999943,
+            "uia_tree_walk": 19.704700000000003,
+            "post_processing": 0.029799999999795546
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 9,
+      "elapsed_ms": 37.83420000000024,
+      "breakdown_ms": {
+        "queue_wait": 0.005700000000160799,
+        "companion_before": 2.403099999999995,
+        "action": 33.746599999999944,
+        "companion_after": 0.6811999999999898,
+        "serialization": 0.02349999999978536,
+        "worker_round_trip": 33.672799999999825,
+        "uia_tree_walk": 31.014100000000003,
+        "post_processing": 0.025599999999940337
+      },
+      "server_total_ms": 36.89899999999989,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 36.89899999999989,
+          "breakdown_ms": {
+            "queue_wait": 0.005700000000160799,
+            "companion_before": 2.403099999999995,
+            "action": 33.746599999999944,
+            "companion_after": 0.6811999999999898,
+            "serialization": 0.02349999999978536,
+            "worker_round_trip": 33.672799999999825,
+            "uia_tree_walk": 31.014100000000003,
+            "post_processing": 0.025599999999940337
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 10,
+      "elapsed_ms": 27.112299999999777,
+      "breakdown_ms": {
+        "queue_wait": 0.008000000000265572,
+        "companion_before": 2.425199999999677,
+        "action": 23.27709999999979,
+        "companion_after": 0.5264000000001943,
+        "serialization": 0.021700000000237196,
+        "worker_round_trip": 23.223399999999856,
+        "uia_tree_walk": 20.5391,
+        "post_processing": 0.026899999999841384
+      },
+      "server_total_ms": 26.3104000000003,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 26.3104000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.008000000000265572,
+            "companion_before": 2.425199999999677,
+            "action": 23.27709999999979,
+            "companion_after": 0.5264000000001943,
+            "serialization": 0.021700000000237196,
+            "worker_round_trip": 23.223399999999856,
+            "uia_tree_walk": 20.5391,
+            "post_processing": 0.026899999999841384
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 11,
+      "elapsed_ms": 25.861799999999675,
+      "breakdown_ms": {
+        "queue_wait": 0.005599999999958527,
+        "companion_before": 3.077400000000125,
+        "action": 21.07609999999977,
+        "companion_after": 0.6984999999999673,
+        "serialization": 0.02860000000009677,
+        "worker_round_trip": 21.033899999999903,
+        "uia_tree_walk": 18.631700000000002,
+        "post_processing": 0.019800000000032014
+      },
+      "server_total_ms": 24.92470000000003,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.92470000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.005599999999958527,
+            "companion_before": 3.077400000000125,
+            "action": 21.07609999999977,
+            "companion_after": 0.6984999999999673,
+            "serialization": 0.02860000000009677,
+            "worker_round_trip": 21.033899999999903,
+            "uia_tree_walk": 18.631700000000002,
+            "post_processing": 0.019800000000032014
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 12,
+      "elapsed_ms": 27.427299999999377,
+      "breakdown_ms": {
+        "queue_wait": 0.005500000000211003,
+        "companion_before": 3.492800000000443,
+        "action": 21.74459999999999,
+        "companion_after": 0.4519999999997708,
+        "serialization": 0.0239000000001397,
+        "worker_round_trip": 21.70219999999972,
+        "uia_tree_walk": 18.7122,
+        "post_processing": 0.01890000000003056
+      },
+      "server_total_ms": 25.759700000000066,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.759700000000066,
+          "breakdown_ms": {
+            "queue_wait": 0.005500000000211003,
+            "companion_before": 3.492800000000443,
+            "action": 21.74459999999999,
+            "companion_after": 0.4519999999997708,
+            "serialization": 0.0239000000001397,
+            "worker_round_trip": 21.70219999999972,
+            "uia_tree_walk": 18.7122,
+            "post_processing": 0.01890000000003056
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 13,
+      "elapsed_ms": 25.558399999999892,
+      "breakdown_ms": {
+        "queue_wait": 0.004600000000209548,
+        "companion_before": 2.4407999999998538,
+        "action": 21.665100000000166,
+        "companion_after": 0.42679999999973006,
+        "serialization": 0.021000000000185537,
+        "worker_round_trip": 21.622699999999895,
+        "uia_tree_walk": 19.2699,
+        "post_processing": 0.018399999999928696
+      },
+      "server_total_ms": 24.594700000000103,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.594700000000103,
+          "breakdown_ms": {
+            "queue_wait": 0.004600000000209548,
+            "companion_before": 2.4407999999998538,
+            "action": 21.665100000000166,
+            "companion_after": 0.42679999999973006,
+            "serialization": 0.021000000000185537,
+            "worker_round_trip": 21.622699999999895,
+            "uia_tree_walk": 19.2699,
+            "post_processing": 0.018399999999928696
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 14,
+      "elapsed_ms": 26.20430000000033,
+      "breakdown_ms": {
+        "queue_wait": 0.009700000000066211,
+        "companion_before": 3.1046000000001186,
+        "action": 21.322200000000066,
+        "companion_after": 0.4130000000000109,
+        "serialization": 0.0239000000001397,
+        "worker_round_trip": 21.281400000000303,
+        "uia_tree_walk": 19.0514,
+        "post_processing": 0.01919999999972788
+      },
+      "server_total_ms": 24.926500000000033,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.926500000000033,
+          "breakdown_ms": {
+            "queue_wait": 0.009700000000066211,
+            "companion_before": 3.1046000000001186,
+            "action": 21.322200000000066,
+            "companion_after": 0.4130000000000109,
+            "serialization": 0.0239000000001397,
+            "worker_round_trip": 21.281400000000303,
+            "uia_tree_walk": 19.0514,
+            "post_processing": 0.01919999999972788
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 15,
+      "elapsed_ms": 26.111400000000685,
+      "breakdown_ms": {
+        "queue_wait": 0.005099999999856664,
+        "companion_before": 2.295799999999872,
+        "action": 21.82380000000012,
+        "companion_after": 0.7022999999999229,
+        "serialization": 0.027599999999893043,
+        "worker_round_trip": 21.771400000000085,
+        "uia_tree_walk": 19.3627,
+        "post_processing": 0.02510000000029322
+      },
+      "server_total_ms": 24.903199999999742,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.903199999999742,
+          "breakdown_ms": {
+            "queue_wait": 0.005099999999856664,
+            "companion_before": 2.295799999999872,
+            "action": 21.82380000000012,
+            "companion_after": 0.7022999999999229,
+            "serialization": 0.027599999999893043,
+            "worker_round_trip": 21.771400000000085,
+            "uia_tree_walk": 19.3627,
+            "post_processing": 0.02510000000029322
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 16,
+      "elapsed_ms": 28.017400000000634,
+      "breakdown_ms": {
+        "queue_wait": 0.005099999999856664,
+        "companion_before": 3.2406999999998334,
+        "action": 23.068500000000313,
+        "companion_after": 0.4193000000000211,
+        "serialization": 0.022399999999834108,
+        "worker_round_trip": 23.027600000000348,
+        "uia_tree_walk": 20.5837,
+        "post_processing": 0.01890000000003056
+      },
+      "server_total_ms": 26.79359999999997,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 26.79359999999997,
+          "breakdown_ms": {
+            "queue_wait": 0.005099999999856664,
+            "companion_before": 3.2406999999998334,
+            "action": 23.068500000000313,
+            "companion_after": 0.4193000000000211,
+            "serialization": 0.022399999999834108,
+            "worker_round_trip": 23.027600000000348,
+            "uia_tree_walk": 20.5837,
+            "post_processing": 0.01890000000003056
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 17,
+      "elapsed_ms": 27.008300000000418,
+      "breakdown_ms": {
+        "queue_wait": 0.004699999999957072,
+        "companion_before": 2.294499999999971,
+        "action": 23.283699999999953,
+        "companion_after": 0.4293999999999869,
+        "serialization": 0.02359999999998763,
+        "worker_round_trip": 23.240299999999934,
+        "uia_tree_walk": 20.445700000000002,
+        "post_processing": 0.019500000000334694
+      },
+      "server_total_ms": 26.07009999999991,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 26.07009999999991,
+          "breakdown_ms": {
+            "queue_wait": 0.004699999999957072,
+            "companion_before": 2.294499999999971,
+            "action": 23.283699999999953,
+            "companion_after": 0.4293999999999869,
+            "serialization": 0.02359999999998763,
+            "worker_round_trip": 23.240299999999934,
+            "uia_tree_walk": 20.445700000000002,
+            "post_processing": 0.019500000000334694
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 18,
+      "elapsed_ms": 24.524199999999837,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 2.1784999999999854,
+        "action": 20.991100000000188,
+        "companion_after": 0.42010000000027503,
+        "serialization": 0.024400000000241562,
+        "worker_round_trip": 20.947899999999663,
+        "uia_tree_walk": 18.8256,
+        "post_processing": 0.020500000000083674
+      },
+      "server_total_ms": 23.65159999999969,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.65159999999969,
+          "breakdown_ms": {
+            "queue_wait": 0.003899999999703141,
+            "companion_before": 2.1784999999999854,
+            "action": 20.991100000000188,
+            "companion_after": 0.42010000000027503,
+            "serialization": 0.024400000000241562,
+            "worker_round_trip": 20.947899999999663,
+            "uia_tree_walk": 18.8256,
+            "post_processing": 0.020500000000083674
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 19,
+      "elapsed_ms": 26.86579999999958,
+      "breakdown_ms": {
+        "queue_wait": 0.00430000000005748,
+        "companion_before": 2.700800000000072,
+        "action": 22.888200000000325,
+        "companion_after": 0.42470000000002983,
+        "serialization": 0.04309999999941283,
+        "worker_round_trip": 22.840799999999945,
+        "uia_tree_walk": 20.2738,
+        "post_processing": 0.01849999999967622
+      },
+      "server_total_ms": 26.090200000000095,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 26.090200000000095,
+          "breakdown_ms": {
+            "queue_wait": 0.00430000000005748,
+            "companion_before": 2.700800000000072,
+            "action": 22.888200000000325,
+            "companion_after": 0.42470000000002983,
+            "serialization": 0.04309999999941283,
+            "worker_round_trip": 22.840799999999945,
+            "uia_tree_walk": 20.2738,
+            "post_processing": 0.01849999999967622
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_narrow",
+      "run": 20,
+      "elapsed_ms": 24.985000000000582,
+      "breakdown_ms": {
+        "queue_wait": 0.004399999999805004,
+        "companion_before": 2.745400000000245,
+        "action": 20.799599999999828,
+        "companion_after": 0.42650000000003274,
+        "serialization": 0.021899999999732245,
+        "worker_round_trip": 20.759099999999762,
+        "uia_tree_walk": 18.7499,
+        "post_processing": 0.017999999999574356
+      },
+      "server_total_ms": 24.031999999999698,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.031999999999698,
+          "breakdown_ms": {
+            "queue_wait": 0.004399999999805004,
+            "companion_before": 2.745400000000245,
+            "action": 20.799599999999828,
+            "companion_after": 0.42650000000003274,
+            "serialization": 0.021899999999732245,
+            "worker_round_trip": 20.759099999999762,
+            "uia_tree_walk": 18.7499,
+            "post_processing": 0.017999999999574356
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 1,
+      "elapsed_ms": 29.040200000000368,
+      "breakdown_ms": {
+        "queue_wait": 0.0039999999999054126,
+        "companion_before": 0.8993000000000393,
+        "action": 26.086899999999787,
+        "companion_after": 0.41429999999991196,
+        "serialization": 0.02570000000014261,
+        "worker_round_trip": 26.032000000000153,
+        "uia_tree_walk": 19.3795,
+        "post_processing": 0.030500000000301952
+      },
+      "server_total_ms": 27.465900000000147,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 27.465900000000147,
+          "breakdown_ms": {
+            "queue_wait": 0.0039999999999054126,
+            "companion_before": 0.8993000000000393,
+            "action": 26.086899999999787,
+            "companion_after": 0.41429999999991196,
+            "serialization": 0.02570000000014261,
+            "worker_round_trip": 26.032000000000153,
+            "uia_tree_walk": 19.3795,
+            "post_processing": 0.030500000000301952
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 2,
+      "elapsed_ms": 26.920500000000175,
+      "breakdown_ms": {
+        "queue_wait": 0.003400000000056025,
+        "companion_before": 2.8146999999999025,
+        "action": 22.677999999999884,
+        "companion_after": 0.4228000000002794,
+        "serialization": 0.03250000000025466,
+        "worker_round_trip": 22.627600000000257,
+        "uia_tree_walk": 19.610300000000002,
+        "post_processing": 0.02320000000008804
+      },
+      "server_total_ms": 25.989600000000337,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.989600000000337,
+          "breakdown_ms": {
+            "queue_wait": 0.003400000000056025,
+            "companion_before": 2.8146999999999025,
+            "action": 22.677999999999884,
+            "companion_after": 0.4228000000002794,
+            "serialization": 0.03250000000025466,
+            "worker_round_trip": 22.627600000000257,
+            "uia_tree_walk": 19.610300000000002,
+            "post_processing": 0.02320000000008804
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 3,
+      "elapsed_ms": 25.886199999999917,
+      "breakdown_ms": {
+        "queue_wait": 0.0032999999998537533,
+        "companion_before": 3.2501000000002023,
+        "action": 20.807900000000245,
+        "companion_after": 0.6177999999999884,
+        "serialization": 0.043100000000322325,
+        "worker_round_trip": 20.730999999999767,
+        "uia_tree_walk": 18.3183,
+        "post_processing": 0.03679999999985739
+      },
+      "server_total_ms": 24.76260000000002,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.76260000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.0032999999998537533,
+            "companion_before": 3.2501000000002023,
+            "action": 20.807900000000245,
+            "companion_after": 0.6177999999999884,
+            "serialization": 0.043100000000322325,
+            "worker_round_trip": 20.730999999999767,
+            "uia_tree_walk": 18.3183,
+            "post_processing": 0.03679999999985739
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 4,
+      "elapsed_ms": 24.709499999999935,
+      "breakdown_ms": {
+        "queue_wait": 0.004999999999654392,
+        "companion_before": 2.5079000000000633,
+        "action": 20.797900000000027,
+        "companion_after": 0.4193000000000211,
+        "serialization": 0.02860000000009677,
+        "worker_round_trip": 20.74980000000005,
+        "uia_tree_walk": 18.5994,
+        "post_processing": 0.022599999999783904
+      },
+      "server_total_ms": 23.78989999999976,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.78989999999976,
+          "breakdown_ms": {
+            "queue_wait": 0.004999999999654392,
+            "companion_before": 2.5079000000000633,
+            "action": 20.797900000000027,
+            "companion_after": 0.4193000000000211,
+            "serialization": 0.02860000000009677,
+            "worker_round_trip": 20.74980000000005,
+            "uia_tree_walk": 18.5994,
+            "post_processing": 0.022599999999783904
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 5,
+      "elapsed_ms": 24.926899999999478,
+      "breakdown_ms": {
+        "queue_wait": 0.003400000000056025,
+        "companion_before": 2.200999999999567,
+        "action": 21.05069999999978,
+        "companion_after": 0.5082999999999629,
+        "serialization": 0.031499999999596184,
+        "worker_round_trip": 20.99420000000009,
+        "uia_tree_walk": 18.6966,
+        "post_processing": 0.02680000000009386
+      },
+      "server_total_ms": 23.83040000000028,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.83040000000028,
+          "breakdown_ms": {
+            "queue_wait": 0.003400000000056025,
+            "companion_before": 2.200999999999567,
+            "action": 21.05069999999978,
+            "companion_after": 0.5082999999999629,
+            "serialization": 0.031499999999596184,
+            "worker_round_trip": 20.99420000000009,
+            "uia_tree_walk": 18.6966,
+            "post_processing": 0.02680000000009386
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 6,
+      "elapsed_ms": 24.430199999999786,
+      "breakdown_ms": {
+        "queue_wait": 0.003000000000156433,
+        "companion_before": 2.2160000000003492,
+        "action": 20.822799999999916,
+        "companion_after": 0.4113999999999578,
+        "serialization": 0.02820000000019718,
+        "worker_round_trip": 20.775900000000092,
+        "uia_tree_walk": 18.5109,
+        "post_processing": 0.02220000000033906
+      },
+      "server_total_ms": 23.510399999999663,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.510399999999663,
+          "breakdown_ms": {
+            "queue_wait": 0.003000000000156433,
+            "companion_before": 2.2160000000003492,
+            "action": 20.822799999999916,
+            "companion_after": 0.4113999999999578,
+            "serialization": 0.02820000000019718,
+            "worker_round_trip": 20.775900000000092,
+            "uia_tree_walk": 18.5109,
+            "post_processing": 0.02220000000033906
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 7,
+      "elapsed_ms": 24.693999999999505,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 2.236399999999776,
+        "action": 20.866700000000037,
+        "companion_after": 0.6087999999999738,
+        "serialization": 0.02760000000034779,
+        "worker_round_trip": 20.821799999999712,
+        "uia_tree_walk": 18.477800000000002,
+        "post_processing": 0.02099999999973079
+      },
+      "server_total_ms": 23.783300000000054,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.783300000000054,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 2.236399999999776,
+            "action": 20.866700000000037,
+            "companion_after": 0.6087999999999738,
+            "serialization": 0.02760000000034779,
+            "worker_round_trip": 20.821799999999712,
+            "uia_tree_walk": 18.477800000000002,
+            "post_processing": 0.02099999999973079
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 8,
+      "elapsed_ms": 26.217900000000554,
+      "breakdown_ms": {
+        "queue_wait": 0.0061000000000603904,
+        "companion_before": 2.8559000000000196,
+        "action": 21.659200000000055,
+        "companion_after": 0.44790000000011787,
+        "serialization": 0.028000000000247383,
+        "worker_round_trip": 21.61120000000028,
+        "uia_tree_walk": 19.4892,
+        "post_processing": 0.021999999999934516
+      },
+      "server_total_ms": 25.039299999999912,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.039299999999912,
+          "breakdown_ms": {
+            "queue_wait": 0.0061000000000603904,
+            "companion_before": 2.8559000000000196,
+            "action": 21.659200000000055,
+            "companion_after": 0.44790000000011787,
+            "serialization": 0.028000000000247383,
+            "worker_round_trip": 21.61120000000028,
+            "uia_tree_walk": 19.4892,
+            "post_processing": 0.021999999999934516
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 9,
+      "elapsed_ms": 25.209199999999328,
+      "breakdown_ms": {
+        "queue_wait": 0.0029999999997016857,
+        "companion_before": 2.1826999999998407,
+        "action": 21.401700000000346,
+        "companion_after": 0.7156999999997424,
+        "serialization": 0.04940000000033251,
+        "worker_round_trip": 21.321200000000317,
+        "uia_tree_walk": 18.6859,
+        "post_processing": 0.03749999999990905
+      },
+      "server_total_ms": 24.37570000000005,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.37570000000005,
+          "breakdown_ms": {
+            "queue_wait": 0.0029999999997016857,
+            "companion_before": 2.1826999999998407,
+            "action": 21.401700000000346,
+            "companion_after": 0.7156999999997424,
+            "serialization": 0.04940000000033251,
+            "worker_round_trip": 21.321200000000317,
+            "uia_tree_walk": 18.6859,
+            "post_processing": 0.03749999999990905
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 10,
+      "elapsed_ms": 24.020000000000437,
+      "breakdown_ms": {
+        "queue_wait": 0.0059000000001105946,
+        "companion_before": 2.1265000000003056,
+        "action": 20.491100000000188,
+        "companion_after": 0.4248999999999796,
+        "serialization": 0.031300000000101136,
+        "worker_round_trip": 20.4367000000002,
+        "uia_tree_walk": 18.2957,
+        "post_processing": 0.0261000000000422
+      },
+      "server_total_ms": 23.103700000000117,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.103700000000117,
+          "breakdown_ms": {
+            "queue_wait": 0.0059000000001105946,
+            "companion_before": 2.1265000000003056,
+            "action": 20.491100000000188,
+            "companion_after": 0.4248999999999796,
+            "serialization": 0.031300000000101136,
+            "worker_round_trip": 20.4367000000002,
+            "uia_tree_walk": 18.2957,
+            "post_processing": 0.0261000000000422
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 11,
+      "elapsed_ms": 24.033399999999347,
+      "breakdown_ms": {
+        "queue_wait": 0.003400000000056025,
+        "companion_before": 2.1691000000000713,
+        "action": 20.236699999999928,
+        "companion_after": 0.5493999999998778,
+        "serialization": 0.02959999999984575,
+        "worker_round_trip": 20.185500000000047,
+        "uia_tree_walk": 18.0243,
+        "post_processing": 0.023400000000037835
+      },
+      "server_total_ms": 23.01650000000018,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.01650000000018,
+          "breakdown_ms": {
+            "queue_wait": 0.003400000000056025,
+            "companion_before": 2.1691000000000713,
+            "action": 20.236699999999928,
+            "companion_after": 0.5493999999998778,
+            "serialization": 0.02959999999984575,
+            "worker_round_trip": 20.185500000000047,
+            "uia_tree_walk": 18.0243,
+            "post_processing": 0.023400000000037835
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 12,
+      "elapsed_ms": 25.090299999999843,
+      "breakdown_ms": {
+        "queue_wait": 0.004699999999957072,
+        "companion_before": 2.710099999999784,
+        "action": 20.758800000000065,
+        "companion_after": 0.4621999999999389,
+        "serialization": 0.03499999999985448,
+        "worker_round_trip": 20.701500000000124,
+        "uia_tree_walk": 18.5254,
+        "post_processing": 0.02719999999999345
+      },
+      "server_total_ms": 24.00019999999995,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.00019999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.004699999999957072,
+            "companion_before": 2.710099999999784,
+            "action": 20.758800000000065,
+            "companion_after": 0.4621999999999389,
+            "serialization": 0.03499999999985448,
+            "worker_round_trip": 20.701500000000124,
+            "uia_tree_walk": 18.5254,
+            "post_processing": 0.02719999999999345
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 13,
+      "elapsed_ms": 24.411299999999756,
+      "breakdown_ms": {
+        "queue_wait": 0.003400000000056025,
+        "companion_before": 2.2856000000001586,
+        "action": 20.64920000000029,
+        "companion_after": 0.39800000000013824,
+        "serialization": 0.02779999999984284,
+        "worker_round_trip": 20.601599999999962,
+        "uia_tree_walk": 18.4934,
+        "post_processing": 0.022199999999884312
+      },
+      "server_total_ms": 23.392700000000332,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.392700000000332,
+          "breakdown_ms": {
+            "queue_wait": 0.003400000000056025,
+            "companion_before": 2.2856000000001586,
+            "action": 20.64920000000029,
+            "companion_after": 0.39800000000013824,
+            "serialization": 0.02779999999984284,
+            "worker_round_trip": 20.601599999999962,
+            "uia_tree_walk": 18.4934,
+            "post_processing": 0.022199999999884312
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 14,
+      "elapsed_ms": 26.05829999999969,
+      "breakdown_ms": {
+        "queue_wait": 0.004100000000107684,
+        "companion_before": 2.8714999999997417,
+        "action": 21.28060000000005,
+        "companion_after": 0.7606999999998152,
+        "serialization": 0.033500000000458385,
+        "worker_round_trip": 21.224100000000362,
+        "uia_tree_walk": 18.9847,
+        "post_processing": 0.026199999999789725
+      },
+      "server_total_ms": 24.985799999999927,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.985799999999927,
+          "breakdown_ms": {
+            "queue_wait": 0.004100000000107684,
+            "companion_before": 2.8714999999997417,
+            "action": 21.28060000000005,
+            "companion_after": 0.7606999999998152,
+            "serialization": 0.033500000000458385,
+            "worker_round_trip": 21.224100000000362,
+            "uia_tree_walk": 18.9847,
+            "post_processing": 0.026199999999789725
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 15,
+      "elapsed_ms": 25.043900000000576,
+      "breakdown_ms": {
+        "queue_wait": 0.003400000000056025,
+        "companion_before": 2.4408999999996013,
+        "action": 20.726599999999962,
+        "companion_after": 0.6171000000003914,
+        "serialization": 0.03890000000001237,
+        "worker_round_trip": 20.654999999999745,
+        "uia_tree_walk": 18.334500000000002,
+        "post_processing": 0.03279999999995198
+      },
+      "server_total_ms": 23.865000000000236,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.865000000000236,
+          "breakdown_ms": {
+            "queue_wait": 0.003400000000056025,
+            "companion_before": 2.4408999999996013,
+            "action": 20.726599999999962,
+            "companion_after": 0.6171000000003914,
+            "serialization": 0.03890000000001237,
+            "worker_round_trip": 20.654999999999745,
+            "uia_tree_walk": 18.334500000000002,
+            "post_processing": 0.03279999999995198
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 16,
+      "elapsed_ms": 25.045100000000275,
+      "breakdown_ms": {
+        "queue_wait": 0.003200000000106229,
+        "companion_before": 2.208499999999731,
+        "action": 21.321199999999862,
+        "companion_after": 0.43329999999969004,
+        "serialization": 0.02900000000045111,
+        "worker_round_trip": 21.273200000000088,
+        "uia_tree_walk": 18.588900000000002,
+        "post_processing": 0.02139999999963038
+      },
+      "server_total_ms": 24.03099999999995,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.03099999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.003200000000106229,
+            "companion_before": 2.208499999999731,
+            "action": 21.321199999999862,
+            "companion_after": 0.43329999999969004,
+            "serialization": 0.02900000000045111,
+            "worker_round_trip": 21.273200000000088,
+            "uia_tree_walk": 18.588900000000002,
+            "post_processing": 0.02139999999963038
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 17,
+      "elapsed_ms": 26.062200000000303,
+      "breakdown_ms": {
+        "queue_wait": 0.0024000000003070454,
+        "companion_before": 2.1007999999997082,
+        "action": 22.577299999999923,
+        "companion_after": 0.40810000000010405,
+        "serialization": 0.02750000000014552,
+        "worker_round_trip": 22.532100000000355,
+        "uia_tree_walk": 20.198700000000002,
+        "post_processing": 0.02250000000003638
+      },
+      "server_total_ms": 25.13670000000002,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.13670000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.0024000000003070454,
+            "companion_before": 2.1007999999997082,
+            "action": 22.577299999999923,
+            "companion_after": 0.40810000000010405,
+            "serialization": 0.02750000000014552,
+            "worker_round_trip": 22.532100000000355,
+            "uia_tree_walk": 20.198700000000002,
+            "post_processing": 0.02250000000003638
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 18,
+      "elapsed_ms": 24.753600000000006,
+      "breakdown_ms": {
+        "queue_wait": 0.00279999999975189,
+        "companion_before": 2.226599999999962,
+        "action": 21.164400000000114,
+        "companion_after": 0.4153000000001157,
+        "serialization": 0.031199999999898864,
+        "worker_round_trip": 21.113000000000284,
+        "uia_tree_walk": 18.9722,
+        "post_processing": 0.02500000000009095
+      },
+      "server_total_ms": 23.860799999999927,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.860799999999927,
+          "breakdown_ms": {
+            "queue_wait": 0.00279999999975189,
+            "companion_before": 2.226599999999962,
+            "action": 21.164400000000114,
+            "companion_after": 0.4153000000001157,
+            "serialization": 0.031199999999898864,
+            "worker_round_trip": 21.113000000000284,
+            "uia_tree_walk": 18.9722,
+            "post_processing": 0.02500000000009095
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 19,
+      "elapsed_ms": 25.883200000000215,
+      "breakdown_ms": {
+        "queue_wait": 0.00279999999975189,
+        "companion_before": 2.5027000000000044,
+        "action": 21.644000000000233,
+        "companion_after": 0.7667000000001281,
+        "serialization": 0.031800000000203,
+        "worker_round_trip": 21.592599999999948,
+        "uia_tree_walk": 19.3506,
+        "post_processing": 0.023700000000189902
+      },
+      "server_total_ms": 24.978699999999662,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.978699999999662,
+          "breakdown_ms": {
+            "queue_wait": 0.00279999999975189,
+            "companion_before": 2.5027000000000044,
+            "action": 21.644000000000233,
+            "companion_after": 0.7667000000001281,
+            "serialization": 0.031800000000203,
+            "worker_round_trip": 21.592599999999948,
+            "uia_tree_walk": 19.3506,
+            "post_processing": 0.023700000000189902
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_get_ui_wide",
+      "run": 20,
+      "elapsed_ms": 24.23699999999917,
+      "breakdown_ms": {
+        "queue_wait": 0.0028999999999541615,
+        "companion_before": 1.9832000000001244,
+        "action": 20.85849999999982,
+        "companion_after": 0.45479999999997744,
+        "serialization": 0.03120000000035361,
+        "worker_round_trip": 20.80659999999989,
+        "uia_tree_walk": 18.732300000000002,
+        "post_processing": 0.024899999999888678
+      },
+      "server_total_ms": 23.34880000000021,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.34880000000021,
+          "breakdown_ms": {
+            "queue_wait": 0.0028999999999541615,
+            "companion_before": 1.9832000000001244,
+            "action": 20.85849999999982,
+            "companion_after": 0.45479999999997744,
+            "serialization": 0.03120000000035361,
+            "worker_round_trip": 20.80659999999989,
+            "uia_tree_walk": 18.732300000000002,
+            "post_processing": 0.024899999999888678
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 1,
+      "elapsed_ms": 50.08400000000074,
+      "breakdown_ms": {
+        "queue_wait": 0.00680000000011205,
+        "companion_before": 5.399399999999332,
+        "action": 41.01350000000002,
+        "companion_after": 1.0441000000000713,
+        "serialization": 0.03169999999954598,
+        "worker_round_trip": 40.932100000000446,
+        "post_processing": 0.026899999999841384,
+        "uia_tree_walk": 21.4429
+      },
+      "server_total_ms": 47.590799999999945,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 20.060899999999947,
+          "breakdown_ms": {
+            "queue_wait": 0.0026000000002568413,
+            "companion_before": 2.0778999999997723,
+            "action": 17.366500000000087,
+            "companion_after": 0.5545999999999367,
+            "serialization": 0.008199999999760621,
+            "worker_round_trip": 17.325900000000274,
+            "post_processing": 0.007999999999810825
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 27.529899999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.0041999999998552084,
+            "companion_before": 3.32149999999956,
+            "action": 23.646999999999935,
+            "companion_after": 0.4895000000001346,
+            "serialization": 0.02349999999978536,
+            "worker_round_trip": 23.60620000000017,
+            "uia_tree_walk": 21.4429,
+            "post_processing": 0.01890000000003056
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 2,
+      "elapsed_ms": 39.02980000000025,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 5.618500000000495,
+        "action": 30.41319999999996,
+        "companion_after": 0.9710000000000036,
+        "serialization": 0.03550000000041109,
+        "worker_round_trip": 30.345900000000256,
+        "post_processing": 0.021000000000185537,
+        "uia_tree_walk": 19.7545
+      },
+      "server_total_ms": 37.1241,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 12.476599999999962,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 3.3738000000003012,
+            "action": 8.495899999999892,
+            "companion_after": 0.5367000000001099,
+            "serialization": 0.013400000000274304,
+            "worker_round_trip": 8.46939999999995,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.647500000000036,
+          "breakdown_ms": {
+            "queue_wait": 0.002399999999852298,
+            "companion_before": 2.2447000000001935,
+            "action": 21.91730000000007,
+            "companion_after": 0.43429999999989377,
+            "serialization": 0.022100000000136788,
+            "worker_round_trip": 21.876500000000306,
+            "uia_tree_walk": 19.7545,
+            "post_processing": 0.019200000000182627
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 3,
+      "elapsed_ms": 37.291299999999865,
+      "breakdown_ms": {
+        "queue_wait": 0.004900000000361615,
+        "companion_before": 4.408600000000206,
+        "action": 30.016200000000026,
+        "companion_after": 0.9874000000004344,
+        "serialization": 0.03349999999954889,
+        "worker_round_trip": 29.939200000000255,
+        "post_processing": 0.02169999999978245,
+        "uia_tree_walk": 19.0994
+      },
+      "server_total_ms": 35.5311999999999,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 11.716899999999896,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 2.2654999999999745,
+            "action": 8.818000000000211,
+            "companion_after": 0.5664000000001579,
+            "serialization": 0.012099999999463762,
+            "worker_round_trip": 8.781500000000051,
+            "post_processing": 0.002199999999902502
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.814300000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.0024000000003070454,
+            "companion_before": 2.1431000000002314,
+            "action": 21.198199999999815,
+            "companion_after": 0.4210000000002765,
+            "serialization": 0.02140000000008513,
+            "worker_round_trip": 21.157700000000204,
+            "uia_tree_walk": 19.0994,
+            "post_processing": 0.019499999999879947
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 4,
+      "elapsed_ms": 38.29700000000048,
+      "breakdown_ms": {
+        "queue_wait": 0.0046999999995023245,
+        "companion_before": 5.526000000000295,
+        "action": 29.76610000000028,
+        "companion_after": 1.2841000000003078,
+        "serialization": 0.043699999999716965,
+        "worker_round_trip": 29.67360000000008,
+        "post_processing": 0.023700000000189902,
+        "uia_tree_walk": 18.8899
+      },
+      "server_total_ms": 36.69459999999981,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 12.005599999999959,
+          "breakdown_ms": {
+            "queue_wait": 0.002399999999852298,
+            "companion_before": 2.3429000000000997,
+            "action": 8.751700000000255,
+            "companion_after": 0.8470000000002074,
+            "serialization": 0.018699999999626016,
+            "worker_round_trip": 8.704999999999927,
+            "post_processing": 0.002100000000154978
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.68899999999985,
+          "breakdown_ms": {
+            "queue_wait": 0.0022999999996500264,
+            "companion_before": 3.183100000000195,
+            "action": 21.014400000000023,
+            "companion_after": 0.4371000000001004,
+            "serialization": 0.02500000000009095,
+            "worker_round_trip": 20.96860000000015,
+            "uia_tree_walk": 18.8899,
+            "post_processing": 0.021600000000034925
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 5,
+      "elapsed_ms": 38.371000000000095,
+      "breakdown_ms": {
+        "queue_wait": 0.006300000000010186,
+        "companion_before": 5.497099999999591,
+        "action": 29.14539999999988,
+        "companion_after": 1.0597999999999956,
+        "serialization": 0.033500000000458385,
+        "worker_round_trip": 29.07849999999962,
+        "post_processing": 0.02139999999963038,
+        "uia_tree_walk": 19.1702
+      },
+      "server_total_ms": 35.84339999999975,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 10.69250000000011,
+          "breakdown_ms": {
+            "queue_wait": 0.003400000000056025,
+            "companion_before": 2.2349999999996726,
+            "action": 7.759399999999914,
+            "companion_after": 0.6273999999998523,
+            "serialization": 0.010200000000168075,
+            "worker_round_trip": 7.733999999999924,
+            "post_processing": 0.0019999999999527063
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.150899999999638,
+          "breakdown_ms": {
+            "queue_wait": 0.0028999999999541615,
+            "companion_before": 3.2620999999999185,
+            "action": 21.385999999999967,
+            "companion_after": 0.43240000000014334,
+            "serialization": 0.02330000000029031,
+            "worker_round_trip": 21.344499999999698,
+            "uia_tree_walk": 19.1702,
+            "post_processing": 0.019399999999677675
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 6,
+      "elapsed_ms": 39.09950000000026,
+      "breakdown_ms": {
+        "queue_wait": 0.009199999999964348,
+        "companion_before": 5.817400000000362,
+        "action": 29.614399999999932,
+        "companion_after": 0.8688000000001921,
+        "serialization": 0.03609999999980573,
+        "worker_round_trip": 29.54430000000002,
+        "post_processing": 0.022400000000288856,
+        "uia_tree_walk": 18.892500000000002
+      },
+      "server_total_ms": 36.47719999999981,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 11.218699999999899,
+          "breakdown_ms": {
+            "queue_wait": 0.002599999999802094,
+            "companion_before": 2.2871000000000095,
+            "action": 8.470699999999852,
+            "companion_after": 0.4036999999998443,
+            "serialization": 0.009099999999762076,
+            "worker_round_trip": 8.444200000000365,
+            "post_processing": 0.0016000000000531145
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.258499999999913,
+          "breakdown_ms": {
+            "queue_wait": 0.006600000000162254,
+            "companion_before": 3.530300000000352,
+            "action": 21.14370000000008,
+            "companion_after": 0.4651000000003478,
+            "serialization": 0.027000000000043656,
+            "worker_round_trip": 21.100099999999657,
+            "uia_tree_walk": 18.892500000000002,
+            "post_processing": 0.02080000000023574
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 7,
+      "elapsed_ms": 37.32719999999972,
+      "breakdown_ms": {
+        "queue_wait": 0.0061000000000603904,
+        "companion_before": 5.658399999999347,
+        "action": 29.14180000000033,
+        "companion_after": 0.8176000000003114,
+        "serialization": 0.038099999998848944,
+        "worker_round_trip": 29.07230000000027,
+        "post_processing": 0.022699999999986176,
+        "uia_tree_walk": 18.917
+      },
+      "server_total_ms": 35.7482,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 10.003799999999956,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 2.2140999999996893,
+            "action": 7.372400000000198,
+            "companion_after": 0.36560000000008586,
+            "serialization": 0.008199999999305874,
+            "worker_round_trip": 7.351500000000215,
+            "post_processing": 0.0014000000001033186
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 25.74440000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 3.4442999999996573,
+            "action": 21.769400000000132,
+            "companion_after": 0.45200000000022555,
+            "serialization": 0.02989999999954307,
+            "worker_round_trip": 21.720800000000054,
+            "uia_tree_walk": 18.917,
+            "post_processing": 0.021299999999882857
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 8,
+      "elapsed_ms": 52.60570000000007,
+      "breakdown_ms": {
+        "queue_wait": 0.0052999999998064595,
+        "companion_before": 6.0779999999999745,
+        "action": 42.86479999999983,
+        "companion_after": 1.3088999999995394,
+        "serialization": 0.05360000000018772,
+        "worker_round_trip": 42.76600000000053,
+        "post_processing": 0.027399999999943248,
+        "uia_tree_walk": 26.7149
+      },
+      "server_total_ms": 50.51819999999998,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 16.98180000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.002599999999802094,
+            "companion_before": 2.913000000000011,
+            "action": 13.129699999999957,
+            "companion_after": 0.7597999999998137,
+            "serialization": 0.017500000000381988,
+            "worker_round_trip": 13.083600000000388,
+            "post_processing": 0.002599999999802094
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 33.53639999999996,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 3.1649999999999636,
+            "action": 29.735099999999875,
+            "companion_after": 0.5490999999997257,
+            "serialization": 0.03609999999980573,
+            "worker_round_trip": 29.682400000000143,
+            "uia_tree_walk": 26.7149,
+            "post_processing": 0.024800000000141154
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 9,
+      "elapsed_ms": 45.11949999999979,
+      "breakdown_ms": {
+        "queue_wait": 0.0067000000003645255,
+        "companion_before": 5.007399999999961,
+        "action": 36.457000000000335,
+        "companion_after": 1.32970000000023,
+        "serialization": 0.044200000000273576,
+        "worker_round_trip": 36.365800000000036,
+        "post_processing": 0.03260000000000218,
+        "uia_tree_walk": 22.7746
+      },
+      "server_total_ms": 42.9393,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 14.23849999999993,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 2.4299999999998363,
+            "action": 11.076000000000022,
+            "companion_after": 0.6640000000002146,
+            "serialization": 0.012999999999919964,
+            "worker_round_trip": 11.043500000000222,
+            "post_processing": 0.0030999999999039574
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 28.700800000000072,
+          "breakdown_ms": {
+            "queue_wait": 0.004200000000309956,
+            "companion_before": 2.577400000000125,
+            "action": 25.381000000000313,
+            "companion_after": 0.6657000000000153,
+            "serialization": 0.03120000000035361,
+            "worker_round_trip": 25.322299999999814,
+            "uia_tree_walk": 22.7746,
+            "post_processing": 0.029500000000098225
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 10,
+      "elapsed_ms": 39.543400000000474,
+      "breakdown_ms": {
+        "queue_wait": 0.005600000000413274,
+        "companion_before": 4.925799999999981,
+        "action": 30.976200000000063,
+        "companion_after": 1.5644000000002052,
+        "serialization": 0.06700000000000728,
+        "worker_round_trip": 30.856600000000526,
+        "post_processing": 0.02289999999993597,
+        "uia_tree_walk": 19.2634
+      },
+      "server_total_ms": 37.59989999999971,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 12.970899999999801,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 2.4544999999998254,
+            "action": 9.489999999999782,
+            "companion_after": 0.9644000000002961,
+            "serialization": 0.04300000000012005,
+            "worker_round_trip": 9.414000000000215,
+            "post_processing": 0.00279999999975189
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.628999999999905,
+          "breakdown_ms": {
+            "queue_wait": 0.0031000000003587047,
+            "companion_before": 2.4713000000001557,
+            "action": 21.48620000000028,
+            "companion_after": 0.599999999999909,
+            "serialization": 0.023999999999887223,
+            "worker_round_trip": 21.44260000000031,
+            "uia_tree_walk": 19.2634,
+            "post_processing": 0.02010000000018408
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 11,
+      "elapsed_ms": 49.38749999999982,
+      "breakdown_ms": {
+        "queue_wait": 0.008299999999962893,
+        "companion_before": 4.260600000000068,
+        "action": 39.976100000000315,
+        "companion_after": 1.8196000000002641,
+        "serialization": 0.04570000000012442,
+        "worker_round_trip": 39.886700000000474,
+        "post_processing": 0.03319999999939682,
+        "uia_tree_walk": 26.7743
+      },
+      "server_total_ms": 46.203399999999874,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 13.787799999999606,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 2.2400000000002365,
+            "action": 10.281300000000101,
+            "companion_after": 1.1996000000003733,
+            "serialization": 0.01190000000042346,
+            "worker_round_trip": 10.255100000000311,
+            "post_processing": 0.0013999999996485712
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 32.41560000000027,
+          "breakdown_ms": {
+            "queue_wait": 0.005599999999958527,
+            "companion_before": 2.020599999999831,
+            "action": 29.694800000000214,
+            "companion_after": 0.6199999999998909,
+            "serialization": 0.03379999999970096,
+            "worker_round_trip": 29.631600000000162,
+            "uia_tree_walk": 26.7743,
+            "post_processing": 0.03179999999974825
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 12,
+      "elapsed_ms": 51.88470000000052,
+      "breakdown_ms": {
+        "queue_wait": 0.005799999999453576,
+        "companion_before": 6.454800000000432,
+        "action": 41.13480000000027,
+        "companion_after": 2.03229999999985,
+        "serialization": 0.04510000000027503,
+        "worker_round_trip": 41.045099999999366,
+        "post_processing": 0.025200000000495493,
+        "uia_tree_walk": 24.701
+      },
+      "server_total_ms": 49.77109999999993,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 17.093199999999797,
+          "breakdown_ms": {
+            "queue_wait": 0.003499999999803549,
+            "companion_before": 2.57320000000027,
+            "action": 13.041000000000167,
+            "companion_after": 1.3971999999998843,
+            "serialization": 0.0158000000001266,
+            "worker_round_trip": 13.000099999999748,
+            "post_processing": 0.002100000000154978
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 32.677900000000136,
+          "breakdown_ms": {
+            "queue_wait": 0.0022999999996500264,
+            "companion_before": 3.8816000000001623,
+            "action": 28.0938000000001,
+            "companion_after": 0.6350999999999658,
+            "serialization": 0.02930000000014843,
+            "worker_round_trip": 28.044999999999618,
+            "uia_tree_walk": 24.701,
+            "post_processing": 0.023100000000340515
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 13,
+      "elapsed_ms": 51.15909999999985,
+      "breakdown_ms": {
+        "queue_wait": 0.008599999999205465,
+        "companion_before": 6.807800000000498,
+        "action": 40.660400000000664,
+        "companion_after": 1.2625999999991109,
+        "serialization": 0.04709999999977299,
+        "worker_round_trip": 40.57720000000063,
+        "post_processing": 0.02540000000044529,
+        "uia_tree_walk": 25.5362
+      },
+      "server_total_ms": 48.901600000000144,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 15.148699999999735,
+          "breakdown_ms": {
+            "queue_wait": 0.004500000000007276,
+            "companion_before": 2.901499999999942,
+            "action": 11.469300000000658,
+            "companion_after": 0.690799999999399,
+            "serialization": 0.017899999998917338,
+            "worker_round_trip": 11.438500000000204,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 33.75290000000041,
+          "breakdown_ms": {
+            "queue_wait": 0.0040999999991981895,
+            "companion_before": 3.906300000000556,
+            "action": 29.191100000000006,
+            "companion_after": 0.5717999999997119,
+            "serialization": 0.029200000000855653,
+            "worker_round_trip": 29.138700000000426,
+            "uia_tree_walk": 25.5362,
+            "post_processing": 0.023600000000442378
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 14,
+      "elapsed_ms": 43.3724000000002,
+      "breakdown_ms": {
+        "queue_wait": 0.008399999999710417,
+        "companion_before": 5.092999999999847,
+        "action": 34.568600000000515,
+        "companion_after": 1.2936999999992622,
+        "serialization": 0.037299999999959255,
+        "worker_round_trip": 34.482999999999265,
+        "post_processing": 0.025399999999535794,
+        "uia_tree_walk": 21.5392
+      },
+      "server_total_ms": 41.09559999999965,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 13.860399999999572,
+          "breakdown_ms": {
+            "queue_wait": 0.0039999999999054126,
+            "companion_before": 2.5108000000000175,
+            "action": 10.617100000000391,
+            "companion_after": 0.6625999999996566,
+            "serialization": 0.011899999999513966,
+            "worker_round_trip": 10.580799999999726,
+            "post_processing": 0.0024999999995998223
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 27.235200000000077,
+          "breakdown_ms": {
+            "queue_wait": 0.004399999999805004,
+            "companion_before": 2.5821999999998297,
+            "action": 23.951500000000124,
+            "companion_after": 0.6310999999996056,
+            "serialization": 0.02540000000044529,
+            "worker_round_trip": 23.90219999999954,
+            "uia_tree_walk": 21.5392,
+            "post_processing": 0.02289999999993597
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 15,
+      "elapsed_ms": 48.9945000000007,
+      "breakdown_ms": {
+        "queue_wait": 0.007300000001123408,
+        "companion_before": 5.1745000000009895,
+        "action": 39.46489999999994,
+        "companion_after": 1.6918999999988955,
+        "serialization": 0.07250000000021828,
+        "worker_round_trip": 39.32429999999931,
+        "post_processing": 0.057700000000295404,
+        "uia_tree_walk": 27.724500000000003
+      },
+      "server_total_ms": 46.48910000000069,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 12.425100000000384,
+          "breakdown_ms": {
+            "queue_wait": 0.004300000000512227,
+            "companion_before": 2.6948000000011234,
+            "action": 9.015599999999722,
+            "companion_after": 0.6367999999993117,
+            "serialization": 0.01540000000022701,
+            "worker_round_trip": 8.965299999999843,
+            "post_processing": 0.0024000000003070454
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 34.064000000000306,
+          "breakdown_ms": {
+            "queue_wait": 0.0030000000006111804,
+            "companion_before": 2.479699999999866,
+            "action": 30.44930000000022,
+            "companion_after": 1.0550999999995838,
+            "serialization": 0.05709999999999127,
+            "worker_round_trip": 30.35899999999947,
+            "uia_tree_walk": 27.724500000000003,
+            "post_processing": 0.05529999999998836
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 16,
+      "elapsed_ms": 41.326999999999316,
+      "breakdown_ms": {
+        "queue_wait": 0.008100000000922591,
+        "companion_before": 5.296900000000278,
+        "action": 32.82600000000002,
+        "companion_after": 1.2808000000013635,
+        "serialization": 0.03570000000036089,
+        "worker_round_trip": 32.75600000000031,
+        "post_processing": 0.022399999999834108,
+        "uia_tree_walk": 18.8641
+      },
+      "server_total_ms": 39.533800000000156,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 15.185999999999694,
+          "breakdown_ms": {
+            "queue_wait": 0.004300000000512227,
+            "companion_before": 2.6523000000006505,
+            "action": 11.641200000000026,
+            "companion_after": 0.817800000000716,
+            "serialization": 0.0136000000002241,
+            "worker_round_trip": 11.613400000000183,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.34780000000046,
+          "breakdown_ms": {
+            "queue_wait": 0.003800000000410364,
+            "companion_before": 2.6445999999996275,
+            "action": 21.184799999999996,
+            "companion_after": 0.46300000000064756,
+            "serialization": 0.022100000000136788,
+            "worker_round_trip": 21.14260000000013,
+            "uia_tree_walk": 18.8641,
+            "post_processing": 0.020599999999831198
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 17,
+      "elapsed_ms": 40.16660000000047,
+      "breakdown_ms": {
+        "queue_wait": 0.005500000000211003,
+        "companion_before": 5.5218000000004395,
+        "action": 31.597900000000664,
+        "companion_after": 1.0576000000000931,
+        "serialization": 0.035000000000763976,
+        "worker_round_trip": 31.53099999999904,
+        "post_processing": 0.022700000000440923,
+        "uia_tree_walk": 19.524900000000002
+      },
+      "server_total_ms": 38.280399999999645,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 13.607500000000073,
+          "breakdown_ms": {
+            "queue_wait": 0.0024999999995998223,
+            "companion_before": 3.266099999999824,
+            "action": 9.711600000000544,
+            "companion_after": 0.5781000000006316,
+            "serialization": 0.011199999999917054,
+            "worker_round_trip": 9.685999999999694,
+            "post_processing": 0.0020000000004074536
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.672899999999572,
+          "breakdown_ms": {
+            "queue_wait": 0.0030000000006111804,
+            "companion_before": 2.2557000000006155,
+            "action": 21.88630000000012,
+            "companion_after": 0.4794999999994616,
+            "serialization": 0.02380000000084692,
+            "worker_round_trip": 21.844999999999345,
+            "uia_tree_walk": 19.524900000000002,
+            "post_processing": 0.02070000000003347
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 18,
+      "elapsed_ms": 48.2537999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.005699999999706051,
+        "companion_before": 8.134699999999611,
+        "action": 35.79749999999967,
+        "companion_after": 1.9167999999999665,
+        "serialization": 0.048299999999471765,
+        "worker_round_trip": 35.716300000000956,
+        "post_processing": 0.022500000000945874,
+        "uia_tree_walk": 21.059800000000003
+      },
+      "server_total_ms": 46.01180000000022,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 17.96259999999984,
+          "breakdown_ms": {
+            "queue_wait": 0.002599999999802094,
+            "companion_before": 4.166899999999259,
+            "action": 12.327900000000227,
+            "companion_after": 1.3815999999997075,
+            "serialization": 0.018399999999928696,
+            "worker_round_trip": 12.291300000000774,
+            "post_processing": 0.002500000000509317
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 28.049200000000383,
+          "breakdown_ms": {
+            "queue_wait": 0.0030999999999039574,
+            "companion_before": 3.967800000000352,
+            "action": 23.469599999999446,
+            "companion_after": 0.535200000000259,
+            "serialization": 0.02989999999954307,
+            "worker_round_trip": 23.425000000000182,
+            "uia_tree_walk": 21.059800000000003,
+            "post_processing": 0.020000000000436557
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 19,
+      "elapsed_ms": 38.70559999999932,
+      "breakdown_ms": {
+        "queue_wait": 0.004300000000512227,
+        "companion_before": 4.9835000000002765,
+        "action": 31.069399999999405,
+        "companion_after": 1.0736000000006243,
+        "serialization": 0.03280000000086147,
+        "worker_round_trip": 31.004100000000108,
+        "post_processing": 0.021500000000742148,
+        "uia_tree_walk": 19.5408
+      },
+      "server_total_ms": 37.22989999999936,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 12.350999999999658,
+          "breakdown_ms": {
+            "queue_wait": 0.0020000000004074536,
+            "companion_before": 2.4177999999992608,
+            "action": 9.286999999999352,
+            "companion_after": 0.5918000000001484,
+            "serialization": 0.010500000000320142,
+            "worker_round_trip": 9.261000000000422,
+            "post_processing": 0.001900000000205182
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.878899999999703,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 2.5657000000010157,
+            "action": 21.782400000000052,
+            "companion_after": 0.48180000000047585,
+            "serialization": 0.02230000000054133,
+            "worker_round_trip": 21.743099999999686,
+            "uia_tree_walk": 19.5408,
+            "post_processing": 0.019600000000536966
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_atomic",
+      "run": 20,
+      "elapsed_ms": 40.464600000000246,
+      "breakdown_ms": {
+        "queue_wait": 0.004999999999199645,
+        "companion_before": 6.591800000001058,
+        "action": 30.907499999999345,
+        "companion_after": 1.1229999999995925,
+        "serialization": 0.03739999999925203,
+        "worker_round_trip": 30.836299999999028,
+        "post_processing": 0.021499999999832653,
+        "uia_tree_walk": 19.1563
+      },
+      "server_total_ms": 38.745200000000295,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 14.545500000000175,
+          "breakdown_ms": {
+            "queue_wait": 0.0023999999993975507,
+            "companion_before": 4.328600000000733,
+            "action": 9.486499999999978,
+            "companion_after": 0.6594999999997526,
+            "serialization": 0.014300000000730506,
+            "worker_round_trip": 9.455199999999422,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.19970000000012,
+          "breakdown_ms": {
+            "queue_wait": 0.002599999999802094,
+            "companion_before": 2.2632000000003245,
+            "action": 21.420999999999367,
+            "companion_after": 0.46349999999983993,
+            "serialization": 0.023099999998521525,
+            "worker_round_trip": 21.381099999999606,
+            "uia_tree_walk": 19.1563,
+            "post_processing": 0.019699999999829743
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 1,
+      "elapsed_ms": 39.19680000000062,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 2.349500000000262,
+        "action": 33.39400000000114,
+        "companion_after": 1.1293000000005122,
+        "serialization": 0.04450000000088039,
+        "worker_round_trip": 32.05549999999948,
+        "post_processing": 0.026300000000446744,
+        "uia_tree_walk": 20.285600000000002
+      },
+      "server_total_ms": 37.649099999999635,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 37.649099999999635,
+          "breakdown_ms": {
+            "queue_wait": 0.004899999999906868,
+            "companion_before": 2.349500000000262,
+            "action": 33.39400000000114,
+            "companion_after": 1.1293000000005122,
+            "serialization": 0.04450000000088039,
+            "worker_round_trip": 32.05549999999948,
+            "post_processing": 0.026300000000446744,
+            "uia_tree_walk": 20.285600000000002
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 2,
+      "elapsed_ms": 43.44719999999961,
+      "breakdown_ms": {
+        "queue_wait": 0.004700000000411819,
+        "companion_before": 5.785200000000259,
+        "action": 35.46020000000044,
+        "companion_after": 1.0697000000000116,
+        "serialization": 0.04019999999945867,
+        "worker_round_trip": 35.217100000000755,
+        "post_processing": 0.023100000000340515,
+        "uia_tree_walk": 20.602700000000002
+      },
+      "server_total_ms": 42.55799999999999,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 42.55799999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.004700000000411819,
+            "companion_before": 5.785200000000259,
+            "action": 35.46020000000044,
+            "companion_after": 1.0697000000000116,
+            "serialization": 0.04019999999945867,
+            "worker_round_trip": 35.217100000000755,
+            "post_processing": 0.023100000000340515,
+            "uia_tree_walk": 20.602700000000002
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 3,
+      "elapsed_ms": 42.210000000000036,
+      "breakdown_ms": {
+        "queue_wait": 0.004700000000411819,
+        "companion_before": 6.316100000000006,
+        "action": 33.32560000000012,
+        "companion_after": 1.1933000000008178,
+        "serialization": 0.048400000001493027,
+        "worker_round_trip": 33.04310000000078,
+        "post_processing": 0.023599999999532884,
+        "uia_tree_walk": 21.3655
+      },
+      "server_total_ms": 41.27949999999964,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 41.27949999999964,
+          "breakdown_ms": {
+            "queue_wait": 0.004700000000411819,
+            "companion_before": 6.316100000000006,
+            "action": 33.32560000000012,
+            "companion_after": 1.1933000000008178,
+            "serialization": 0.048400000001493027,
+            "worker_round_trip": 33.04310000000078,
+            "post_processing": 0.023599999999532884,
+            "uia_tree_walk": 21.3655
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 4,
+      "elapsed_ms": 41.792600000000675,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 5.701799999999821,
+        "action": 33.494799999999486,
+        "companion_after": 1.1606999999994514,
+        "serialization": 0.04390000000148575,
+        "worker_round_trip": 33.200300000000425,
+        "post_processing": 0.023000000000138243,
+        "uia_tree_walk": 20.5856
+      },
+      "server_total_ms": 40.78720000000067,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 40.78720000000067,
+          "breakdown_ms": {
+            "queue_wait": 0.004899999999906868,
+            "companion_before": 5.701799999999821,
+            "action": 33.494799999999486,
+            "companion_after": 1.1606999999994514,
+            "serialization": 0.04390000000148575,
+            "worker_round_trip": 33.200300000000425,
+            "post_processing": 0.023000000000138243,
+            "uia_tree_walk": 20.5856
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 5,
+      "elapsed_ms": 40.34659999999985,
+      "breakdown_ms": {
+        "queue_wait": 0.002300000000104774,
+        "companion_before": 6.25630000000001,
+        "action": 31.777000000000953,
+        "companion_after": 1.1120999999993728,
+        "serialization": 0.04460000000108266,
+        "worker_round_trip": 31.217599999999948,
+        "post_processing": 0.02099999999973079,
+        "uia_tree_walk": 20.0239
+      },
+      "server_total_ms": 39.49399999999969,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 39.49399999999969,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 6.25630000000001,
+            "action": 31.777000000000953,
+            "companion_after": 1.1120999999993728,
+            "serialization": 0.04460000000108266,
+            "worker_round_trip": 31.217599999999948,
+            "post_processing": 0.02099999999973079,
+            "uia_tree_walk": 20.0239
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 6,
+      "elapsed_ms": 40.13340000000062,
+      "breakdown_ms": {
+        "queue_wait": 0.004500000000007276,
+        "companion_before": 5.579099999999016,
+        "action": 32.32500000000073,
+        "companion_after": 1.060299999999188,
+        "serialization": 0.044200000002092565,
+        "worker_round_trip": 32.085800000000745,
+        "post_processing": 0.022900000000845466,
+        "uia_tree_walk": 19.919900000000002
+      },
+      "server_total_ms": 39.20340000000033,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 39.20340000000033,
+          "breakdown_ms": {
+            "queue_wait": 0.004500000000007276,
+            "companion_before": 5.579099999999016,
+            "action": 32.32500000000073,
+            "companion_after": 1.060299999999188,
+            "serialization": 0.044200000002092565,
+            "worker_round_trip": 32.085800000000745,
+            "post_processing": 0.022900000000845466,
+            "uia_tree_walk": 19.919900000000002
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 7,
+      "elapsed_ms": 51.48320000000058,
+      "breakdown_ms": {
+        "queue_wait": 0.002800000000206637,
+        "companion_before": 7.003600000000915,
+        "action": 41.70849999999973,
+        "companion_after": 1.2084999999997308,
+        "serialization": 0.06469999999899301,
+        "worker_round_trip": 41.37950000000001,
+        "post_processing": 0.027999999999337888,
+        "uia_tree_walk": 27.6554
+      },
+      "server_total_ms": 50.24090000000069,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 50.24090000000069,
+          "breakdown_ms": {
+            "queue_wait": 0.002800000000206637,
+            "companion_before": 7.003600000000915,
+            "action": 41.70849999999973,
+            "companion_after": 1.2084999999997308,
+            "serialization": 0.06469999999899301,
+            "worker_round_trip": 41.37950000000001,
+            "post_processing": 0.027999999999337888,
+            "uia_tree_walk": 27.6554
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 8,
+      "elapsed_ms": 59.79819999999927,
+      "breakdown_ms": {
+        "queue_wait": 0.0039000000006126356,
+        "companion_before": 7.9256000000013955,
+        "action": 48.421800000000076,
+        "companion_after": 1.7627000000002226,
+        "serialization": 0.08649999999852298,
+        "worker_round_trip": 48.07830000000013,
+        "post_processing": 0.04430000000047585,
+        "uia_tree_walk": 28.458000000000002
+      },
+      "server_total_ms": 58.42559999999958,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 58.42559999999958,
+          "breakdown_ms": {
+            "queue_wait": 0.0039000000006126356,
+            "companion_before": 7.9256000000013955,
+            "action": 48.421800000000076,
+            "companion_after": 1.7627000000002226,
+            "serialization": 0.08649999999852298,
+            "worker_round_trip": 48.07830000000013,
+            "post_processing": 0.04430000000047585,
+            "uia_tree_walk": 28.458000000000002
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 9,
+      "elapsed_ms": 38.295500000000175,
+      "breakdown_ms": {
+        "queue_wait": 0.0026000000007115887,
+        "companion_before": 6.127599999999802,
+        "action": 29.823200000000725,
+        "companion_after": 1.0460000000002765,
+        "serialization": 0.04629999999906431,
+        "worker_round_trip": 29.627300000000105,
+        "post_processing": 0.02299999999922875,
+        "uia_tree_walk": 19.2845
+      },
+      "server_total_ms": 37.312300000000505,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 37.312300000000505,
+          "breakdown_ms": {
+            "queue_wait": 0.0026000000007115887,
+            "companion_before": 6.127599999999802,
+            "action": 29.823200000000725,
+            "companion_after": 1.0460000000002765,
+            "serialization": 0.04629999999906431,
+            "worker_round_trip": 29.627300000000105,
+            "post_processing": 0.02299999999922875,
+            "uia_tree_walk": 19.2845
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 10,
+      "elapsed_ms": 39.44250000000102,
+      "breakdown_ms": {
+        "queue_wait": 0.004200000000309956,
+        "companion_before": 6.031100000000151,
+        "action": 31.141200000000936,
+        "companion_after": 0.9792999999999665,
+        "serialization": 0.04460000000017317,
+        "worker_round_trip": 30.91769999999906,
+        "post_processing": 0.022500000000945874,
+        "uia_tree_walk": 19.6319
+      },
+      "server_total_ms": 38.38159999999971,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 38.38159999999971,
+          "breakdown_ms": {
+            "queue_wait": 0.004200000000309956,
+            "companion_before": 6.031100000000151,
+            "action": 31.141200000000936,
+            "companion_after": 0.9792999999999665,
+            "serialization": 0.04460000000017317,
+            "worker_round_trip": 30.91769999999906,
+            "post_processing": 0.022500000000945874,
+            "uia_tree_walk": 19.6319
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 11,
+      "elapsed_ms": 43.417199999999866,
+      "breakdown_ms": {
+        "queue_wait": 0.03330000000005384,
+        "companion_before": 6.938299999999799,
+        "action": 33.94639999999981,
+        "companion_after": 1.0685000000003129,
+        "serialization": 0.06329999999979918,
+        "worker_round_trip": 33.68880000000081,
+        "post_processing": 0.036199999999553256,
+        "uia_tree_walk": 21.3961
+      },
+      "server_total_ms": 42.23710000000028,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 42.23710000000028,
+          "breakdown_ms": {
+            "queue_wait": 0.03330000000005384,
+            "companion_before": 6.938299999999799,
+            "action": 33.94639999999981,
+            "companion_after": 1.0685000000003129,
+            "serialization": 0.06329999999979918,
+            "worker_round_trip": 33.68880000000081,
+            "post_processing": 0.036199999999553256,
+            "uia_tree_walk": 21.3961
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 12,
+      "elapsed_ms": 41.6916999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.005699999999706051,
+        "companion_before": 6.968000000000757,
+        "action": 32.63959999999952,
+        "companion_after": 0.9697000000005573,
+        "serialization": 0.1426999999994223,
+        "worker_round_trip": 32.4408999999996,
+        "post_processing": 0.021899999999732245,
+        "uia_tree_walk": 20.104300000000002
+      },
+      "server_total_ms": 40.79669999999987,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 40.79669999999987,
+          "breakdown_ms": {
+            "queue_wait": 0.005699999999706051,
+            "companion_before": 6.968000000000757,
+            "action": 32.63959999999952,
+            "companion_after": 0.9697000000005573,
+            "serialization": 0.1426999999994223,
+            "worker_round_trip": 32.4408999999996,
+            "post_processing": 0.021899999999732245,
+            "uia_tree_walk": 20.104300000000002
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 13,
+      "elapsed_ms": 39.89149999999972,
+      "breakdown_ms": {
+        "queue_wait": 0.004799999999704596,
+        "companion_before": 5.421500000001288,
+        "action": 32.26630000000023,
+        "companion_after": 1.090699999998833,
+        "serialization": 0.040599999998448766,
+        "worker_round_trip": 32.101700000000164,
+        "post_processing": 0.023500000000240107,
+        "uia_tree_walk": 19.3381
+      },
+      "server_total_ms": 38.98780000000079,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 38.98780000000079,
+          "breakdown_ms": {
+            "queue_wait": 0.004799999999704596,
+            "companion_before": 5.421500000001288,
+            "action": 32.26630000000023,
+            "companion_after": 1.090699999998833,
+            "serialization": 0.040599999998448766,
+            "worker_round_trip": 32.101700000000164,
+            "post_processing": 0.023500000000240107,
+            "uia_tree_walk": 19.3381
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 14,
+      "elapsed_ms": 39.3729000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.004299999999602733,
+        "companion_before": 5.539100000000872,
+        "action": 31.545599999999467,
+        "companion_after": 1.0187000000005355,
+        "serialization": 0.05230000000028667,
+        "worker_round_trip": 31.381099999999606,
+        "post_processing": 0.021400000000539876,
+        "uia_tree_walk": 19.6372
+      },
+      "server_total_ms": 38.32040000000052,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 38.32040000000052,
+          "breakdown_ms": {
+            "queue_wait": 0.004299999999602733,
+            "companion_before": 5.539100000000872,
+            "action": 31.545599999999467,
+            "companion_after": 1.0187000000005355,
+            "serialization": 0.05230000000028667,
+            "worker_round_trip": 31.381099999999606,
+            "post_processing": 0.021400000000539876,
+            "uia_tree_walk": 19.6372
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 15,
+      "elapsed_ms": 53.38420000000042,
+      "breakdown_ms": {
+        "queue_wait": 0.002900000000408909,
+        "companion_before": 5.793300000000272,
+        "action": 44.801800000000185,
+        "companion_after": 1.4524000000010346,
+        "serialization": 0.04589999999916472,
+        "worker_round_trip": 44.60730000000058,
+        "post_processing": 0.026799999999639113,
+        "uia_tree_walk": 26.6046
+      },
+      "server_total_ms": 52.26209999999992,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 52.26209999999992,
+          "breakdown_ms": {
+            "queue_wait": 0.002900000000408909,
+            "companion_before": 5.793300000000272,
+            "action": 44.801800000000185,
+            "companion_after": 1.4524000000010346,
+            "serialization": 0.04589999999916472,
+            "worker_round_trip": 44.60730000000058,
+            "post_processing": 0.026799999999639113,
+            "uia_tree_walk": 26.6046
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 16,
+      "elapsed_ms": 46.06209999999919,
+      "breakdown_ms": {
+        "queue_wait": 0.002199999999902502,
+        "companion_before": 6.731299999998555,
+        "action": 37.05490000000009,
+        "companion_after": 1.1592000000000553,
+        "serialization": 0.0488999999997759,
+        "worker_round_trip": 36.85999999999967,
+        "post_processing": 0.022099999999227293,
+        "uia_tree_walk": 23.9728
+      },
+      "server_total_ms": 45.15380000000005,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 45.15380000000005,
+          "breakdown_ms": {
+            "queue_wait": 0.002199999999902502,
+            "companion_before": 6.731299999998555,
+            "action": 37.05490000000009,
+            "companion_after": 1.1592000000000553,
+            "serialization": 0.0488999999997759,
+            "worker_round_trip": 36.85999999999967,
+            "post_processing": 0.022099999999227293,
+            "uia_tree_walk": 23.9728
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 17,
+      "elapsed_ms": 44.28050000000076,
+      "breakdown_ms": {
+        "queue_wait": 0.004400000000714499,
+        "companion_before": 7.0503999999982625,
+        "action": 34.94660000000022,
+        "companion_after": 1.1500999999998385,
+        "serialization": 0.0676000000012209,
+        "worker_round_trip": 34.6859000000004,
+        "post_processing": 0.03499999999985448,
+        "uia_tree_walk": 22.5027
+      },
+      "server_total_ms": 43.378200000000106,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 43.378200000000106,
+          "breakdown_ms": {
+            "queue_wait": 0.004400000000714499,
+            "companion_before": 7.0503999999982625,
+            "action": 34.94660000000022,
+            "companion_after": 1.1500999999998385,
+            "serialization": 0.0676000000012209,
+            "worker_round_trip": 34.6859000000004,
+            "post_processing": 0.03499999999985448,
+            "uia_tree_walk": 22.5027
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 18,
+      "elapsed_ms": 51.348800000001575,
+      "breakdown_ms": {
+        "queue_wait": 0.007499999999708962,
+        "companion_before": 6.918099999999868,
+        "action": 41.47009999999955,
+        "companion_after": 1.2563000000000102,
+        "serialization": 0.05739999999968859,
+        "worker_round_trip": 41.23570000000018,
+        "post_processing": 0.026499999999941792,
+        "uia_tree_walk": 23.7889
+      },
+      "server_total_ms": 50.00770000000011,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 50.00770000000011,
+          "breakdown_ms": {
+            "queue_wait": 0.007499999999708962,
+            "companion_before": 6.918099999999868,
+            "action": 41.47009999999955,
+            "companion_after": 1.2563000000000102,
+            "serialization": 0.05739999999968859,
+            "worker_round_trip": 41.23570000000018,
+            "post_processing": 0.026499999999941792,
+            "uia_tree_walk": 23.7889
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 19,
+      "elapsed_ms": 47.87780000000021,
+      "breakdown_ms": {
+        "queue_wait": 0.0033000000003085006,
+        "companion_before": 7.366700000000492,
+        "action": 36.36629999999968,
+        "companion_after": 1.6282000000001062,
+        "serialization": 0.0466999999998734,
+        "worker_round_trip": 36.15690000000086,
+        "post_processing": 0.025600000000849832,
+        "uia_tree_walk": 23.7698
+      },
+      "server_total_ms": 45.6224000000002,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 45.6224000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.0033000000003085006,
+            "companion_before": 7.366700000000492,
+            "action": 36.36629999999968,
+            "companion_after": 1.6282000000001062,
+            "serialization": 0.0466999999998734,
+            "worker_round_trip": 36.15690000000086,
+            "post_processing": 0.025600000000849832,
+            "uia_tree_walk": 23.7698
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "windows_set_verify_batch",
+      "run": 20,
+      "elapsed_ms": 54.14570000000094,
+      "breakdown_ms": {
+        "queue_wait": 0.0037000000002080924,
+        "companion_before": 8.015800000000127,
+        "action": 42.64679999999953,
+        "companion_after": 1.824800000000323,
+        "serialization": 0.052500000000691216,
+        "worker_round_trip": 42.41579999999976,
+        "post_processing": 0.026500000000851287,
+        "uia_tree_walk": 28.1152
+      },
+      "server_total_ms": 52.73359999999957,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 52.73359999999957,
+          "breakdown_ms": {
+            "queue_wait": 0.0037000000002080924,
+            "companion_before": 8.015800000000127,
+            "action": 42.64679999999953,
+            "companion_after": 1.824800000000323,
+            "serialization": 0.052500000000691216,
+            "worker_round_trip": 42.41579999999976,
+            "post_processing": 0.026500000000851287,
+            "uia_tree_walk": 28.1152
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 1,
+      "elapsed_ms": 105.82639999999992,
+      "breakdown_ms": {
+        "queue_wait": 0.00659999999993488,
+        "companion_before": 0.033399999999801366,
+        "action": 104.06770000000006,
+        "companion_after": 0.019199999999955253,
+        "serialization": 0.026500000000169166,
+        "worker_round_trip": 103.9326000000001,
+        "uia_tree_walk": 39.4792,
+        "post_processing": 0.09560000000010405
+      },
+      "server_total_ms": 104.18499999999995,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 104.18499999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.00659999999993488,
+            "companion_before": 0.033399999999801366,
+            "action": 104.06770000000006,
+            "companion_after": 0.019199999999955253,
+            "serialization": 0.026500000000169166,
+            "worker_round_trip": 103.9326000000001,
+            "uia_tree_walk": 39.4792,
+            "post_processing": 0.09560000000010405
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 2,
+      "elapsed_ms": 21.34610000000066,
+      "breakdown_ms": {
+        "queue_wait": 0.005500000000211003,
+        "companion_before": 0.032999999999901775,
+        "action": 20.32479999999987,
+        "companion_after": 0.020400000000108776,
+        "serialization": 0.01929999999993015,
+        "worker_round_trip": 20.276399999999967,
+        "uia_tree_walk": 18.332900000000002,
+        "post_processing": 0.020400000000108776
+      },
+      "server_total_ms": 20.49940000000015,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 20.49940000000015,
+          "breakdown_ms": {
+            "queue_wait": 0.005500000000211003,
+            "companion_before": 0.032999999999901775,
+            "action": 20.32479999999987,
+            "companion_after": 0.020400000000108776,
+            "serialization": 0.01929999999993015,
+            "worker_round_trip": 20.276399999999967,
+            "uia_tree_walk": 18.332900000000002,
+            "post_processing": 0.020400000000108776
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 3,
+      "elapsed_ms": 19.769900000001144,
+      "breakdown_ms": {
+        "queue_wait": 0.005999999999858119,
+        "companion_before": 0.027700000000095315,
+        "action": 18.666600000000017,
+        "companion_after": 0.0159000000001015,
+        "serialization": 0.01880000000005566,
+        "worker_round_trip": 18.620200000000068,
+        "uia_tree_walk": 16.7534,
+        "post_processing": 0.02020000000015898
+      },
+      "server_total_ms": 18.766999999999825,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.766999999999825,
+          "breakdown_ms": {
+            "queue_wait": 0.005999999999858119,
+            "companion_before": 0.027700000000095315,
+            "action": 18.666600000000017,
+            "companion_after": 0.0159000000001015,
+            "serialization": 0.01880000000005566,
+            "worker_round_trip": 18.620200000000068,
+            "uia_tree_walk": 16.7534,
+            "post_processing": 0.02020000000015898
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 4,
+      "elapsed_ms": 19.361700000001292,
+      "breakdown_ms": {
+        "queue_wait": 0.005699999999933425,
+        "companion_before": 0.024100000000089494,
+        "action": 18.383399999999938,
+        "companion_after": 0.015999999999849024,
+        "serialization": 0.018700000000080763,
+        "worker_round_trip": 18.334499999999935,
+        "uia_tree_walk": 16.5134,
+        "post_processing": 0.02109999999993306
+      },
+      "server_total_ms": 18.479100000000017,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.479100000000017,
+          "breakdown_ms": {
+            "queue_wait": 0.005699999999933425,
+            "companion_before": 0.024100000000089494,
+            "action": 18.383399999999938,
+            "companion_after": 0.015999999999849024,
+            "serialization": 0.018700000000080763,
+            "worker_round_trip": 18.334499999999935,
+            "uia_tree_walk": 16.5134,
+            "post_processing": 0.02109999999993306
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 5,
+      "elapsed_ms": 20.08129999999983,
+      "breakdown_ms": {
+        "queue_wait": 0.006699999999909778,
+        "companion_before": 0.02769999999986794,
+        "action": 19.006600000000162,
+        "companion_after": 0.01619999999979882,
+        "serialization": 0.019599999999854845,
+        "worker_round_trip": 18.952600000000075,
+        "uia_tree_walk": 17.1327,
+        "post_processing": 0.025699999999915235
+      },
+      "server_total_ms": 19.155099999999948,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.155099999999948,
+          "breakdown_ms": {
+            "queue_wait": 0.006699999999909778,
+            "companion_before": 0.02769999999986794,
+            "action": 19.006600000000162,
+            "companion_after": 0.01619999999979882,
+            "serialization": 0.019599999999854845,
+            "worker_round_trip": 18.952600000000075,
+            "uia_tree_walk": 17.1327,
+            "post_processing": 0.025699999999915235
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 6,
+      "elapsed_ms": 19.65940000000046,
+      "breakdown_ms": {
+        "queue_wait": 0.008199999999987995,
+        "companion_before": 0.027100000000018554,
+        "action": 18.542899999999918,
+        "companion_after": 0.020400000000108776,
+        "serialization": 0.02500000000009095,
+        "worker_round_trip": 18.473400000000083,
+        "uia_tree_walk": 16.4862,
+        "post_processing": 0.03469999999992979
+      },
+      "server_total_ms": 18.767299999999977,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.767299999999977,
+          "breakdown_ms": {
+            "queue_wait": 0.008199999999987995,
+            "companion_before": 0.027100000000018554,
+            "action": 18.542899999999918,
+            "companion_after": 0.020400000000108776,
+            "serialization": 0.02500000000009095,
+            "worker_round_trip": 18.473400000000083,
+            "uia_tree_walk": 16.4862,
+            "post_processing": 0.03469999999992979
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 7,
+      "elapsed_ms": 20.54529999999977,
+      "breakdown_ms": {
+        "queue_wait": 0.008199999999987995,
+        "companion_before": 0.07090000000016516,
+        "action": 19.58140000000003,
+        "companion_after": 0.0159000000001015,
+        "serialization": 0.0204999999998563,
+        "worker_round_trip": 19.42710000000011,
+        "uia_tree_walk": 17.287300000000002,
+        "post_processing": 0.024400000000014188
+      },
+      "server_total_ms": 19.74630000000002,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.74630000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.008199999999987995,
+            "companion_before": 0.07090000000016516,
+            "action": 19.58140000000003,
+            "companion_after": 0.0159000000001015,
+            "serialization": 0.0204999999998563,
+            "worker_round_trip": 19.42710000000011,
+            "uia_tree_walk": 17.287300000000002,
+            "post_processing": 0.024400000000014188
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 8,
+      "elapsed_ms": 19.39350000000013,
+      "breakdown_ms": {
+        "queue_wait": 0.006999999999834472,
+        "companion_before": 0.023899999999912325,
+        "action": 18.45830000000001,
+        "companion_after": 0.017299999999977445,
+        "serialization": 0.01869999999985339,
+        "worker_round_trip": 18.335399999999936,
+        "uia_tree_walk": 16.494,
+        "post_processing": 0.027100000000018554
+      },
+      "server_total_ms": 18.563899999999876,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.563899999999876,
+          "breakdown_ms": {
+            "queue_wait": 0.006999999999834472,
+            "companion_before": 0.023899999999912325,
+            "action": 18.45830000000001,
+            "companion_after": 0.017299999999977445,
+            "serialization": 0.01869999999985339,
+            "worker_round_trip": 18.335399999999936,
+            "uia_tree_walk": 16.494,
+            "post_processing": 0.027100000000018554
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 9,
+      "elapsed_ms": 19.474700000000666,
+      "breakdown_ms": {
+        "queue_wait": 0.005699999999933425,
+        "companion_before": 0.026099999999814827,
+        "action": 18.636199999999917,
+        "companion_after": 0.017600000000129512,
+        "serialization": 0.01880000000005566,
+        "worker_round_trip": 18.576000000000022,
+        "uia_tree_walk": 16.7981,
+        "post_processing": 0.021700000000009823
+      },
+      "server_total_ms": 18.72160000000008,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.72160000000008,
+          "breakdown_ms": {
+            "queue_wait": 0.005699999999933425,
+            "companion_before": 0.026099999999814827,
+            "action": 18.636199999999917,
+            "companion_after": 0.017600000000129512,
+            "serialization": 0.01880000000005566,
+            "worker_round_trip": 18.576000000000022,
+            "uia_tree_walk": 16.7981,
+            "post_processing": 0.021700000000009823
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 10,
+      "elapsed_ms": 30.477200000001176,
+      "breakdown_ms": {
+        "queue_wait": 0.004999999999881766,
+        "companion_before": 0.027800000000070213,
+        "action": 29.597800000000007,
+        "companion_after": 0.021200000000135333,
+        "serialization": 0.019900000000006912,
+        "worker_round_trip": 29.5474999999999,
+        "uia_tree_walk": 27.701800000000002,
+        "post_processing": 0.025200000000040745
+      },
+      "server_total_ms": 29.6882999999998,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 29.6882999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.004999999999881766,
+            "companion_before": 0.027800000000070213,
+            "action": 29.597800000000007,
+            "companion_after": 0.021200000000135333,
+            "serialization": 0.019900000000006912,
+            "worker_round_trip": 29.5474999999999,
+            "uia_tree_walk": 27.701800000000002,
+            "post_processing": 0.025200000000040745
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 11,
+      "elapsed_ms": 20.36659999999938,
+      "breakdown_ms": {
+        "queue_wait": 0.005100000000311411,
+        "companion_before": 0.03209999999990032,
+        "action": 19.464300000000094,
+        "companion_after": 0.0181999999999789,
+        "serialization": 0.020399999999881402,
+        "worker_round_trip": 19.42489999999998,
+        "uia_tree_walk": 17.502200000000002,
+        "post_processing": 0.018699999999626016
+      },
+      "server_total_ms": 19.55529999999999,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.55529999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.005100000000311411,
+            "companion_before": 0.03209999999990032,
+            "action": 19.464300000000094,
+            "companion_after": 0.0181999999999789,
+            "serialization": 0.020399999999881402,
+            "worker_round_trip": 19.42489999999998,
+            "uia_tree_walk": 17.502200000000002,
+            "post_processing": 0.018699999999626016
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 12,
+      "elapsed_ms": 19.115900000000693,
+      "breakdown_ms": {
+        "queue_wait": 0.005000000000109139,
+        "companion_before": 0.02169999999978245,
+        "action": 18.27240000000029,
+        "companion_after": 0.014000000000123691,
+        "serialization": 0.01869999999917127,
+        "worker_round_trip": 18.23660000000018,
+        "uia_tree_walk": 16.46,
+        "post_processing": 0.01749999999992724
+      },
+      "server_total_ms": 18.345400000000154,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.345400000000154,
+          "breakdown_ms": {
+            "queue_wait": 0.005000000000109139,
+            "companion_before": 0.02169999999978245,
+            "action": 18.27240000000029,
+            "companion_after": 0.014000000000123691,
+            "serialization": 0.01869999999917127,
+            "worker_round_trip": 18.23660000000018,
+            "uia_tree_walk": 16.46,
+            "post_processing": 0.01749999999992724
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 13,
+      "elapsed_ms": 19.354300000000876,
+      "breakdown_ms": {
+        "queue_wait": 0.005499999999756255,
+        "companion_before": 0.027000000000043656,
+        "action": 18.40199999999959,
+        "companion_after": 0.0136000000002241,
+        "serialization": 0.019500000000334694,
+        "worker_round_trip": 18.36349999999993,
+        "uia_tree_walk": 16.578200000000002,
+        "post_processing": 0.017600000000129512
+      },
+      "server_total_ms": 18.485200000000077,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.485200000000077,
+          "breakdown_ms": {
+            "queue_wait": 0.005499999999756255,
+            "companion_before": 0.027000000000043656,
+            "action": 18.40199999999959,
+            "companion_after": 0.0136000000002241,
+            "serialization": 0.019500000000334694,
+            "worker_round_trip": 18.36349999999993,
+            "uia_tree_walk": 16.578200000000002,
+            "post_processing": 0.017600000000129512
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 14,
+      "elapsed_ms": 19.520400000001246,
+      "breakdown_ms": {
+        "queue_wait": 0.004699999999957072,
+        "companion_before": 0.021900000000186992,
+        "action": 18.69939999999997,
+        "companion_after": 0.015199999999822467,
+        "serialization": 0.02110000000038781,
+        "worker_round_trip": 18.658100000000104,
+        "uia_tree_walk": 16.9194,
+        "post_processing": 0.020899999999983265
+      },
+      "server_total_ms": 18.773999999999887,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.773999999999887,
+          "breakdown_ms": {
+            "queue_wait": 0.004699999999957072,
+            "companion_before": 0.021900000000186992,
+            "action": 18.69939999999997,
+            "companion_after": 0.015199999999822467,
+            "serialization": 0.02110000000038781,
+            "worker_round_trip": 18.658100000000104,
+            "uia_tree_walk": 16.9194,
+            "post_processing": 0.020899999999983265
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 15,
+      "elapsed_ms": 20.07380000000012,
+      "breakdown_ms": {
+        "queue_wait": 0.004899999999906868,
+        "companion_before": 0.023400000000037835,
+        "action": 19.20390000000043,
+        "companion_after": 0.013799999999719148,
+        "serialization": 0.01929999999993015,
+        "worker_round_trip": 19.164299999999912,
+        "uia_tree_walk": 17.2784,
+        "post_processing": 0.01900000000023283
+      },
+      "server_total_ms": 19.2813000000001,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.2813000000001,
+          "breakdown_ms": {
+            "queue_wait": 0.004899999999906868,
+            "companion_before": 0.023400000000037835,
+            "action": 19.20390000000043,
+            "companion_after": 0.013799999999719148,
+            "serialization": 0.01929999999993015,
+            "worker_round_trip": 19.164299999999912,
+            "uia_tree_walk": 17.2784,
+            "post_processing": 0.01900000000023283
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 16,
+      "elapsed_ms": 21.98199999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.005099999999856664,
+        "companion_before": 0.06329999999979918,
+        "action": 20.963000000000193,
+        "companion_after": 0.015100000000074942,
+        "serialization": 0.020300000000133878,
+        "worker_round_trip": 20.92560000000003,
+        "uia_tree_walk": 18.9226,
+        "post_processing": 0.017600000000129512
+      },
+      "server_total_ms": 21.07930000000033,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 21.07930000000033,
+          "breakdown_ms": {
+            "queue_wait": 0.005099999999856664,
+            "companion_before": 0.06329999999979918,
+            "action": 20.963000000000193,
+            "companion_after": 0.015100000000074942,
+            "serialization": 0.020300000000133878,
+            "worker_round_trip": 20.92560000000003,
+            "uia_tree_walk": 18.9226,
+            "post_processing": 0.017600000000129512
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 17,
+      "elapsed_ms": 19.368499999998676,
+      "breakdown_ms": {
+        "queue_wait": 0.004699999999957072,
+        "companion_before": 0.01959999999962747,
+        "action": 18.586699999999837,
+        "companion_after": 0.01290000000017244,
+        "serialization": 0.019099999999525608,
+        "worker_round_trip": 18.548099999999977,
+        "uia_tree_walk": 16.682000000000002,
+        "post_processing": 0.018500000000130967
+      },
+      "server_total_ms": 18.656400000000303,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.656400000000303,
+          "breakdown_ms": {
+            "queue_wait": 0.004699999999957072,
+            "companion_before": 0.01959999999962747,
+            "action": 18.586699999999837,
+            "companion_after": 0.01290000000017244,
+            "serialization": 0.019099999999525608,
+            "worker_round_trip": 18.548099999999977,
+            "uia_tree_walk": 16.682000000000002,
+            "post_processing": 0.018500000000130967
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 18,
+      "elapsed_ms": 19.111899999999878,
+      "breakdown_ms": {
+        "queue_wait": 0.004200000000309956,
+        "companion_before": 0.020500000000083674,
+        "action": 18.286899999999605,
+        "companion_after": 0.012600000000020373,
+        "serialization": 0.01859999999987849,
+        "worker_round_trip": 18.250800000000254,
+        "uia_tree_walk": 16.571,
+        "post_processing": 0.01749999999992724
+      },
+      "server_total_ms": 18.358000000000175,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.358000000000175,
+          "breakdown_ms": {
+            "queue_wait": 0.004200000000309956,
+            "companion_before": 0.020500000000083674,
+            "action": 18.286899999999605,
+            "companion_after": 0.012600000000020373,
+            "serialization": 0.01859999999987849,
+            "worker_round_trip": 18.250800000000254,
+            "uia_tree_walk": 16.571,
+            "post_processing": 0.01749999999992724
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 19,
+      "elapsed_ms": 19.635700000000725,
+      "breakdown_ms": {
+        "queue_wait": 0.004500000000007276,
+        "companion_before": 0.024500000000443833,
+        "action": 18.70139999999992,
+        "companion_after": 0.014400000000023283,
+        "serialization": 0.020900000000438013,
+        "worker_round_trip": 18.65689999999995,
+        "uia_tree_walk": 16.9643,
+        "post_processing": 0.020500000000083674
+      },
+      "server_total_ms": 18.77930000000015,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.77930000000015,
+          "breakdown_ms": {
+            "queue_wait": 0.004500000000007276,
+            "companion_before": 0.024500000000443833,
+            "action": 18.70139999999992,
+            "companion_after": 0.014400000000023283,
+            "serialization": 0.020900000000438013,
+            "worker_round_trip": 18.65689999999995,
+            "uia_tree_walk": 16.9643,
+            "post_processing": 0.020500000000083674
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_narrow",
+      "run": 20,
+      "elapsed_ms": 20.39419999999882,
+      "breakdown_ms": {
+        "queue_wait": 0.0079000000000633,
+        "companion_before": 0.03850000000011278,
+        "action": 19.427500000000236,
+        "companion_after": 0.014500000000225555,
+        "serialization": 0.02059999999937645,
+        "worker_round_trip": 19.38819999999987,
+        "uia_tree_walk": 17.509,
+        "post_processing": 0.018000000000029104
+      },
+      "server_total_ms": 19.5304000000001,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.5304000000001,
+          "breakdown_ms": {
+            "queue_wait": 0.0079000000000633,
+            "companion_before": 0.03850000000011278,
+            "action": 19.427500000000236,
+            "companion_after": 0.014500000000225555,
+            "serialization": 0.02059999999937645,
+            "worker_round_trip": 19.38819999999987,
+            "uia_tree_walk": 17.509,
+            "post_processing": 0.018000000000029104
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 1,
+      "elapsed_ms": 25.666400000000067,
+      "breakdown_ms": {
+        "queue_wait": 0.011999999999716238,
+        "companion_before": 0.0443000000000211,
+        "action": 24.13289999999961,
+        "companion_after": 0.014900000000125146,
+        "serialization": 0.029100000000198634,
+        "worker_round_trip": 24.07459999999992,
+        "uia_tree_walk": 17.5869,
+        "post_processing": 0.030700000000251748
+      },
+      "server_total_ms": 24.310399999999845,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.310399999999845,
+          "breakdown_ms": {
+            "queue_wait": 0.011999999999716238,
+            "companion_before": 0.0443000000000211,
+            "action": 24.13289999999961,
+            "companion_after": 0.014900000000125146,
+            "serialization": 0.029100000000198634,
+            "worker_round_trip": 24.07459999999992,
+            "uia_tree_walk": 17.5869,
+            "post_processing": 0.030700000000251748
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 2,
+      "elapsed_ms": 19.93489999999838,
+      "breakdown_ms": {
+        "queue_wait": 0.0045999999997548,
+        "companion_before": 0.02250000000003638,
+        "action": 19.11200000000008,
+        "companion_after": 0.012200000000120781,
+        "serialization": 0.025300000000243017,
+        "worker_round_trip": 19.067599999999857,
+        "uia_tree_walk": 17.119600000000002,
+        "post_processing": 0.0215000000002874
+      },
+      "server_total_ms": 19.1850000000004,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.1850000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.0045999999997548,
+            "companion_before": 0.02250000000003638,
+            "action": 19.11200000000008,
+            "companion_after": 0.012200000000120781,
+            "serialization": 0.025300000000243017,
+            "worker_round_trip": 19.067599999999857,
+            "uia_tree_walk": 17.119600000000002,
+            "post_processing": 0.0215000000002874
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 3,
+      "elapsed_ms": 20.194499999999607,
+      "breakdown_ms": {
+        "queue_wait": 0.0039000000001578883,
+        "companion_before": 0.01749999999992724,
+        "action": 19.36539999999968,
+        "companion_after": 0.012699999999767897,
+        "serialization": 0.0248000000005959,
+        "worker_round_trip": 19.320500000000266,
+        "uia_tree_walk": 17.515800000000002,
+        "post_processing": 0.02179999999998472
+      },
+      "server_total_ms": 19.43159999999989,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.43159999999989,
+          "breakdown_ms": {
+            "queue_wait": 0.0039000000001578883,
+            "companion_before": 0.01749999999992724,
+            "action": 19.36539999999968,
+            "companion_after": 0.012699999999767897,
+            "serialization": 0.0248000000005959,
+            "worker_round_trip": 19.320500000000266,
+            "uia_tree_walk": 17.515800000000002,
+            "post_processing": 0.02179999999998472
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 4,
+      "elapsed_ms": 19.555900000001202,
+      "breakdown_ms": {
+        "queue_wait": 0.004399999999805004,
+        "companion_before": 0.019699999999829743,
+        "action": 18.719499999999698,
+        "companion_after": 0.013900000000376167,
+        "serialization": 0.028599999999642023,
+        "worker_round_trip": 18.67049999999972,
+        "uia_tree_walk": 16.8976,
+        "post_processing": 0.023099999999885767
+      },
+      "server_total_ms": 18.797399999999925,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.797399999999925,
+          "breakdown_ms": {
+            "queue_wait": 0.004399999999805004,
+            "companion_before": 0.019699999999829743,
+            "action": 18.719499999999698,
+            "companion_after": 0.013900000000376167,
+            "serialization": 0.028599999999642023,
+            "worker_round_trip": 18.67049999999972,
+            "uia_tree_walk": 16.8976,
+            "post_processing": 0.023099999999885767
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 5,
+      "elapsed_ms": 19.313900000001013,
+      "breakdown_ms": {
+        "queue_wait": 0.004100000000107684,
+        "companion_before": 0.05580000000054497,
+        "action": 18.203299999999672,
+        "companion_after": 0.011800000000221189,
+        "serialization": 0.026199999999789725,
+        "worker_round_trip": 18.155500000000302,
+        "uia_tree_walk": 16.3401,
+        "post_processing": 0.022699999999986176
+      },
+      "server_total_ms": 18.3091000000004,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.3091000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.004100000000107684,
+            "companion_before": 0.05580000000054497,
+            "action": 18.203299999999672,
+            "companion_after": 0.011800000000221189,
+            "serialization": 0.026199999999789725,
+            "worker_round_trip": 18.155500000000302,
+            "uia_tree_walk": 16.3401,
+            "post_processing": 0.022699999999986176
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 6,
+      "elapsed_ms": 20.381499999999505,
+      "breakdown_ms": {
+        "queue_wait": 0.0032999999998537533,
+        "companion_before": 0.015200000000277214,
+        "action": 19.49240000000009,
+        "companion_after": 0.011600000000271393,
+        "serialization": 0.02930000000014843,
+        "worker_round_trip": 19.440799999999854,
+        "uia_tree_walk": 17.313100000000002,
+        "post_processing": 0.025500000000192813
+      },
+      "server_total_ms": 19.553699999999935,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.553699999999935,
+          "breakdown_ms": {
+            "queue_wait": 0.0032999999998537533,
+            "companion_before": 0.015200000000277214,
+            "action": 19.49240000000009,
+            "companion_after": 0.011600000000271393,
+            "serialization": 0.02930000000014843,
+            "worker_round_trip": 19.440799999999854,
+            "uia_tree_walk": 17.313100000000002,
+            "post_processing": 0.025500000000192813
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 7,
+      "elapsed_ms": 19.3762999999999,
+      "breakdown_ms": {
+        "queue_wait": 0.0035000000002582965,
+        "companion_before": 0.019900000000234286,
+        "action": 18.503000000000156,
+        "companion_after": 0.01499999999987267,
+        "serialization": 0.029200000000400905,
+        "worker_round_trip": 18.45219999999972,
+        "uia_tree_walk": 16.634600000000002,
+        "post_processing": 0.025099999999838474
+      },
+      "server_total_ms": 18.57659999999987,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.57659999999987,
+          "breakdown_ms": {
+            "queue_wait": 0.0035000000002582965,
+            "companion_before": 0.019900000000234286,
+            "action": 18.503000000000156,
+            "companion_after": 0.01499999999987267,
+            "serialization": 0.029200000000400905,
+            "worker_round_trip": 18.45219999999972,
+            "uia_tree_walk": 16.634600000000002,
+            "post_processing": 0.025099999999838474
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 8,
+      "elapsed_ms": 19.140699999999924,
+      "breakdown_ms": {
+        "queue_wait": 0.0032999999998537533,
+        "companion_before": 0.01639999999997599,
+        "action": 18.360200000000077,
+        "companion_after": 0.011500000000069122,
+        "serialization": 0.025599999999940337,
+        "worker_round_trip": 18.316499999999905,
+        "uia_tree_walk": 16.5446,
+        "post_processing": 0.02140000000008513
+      },
+      "server_total_ms": 18.421699999999873,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.421699999999873,
+          "breakdown_ms": {
+            "queue_wait": 0.0032999999998537533,
+            "companion_before": 0.01639999999997599,
+            "action": 18.360200000000077,
+            "companion_after": 0.011500000000069122,
+            "serialization": 0.025599999999940337,
+            "worker_round_trip": 18.316499999999905,
+            "uia_tree_walk": 16.5446,
+            "post_processing": 0.02140000000008513
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 9,
+      "elapsed_ms": 18.734199999998964,
+      "breakdown_ms": {
+        "queue_wait": 0.0037000000002080924,
+        "companion_before": 0.01540000000022701,
+        "action": 17.920500000000175,
+        "companion_after": 0.011800000000221189,
+        "serialization": 0.025799999999890133,
+        "worker_round_trip": 17.875100000000202,
+        "uia_tree_walk": 16.0238,
+        "post_processing": 0.02209999999968204
+      },
+      "server_total_ms": 17.982800000000225,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 17.982800000000225,
+          "breakdown_ms": {
+            "queue_wait": 0.0037000000002080924,
+            "companion_before": 0.01540000000022701,
+            "action": 17.920500000000175,
+            "companion_after": 0.011800000000221189,
+            "serialization": 0.025799999999890133,
+            "worker_round_trip": 17.875100000000202,
+            "uia_tree_walk": 16.0238,
+            "post_processing": 0.02209999999968204
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 10,
+      "elapsed_ms": 20.6221000000005,
+      "breakdown_ms": {
+        "queue_wait": 0.0037000000002080924,
+        "companion_before": 0.016499999999723514,
+        "action": 19.58809999999994,
+        "companion_after": 0.011700000000018917,
+        "serialization": 0.025900000000547152,
+        "worker_round_trip": 19.541000000000167,
+        "uia_tree_walk": 17.5245,
+        "post_processing": 0.022599999999783904
+      },
+      "server_total_ms": 19.652300000000196,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.652300000000196,
+          "breakdown_ms": {
+            "queue_wait": 0.0037000000002080924,
+            "companion_before": 0.016499999999723514,
+            "action": 19.58809999999994,
+            "companion_after": 0.011700000000018917,
+            "serialization": 0.025900000000547152,
+            "worker_round_trip": 19.541000000000167,
+            "uia_tree_walk": 17.5245,
+            "post_processing": 0.022599999999783904
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 11,
+      "elapsed_ms": 19.380199999999604,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 0.018399999999928696,
+        "action": 18.539800000000014,
+        "companion_after": 0.010799999999562715,
+        "serialization": 0.026300000000446744,
+        "worker_round_trip": 18.489600000000337,
+        "uia_tree_walk": 16.4333,
+        "post_processing": 0.021700000000237196
+      },
+      "server_total_ms": 18.60699999999997,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.60699999999997,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 0.018399999999928696,
+            "action": 18.539800000000014,
+            "companion_after": 0.010799999999562715,
+            "serialization": 0.026300000000446744,
+            "worker_round_trip": 18.489600000000337,
+            "uia_tree_walk": 16.4333,
+            "post_processing": 0.021700000000237196
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 12,
+      "elapsed_ms": 19.6270999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.04080000000021755,
+        "companion_before": 0.01830000000018117,
+        "action": 18.659400000000005,
+        "companion_after": 0.010600000000067666,
+        "serialization": 0.024899999999888678,
+        "worker_round_trip": 18.615899999999783,
+        "uia_tree_walk": 16.7653,
+        "post_processing": 0.02070000000003347
+      },
+      "server_total_ms": 18.76189999999997,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.76189999999997,
+          "breakdown_ms": {
+            "queue_wait": 0.04080000000021755,
+            "companion_before": 0.01830000000018117,
+            "action": 18.659400000000005,
+            "companion_after": 0.010600000000067666,
+            "serialization": 0.024899999999888678,
+            "worker_round_trip": 18.615899999999783,
+            "uia_tree_walk": 16.7653,
+            "post_processing": 0.02070000000003347
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 13,
+      "elapsed_ms": 19.572000000000116,
+      "breakdown_ms": {
+        "queue_wait": 0.0033000000003085006,
+        "companion_before": 0.05079999999998108,
+        "action": 18.56919999999991,
+        "companion_after": 0.018000000000029104,
+        "serialization": 0.09239999999999782,
+        "worker_round_trip": 18.457300000000032,
+        "uia_tree_walk": 16.5913,
+        "post_processing": 0.020399999999881402
+      },
+      "server_total_ms": 18.68060000000014,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.68060000000014,
+          "breakdown_ms": {
+            "queue_wait": 0.0033000000003085006,
+            "companion_before": 0.05079999999998108,
+            "action": 18.56919999999991,
+            "companion_after": 0.018000000000029104,
+            "serialization": 0.09239999999999782,
+            "worker_round_trip": 18.457300000000032,
+            "uia_tree_walk": 16.5913,
+            "post_processing": 0.020399999999881402
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 14,
+      "elapsed_ms": 19.094499999999243,
+      "breakdown_ms": {
+        "queue_wait": 0.004699999999957072,
+        "companion_before": 0.024699999999938882,
+        "action": 18.1541000000002,
+        "companion_after": 0.01069999999981519,
+        "serialization": 0.024499999999989086,
+        "worker_round_trip": 18.109599999999773,
+        "uia_tree_walk": 16.3306,
+        "post_processing": 0.02070000000003347
+      },
+      "server_total_ms": 18.23169999999982,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.23169999999982,
+          "breakdown_ms": {
+            "queue_wait": 0.004699999999957072,
+            "companion_before": 0.024699999999938882,
+            "action": 18.1541000000002,
+            "companion_after": 0.01069999999981519,
+            "serialization": 0.024499999999989086,
+            "worker_round_trip": 18.109599999999773,
+            "uia_tree_walk": 16.3306,
+            "post_processing": 0.02070000000003347
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 15,
+      "elapsed_ms": 19.175499999999374,
+      "breakdown_ms": {
+        "queue_wait": 0.0027000000000043656,
+        "companion_before": 0.014300000000275759,
+        "action": 18.36779999999999,
+        "companion_after": 0.010800000000017462,
+        "serialization": 0.025799999999890133,
+        "worker_round_trip": 18.323399999999765,
+        "uia_tree_walk": 16.5764,
+        "post_processing": 0.02179999999998472
+      },
+      "server_total_ms": 18.429200000000037,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.429200000000037,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 0.014300000000275759,
+            "action": 18.36779999999999,
+            "companion_after": 0.010800000000017462,
+            "serialization": 0.025799999999890133,
+            "worker_round_trip": 18.323399999999765,
+            "uia_tree_walk": 16.5764,
+            "post_processing": 0.02179999999998472
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 16,
+      "elapsed_ms": 19.350600000001577,
+      "breakdown_ms": {
+        "queue_wait": 0.0025000000000545697,
+        "companion_before": 0.013800000000173895,
+        "action": 18.56939999999986,
+        "companion_after": 0.011300000000119326,
+        "serialization": 0.02489999999943393,
+        "worker_round_trip": 18.523799999999937,
+        "uia_tree_walk": 16.7851,
+        "post_processing": 0.022100000000136788
+      },
+      "server_total_ms": 18.6262999999999,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.6262999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 0.013800000000173895,
+            "action": 18.56939999999986,
+            "companion_after": 0.011300000000119326,
+            "serialization": 0.02489999999943393,
+            "worker_round_trip": 18.523799999999937,
+            "uia_tree_walk": 16.7851,
+            "post_processing": 0.022100000000136788
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 17,
+      "elapsed_ms": 20.010800000000017,
+      "breakdown_ms": {
+        "queue_wait": 0.0027000000000043656,
+        "companion_before": 0.014599999999973079,
+        "action": 19.159000000000106,
+        "companion_after": 0.010600000000067666,
+        "serialization": 0.027499999999690772,
+        "worker_round_trip": 19.11279999999988,
+        "uia_tree_walk": 17.3569,
+        "post_processing": 0.023000000000138243
+      },
+      "server_total_ms": 19.21730000000025,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.21730000000025,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 0.014599999999973079,
+            "action": 19.159000000000106,
+            "companion_after": 0.010600000000067666,
+            "serialization": 0.027499999999690772,
+            "worker_round_trip": 19.11279999999988,
+            "uia_tree_walk": 17.3569,
+            "post_processing": 0.023000000000138243
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 18,
+      "elapsed_ms": 19.378200000001016,
+      "breakdown_ms": {
+        "queue_wait": 0.0027000000000043656,
+        "companion_before": 0.015900000000328873,
+        "action": 18.429999999999836,
+        "companion_after": 0.01069999999981519,
+        "serialization": 0.026800000000548607,
+        "worker_round_trip": 18.384000000000015,
+        "uia_tree_walk": 16.599800000000002,
+        "post_processing": 0.022400000000288856
+      },
+      "server_total_ms": 18.49270000000024,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.49270000000024,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 0.015900000000328873,
+            "action": 18.429999999999836,
+            "companion_after": 0.01069999999981519,
+            "serialization": 0.026800000000548607,
+            "worker_round_trip": 18.384000000000015,
+            "uia_tree_walk": 16.599800000000002,
+            "post_processing": 0.022400000000288856
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 19,
+      "elapsed_ms": 18.87039999999979,
+      "breakdown_ms": {
+        "queue_wait": 0.002800000000206637,
+        "companion_before": 0.013599999999769352,
+        "action": 17.977499999999964,
+        "companion_after": 0.012600000000020373,
+        "serialization": 0.032599999999547435,
+        "worker_round_trip": 17.924400000000333,
+        "uia_tree_walk": 16.2486,
+        "post_processing": 0.029399999999895954
+      },
+      "server_total_ms": 18.038499999999658,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.038499999999658,
+          "breakdown_ms": {
+            "queue_wait": 0.002800000000206637,
+            "companion_before": 0.013599999999769352,
+            "action": 17.977499999999964,
+            "companion_after": 0.012600000000020373,
+            "serialization": 0.032599999999547435,
+            "worker_round_trip": 17.924400000000333,
+            "uia_tree_walk": 16.2486,
+            "post_processing": 0.029399999999895954
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_get_ui_wide",
+      "run": 20,
+      "elapsed_ms": 19.26470000000154,
+      "breakdown_ms": {
+        "queue_wait": 0.002900000000408909,
+        "companion_before": 0.014600000000427826,
+        "action": 18.454299999999876,
+        "companion_after": 0.010099999999965803,
+        "serialization": 0.02529999999978827,
+        "worker_round_trip": 18.409899999999652,
+        "uia_tree_walk": 16.650000000000002,
+        "post_processing": 0.02109999999993306
+      },
+      "server_total_ms": 18.511399999999867,
+      "payload_bytes": 0,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.511399999999867,
+          "breakdown_ms": {
+            "queue_wait": 0.002900000000408909,
+            "companion_before": 0.014600000000427826,
+            "action": 18.454299999999876,
+            "companion_after": 0.010099999999965803,
+            "serialization": 0.02529999999978827,
+            "worker_round_trip": 18.409899999999652,
+            "uia_tree_walk": 16.650000000000002,
+            "post_processing": 0.02109999999993306
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 1,
+      "elapsed_ms": 38.48939999999857,
+      "breakdown_ms": {
+        "queue_wait": 0.009399999999914144,
+        "companion_before": 0.04579999999987194,
+        "action": 36.02709999999979,
+        "companion_after": 0.032900000000609,
+        "serialization": 0.030799999999999272,
+        "worker_round_trip": 35.918900000000576,
+        "post_processing": 0.03299999999944703,
+        "uia_tree_walk": 17.2533
+      },
+      "server_total_ms": 36.21180000000004,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 16.43020000000024,
+          "breakdown_ms": {
+            "queue_wait": 0.0030999999999039574,
+            "companion_before": 0.014299999999821011,
+            "action": 16.344699999999648,
+            "companion_after": 0.021700000000237196,
+            "serialization": 0.008599999999660213,
+            "worker_round_trip": 16.277800000000298,
+            "post_processing": 0.013999999999668944
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.7815999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.006300000000010186,
+            "companion_before": 0.03150000000005093,
+            "action": 19.682400000000143,
+            "companion_after": 0.011200000000371801,
+            "serialization": 0.02220000000033906,
+            "worker_round_trip": 19.64110000000028,
+            "uia_tree_walk": 17.2533,
+            "post_processing": 0.018999999999778083
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 2,
+      "elapsed_ms": 28.148299999998926,
+      "breakdown_ms": {
+        "queue_wait": 0.006200000000262662,
+        "companion_before": 0.029399999999895954,
+        "action": 26.52460000000019,
+        "companion_after": 0.019800000000032014,
+        "serialization": 0.02559999999948559,
+        "worker_round_trip": 26.466899999999896,
+        "post_processing": 0.019499999999879947,
+        "uia_tree_walk": 17.7952
+      },
+      "server_total_ms": 26.641399999999976,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.7422999999998865,
+          "breakdown_ms": {
+            "queue_wait": 0.0028999999999541615,
+            "companion_before": 0.014099999999871216,
+            "action": 6.686200000000099,
+            "companion_after": 0.009900000000016007,
+            "serialization": 0.006999999999607098,
+            "worker_round_trip": 6.666999999999916,
+            "post_processing": 0.0014000000001033186
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.89910000000009,
+          "breakdown_ms": {
+            "queue_wait": 0.0033000000003085006,
+            "companion_before": 0.015300000000024738,
+            "action": 19.838400000000092,
+            "companion_after": 0.009900000000016007,
+            "serialization": 0.01859999999987849,
+            "worker_round_trip": 19.79989999999998,
+            "uia_tree_walk": 17.7952,
+            "post_processing": 0.018099999999776628
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 3,
+      "elapsed_ms": 28.079600000000937,
+      "breakdown_ms": {
+        "queue_wait": 0.005099999999856664,
+        "companion_before": 0.01769999999942229,
+        "action": 26.162100000000464,
+        "companion_after": 0.018999999999778083,
+        "serialization": 0.028900000000248838,
+        "worker_round_trip": 26.09940000000006,
+        "post_processing": 0.021299999999882857,
+        "uia_tree_walk": 16.7203
+      },
+      "server_total_ms": 26.26800000000003,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 7.473199999999906,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 0.009299999999711872,
+            "action": 7.4145000000003165,
+            "companion_after": 0.01069999999981519,
+            "serialization": 0.009200000000419095,
+            "worker_round_trip": 7.390100000000075,
+            "post_processing": 0.002100000000154978
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 18.794800000000123,
+          "breakdown_ms": {
+            "queue_wait": 0.002399999999852298,
+            "companion_before": 0.008399999999710417,
+            "action": 18.747600000000148,
+            "companion_after": 0.008299999999962893,
+            "serialization": 0.019699999999829743,
+            "worker_round_trip": 18.709299999999985,
+            "uia_tree_walk": 16.7203,
+            "post_processing": 0.01919999999972788
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 4,
+      "elapsed_ms": 28.011000000000422,
+      "breakdown_ms": {
+        "queue_wait": 0.004399999999805004,
+        "companion_before": 0.013700000000426371,
+        "action": 26.53309999999965,
+        "companion_after": 0.017400000000179716,
+        "serialization": 0.02820000000019718,
+        "worker_round_trip": 26.474100000000362,
+        "post_processing": 0.021599999999580177,
+        "uia_tree_walk": 18.213
+      },
+      "server_total_ms": 26.616299999999683,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.704499999999825,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 0.00709999999980937,
+            "action": 6.664299999999912,
+            "companion_after": 0.007700000000113505,
+            "serialization": 0.007000000000061846,
+            "worker_round_trip": 6.646200000000135,
+            "post_processing": 0.0013999999996485712
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.911799999999857,
+          "breakdown_ms": {
+            "queue_wait": 0.0020999999997002305,
+            "companion_before": 0.006600000000617001,
+            "action": 19.868799999999737,
+            "companion_after": 0.009700000000066211,
+            "serialization": 0.021200000000135333,
+            "worker_round_trip": 19.827900000000227,
+            "uia_tree_walk": 18.213,
+            "post_processing": 0.020199999999931606
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 5,
+      "elapsed_ms": 27.897799999998824,
+      "breakdown_ms": {
+        "queue_wait": 0.00550000000066575,
+        "companion_before": 0.01740000000108921,
+        "action": 26.071500000000015,
+        "companion_after": 0.019400000000132422,
+        "serialization": 0.028699999999844295,
+        "worker_round_trip": 26.008100000000013,
+        "post_processing": 0.020500000000083674,
+        "uia_tree_walk": 16.851300000000002
+      },
+      "server_total_ms": 26.178199999999833,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 7.168099999999868,
+          "breakdown_ms": {
+            "queue_wait": 0.0024000000003070454,
+            "companion_before": 0.00830000000041764,
+            "action": 7.113399999999729,
+            "companion_after": 0.011300000000119326,
+            "serialization": 0.008800000000064756,
+            "worker_round_trip": 7.08869999999979,
+            "post_processing": 0.0014999999998508429
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.010099999999966,
+          "breakdown_ms": {
+            "queue_wait": 0.0031000000003587047,
+            "companion_before": 0.009100000000671571,
+            "action": 18.958100000000286,
+            "companion_after": 0.008100000000013097,
+            "serialization": 0.01989999999977954,
+            "worker_round_trip": 18.919400000000223,
+            "uia_tree_walk": 16.851300000000002,
+            "post_processing": 0.01900000000023283
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 6,
+      "elapsed_ms": 27.019200000000637,
+      "breakdown_ms": {
+        "queue_wait": 0.004299999999602733,
+        "companion_before": 0.014800000000377622,
+        "action": 25.54890000000023,
+        "companion_after": 0.01679999999987558,
+        "serialization": 0.029299999999693682,
+        "worker_round_trip": 25.490000000000236,
+        "post_processing": 0.022300000000086584,
+        "uia_tree_walk": 17.5322
+      },
+      "server_total_ms": 25.634900000000016,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.454699999999775,
+          "breakdown_ms": {
+            "queue_wait": 0.0020999999997002305,
+            "companion_before": 0.007600000000365981,
+            "action": 6.414200000000164,
+            "companion_after": 0.007699999999658758,
+            "serialization": 0.007000000000061846,
+            "worker_round_trip": 6.397500000000036,
+            "post_processing": 0.0010000000002037268
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.18020000000024,
+          "breakdown_ms": {
+            "queue_wait": 0.002199999999902502,
+            "companion_before": 0.0072000000000116415,
+            "action": 19.134700000000066,
+            "companion_after": 0.009100000000216824,
+            "serialization": 0.022299999999631837,
+            "worker_round_trip": 19.0925000000002,
+            "uia_tree_walk": 17.5322,
+            "post_processing": 0.021299999999882857
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 7,
+      "elapsed_ms": 27.727999999999156,
+      "breakdown_ms": {
+        "queue_wait": 0.006499999999959982,
+        "companion_before": 0.021700000000237196,
+        "action": 25.883600000000115,
+        "companion_after": 0.023199999999633292,
+        "serialization": 0.03099999999949432,
+        "worker_round_trip": 25.822400000000016,
+        "post_processing": 0.021000000000185537,
+        "uia_tree_walk": 16.959300000000002
+      },
+      "server_total_ms": 25.999199999999746,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.5219999999999345,
+          "breakdown_ms": {
+            "queue_wait": 0.0041999999998552084,
+            "companion_before": 0.012100000000373257,
+            "action": 6.460999999999785,
+            "companion_after": 0.009799999999813735,
+            "serialization": 0.010299999999915599,
+            "worker_round_trip": 6.438200000000052,
+            "post_processing": 0.0014000000001033186
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.47719999999981,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 0.00959999999986394,
+            "action": 19.42260000000033,
+            "companion_after": 0.013399999999819556,
+            "serialization": 0.020699999999578722,
+            "worker_round_trip": 19.384199999999964,
+            "uia_tree_walk": 16.959300000000002,
+            "post_processing": 0.01960000000008222
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 8,
+      "elapsed_ms": 32.41369999999915,
+      "breakdown_ms": {
+        "queue_wait": 0.007799999999861029,
+        "companion_before": 0.02359999999998763,
+        "action": 30.697000000000116,
+        "companion_after": 0.02139999999963038,
+        "serialization": 0.03129999999964639,
+        "worker_round_trip": 30.63500000000022,
+        "post_processing": 0.022700000000440923,
+        "uia_tree_walk": 22.360200000000003
+      },
+      "server_total_ms": 30.86779999999999,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.715799999999945,
+          "breakdown_ms": {
+            "queue_wait": 0.0037999999999556167,
+            "companion_before": 0.012299999999868305,
+            "action": 6.615600000000086,
+            "companion_after": 0.011299999999664578,
+            "serialization": 0.008299999999962893,
+            "worker_round_trip": 6.595800000000054,
+            "post_processing": 0.0014000000001033186
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.152000000000044,
+          "breakdown_ms": {
+            "queue_wait": 0.0039999999999054126,
+            "companion_before": 0.011300000000119326,
+            "action": 24.08140000000003,
+            "companion_after": 0.010099999999965803,
+            "serialization": 0.022999999999683496,
+            "worker_round_trip": 24.039200000000164,
+            "uia_tree_walk": 22.360200000000003,
+            "post_processing": 0.021300000000337604
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 9,
+      "elapsed_ms": 27.755299999998897,
+      "breakdown_ms": {
+        "queue_wait": 0.005200000000058935,
+        "companion_before": 0.01720000000022992,
+        "action": 26.04370000000017,
+        "companion_after": 0.018099999999776628,
+        "serialization": 0.030899999999746797,
+        "worker_round_trip": 25.983299999999872,
+        "post_processing": 0.02109999999993306,
+        "uia_tree_walk": 17.041700000000002
+      },
+      "server_total_ms": 26.143899999999576,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.88379999999961,
+          "breakdown_ms": {
+            "queue_wait": 0.002199999999902502,
+            "companion_before": 0.007599999999911233,
+            "action": 6.83600000000024,
+            "companion_after": 0.00959999999986394,
+            "serialization": 0.011099999999714782,
+            "worker_round_trip": 6.813299999999799,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.260099999999966,
+          "breakdown_ms": {
+            "queue_wait": 0.003000000000156433,
+            "companion_before": 0.009600000000318687,
+            "action": 19.20769999999993,
+            "companion_after": 0.008499999999912689,
+            "serialization": 0.019800000000032014,
+            "worker_round_trip": 19.170000000000073,
+            "uia_tree_walk": 17.041700000000002,
+            "post_processing": 0.01929999999993015
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 10,
+      "elapsed_ms": 27.92749999999978,
+      "breakdown_ms": {
+        "queue_wait": 0.005499999999756255,
+        "companion_before": 0.015799999999671854,
+        "action": 26.357500000000073,
+        "companion_after": 0.020899999999983265,
+        "serialization": 0.030700000000251748,
+        "worker_round_trip": 26.290500000000065,
+        "post_processing": 0.024499999999989086,
+        "uia_tree_walk": 17.9995
+      },
+      "server_total_ms": 26.454600000000482,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.699100000000271,
+          "breakdown_ms": {
+            "queue_wait": 0.0031999999996514816,
+            "companion_before": 0.008400000000165164,
+            "action": 6.645899999999983,
+            "companion_after": 0.011899999999968713,
+            "serialization": 0.009000000000014552,
+            "worker_round_trip": 6.6206999999999425,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.75550000000021,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 0.00739999999950669,
+            "action": 19.71160000000009,
+            "companion_after": 0.009000000000014552,
+            "serialization": 0.021700000000237196,
+            "worker_round_trip": 19.669800000000123,
+            "uia_tree_walk": 17.9995,
+            "post_processing": 0.022699999999986176
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 11,
+      "elapsed_ms": 28.375299999999697,
+      "breakdown_ms": {
+        "queue_wait": 0.006900000000314321,
+        "companion_before": 0.02269999999953143,
+        "action": 26.00360000000046,
+        "companion_after": 0.02220000000033906,
+        "serialization": 0.04150000000072396,
+        "worker_round_trip": 25.922199999999975,
+        "post_processing": 0.03249999999979991,
+        "uia_tree_walk": 16.8698
+      },
+      "server_total_ms": 26.1242000000002,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.678000000000338,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 0.007399999999961437,
+            "action": 6.633200000000215,
+            "companion_after": 0.009400000000368891,
+            "serialization": 0.007500000000163709,
+            "worker_round_trip": 6.611100000000079,
+            "post_processing": 0.002399999999852298
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.446199999999862,
+          "breakdown_ms": {
+            "queue_wait": 0.004600000000209548,
+            "companion_before": 0.015299999999569991,
+            "action": 19.370400000000245,
+            "companion_after": 0.012799999999970169,
+            "serialization": 0.03400000000056025,
+            "worker_round_trip": 19.311099999999897,
+            "uia_tree_walk": 16.8698,
+            "post_processing": 0.030099999999947613
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 12,
+      "elapsed_ms": 29.924399999999878,
+      "breakdown_ms": {
+        "queue_wait": 0.006600000000617001,
+        "companion_before": 0.021700000000237196,
+        "action": 28.078100000000177,
+        "companion_after": 0.024100000000089494,
+        "serialization": 0.03349999999954889,
+        "worker_round_trip": 28.00689999999986,
+        "post_processing": 0.023799999999937427,
+        "uia_tree_walk": 18.938000000000002
+      },
+      "server_total_ms": 28.195000000000164,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 7.4430999999999585,
+          "breakdown_ms": {
+            "queue_wait": 0.004400000000259752,
+            "companion_before": 0.011599999999816646,
+            "action": 7.3762000000001535,
+            "companion_after": 0.013699999999971624,
+            "serialization": 0.010299999999460852,
+            "worker_round_trip": 7.348399999999856,
+            "post_processing": 0.0018000000000029104
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 20.751900000000205,
+          "breakdown_ms": {
+            "queue_wait": 0.0022000000003572495,
+            "companion_before": 0.01010000000042055,
+            "action": 20.701900000000023,
+            "companion_after": 0.01040000000011787,
+            "serialization": 0.02320000000008804,
+            "worker_round_trip": 20.658500000000004,
+            "uia_tree_walk": 18.938000000000002,
+            "post_processing": 0.021999999999934516
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 13,
+      "elapsed_ms": 32.86989999999969,
+      "breakdown_ms": {
+        "queue_wait": 0.004700000000411819,
+        "companion_before": 0.01650000000063301,
+        "action": 30.8761999999997,
+        "companion_after": 0.024899999999888678,
+        "serialization": 0.03539999999975407,
+        "worker_round_trip": 30.79850000000033,
+        "post_processing": 0.02719999999999345,
+        "uia_tree_walk": 19.5227
+      },
+      "server_total_ms": 30.98829999999998,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 9.011399999999867,
+          "breakdown_ms": {
+            "queue_wait": 0.0024000000003070454,
+            "companion_before": 0.0072000000000116415,
+            "action": 8.947899999999663,
+            "companion_after": 0.01569999999992433,
+            "serialization": 0.01040000000011787,
+            "worker_round_trip": 8.918700000000172,
+            "post_processing": 0.002199999999902502
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 21.976900000000114,
+          "breakdown_ms": {
+            "queue_wait": 0.002300000000104774,
+            "companion_before": 0.009300000000621367,
+            "action": 21.928300000000036,
+            "companion_after": 0.009199999999964348,
+            "serialization": 0.024999999999636202,
+            "worker_round_trip": 21.87980000000016,
+            "uia_tree_walk": 19.5227,
+            "post_processing": 0.02500000000009095
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 14,
+      "elapsed_ms": 30.663800000000265,
+      "breakdown_ms": {
+        "queue_wait": 0.004900000000361615,
+        "companion_before": 0.018799999999828287,
+        "action": 28.810999999999694,
+        "companion_after": 0.019499999999879947,
+        "serialization": 0.04250000000047294,
+        "worker_round_trip": 28.746100000000297,
+        "post_processing": 0.020899999999983265,
+        "uia_tree_walk": 19.0667
+      },
+      "server_total_ms": 28.91890000000012,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 7.077400000000125,
+          "breakdown_ms": {
+            "queue_wait": 0.0022000000003572495,
+            "companion_before": 0.007599999999911233,
+            "action": 7.027999999999793,
+            "companion_after": 0.011300000000119326,
+            "serialization": 0.009600000000318687,
+            "worker_round_trip": 7.002600000000257,
+            "post_processing": 0.0016000000000531145
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 21.841499999999996,
+          "breakdown_ms": {
+            "queue_wait": 0.0027000000000043656,
+            "companion_before": 0.011199999999917054,
+            "action": 21.7829999999999,
+            "companion_after": 0.008199999999760621,
+            "serialization": 0.03290000000015425,
+            "worker_round_trip": 21.74350000000004,
+            "uia_tree_walk": 19.0667,
+            "post_processing": 0.01929999999993015
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 15,
+      "elapsed_ms": 27.704899999998815,
+      "breakdown_ms": {
+        "queue_wait": 0.0059000000001105946,
+        "companion_before": 0.01940000000058717,
+        "action": 26.1550000000002,
+        "companion_after": 0.016599999999925785,
+        "serialization": 0.028400000000146974,
+        "worker_round_trip": 26.10059999999976,
+        "post_processing": 0.01999999999998181,
+        "uia_tree_walk": 17.910700000000002
+      },
+      "server_total_ms": 26.2487000000001,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.650000000000091,
+          "breakdown_ms": {
+            "queue_wait": 0.0039000000001578883,
+            "companion_before": 0.012400000000525324,
+            "action": 6.597099999999955,
+            "companion_after": 0.007999999999810825,
+            "serialization": 0.009100000000216824,
+            "worker_round_trip": 6.5801000000001295,
+            "post_processing": 0.001099999999951251
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 19.598700000000008,
+          "breakdown_ms": {
+            "queue_wait": 0.0019999999999527063,
+            "companion_before": 0.007000000000061846,
+            "action": 19.557900000000245,
+            "companion_after": 0.00860000000011496,
+            "serialization": 0.01929999999993015,
+            "worker_round_trip": 19.52049999999963,
+            "uia_tree_walk": 17.910700000000002,
+            "post_processing": 0.01890000000003056
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 16,
+      "elapsed_ms": 30.207300000000032,
+      "breakdown_ms": {
+        "queue_wait": 0.006300000000010186,
+        "companion_before": 0.02010000000018408,
+        "action": 28.25579999999991,
+        "companion_after": 0.02070000000003347,
+        "serialization": 0.0316000000002532,
+        "worker_round_trip": 28.184799999999996,
+        "post_processing": 0.023799999999937427,
+        "uia_tree_walk": 18.317800000000002
+      },
+      "server_total_ms": 28.36369999999988,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 7.831699999999728,
+          "breakdown_ms": {
+            "queue_wait": 0.003200000000106229,
+            "companion_before": 0.01040000000011787,
+            "action": 7.7753999999999905,
+            "companion_after": 0.011199999999917054,
+            "serialization": 0.00930000000016662,
+            "worker_round_trip": 7.745800000000145,
+            "post_processing": 0.002199999999902502
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 20.532000000000153,
+          "breakdown_ms": {
+            "queue_wait": 0.0030999999999039574,
+            "companion_before": 0.009700000000066211,
+            "action": 20.480399999999918,
+            "companion_after": 0.009500000000116415,
+            "serialization": 0.022300000000086584,
+            "worker_round_trip": 20.43899999999985,
+            "uia_tree_walk": 18.317800000000002,
+            "post_processing": 0.021600000000034925
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 17,
+      "elapsed_ms": 32.757000000001426,
+      "breakdown_ms": {
+        "queue_wait": 0.004500000000007276,
+        "companion_before": 0.01470000000017535,
+        "action": 31.238799999999628,
+        "companion_after": 0.020300000000133878,
+        "serialization": 0.0376999999994041,
+        "worker_round_trip": 31.156099999999697,
+        "post_processing": 0.03299999999944703,
+        "uia_tree_walk": 21.8209
+      },
+      "server_total_ms": 31.330200000000332,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 7.54910000000018,
+          "breakdown_ms": {
+            "queue_wait": 0.002399999999852298,
+            "companion_before": 0.007700000000113505,
+            "action": 7.505899999999656,
+            "companion_after": 0.010000000000218279,
+            "serialization": 0.007299999999759166,
+            "worker_round_trip": 7.484399999999823,
+            "post_processing": 0.0015999999995983671
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.78110000000015,
+          "breakdown_ms": {
+            "queue_wait": 0.002100000000154978,
+            "companion_before": 0.007000000000061846,
+            "action": 23.732899999999972,
+            "companion_after": 0.010299999999915599,
+            "serialization": 0.030399999999644933,
+            "worker_round_trip": 23.671699999999873,
+            "uia_tree_walk": 21.8209,
+            "post_processing": 0.03139999999984866
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 18,
+      "elapsed_ms": 34.55329999999958,
+      "breakdown_ms": {
+        "queue_wait": 0.004700000000411819,
+        "companion_before": 0.016899999999168358,
+        "action": 32.84890000000041,
+        "companion_after": 0.019699999999374995,
+        "serialization": 0.030499999999847205,
+        "worker_round_trip": 32.78150000000005,
+        "post_processing": 0.02500000000009095,
+        "uia_tree_walk": 22.4384
+      },
+      "server_total_ms": 32.94959999999992,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 8.6858000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.0025000000000545697,
+            "companion_before": 0.008799999999610009,
+            "action": 8.638900000000376,
+            "companion_after": 0.009499999999661668,
+            "serialization": 0.007699999999658758,
+            "worker_round_trip": 8.617600000000039,
+            "post_processing": 0.0016000000000531145
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 24.26379999999972,
+          "breakdown_ms": {
+            "queue_wait": 0.0022000000003572495,
+            "companion_before": 0.00809999999955835,
+            "action": 24.210000000000036,
+            "companion_after": 0.010199999999713327,
+            "serialization": 0.022800000000188447,
+            "worker_round_trip": 24.163900000000012,
+            "uia_tree_walk": 22.4384,
+            "post_processing": 0.023400000000037835
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 19,
+      "elapsed_ms": 33.75350000000071,
+      "breakdown_ms": {
+        "queue_wait": 0.005200000000058935,
+        "companion_before": 0.016899999999623105,
+        "action": 32.101900000000114,
+        "companion_after": 0.019099999999980355,
+        "serialization": 0.029200000000400905,
+        "worker_round_trip": 32.04100000000017,
+        "post_processing": 0.021300000000337604,
+        "uia_tree_walk": 20.9678
+      },
+      "server_total_ms": 32.197599999999966,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 9.195400000000063,
+          "breakdown_ms": {
+            "queue_wait": 0.002800000000206637,
+            "companion_before": 0.008800000000064756,
+            "action": 9.145700000000033,
+            "companion_after": 0.009900000000016007,
+            "serialization": 0.008800000000064756,
+            "worker_round_trip": 9.124099999999999,
+            "post_processing": 0.0013000000003557943
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.002199999999903,
+          "breakdown_ms": {
+            "queue_wait": 0.002399999999852298,
+            "companion_before": 0.00809999999955835,
+            "action": 22.95620000000008,
+            "companion_after": 0.009199999999964348,
+            "serialization": 0.02040000000033615,
+            "worker_round_trip": 22.91690000000017,
+            "uia_tree_walk": 20.9678,
+            "post_processing": 0.01999999999998181
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "windows_set_verify_atomic",
+      "run": 20,
+      "elapsed_ms": 32.120999999999185,
+      "breakdown_ms": {
+        "queue_wait": 0.0079000000000633,
+        "companion_before": 0.028599999999642023,
+        "action": 30.081599999999526,
+        "companion_after": 0.02750000000014552,
+        "serialization": 0.03500000000030923,
+        "worker_round_trip": 30.011200000000372,
+        "post_processing": 0.02459999999973661,
+        "uia_tree_walk": 20.9041
+      },
+      "server_total_ms": 30.225499999999556,
+      "payload_bytes": 0,
+      "calls": 2,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "set_value",
+          "total_ms": 6.820299999999861,
+          "breakdown_ms": {
+            "queue_wait": 0.005099999999856664,
+            "companion_before": 0.013399999999819556,
+            "action": 6.747099999999591,
+            "companion_after": 0.017800000000079308,
+            "serialization": 0.011800000000221189,
+            "worker_round_trip": 6.7184000000002015,
+            "post_processing": 0.0028999999999541615
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "total_ms": 23.405199999999695,
+          "breakdown_ms": {
+            "queue_wait": 0.002800000000206637,
+            "companion_before": 0.015199999999822467,
+            "action": 23.334499999999935,
+            "companion_after": 0.009700000000066211,
+            "serialization": 0.02320000000008804,
+            "worker_round_trip": 23.29280000000017,
+            "uia_tree_walk": 20.9041,
+            "post_processing": 0.02169999999978245
+          }
+        }
+      ],
+      "verified": true
+    }
+  ]
+}

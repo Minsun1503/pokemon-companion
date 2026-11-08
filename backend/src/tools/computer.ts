@@ -8,6 +8,7 @@ import {
 	Button,
 	imageToJimp,
 	Key,
+	providerRegistry,
 } from '@nut-tree-fork/nut-js';
 import {execFileSync} from 'node:child_process';
 import {readFileSync, unlinkSync} from 'node:fs';
@@ -16,6 +17,9 @@ import {join} from 'node:path';
 import Jimp from 'jimp';
 import sharp from 'sharp';
 import {toKeys} from '../utils/xdotoolStringToKeys.js';
+import {
+	measure, measureSync, serialize, timedCall,
+} from '../utils/timing.js';
 import {jsonResult} from '../utils/response.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 
@@ -139,8 +143,8 @@ const ActionEnum = z.enum([
 ]);
 
 const actionDescription = `The action to perform. The available actions are:
-* key: Press a key or key-combination on the keyboard.
-* type: Type a string of text on the keyboard.
+* key: Press one key or key-combination. Optional window_id blocks input if the target is not foreground (or root owner of foreground); it never activates the window.
+* type: Type a string of text on the keyboard. A Vietnamese/IME keyboard layout can alter typed letters (for example Telex). Prefer windows set_value for fields; after type, verify the field with read_text.
 * get_cursor_position: Get the current (x, y) pixel coordinate of the cursor on the screen.
 * mouse_move: Move the cursor to a specified (x, y) pixel coordinate on the screen.
 * left_click: Click the left mouse button. If coordinate is provided, moves to that position first.
@@ -151,7 +155,7 @@ const actionDescription = `The action to perform. The available actions are:
 * scroll: Scroll the screen in a specified direction. Requires coordinate (moves there first) and text parameter with direction: "up", "down", "left", or "right". Optionally append ":N" to scroll N pixels (default 300), e.g. "down:500".
 * get_screenshot: Take a screenshot of the screen.`;
 
-const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool for compact UI Automation inspection, control invocation, field values, and result verification. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses.';
+const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool for compact UI Automation inspection, control invocation, field values, and result verification. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses. Shortcuts: use windows focus/invoke/set_value and batch first. Use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only when no control is exposed or no UIA pattern fits; on Windows pass window_id for the foreground guard and verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation.';
 
 const coordinateSchema = z
 	.array(z.number())
@@ -168,14 +172,18 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 				action: ActionEnum.describe(actionDescription),
 				coordinate: coordinateSchema.optional(),
 				text: z.string().optional().describe('Text to type or key command to execute'),
+				window_id: z.string().regex(/^\d+$/).optional().describe('Windows key/type only: require this foreground window or its owned dialog. No automatic activation. Focus can still change between the check and input; verify afterward.'),
 			}).strict(),
 			// Note: No outputSchema because this tool returns varying content types including images
 			annotations: {
 				readOnlyHint: false,
 			},
 		},
-		async (args, extra) => {
-			const {action, coordinate, text} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string};
+		async (args, extra) => timedCall('computer', args.action, async () => {
+			const {action, coordinate, text, window_id: windowId} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string; window_id?: string};
+			if (windowId !== undefined && (process.platform !== 'win32' || !['key', 'type'].includes(action))) {
+				throw new Error('window_id is supported only for Windows key and type actions.');
+			}
 
 			// Scale coordinates from API image space to logical screen space
 			let scaledCoordinate = coordinate;
@@ -195,7 +203,24 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 			}
 
 			return runtime.computer(action, scaledCoordinate, async () => {
-			// Implement system actions using nut-js
+				const beforeInput = async () => {
+					if (extra.signal.aborted || runtime.companion.state.paused) {
+						throw new Error('Computer action cancelled or paused before execution.');
+					}
+
+					if (windowId !== undefined) {
+						// shortcut: focus can change after this check; use app APIs when atomic targeting is required.
+						await measure('foreground_guard', async () => runtime.windows.requireForeground(windowId, {
+							signal: extra.signal, timeoutMs: 20_000, paused: () => runtime.companion.state.paused, timeoutError: 'Foreground check timed out. No input was sent; read the window again before continuing.',
+						}));
+					}
+
+					if (extra.signal.aborted || runtime.companion.state.paused) {
+						throw new Error('Computer action cancelled or paused before execution.');
+					}
+				};
+
+				// Implement system actions using nut-js
 				switch (action) {
 					case 'key': {
 						if (!text) {
@@ -203,6 +228,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						}
 
 						const keys = toKeys(text);
+						await beforeInput();
 						await keyboard.pressKey(...keys);
 						await keyboard.releaseKey(...keys);
 
@@ -214,25 +240,62 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 							throw new Error('Text required for type');
 						}
 
+						let inputMethod: Record<string, unknown> | undefined;
+						if (process.platform === 'win32') {
+							try {
+								inputMethod = await runtime.windows.request({action: 'input_method'}, {
+									signal: extra.signal, timeoutMs: 200, paused: () => runtime.companion.state.paused, timeoutError: 'Input method observation timed out.',
+								});
+							} catch {
+								inputMethod = {status: 'unavailable'};
+							}
+						}
+
+						if (extra.signal.aborted || runtime.companion.state.paused) {
+							throw new Error('Computer action cancelled or paused before execution.');
+						}
+
 						if (process.platform === 'linux' && hasXdotool()) {
 							xdotoolType(text);
 						} else if (process.platform === 'win32' && [...text].some((character) => character.codePointAt(0)! > 127) && runtime.companion.clipboard) {
 							await runtime.companion.clipboard(text);
+							let pasteStarted = false;
 							try {
+								await beforeInput();
+								pasteStarted = true;
 								await keyboard.pressKey(Key.LeftControl, Key.V);
 								await keyboard.releaseKey(Key.LeftControl, Key.V);
 								await new Promise<void>((resolve) => {
 									setTimeout(resolve, 200);
 								});
 							} finally {
-								await keyboard.releaseKey(Key.LeftControl, Key.V);
+								if (pasteStarted) {
+									await keyboard.releaseKey(Key.LeftControl, Key.V);
+								}
+
 								await runtime.companion.clipboard(null);
 							}
+						} else if (process.platform === 'win32' && [...text].every((character) => character.codePointAt(0)! > 0 && character.codePointAt(0)! <= 127)) {
+							await beforeInput();
+							// Bypass per-character JS waits while yielding for pause/cancellation between chunks.
+							for (let index = 0; index < text.length; index += 32) {
+								if (extra.signal.aborted || runtime.companion.state.paused) {
+									throw new Error(`Computer action cancelled. Submitted ${index} of ${text.length} characters; input methods may transform them. Read the field before continuing; do not retype from the start.`);
+								}
+
+								// eslint-disable-next-line no-await-in-loop
+								await providerRegistry.getKeyboard().type(text.slice(index, index + 32));
+								// eslint-disable-next-line no-await-in-loop
+								await new Promise<void>((resolve) => {
+									setImmediate(resolve);
+								});
+							}
 						} else {
+							await beforeInput();
 							await keyboard.type(text);
 						}
 
-						return jsonResult({ok: true});
+						return jsonResult({ok: true, verify: 'read the field to confirm the text; an active input method can alter letters', ...(inputMethod ? {input_method: inputMethod} : {})});
 					}
 
 					case 'get_cursor_position': {
@@ -354,16 +417,12 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						const cursorPos = await mouse.getPosition();
 
 						// Capture the entire screen (may be at Retina resolution)
-						const image = await grabScreen();
+						const image = await measure('screenshot_capture', grabScreen);
 
 						// Then resize to fit within API limits
 						const apiScaleFactor = getSizeToApiScale(image.getWidth(), image.getHeight());
-						if (apiScaleFactor < 1) {
-							image.resize(
-								Math.floor(image.getWidth() * apiScaleFactor),
-								Math.floor(image.getHeight() * apiScaleFactor),
-							);
-						}
+						const imageWidth = Math.floor(image.getWidth() * apiScaleFactor);
+						const imageHeight = Math.floor(image.getHeight() * apiScaleFactor);
 
 						// Calculate cursor position in API image coordinates
 						// cursor is in logical coords, need to convert to API image coords
@@ -374,20 +433,19 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						// Draw a crosshair at cursor position (red color)
 						const crosshairSize = 20;
 						const crosshairColor = 0xFF0000FF; // Red with full opacity (RGBA)
-						const imageWidth = image.getWidth();
-						const imageHeight = image.getHeight();
+						const crosshair = new Jimp(imageWidth, imageHeight, 0x00000000);
 
 						// Draw horizontal line
 						for (let x = Math.max(0, cursorInImageX - crosshairSize); x <= Math.min(imageWidth - 1, cursorInImageX + crosshairSize); x++) {
 							if (cursorInImageY >= 0 && cursorInImageY < imageHeight) {
-								image.setPixelColor(crosshairColor, x, cursorInImageY);
+								crosshair.setPixelColor(crosshairColor, x, cursorInImageY);
 								// Make it thicker
 								if (cursorInImageY > 0) {
-									image.setPixelColor(crosshairColor, x, cursorInImageY - 1);
+									crosshair.setPixelColor(crosshairColor, x, cursorInImageY - 1);
 								}
 
 								if (cursorInImageY < imageHeight - 1) {
-									image.setPixelColor(crosshairColor, x, cursorInImageY + 1);
+									crosshair.setPixelColor(crosshairColor, x, cursorInImageY + 1);
 								}
 							}
 						}
@@ -395,34 +453,35 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						// Draw vertical line
 						for (let y = Math.max(0, cursorInImageY - crosshairSize); y <= Math.min(imageHeight - 1, cursorInImageY + crosshairSize); y++) {
 							if (cursorInImageX >= 0 && cursorInImageX < imageWidth) {
-								image.setPixelColor(crosshairColor, cursorInImageX, y);
+								crosshair.setPixelColor(crosshairColor, cursorInImageX, y);
 								// Make it thicker
 								if (cursorInImageX > 0) {
-									image.setPixelColor(crosshairColor, cursorInImageX - 1, y);
+									crosshair.setPixelColor(crosshairColor, cursorInImageX - 1, y);
 								}
 
 								if (cursorInImageX < imageWidth - 1) {
-									image.setPixelColor(crosshairColor, cursorInImageX + 1, y);
+									crosshair.setPixelColor(crosshairColor, cursorInImageX + 1, y);
 								}
 							}
 						}
 
-						// Get PNG buffer from Jimp
-						const pngBuffer = await image.getBufferAsync('image/png');
-
-						// Compress PNG using sharp, to fit size limits
-						const optimizedBuffer = await sharp(pngBuffer)
+						// Resize before compositing so the calibrated crosshair stays sharp and three pixels thick.
+						const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(image.bitmap.data, {
+							raw: {width: image.getWidth(), height: image.getHeight(), channels: 4},
+						})
+							.resize(imageWidth, imageHeight, {fit: 'fill', kernel: 'linear'})
+							.composite([{input: crosshair.bitmap.data, raw: {width: imageWidth, height: imageHeight, channels: 4}}])
 							.png({quality: 80, compressionLevel: 9})
-							.toBuffer();
+							.toBuffer());
 
 						// Convert optimized buffer to base64
-						const base64Data = optimizedBuffer.toString('base64');
+						const base64Data = measureSync('screenshot_base64', () => optimizedBuffer.toString('base64'));
 
 						return {
 							content: [
 								{
 									type: 'text',
-									text: JSON.stringify({
+									text: serialize({
 									// Report the image dimensions - Claude should use coordinates within this space
 									// These may differ from the actual display due to scaling for API limits
 										image_width: imageWidth,
@@ -439,6 +498,6 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 					}
 				}
 			}, extra.signal);
-		},
+		}),
 	);
 }

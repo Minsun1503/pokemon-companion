@@ -14,6 +14,7 @@ let activeDisplayId: number
 let tray: Tray
 let socket: net.Socket
 let capturing = false
+let refreshQueued = false
 let paused = false
 let clipboardBackup: Electron.Data | undefined
 let pastedText: string | undefined
@@ -52,6 +53,19 @@ function refresh(): void {
 
 function send(data: unknown): void {
   if (socket && !socket.destroyed) socket.write(`${JSON.stringify(data)}\n`)
+}
+
+function scheduleRefresh(): void {
+  if (refreshQueued) return
+  refreshQueued = true
+  setImmediate(() => {
+    refreshQueued = false
+    try {
+      refresh()
+    } catch (error) {
+      console.error(error)
+    }
+  })
 }
 
 function togglePause(): boolean {
@@ -120,6 +134,7 @@ async function syncDisplays(): Promise<void> {
       display,
       active: display.id === activeDisplayId,
       rendererFile: 'companion.html',
+      focusable: false,
     })
     windows.set(display.id, win)
     await new Promise<void>((resolve, reject) => {
@@ -161,8 +176,13 @@ app
     ipcMain.handle('companion:select', (_event, pet: unknown) => selectPet(pet))
     ipcMain.handle('companion:pause', () => togglePause())
     ipcMain.on('companion:quit', () => app.quit())
-    ipcMain.on('companion:panel', (_event, open: unknown) => {
+    ipcMain.on('companion:panel', (event, open: unknown) => {
       if (open === true && !paused && (state.task || state.interactionLocked)) togglePause()
+      const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
+      if (!win || win.isDestroyed()) return
+      if (open !== true && win.isFocused()) win.blur()
+      win.setFocusable(open === true)
+      if (open === true) win.focus()
     })
     const chat = new CompanionChat(rootDir, app.getPath('userData'), registry)
     ipcMain.handle('companion:chat-history', (_event, pet: unknown) => {
@@ -178,7 +198,7 @@ app
     ipcMain.on('companion:ignore-mouse', (event, ignore: unknown) => {
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
       const busy = !paused && Boolean(state.interactionLocked)
-      win?.setIgnoreMouseEvents(process.platform === 'win32' ? busy : ignore !== false || busy, { forward: true })
+      win?.setIgnoreMouseEvents(ignore !== false || busy, { forward: true })
     })
     ipcMain.on('companion:regions', (event, regions: unknown) => {
       if (process.platform !== 'win32' || !Array.isArray(regions) || regions.length > 3) return
@@ -191,6 +211,7 @@ app
       if (
         !regions.every(
           (region) =>
+            typeof region.interactive === 'boolean' &&
             [region.x, region.y, region.width, region.height].every(Number.isInteger) &&
             region.x >= 0 &&
             region.y >= 0 &&
@@ -199,9 +220,20 @@ app
         )
       )
         return
-      win.setShape(regions)
+      win.setShape(regions.map(({ x, y, width, height }) => ({ x, y, width, height })))
+      const cursor = screen.getCursorScreenPoint()
+      const bounds = win.getBounds()
+      // The bubble must stay painted while clicks pass through it to the app below.
+      const inside = regions.some(
+        (region) =>
+          region.interactive &&
+          cursor.x >= bounds.x + region.x &&
+          cursor.x < bounds.x + region.x + region.width &&
+          cursor.y >= bounds.y + region.y &&
+          cursor.y < bounds.y + region.y + region.height,
+      )
       const busy = !paused && Boolean(state.interactionLocked)
-      win.setIgnoreMouseEvents(busy, { forward: true })
+      win.setIgnoreMouseEvents(!inside || busy, { forward: true })
     })
     await syncDisplays()
     globalShortcut.register('CommandOrControl+Shift+P', togglePause)
@@ -236,8 +268,22 @@ app
             const command = JSON.parse(line)
             try {
               if (command.kind === 'state') {
-                if (!registry.list().some((pet) => pet.id === command.state?.pet)) throw new Error('Unknown Pokémon.')
-                state = { ...command.state, paused }
+                if (command.lock_only) {
+                  state.interactionLocked = Boolean(command.state?.interactionLocked)
+                  for (const win of windows.values()) {
+                    if (!win.isDestroyed() && !paused && state.interactionLocked)
+                      win.setIgnoreMouseEvents(true, { forward: true })
+                  }
+                  send({ kind: 'ack', id: command.id })
+                  return
+                }
+                if (
+                  (!command.cosmetic || command.state?.pet !== state.pet) &&
+                  !registry.list().some((pet) => pet.id === command.state?.pet)
+                )
+                  throw new Error('Unknown Pokémon.')
+                const interactionLocked = state.interactionLocked
+                state = { ...command.state, paused, ...(command.cosmetic ? { interactionLocked } : {}) }
                 if (
                   Array.isArray(command.coordinate) &&
                   command.coordinate.length === 2 &&
@@ -249,7 +295,8 @@ app
                   activeDisplayId = display.id
                   target = { x: logical.x - display.workArea.x + 36, y: logical.y - display.workArea.y + 24 }
                 }
-                refresh()
+                if (command.cosmetic) scheduleRefresh()
+                else refresh()
               } else if (command.kind === 'clipboard') {
                 if (typeof command.text === 'string') {
                   if (clipboardBackup) throw new Error('A paste is already in progress.')

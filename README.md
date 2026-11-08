@@ -47,6 +47,10 @@ On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate 
 
 Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window. Narrow `query` or `control_type` (such as `Button`, `Edit`, or `TabItem`) to return only relevant controls. Results default to 60 elements and 6,000 characters; lower `max_elements`/`max_chars` when possible. `truncated` indicates that you should narrow the query or increase the budget. For actions, pass the returned `snapshot` and `element_id`:
 
+`max_chars` must be at most 16,000. Field previews are limited to 160 characters and carry `value_clipped: true` when shortened, even if the tree has `truncated: false`; use `read_text` for the full field text. If only title-bar controls appear, call `activate` on the window and read again: Electron/Chromium may expose their controls only after activation. After navigation or `invoke`, the first read may still show the previous view; re-read once before concluding.
+
+`matched` is a lower bound when `truncated` is true. Use `wait_for` to poll controls or exact values with a bounded timeout (default 5 seconds, maximum 15 seconds). After an interrupted wait, call `get_ui` again for fresh snapshots. Use `launch` to start an executable name/path or HTTP(S) URL and wait for a window; URLs require a window-title/process `query`, and command shells, script hosts and arguments are unsupported. Interrupted Windows ASCII typing reports submitted characters; input methods may transform them, so inspect the field before continuing instead of retyping from the start.
+
 ```json
 {"action":"get_ui","window_id":"12345","query":"Search","control_type":"Edit","max_chars":2000}
 {"action":"set_value","snapshot":"<returned snapshot>","element_id":1,"text":"Daft Punk"}
@@ -76,6 +80,8 @@ For known sequences, prefer **`action: "batch"`** to reduce exchanges with the A
 The whole sequence excludes input from other MCP clients, checks user pauses and cancellation before each step, and stops on an error or ambiguous target. Failure output reports `completed`, `stopped_step`, `failed_step_started`, and bounded diagnostics. Earlier successful steps remain applied; a failed native step may also have applied its action. Inputs are never retried automatically. Inspect the failure before continuing. Top-level `max_chars` bounds the entire response, while each step has its own discovery budget; narrow filters if results are truncated. Use atomic calls when the next step requires the AI to interpret new information. Batching reduces model round trips; Windows API calls still execute individually on the computer.
 
 `computer` retains native mouse/keyboard input, cursor actions, and screenshot capture. Prefer keyboard shortcuts when UI Automation lacks a pattern, and screenshots when the task requires visual information (for example, canvas content). The tool descriptions and `pokemon-work` prompt specify this order: **Windows APIs → keyboard shortcuts → screenshots**. Both tools update the Pokémon before and after actions. Screenshots briefly hide the companion.
+
+Use Windows `focus`, `invoke`, `set_value` and batch first. When no control is exposed or no UIA pattern fits, use a known direct shortcut: `ctrl+l` for the browser address bar, `ctrl+1..8` for an indexed browser tab (`ctrl+9` selects the last tab), `escape` to dismiss, or `ctrl+,` for settings where supported. On Windows, pass `window_id` for the foreground guard and verify the result immediately. Never use `tab`, `ctrl+tab`, or `alt+tab` as blind navigation. Windows `computer key` and `type` accept optional `window_id` to reject input when another window is foreground. An owned dialog also matches its root owner's ID. The guard never activates a window, and focus can still change between the check and input. Calls without `window_id` retain their existing behavior.
 
 `pokemon` controls presentation:
 

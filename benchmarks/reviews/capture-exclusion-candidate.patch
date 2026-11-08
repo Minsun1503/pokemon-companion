@@ -1,0 +1,53 @@
+diff --git a/frontend/src/main/companion/index.ts b/frontend/src/main/companion/index.ts
+index d7f1055..5e61cba 100644
+--- a/frontend/src/main/companion/index.ts
++++ b/frontend/src/main/companion/index.ts
+@@ -1,4 +1,5 @@
+ import net from 'node:net'
++import os from 'node:os'
+ import path from 'node:path'
+ import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tray } from 'electron'
+ import type { CompanionSnapshot, CompanionState } from '../../types/companion'
+@@ -14,6 +15,7 @@ let activeDisplayId: number
+ let tray: Tray
+ let socket: net.Socket
+ let capturing = false
++const canExcludeCapture = process.platform === 'win32' && Number(os.release().split('.')[2]) >= 19041
+ let refreshQueued = false
+ let paused = false
+ let clipboardBackup: Electron.Data | undefined
+@@ -135,6 +137,13 @@ async function syncDisplays(): Promise<void> {
+       active: display.id === activeDisplayId,
+       rendererFile: 'companion.html',
+     })
++    if (canExcludeCapture) {
++      try {
++        win.setContentProtection(true)
++      } catch {
++        // Capture keeps hide/show when protection is unavailable.
++      }
++    }
+     windows.set(display.id, win)
+     await new Promise<void>((resolve, reject) => {
+       win.webContents.once('did-finish-load', resolve)
+@@ -297,10 +306,16 @@ app
+                   pastedText = undefined
+                 } else throw new Error('Invalid paste command.')
+               } else if (command.kind === 'capture') {
+-                capturing = Boolean(command.hidden)
+-                refresh()
+-                // Give the desktop compositor time to remove the overlay before the screenshot.
+-                if (capturing) await new Promise((resolve) => setTimeout(resolve, 120))
++                const excluded =
++                  canExcludeCapture &&
++                  windows.size > 0 &&
++                  [...windows.values()].every((win) => !win.isDestroyed() && win.isContentProtected())
++                if (capturing || !excluded) {
++                  capturing = Boolean(command.hidden)
++                  refresh()
++                  // Give the desktop compositor time to remove the overlay before the screenshot.
++                  if (capturing) await new Promise((resolve) => setTimeout(resolve, 120))
++                }
+               } else if (command.kind === 'quit') {
+                 send({ kind: 'ack', id: command.id })
+                 app.quit()

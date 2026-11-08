@@ -18,7 +18,7 @@ declare global {
         send(pet: string, text: string): Promise<CompanionChatReply>
       }
       ignoreMouse(ignore: boolean): void
-      regions(regions: { x: number; y: number; width: number; height: number }[]): void
+      regions(regions: { x: number; y: number; width: number; height: number; interactive: boolean }[]): void
       onState(listener: (snapshot: CompanionSnapshot) => void): () => void
     }
   }
@@ -178,12 +178,21 @@ async function sendChat(): Promise<void> {
 }
 
 function apply(snapshot: CompanionSnapshot): void {
+  const previous = current
   const changedPet = current?.state.pet !== snapshot.state.pet
   current = snapshot
   const { state, definition } = snapshot
   document.body.classList.toggle('inactive', !snapshot.active || !state.visible)
   if (!snapshot.active || !state.visible) closePanel()
   const activity = state.paused ? 'paused' : state.activity
+  document.body.dataset.pet = state.pet
+  const actionChanged =
+    changedPet ||
+    activity === 'paused' ||
+    activity === 'success' ||
+    activity === 'error' ||
+    state.action?.id !== previous?.state.action?.id ||
+    state.action?.active !== previous?.state.action?.active
   // Keep very short tool actions visible long enough to read as animation.
   if (activity !== 'idle' || (visualActivity !== 'working' && visualActivity !== 'thinking')) {
     clearTimeout(visualTimer)
@@ -213,7 +222,16 @@ function apply(snapshot: CompanionSnapshot): void {
       petContainer,
       initialPosition: position,
       canWalk: () =>
-        Boolean(current?.active && !current.state.paused && visualActivity === 'idle' && !hoveringPet && panel.hidden),
+        Boolean(
+          current?.active &&
+            !current.state.paused &&
+            visualActivity === 'idle' &&
+            !motion?.isPerformingAction &&
+            !hoveringPet &&
+            panel.hidden,
+        ),
+      getAnimation:
+        state.pet === 'pikachu' ? () => (visualActivity === 'working' ? 'idle' : visualActivity) : undefined,
       getMinY: () => bubble.getRequiredAnchorTop(),
       onPositionApplied: () => {
         bubble.updatePosition()
@@ -223,6 +241,10 @@ function apply(snapshot: CompanionSnapshot): void {
     petImage.alt = state.pet
     element('active-name').textContent = state.pet
     if (panelView === 'talk') void loadChat()
+  }
+  if (state.pet === 'pikachu' && actionChanged) {
+    const animation = ['paused', 'success', 'error'].includes(activity) ? undefined : state.action?.animation
+    motion?.playAnimation(animation, state.action?.active ? Infinity : 1000)
   }
   const targetKey = JSON.stringify(snapshot.target)
   if (snapshot.active && snapshot.target && (targetKey !== previousTarget || changedPet)) {
@@ -376,6 +398,7 @@ setInterval(() => {
         y: Math.max(0, Math.floor(bounds.top) - 8),
         width: Math.ceil(bounds.width) + 16,
         height: Math.ceil(bounds.height) + 16,
+        interactive: entry !== element('bubble'),
       }
     })
   window.pokemonAPI.regions(regions)

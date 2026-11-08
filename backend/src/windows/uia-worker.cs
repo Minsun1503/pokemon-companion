@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Automation;
@@ -12,8 +14,11 @@ public static class PokemonWindowsAutomation {
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr window, StringBuilder text, int count);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
     [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] static extern IntPtr GetAncestor(IntPtr window, uint flags);
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr window);
     [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window, int command);
+    [DllImport("user32.dll")] static extern IntPtr GetKeyboardLayout(uint thread);
+    [DllImport("imm32.dll")] static extern bool ImmIsIME(IntPtr layout);
     delegate bool EnumProc(IntPtr window, IntPtr data);
 
     class Snapshot {
@@ -33,9 +38,13 @@ public static class PokemonWindowsAutomation {
         for (int i = 0; i < values.Length; i += 2) result[(string)values[i]] = values[i + 1];
         return result;
     }
-    static string Clip(string value, int length) {
+    static string Clip(string value, int length, Dictionary<string, object> node = null) {
         if (String.IsNullOrEmpty(value)) return "";
-        return value.Length > length ? value.Substring(0, length) + "…" : value;
+        if (value.Length > length) {
+            if (node != null) node["value_clipped"] = true;
+            return value.Substring(0, length) + "…";
+        }
+        return value;
     }
     static IntPtr Handle(string id) {
         long value;
@@ -59,7 +68,8 @@ public static class PokemonWindowsAutomation {
             var title = (string)info["title"];
             if (String.IsNullOrEmpty(title)) return true;
             if (!String.IsNullOrEmpty(query) && (title + " " + info["process"]).IndexOf(query, StringComparison.OrdinalIgnoreCase) < 0) return true;
-            info["active"] = handle == GetForegroundWindow();
+            var foreground = GetForegroundWindow();
+            info["active"] = handle == foreground || handle == GetAncestor(foreground, 3);
             windows.Add(info);
             return windows.Count < 100;
         }, IntPtr.Zero);
@@ -67,19 +77,18 @@ public static class PokemonWindowsAutomation {
     }
     static List<string> Actions(AutomationElement element) {
         var actions = new List<string>();
-        if (!element.Current.IsEnabled || element.Current.IsPassword) return actions;
+        if (!element.Cached.IsEnabled || element.Cached.IsPassword) return actions;
         object pattern;
-        if (element.TryGetCurrentPattern(InvokePattern.Pattern, out pattern)) actions.Add("invoke");
-        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern) && !((ValuePattern)pattern).Current.IsReadOnly) actions.Add("set_value");
-        if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) actions.Add("select");
-        if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) actions.Add("toggle");
-        if (element.TryGetCurrentPattern(ExpandCollapsePattern.Pattern, out pattern)) { actions.Add("expand"); actions.Add("collapse"); }
-        if (element.TryGetCurrentPattern(ScrollPattern.Pattern, out pattern)) actions.Add("scroll");
-        if (element.TryGetCurrentPattern(TextPattern.Pattern, out pattern)) actions.Add("read_text");
-        if (element.Current.IsKeyboardFocusable) actions.Add("focus");
+        if (element.TryGetCachedPattern(InvokePattern.Pattern, out pattern)) actions.Add("invoke");
+        if (element.TryGetCachedPattern(ValuePattern.Pattern, out pattern) && !((ValuePattern)pattern).Cached.IsReadOnly) actions.Add("set_value");
+        if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) actions.Add("select");
+        if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) actions.Add("toggle");
+        if (element.TryGetCachedPattern(ExpandCollapsePattern.Pattern, out pattern)) { actions.Add("expand"); actions.Add("collapse"); }
+        if (element.TryGetCachedPattern(ScrollPattern.Pattern, out pattern)) actions.Add("scroll");
+        if (element.TryGetCachedPattern(TextPattern.Pattern, out pattern) || element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) actions.Add("read_text");
+        if (element.Cached.IsKeyboardFocusable) actions.Add("focus");
         return actions;
     }
-    static string Role(AutomationElement element) { return element.Current.ControlType.ProgrammaticName.Replace("ControlType.", ""); }
     static string RuntimeId(AutomationElement element) { return String.Join(".", element.GetRuntimeId()); }
     public static object UI(string windowId, string query, string roleFilter, int limit, int maxDepth) {
         var handle = Handle(windowId);
@@ -88,14 +97,30 @@ public static class PokemonWindowsAutomation {
         var expired = new List<string>();
         foreach (var entry in snapshots) if ((DateTime.UtcNow - entry.Value.Created).TotalSeconds > 120) expired.Add(entry.Key);
         foreach (var key in expired) snapshots.Remove(key);
-        if (snapshots.Count >= 8) snapshots.Clear();
+        if (snapshots.Count >= 8) {
+            string oldestId = null;
+            DateTime oldest = DateTime.MaxValue;
+            foreach (var entry in snapshots) if (entry.Value.Created < oldest) { oldest = entry.Value.Created; oldestId = entry.Key; }
+            snapshots.Remove(oldestId);
+        }
         var snapshot = new Snapshot { Window = handle };
         var snapshotId = Guid.NewGuid().ToString("N");
         snapshots[snapshotId] = snapshot;
+        var watch = Stopwatch.StartNew();
+        var cache = new CacheRequest { TreeScope = TreeScope.Element };
+        foreach (var property in new AutomationProperty[] {
+            AutomationElement.IsOffscreenProperty, AutomationElement.IsPasswordProperty, AutomationElement.IsEnabledProperty,
+            AutomationElement.IsKeyboardFocusableProperty, AutomationElement.ControlTypeProperty, AutomationElement.NameProperty,
+            AutomationElement.AutomationIdProperty,
+            ValuePattern.IsReadOnlyProperty, TogglePattern.ToggleStateProperty, SelectionItemPattern.IsSelectedProperty
+        }) cache.Add(property);
+        foreach (var pattern in new AutomationPattern[] {
+            InvokePattern.Pattern, ValuePattern.Pattern, SelectionItemPattern.Pattern, TogglePattern.Pattern,
+            ExpandCollapsePattern.Pattern, ScrollPattern.Pattern, TextPattern.Pattern
+        }) cache.Add(pattern);
         var nodes = new List<object>();
         var pending = new Stack<Visit>();
-        pending.Push(new Visit(root, 0));
-        var watch = Stopwatch.StartNew();
+        pending.Push(new Visit(root.GetUpdatedCache(cache), 0));
         int scanned = 0, matched = 0;
         bool depthLimited = false;
         while (pending.Count > 0 && scanned < 2500 && watch.ElapsedMilliseconds < 8000) {
@@ -103,15 +128,22 @@ public static class PokemonWindowsAutomation {
             scanned++;
             try {
                 var element = visit.Element;
-                var info = element.Current;
+                // Queue one sibling at a time instead of fetching hundreds before inspecting any.
+                if (visit.Depth > 0) {
+                    var sibling = TreeWalker.ControlViewWalker.GetNextSibling(element, cache);
+                    if (sibling != null) pending.Push(new Visit(sibling, visit.Depth));
+                }
+                var info = element.Cached;
                 if (info.IsOffscreen || info.IsPassword) continue;
-                string role = Role(element), name = info.Name ?? "", automationId = info.AutomationId ?? "";
-                var actions = Actions(element);
-                bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
+                string role = info.ControlType.ProgrammaticName.Replace("ControlType.", ""), name = info.Name ?? "", automationId = info.AutomationId ?? "";
                 bool matches = String.IsNullOrEmpty(query) || (name + " " + automationId).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
-                if (useful && matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
-                    matched++;
-                    if (nodes.Count < limit) {
+                if (matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
+                    var actions = Actions(element);
+                    bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
+                    if (useful) {
+                        matched++;
+                        // One extra match proves truncation/ambiguity without walking the remaining tree.
+                        if (nodes.Count == limit) break;
                         int id = nodes.Count + 1;
                         snapshot.Elements[id] = element;
                         snapshot.RuntimeIds[id] = RuntimeId(element);
@@ -119,32 +151,100 @@ public static class PokemonWindowsAutomation {
                         if (actions.Count > 0) node["actions"] = actions;
                         if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
                         object pattern;
-                        if (element.TryGetCurrentPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160);
-                        if (element.TryGetCurrentPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Current.ToggleState.ToString();
-                        if (element.TryGetCurrentPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Current.IsSelected;
+                        // Mutable field values stay live so fast reads preserve existing verification behavior.
+                        if (element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node);
+                        if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Cached.ToggleState.ToString();
+                        if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Cached.IsSelected;
                         if (!info.IsEnabled) node["enabled"] = false;
                         nodes.Add(node);
                     }
                 }
                 if (visit.Depth < maxDepth) {
-                    var children = new List<AutomationElement>();
-                    var child = TreeWalker.ControlViewWalker.GetFirstChild(element);
-                    while (child != null && children.Count < 500 && watch.ElapsedMilliseconds < 8000) {
-                        children.Add(child);
-                        child = TreeWalker.ControlViewWalker.GetNextSibling(child);
-                    }
-                    for (int i = children.Count - 1; i >= 0; i--) pending.Push(new Visit(children[i], visit.Depth + 1));
+                    var child = TreeWalker.ControlViewWalker.GetFirstChild(element, cache);
+                    if (child != null) pending.Push(new Visit(child, visit.Depth + 1));
                 } else depthLimited = true;
             } catch (ElementNotAvailableException) { } catch (InvalidOperationException) { }
         }
-        return Obj("window", WindowInfo(handle), "snapshot", snapshotId, "nodes", nodes, "matched", matched,
+        var result = Obj("window", WindowInfo(handle), "snapshot", snapshotId, "nodes", nodes, "matched", matched,
             "truncated", matched > nodes.Count || pending.Count > 0 || depthLimited, "scanned", scanned);
+        if (Environment.GetEnvironmentVariable("POKEMON_TIMING") == "1") result["uia_tree_walk_ms"] = watch.Elapsed.TotalMilliseconds;
+        return result;
     }
     public static object Activate(string windowId) {
         var handle = Handle(windowId);
         ShowWindow(handle, 9);
-        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle) throw new Exception("Windows did not allow activation. Select the window manually.");
+        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle && GetAncestor(GetForegroundWindow(), 3) != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. Re-read its UI and use windows focus on a known control when available.");
         return Obj("ok", true);
+    }
+    public static object Foreground() {
+        var handle = GetForegroundWindow();
+        var info = WindowInfo(handle);
+        info["root_owner_id"] = GetAncestor(handle, 3).ToInt64().ToString();
+        return info;
+    }
+    static void RejectScriptHost(string target) {
+        string name = Path.GetFileNameWithoutExtension(target).ToLowerInvariant();
+        if (Array.IndexOf(new string[] { "cmd", "powershell", "pwsh", "wscript", "cscript", "mshta" }, name) >= 0)
+            throw new Exception("launch does not support command shells or script hosts.");
+    }
+    public static object Launch(string target) {
+        if (String.IsNullOrWhiteSpace(target) || target.IndexOfAny(new char[] { '"', '<', '>', '|', '\r', '\n', '\0' }) >= 0)
+            throw new Exception("launch requires an http/https URL or executable name/path, without shell commands or arguments.");
+        Uri url;
+        if (Uri.TryCreate(target, UriKind.Absolute, out url) && (url.Scheme == "http" || url.Scheme == "https")) {
+            Process.Start(new ProcessStartInfo(url.AbsoluteUri) { UseShellExecute = true });
+            return Obj("started", url.AbsoluteUri);
+        }
+        RejectScriptHost(target);
+        string executable = null;
+        if (target.IndexOfAny(new char[] { '\\', '/' }) >= 0 || Path.IsPathRooted(target)) {
+            if (Path.GetExtension(target).Equals(".exe", StringComparison.OrdinalIgnoreCase) && File.Exists(target)) executable = Path.GetFullPath(target);
+        } else {
+            string extension = Path.GetExtension(target);
+            if (extension != "" && !extension.Equals(".exe", StringComparison.OrdinalIgnoreCase))
+                throw new Exception("launch accepts only an http/https URL or executable name/path.");
+            string filename = extension == "" ? target + ".exe" : target;
+            foreach (string folder in (Environment.GetEnvironmentVariable("PATH") ?? "").Split(';')) {
+                if (String.IsNullOrWhiteSpace(folder)) continue;
+                string candidate = Path.Combine(folder.Trim('"'), filename);
+                if (File.Exists(candidate)) { executable = Path.GetFullPath(candidate); break; }
+            }
+            if (executable == null) {
+                object shell = null;
+                try {
+                    Type shellType = Type.GetTypeFromProgID("WScript.Shell");
+                    shell = Activator.CreateInstance(shellType);
+                    foreach (Environment.SpecialFolder location in new Environment.SpecialFolder[] { Environment.SpecialFolder.StartMenu, Environment.SpecialFolder.CommonStartMenu }) {
+                        string folder = Environment.GetFolderPath(location);
+                        if (!Directory.Exists(folder)) continue;
+                        foreach (string shortcut in Directory.GetFiles(folder, "*.lnk", SearchOption.AllDirectories)) {
+                            if (!Path.GetFileNameWithoutExtension(shortcut).Equals(Path.GetFileNameWithoutExtension(target), StringComparison.OrdinalIgnoreCase)) continue;
+                            object link = shellType.InvokeMember("CreateShortcut", BindingFlags.InvokeMethod, null, shell, new object[] { shortcut });
+                            try {
+                                // Read TargetPath only: shortcut arguments must never become commands.
+                                string candidate = (string)link.GetType().InvokeMember("TargetPath", BindingFlags.GetProperty, null, link, null);
+                                if (!Path.GetExtension(candidate).Equals(".exe", StringComparison.OrdinalIgnoreCase) || !File.Exists(candidate)) continue;
+                                candidate = Path.GetFullPath(candidate);
+                                if (executable != null && !executable.Equals(candidate, StringComparison.OrdinalIgnoreCase))
+                                    throw new Exception("Multiple Start Menu executables match. Supply the full executable path.");
+                                executable = candidate;
+                            } finally { Marshal.FinalReleaseComObject(link); }
+                        }
+                    }
+                } finally { if (shell != null) Marshal.FinalReleaseComObject(shell); }
+            }
+        }
+        if (executable == null) throw new Exception("Executable not found in PATH or the Start Menu. Supply its full .exe path; shell commands and arguments are not supported.");
+        RejectScriptHost(executable);
+        Process.Start(new ProcessStartInfo(executable) { UseShellExecute = true });
+        return Obj("started", executable, "query", Path.GetFileNameWithoutExtension(executable));
+    }
+    public static object InputMethod() {
+        var foreground = GetForegroundWindow();
+        if (foreground == IntPtr.Zero) return Obj("status", "unavailable");
+        uint process;
+        var layout = GetKeyboardLayout(GetWindowThreadProcessId(foreground, out process));
+        return Obj("keyboard_layout", unchecked((uint)layout.ToInt64()).ToString("X8"), "language_id", (layout.ToInt64() & 0xffff).ToString("X4"), "imm_ime", ImmIsIME(layout));
     }
     public static object Act(string snapshotId, int id, string action, string text, string direction) {
         Snapshot snapshot;
@@ -163,6 +263,13 @@ public static class PokemonWindowsAutomation {
         if (!belongs) throw new Exception("Element no longer belongs to the selected window. Call get_ui again.");
         if (element.Current.IsPassword) throw new Exception("Password controls are not exposed.");
         if (action == "read_text") {
+            object editable;
+            if (element.Current.ControlType != ControlType.Document && element.TryGetCurrentPattern(ValuePattern.Pattern, out editable)) {
+                var full = ((ValuePattern)editable).Current.Value ?? "";
+                var readResult = Obj("text", Clip(full, 8000));
+                if (full.Length > 8000) readResult["truncated"] = true;
+                return readResult;
+            }
             var pattern = (TextPattern)element.GetCurrentPattern(TextPattern.Pattern);
             return Obj("text", Clip(pattern.DocumentRange.GetText(8000), 8000));
         }
@@ -192,7 +299,7 @@ public static class PokemonWindowsAutomation {
         }
         var result = Obj("ok", true);
         try {
-            if (element.TryGetCurrentPattern(ValuePattern.Pattern, out value)) result["value"] = Clip(((ValuePattern)value).Current.Value, 160);
+            if (element.TryGetCurrentPattern(ValuePattern.Pattern, out value)) result["value"] = Clip(((ValuePattern)value).Current.Value, 160, result);
         } catch (ElementNotAvailableException) { }
         return result;
     }

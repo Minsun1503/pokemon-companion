@@ -17,12 +17,14 @@ export type PokemonState = {
 	paused: boolean;
 	completedActions: number;
 	interactionLocked?: boolean;
+	action?: {animation: 'typing' | 'clicking'; id: number; active: boolean} | undefined;
 };
 
 export type Companion = {
 	state: PokemonState;
 	start: () => Promise<void>;
 	update: (patch: Partial<PokemonState>, coordinate?: number[]) => Promise<void>;
+	animate?: (patch: Partial<PokemonState>, coordinate?: number[]) => void;
 	capture: (hidden: boolean) => Promise<void>;
 	clipboard?: (text: string | null) => Promise<void>;
 	close: () => Promise<void>;
@@ -45,6 +47,9 @@ export class DesktopCompanion implements Companion {
 	private headlessClipboard: string | undefined;
 	private readonly pending = new Map<number, {resolve: () => void; reject: (error: Error) => void; timer: ReturnType<typeof setTimeout>}>();
 	private readonly headless = process.env.POKEMON_UI === 'off';
+	private animating = false;
+	private animationDirty = false;
+	private animationCoordinate: number[] | undefined;
 
 	async start(): Promise<void> {
 		if (this.closed) {
@@ -65,7 +70,25 @@ export class DesktopCompanion implements Companion {
 	async update(patch: Partial<PokemonState>, coordinate?: number[]): Promise<void> {
 		await this.start();
 		Object.assign(this.state, patch);
-		await this.send('state', {state: this.state, coordinate});
+		const lockOnly = Object.keys(patch).length === 1 && 'interactionLocked' in patch;
+		await this.send('state', {state: this.state, coordinate, ...(lockOnly ? {lock_only: true} : {})});
+	}
+
+	/** Only the latest cosmetic state needs to reach the renderer. */
+	animate(patch: Partial<PokemonState>, coordinate?: number[]): void {
+		Object.assign(this.state, patch);
+		if (this.headless || this.closed) {
+			return;
+		}
+
+		this.animationDirty = true;
+		this.animationCoordinate = coordinate ?? this.animationCoordinate;
+		if (!this.animating) {
+			this.animating = true;
+			setImmediate(() => {
+				void this.flushAnimation();
+			});
+		}
 	}
 
 	async capture(hidden: boolean): Promise<void> {
@@ -94,6 +117,22 @@ export class DesktopCompanion implements Companion {
 		}
 
 		await this.send('clipboard', {text});
+	}
+
+	private async flushAnimation(): Promise<void> {
+		try {
+			while (this.animationDirty && !this.closed) {
+				this.animationDirty = false;
+				const coordinate = this.animationCoordinate;
+				this.animationCoordinate = undefined;
+				try {
+					// eslint-disable-next-line no-await-in-loop
+					await this.send('state', {state: {...this.state}, coordinate, cosmetic: true});
+				} catch {/* Cosmetic bridge failures cannot affect input. */}
+			}
+		} finally {
+			this.animating = false;
+		}
 	}
 
 	private async shutdown(): Promise<void> {

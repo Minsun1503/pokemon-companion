@@ -1,0 +1,1892 @@
+{
+  "complete": true,
+  "measured_at": "2026-11-07T14:56:17.818Z",
+  "runs": 20,
+  "typing_corpus": "1234 repeated with a trailing space: neutral ASCII under the active input method.",
+  "environment": {
+    "platform": "win32",
+    "node": "v22.12.0",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "transport": "stdio"
+  },
+  "timing_notes": "Nested spans overlap: worker/tree/post-processing and serialization are included in action; capture_hide/show are included in companion_before/after. Tool total excludes SDK framing; client elapsed includes stdio. Cold start also includes server connection. Fixture setup and independent verification are outside timers.",
+  "built_sha256": {
+    "main.js": "71dc1e3f724bd87ac4a44e86a9b17c445ec8048ea605173921461f7429b0710b",
+    "pokemon/runtime.js": "6a2bbc920414a9bae204ca4cb16f9c46b135685bd57d12aed08a28a7850a0f90",
+    "pokemon/companion.js": "3540ba51e04773079c699b3a880398a0971e5f06ddcdfaa515c0f1326190daf8",
+    "tools/computer.js": "cc3d502dc1988d61c0493188cb10ce0011cb602f1ba8bba1b5196dd091a990e4",
+    "tools/windows.js": "4bfc94e13557cfd6544782feeb3ae2087e86021f204b16e6553b0335d3b88a5c",
+    "windows/automation.js": "b59ff865cbb46ea081f3e5486cdef3b330c79d0a5148a40e5941eb9ff047d865",
+    "windows/uia-worker.cs": "551848a9400c40a1ffc47b81f15efc6f7191b9ed5380d96b56bff02ad082195d",
+    "windows/uia-worker.ps1": "c305f7226e564b8a9ab90e9bb93cdbb245fba0c8286d87ffb5776581742149d9",
+    "windows/uia-worker.dll": "8dd5f1b890926688b8ea6f74e3c64fd5e7673048ff71a1ed28188f5c862450b9"
+  },
+  "summary": [
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "elapsed_ms": {
+        "min": 512.6865000000016,
+        "median": 587.6547500000006,
+        "p95": 635.7999999999993
+      },
+      "breakdown_ms": {
+        "queue_wait": {
+          "min": 0.0033999999996012775,
+          "median": 0.007999999999356078,
+          "p95": 0.11430000000018481
+        },
+        "companion_before": {
+          "min": 126.39079999999922,
+          "median": 135.39724999999999,
+          "p95": 142.82949999999983
+        },
+        "action": {
+          "min": 358.2284000000009,
+          "median": 432.9554000000003,
+          "p95": 488.7361000000001
+        },
+        "companion_after": {
+          "min": 9.73700000000008,
+          "median": 11.444350000000668,
+          "p95": 18.312700000000405
+        },
+        "serialization": {
+          "min": 0.005499999999301508,
+          "median": 0.007349999999860302,
+          "p95": 0.010600000000067666
+        },
+        "capture_hide": {
+          "min": 125.81370000000061,
+          "median": 134.4224000000006,
+          "p95": 141.6374999999989
+        },
+        "screenshot_capture": {
+          "min": 40.86349999999993,
+          "median": 53.561899999999696,
+          "p95": 74.89599999999882
+        },
+        "screenshot_resize": {
+          "min": 92.509399999999,
+          "median": 125.92249999999967,
+          "p95": 162.69869999999992
+        },
+        "screenshot_encode_png": {
+          "min": 211.22420000000056,
+          "median": 245.98814999999945,
+          "p95": 282.15910000000076
+        },
+        "screenshot_base64": {
+          "min": 0.12629999999990105,
+          "median": 0.18960000000015498,
+          "p95": 0.33980000000065047
+        },
+        "capture_show": {
+          "min": 8.962300000000141,
+          "median": 10.753100000000359,
+          "p95": 17.453999999999724
+        }
+      },
+      "payload_bytes": {
+        "min": 172948,
+        "median": 180225,
+        "p95": 189805
+      },
+      "verified_runs": 20
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "elapsed_ms": {
+        "min": 342.33309999999983,
+        "median": 409.3228999999974,
+        "p95": 435.53310000000056
+      },
+      "breakdown_ms": {
+        "queue_wait": {
+          "min": 0.0036000000000058208,
+          "median": 0.005999999999971806,
+          "p95": 0.023299999999835563
+        },
+        "companion_before": {
+          "min": 0.025499999997919076,
+          "median": 0.05270000000007258,
+          "p95": 0.15540000000055443
+        },
+        "action": {
+          "min": 339.72429999999986,
+          "median": 405.14985,
+          "p95": 432.3086000000003
+        },
+        "companion_after": {
+          "min": 0.027300000001559965,
+          "median": 0.055699999998978456,
+          "p95": 0.11160000000018044
+        },
+        "serialization": {
+          "min": 0.005099999999401916,
+          "median": 0.005749999999807187,
+          "p95": 0.009999999999763531
+        },
+        "capture_hide": {
+          "min": 0.0059000000001105946,
+          "median": 0.01169999999990523,
+          "p95": 0.06859999999960564
+        },
+        "screenshot_capture": {
+          "min": 39.38060000000041,
+          "median": 48.86970000000019,
+          "p95": 63.77589999999964
+        },
+        "screenshot_resize": {
+          "min": 98.56620000000021,
+          "median": 117.15755000000013,
+          "p95": 132.61629999999968
+        },
+        "screenshot_encode_png": {
+          "min": 194.31579999999985,
+          "median": 240.29535000000033,
+          "p95": 262.6685000000002
+        },
+        "screenshot_base64": {
+          "min": 0.11650000000008731,
+          "median": 0.12819999999965148,
+          "p95": 0.2793999999994412
+        },
+        "capture_show": {
+          "min": 0.0072000000000116415,
+          "median": 0.011899999999968713,
+          "p95": 0.02860000000009677
+        }
+      },
+      "payload_bytes": {
+        "min": 175284,
+        "median": 180006,
+        "p95": 182283
+      },
+      "verified_runs": 20
+    }
+  ],
+  "samples": [
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 1,
+      "elapsed_ms": 599.3945999999996,
+      "breakdown_ms": {
+        "queue_wait": 0.03579999999988104,
+        "companion_before": 134.6918999999998,
+        "action": 448.1713999999997,
+        "companion_after": 11.069400000000314,
+        "serialization": 0.006600000000162254,
+        "capture_hide": 133.50750000000016,
+        "screenshot_capture": 54.69790000000012,
+        "screenshot_resize": 145.72919999999976,
+        "screenshot_encode_png": 246.8503999999998,
+        "screenshot_base64": 0.1617999999998574,
+        "capture_show": 10.459799999999632
+      },
+      "server_total_ms": 594.1985999999999,
+      "payload_bytes": 178975,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 594.1985999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.03579999999988104,
+            "companion_before": 134.6918999999998,
+            "action": 448.1713999999997,
+            "companion_after": 11.069400000000314,
+            "serialization": 0.006600000000162254,
+            "capture_hide": 133.50750000000016,
+            "screenshot_capture": 54.69790000000012,
+            "screenshot_resize": 145.72919999999976,
+            "screenshot_encode_png": 246.8503999999998,
+            "screenshot_base64": 0.1617999999998574,
+            "capture_show": 10.459799999999632
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 2,
+      "elapsed_ms": 555.5341000000008,
+      "breakdown_ms": {
+        "queue_wait": 0.005999999999858119,
+        "companion_before": 131.47539999999935,
+        "action": 409.03769999999986,
+        "companion_after": 10.371399999999994,
+        "serialization": 0.012200000000120781,
+        "capture_hide": 130.7806999999998,
+        "screenshot_capture": 47.92009999999982,
+        "screenshot_resize": 139.36539999999968,
+        "screenshot_encode_png": 221.04309999999987,
+        "screenshot_base64": 0.19530000000031578,
+        "capture_show": 9.486199999999826
+      },
+      "server_total_ms": 551.1617999999999,
+      "payload_bytes": 188081,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 551.1617999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.005999999999858119,
+            "companion_before": 131.47539999999935,
+            "action": 409.03769999999986,
+            "companion_after": 10.371399999999994,
+            "serialization": 0.012200000000120781,
+            "capture_hide": 130.7806999999998,
+            "screenshot_capture": 47.92009999999982,
+            "screenshot_resize": 139.36539999999968,
+            "screenshot_encode_png": 221.04309999999987,
+            "screenshot_base64": 0.19530000000031578,
+            "capture_show": 9.486199999999826
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 3,
+      "elapsed_ms": 603.4912999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.005700000000160799,
+        "companion_before": 127.12199999999984,
+        "action": 461.07259999999997,
+        "companion_after": 10.908899999999903,
+        "serialization": 0.010600000000067666,
+        "capture_hide": 126.43169999999964,
+        "screenshot_capture": 42.17079999999987,
+        "screenshot_resize": 137.28750000000036,
+        "screenshot_encode_png": 281.16809999999987,
+        "screenshot_base64": 0.14010000000007494,
+        "capture_show": 10.025700000000143
+      },
+      "server_total_ms": 599.2750999999998,
+      "payload_bytes": 176044,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 599.2750999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.005700000000160799,
+            "companion_before": 127.12199999999984,
+            "action": 461.07259999999997,
+            "companion_after": 10.908899999999903,
+            "serialization": 0.010600000000067666,
+            "capture_hide": 126.43169999999964,
+            "screenshot_capture": 42.17079999999987,
+            "screenshot_resize": 137.28750000000036,
+            "screenshot_encode_png": 281.16809999999987,
+            "screenshot_base64": 0.14010000000007494,
+            "capture_show": 10.025700000000143
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 4,
+      "elapsed_ms": 557.3986000000004,
+      "breakdown_ms": {
+        "queue_wait": 0.009700000000066211,
+        "companion_before": 138.77499999999964,
+        "action": 403.4025999999999,
+        "companion_after": 10.555699999999888,
+        "serialization": 0.005799999999908323,
+        "capture_hide": 137.88619999999992,
+        "screenshot_capture": 40.86349999999993,
+        "screenshot_resize": 129.03020000000015,
+        "screenshot_encode_png": 232.75480000000016,
+        "screenshot_base64": 0.21900000000005093,
+        "capture_show": 9.984000000000378
+      },
+      "server_total_ms": 552.9450000000002,
+      "payload_bytes": 181848,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 552.9450000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.009700000000066211,
+            "companion_before": 138.77499999999964,
+            "action": 403.4025999999999,
+            "companion_after": 10.555699999999888,
+            "serialization": 0.005799999999908323,
+            "capture_hide": 137.88619999999992,
+            "screenshot_capture": 40.86349999999993,
+            "screenshot_resize": 129.03020000000015,
+            "screenshot_encode_png": 232.75480000000016,
+            "screenshot_base64": 0.21900000000005093,
+            "capture_show": 9.984000000000378
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 5,
+      "elapsed_ms": 522.5245999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.11430000000018481,
+        "companion_before": 134.07359999999971,
+        "action": 372.5615000000007,
+        "companion_after": 10.40349999999944,
+        "serialization": 0.0059000000001105946,
+        "capture_hide": 132.89850000000024,
+        "screenshot_capture": 63.35620000000017,
+        "screenshot_resize": 97.38419999999951,
+        "screenshot_encode_png": 211.22420000000056,
+        "screenshot_base64": 0.197400000000016,
+        "capture_show": 9.875300000000607
+      },
+      "server_total_ms": 517.3708999999999,
+      "payload_bytes": 184808,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 517.3708999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.11430000000018481,
+            "companion_before": 134.07359999999971,
+            "action": 372.5615000000007,
+            "companion_after": 10.40349999999944,
+            "serialization": 0.0059000000001105946,
+            "capture_hide": 132.89850000000024,
+            "screenshot_capture": 63.35620000000017,
+            "screenshot_resize": 97.38419999999951,
+            "screenshot_encode_png": 211.22420000000056,
+            "screenshot_base64": 0.197400000000016,
+            "capture_show": 9.875300000000607
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 6,
+      "elapsed_ms": 582.5629999999992,
+      "breakdown_ms": {
+        "queue_wait": 0.01209999999991851,
+        "companion_before": 133.33939999999984,
+        "action": 434.03279999999995,
+        "companion_after": 11.289200000000164,
+        "serialization": 0.005499999999301508,
+        "capture_hide": 132.65710000000036,
+        "screenshot_capture": 50.55249999999978,
+        "screenshot_resize": 150.22220000000016,
+        "screenshot_encode_png": 232.57710000000043,
+        "screenshot_base64": 0.18389999999999418,
+        "capture_show": 10.62750000000051
+      },
+      "server_total_ms": 579.0622000000003,
+      "payload_bytes": 183324,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 579.0622000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.01209999999991851,
+            "companion_before": 133.33939999999984,
+            "action": 434.03279999999995,
+            "companion_after": 11.289200000000164,
+            "serialization": 0.005499999999301508,
+            "capture_hide": 132.65710000000036,
+            "screenshot_capture": 50.55249999999978,
+            "screenshot_resize": 150.22220000000016,
+            "screenshot_encode_png": 232.57710000000043,
+            "screenshot_base64": 0.18389999999999418,
+            "capture_show": 10.62750000000051
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 7,
+      "elapsed_ms": 512.6865000000016,
+      "breakdown_ms": {
+        "queue_wait": 0.007499999999708962,
+        "companion_before": 136.97059999999965,
+        "action": 358.2284000000009,
+        "companion_after": 9.73700000000008,
+        "serialization": 0.0058999999992011,
+        "capture_hide": 136.39539999999943,
+        "screenshot_capture": 41.51429999999982,
+        "screenshot_resize": 93.91659999999956,
+        "screenshot_encode_png": 222.2512999999999,
+        "screenshot_base64": 0.12879999999950087,
+        "capture_show": 8.962300000000141
+      },
+      "server_total_ms": 505.1742000000004,
+      "payload_bytes": 175625,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 505.1742000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.007499999999708962,
+            "companion_before": 136.97059999999965,
+            "action": 358.2284000000009,
+            "companion_after": 9.73700000000008,
+            "serialization": 0.0058999999992011,
+            "capture_hide": 136.39539999999943,
+            "screenshot_capture": 41.51429999999982,
+            "screenshot_resize": 93.91659999999956,
+            "screenshot_encode_png": 222.2512999999999,
+            "screenshot_base64": 0.12879999999950087,
+            "capture_show": 8.962300000000141
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 8,
+      "elapsed_ms": 575.6597999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.18469999999979336,
+        "companion_before": 129.16569999999956,
+        "action": 423.8209000000006,
+        "companion_after": 18.708400000000438,
+        "serialization": 0.008400000000619912,
+        "capture_hide": 128.10530000000017,
+        "screenshot_capture": 71.90309999999954,
+        "screenshot_resize": 95.30719999999928,
+        "screenshot_encode_png": 255.81780000000072,
+        "screenshot_base64": 0.33980000000065047,
+        "capture_show": 17.530699999999342
+      },
+      "server_total_ms": 572.1131000000005,
+      "payload_bytes": 198595,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 572.1131000000005,
+          "breakdown_ms": {
+            "queue_wait": 0.18469999999979336,
+            "companion_before": 129.16569999999956,
+            "action": 423.8209000000006,
+            "companion_after": 18.708400000000438,
+            "serialization": 0.008400000000619912,
+            "capture_hide": 128.10530000000017,
+            "screenshot_capture": 71.90309999999954,
+            "screenshot_resize": 95.30719999999928,
+            "screenshot_encode_png": 255.81780000000072,
+            "screenshot_base64": 0.33980000000065047,
+            "capture_show": 17.530699999999342
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 9,
+      "elapsed_ms": 609.7531999999992,
+      "breakdown_ms": {
+        "queue_wait": 0.0052999999998064595,
+        "companion_before": 140.11599999999908,
+        "action": 453.39070000000083,
+        "companion_after": 12.4304000000011,
+        "serialization": 0.007899999999608553,
+        "capture_hide": 139.15479999999934,
+        "screenshot_capture": 53.57899999999972,
+        "screenshot_resize": 116.77160000000003,
+        "screenshot_encode_png": 282.15910000000076,
+        "screenshot_base64": 0.17410000000018044,
+        "capture_show": 11.681099999999788
+      },
+      "server_total_ms": 606.1144000000004,
+      "payload_bytes": 179065,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 606.1144000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.0052999999998064595,
+            "companion_before": 140.11599999999908,
+            "action": 453.39070000000083,
+            "companion_after": 12.4304000000011,
+            "serialization": 0.007899999999608553,
+            "capture_hide": 139.15479999999934,
+            "screenshot_capture": 53.57899999999972,
+            "screenshot_resize": 116.77160000000003,
+            "screenshot_encode_png": 282.15910000000076,
+            "screenshot_base64": 0.17410000000018044,
+            "capture_show": 11.681099999999788
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 10,
+      "elapsed_ms": 609.2057999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.007599999999911233,
+        "companion_before": 127.3128999999999,
+        "action": 465.6799000000001,
+        "companion_after": 11.599500000001171,
+        "serialization": 0.00889999999981228,
+        "capture_hide": 126.60739999999987,
+        "screenshot_capture": 68.35859999999957,
+        "screenshot_resize": 162.69869999999992,
+        "screenshot_encode_png": 233.92540000000008,
+        "screenshot_base64": 0.22699999999986176,
+        "capture_show": 10.878700000000208
+      },
+      "server_total_ms": 604.7844999999998,
+      "payload_bytes": 179759,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 604.7844999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.007599999999911233,
+            "companion_before": 127.3128999999999,
+            "action": 465.6799000000001,
+            "companion_after": 11.599500000001171,
+            "serialization": 0.00889999999981228,
+            "capture_hide": 126.60739999999987,
+            "screenshot_capture": 68.35859999999957,
+            "screenshot_resize": 162.69869999999992,
+            "screenshot_encode_png": 233.92540000000008,
+            "screenshot_base64": 0.22699999999986176,
+            "capture_show": 10.878700000000208
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 11,
+      "elapsed_ms": 588.4529000000002,
+      "breakdown_ms": {
+        "queue_wait": 0.010500000000320142,
+        "companion_before": 145.5624000000007,
+        "action": 424.58050000000003,
+        "companion_after": 14.57680000000073,
+        "serialization": 0.008700000000317232,
+        "capture_hide": 143.59479999999985,
+        "screenshot_capture": 46.94750000000022,
+        "screenshot_resize": 96.23639999999978,
+        "screenshot_encode_png": 280.5757000000003,
+        "screenshot_base64": 0.2955000000001746,
+        "capture_show": 13.52770000000055
+      },
+      "server_total_ms": 584.9571999999998,
+      "payload_bytes": 177783,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 584.9571999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.010500000000320142,
+            "companion_before": 145.5624000000007,
+            "action": 424.58050000000003,
+            "companion_after": 14.57680000000073,
+            "serialization": 0.008700000000317232,
+            "capture_hide": 143.59479999999985,
+            "screenshot_capture": 46.94750000000022,
+            "screenshot_resize": 96.23639999999978,
+            "screenshot_encode_png": 280.5757000000003,
+            "screenshot_base64": 0.2955000000001746,
+            "capture_show": 13.52770000000055
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 12,
+      "elapsed_ms": 572.1111999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.005199999999604188,
+        "companion_before": 126.39079999999922,
+        "action": 428.9326999999994,
+        "companion_after": 12.4333000000006,
+        "serialization": 0.005699999999706051,
+        "capture_hide": 125.81370000000061,
+        "screenshot_capture": 53.54479999999967,
+        "screenshot_resize": 133.0041000000001,
+        "screenshot_encode_png": 241.4418999999998,
+        "screenshot_base64": 0.1628999999993539,
+        "capture_show": 11.60740000000078
+      },
+      "server_total_ms": 567.9021000000012,
+      "payload_bytes": 189805,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 567.9021000000012,
+          "breakdown_ms": {
+            "queue_wait": 0.005199999999604188,
+            "companion_before": 126.39079999999922,
+            "action": 428.9326999999994,
+            "companion_after": 12.4333000000006,
+            "serialization": 0.005699999999706051,
+            "capture_hide": 125.81370000000061,
+            "screenshot_capture": 53.54479999999967,
+            "screenshot_resize": 133.0041000000001,
+            "screenshot_encode_png": 241.4418999999998,
+            "screenshot_base64": 0.1628999999993539,
+            "capture_show": 11.60740000000078
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 13,
+      "elapsed_ms": 575.9882999999991,
+      "breakdown_ms": {
+        "queue_wait": 0.008399999998800922,
+        "companion_before": 139.89859999999862,
+        "action": 422.78379999999925,
+        "companion_after": 10.381400000000212,
+        "serialization": 0.007599999999001739,
+        "capture_hide": 139.16570000000138,
+        "screenshot_capture": 67.69959999999992,
+        "screenshot_resize": 109.50019999999859,
+        "screenshot_encode_png": 245.1258999999991,
+        "screenshot_base64": 0.1514999999999418,
+        "capture_show": 9.602699999999459
+      },
+      "server_total_ms": 573.2429999999986,
+      "payload_bytes": 180425,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 573.2429999999986,
+          "breakdown_ms": {
+            "queue_wait": 0.008399999998800922,
+            "companion_before": 139.89859999999862,
+            "action": 422.78379999999925,
+            "companion_after": 10.381400000000212,
+            "serialization": 0.007599999999001739,
+            "capture_hide": 139.16570000000138,
+            "screenshot_capture": 67.69959999999992,
+            "screenshot_resize": 109.50019999999859,
+            "screenshot_encode_png": 245.1258999999991,
+            "screenshot_base64": 0.1514999999999418,
+            "capture_show": 9.602699999999459
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 14,
+      "elapsed_ms": 543.4434999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.008700000000317232,
+        "companion_before": 132.0544000000009,
+        "action": 395.0704999999998,
+        "companion_after": 12.319499999999607,
+        "serialization": 0.008499999999912689,
+        "capture_hide": 131.36179999999877,
+        "screenshot_capture": 51.713700000000244,
+        "screenshot_resize": 92.509399999999,
+        "screenshot_encode_png": 250.34279999999853,
+        "screenshot_base64": 0.20200000000113505,
+        "capture_show": 11.480999999999767
+      },
+      "server_total_ms": 539.6365000000005,
+      "payload_bytes": 177121,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 539.6365000000005,
+          "breakdown_ms": {
+            "queue_wait": 0.008700000000317232,
+            "companion_before": 132.0544000000009,
+            "action": 395.0704999999998,
+            "companion_after": 12.319499999999607,
+            "serialization": 0.008499999999912689,
+            "capture_hide": 131.36179999999877,
+            "screenshot_capture": 51.713700000000244,
+            "screenshot_resize": 92.509399999999,
+            "screenshot_encode_png": 250.34279999999853,
+            "screenshot_base64": 0.20200000000113505,
+            "capture_show": 11.480999999999767
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 15,
+      "elapsed_ms": 612.0002000000004,
+      "breakdown_ms": {
+        "queue_wait": 0.03439999999864085,
+        "companion_before": 142.82949999999983,
+        "action": 448.6681000000008,
+        "companion_after": 15.227999999999156,
+        "serialization": 0.009099999999307329,
+        "capture_hide": 141.6374999999989,
+        "screenshot_capture": 42.105499999999665,
+        "screenshot_resize": 126.5036,
+        "screenshot_encode_png": 279.40190000000075,
+        "screenshot_base64": 0.31189999999878637,
+        "capture_show": 14.139799999999013
+      },
+      "server_total_ms": 607.0481999999993,
+      "payload_bytes": 183080,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 607.0481999999993,
+          "breakdown_ms": {
+            "queue_wait": 0.03439999999864085,
+            "companion_before": 142.82949999999983,
+            "action": 448.6681000000008,
+            "companion_after": 15.227999999999156,
+            "serialization": 0.009099999999307329,
+            "capture_hide": 141.6374999999989,
+            "screenshot_capture": 42.105499999999665,
+            "screenshot_resize": 126.5036,
+            "screenshot_encode_png": 279.40190000000075,
+            "screenshot_base64": 0.31189999999878637,
+            "capture_show": 14.139799999999013
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 16,
+      "elapsed_ms": 589.755000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 136.10260000000017,
+        "action": 435.2706999999991,
+        "companion_after": 14.213599999999133,
+        "serialization": 0.009799999999813735,
+        "capture_hide": 135.33730000000105,
+        "screenshot_capture": 58.43759999999929,
+        "screenshot_resize": 111.03150000000096,
+        "screenshot_encode_png": 265.02269999999953,
+        "screenshot_base64": 0.3613999999997759,
+        "capture_show": 13.154199999999037
+      },
+      "server_total_ms": 585.8230999999996,
+      "payload_bytes": 179521,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 585.8230999999996,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 136.10260000000017,
+            "action": 435.2706999999991,
+            "companion_after": 14.213599999999133,
+            "serialization": 0.009799999999813735,
+            "capture_hide": 135.33730000000105,
+            "screenshot_capture": 58.43759999999929,
+            "screenshot_resize": 111.03150000000096,
+            "screenshot_encode_png": 265.02269999999953,
+            "screenshot_base64": 0.3613999999997759,
+            "capture_show": 13.154199999999037
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 17,
+      "elapsed_ms": 635.7999999999993,
+      "breakdown_ms": {
+        "queue_wait": 0.0033999999996012775,
+        "companion_before": 132.3817999999992,
+        "action": 488.7361000000001,
+        "companion_after": 10.39180000000124,
+        "serialization": 0.005600000000413274,
+        "capture_hide": 131.72469999999885,
+        "screenshot_capture": 76.04390000000058,
+        "screenshot_resize": 170.02400000000125,
+        "screenshot_encode_png": 242.28040000000146,
+        "screenshot_base64": 0.13410000000112632,
+        "capture_show": 9.813999999998487
+      },
+      "server_total_ms": 631.6503999999986,
+      "payload_bytes": 180025,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 631.6503999999986,
+          "breakdown_ms": {
+            "queue_wait": 0.0033999999996012775,
+            "companion_before": 132.3817999999992,
+            "action": 488.7361000000001,
+            "companion_after": 10.39180000000124,
+            "serialization": 0.005600000000413274,
+            "capture_hide": 131.72469999999885,
+            "screenshot_capture": 76.04390000000058,
+            "screenshot_resize": 170.02400000000125,
+            "screenshot_encode_png": 242.28040000000146,
+            "screenshot_base64": 0.13410000000112632,
+            "capture_show": 9.813999999998487
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 18,
+      "elapsed_ms": 620.0949999999993,
+      "breakdown_ms": {
+        "queue_wait": 0.0068000000010215444,
+        "companion_before": 141.35540000000037,
+        "action": 464.38480000000163,
+        "companion_after": 10.659600000000864,
+        "serialization": 0.0059999999994033715,
+        "capture_hide": 140.52709999999934,
+        "screenshot_capture": 63.362199999999575,
+        "screenshot_resize": 133.60740000000078,
+        "screenshot_encode_png": 267.02239999999983,
+        "screenshot_base64": 0.12629999999990105,
+        "capture_show": 10.11949999999888
+      },
+      "server_total_ms": 616.5451999999987,
+      "payload_bytes": 180964,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 616.5451999999987,
+          "breakdown_ms": {
+            "queue_wait": 0.0068000000010215444,
+            "companion_before": 141.35540000000037,
+            "action": 464.38480000000163,
+            "companion_after": 10.659600000000864,
+            "serialization": 0.0059999999994033715,
+            "capture_hide": 140.52709999999934,
+            "screenshot_capture": 63.362199999999575,
+            "screenshot_resize": 133.60740000000078,
+            "screenshot_encode_png": 267.02239999999983,
+            "screenshot_base64": 0.12629999999990105,
+            "capture_show": 10.11949999999888
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 19,
+      "elapsed_ms": 586.856600000001,
+      "breakdown_ms": {
+        "queue_wait": 0.005800000000817818,
+        "companion_before": 137.5092999999997,
+        "action": 431.8780000000006,
+        "companion_after": 11.811000000001513,
+        "serialization": 0.005499999999301508,
+        "capture_hide": 136.59119999999893,
+        "screenshot_capture": 74.89599999999882,
+        "screenshot_resize": 121.58439999999973,
+        "screenshot_encode_png": 234.92679999999928,
+        "screenshot_base64": 0.1275999999998021,
+        "capture_show": 11.281000000000859
+      },
+      "server_total_ms": 581.3403999999991,
+      "payload_bytes": 181370,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 581.3403999999991,
+          "breakdown_ms": {
+            "queue_wait": 0.005800000000817818,
+            "companion_before": 137.5092999999997,
+            "action": 431.8780000000006,
+            "companion_after": 11.811000000001513,
+            "serialization": 0.005499999999301508,
+            "capture_hide": 136.59119999999893,
+            "screenshot_capture": 74.89599999999882,
+            "screenshot_resize": 121.58439999999973,
+            "screenshot_encode_png": 234.92679999999928,
+            "screenshot_base64": 0.1275999999998021,
+            "capture_show": 11.281000000000859
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "on",
+      "scenario": "computer_get_screenshot",
+      "run": 20,
+      "elapsed_ms": 654.2885000000024,
+      "breakdown_ms": {
+        "queue_wait": 0.013699999999516876,
+        "companion_before": 137.79029999999875,
+        "action": 492.4392000000007,
+        "companion_after": 18.312700000000405,
+        "serialization": 0.007100000000718865,
+        "capture_hide": 136.5000999999993,
+        "screenshot_capture": 52.79460000000108,
+        "screenshot_resize": 125.34139999999934,
+        "screenshot_encode_png": 313.66409999999996,
+        "screenshot_base64": 0.30370000000039,
+        "capture_show": 17.453999999999724
+      },
+      "server_total_ms": 648.7511999999988,
+      "payload_bytes": 172948,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 648.7511999999988,
+          "breakdown_ms": {
+            "queue_wait": 0.013699999999516876,
+            "companion_before": 137.79029999999875,
+            "action": 492.4392000000007,
+            "companion_after": 18.312700000000405,
+            "serialization": 0.007100000000718865,
+            "capture_hide": 136.5000999999993,
+            "screenshot_capture": 52.79460000000108,
+            "screenshot_resize": 125.34139999999934,
+            "screenshot_encode_png": 313.66409999999996,
+            "screenshot_base64": 0.30370000000039,
+            "capture_show": 17.453999999999724
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 1,
+      "elapsed_ms": 402.21450000000186,
+      "breakdown_ms": {
+        "queue_wait": 0.006799999999884676,
+        "companion_before": 0.055900000000292493,
+        "action": 398.2673000000002,
+        "companion_after": 0.045699999999897045,
+        "serialization": 0.007400000000188811,
+        "capture_hide": 0.01269999999999527,
+        "screenshot_capture": 45.47550000000001,
+        "screenshot_resize": 125.90390000000002,
+        "screenshot_encode_png": 226.18869999999993,
+        "screenshot_base64": 0.14899999999988722,
+        "capture_show": 0.011500000000069122
+      },
+      "server_total_ms": 398.44550000000004,
+      "payload_bytes": 182283,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 398.44550000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.006799999999884676,
+            "companion_before": 0.055900000000292493,
+            "action": 398.2673000000002,
+            "companion_after": 0.045699999999897045,
+            "serialization": 0.007400000000188811,
+            "capture_hide": 0.01269999999999527,
+            "screenshot_capture": 45.47550000000001,
+            "screenshot_resize": 125.90390000000002,
+            "screenshot_encode_png": 226.18869999999993,
+            "screenshot_base64": 0.14899999999988722,
+            "capture_show": 0.011500000000069122
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 2,
+      "elapsed_ms": 362.59140000000116,
+      "breakdown_ms": {
+        "queue_wait": 0.005300000000033833,
+        "companion_before": 0.04949999999985266,
+        "action": 359.55899999999997,
+        "companion_after": 0.04579999999987194,
+        "serialization": 0.009100000000216824,
+        "capture_hide": 0.009799999999813735,
+        "screenshot_capture": 41.92399999999998,
+        "screenshot_resize": 117.91750000000002,
+        "screenshot_encode_png": 199.26229999999987,
+        "screenshot_base64": 0.13029999999980646,
+        "capture_show": 0.012299999999868305
+      },
+      "server_total_ms": 359.7333000000003,
+      "payload_bytes": 179576,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 359.7333000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.005300000000033833,
+            "companion_before": 0.04949999999985266,
+            "action": 359.55899999999997,
+            "companion_after": 0.04579999999987194,
+            "serialization": 0.009100000000216824,
+            "capture_hide": 0.009799999999813735,
+            "screenshot_capture": 41.92399999999998,
+            "screenshot_resize": 117.91750000000002,
+            "screenshot_encode_png": 199.26229999999987,
+            "screenshot_base64": 0.13029999999980646,
+            "capture_show": 0.012299999999868305
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 3,
+      "elapsed_ms": 342.33309999999983,
+      "breakdown_ms": {
+        "queue_wait": 0.005200000000058935,
+        "companion_before": 0.03860000000031505,
+        "action": 339.72429999999986,
+        "companion_after": 0.13249999999970896,
+        "serialization": 0.009999999999763531,
+        "capture_hide": 0.01069999999981519,
+        "screenshot_capture": 44.52019999999993,
+        "screenshot_resize": 100.48559999999998,
+        "screenshot_encode_png": 194.31579999999985,
+        "screenshot_base64": 0.1406000000001768,
+        "capture_show": 0.016000000000076398
+      },
+      "server_total_ms": 339.97890000000007,
+      "payload_bytes": 180168,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 339.97890000000007,
+          "breakdown_ms": {
+            "queue_wait": 0.005200000000058935,
+            "companion_before": 0.03860000000031505,
+            "action": 339.72429999999986,
+            "companion_after": 0.13249999999970896,
+            "serialization": 0.009999999999763531,
+            "capture_hide": 0.01069999999981519,
+            "screenshot_capture": 44.52019999999993,
+            "screenshot_resize": 100.48559999999998,
+            "screenshot_encode_png": 194.31579999999985,
+            "screenshot_base64": 0.1406000000001768,
+            "capture_show": 0.016000000000076398
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 4,
+      "elapsed_ms": 416.53759999999966,
+      "breakdown_ms": {
+        "queue_wait": 0.005200000000058935,
+        "companion_before": 0.03819999999996071,
+        "action": 413.33399999999983,
+        "companion_after": 0.047000000000025466,
+        "serialization": 0.005100000000311411,
+        "capture_hide": 0.010000000000218279,
+        "screenshot_capture": 53.61299999999983,
+        "screenshot_resize": 107.48720000000003,
+        "screenshot_encode_png": 251.80250000000024,
+        "screenshot_base64": 0.1406000000001768,
+        "capture_show": 0.015599999999722058
+      },
+      "server_total_ms": 413.50670000000036,
+      "payload_bytes": 179576,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 413.50670000000036,
+          "breakdown_ms": {
+            "queue_wait": 0.005200000000058935,
+            "companion_before": 0.03819999999996071,
+            "action": 413.33399999999983,
+            "companion_after": 0.047000000000025466,
+            "serialization": 0.005100000000311411,
+            "capture_hide": 0.010000000000218279,
+            "screenshot_capture": 53.61299999999983,
+            "screenshot_resize": 107.48720000000003,
+            "screenshot_encode_png": 251.80250000000024,
+            "screenshot_base64": 0.1406000000001768,
+            "capture_show": 0.015599999999722058
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 5,
+      "elapsed_ms": 430.15090000000055,
+      "breakdown_ms": {
+        "queue_wait": 0.006699999999909778,
+        "companion_before": 0.11599999999998545,
+        "action": 426.33449999999993,
+        "companion_after": 0.05940000000009604,
+        "serialization": 0.006300000000010186,
+        "capture_hide": 0.021600000000034925,
+        "screenshot_capture": 59.23500000000013,
+        "screenshot_resize": 103.8714,
+        "screenshot_encode_png": 262.6685000000002,
+        "screenshot_base64": 0.13299999999981083,
+        "capture_show": 0.019699999999829743
+      },
+      "server_total_ms": 426.6225000000004,
+      "payload_bytes": 179945,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 426.6225000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.006699999999909778,
+            "companion_before": 0.11599999999998545,
+            "action": 426.33449999999993,
+            "companion_after": 0.05940000000009604,
+            "serialization": 0.006300000000010186,
+            "capture_hide": 0.021600000000034925,
+            "screenshot_capture": 59.23500000000013,
+            "screenshot_resize": 103.8714,
+            "screenshot_encode_png": 262.6685000000002,
+            "screenshot_base64": 0.13299999999981083,
+            "capture_show": 0.019699999999829743
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 6,
+      "elapsed_ms": 411.2791999999972,
+      "breakdown_ms": {
+        "queue_wait": 0.008100000000013097,
+        "companion_before": 0.041199999999662396,
+        "action": 405.9749999999999,
+        "companion_after": 0.10779999999977008,
+        "serialization": 0.009199999999964348,
+        "capture_hide": 0.009800000000268483,
+        "screenshot_capture": 39.38060000000041,
+        "screenshot_resize": 111.93159999999989,
+        "screenshot_encode_png": 254.1219000000001,
+        "screenshot_base64": 0.23969999999962965,
+        "capture_show": 0.02860000000009677
+      },
+      "server_total_ms": 406.55020000000013,
+      "payload_bytes": 179729,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 406.55020000000013,
+          "breakdown_ms": {
+            "queue_wait": 0.008100000000013097,
+            "companion_before": 0.041199999999662396,
+            "action": 405.9749999999999,
+            "companion_after": 0.10779999999977008,
+            "serialization": 0.009199999999964348,
+            "capture_hide": 0.009800000000268483,
+            "screenshot_capture": 39.38060000000041,
+            "screenshot_resize": 111.93159999999989,
+            "screenshot_encode_png": 254.1219000000001,
+            "screenshot_base64": 0.23969999999962965,
+            "capture_show": 0.02860000000009677
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 7,
+      "elapsed_ms": 415.9506000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.010299999999915599,
+        "companion_before": 0.06080000000019936,
+        "action": 413.00959999999986,
+        "companion_after": 0.04250000000047294,
+        "serialization": 0.005700000000615546,
+        "capture_hide": 0.014400000000023283,
+        "screenshot_capture": 46.35570000000007,
+        "screenshot_resize": 126.26119999999992,
+        "screenshot_encode_png": 240.0072,
+        "screenshot_base64": 0.1172999999998865,
+        "capture_show": 0.009799999999813735
+      },
+      "server_total_ms": 413.25019999999995,
+      "payload_bytes": 179576,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 413.25019999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.010299999999915599,
+            "companion_before": 0.06080000000019936,
+            "action": 413.00959999999986,
+            "companion_after": 0.04250000000047294,
+            "serialization": 0.005700000000615546,
+            "capture_hide": 0.014400000000023283,
+            "screenshot_capture": 46.35570000000007,
+            "screenshot_resize": 126.26119999999992,
+            "screenshot_encode_png": 240.0072,
+            "screenshot_base64": 0.1172999999998865,
+            "capture_show": 0.009799999999813735
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 8,
+      "elapsed_ms": 433.6454999999987,
+      "breakdown_ms": {
+        "queue_wait": 0.11130000000048312,
+        "companion_before": 0.09429999999974825,
+        "action": 430.52840000000015,
+        "companion_after": 0.05409999999938009,
+        "serialization": 0.005099999999401916,
+        "capture_hide": 0.018500000000130967,
+        "screenshot_capture": 50.50280000000021,
+        "screenshot_resize": 118.36179999999968,
+        "screenshot_encode_png": 261.0012999999999,
+        "screenshot_base64": 0.12190000000009604,
+        "capture_show": 0.010600000000522414
+      },
+      "server_total_ms": 430.8809000000001,
+      "payload_bytes": 180430,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 430.8809000000001,
+          "breakdown_ms": {
+            "queue_wait": 0.11130000000048312,
+            "companion_before": 0.09429999999974825,
+            "action": 430.52840000000015,
+            "companion_after": 0.05409999999938009,
+            "serialization": 0.005099999999401916,
+            "capture_hide": 0.018500000000130967,
+            "screenshot_capture": 50.50280000000021,
+            "screenshot_resize": 118.36179999999968,
+            "screenshot_encode_png": 261.0012999999999,
+            "screenshot_base64": 0.12190000000009604,
+            "capture_show": 0.010600000000522414
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 9,
+      "elapsed_ms": 395.4945999999982,
+      "breakdown_ms": {
+        "queue_wait": 0.019600000000536966,
+        "companion_before": 0.15540000000055443,
+        "action": 391.0695999999998,
+        "companion_after": 0.05729999999857682,
+        "serialization": 0.005200000000513683,
+        "capture_hide": 0.035499999999956344,
+        "screenshot_capture": 65.04310000000078,
+        "screenshot_resize": 116.39760000000024,
+        "screenshot_encode_png": 209.0677999999998,
+        "screenshot_base64": 0.12100000000009459,
+        "capture_show": 0.009500000000116415
+      },
+      "server_total_ms": 391.41489999999976,
+      "payload_bytes": 175868,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 391.41489999999976,
+          "breakdown_ms": {
+            "queue_wait": 0.019600000000536966,
+            "companion_before": 0.15540000000055443,
+            "action": 391.0695999999998,
+            "companion_after": 0.05729999999857682,
+            "serialization": 0.005200000000513683,
+            "capture_hide": 0.035499999999956344,
+            "screenshot_capture": 65.04310000000078,
+            "screenshot_resize": 116.39760000000024,
+            "screenshot_encode_png": 209.0677999999998,
+            "screenshot_base64": 0.12100000000009459,
+            "capture_show": 0.009500000000116415
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 10,
+      "elapsed_ms": 393.7942000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.00709999999980937,
+        "companion_before": 0.0385999999998603,
+        "action": 390.5461000000005,
+        "companion_after": 0.06129999999939173,
+        "serialization": 0.005699999999706051,
+        "capture_hide": 0.008500000000822183,
+        "screenshot_capture": 49.60180000000037,
+        "screenshot_resize": 116.15399999999954,
+        "screenshot_encode_png": 224.35930000000008,
+        "screenshot_base64": 0.1260999999994965,
+        "capture_show": 0.010800000000017462
+      },
+      "server_total_ms": 390.70960000000014,
+      "payload_bytes": 186929,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 390.70960000000014,
+          "breakdown_ms": {
+            "queue_wait": 0.00709999999980937,
+            "companion_before": 0.0385999999998603,
+            "action": 390.5461000000005,
+            "companion_after": 0.06129999999939173,
+            "serialization": 0.005699999999706051,
+            "capture_hide": 0.008500000000822183,
+            "screenshot_capture": 49.60180000000037,
+            "screenshot_resize": 116.15399999999954,
+            "screenshot_encode_png": 224.35930000000008,
+            "screenshot_base64": 0.1260999999994965,
+            "capture_show": 0.010800000000017462
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 11,
+      "elapsed_ms": 435.53310000000056,
+      "breakdown_ms": {
+        "queue_wait": 0.023299999999835563,
+        "companion_before": 0.18880000000081054,
+        "action": 432.3086000000003,
+        "companion_after": 0.03819999999996071,
+        "serialization": 0.005200000000513683,
+        "capture_hide": 0.047100000000682485,
+        "screenshot_capture": 53.21270000000004,
+        "screenshot_resize": 132.61629999999968,
+        "screenshot_encode_png": 245.92140000000018,
+        "screenshot_base64": 0.11650000000008731,
+        "capture_show": 0.009799999999813735
+      },
+      "server_total_ms": 432.66209999999955,
+      "payload_bytes": 178325,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 432.66209999999955,
+          "breakdown_ms": {
+            "queue_wait": 0.023299999999835563,
+            "companion_before": 0.18880000000081054,
+            "action": 432.3086000000003,
+            "companion_after": 0.03819999999996071,
+            "serialization": 0.005200000000513683,
+            "capture_hide": 0.047100000000682485,
+            "screenshot_capture": 53.21270000000004,
+            "screenshot_resize": 132.61629999999968,
+            "screenshot_encode_png": 245.92140000000018,
+            "screenshot_base64": 0.11650000000008731,
+            "capture_show": 0.009799999999813735
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 12,
+      "elapsed_ms": 407.36659999999756,
+      "breakdown_ms": {
+        "queue_wait": 0.004500000000007276,
+        "companion_before": 0.09310000000095897,
+        "action": 404.3247000000001,
+        "companion_after": 0.06610000000000582,
+        "serialization": 0.008800000000519503,
+        "capture_hide": 0.06859999999960564,
+        "screenshot_capture": 53.80879999999979,
+        "screenshot_resize": 110.07270000000062,
+        "screenshot_encode_png": 239.60459999999966,
+        "screenshot_base64": 0.12409999999999854,
+        "capture_show": 0.025099999999838474
+      },
+      "server_total_ms": 404.5653999999995,
+      "payload_bytes": 179769,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 404.5653999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.004500000000007276,
+            "companion_before": 0.09310000000095897,
+            "action": 404.3247000000001,
+            "companion_after": 0.06610000000000582,
+            "serialization": 0.008800000000519503,
+            "capture_hide": 0.06859999999960564,
+            "screenshot_capture": 53.80879999999979,
+            "screenshot_resize": 110.07270000000062,
+            "screenshot_encode_png": 239.60459999999966,
+            "screenshot_base64": 0.12409999999999854,
+            "capture_show": 0.025099999999838474
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 13,
+      "elapsed_ms": 381.4305000000022,
+      "breakdown_ms": {
+        "queue_wait": 0.004199999999400461,
+        "companion_before": 0.03540000000066357,
+        "action": 376.76640000000043,
+        "companion_after": 0.05980000000090513,
+        "serialization": 0.007000000000516593,
+        "capture_hide": 0.010099999999511056,
+        "screenshot_capture": 42.58629999999994,
+        "screenshot_resize": 115.00520000000051,
+        "screenshot_encode_png": 218.7609999999995,
+        "screenshot_base64": 0.21489999999994325,
+        "capture_show": 0.022700000000440923
+      },
+      "server_total_ms": 376.9377000000004,
+      "payload_bytes": 180426,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 376.9377000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.004199999999400461,
+            "companion_before": 0.03540000000066357,
+            "action": 376.76640000000043,
+            "companion_after": 0.05980000000090513,
+            "serialization": 0.007000000000516593,
+            "capture_hide": 0.010099999999511056,
+            "screenshot_capture": 42.58629999999994,
+            "screenshot_resize": 115.00520000000051,
+            "screenshot_encode_png": 218.7609999999995,
+            "screenshot_base64": 0.21489999999994325,
+            "capture_show": 0.022700000000440923
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 14,
+      "elapsed_ms": 398.576299999997,
+      "breakdown_ms": {
+        "queue_wait": 0.004400000000714499,
+        "companion_before": 0.06559999999990396,
+        "action": 392.1875,
+        "companion_after": 0.07319999999981519,
+        "serialization": 0.008100000000013097,
+        "capture_hide": 0.040500000000065484,
+        "screenshot_capture": 48.13760000000002,
+        "screenshot_resize": 114.03800000000047,
+        "screenshot_encode_png": 229.51029999999992,
+        "screenshot_base64": 0.2793999999994412,
+        "capture_show": 0.023100000000340515
+      },
+      "server_total_ms": 392.4377000000004,
+      "payload_bytes": 180426,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 392.4377000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.004400000000714499,
+            "companion_before": 0.06559999999990396,
+            "action": 392.1875,
+            "companion_after": 0.07319999999981519,
+            "serialization": 0.008100000000013097,
+            "capture_hide": 0.040500000000065484,
+            "screenshot_capture": 48.13760000000002,
+            "screenshot_resize": 114.03800000000047,
+            "screenshot_encode_png": 229.51029999999992,
+            "screenshot_base64": 0.2793999999994412,
+            "capture_show": 0.023100000000340515
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 15,
+      "elapsed_ms": 427.33309999999983,
+      "breakdown_ms": {
+        "queue_wait": 0.011199999999917054,
+        "companion_before": 0.1433999999999287,
+        "action": 421.53240000000005,
+        "companion_after": 0.11160000000018044,
+        "serialization": 0.012899999999717693,
+        "capture_hide": 0.07240000000001601,
+        "screenshot_capture": 43.25450000000001,
+        "screenshot_resize": 128.02829999999994,
+        "screenshot_encode_png": 249.53600000000006,
+        "screenshot_base64": 0.3716999999996915,
+        "capture_show": 0.03510000000005675
+      },
+      "server_total_ms": 421.9475000000002,
+      "payload_bytes": 180067,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 421.9475000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.011199999999917054,
+            "companion_before": 0.1433999999999287,
+            "action": 421.53240000000005,
+            "companion_after": 0.11160000000018044,
+            "serialization": 0.012899999999717693,
+            "capture_hide": 0.07240000000001601,
+            "screenshot_capture": 43.25450000000001,
+            "screenshot_resize": 128.02829999999994,
+            "screenshot_encode_png": 249.53600000000006,
+            "screenshot_base64": 0.3716999999996915,
+            "capture_show": 0.03510000000005675
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 16,
+      "elapsed_ms": 446.80569999999716,
+      "breakdown_ms": {
+        "queue_wait": 0.0037999999995008693,
+        "companion_before": 0.03230000000075961,
+        "action": 443.3065999999999,
+        "companion_after": 0.08760000000074797,
+        "serialization": 0.005500000000211003,
+        "capture_hide": 0.007000000000516593,
+        "screenshot_capture": 50.16179999999986,
+        "screenshot_resize": 134.52520000000004,
+        "screenshot_encode_png": 258.2523999999994,
+        "screenshot_base64": 0.1522000000004482,
+        "capture_show": 0.014299999999821011
+      },
+      "server_total_ms": 443.4988999999996,
+      "payload_bytes": 175284,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 443.4988999999996,
+          "breakdown_ms": {
+            "queue_wait": 0.0037999999995008693,
+            "companion_before": 0.03230000000075961,
+            "action": 443.3065999999999,
+            "companion_after": 0.08760000000074797,
+            "serialization": 0.005500000000211003,
+            "capture_hide": 0.007000000000516593,
+            "screenshot_capture": 50.16179999999986,
+            "screenshot_resize": 134.52520000000004,
+            "screenshot_encode_png": 258.2523999999994,
+            "screenshot_base64": 0.1522000000004482,
+            "capture_show": 0.014299999999821011
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 17,
+      "elapsed_ms": 406.4386999999988,
+      "breakdown_ms": {
+        "queue_wait": 0.007899999999608553,
+        "companion_before": 0.06700000000000728,
+        "action": 403.2529999999997,
+        "companion_after": 0.029699999999138527,
+        "serialization": 0.005600000000413274,
+        "capture_hide": 0.01540000000022701,
+        "screenshot_capture": 63.77589999999964,
+        "screenshot_resize": 98.56620000000021,
+        "screenshot_encode_png": 240.58350000000064,
+        "screenshot_base64": 0.12229999999908614,
+        "capture_show": 0.007900000000518048
+      },
+      "server_total_ms": 403.4303,
+      "payload_bytes": 180158,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 403.4303,
+          "breakdown_ms": {
+            "queue_wait": 0.007899999999608553,
+            "companion_before": 0.06700000000000728,
+            "action": 403.2529999999997,
+            "companion_after": 0.029699999999138527,
+            "serialization": 0.005600000000413274,
+            "capture_hide": 0.01540000000022701,
+            "screenshot_capture": 63.77589999999964,
+            "screenshot_resize": 98.56620000000021,
+            "screenshot_encode_png": 240.58350000000064,
+            "screenshot_base64": 0.12229999999908614,
+            "capture_show": 0.007900000000518048
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 18,
+      "elapsed_ms": 433.8216999999968,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.026500000001760782,
+        "action": 430.8780999999999,
+        "companion_after": 0.030300000002171146,
+        "serialization": 0.005699999999706051,
+        "capture_hide": 0.006199999999807915,
+        "screenshot_capture": 42.299700000001394,
+        "screenshot_resize": 120.07879999999932,
+        "screenshot_encode_png": 268.1860000000015,
+        "screenshot_base64": 0.1257000000005064,
+        "capture_show": 0.007999999999810825
+      },
+      "server_total_ms": 431.0031999999992,
+      "payload_bytes": 180399,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 431.0031999999992,
+          "breakdown_ms": {
+            "queue_wait": 0.003899999999703141,
+            "companion_before": 0.026500000001760782,
+            "action": 430.8780999999999,
+            "companion_after": 0.030300000002171146,
+            "serialization": 0.005699999999706051,
+            "capture_hide": 0.006199999999807915,
+            "screenshot_capture": 42.299700000001394,
+            "screenshot_resize": 120.07879999999932,
+            "screenshot_encode_png": 268.1860000000015,
+            "screenshot_base64": 0.1257000000005064,
+            "capture_show": 0.007999999999810825
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 19,
+      "elapsed_ms": 429.58090000000084,
+      "breakdown_ms": {
+        "queue_wait": 0.003899999999703141,
+        "companion_before": 0.027700000000550062,
+        "action": 427.1389999999992,
+        "companion_after": 0.02779999999984284,
+        "serialization": 0.005400000000008731,
+        "capture_hide": 0.006400000000212458,
+        "screenshot_capture": 45.235499999998865,
+        "screenshot_resize": 127.32330000000002,
+        "screenshot_encode_png": 254.27700000000004,
+        "screenshot_base64": 0.12159999999857973,
+        "capture_show": 0.0072000000000116415
+      },
+      "server_total_ms": 427.2519999999986,
+      "payload_bytes": 180158,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 427.2519999999986,
+          "breakdown_ms": {
+            "queue_wait": 0.003899999999703141,
+            "companion_before": 0.027700000000550062,
+            "action": 427.1389999999992,
+            "companion_after": 0.02779999999984284,
+            "serialization": 0.005400000000008731,
+            "capture_hide": 0.006400000000212458,
+            "screenshot_capture": 45.235499999998865,
+            "screenshot_resize": 127.32330000000002,
+            "screenshot_encode_png": 254.27700000000004,
+            "screenshot_base64": 0.12159999999857973,
+            "capture_show": 0.0072000000000116415
+          }
+        }
+      ],
+      "verified": true
+    },
+    {
+      "ui": "off",
+      "scenario": "computer_get_screenshot",
+      "run": 20,
+      "elapsed_ms": 381.22869999999966,
+      "breakdown_ms": {
+        "queue_wait": 0.0036000000000058208,
+        "companion_before": 0.025499999997919076,
+        "action": 378.1714000000011,
+        "companion_after": 0.027300000001559965,
+        "serialization": 0.005799999998998828,
+        "capture_hide": 0.0059000000001105946,
+        "screenshot_capture": 50.995199999999386,
+        "screenshot_resize": 127.19260000000031,
+        "screenshot_encode_png": 199.686099999999,
+        "screenshot_base64": 0.11779999999998836,
+        "capture_show": 0.0072000000000116415
+      },
+      "server_total_ms": 378.28089999999975,
+      "payload_bytes": 179104,
+      "calls": 1,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "get_screenshot",
+          "total_ms": 378.28089999999975,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 0.025499999997919076,
+            "action": 378.1714000000011,
+            "companion_after": 0.027300000001559965,
+            "serialization": 0.005799999998998828,
+            "capture_hide": 0.0059000000001105946,
+            "screenshot_capture": 50.995199999999386,
+            "screenshot_resize": 127.19260000000031,
+            "screenshot_encode_png": 199.686099999999,
+            "screenshot_base64": 0.11779999999998836,
+            "capture_show": 0.0072000000000116415
+          }
+        }
+      ],
+      "verified": true
+    }
+  ]
+}

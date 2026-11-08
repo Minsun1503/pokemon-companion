@@ -169,8 +169,17 @@ const keyMap: Record<string, Key> = {
 	9: Key.Num9,
 
 	// Punctuation
+	',': Key.Comma,
+	'.': Key.Period,
+	'/': Key.Slash,
+	';': Key.Semicolon,
+	'-': Key.Minus,
+	'=': Key.Equal,
+	'[': Key.LeftBracket,
+	']': Key.RightBracket,
 	minus: Key.Minus,
 	equal: Key.Equal,
+	equals: Key.Equal,
 	bracketleft: Key.LeftBracket,
 	bracketright: Key.RightBracket,
 	bracket_l: Key.LeftBracket,

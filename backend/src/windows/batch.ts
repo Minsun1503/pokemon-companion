@@ -1,9 +1,11 @@
 import {z} from 'zod';
+import {serialize} from '../utils/timing.js';
 import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import type {WindowsRequest} from './automation.js';
+import {setTimeout as delay} from 'node:timers/promises';
 
-export const windowsActions = ['get_windows', 'get_ui', 'activate', 'invoke', 'set_value', 'select', 'toggle', 'expand', 'collapse', 'scroll', 'focus', 'read_text'] as const;
+export const windowsActions = ['get_windows', 'get_ui', 'activate', 'invoke', 'set_value', 'select', 'toggle', 'expand', 'collapse', 'scroll', 'focus', 'read_text', 'wait_for', 'launch'] as const;
 export const windowsFields = {
 	window_id: z.string().regex(/^\d+$/).optional(),
 	query: z.string().max(200).optional().describe('Case-insensitive name/automation-id filter; get_windows also matches process names.'),
@@ -15,6 +17,8 @@ export const windowsFields = {
 	element_id: z.number().int().positive().optional(),
 	text: z.string().max(8000).optional(),
 	direction: z.enum(['up', 'down', 'left', 'right']).optional(),
+	expect_value: z.string().max(160).optional().describe('For wait_for (or batch get_ui): require a control with this exact value.'),
+	timeout_ms: z.number().int().min(1).max(15000).optional().describe('wait_for/launch timeout; default 5000 ms, max 15000.'),
 };
 
 const windowsRequestSchema = z.object({
@@ -22,21 +26,48 @@ const windowsRequestSchema = z.object({
 	...windowsFields,
 });
 export const windowsStepSchema = windowsRequestSchema.extend({
-	window_step: z.number().int().min(0).max(15).optional().describe('Zero-based earlier get_windows (one match) or get_ui step supplying the window.'),
-	target_step: z.number().int().min(0).max(15).optional().describe('Zero-based earlier get_ui step with exactly one untruncated control supporting this action.'),
-	expect_value: z.string().max(160).optional().describe('For get_ui: require one untruncated control with this exact value before continuing.'),
+	window_step: z.number().int().min(0).max(15).optional().describe('Zero-based earlier get_windows/launch (one match) or get_ui/wait_for step supplying the window.'),
+	target_step: z.number().int().min(0).max(15).optional().describe('Zero-based earlier get_ui/wait_for step with exactly one untruncated control supporting this action.'),
 }).strict();
 export type WindowsStep = z.infer<typeof windowsStepSchema>;
 
-const windowActions = ['get_ui', 'activate'];
-const discoveryActions = ['get_windows', ...windowActions];
+const windowActions = ['get_ui', 'activate', 'wait_for'];
+const discoveryActions = ['get_windows', 'launch', ...windowActions];
+const windowSources = ['get_windows', 'get_ui', 'wait_for', 'launch'];
+const controlSources = ['get_ui', 'wait_for'];
 
 // Match atomic Windows responses: one compact text payload, without duplicate structured data.
 function compactResult(data: Record<string, unknown>): CallToolResult {
-	return {content: [{type: 'text', text: JSON.stringify(data)}]};
+	return {content: [{type: 'text', text: serialize(data)}]};
 }
 
 export function validateWindowsRequest(args: WindowsRequest): void {
+	if (args.action === 'wait_for' && !args.query && !args.control_type) {
+		throw new Error('wait_for requires query or control_type.');
+	}
+
+	if (args.action === 'launch') {
+		const target = args.text;
+		if (!target || /["<>|]/.test(target) || [...target].some((character) => character.charCodeAt(0) < 32)) {
+			throw new Error('launch requires text containing an http/https URL or executable name/path, without shell commands or arguments.');
+		}
+
+		if (/^https?:/i.test(target)) {
+			const url = new URL(target);
+			if (!url.hostname || /\s/.test(target)) {
+				throw new Error('launch requires a valid http/https URL.');
+			}
+
+			if (!args.query) {
+				throw new Error('launch of a URL requires query to identify the resulting window.');
+			}
+		} else if (/[*?]/.test(target) || (/[\\/]/.test(target) && !/\.exe$/i.test(target)) || (/\.[^\\/.]+$/.test(target) && !/\.exe$/i.test(target)) || (target.includes(':') && !/^[a-z]:[\\/]/i.test(target))) {
+			throw new Error('launch accepts only an http/https URL or executable name/path.');
+		} else if (/(?:^|[\\/])(cmd|powershell|pwsh|wscript|cscript|mshta)(?:\.exe)?$/i.test(target)) {
+			throw new Error('launch does not support command shells or script hosts.');
+		}
+	}
+
 	if (windowActions.includes(args.action) && !args.window_id) {
 		throw new Error(`${args.action} requires window_id from get_windows.`);
 	}
@@ -57,18 +88,18 @@ export function validateWindowsRequest(args: WindowsRequest): void {
 function validateSteps(steps: WindowsStep[]): void {
 	for (const [index, step] of steps.entries()) {
 		if (step.window_step !== undefined) {
-			if (!windowActions.includes(step.action) || step.window_id !== undefined || step.window_step >= index || !['get_windows', 'get_ui'].includes(steps[step.window_step]!.action)) {
+			if (!windowActions.includes(step.action) || step.window_id !== undefined || step.window_step >= index || !windowSources.includes(steps[step.window_step]!.action)) {
 				throw new Error(`Step ${index}: window_step must reference an earlier get_windows/get_ui and replace window_id on get_ui/activate.`);
 			}
 		}
 
 		if (step.target_step !== undefined) {
-			if (discoveryActions.includes(step.action) || step.snapshot !== undefined || step.element_id !== undefined || step.target_step >= index || steps[step.target_step]!.action !== 'get_ui') {
+			if (discoveryActions.includes(step.action) || step.snapshot !== undefined || step.element_id !== undefined || step.target_step >= index || !controlSources.includes(steps[step.target_step]!.action)) {
 				throw new Error(`Step ${index}: target_step must reference an earlier get_ui and replace snapshot/element_id on a control action.`);
 			}
 		}
 
-		if (step.expect_value !== undefined && step.action !== 'get_ui') {
+		if (step.expect_value !== undefined && !['get_ui', 'wait_for'].includes(step.action)) {
 			throw new Error(`Step ${index}: expect_value is supported only by get_ui.`);
 		}
 
@@ -99,7 +130,12 @@ function single(result: Record<string, unknown>, key: 'nodes' | 'windows', resul
 
 function resolveStep(step: WindowsStep, results: Record<string, unknown>[]): WindowsRequest {
 	const {window_step: windowStep, target_step: targetStep} = step;
-	const request = windowsRequestSchema.parse(step);
+	const {expect_value: expectation, ...fields} = step;
+	const request = windowsRequestSchema.parse(fields);
+	if (step.action === 'wait_for') {
+		request.expect_value = expectation;
+	}
+
 	if (windowStep !== undefined) {
 		const source = results[windowStep]!;
 		const window = Array.isArray(source.windows) ? single(source, 'windows', windowStep) : source.window as Record<string, unknown> | undefined;
@@ -129,7 +165,7 @@ function bounded(outcome: Record<string, unknown>, maxChars: number): Record<str
 	const copy = structuredClone(outcome);
 	const result = copy.result as Record<string, unknown> | undefined;
 	const entries = Array.isArray(result?.nodes) ? result.nodes : Array.isArray(result?.windows) ? result.windows : undefined;
-	while (JSON.stringify(copy).length > maxChars) {
+	while (serialize(copy).length > maxChars) {
 		copy.truncated = true;
 		if (result) {
 			result.truncated = true;
@@ -138,12 +174,15 @@ function bounded(outcome: Record<string, unknown>, maxChars: number): Record<str
 		if (entries?.length) {
 			entries.pop();
 		} else if (typeof result?.text === 'string' && result.text.length) {
-			result.text = result.text.slice(0, Math.max(0, result.text.length - Math.max(1, JSON.stringify(copy).length - maxChars)));
+			result.text = result.text.slice(0, Math.max(0, result.text.length - Math.max(1, serialize(copy).length - maxChars)));
+		} else if (typeof result?.started === 'string' && result.started.length) {
+			result.started_clipped = true;
+			result.started = result.started.slice(0, Math.max(0, result.started.length - Math.max(1, serialize(copy).length - maxChars)));
 		} else if (copy.result) {
 			delete copy.result;
 			copy.result_omitted = true;
 		} else if (typeof copy.error === 'string' && copy.error.length) {
-			copy.error = copy.error.slice(0, Math.max(0, copy.error.length - Math.max(1, JSON.stringify(copy).length - maxChars)));
+			copy.error = copy.error.slice(0, Math.max(0, copy.error.length - Math.max(1, serialize(copy).length - maxChars)));
 		} else {
 			break;
 		}
@@ -164,9 +203,19 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 				await perform(step.action === 'read_text' ? 'get_ui_text' : step.action, async () => {
 					const request = resolveStep(step, results);
 					started = true;
-					const result = await runtime.windows.request(request);
+					let result = await runWindowsRequest(runtime, request, signal);
 					results.push(result);
-					if (step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
+					if (step.action === 'get_ui' && step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
+						if (signal?.aborted || runtime.companion.state.paused) {
+							throw new Error('Computer action cancelled or paused before execution.');
+						}
+
+						// UIA may still expose the previous view; re-read once, never replay the input.
+						result = await runtime.windows.request(request);
+						results[index] = result;
+					}
+
+					if (step.action === 'get_ui' && step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
 						throw new BatchReferenceError('Control value did not match expect_value; no subsequent steps were run.', result, index);
 					}
 
@@ -189,4 +238,83 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 			ok: true, completed: steps.length, total: steps.length, result_step: steps.length - 1, result: results.at(-1),
 		}, maxChars));
 	}, signal);
+}
+
+/** Poll read-only discovery; launch happens once and input is never replayed. */
+export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRequest, signal?: AbortSignal): Promise<Record<string, unknown>> {
+	if (!['wait_for', 'launch'].includes(args.action)) {
+		return runtime.windows.request(args);
+	}
+
+	const deadline = performance.now() + (args.timeout_ms ?? 5000);
+	const refreshHint = ' After an interrupted wait, call get_ui again for fresh snapshots.';
+	let timeoutError = `${args.action} timed out after ${args.timeout_ms ?? 5000} ms waiting for ${(args.query || args.control_type || args.text || '').slice(0, 200)}.${refreshHint}`;
+	const check = () => {
+		if (signal?.aborted) {
+			throw new Error(`Computer action cancelled.${refreshHint}`);
+		}
+
+		if (runtime.companion.state.paused) {
+			throw new Error(`Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.${refreshHint}`);
+		}
+
+		if (performance.now() >= deadline) {
+			throw new Error(timeoutError);
+		}
+	};
+
+	const read = async (request: WindowsRequest) => {
+		check();
+		const result = await runtime.windows.request(request, {
+			signal, timeoutMs: Math.max(1, deadline - performance.now()), paused: () => runtime.companion.state.paused, timeoutError,
+		});
+		check();
+		return result;
+	};
+
+	const urlLaunch = args.action === 'launch' && /^https?:/i.test(args.text ?? '');
+	const allWindows = {action: 'get_windows', max_elements: 250, max_chars: 16000};
+	const before = urlLaunch ? await read(allWindows) : undefined;
+	const previous = new Map(((before?.windows ?? []) as Record<string, unknown>[]).map((window) => [window.id, `${String(window.title)}/${String(window.process)}`]));
+	const launched = args.action === 'launch' ? await read(args) : undefined;
+	if (launched) {
+		timeoutError = `launch started ${String(launched.started).slice(0, 200)}; ${timeoutError}`;
+	}
+
+	const request = launched
+		? urlLaunch ? allWindows : {...args, action: 'get_windows', query: args.query || String(launched.query)}
+		: {...args, action: 'get_ui'};
+	for (;;) {
+		// eslint-disable-next-line no-await-in-loop
+		let result = await read(request);
+		if (urlLaunch) {
+			const windows = result.windows as Record<string, unknown>[];
+			const appeared = windows.filter((window) => previous.get(window.id) !== `${String(window.title)}/${String(window.process)}`)
+				.slice(0, 5).map((window) => ({title: String(window.title).slice(0, 60), process: String(window.process).slice(0, 25)}));
+			timeoutError = `URL launch succeeded, but its window query did not match within ${args.timeout_ms ?? 5000} ms. Use get_windows with the browser process name. New/changed windows: ${JSON.stringify(appeared)}. After an interrupted wait, call get_ui again for fresh snapshots.`;
+			if (result.truncated) {
+				// A broad diagnostic list cannot hide a matching browser beyond its budget.
+				// eslint-disable-next-line no-await-in-loop
+				result = await read({...args, action: 'get_windows'});
+			} else {
+				const query = args.query!.toLowerCase();
+				result = {...result, windows: windows.filter((window) => `${String(window.title)} ${String(window.process)}`.toLowerCase().includes(query))};
+			}
+		}
+
+		const entries = (launched ? result.windows : result.nodes) as Record<string, unknown>[];
+		const matches = entries.filter((node) => args.expect_value === undefined || (!node.value_clipped && node.value === args.expect_value));
+		if (matches.length) {
+			if (launched) {
+				return bounded({result: {...result, started: launched.started}}, args.max_chars ?? 6000).result as Record<string, unknown>;
+			}
+
+			return {...result, nodes: matches, matched: result.truncated ? result.matched : matches.length};
+		}
+
+		// eslint-disable-next-line no-await-in-loop
+		await delay(Math.min(100, Math.max(1, deadline - performance.now())), undefined, {signal}).catch(() => {
+			throw new Error(`Computer action cancelled.${refreshHint}`);
+		});
+	}
 }

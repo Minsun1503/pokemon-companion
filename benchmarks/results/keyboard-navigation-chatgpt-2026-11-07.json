@@ -1,0 +1,1457 @@
+{
+  "complete": true,
+  "diagnostics": [
+    "Computer Use MCP server running on stdio",
+    "(node:12436) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+    "(Use `node --trace-deprecation ...` to show where the warning was created)",
+    "Resumed after restoration failed: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Computer Use MCP server running on stdio",
+    "(node:5112) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.",
+    "(Use `node --trace-deprecation ...` to show where the warning was created)",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+    "Restoration read failed with a disappearing control; reread once: System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )"
+  ],
+  "measured_at": "2026-11-07T17:13:23.104Z",
+  "app": "chatgpt",
+  "runs_per_path": 20,
+  "companion": "on",
+  "alternating_order": true,
+  "notes": "Preparation and verified restoration excluded. No Enter, screenshots, or AI inference. Edge numerical URL avoids known Telex alphabetic transformations; this does not establish alphabetic typing correctness.",
+  "summary": [
+    {
+      "path": "uia",
+      "correct": 14,
+      "runs": 20,
+      "foreground_mismatches": 0,
+      "mcp_calls": [
+        1
+      ],
+      "server": {
+        "median_ms": 1051.9231999999984,
+        "p95_ms": 1204.2576999999947
+      },
+      "client": {
+        "median_ms": 1053.476250000001,
+        "p95_ms": 1205.5806999999986
+      }
+    },
+    {
+      "path": "shortcut",
+      "correct": 11,
+      "runs": 20,
+      "foreground_mismatches": 0,
+      "mcp_calls": [
+        2
+      ],
+      "server": {
+        "median_ms": 684.5192499999994,
+        "p95_ms": 883.2933000000048
+      },
+      "client": {
+        "median_ms": 687.7269500000011,
+        "p95_ms": 885.5227000000014
+      }
+    }
+  ],
+  "samples": [
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 0,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1045.3249999999998,
+      "server_ms": 1043.544,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1043.544,
+          "breakdown_ms": {
+            "queue_wait": 0.01209999999991851,
+            "companion_before": 16.62019999999984,
+            "action": 1022.9785000000004,
+            "companion_after": 2.651200000000017,
+            "serialization": 0.16849999999931242,
+            "worker_round_trip": 806.6682000000003,
+            "uia_tree_walk": 756.0230000000001,
+            "post_processing": 0.2582999999999629
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 0,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 703.9188999999997,
+      "server_ms": 701.2030000000004,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 53.65410000000065,
+          "breakdown_ms": {
+            "queue_wait": 0.01010000000042055,
+            "companion_before": 2.387599999999111,
+            "action": 50.19670000000042,
+            "companion_after": 0.6939999999995052,
+            "serialization": 0.01769999999942229,
+            "worker_round_trip": 19.77219999999943,
+            "post_processing": 0.0065999999997075065,
+            "foreground_guard": 19.89300000000003
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 647.5488999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.005799999999908323,
+            "companion_before": 4.0318999999999505,
+            "action": 642.7983000000004,
+            "companion_after": 0.6399000000001251,
+            "serialization": 0.06760000000031141,
+            "worker_round_trip": 414.6088000000009,
+            "uia_tree_walk": 403.18370000000004,
+            "post_processing": 0.06459999999970023
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 1,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 463.4931999999999,
+      "server_ms": 461.3590000000004,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 41.792599999999766,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 4.339799999999741,
+            "action": 36.62459999999919,
+            "companion_after": 0.7426000000004933,
+            "serialization": 0.02010000000063883,
+            "worker_round_trip": 6.593899999999849,
+            "post_processing": 0.0007999999997991836,
+            "foreground_guard": 6.6228000000000975
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 419.5664000000006,
+          "breakdown_ms": {
+            "queue_wait": 0.005500000000211003,
+            "companion_before": 4.022399999998925,
+            "action": 414.7954,
+            "companion_after": 0.5887000000002445,
+            "serialization": 0.04749999999967258,
+            "worker_round_trip": 198.91470000000027,
+            "uia_tree_walk": 195.7175,
+            "post_processing": 0.014799999999922875
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 1,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 985.9840000000004,
+      "server_ms": 983.9393,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 983.9393,
+          "breakdown_ms": {
+            "queue_wait": 0.007800000001225271,
+            "companion_before": 16.327800000000934,
+            "action": 964.3981999999996,
+            "companion_after": 2.683599999996659,
+            "serialization": 0.16699999999946158,
+            "worker_round_trip": 745.2804999999989,
+            "uia_tree_walk": 688.2504,
+            "post_processing": 0.1555000000007567
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 2,
+      "correct": false,
+      "error": "{\"ok\":false,\"completed\":4,\"total\":5,\"stopped_step\":4,\"action\":\"wait_for\",\"failed_step_started\":true,\"error\":\"System.Runtime.InteropServices.COMException (0x80040201)\\r\\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\\r\\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\\r\\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\\r\\n   at Syste\",\"result_step\":3,\"result\":{\"ok\":true}}",
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 793.3241,
+      "server_ms": 790.9800999999998,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 790.9800999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.01859999999987849,
+            "companion_before": 15.056699999999637,
+            "action": 771.1843999999999,
+            "companion_after": 3.0489000000002306,
+            "serialization": 0.11439999999970496,
+            "worker_round_trip": 525.6731,
+            "uia_tree_walk": 480.1494,
+            "post_processing": 0.19409999999993488
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 2,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 502.96990000000005,
+      "server_ms": 498.8045999999995,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 42.568099999999504,
+          "breakdown_ms": {
+            "queue_wait": 0.04219999999986612,
+            "companion_before": 4.11180000000013,
+            "action": 36.03740000000016,
+            "companion_after": 0.8510999999998603,
+            "serialization": 0.011300000000119326,
+            "worker_round_trip": 7.76050000000032,
+            "post_processing": 0.006399999999757711,
+            "foreground_guard": 7.85799999999972
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 456.2365,
+          "breakdown_ms": {
+            "queue_wait": 0.008499999999912689,
+            "companion_before": 2.8654999999998836,
+            "action": 452.08469999999943,
+            "companion_after": 0.9236000000000786,
+            "serialization": 0.033199999998942076,
+            "worker_round_trip": 223.1309000000001,
+            "uia_tree_walk": 220.32090000000002,
+            "post_processing": 0.0363999999999578
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 3,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 697.7397000000001,
+      "server_ms": 695.4099999999999,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 46.263199999999415,
+          "breakdown_ms": {
+            "queue_wait": 0.00739999999950669,
+            "companion_before": 4.698099999998703,
+            "action": 40.44489999999951,
+            "companion_after": 0.9929000000001906,
+            "serialization": 0.023699999999735155,
+            "worker_round_trip": 4.376900000000205,
+            "post_processing": 0.0011000000004059984,
+            "foreground_guard": 4.400800000000345
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 649.1468000000004,
+          "breakdown_ms": {
+            "queue_wait": 0.0030000000006111804,
+            "companion_before": 5.60530000000108,
+            "action": 642.7377000000006,
+            "companion_after": 0.7222000000001572,
+            "serialization": 0.14390000000003056,
+            "worker_round_trip": 420.52190000000064,
+            "uia_tree_walk": 408.1607,
+            "post_processing": 0.0820000000003347
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 3,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 973.0403999999999,
+      "server_ms": 971.8796000000002,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 971.8796000000002,
+          "breakdown_ms": {
+            "queue_wait": 0.002599999999802094,
+            "companion_before": 14.889299999998912,
+            "action": 953.8250999999964,
+            "companion_after": 2.6820000000025175,
+            "serialization": 0.14029999999820575,
+            "worker_round_trip": 731.4326000000019,
+            "uia_tree_walk": 687.1909,
+            "post_processing": 0.12999999999919964
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 4,
+      "correct": false,
+      "error": "{\"ok\":false,\"completed\":4,\"total\":5,\"stopped_step\":4,\"action\":\"wait_for\",\"failed_step_started\":true,\"error\":\"System.Runtime.InteropServices.COMException (0x80040201)\\r\\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\\r\\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\\r\\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\\r\\n   at Syste\",\"result_step\":3,\"result\":{\"ok\":true}}",
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 877.9740000000002,
+      "server_ms": 876.6020000000008,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 876.6020000000008,
+          "breakdown_ms": {
+            "queue_wait": 0.005600000000413274,
+            "companion_before": 25.032600000004095,
+            "action": 847.984199999999,
+            "companion_after": 2.8734999999978754,
+            "serialization": 0.13980000000083237,
+            "worker_round_trip": 642.6550999999981,
+            "uia_tree_walk": 606.3387,
+            "post_processing": 0.07189999999718566
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 4,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 694.9662000000008,
+      "server_ms": 692.8938999999991,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 43.695599999999104,
+          "breakdown_ms": {
+            "queue_wait": 0.0032000000010157237,
+            "companion_before": 5.824300000000221,
+            "action": 37.113900000000285,
+            "companion_after": 0.6136999999998807,
+            "serialization": 0.024699999998119893,
+            "worker_round_trip": 5.992200000000594,
+            "post_processing": 0.01209999999991851,
+            "foreground_guard": 6.070600000000923
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 649.1983,
+          "breakdown_ms": {
+            "queue_wait": 0.0046999999995023245,
+            "companion_before": 4.124400000000605,
+            "action": 644.3654000000006,
+            "companion_after": 0.6212000000014086,
+            "serialization": 0.07509999999820138,
+            "worker_round_trip": 428.53400000000147,
+            "uia_tree_walk": 420.88880000000006,
+            "post_processing": 0.054500000000189175
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 5,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 484.90090000000055,
+      "server_ms": 482.66430000000037,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 43.504000000000815,
+          "breakdown_ms": {
+            "queue_wait": 0.0033999999996012775,
+            "companion_before": 3.4715000000014697,
+            "action": 39.08679999999913,
+            "companion_after": 0.8528000000005704,
+            "serialization": 0.017700000000331784,
+            "worker_round_trip": 6.005600000000413,
+            "post_processing": 0.0011999999987892807,
+            "foreground_guard": 6.032400000000052
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 439.16029999999955,
+          "breakdown_ms": {
+            "queue_wait": 0.0036000000000058208,
+            "companion_before": 4.712999999999738,
+            "action": 433.6687000000002,
+            "companion_after": 0.6615000000019791,
+            "serialization": 0.03400000000146974,
+            "worker_round_trip": 202.51950000000033,
+            "uia_tree_walk": 198.4453,
+            "post_processing": 0.01629999999931897
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 5,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 980.7839999999997,
+      "server_ms": 979.588499999998,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 979.588499999998,
+          "breakdown_ms": {
+            "queue_wait": 0.010500000000320142,
+            "companion_before": 19.516799999993964,
+            "action": 956.9493999999977,
+            "companion_after": 2.561999999990803,
+            "serialization": 0.19339999998919666,
+            "worker_round_trip": 746.9592000000011,
+            "uia_tree_walk": 701.7932,
+            "post_processing": 0.12189999999827705
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 6,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 991.877199999999,
+      "server_ms": 990.7870000000003,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 990.7870000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.0033000000003085006,
+            "companion_before": 18.279900000005,
+            "action": 969.6260999999977,
+            "companion_after": 2.501399999997375,
+            "serialization": 0.15429999998377752,
+            "worker_round_trip": 759.2682000000023,
+            "uia_tree_walk": 721.7539,
+            "post_processing": 0.09730000000126893
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 6,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 680.4877000000015,
+      "server_ms": 676.1445999999996,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 45.71819999999934,
+          "breakdown_ms": {
+            "queue_wait": 0.005300000000715954,
+            "companion_before": 2.2472000000016124,
+            "action": 40.46600000000035,
+            "companion_after": 2.8869999999988067,
+            "serialization": 0.014200000005075708,
+            "worker_round_trip": 4.77100000000064,
+            "post_processing": 0.0010999999976775143,
+            "foreground_guard": 4.796900000001187
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 630.4264000000003,
+          "breakdown_ms": {
+            "queue_wait": 0.008099999999103602,
+            "companion_before": 3.8706999999994878,
+            "action": 625.8698000000004,
+            "companion_after": 0.4497000000010303,
+            "serialization": 0.079699999987497,
+            "worker_round_trip": 410.5702999999994,
+            "uia_tree_walk": 401.168,
+            "post_processing": 0.06899999999586726
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 7,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 481.946100000001,
+      "server_ms": 478.9264000000039,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 41.09310000000187,
+          "breakdown_ms": {
+            "queue_wait": 0.005600000000413274,
+            "companion_before": 2.551500000001397,
+            "action": 37.679299999999785,
+            "companion_after": 0.7478999999984808,
+            "serialization": 0.01959999999962747,
+            "worker_round_trip": 4.31499999999869,
+            "post_processing": 0.001299999999901047,
+            "foreground_guard": 4.338800000001356
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 437.83330000000205,
+          "breakdown_ms": {
+            "queue_wait": 0.004699999997683335,
+            "companion_before": 3.254000000000815,
+            "action": 433.83720000000176,
+            "companion_after": 0.653600000001461,
+            "serialization": 0.0352999999995518,
+            "worker_round_trip": 216.81210000000283,
+            "uia_tree_walk": 213.4675,
+            "post_processing": 0.023999999997613486
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 7,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1061.6275000000023,
+      "server_ms": 1060.3023999999969,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1060.3023999999969,
+          "breakdown_ms": {
+            "queue_wait": 0.004199999999400461,
+            "companion_before": 22.536199999998644,
+            "action": 1034.7765,
+            "companion_after": 2.525999999998021,
+            "serialization": 0.16180000000895234,
+            "worker_round_trip": 813.1536999999989,
+            "uia_tree_walk": 760.388,
+            "post_processing": 0.14949999999589636
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 8,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1174.1767,
+      "server_ms": 1173.0375000000022,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1173.0375000000022,
+          "breakdown_ms": {
+            "queue_wait": 0.004600000000209548,
+            "companion_before": 26.55619999999908,
+            "action": 1142.243899999994,
+            "companion_after": 3.659299999999348,
+            "serialization": 0.2428000000109023,
+            "worker_round_trip": 919.7530000000042,
+            "uia_tree_walk": 874.7895000000001,
+            "post_processing": 0.18660000000090804
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 8,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 732.8562999999995,
+      "server_ms": 730.3950999999943,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 50.71709999999439,
+          "breakdown_ms": {
+            "queue_wait": 0.003299999996670522,
+            "companion_before": 3.37149999999383,
+            "action": 46.3038000000015,
+            "companion_after": 0.9325000000026193,
+            "serialization": 0.021899999992456287,
+            "worker_round_trip": 5.938399999999092,
+            "post_processing": 0.0031999999991967343,
+            "foreground_guard": 5.977099999996426
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 679.6779999999999,
+          "breakdown_ms": {
+            "queue_wait": 0.006300000000919681,
+            "companion_before": 4.655899999997928,
+            "action": 674.1829999999973,
+            "companion_after": 0.7237999999997555,
+            "serialization": 0.12100000000646105,
+            "worker_round_trip": 445.88900000000285,
+            "uia_tree_walk": 435.3309,
+            "post_processing": 0.0834000000031665
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 9,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 714.1739999999991,
+      "server_ms": 712.0859999999957,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 34.22589999999764,
+          "breakdown_ms": {
+            "queue_wait": 0.002799999994749669,
+            "companion_before": 2.7141000000046915,
+            "action": 30.817399999999907,
+            "companion_after": 0.6239999999961583,
+            "serialization": 0.014999999999417923,
+            "worker_round_trip": 3.9368000000031316,
+            "post_processing": 0.0009000000063679181,
+            "foreground_guard": 3.958200000000943
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 677.860099999998,
+          "breakdown_ms": {
+            "queue_wait": 0.004099999998288695,
+            "companion_before": 3.267099999997299,
+            "action": 673.639900000002,
+            "companion_after": 0.8518000000040047,
+            "serialization": 0.22239999999874271,
+            "worker_round_trip": 456.7815000000046,
+            "uia_tree_walk": 437.0188,
+            "post_processing": 0.21149999999033753
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 9,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1109.445599999999,
+      "server_ms": 1108.4486000000034,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1108.4486000000034,
+          "breakdown_ms": {
+            "queue_wait": 0.0039000000033411197,
+            "companion_before": 20.262900000008813,
+            "action": 1085.3575000000055,
+            "companion_after": 2.427000000003318,
+            "serialization": 0.17699999999604188,
+            "worker_round_trip": 871.7131000000081,
+            "uia_tree_walk": 828.2701000000001,
+            "post_processing": 0.10740000000077998
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 10,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1227.0037999999986,
+      "server_ms": 1226.004700000005,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1226.004700000005,
+          "breakdown_ms": {
+            "queue_wait": 0.005199999999604188,
+            "companion_before": 25.788500000002387,
+            "action": 1197.0861000000004,
+            "companion_after": 2.7439999999915017,
+            "serialization": 0.19010000000707805,
+            "worker_round_trip": 971.0208000000057,
+            "uia_tree_walk": 921.4546000000001,
+            "post_processing": 0.12440000000060536
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 10,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 1054.314400000003,
+      "server_ms": 1051.3573999999935,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 49.91229999999632,
+          "breakdown_ms": {
+            "queue_wait": 0.21980000000621658,
+            "companion_before": 4.600500000000466,
+            "action": 43.708700000002864,
+            "companion_after": 1.2572000000000116,
+            "serialization": 0.02599999999802094,
+            "worker_round_trip": 6.715100000001257,
+            "post_processing": 0.002499999995052349,
+            "foreground_guard": 6.769799999994575
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 1001.4450999999972,
+          "breakdown_ms": {
+            "queue_wait": 0.0063999999983934686,
+            "companion_before": 5.404199999989942,
+            "action": 994.9873999999982,
+            "companion_after": 0.9562999999980093,
+            "serialization": 0.08989999999903375,
+            "worker_round_trip": 772.1395000000048,
+            "uia_tree_walk": 762.6413,
+            "post_processing": 0.06739999999990687
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 11,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 629.5138000000006,
+      "server_ms": 627.4323999999979,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 45.35529999999562,
+          "breakdown_ms": {
+            "queue_wait": 0.004000000000814907,
+            "companion_before": 3.980700000007346,
+            "action": 40.31319999999687,
+            "companion_after": 0.9602999999988242,
+            "serialization": 0.016999999999825377,
+            "worker_round_trip": 8.973500000000058,
+            "post_processing": 0.002400000004854519,
+            "foreground_guard": 9.010300000001735
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 582.0771000000022,
+          "breakdown_ms": {
+            "queue_wait": 0.004600000000209548,
+            "companion_before": 3.6612000000022817,
+            "action": 577.6821999999956,
+            "companion_after": 0.6169000000008964,
+            "serialization": 0.04869999999937136,
+            "worker_round_trip": 249.7375999999931,
+            "uia_tree_walk": 237.7032,
+            "post_processing": 0.023099999998521525
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 11,
+      "correct": false,
+      "error": "{\"ok\":false,\"completed\":0,\"total\":5,\"stopped_step\":0,\"action\":\"get_ui\",\"failed_step_started\":true,\"error\":\"System.Runtime.InteropServices.COMException (0x80040201)\\r\\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\\r\\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\\r\\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\\r\\n   at Syste\"}",
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 169.57329999999638,
+      "server_ms": 168.1123000000007,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 168.1123000000007,
+          "breakdown_ms": {
+            "queue_wait": 0.005899999996472616,
+            "companion_before": 5.042299999993702,
+            "action": 162.31180000000313,
+            "companion_after": 0.5276999999987311,
+            "serialization": 0.014999999999417923
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 12,
+      "correct": false,
+      "error": "{\"ok\":false,\"completed\":4,\"total\":5,\"stopped_step\":4,\"action\":\"wait_for\",\"failed_step_started\":true,\"error\":\"System.Runtime.InteropServices.COMException (0x80040201)\\r\\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\\r\\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\\r\\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\\r\\n   at Syste\",\"result_step\":3,\"result\":{\"ok\":true}}",
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 978.9434000000037,
+      "server_ms": 976.8195000000051,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 976.8195000000051,
+          "breakdown_ms": {
+            "queue_wait": 0.0026999999972758815,
+            "companion_before": 24.280199999993783,
+            "action": 949.376599999996,
+            "companion_after": 2.755199999999604,
+            "serialization": 0.13210000000253785,
+            "worker_round_trip": 724.4231000000073,
+            "uia_tree_walk": 681.3235,
+            "post_processing": 0.08780000000115251
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 12,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 811.4920000000056,
+      "server_ms": 807.1647999999986,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 47.15869999999995,
+          "breakdown_ms": {
+            "queue_wait": 0.0956000000005588,
+            "companion_before": 3.9596000000019558,
+            "action": 41.60250000000087,
+            "companion_after": 0.9997999999977765,
+            "serialization": 0.014400000000023283,
+            "worker_round_trip": 4.269899999999325,
+            "post_processing": 0.0022000000026309863,
+            "foreground_guard": 4.302199999998265
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 760.0060999999987,
+          "breakdown_ms": {
+            "queue_wait": 0.005299999997077975,
+            "companion_before": 4.045200000000477,
+            "action": 755.3820999999953,
+            "companion_after": 0.5041000000055647,
+            "serialization": 0.07920000000012806,
+            "worker_round_trip": 545.1504999999961,
+            "uia_tree_walk": 534.1627000000001,
+            "post_processing": 0.05980000000272412
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 13,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 781.8049000000028,
+      "server_ms": 779.7545000000027,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 48.73750000000291,
+          "breakdown_ms": {
+            "queue_wait": 0.002899999999499414,
+            "companion_before": 4.2916000000041095,
+            "action": 43.75310000000172,
+            "companion_after": 0.6235000000015134,
+            "serialization": 0.01579999999376014,
+            "worker_round_trip": 6.089899999999034,
+            "post_processing": 0.0014000000010128133,
+            "foreground_guard": 6.118200000004435
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 731.0169999999998,
+          "breakdown_ms": {
+            "queue_wait": 0.005199999999604188,
+            "companion_before": 3.560700000001816,
+            "action": 726.8807000000015,
+            "companion_after": 0.5059999999939464,
+            "serialization": 0.11209999999846332,
+            "worker_round_trip": 517.6538999999975,
+            "uia_tree_walk": 507.6382,
+            "post_processing": 0.09249999999883585
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 13,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1200.493300000002,
+      "server_ms": 1199.4847000000009,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1199.4847000000009,
+          "breakdown_ms": {
+            "queue_wait": 0.002899999999499414,
+            "companion_before": 28.79460000000836,
+            "action": 1167.4009000000005,
+            "companion_after": 2.853900000016438,
+            "serialization": 0.19909999997616978,
+            "worker_round_trip": 947.8327999999965,
+            "uia_tree_walk": 905.3224,
+            "post_processing": 0.1323000000047614
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 14,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1205.5806999999986,
+      "server_ms": 1204.2576999999947,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1204.2576999999947,
+          "breakdown_ms": {
+            "queue_wait": 0.002899999999499414,
+            "companion_before": 24.425000000010186,
+            "action": 1176.3597999999838,
+            "companion_after": 3.0785000000032596,
+            "serialization": 0.17880000000150176,
+            "worker_round_trip": 961.760500000004,
+            "uia_tree_walk": 917.2919,
+            "post_processing": 0.12590000000636792
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 14,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 535.6273999999976,
+      "server_ms": 533.3706999999995,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 40.93159999999625,
+          "breakdown_ms": {
+            "queue_wait": 0.005699999994249083,
+            "companion_before": 3.690499999996973,
+            "action": 36.50260000000708,
+            "companion_after": 0.6637999999948079,
+            "serialization": 0.016199999998207204,
+            "worker_round_trip": 4.129500000010012,
+            "post_processing": 0.0018000000127358362,
+            "foreground_guard": 4.152299999987008
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 492.43910000000324,
+          "breakdown_ms": {
+            "queue_wait": 0.004999999990104698,
+            "companion_before": 3.4189000000042142,
+            "action": 488.05019999999786,
+            "companion_after": 0.8602000000100816,
+            "serialization": 0.0784000000130618,
+            "worker_round_trip": 245.17939999999362,
+            "uia_tree_walk": 240.3571,
+            "post_processing": 0.08320000000821892
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 15,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 513.4124000000011,
+      "server_ms": 511.26160000001255,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 45.13840000001073,
+          "breakdown_ms": {
+            "queue_wait": 0.005000000004656613,
+            "companion_before": 3.526800000006915,
+            "action": 40.80419999999867,
+            "companion_after": 0.7210999999952037,
+            "serialization": 0.01630000000295695,
+            "worker_round_trip": 4.330900000000838,
+            "post_processing": 0.0011000000085914508,
+            "foreground_guard": 4.34320000000298
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 466.1232000000018,
+          "breakdown_ms": {
+            "queue_wait": 0.005299999989802018,
+            "companion_before": 4.689099999988684,
+            "action": 460.8433999999979,
+            "companion_after": 0.4910999999992782,
+            "serialization": 0.032700000010663643,
+            "worker_round_trip": 251.3347999999969,
+            "uia_tree_walk": 247.06910000000002,
+            "post_processing": 0.020300000003771856
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 15,
+      "correct": false,
+      "error": "{\"ok\":false,\"completed\":4,\"total\":5,\"stopped_step\":4,\"action\":\"wait_for\",\"failed_step_started\":true,\"error\":\"System.Runtime.InteropServices.COMException (0x80040201)\\r\\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\\r\\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\\r\\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\\r\\n   at Syste\",\"result_step\":3,\"result\":{\"ok\":true}}",
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1190.6054000000004,
+      "server_ms": 1189.462599999999,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1189.462599999999,
+          "breakdown_ms": {
+            "queue_wait": 0.003200000006472692,
+            "companion_before": 31.677399999985937,
+            "action": 1154.1959999999817,
+            "companion_after": 3.06349999998929,
+            "serialization": 0.15470000002824236,
+            "worker_round_trip": 938.2179999999935,
+            "uia_tree_walk": 891.2987,
+            "post_processing": 0.07830000000831205
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 16,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1195.925900000002,
+      "server_ms": 1195.0035999999964,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1195.0035999999964,
+          "breakdown_ms": {
+            "queue_wait": 0.003899999996065162,
+            "companion_before": 26.207599999994272,
+            "action": 1165.022100000002,
+            "companion_after": 3.318299999984447,
+            "serialization": 0.18360000004759058,
+            "worker_round_trip": 946.3036000000138,
+            "uia_tree_walk": 907.9285000000002,
+            "post_processing": 0.12040000001434237
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 16,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 777.5890999999974,
+      "server_ms": 775.3141999999934,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 45.543699999994715,
+          "breakdown_ms": {
+            "queue_wait": 0.003899999996065162,
+            "companion_before": 5.251700000007986,
+            "action": 39.24190000000817,
+            "companion_after": 0.979300000006333,
+            "serialization": 0.016899999987799674,
+            "worker_round_trip": 6.032699999996112,
+            "post_processing": 0.0010000000038417056,
+            "foreground_guard": 6.047100000010687
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 729.7704999999987,
+          "breakdown_ms": {
+            "queue_wait": 0.004199999995762482,
+            "companion_before": 4.23070000000007,
+            "action": 724.9883999999875,
+            "companion_after": 0.46830000000773,
+            "serialization": 0.12960000000020955,
+            "worker_round_trip": 502.87339999999676,
+            "uia_tree_walk": 493.8335,
+            "post_processing": 0.06739999999990687
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 17,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 602.6581000000006,
+      "server_ms": 599.6347999999853,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 45.01019999998971,
+          "breakdown_ms": {
+            "queue_wait": 0.0031999999919207767,
+            "companion_before": 5.65679999999702,
+            "action": 37.30569999999716,
+            "companion_after": 1.9485999999888008,
+            "serialization": 0.04320000000006985,
+            "worker_round_trip": 5.663300000000163,
+            "post_processing": 0.0011000000085914508,
+            "foreground_guard": 5.677999999999884
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 554.6245999999956,
+          "breakdown_ms": {
+            "queue_wait": 0.005399999994551763,
+            "companion_before": 5.324800000002142,
+            "action": 548.3419999999896,
+            "companion_after": 0.7039999999979045,
+            "serialization": 0.037399999986519106,
+            "worker_round_trip": 244.82719999999972,
+            "uia_tree_walk": 240.12570000000002,
+            "post_processing": 0.01980000000912696
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 17,
+      "correct": false,
+      "error": "{\"ok\":false,\"completed\":4,\"total\":5,\"stopped_step\":4,\"action\":\"wait_for\",\"failed_step_started\":true,\"error\":\"System.Runtime.InteropServices.COMException (0x80040201)\\r\\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\\r\\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\\r\\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\\r\\n   at Syste\",\"result_step\":3,\"result\":{\"ok\":true}}",
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1002.1637999999948,
+      "server_ms": 1001.2690999999904,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1001.2690999999904,
+          "breakdown_ms": {
+            "queue_wait": 0.0028999999922234565,
+            "companion_before": 28.65460000000894,
+            "action": 969.7385000000068,
+            "companion_after": 2.501399999979185,
+            "serialization": 0.14900000001944136,
+            "worker_round_trip": 729.3847999999998,
+            "uia_tree_walk": 689.9578,
+            "post_processing": 0.10910000000149012
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 18,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1202.5378000000055,
+      "server_ms": 1201.2305999999953,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1201.2305999999953,
+          "breakdown_ms": {
+            "queue_wait": 0.0026999999972758815,
+            "companion_before": 25.05360000001383,
+            "action": 1173.111899999989,
+            "companion_after": 2.7062000000150874,
+            "serialization": 0.17249999998603016,
+            "worker_round_trip": 964.6173999999737,
+            "uia_tree_walk": 921.6875,
+            "post_processing": 0.1245000000053551
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 18,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 885.5227000000014,
+      "server_ms": 883.2933000000048,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 49.54869999999937,
+          "breakdown_ms": {
+            "queue_wait": 0.0031999999919207767,
+            "companion_before": 4.97019999998156,
+            "action": 42.69090000000142,
+            "companion_after": 1.7828000000008615,
+            "serialization": 0.019899999984772876,
+            "worker_round_trip": 4.434300000008079,
+            "post_processing": 0.0010000000038417056,
+            "foreground_guard": 4.447099999990314
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 833.7446000000054,
+          "breakdown_ms": {
+            "queue_wait": 0.008200000011129305,
+            "companion_before": 4.115000000005239,
+            "action": 828.8963000000076,
+            "companion_after": 0.6288000000058673,
+            "serialization": 0.12149999999382999,
+            "worker_round_trip": 620.2970000000059,
+            "uia_tree_walk": 596.0862000000001,
+            "post_processing": 0.08870000000752043
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "shortcut",
+      "run": 19,
+      "correct": false,
+      "error": "System.Runtime.InteropServices.COMException (0x80040201)\r\n   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)\r\n   at MS.Internal.Automation.UiaCoreApi.IsErrorMarker(Object val, Boolean throwException)\r\n   at System.Windows.Automation.AutomationElement.GetCachedPropertyValue(AutomationProperty property, Boolean ignoreDefaultValue)\r\n   at System.Windows.Automation.AutomationElement.AutomationElementInformation.get_IsOffscreen()\r\n   at PokemonWindowsAutomation.UI(String windowId, String query, String roleFilter, Int32 limit, Int32 maxDepth)\r\n   at CallSite.Target(Closure , CallSite , Type , Object , Object , Object , Object , Object )",
+      "foreground_mismatch": false,
+      "mcp_calls": 2,
+      "client_ms": 506.9331999999995,
+      "server_ms": 505.1148000000103,
+      "timing": [
+        {
+          "tool": "computer",
+          "action": "key",
+          "total_ms": 40.84120000000985,
+          "breakdown_ms": {
+            "queue_wait": 0.0029999999969732016,
+            "companion_before": 3.4165999999968335,
+            "action": 36.77249999999185,
+            "companion_after": 0.5855999999912456,
+            "serialization": 0.01680000001215376,
+            "worker_round_trip": 4.885200000004261,
+            "post_processing": 0.0013999999937368557,
+            "foreground_guard": 4.896600000007311
+          }
+        },
+        {
+          "tool": "windows",
+          "action": "wait_for",
+          "total_ms": 464.27360000000044,
+          "breakdown_ms": {
+            "queue_wait": 0.0046999999904073775,
+            "companion_before": 5.558799999998882,
+            "action": 458.03330000001006,
+            "companion_after": 0.5864999999903375,
+            "serialization": 0.036999999996623956,
+            "worker_round_trip": 238.4942999999912,
+            "uia_tree_walk": 226.0676,
+            "post_processing": 0.020000000004074536
+          }
+        }
+      ]
+    },
+    {
+      "app": "chatgpt",
+      "path": "uia",
+      "run": 19,
+      "correct": true,
+      "foreground_mismatch": false,
+      "mcp_calls": 1,
+      "client_ms": 1139.3200999999972,
+      "server_ms": 1138.1924,
+      "timing": [
+        {
+          "tool": "windows",
+          "action": "batch",
+          "total_ms": 1138.1924,
+          "breakdown_ms": {
+            "queue_wait": 0.0029999999969732016,
+            "companion_before": 28.98699999997916,
+            "action": 1105.9049000000086,
+            "companion_after": 2.86620000001858,
+            "serialization": 0.18110000004526228,
+            "worker_round_trip": 891.480699999971,
+            "uia_tree_walk": 852.1379000000002,
+            "post_processing": 0.11199999999371357
+          }
+        }
+      ]
+    }
+  ]
+}

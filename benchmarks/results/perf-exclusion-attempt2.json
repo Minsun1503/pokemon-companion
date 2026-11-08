@@ -1,0 +1,56 @@
+{
+  "complete": false,
+  "failure": "Capture must show underlying content without a black hole: {\"label\":\"protected-0-normal-0\",\"elapsed_ms\":503.42999999999984,\"bytes\":162330,\"image_width\":1464,\"image_height\":823,\"sentinel_pixels\":0,\"center\":[255,255,255],\"visible_windows\":1}",
+  "affinity": [
+    {
+      "handle": "1573674",
+      "ok": true,
+      "affinity": 17
+    }
+  ],
+  "electron": "42.3.3",
+  "samples": [
+    {
+      "label": "unprotected-visible",
+      "elapsed_ms": 534.5093999999999,
+      "bytes": 163196,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 1451,
+      "center": [
+        18,
+        228,
+        167
+      ],
+      "visible_windows": 1
+    },
+    {
+      "label": "hide-show-fallback",
+      "elapsed_ms": 438.8454999999999,
+      "bytes": 156004,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "visible_windows": 1
+    },
+    {
+      "label": "protected-0-normal-0",
+      "elapsed_ms": 503.42999999999984,
+      "bytes": 162330,
+      "image_width": 1464,
+      "image_height": 823,
+      "sentinel_pixels": 0,
+      "center": [
+        255,
+        255,
+        255
+      ],
+      "visible_windows": 1
+    }
+  ]
+}
