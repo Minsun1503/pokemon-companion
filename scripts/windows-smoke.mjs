@@ -10,7 +10,7 @@ let fixture;
 let fixtureUrl;
 try {
   const electron = resolve(root, 'frontend/node_modules/electron/dist/electron.exe');
-  const env = {...process.env, POKEMON_INPUT_FIXTURE_PASSWORD: '1', POKEMON_INPUT_FIXTURE_SINGLELINE: '1'};
+  const env = {...process.env, POKEMON_INPUT_FIXTURE_PASSWORD: '1', POKEMON_INPUT_FIXTURE_SINGLELINE: '1', POKEMON_INPUT_FIXTURE_WRAPPERS: '1'};
   delete env.ELECTRON_RUN_AS_NODE;
   fixture = spawn(electron, [resolve(root, 'scripts/input-fixture/index.cjs'), '--force-renderer-accessibility'], {env, windowsHide: true, stdio: ['ignore', 'pipe', 'inherit']});
   await new Promise((ready, reject) => {
@@ -56,14 +56,14 @@ try {
   assert.equal(editors.nodes.length, 1);
   assert(editors.nodes[0].actions.includes('set_value'));
   const text = 'Xin chào, mình là Pikachu! www.youtube.com';
-  await api({action: 'set_value', snapshot: editors.snapshot, element_id: editors.nodes[0].id, text});
+  await api({action: 'set_value', ref: `@s${editors.snapshot}:e${editors.nodes[0].id}`, text});
   let filled = await api({action: 'get_ui', window_id, query: 'Test note'});
   if (filled.nodes[0]?.value !== text) filled = await api({action: 'get_ui', window_id, query: 'Test note'});
   assert.equal(filled.nodes[0].value, text);
   assert.equal(filled.nodes[0].value_clipped, undefined);
   const buttons = await api({action: 'get_ui', window_id, query: 'Verify input', control_type: 'Button'});
   assert.equal(buttons.nodes.length, 1);
-  await api({action: 'invoke', snapshot: buttons.snapshot, element_id: buttons.nodes[0].id});
+  await api({action: 'invoke', ref: `@s${buttons.snapshot}:e${buttons.nodes[0].id}`});
   const fixtureState = await (await fetch(fixtureUrl)).json();
   assert.equal(fixtureState.text, text);
   assert.equal(fixtureState.clicks, 1);

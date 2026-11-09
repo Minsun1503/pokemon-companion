@@ -31,7 +31,8 @@ public static class PokemonWindowsAutomation {
     class Visit {
         public AutomationElement Element;
         public int Depth;
-        public Visit(AutomationElement element, int depth) { Element = element; Depth = depth; }
+        public bool IsRoot;
+        public Visit(AutomationElement element, int depth, bool isRoot = false) { Element = element; Depth = depth; IsRoot = isRoot; }
     }
     static Dictionary<string, Snapshot> snapshots = new Dictionary<string, Snapshot>();
     static Dictionary<string, object> Obj(params object[] values) {
@@ -124,7 +125,7 @@ public static class PokemonWindowsAutomation {
         }) cache.Add(pattern);
         var nodes = new List<object>();
         var pending = new Stack<Visit>();
-        pending.Push(new Visit(root.GetUpdatedCache(cache), 0));
+        pending.Push(new Visit(root.GetUpdatedCache(cache), 0, true));
         int scanned = 0, matched = 0;
         bool depthLimited = false;
         while (pending.Count > 0 && scanned < 2500 && watch.ElapsedMilliseconds < 8000) {
@@ -133,7 +134,7 @@ public static class PokemonWindowsAutomation {
             try {
                 var element = visit.Element;
                 // Queue one sibling at a time instead of fetching hundreds before inspecting any.
-                if (visit.Depth > 0) {
+                if (!visit.IsRoot) {
                     var sibling = TreeWalker.ControlViewWalker.GetNextSibling(element, cache);
                     if (sibling != null) pending.Push(new Visit(sibling, visit.Depth));
                 }
@@ -172,7 +173,7 @@ public static class PokemonWindowsAutomation {
                     String.IsNullOrEmpty(automationId) &&
                     actions.Count == 0;
                 int nextDepth = isWebWrapper ? visit.Depth : visit.Depth + 1;
-                if (nextDepth < maxDepth) {
+                if (nextDepth <= maxDepth) {
                     var child = TreeWalker.ControlViewWalker.GetFirstChild(element, cache);
                     if (child != null) pending.Push(new Visit(child, nextDepth));
                 } else depthLimited = true;

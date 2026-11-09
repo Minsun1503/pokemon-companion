@@ -3,7 +3,7 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {performance} from 'node:perf_hooks';
 import {recordTiming, serialize} from '../utils/timing.js';
-import {runCrossPlatformRequest} from './cross-platform.js';
+import {CrossPlatformAutomation} from './cross-platform.js';
 
 export type WindowsRequest = {
 	action: string;
@@ -22,9 +22,10 @@ export type WindowsRequest = {
 	timeout_ms?: number | undefined;
 };
 
-type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};
+export type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};
 
 export class WindowsAutomation {
+	private readonly desktop = new CrossPlatformAutomation();
 	private worker: ChildProcessWithoutNullStreams | undefined;
 	private sequence = 0;
 	private buffer = '';
@@ -37,7 +38,9 @@ export class WindowsAutomation {
 	}
 
 	async requireForeground(windowId: string, options: RequestOptions): Promise<void> {
-		if (process.platform === 'win32') {
+		if (process.platform !== 'win32') {
+			throw new Error('Foreground-guarded physical input is supported only on Windows.');
+		} else {
 			const foreground = await this.request({action: 'foreground'}, options);
 			if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
 				throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
@@ -46,9 +49,8 @@ export class WindowsAutomation {
 	}
 
 	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
-		// Credit: Cross-platform routing inspired by Vercel Labs agent-desktop
 		if (process.platform !== 'win32') {
-			const crossResult = await runCrossPlatformRequest(args);
+			const crossResult = await this.desktop.request(args, options);
 			return this.postProcess(crossResult, args);
 		}
 
@@ -95,6 +97,20 @@ export class WindowsAutomation {
 		return this.postProcess(result, args);
 	}
 
+	close(error = new Error('Windows UI Automation worker closed.')): void {
+		this.desktop.close();
+		const {worker} = this;
+		this.worker = undefined;
+		this.buffer = '';
+		worker?.kill();
+		for (const item of this.pending.values()) {
+			item.cleanup();
+			item.reject(error);
+		}
+
+		this.pending.clear();
+	}
+
 	private postProcess(result: Record<string, unknown>, args: WindowsRequest): Record<string, unknown> {
 		const postProcessing = performance.now();
 		const maxChars = args.max_chars ?? 6000;
@@ -127,19 +143,6 @@ export class WindowsAutomation {
 
 		recordTiming('post_processing', performance.now() - postProcessing);
 		return result;
-	}
-
-	close(error = new Error('Windows UI Automation worker closed.')): void {
-		const {worker} = this;
-		this.worker = undefined;
-		this.buffer = '';
-		worker?.kill();
-		for (const item of this.pending.values()) {
-			item.cleanup();
-			item.reject(error);
-		}
-
-		this.pending.clear();
 	}
 
 	private start(): void {

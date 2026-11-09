@@ -134,7 +134,7 @@ describe('Pokémon desktop execution', () => {
 				throw new Error('Cosmetic failure');
 			}
 
-			return failure === 'hang' ? new Promise(() => {/* Deliberately stalled cosmetic bridge. */}) : Promise.reject(new Error('Cosmetic failure'));
+			return failure === 'hang' ? new Promise<void>(() => {/* Deliberately stalled cosmetic bridge. */}) : Promise.reject(new Error('Cosmetic failure'));
 		});
 		if (failure === 'throw') {
 			companion.animate = () => {

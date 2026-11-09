@@ -1,366 +1,394 @@
-/**
- * Cross-platform desktop automation adapter for macOS and Linux.
- * 
- * Credit: Architecture and ref conventions adapted from Vercel Labs agent-desktop
- * (https://github.com/vercel-labs/agent-desktop).
- */
-
+/** Optional macOS/Linux bridge to https://github.com/vercel-labs/agent-desktop (contract 2.6). */
 import * as childProcess from 'node:child_process';
-import {promisify} from 'node:util';
-import type {WindowsRequest} from './automation.js';
+import {randomBytes} from 'node:crypto';
+import {z} from 'zod';
+import type {RequestOptions, WindowsRequest} from './automation.js';
 
-async function execFileAsync(cmd: string, args: string[]): Promise<{stdout: string; stderr: string}> {
-	const fn = childProcess.execFile ? promisify(childProcess.execFile) : null;
-	if (!fn) {
-		throw new Error(`execFile is unavailable in current environment.`);
-	}
-	return fn(cmd, args) as Promise<{stdout: string; stderr: string}>;
-}
+type Execution = {stdout: string; exitCode: number | null};
+export type DesktopExecutor = (args: string[], signal: AbortSignal, input?: string) => Promise<Execution>;
 
-let agentDesktopCached: boolean | undefined;
-
-/**
- * Check if the `agent-desktop` CLI (from Vercel Labs) is installed and available in PATH.
- */
-export function isAgentDesktopAvailable(): boolean {
-	if (agentDesktopCached !== undefined) {
-		return agentDesktopCached;
-	}
-
-	try {
-		if (typeof childProcess.spawnSync !== 'function') {
-			agentDesktopCached = false;
-			return false;
+// No shell, headed input, automatic installation, action retries or fallback on failure.
+export const executeDesktop: DesktopExecutor = async (args, signal, input) => new Promise((resolve, reject) => {
+	const child = childProcess.spawn('agent-desktop', args, {stdio: 'pipe', windowsHide: true, signal});
+	let stdout = '';
+	let stderr = '';
+	child.stdout.setEncoding('utf8');
+	child.stdout.on('data', (chunk: string) => {
+		stdout += chunk;
+		if (stdout.length > 2_000_000) {
+			child.kill();
+			reject(new Error('agent-desktop response exceeded the buffer limit; delivery may be uncertain. Do not replay input.'));
 		}
-		const checkCmd = process.platform === 'win32' ? 'where' : 'which';
-		const result = childProcess.spawnSync(checkCmd, ['agent-desktop'], {encoding: 'utf8', timeout: 2000});
-		agentDesktopCached = result.status === 0;
-	} catch {
-		agentDesktopCached = false;
-	}
-
-	return agentDesktopCached;
-}
-
-/**
- * Flatten an agent-desktop accessibility tree into pokemon-companion nodes format.
- */
-function flattenAgentDesktopTree(
-	node: Record<string, any>,
-	snapshotId: string,
-	nodes: Record<string, unknown>[] = [],
-): Record<string, unknown>[] {
-	if (!node || typeof node !== 'object') {
-		return nodes;
-	}
-
-	if (node.ref_id || node.name) {
-		const id = nodes.length + 1;
-		const rawActions: string[] = Array.isArray(node.available_actions) ? node.available_actions : [];
-		const actions = rawActions.map((action) => {
-			const lower = action.toLowerCase();
-			return lower === 'click' ? 'invoke' : lower;
-		});
-
-		nodes.push({
-			id,
-			role: node.role || 'Unknown',
-			name: String(node.name || '').slice(0, 160),
-			actions,
-			ref: node.ref_id || `@s${snapshotId}:e${id}`,
-			...(node.value !== undefined ? {value: String(node.value).slice(0, 160)} : {}),
-		});
-	}
-
-	if (Array.isArray(node.children)) {
-		for (const child of node.children) {
-			flattenAgentDesktopTree(child, snapshotId, nodes);
+	});
+	child.stderr.on('data', (chunk: Buffer) => {
+		stderr = (stderr + chunk.toString()).slice(-2000);
+	});
+	child.once('error', (error: NodeJS.ErrnoException) => {
+		reject(error.code === 'ENOENT' ? new Error('macOS/Linux automation requires agent-desktop on PATH, with JSON contract 2.6.') : error);
+	});
+	child.stdin.on('error', reject);
+	child.once('close', (exitCode) => {
+		if (!stdout.trim()) {
+			reject(new Error(`agent-desktop returned no JSON (exit ${String(exitCode)}): ${stderr}. Delivery may be uncertain; do not replay input.`));
+		} else {
+			resolve({stdout, exitCode});
 		}
-	}
+	});
+	child.stdin.end(input);
+});
 
-	return nodes;
+const windowSchema = z.object({
+	id: z.string().min(1), title: z.string().optional(), app_name: z.string().optional(), is_focused: z.boolean().optional(),
+}).loose();
+const dispositionSchema = z.object({
+	delivery: z.enum(['delivered_verified', 'delivered_unverified', 'not_delivered', 'delivery_uncertain']),
+	retry: z.enum(['safe', 'unsafe']),
+}).loose();
+const envelopeSchema = z.object({
+	version: z.literal('2.6'), ok: z.boolean(), command: z.string(), data: z.unknown().optional(),
+	error: z.object({code: z.string(), message: z.string(), disposition: dispositionSchema.optional()}).loose().optional(),
+});
+
+export class DesktopCommandError extends Error {
+	constructor(readonly details: NonNullable<z.infer<typeof envelopeSchema>['error']>) {
+		super(`agent-desktop ${details.code}: ${details.message}${details.disposition ? ` (${JSON.stringify(details.disposition)})` : ''}`);
+	}
 }
 
-/**
- * Run macOS desktop automation through agent-desktop CLI or native osascript fallback.
- */
-async function runDarwinRequest(args: WindowsRequest): Promise<Record<string, unknown>> {
-	// Mode A: agent-desktop CLI from Vercel Labs if installed
-	if (isAgentDesktopAvailable()) {
-		try {
-			if (args.action === 'get_windows') {
-				const {stdout} = await execFileAsync('agent-desktop', ['list-windows']);
-				const parsed = JSON.parse(stdout);
-				const windows = Array.isArray(parsed) ? parsed : parsed.data?.windows || [];
-				return {windows};
+type TreeNode = {
+	role: string; name?: string | undefined; value?: string | undefined; ref_id?: string | undefined;
+	native_id?: {kind: string; value: string} | undefined; states?: string[] | undefined;
+	available_actions?: string[] | undefined; children?: TreeNode[] | undefined; subtree_truncated?: boolean | undefined;
+};
+const treeSchema: z.ZodType<TreeNode> = z.lazy(() => z.object({
+	role: z.string(), name: z.string().optional(), value: z.string().optional(), ref_id: z.string().optional(),
+	native_id: z.object({kind: z.string(), value: z.string()}).optional(), states: z.array(z.string()).optional(),
+	available_actions: z.array(z.string()).optional(), children: z.array(treeSchema).optional(), subtree_truncated: z.boolean().optional(),
+}).loose());
+const snapshotSchema = z.object({
+	window: windowSchema, snapshot_id: z.string().regex(/^s[a-z0-9]+$/), complete: z.boolean(), tree: treeSchema,
+	truncated: z.boolean().optional(), identity_unproven: z.boolean().optional(), nodes_observed: z.number().optional(),
+});
+const commands: Readonly<Record<string, string>> = {
+	invoke: 'click', set_value: 'set-value', focus: 'focus', toggle: 'toggle', expand: 'expand', collapse: 'collapse', scroll: 'scroll', read_text: 'get',
+};
+const capabilities: Readonly<Record<string, string>> = {
+	Click: 'invoke', SetValue: 'set_value', SetFocus: 'focus', Toggle: 'toggle', Expand: 'expand', Collapse: 'collapse', Scroll: 'scroll',
+};
+const roles: Readonly<Record<string, string>> = {
+	button: 'Button', text: 'Text', textbox: 'Edit', textfield: 'Edit', text_field: 'Edit', entry: 'Edit',
+	window: 'Window', group: 'Group', pane: 'Pane', tab: 'TabItem', checkbox: 'CheckBox', combobox: 'ComboBox', document: 'Document',
+};
+type Target = {ref: string; actions: string[]};
+type Snapshot = {created: number; windowId: string; elements: Map<number, Target>};
+
+export class CrossPlatformAutomation {
+	private readonly snapshots = new Map<string, Snapshot>();
+	private readonly pending = new Set<() => void>();
+	constructor(
+		private readonly execute: DesktopExecutor = executeDesktop,
+		private readonly platform: string = process.platform,
+		private readonly now: () => number = Date.now,
+	) {}
+
+	close(): void {
+		for (const stop of this.pending) {
+			stop();
+		}
+
+		this.snapshots.clear();
+	}
+
+	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
+		if (!['darwin', 'linux'].includes(this.platform)) {
+			throw new Error(`Unsupported desktop platform: ${this.platform}.`);
+		}
+
+		const controller = new AbortController();
+		const timeoutMs = Math.max(1, Math.min(options?.timeoutMs ?? 20_000, 20_000));
+		const deadline = this.now() + timeoutMs;
+		let interruption: Error | undefined;
+		const stop = (message: string) => {
+			interruption ??= new Error(`${message} Delivery may be uncertain if started; do not replay input. Call get_ui again.`);
+			controller.abort();
+		};
+
+		const cancel = () => {
+			stop('Computer action cancelled.');
+		};
+
+		const closed = () => {
+			stop('Desktop automation closed.');
+		};
+
+		this.pending.add(closed);
+
+		const check = () => {
+			if (options?.signal?.aborted) {
+				cancel();
 			}
 
-			if (args.action === 'get_ui') {
-				const cliArgs = ['snapshot'];
-				if (args.window_id) {
-					cliArgs.push('--window-id', args.window_id);
-				}
-				if (args.query) {
-					cliArgs.push('--app', args.query);
-				}
+			if (options?.paused()) {
+				stop('Computer control is paused by the user.');
+			}
 
-				const {stdout} = await execFileAsync('agent-desktop', cliArgs);
-				const parsed = JSON.parse(stdout);
-				const snapshotId = parsed.data?.snapshot_id || 's' + Date.now().toString(16);
-				const nodes = flattenAgentDesktopTree(parsed.data?.tree, snapshotId);
-				return {
-					window: {id: args.window_id || '1', title: args.query || 'Desktop App'},
-					snapshot: snapshotId,
-					nodes,
-					matched: nodes.length,
-					truncated: false,
-					scanned: nodes.length,
+			if (this.now() >= deadline) {
+				stop(options?.timeoutError ?? 'Desktop automation timed out.');
+			}
+
+			if (interruption) {
+				throw interruption;
+			}
+		};
+
+		const timer = setTimeout(() => {
+			stop(options?.timeoutError ?? 'Desktop automation timed out.');
+		}, timeoutMs);
+		const pauseTimer = options ? setInterval(checkPause, 50) : undefined;
+		function checkPause() {
+			if (options?.paused()) {
+				stop('Computer control is paused by the user.');
+			}
+		}
+
+		options?.signal?.addEventListener('abort', cancel, {once: true});
+		const call = async (command: string, parameters: string[], input?: string) => {
+			check();
+			const timeoutFlag = command === 'launch' ? '--timeout' : '--timeout-ms';
+			const timeoutArgs = ['get', 'focus-window'].includes(command) ? [] : [timeoutFlag, String(Math.max(1, Math.floor(deadline - this.now())))];
+			let onAbort: () => void = () => undefined;
+			const interrupted = new Promise<never>((_resolve, reject) => {
+				onAbort = () => {
+					reject(interruption ?? new Error('Desktop automation interrupted.'));
 				};
-			}
 
-			if (args.action === 'invoke' && args.ref) {
-				await execFileAsync('agent-desktop', ['click', args.ref]);
-				return {ok: true};
-			}
-
-			if (args.action === 'set_value' && args.ref) {
-				await execFileAsync('agent-desktop', ['set-value', args.ref, args.text ?? '']);
-				return {ok: true};
-			}
-
-			if (args.action === 'activate' && args.window_id) {
-				await execFileAsync('agent-desktop', ['window-focus', args.window_id]);
-				return {ok: true};
-			}
-		} catch (error) {
-			// Fall through to native osascript on failure
-		}
-	}
-
-	// Mode B: Native macOS JXA / AppleScript fallback (zero external dependencies)
-	if (args.action === 'get_windows') {
-		const script = `
-			const se = Application("System Events");
-			const procs = se.processes.whose({backgroundOnly: false})();
-			const windows = [];
-			for (let i = 0; i < procs.length; i++) {
-				const p = procs[i];
-				try {
-					const wins = p.windows();
-					for (let j = 0; j < wins.length; j++) {
-						const title = wins[j].name() || p.name();
-						windows.push({
-							id: String(p.id()),
-							title: title.slice(0, 200),
-							process: p.name(),
-							active: p.frontmost()
-						});
-					}
-				} catch (e) {}
-			}
-			JSON.stringify(windows);
-		`;
-		try {
-			const {stdout} = await execFileAsync('osascript', ['-l', 'JavaScript', '-e', script]);
-			const rawWindows = JSON.parse(stdout.trim());
-			let windows = rawWindows;
-			if (args.query) {
-				const q = args.query.toLowerCase();
-				windows = rawWindows.filter((w: any) =>
-					(w.title && w.title.toLowerCase().includes(q)) ||
-					(w.process && w.process.toLowerCase().includes(q)),
-				);
-			}
-			return {windows};
-		} catch {
-			return {windows: []};
-		}
-	}
-
-	if (args.action === 'activate') {
-		if (!args.window_id) {
-			throw new Error('activate requires window_id.');
-		}
-		const script = `tell application "System Events" to set frontmost of (first process whose id is ${args.window_id}) to true`;
-		try {
-			await execFileAsync('osascript', ['-e', script]);
-			return {ok: true};
-		} catch (error) {
-			throw new Error(`macOS activate failed for process id ${args.window_id}: ${String(error)}`);
-		}
-	}
-
-	if (args.action === 'launch') {
-		if (!args.text) {
-			throw new Error('launch requires target URL or application name.');
-		}
-		await execFileAsync('open', [args.text]);
-		return {started: args.text};
-	}
-
-	if (args.action === 'get_ui') {
-		const windowId = args.window_id ?? '0';
-		const script = `
-			const se = Application("System Events");
-			let proc;
-			try { proc = se.processes.byId(${windowId}); } catch(e) {}
-			if (!proc) {
-				const procs = se.processes.whose({backgroundOnly: false})();
-				proc = procs.length > 0 ? procs[0] : null;
-			}
-			const nodes = [];
-			if (proc) {
-				try {
-					const wins = proc.windows();
-					if (wins.length > 0) {
-						const items = wins[0].entireContents();
-						const limit = Math.min(items.length, 60);
-						for (let i = 0; i < limit; i++) {
-							const el = items[i];
-							try {
-								const name = el.name() || el.description() || "";
-								const role = el.role() || "UIElement";
-								nodes.push({
-									id: i + 1,
-									role: role,
-									name: name.slice(0, 160),
-									actions: ["invoke"]
-								});
-							} catch(err) {}
-						}
-					}
-				} catch(err) {}
-			}
-			JSON.stringify(nodes);
-		`;
-		try {
-			const {stdout} = await execFileAsync('osascript', ['-l', 'JavaScript', '-e', script]);
-			const nodes = JSON.parse(stdout.trim());
-			const snapshotId = 's' + Date.now().toString(16).slice(-8);
-			for (const node of nodes) {
-				node.ref = `@${snapshotId}:e${node.id}`;
-			}
-			return {
-				window: {id: windowId, title: 'macOS Application'},
-				snapshot: snapshotId,
-				nodes,
-				matched: nodes.length,
-				truncated: false,
-				scanned: nodes.length,
-			};
-		} catch {
-			return {window: {id: windowId}, snapshot: 's' + Date.now().toString(16), nodes: [], matched: 0, truncated: false, scanned: 0};
-		}
-	}
-
-	return {ok: true};
-}
-
-/**
- * Run Linux desktop automation through agent-desktop CLI or wmctrl / xdotool fallback.
- */
-async function runLinuxRequest(args: WindowsRequest): Promise<Record<string, unknown>> {
-	// Mode A: agent-desktop CLI from Vercel Labs if installed
-	if (isAgentDesktopAvailable()) {
-		try {
-			if (args.action === 'get_windows') {
-				const {stdout} = await execFileAsync('agent-desktop', ['list-windows']);
-				const parsed = JSON.parse(stdout);
-				const windows = Array.isArray(parsed) ? parsed : parsed.data?.windows || [];
-				return {windows};
-			}
-
-			if (args.action === 'get_ui') {
-				const cliArgs = ['snapshot'];
-				if (args.window_id) cliArgs.push('--window-id', args.window_id);
-				if (args.query) cliArgs.push('--app', args.query);
-				const {stdout} = await execFileAsync('agent-desktop', cliArgs);
-				const parsed = JSON.parse(stdout);
-				const snapshotId = parsed.data?.snapshot_id || 's' + Date.now().toString(16);
-				const nodes = flattenAgentDesktopTree(parsed.data?.tree, snapshotId);
-				return {
-					window: {id: args.window_id || '1', title: args.query || 'Desktop App'},
-					snapshot: snapshotId,
-					nodes,
-					matched: nodes.length,
-					truncated: false,
-					scanned: nodes.length,
-				};
-			}
-
-			if (args.action === 'invoke' && args.ref) {
-				await execFileAsync('agent-desktop', ['click', args.ref]);
-				return {ok: true};
-			}
-
-			if (args.action === 'set_value' && args.ref) {
-				await execFileAsync('agent-desktop', ['set-value', args.ref, args.text ?? '']);
-				return {ok: true};
-			}
-
-			if (args.action === 'activate' && args.window_id) {
-				await execFileAsync('agent-desktop', ['window-focus', args.window_id]);
-				return {ok: true};
-			}
-		} catch (error) {
-			// Fall through to native fallback
-		}
-	}
-
-	// Mode B: Native Linux utilities (wmctrl, xdotool, xdg-open)
-	if (args.action === 'get_windows') {
-		try {
-			const {stdout} = await execFileAsync('wmctrl', ['-l', '-p']);
-			const lines = stdout.split('\n').filter(Boolean);
-			let windows = lines.map((line) => {
-				const parts = line.trim().split(/\s+/);
-				const id = parts[0] || '';
-				const pid = parts[2] || '';
-				const title = parts.slice(4).join(' ');
-				return {id, pid, title, process: pid, active: false};
+				controller.signal.addEventListener('abort', onAbort, {once: true});
 			});
-			if (args.query) {
-				const q = args.query.toLowerCase();
-				windows = windows.filter((w) => w.title.toLowerCase().includes(q) || w.process.includes(q));
+			let execution: Execution;
+			try {
+				execution = await Promise.race([this.execute([command, ...parameters, ...timeoutArgs], controller.signal, input), interrupted]);
+			} finally {
+				controller.signal.removeEventListener('abort', onAbort);
 			}
-			return {windows};
-		} catch {
-			return {windows: []};
-		}
-	}
 
-	if (args.action === 'activate') {
-		if (!args.window_id) {
-			throw new Error('activate requires window_id.');
-		}
+			check();
+			const envelope = envelopeSchema.parse(JSON.parse(execution.stdout) as unknown);
+			if (envelope.command !== command) {
+				throw new Error('agent-desktop returned a mismatched command.');
+			}
+
+			if (!envelope.ok) {
+				if (!envelope.error || envelope.data !== undefined) {
+					throw new Error('agent-desktop returned an invalid error envelope.');
+				}
+
+				throw new DesktopCommandError(envelope.error);
+			}
+
+			if (execution.exitCode !== 0 || envelope.error || envelope.data === undefined) {
+				throw new Error('agent-desktop returned an invalid success envelope; do not replay input.');
+			}
+
+			return envelope.data;
+		};
+
 		try {
-			await execFileAsync('wmctrl', ['-i', '-a', args.window_id]);
-		} catch {
-			await execFileAsync('xdotool', ['windowactivate', args.window_id]);
+			check();
+			if (args.action === 'get_windows') {
+				const windows = windowSchema.array().parse(await call('list-windows', [])).map((window) => ({
+					...window, title: window.title ?? '', process: window.app_name ?? '', active: window.is_focused ?? false,
+				})).filter((window) => !args.query || `${window.title} ${window.process}`.toLowerCase().includes(args.query.toLowerCase()));
+				return {windows};
+			}
+
+			if (args.action === 'get_ui') {
+				if (!args.window_id) {
+					throw new Error('get_ui requires window_id.');
+				}
+
+				const data = snapshotSchema.parse(await call('snapshot', ['--window-id', args.window_id, '--max-depth', String(args.max_depth ?? 24)]));
+				if (data.window.id !== args.window_id) {
+					throw new Error('agent-desktop snapshot belongs to another window.');
+				}
+
+				return this.capture(data, args);
+			}
+
+			if (args.action === 'activate') {
+				if (!args.window_id) {
+					throw new Error('activate requires window_id.');
+				}
+
+				const data = z.object({focused: windowSchema}).loose().parse(await call('focus-window', ['--window-id', args.window_id]));
+				if (data.focused.id !== args.window_id) {
+					throw new Error('agent-desktop focused another window.');
+				}
+
+				return {ok: true, ...data};
+			}
+
+			if (args.action === 'launch') {
+				if (!args.text || args.text.startsWith('-') || /^https?:/i.test(args.text) || /[\\/:]/.test(args.text)) {
+					throw new Error('macOS/Linux launch supports an application name only; URLs and paths are not supported by this bridge.');
+				}
+
+				const data = z.object({
+					app: z.string(), pid: z.number(), process_instance: z.string().nullable(), window: windowSchema.optional(),
+				}).loose().parse(await call('launch', [args.text]));
+				return {...data, started: args.text, query: data.app};
+			}
+
+			const command = commands[args.action];
+			if (!command) {
+				throw new Error(`macOS/Linux automation does not support ${args.action}.`);
+			}
+
+			const target = this.target(args);
+			if (!target.actions.includes(args.action)) {
+				throw new Error(`Observed control does not support ${args.action}. Call get_ui again.`);
+			}
+
+			const parameters = [target.ref];
+			if (args.action === 'set_value') {
+				if (args.text === undefined) {
+					throw new Error('set_value requires text.');
+				}
+
+				parameters.push('--stdin');
+			} else if (args.action === 'scroll') {
+				if (!['up', 'down', 'left', 'right'].includes(args.direction ?? '')) {
+					throw new Error('scroll requires direction.');
+				}
+
+				parameters.push('--direction', args.direction!);
+			} else if (args.action === 'read_text') {
+				parameters.push('--property', 'text');
+			}
+
+			const raw = await call(command, parameters, args.action === 'set_value' ? args.text : undefined);
+			if (args.action === 'read_text') {
+				const data = z.object({property: z.literal('text'), ref: z.literal(target.ref), value: z.string()}).parse(raw);
+				return {text: data.value, source: 'agent-desktop get (may use saved snapshot text)'};
+			}
+
+			const data = z.object({action: z.literal(command), disposition: dispositionSchema}).loose().parse(raw);
+			if (data.disposition.delivery === 'delivery_uncertain') {
+				throw new Error('agent-desktop returned uncertain delivery as success; do not replay input.');
+			}
+
+			const report: Record<string, unknown> = {ok: true, ...data};
+			for (const key of Object.keys(data).filter((key) => !['action', 'disposition'].includes(key))) {
+				if (JSON.stringify(report).length <= (args.max_chars ?? 6000)) {
+					break;
+				}
+
+				Reflect.deleteProperty(report, key);
+				report.truncated = true;
+				report.details_omitted = true;
+			}
+
+			return report;
+		} catch (error) {
+			if (interruption) {
+				this.close();
+				throw interruption;
+			}
+
+			throw error;
+		} finally {
+			this.pending.delete(closed);
+			clearTimeout(timer);
+			clearInterval(pauseTimer);
+			options?.signal?.removeEventListener('abort', cancel);
 		}
-		return {ok: true};
 	}
 
-	if (args.action === 'launch') {
-		if (!args.text) {
-			throw new Error('launch requires target URL or application.');
+	private expire(): void {
+		for (const [id, snapshot] of this.snapshots) {
+			if (this.now() - snapshot.created >= 120_000) {
+				this.snapshots.delete(id);
+			}
 		}
-		await execFileAsync('xdg-open', [args.text]);
-		return {started: args.text};
 	}
 
-	return {ok: true, nodes: [], snapshot: 's' + Date.now().toString(16), matched: 0, truncated: false, scanned: 0};
-}
+	private target(args: WindowsRequest): Target {
+		this.expire();
+		const snapshot = args.snapshot ? this.snapshots.get(args.snapshot) : undefined;
+		if (!snapshot || (args.window_id !== undefined && args.window_id !== snapshot.windowId)) {
+			throw new Error('Snapshot expired, missing or belongs to another window. Call get_ui again.');
+		}
 
-/**
- * Route request to the appropriate platform handler.
- */
-export async function runCrossPlatformRequest(args: WindowsRequest): Promise<Record<string, unknown>> {
-	if (process.platform === 'darwin') {
-		return runDarwinRequest(args);
+		const target = args.element_id ? snapshot.elements.get(args.element_id) : undefined;
+		if (!target) {
+			throw new Error('Element is absent from this snapshot. Call get_ui again.');
+		}
+
+		return target;
 	}
-	if (process.platform === 'linux') {
-		return runLinuxRequest(args);
+
+	private capture(data: z.infer<typeof snapshotSchema>, args: WindowsRequest): Record<string, unknown> {
+		this.expire();
+		if (this.snapshots.size >= 8) {
+			this.snapshots.delete(this.snapshots.keys().next().value!);
+		}
+
+		const id = randomBytes(16).toString('hex');
+		const snapshot: Snapshot = {created: this.now(), windowId: data.window.id, elements: new Map()};
+		const nodes: Record<string, unknown>[] = [];
+		const pending = [data.tree];
+		let scanned = 0;
+		let partial = !data.complete || Boolean(data.truncated);
+		while (pending.length && scanned < 2500) {
+			const node = pending.pop()!;
+			scanned += 1;
+			partial ||= Boolean(node.subtree_truncated);
+			const states = node.states ?? [];
+			if (states.some((state) => ['password', 'protected', 'secure', 'sensitive', 'hidden', 'offscreen'].includes(state.toLowerCase()))) {
+				continue;
+			}
+
+			if (node.children) {
+				pending.push(...node.children.toReversed());
+			}
+
+			const role = roles[node.role.toLowerCase()] ?? node.role;
+			const name = node.name ?? '';
+			const automationId = node.native_id?.value ?? '';
+			if (args.query && !`${name} ${automationId}`.toLowerCase().includes(args.query.toLowerCase())) {
+				continue;
+			}
+
+			if (args.control_type && role.toLowerCase() !== args.control_type.toLowerCase()) {
+				continue;
+			}
+
+			const elementId = nodes.length + 1;
+			const enabled = !states.some((state) => ['disabled', 'unavailable'].includes(state.toLowerCase()));
+			const actions = enabled && node.ref_id ? (node.available_actions ?? []).flatMap((action) => capabilities[action] ? [capabilities[action]] : []) : [];
+			if (enabled && node.ref_id) {
+				actions.push('read_text');
+			}
+
+			if (node.ref_id) {
+				if (!new RegExp(`^@${data.snapshot_id}:e[1-9][0-9]*$`).test(node.ref_id)) {
+					throw new Error('agent-desktop returned a ref from another snapshot.');
+				}
+
+				snapshot.elements.set(elementId, {ref: node.ref_id, actions});
+			}
+
+			nodes.push({
+				id: elementId, role, name: name.slice(0, 160), actions, enabled, states,
+				...(node.ref_id ? {ref: `@s${id}:e${elementId}`} : {}),
+				...(automationId ? {automation_id: automationId.slice(0, 100)} : {}),
+				...(node.value !== undefined ? {value: node.value.slice(0, 160), value_clipped: node.value.length > 160} : {}),
+			});
+		}
+
+		this.snapshots.set(id, snapshot);
+		return {
+			window: data.window, snapshot: id, nodes, matched: nodes.length, scanned, complete: data.complete,
+			truncated: partial || pending.length > 0, identity_unproven: data.identity_unproven ?? false,
+		};
 	}
-	throw new Error(`Unsupported desktop platform: ${process.platform}. Cross-platform automation supports Windows, macOS (darwin), and Linux.`);
 }

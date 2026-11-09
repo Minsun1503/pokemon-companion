@@ -65,6 +65,8 @@ $blocked.Save()
     fixturePid = Number(await readFile(executable.replace(/\.exe$/, '.pid'), 'utf8'));
     assert.equal(await readFile(executable.replace(/\.exe$/, '.args'), 'utf8'), '0', 'Shortcut arguments must not be used.');
     const window_id = launched.windows[0].id;
+    const boundary = await api({action: 'get_ui', window_id, query: 'Reveal control', control_type: 'Button', max_depth: 1});
+    assert.equal(boundary.nodes.length, 1, 'Direct native children at the max_depth boundary must remain visible.');
     const value = await api({action: 'wait_for', window_id, query: 'Wait value', control_type: 'Edit', expect_value: 'old'});
     assert.equal(value.nodes[0].value, 'old');
     if (target === executable) {

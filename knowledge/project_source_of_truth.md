@@ -1,33 +1,27 @@
-# Project Source of Truth: pokemon-companion vs agent-desktop (Vercel)
+# Desktop automation support
 
-## 1. Những gì đã làm (What was done)
-- **Nghiên cứu & Đối chiếu Kiến trúc**:
-  - Khảo sát toàn diện repo của user: [pokemon-companion](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion) (Desktop pet Electron + MCP Computer-Use Server).
-  - Khảo sát sâu repo của Vercel Labs: [agent-desktop](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/agent-desktop) (Rust CLI/C-lib accessibility-tree computer use engine).
-  - Phân tích chi tiết các ưu điểm vượt trội của `agent-desktop` về: Native performance, Web Wrapper Flattening, Durable Window Identity, Ref system (`@s...:e...`), Skeleton Tree / Drill-down, Action Disposition Tri-state, và Security.
-- **Học hỏi và Áp dụng vào `pokemon-companion`**:
-  1. **Web Wrapper Flattening (Tối ưu duyệt cây Electron/Chromium)**:
-     - File: [uia-worker.cs](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/windows/uia-worker.cs)
-     - Logic: Thêm `GetClassName` từ `user32.dll` để phát hiện cửa sổ Chromium (`Chrome_WidgetWin_1`). Khi duyệt cây qua các container rỗng (`Group`, `Custom`, `Pane` không name, không automationId, không actions), không tăng logical depth (`nextDepth = isWebWrapper ? visit.Depth : visit.Depth + 1`). Tránh chạm cạn kiệt ngân sách `maxDepth: 24` trên các app Electron/Chromium sâu như Slack, VS Code, Chrome.
-     - Credit: *Adapted from Vercel Labs agent-desktop (https://github.com/vercel-labs/agent-desktop)*.
-  2. **Hỗ trợ Unified Ref System (`@s<snapshot>:e<element_id>`)**:
-     - Files: [batch.ts](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/windows/batch.ts), [automation.ts](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/windows/automation.ts), [windows.ts](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/tools/windows.ts).
-     - Logic: Thêm trường `ref` vào schema Zod của `windows` tool và batch step. Parser tự động phân tích cú pháp `@s<snapshot>:e<element_id>` thành `snapshot` và `element_id` cho worker native xử lý, giúp LLM gửi lệnh ngắn gọn, tự nhiên và ít lỗi cú pháp hơn.
-     - Credit: *Adapted from Vercel Labs agent-desktop*.
-  3. **Hỗ trợ Đa Nền Tảng (Cross-Platform Desktop Automation: Windows, macOS, Linux)**:
-     - Files: [cross-platform.ts](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/windows/cross-platform.ts), [automation.ts](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/windows/automation.ts), [windows.ts](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/backend/src/tools/windows.ts).
-     - Logic: Gỡ bỏ giới hạn `process.platform !== 'win32'`. Tích hợp adapter đa nền tảng: C# UIA worker trên Windows, tự động ủy quyền `agent-desktop` CLI hoặc fallback `osascript` JXA trên macOS và `wmctrl`/`xdotool` trên Linux.
-     - Credit: *Architecture and multi-platform bridge inspired by Vercel Labs agent-desktop*.
-  4. **Kiểm thử & Benchmark Thực Tế**:
-     - Toàn bộ 127 unit/integration tests trong 10 test files đều PASS 100%.
-     - Chạy thành công benchmark thực tế: [windows-batch-2026-11-09.md](file:///c:/Users/84845.DESKTOP-6UDUU1B/Downloads/gitclone/pokemon-companion/benchmarks/results/windows-batch-2026-11-09.md).
-     - Kết quả đo lường: Batch giảm **83.3%** số lượt gọi MCP (1 vs 6 calls), giảm **64.7%** ký tự kết quả trả về cho LLM (400 vs 1133 chars), và giảm **67.5%** dung lượng UTF-8 byte (506 vs 1557 bytes).
+The `windows` MCP tool retains its name for compatibility. Windows uses the native C# UI Automation worker. macOS and Linux use an optional bridge to [Vercel Labs agent-desktop](https://github.com/vercel-labs/agent-desktop), installed separately on PATH. This bridge accepts JSON contract **2.6** only; an absent CLI, malformed response, incompatible version or upstream failure is an error. There are no AppleScript, wmctrl or xdotool fallbacks and no automatic installation or input retries.
 
-## 2. Những "đặc sản" logic vừa tìm thấy (Logic Quirks & Findings)
-- **Interactive Windows Desktop Session Requirement**: Benchmark chạy Electron fixture với `--force-renderer-accessibility` và kiểm tra UIA thực tế yêu cầu môi trường desktop tương tác (`BypassSandbox: true`).
-- **Lazy ChildProcess Import in Vitest**: Khi test unit mock `node:child_process`, việc import top-level `{execFile}` sẽ gây lỗi nếu mock không trả về `execFile`. Cần dùng lazy access `childProcess.execFile ? promisify(childProcess.execFile) : null`.
-- **Web Wrapper Depth Trap**: Các ứng dụng Chromium/Electron tạo ra hàng chục tầng container ẩn danh không mang ngữ nghĩa. Gating kiểm tra `Chrome_WidgetWin` là cần thiết để không làm phẳng sai các container native thông thường.
+## Targets and observations
 
-## 3. Những việc còn dang dở / Tiềm năng nâng cấp tiếp theo (Pending Work & Roadmap)
-- [ ] **Chế độ Skeleton Tree & Subtree Drill-down**: Thêm flag `skeleton: true` và `root_ref` vào `get_ui` để LLM quét khung sườn tổng quan trước khi đi sâu vào từng panel.
-- [ ] **Action Disposition & Verification**: Chuẩn hóa envelope kết quả trả về của tool `windows` để trả về `disposition: { retry: 'safe' | 'unsafe' }`.
+`get_windows` returns native window IDs. Windows IDs are decimal handles; other platforms return opaque strings. Pass the returned ID unchanged to `get_ui` or `activate`. A control `query` matches its name or native automation ID locally, and `control_type` matches its role. `query` on `get_windows` also matches the process/application name.
+
+Local snapshots use 32 lowercase hex characters on every platform. Control actions accept `snapshot` + `element_id` or `@s<snapshot>:e<element_id>`. If both forms are supplied, they must agree. macOS/Linux snapshots map each local element to its exact original agent-desktop ref; they never construct upstream refs from local IDs. The cache is per automation instance, expires after 120 seconds and retains at most eight snapshots. Upstream 2.6 also checks native target identity before delivery.
+
+Partial trees, exhausted scan budgets and clipped values remain explicit. `truncated` prevents batch target selection from treating an incomplete result as a unique match. `value_clipped` prevents `wait_for` from treating an abbreviated field value as an exact match. Disabled controls expose no supported actions, and protected/hidden/offscreen subtrees are excluded.
+
+Windows Chromium/Electron traversal skips logical depth increments for anonymous, non-actionable Group/Custom/Pane wrappers only. Root tracking is independent of logical depth, so siblings of flattened wrappers remain visible. Non-wrapper controls at `max_depth` remain included. The existing 2,500-node and eight-second limits still bound traversal.
+
+## Actions and limits
+
+On macOS/Linux, supported actions are mapped from observed native capabilities: invoke/click, set_value, focus, toggle, expand, collapse and scroll. `select` is deliberately unsupported because upstream selection requires an option value and has different semantics from Windows tab/item selection. Native platform policies may reject any supported action, including focus or scroll; those errors are preserved, without enabling headed input or trying another delivery method.
+
+`set_value` sends UTF-8 through stdin and preserves empty strings and newlines. `read_text` uses `agent-desktop get --property text`, which can use saved snapshot text; it is not a guarantee of live field verification. Successful native actions preserve their delivery/retry disposition and observed post-state. Success alone is not proof of application effects; observe again. Cancellation, pause and timeout stop waiting, invalidate bridge refs and report possible delivery uncertainty.
+
+`activate` uses `focus-window --window-id`. macOS/Linux `launch` supports an application name only; this bridge rejects URLs and paths. It accepts upstream process launch without an initial window, then the shared helper polls for a matching window. Windows keeps executable, Start Menu and URL launch behavior. Foreground-guarded physical keyboard input remains Windows-only.
+
+## Validation
+
+`backend/src/windows/cross-platform.test.ts` exercises documented 2.6 response fixtures for macOS and Linux, exact target mapping, errors, capability checks, clipping and interruption. These are contract tests run on Windows, not live tests on macOS/Linux. Live native-host validation is still needed before claiming those hosts are fully verified.
+
+Windows smoke scripts exercise native UI Automation against owned test windows. The benchmark files in `benchmarks/results/windows-batch-2026-11-09.*` describe the original submitted benchmark run; their numbers are historical and do not establish bridge correctness or performance on other hosts.
