@@ -190,7 +190,7 @@ describe.each([
 			expect(result.tools.map((t) => t.name)).toEqual([
 				'computer',
 				'pokemon',
-				...(process.platform === 'win32' ? ['windows', 'course'] : []),
+				...(process.platform === 'win32' ? ['windows', 'course', 'excel'] : []),
 			]);
 			expect(result.tools[0]).toMatchObject({
 				name: 'computer',
