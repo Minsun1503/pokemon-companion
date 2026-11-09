@@ -131,6 +131,20 @@ describe('Windows batch execution', () => {
 		expect(request).toHaveBeenCalledTimes(5);
 	});
 
+	it('rejects clipped field values even when their prefix equals the expectation', async () => {
+		const {runtime, request} = fixture();
+		const clipped = {...control, nodes: [{...control.nodes[0], value: 'Hello', value_clipped: true}]};
+		request.mockReset().mockResolvedValue(clipped);
+		const result = await runWindowsBatch(runtime, steps([
+			{
+				action: 'get_ui', window_id: '123', query: 'Note', expect_value: 'Hello',
+			},
+			{action: 'invoke', target_step: 0},
+		]), 2000);
+		expect(parse(result)).toMatchObject({ok: false, completed: 0, stopped_step: 0});
+		expect(request).toHaveBeenCalledTimes(2);
+	});
+
 	it.each(['pause', 'cancel'])('honors %s before rechecking a stale value', async (reason) => {
 		const {runtime, companion, request} = fixture();
 		const controller = new AbortController();
@@ -225,6 +239,16 @@ describe('Windows batch execution', () => {
 		expect(JSON.stringify(parse(failure)).length).toBeLessThanOrEqual(1000);
 		expect(failure.content.find((item) => item.type === 'text')!.text.length).toBeLessThanOrEqual(1000);
 		expect(parse(failure).truncated).toBe(true);
+	});
+
+	it('supports element ref format @s<snapshot>:e<element_id> (Credit: Vercel agent-desktop)', async () => {
+		const {runtime, request} = fixture();
+		request.mockReset().mockResolvedValueOnce({ok: true});
+		const result = await runWindowsBatch(runtime, steps([{action: 'invoke', ref: `@s${snapshot}:e1`}]), 2000);
+		expect(result.isError).not.toBe(true);
+		expect(request).toHaveBeenCalledWith(expect.objectContaining({
+			action: 'invoke', snapshot, element_id: 1,
+		}), expect.objectContaining({timeoutMs: 20_000, paused: expect.any(Function)}));
 	});
 
 	it.runIf(process.platform === 'win32')('exposes batches through MCP while preserving atomic calls and validating size', async () => {

@@ -13,6 +13,7 @@ public static class PokemonWindowsAutomation {
     [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr window);
     [DllImport("user32.dll")] static extern bool IsWindow(IntPtr window);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr window, StringBuilder text, int count);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetClassName(IntPtr window, StringBuilder className, int count);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
     [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] static extern IntPtr GetAncestor(IntPtr window, uint flags);
@@ -31,7 +32,8 @@ public static class PokemonWindowsAutomation {
     class Visit {
         public AutomationElement Element;
         public int Depth;
-        public Visit(AutomationElement element, int depth) { Element = element; Depth = depth; }
+        public bool IsRoot;
+        public Visit(AutomationElement element, int depth, bool isRoot = false) { Element = element; Depth = depth; IsRoot = isRoot; }
     }
     static Dictionary<string, Snapshot> snapshots = new Dictionary<string, Snapshot>();
     static Dictionary<string, object> Obj(params object[] values) {
@@ -95,6 +97,9 @@ public static class PokemonWindowsAutomation {
         var handle = Handle(windowId);
         var root = AutomationElement.FromHandle(handle);
         if (root == null) throw new Exception("UI Automation is unavailable for this window. Use keyboard shortcuts or a screenshot fallback.");
+        var classNameBuilder = new StringBuilder(256);
+        GetClassName(handle, classNameBuilder, classNameBuilder.Capacity);
+        bool isChromium = classNameBuilder.ToString().IndexOf("Chrome_WidgetWin", StringComparison.OrdinalIgnoreCase) >= 0;
         var expired = new List<string>();
         foreach (var entry in snapshots) if ((DateTime.UtcNow - entry.Value.Created).TotalSeconds > 120) expired.Add(entry.Key);
         foreach (var key in expired) snapshots.Remove(key);
@@ -121,7 +126,7 @@ public static class PokemonWindowsAutomation {
         }) cache.Add(pattern);
         var nodes = new List<object>();
         var pending = new Stack<Visit>();
-        pending.Push(new Visit(root.GetUpdatedCache(cache), 0));
+        pending.Push(new Visit(root.GetUpdatedCache(cache), 0, true));
         int scanned = 0, matched = 0;
         bool depthLimited = false;
         while (pending.Count > 0 && scanned < 2500 && watch.ElapsedMilliseconds < 8000) {
@@ -130,16 +135,16 @@ public static class PokemonWindowsAutomation {
             try {
                 var element = visit.Element;
                 // Queue one sibling at a time instead of fetching hundreds before inspecting any.
-                if (visit.Depth > 0) {
+                if (!visit.IsRoot) {
                     var sibling = TreeWalker.ControlViewWalker.GetNextSibling(element, cache);
                     if (sibling != null) pending.Push(new Visit(sibling, visit.Depth));
                 }
                 var info = element.Cached;
                 if (info.IsOffscreen || info.IsPassword) continue;
                 string role = info.ControlType.ProgrammaticName.Replace("ControlType.", ""), name = info.Name ?? "", automationId = info.AutomationId ?? "";
+                var actions = Actions(element);
                 bool matches = String.IsNullOrEmpty(query) || (name + " " + automationId).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
                 if (matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
-                    var actions = Actions(element);
                     bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
                     if (useful) {
                         matched++;
@@ -160,9 +165,18 @@ public static class PokemonWindowsAutomation {
                         nodes.Add(node);
                     }
                 }
-                if (visit.Depth < maxDepth) {
+                // Credit: Adapted from Vercel Labs agent-desktop (https://github.com/vercel-labs/agent-desktop)
+                // A transparent web wrapper in Chromium/Electron (Group, Custom, Pane with no name, no automationId, no actions)
+                // consumes raw depth but skips logical depth to avoid hitting maxDepth prematurely.
+                bool isWebWrapper = isChromium &&
+                    (role == "Pane" || role == "Group" || role == "Custom") &&
+                    String.IsNullOrEmpty(name) &&
+                    String.IsNullOrEmpty(automationId) &&
+                    actions.Count == 0;
+                int nextDepth = isWebWrapper ? visit.Depth : visit.Depth + 1;
+                if (nextDepth <= maxDepth) {
                     var child = TreeWalker.ControlViewWalker.GetFirstChild(element, cache);
-                    if (child != null) pending.Push(new Visit(child, visit.Depth + 1));
+                    if (child != null) pending.Push(new Visit(child, nextDepth));
                 } else depthLimited = true;
             } catch (ElementNotAvailableException) { } catch (InvalidOperationException) { }
         }

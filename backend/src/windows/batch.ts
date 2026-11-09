@@ -7,14 +7,15 @@ import {setTimeout as delay} from 'node:timers/promises';
 
 export const windowsActions = ['get_windows', 'get_ui', 'activate', 'invoke', 'set_value', 'select', 'toggle', 'expand', 'collapse', 'scroll', 'focus', 'read_text', 'wait_for', 'launch'] as const;
 export const windowsFields = {
-	window_id: z.string().regex(/^\d+$/).optional(),
+	window_id: z.string().min(1).max(500).refine((id) => !/\s/.test(id) && [...id].every((character) => character.charCodeAt(0) >= 32)).optional().describe('Opaque native window ID from get_windows; decimal on Windows.'),
 	query: z.string().max(200).optional().describe('Case-insensitive name/automation-id filter; get_windows also matches process names.'),
 	control_type: z.string().max(50).optional().describe('Optional role, e.g. Button, Edit, TabItem, Text.'),
 	max_elements: z.number().int().min(1).max(250).default(60),
 	max_depth: z.number().int().min(1).max(30).default(24),
 	max_chars: z.number().int().min(1000).max(16000).default(6000),
 	snapshot: z.string().regex(/^[a-f0-9]{32}$/).optional(),
-	element_id: z.number().int().positive().optional(),
+	element_id: z.number().int().positive().max(Number.MAX_SAFE_INTEGER).optional(),
+	ref: z.string().max(60).regex(/^@?s[a-f0-9]{32}:e?[1-9]\d*$/).optional().describe('Local element ref @s<32-hex snapshot>:e<element_id>; native agent-desktop refs are mapped internally.'),
 	text: z.string().max(8000).optional(),
 	direction: z.enum(['up', 'down', 'left', 'right']).optional(),
 	expect_value: z.string().max(160).optional().describe('For wait_for (or batch get_ui): require a control with this exact value.'),
@@ -42,6 +43,14 @@ function compactResult(data: Record<string, unknown>): CallToolResult {
 }
 
 export function validateWindowsRequest(args: WindowsRequest): void {
+	if (process.platform === 'win32' && args.window_id !== undefined && !/^\d+$/.test(args.window_id)) {
+		throw new Error('Windows window_id must be decimal, from get_windows.');
+	}
+
+	if (['darwin', 'linux'].includes(process.platform) && (args.action === 'select' || (args.action === 'launch' && ((args.text ?? '').startsWith('-') || /[\\/:]/.test(args.text ?? ''))))) {
+		throw new Error('macOS/Linux bridge does not support select or URL/path launch.');
+	}
+
 	if (args.action === 'wait_for' && !args.query && !args.control_type) {
 		throw new Error('wait_for requires query or control_type.');
 	}
@@ -72,8 +81,20 @@ export function validateWindowsRequest(args: WindowsRequest): void {
 		throw new Error(`${args.action} requires window_id from get_windows.`);
 	}
 
+	if (args.ref !== undefined) {
+		const match = /^@?s([a-f0-9]{32}):e?([1-9]\d*)$/.exec(args.ref);
+		const elementId = Number(match?.[2]);
+		if (!match || !Number.isSafeInteger(elementId) || (args.snapshot !== undefined && args.snapshot !== match[1]) || (args.element_id !== undefined && args.element_id !== elementId)) {
+			throw new Error('ref is invalid or conflicts with snapshot/element_id.');
+		}
+
+		args.snapshot = match[1];
+		args.element_id = elementId;
+		delete args.ref;
+	}
+
 	if (!discoveryActions.includes(args.action) && (!args.snapshot || !args.element_id)) {
-		throw new Error(`${args.action} requires snapshot and element_id from get_ui.`);
+		throw new Error(`${args.action} requires snapshot and element_id from get_ui (or ref: "@s<snapshot>:e<element_id>").`);
 	}
 
 	if (args.action === 'set_value' && args.text === undefined) {
@@ -94,7 +115,7 @@ function validateSteps(steps: WindowsStep[]): void {
 		}
 
 		if (step.target_step !== undefined) {
-			if (discoveryActions.includes(step.action) || step.snapshot !== undefined || step.element_id !== undefined || step.target_step >= index || !controlSources.includes(steps[step.target_step]!.action)) {
+			if (discoveryActions.includes(step.action) || step.snapshot !== undefined || step.element_id !== undefined || step.ref !== undefined || step.target_step >= index || !controlSources.includes(steps[step.target_step]!.action)) {
 				throw new Error(`Step ${index}: target_step must reference an earlier get_ui and replace snapshot/element_id on a control action.`);
 			}
 		}
@@ -157,6 +178,7 @@ function resolveStep(step: WindowsStep, results: Record<string, unknown>[]): Win
 		request.element_id = node.id;
 	}
 
+	validateWindowsRequest(request);
 	return request;
 }
 
@@ -205,17 +227,22 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 					started = true;
 					let result = await runWindowsRequest(runtime, request, signal);
 					results.push(result);
-					if (step.action === 'get_ui' && step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
+					const matchesExpectation = () => {
+						const node = single(result, 'nodes', index);
+						return !node.value_clipped && node.value === step.expect_value;
+					};
+
+					if (step.action === 'get_ui' && step.expect_value !== undefined && !matchesExpectation()) {
 						if (signal?.aborted || runtime.companion.state.paused) {
 							throw new Error('Computer action cancelled or paused before execution.');
 						}
 
 						// UIA may still expose the previous view; re-read once, never replay the input.
-						result = await runtime.windows.request(request);
+						result = await runWindowsRequest(runtime, request, signal);
 						results[index] = result;
 					}
 
-					if (step.action === 'get_ui' && step.expect_value !== undefined && single(result, 'nodes', index).value !== step.expect_value) {
+					if (step.action === 'get_ui' && step.expect_value !== undefined && !matchesExpectation()) {
 						throw new BatchReferenceError('Control value did not match expect_value; no subsequent steps were run.', result, index);
 					}
 
@@ -243,7 +270,9 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 /** Poll read-only discovery; launch happens once and input is never replayed. */
 export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRequest, signal?: AbortSignal): Promise<Record<string, unknown>> {
 	if (!['wait_for', 'launch'].includes(args.action)) {
-		return runtime.windows.request(args);
+		return runtime.windows.request(args, {
+			signal, timeoutMs: 20_000, paused: () => runtime.companion.state.paused, timeoutError: 'Desktop automation timed out. Call get_ui again; do not replay input.',
+		});
 	}
 
 	const deadline = performance.now() + (args.timeout_ms ?? 5000);

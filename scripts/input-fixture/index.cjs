@@ -15,6 +15,20 @@ app.whenReady().then(async () => {
   if (process.env.POKEMON_INPUT_FIXTURE_SINGLELINE === '1') {
     await win.webContents.executeJavaScript('const blank = document.createElement("input"); blank.setAttribute("aria-label", "Blank field"); blank.style.top = "260px"; document.body.appendChild(blank);');
   }
+  if (process.env.POKEMON_INPUT_FIXTURE_WRAPPERS === '1') {
+    // Deep anonymous ARIA groups exercise Chromium wrapper flattening and sibling traversal.
+    await win.webContents.executeJavaScript(`
+      let container = document.body;
+      for (let depth = 0; depth < 35; depth++) {
+        const group = document.createElement('div');
+        group.setAttribute('role', 'group');
+        container.appendChild(group);
+        container = group;
+      }
+      container.appendChild(document.getElementById('note'));
+      container.appendChild(document.getElementById('verify'));
+    `);
+  }
   if (process.env.POKEMON_INPUT_FIXTURE_TITLE) win.setTitle(process.env.POKEMON_INPUT_FIXTURE_TITLE);
   if (process.env.POKEMON_INPUT_FIXTURE_KEYCOUNT === '1') {
     await win.webContents.executeJavaScript('window.__fixtureKeys = {down: 0, up: 0, logical: 0, events: []}; document.getElementById("note").addEventListener("input", () => { window.__fixtureKeys.logical += 1; }); for (const phase of ["down", "up"]) document.addEventListener("key" + phase, event => { window.__fixtureKeys.events.push([phase, event.key, event.code]); window.__fixtureKeys[phase] += 1; if (event.key === "F8") { event.preventDefault(); if (phase === "down") window.__fixtureKeys.logical += 1; } });');

@@ -3,6 +3,7 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {performance} from 'node:perf_hooks';
 import {recordTiming, serialize} from '../utils/timing.js';
+import {CrossPlatformAutomation} from './cross-platform.js';
 
 export type WindowsRequest = {
 	action: string;
@@ -14,6 +15,7 @@ export type WindowsRequest = {
 	max_chars?: number;
 	snapshot?: string | undefined;
 	element_id?: number | undefined;
+	ref?: string | undefined;
 	text?: string | undefined;
 	direction?: string | undefined;
 	expect_value?: string | undefined;
@@ -38,9 +40,10 @@ export type WindowsRequest = {
 	expected_path?: string;
 };
 
-type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};
+export type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};
 
 export class WindowsAutomation {
+	private readonly desktop = new CrossPlatformAutomation();
 	private worker: ChildProcessWithoutNullStreams | undefined;
 	private sequence = 0;
 	private buffer = '';
@@ -53,15 +56,20 @@ export class WindowsAutomation {
 	}
 
 	async requireForeground(windowId: string, options: RequestOptions): Promise<void> {
-		const foreground = await this.request({action: 'foreground'}, options);
-		if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
-			throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
+		if (process.platform !== 'win32') {
+			throw new Error('Foreground-guarded physical input is supported only on Windows.');
+		} else {
+			const foreground = await this.request({action: 'foreground'}, options);
+			if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
+				throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
+			}
 		}
 	}
 
 	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
 		if (process.platform !== 'win32') {
-			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');
+			const crossResult = await this.desktop.request(args, options);
+			return this.postProcess(crossResult, args);
 		}
 
 		const roundTrip = performance.now();
@@ -104,6 +112,24 @@ export class WindowsAutomation {
 			delete result.uia_tree_walk_ms;
 		}
 
+		return this.postProcess(result, args);
+	}
+
+	close(error = new Error('Windows UI Automation worker closed.')): void {
+		this.desktop.close();
+		const {worker} = this;
+		this.worker = undefined;
+		this.buffer = '';
+		worker?.kill();
+		for (const item of this.pending.values()) {
+			item.cleanup();
+			item.reject(error);
+		}
+
+		this.pending.clear();
+	}
+
+	private postProcess(result: Record<string, unknown>, args: WindowsRequest): Record<string, unknown> {
 		const postProcessing = performance.now();
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;
@@ -135,19 +161,6 @@ export class WindowsAutomation {
 
 		recordTiming('post_processing', performance.now() - postProcessing);
 		return result;
-	}
-
-	close(error = new Error('Windows UI Automation worker closed.')): void {
-		const {worker} = this;
-		this.worker = undefined;
-		this.buffer = '';
-		worker?.kill();
-		for (const item of this.pending.values()) {
-			item.cleanup();
-			item.reject(error);
-		}
-
-		this.pending.clear();
 	}
 
 	private start(): void {

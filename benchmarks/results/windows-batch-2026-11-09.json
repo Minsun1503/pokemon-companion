@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "measured_at": "2026-11-09T07:47:19.484Z",
+  "runs_per_mode": 5,
+  "environment": {
+    "platform": "win32",
+    "os_release": "10.0.26200",
+    "arch": "x64",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "logical_cpus": 8,
+    "node": "v22.12.0",
+    "electron": "42.3.3",
+    "overlay": "enabled",
+    "transport": "stdio"
+  },
+  "workflow": {
+    "native_steps": 6,
+    "field_and_button_verified_each_run": true,
+    "inference_measured": false,
+    "warmup_runs_per_mode": 1,
+    "alternating_pair_order": true,
+    "chars_are_utf16_code_units": true
+  },
+  "built_backend_sha256": {
+    "backend/dist/tools/windows.js": "94526df2cf4bcde188715a34a3bee634d4985b38e3991dfa0d40c7cf8a3a96c9",
+    "backend/dist/windows/batch.js": "19aec82e0497ad5c68c8ecd9142fd8538f0522f8a59a9468b7466091bae4782c",
+    "backend/dist/windows/automation.js": "7b384bb3b96d939e301f6cc5a0e638f8f5279a83a1c934830ca9e3812fbe7b00",
+    "backend/dist/windows/uia-worker.cs": "63ddac20e9928390345483e5ee6c425912ee6c8540ea85fdce3c5cb5f5b74df4",
+    "backend/dist/windows/uia-worker.ps1": "f14eb344a99f83036a55861437bf3572a081ec41c4de726636ae0b718cc58e79",
+    "backend/dist/pokemon/runtime.js": "266fddb65cf65395856620035f813f0e8e79b8c06af3d3f1c37544ef59d864d9"
+  },
+  "startup": [
+    {
+      "session": "fresh-atomic",
+      "mcp_connect_ms": 2591.3106,
+      "companion_start_ms": 3400.7026
+    },
+    {
+      "session": "fresh-batch",
+      "mcp_connect_ms": 1006.9174000000003,
+      "companion_start_ms": 368.6898999999994
+    },
+    {
+      "session": "warm",
+      "mcp_connect_ms": 1107.3270999999986,
+      "companion_start_ms": 393.75320000000283
+    }
+  ],
+  "summary": {
+    "atomic": {
+      "runs": 5,
+      "elapsed_ms": {
+        "min": 4158.1774000000005,
+        "median": 4181.9653000000035,
+        "p95": 4231.528999999999,
+        "max": 4231.528999999999,
+        "mean": 4190.804680000002
+      },
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1541,
+      "response_json_bytes": 1557,
+      "response_text_chars": 1133,
+      "screenshot_images": 0
+    },
+    "batch": {
+      "runs": 5,
+      "elapsed_ms": {
+        "min": 4182.644800000002,
+        "median": 4197.534299999999,
+        "p95": 4236.654699999999,
+        "max": 4236.654699999999,
+        "mean": 4200.985919999999
+      },
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0
+    }
+  },
+  "reductions": {
+    "mcp_calls_pct": 83.33333333333333,
+    "response_text_chars_pct": 64.6954986760812,
+    "warm_median_execution_pct": -0.372289076621364
+  },
+  "samples": [
+    {
+      "mode": "atomic",
+      "phase": "fresh_worker",
+      "pair": 0,
+      "elapsed_ms": 4661.4342,
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1469,
+      "response_json_bytes": 1477,
+      "response_text_chars": 1061,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "batch",
+      "phase": "fresh_worker",
+      "pair": 0,
+      "elapsed_ms": 4561.903899999999,
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "atomic",
+      "phase": "warm",
+      "pair": 1,
+      "elapsed_ms": 4231.528999999999,
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1541,
+      "response_json_bytes": 1557,
+      "response_text_chars": 1133,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "batch",
+      "phase": "warm",
+      "pair": 1,
+      "elapsed_ms": 4236.654699999999,
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "batch",
+      "phase": "warm",
+      "pair": 2,
+      "elapsed_ms": 4202.041599999997,
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "atomic",
+      "phase": "warm",
+      "pair": 2,
+      "elapsed_ms": 4181.9653000000035,
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1541,
+      "response_json_bytes": 1557,
+      "response_text_chars": 1133,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "atomic",
+      "phase": "warm",
+      "pair": 3,
+      "elapsed_ms": 4212.753400000001,
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1541,
+      "response_json_bytes": 1557,
+      "response_text_chars": 1133,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "batch",
+      "phase": "warm",
+      "pair": 3,
+      "elapsed_ms": 4182.644800000002,
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "batch",
+      "phase": "warm",
+      "pair": 4,
+      "elapsed_ms": 4186.054199999999,
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "atomic",
+      "phase": "warm",
+      "pair": 4,
+      "elapsed_ms": 4169.598300000005,
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1541,
+      "response_json_bytes": 1557,
+      "response_text_chars": 1133,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "atomic",
+      "phase": "warm",
+      "pair": 5,
+      "elapsed_ms": 4158.1774000000005,
+      "mcp_calls": 6,
+      "request_json_chars": 809,
+      "request_json_bytes": 814,
+      "response_json_chars": 1541,
+      "response_json_bytes": 1557,
+      "response_text_chars": 1133,
+      "screenshot_images": 0,
+      "verified": true
+    },
+    {
+      "mode": "batch",
+      "phase": "warm",
+      "pair": 5,
+      "elapsed_ms": 4197.534299999999,
+      "mcp_calls": 1,
+      "request_json_chars": 654,
+      "request_json_bytes": 663,
+      "response_json_chars": 501,
+      "response_json_bytes": 506,
+      "response_text_chars": 400,
+      "screenshot_images": 0,
+      "verified": true
+    }
+  ]
+}
