@@ -21,6 +21,7 @@
   },
   "tools": [
     { "name": "windows", "description": "Preferred: read and operate compact Windows UI Automation controls without screenshots." },
+    { "name": "course", "description": "Course navigation, verified search, versioned lesson reading, and completion-message checks through Windows APIs." },
     { "name": "computer", "description": "Native mouse and keyboard actions, cursor position, and screenshot fallback." },
     { "name": "pokemon", "description": "Switch Pokémon, announce tasks, show progress, and celebrate completion." }
   ],

@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Security.Cryptography;
 using System.Windows.Automation;
 
 public static class PokemonWindowsAutomation {
@@ -246,7 +247,7 @@ public static class PokemonWindowsAutomation {
         var layout = GetKeyboardLayout(GetWindowThreadProcessId(foreground, out process));
         return Obj("keyboard_layout", unchecked((uint)layout.ToInt64()).ToString("X8"), "language_id", (layout.ToInt64() & 0xffff).ToString("X4"), "imm_ime", ImmIsIME(layout));
     }
-    public static object Act(string snapshotId, int id, string action, string text, string direction) {
+    static AutomationElement Target(string snapshotId, int id) {
         Snapshot snapshot;
         AutomationElement element;
         if (String.IsNullOrEmpty(snapshotId) || !snapshots.TryGetValue(snapshotId, out snapshot) ||
@@ -262,6 +263,46 @@ public static class PokemonWindowsAutomation {
         }
         if (!belongs) throw new Exception("Element no longer belongs to the selected window. Call get_ui again.");
         if (element.Current.IsPassword) throw new Exception("Password controls are not exposed.");
+        return element;
+    }
+    public static object TextPage(string snapshotId, int id, int offset, int count, string expectedVersion, string requiredText) {
+        if (offset < 0 || offset > 1000000 || count < 1 || count > 12000) throw new Exception("Invalid course text page bounds.");
+        var element = Target(snapshotId, id);
+        object value;
+        string full;
+        if (element.Current.ControlType != ControlType.Document && element.TryGetCurrentPattern(ValuePattern.Pattern, out value)) {
+            full = ((ValuePattern)value).Current.Value ?? "";
+        } else {
+            var pattern = (TextPattern)element.GetCurrentPattern(TextPattern.Pattern);
+            full = pattern.DocumentRange.GetText(1000001) ?? "";
+        }
+        bool sourceTruncated = full.Length > 1000000;
+        if (sourceTruncated) full = full.Substring(0, 1000000);
+        string version;
+        using (var hash = SHA256.Create()) version = BitConverter.ToString(hash.ComputeHash(Encoding.Unicode.GetBytes(full))).Replace("-", "").ToLowerInvariant();
+        if (!String.IsNullOrEmpty(expectedVersion) && expectedVersion != version) throw new Exception("Lesson text changed. Restart read_lesson at offset 0; no navigation was replayed.");
+        if (offset > full.Length) throw new Exception("Course text offset is beyond the readable document.");
+        int end = Math.Min(full.Length, offset + count);
+        if (end < full.Length && end > offset && Char.IsHighSurrogate(full[end - 1]) && Char.IsLowSurrogate(full[end])) end--;
+        int matches = 0, first = -1;
+        if (!String.IsNullOrEmpty(requiredText)) {
+            int position = 0;
+            while ((position = full.IndexOf(requiredText, position, StringComparison.Ordinal)) >= 0) {
+                if (first < 0) first = position;
+                matches++;
+                position += requiredText.Length;
+            }
+        }
+        var result = Obj("text", full.Substring(offset, end - offset), "offset", offset, "next_offset", end < full.Length ? (object)end : null,
+            "has_more", end < full.Length, "total_characters", full.Length, "source_truncated", sourceTruncated, "version", version);
+        if (!String.IsNullOrEmpty(requiredText)) {
+            result["match_count"] = matches;
+            result["match_excerpt"] = first < 0 ? "" : full.Substring(Math.Max(0, first - 80), Math.Min(full.Length, first + requiredText.Length + 80) - Math.Max(0, first - 80));
+        }
+        return result;
+    }
+    public static object Act(string snapshotId, int id, string action, string text, string direction) {
+        var element = Target(snapshotId, id);
         if (action == "read_text") {
             object editable;
             if (element.Current.ControlType != ControlType.Document && element.TryGetCurrentPattern(ValuePattern.Pattern, out editable)) {
@@ -271,7 +312,10 @@ public static class PokemonWindowsAutomation {
                 return readResult;
             }
             var pattern = (TextPattern)element.GetCurrentPattern(TextPattern.Pattern);
-            return Obj("text", Clip(pattern.DocumentRange.GetText(8000), 8000));
+            var documentText = pattern.DocumentRange.GetText(8001) ?? "";
+            var documentResult = Obj("text", Clip(documentText, 8000));
+            if (documentText.Length > 8000) documentResult["truncated"] = true;
+            return documentResult;
         }
         if (element.Current.IsOffscreen || !element.Current.IsEnabled) throw new Exception("Control is hidden or disabled. Call get_ui again.");
         object value;
