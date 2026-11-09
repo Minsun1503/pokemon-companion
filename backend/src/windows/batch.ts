@@ -15,6 +15,7 @@ export const windowsFields = {
 	max_chars: z.number().int().min(1000).max(16000).default(6000),
 	snapshot: z.string().regex(/^[a-f0-9]{32}$/).optional(),
 	element_id: z.number().int().positive().optional(),
+	ref: z.string().regex(/^@?s[a-f0-9]{32}:e?\d+$/).optional().describe('Element ref format @s<snapshot>:e<element_id> (Credit: adapted from Vercel agent-desktop).'),
 	text: z.string().max(8000).optional(),
 	direction: z.enum(['up', 'down', 'left', 'right']).optional(),
 	expect_value: z.string().max(160).optional().describe('For wait_for (or batch get_ui): require a control with this exact value.'),
@@ -72,8 +73,19 @@ export function validateWindowsRequest(args: WindowsRequest): void {
 		throw new Error(`${args.action} requires window_id from get_windows.`);
 	}
 
+	// Credit: Adapted from Vercel Labs agent-desktop (https://github.com/vercel-labs/agent-desktop)
+	// Supports unified element ref format: @s<snapshot>:e<element_id>
+	if (args.ref) {
+		const match = args.ref.match(/^@?s([a-f0-9]{32}):e?(\d+)$/i);
+		if (match) {
+			args.snapshot = args.snapshot ?? match[1];
+			args.element_id = args.element_id ?? Number.parseInt(match[2]!, 10);
+			delete args.ref;
+		}
+	}
+
 	if (!discoveryActions.includes(args.action) && (!args.snapshot || !args.element_id)) {
-		throw new Error(`${args.action} requires snapshot and element_id from get_ui.`);
+		throw new Error(`${args.action} requires snapshot and element_id from get_ui (or ref: "@s<snapshot>:e<element_id>").`);
 	}
 
 	if (args.action === 'set_value' && args.text === undefined) {
@@ -94,7 +106,7 @@ function validateSteps(steps: WindowsStep[]): void {
 		}
 
 		if (step.target_step !== undefined) {
-			if (discoveryActions.includes(step.action) || step.snapshot !== undefined || step.element_id !== undefined || step.target_step >= index || !controlSources.includes(steps[step.target_step]!.action)) {
+			if (discoveryActions.includes(step.action) || step.snapshot !== undefined || step.element_id !== undefined || step.ref !== undefined || step.target_step >= index || !controlSources.includes(steps[step.target_step]!.action)) {
 				throw new Error(`Step ${index}: target_step must reference an earlier get_ui and replace snapshot/element_id on a control action.`);
 			}
 		}
@@ -132,6 +144,14 @@ function resolveStep(step: WindowsStep, results: Record<string, unknown>[]): Win
 	const {window_step: windowStep, target_step: targetStep} = step;
 	const {expect_value: expectation, ...fields} = step;
 	const request = windowsRequestSchema.parse(fields);
+	if (request.ref) {
+		const match = request.ref.match(/^@?s([a-f0-9]{32}):e?(\d+)$/i);
+		if (match) {
+			request.snapshot = request.snapshot ?? match[1];
+			request.element_id = request.element_id ?? Number.parseInt(match[2]!, 10);
+			delete request.ref;
+		}
+	}
 	if (step.action === 'wait_for') {
 		request.expect_value = expectation;
 	}

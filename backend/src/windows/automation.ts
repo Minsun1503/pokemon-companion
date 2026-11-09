@@ -3,6 +3,7 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {performance} from 'node:perf_hooks';
 import {recordTiming, serialize} from '../utils/timing.js';
+import {runCrossPlatformRequest} from './cross-platform.js';
 
 export type WindowsRequest = {
 	action: string;
@@ -14,6 +15,7 @@ export type WindowsRequest = {
 	max_chars?: number;
 	snapshot?: string | undefined;
 	element_id?: number | undefined;
+	ref?: string | undefined;
 	text?: string | undefined;
 	direction?: string | undefined;
 	expect_value?: string | undefined;
@@ -35,15 +37,19 @@ export class WindowsAutomation {
 	}
 
 	async requireForeground(windowId: string, options: RequestOptions): Promise<void> {
-		const foreground = await this.request({action: 'foreground'}, options);
-		if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
-			throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
+		if (process.platform === 'win32') {
+			const foreground = await this.request({action: 'foreground'}, options);
+			if (windowId === '0' || (foreground.id !== windowId && foreground.root_owner_id !== windowId)) {
+				throw new Error(`Foreground window mismatch: ${String(foreground.title)} (${String(foreground.process)}, window ${String(foreground.id)}). No input was sent. Call windows activate on ${windowId} once, then verify foreground before retrying.`);
+			}
 		}
 	}
 
 	async request(args: WindowsRequest, options?: RequestOptions): Promise<Record<string, unknown>> {
+		// Credit: Cross-platform routing inspired by Vercel Labs agent-desktop
 		if (process.platform !== 'win32') {
-			throw new Error('Windows UI Automation is available only on Windows. Use the computer tool on this platform.');
+			const crossResult = await runCrossPlatformRequest(args);
+			return this.postProcess(crossResult, args);
 		}
 
 		const roundTrip = performance.now();
@@ -86,6 +92,10 @@ export class WindowsAutomation {
 			delete result.uia_tree_walk_ms;
 		}
 
+		return this.postProcess(result, args);
+	}
+
+	private postProcess(result: Record<string, unknown>, args: WindowsRequest): Record<string, unknown> {
 		const postProcessing = performance.now();
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;

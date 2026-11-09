@@ -227,6 +227,16 @@ describe('Windows batch execution', () => {
 		expect(parse(failure).truncated).toBe(true);
 	});
 
+	it('supports element ref format @s<snapshot>:e<element_id> (Credit: Vercel agent-desktop)', async () => {
+		const {runtime, request} = fixture();
+		request.mockReset().mockResolvedValueOnce({ok: true});
+		const result = await runWindowsBatch(runtime, steps([{action: 'invoke', ref: `@s${snapshot}:e1`}]), 2000);
+		expect(result.isError).not.toBe(true);
+		expect(request).toHaveBeenCalledWith(expect.objectContaining({
+			action: 'invoke', snapshot, element_id: 1,
+		}));
+	});
+
 	it.runIf(process.platform === 'win32')('exposes batches through MCP while preserving atomic calls and validating size', async () => {
 		const {runtime, request} = fixture();
 		const server = new McpServer({name: 'batch-test', version: '1'});
