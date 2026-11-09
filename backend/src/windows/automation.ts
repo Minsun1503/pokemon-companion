@@ -18,6 +18,10 @@ export type WindowsRequest = {
 	direction?: string | undefined;
 	expect_value?: string | undefined;
 	timeout_ms?: number | undefined;
+	text_offset?: number;
+	text_length?: number;
+	expected_version?: string | undefined;
+	required_text?: string | undefined;
 };
 
 type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};

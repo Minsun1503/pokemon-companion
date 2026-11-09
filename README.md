@@ -98,6 +98,12 @@ Use Windows `focus`, `invoke`, `set_value` and batch first. When no control is e
 
 The `pokemon-work` MCP prompt helps the AI use these tools together. The server does not itself plan a task or infer when a task is finished; the AI calls `done` after verifying the actual result.
 
+### Course navigation and reading
+
+The Windows-only **`course`** tool combines repeated course steps into one call. `open_lesson` opens one named lesson control, waits for changed text containing a unique expected marker, and returns a text page. `search_courses` fills the exact course search field, verifies its value, and waits for the expected result. `read_lesson` reads long lessons in versioned pages. `check_completion` returns evidence for a specific completion message.
+
+Start with `windows get_windows/get_ui` to identify the window and exact accessible names. These helpers use native Windows APIs, require visible controls, respect pauses, and never replay inputs automatically. They do not answer quizzes or automatically press Finish. Accessible text reading does not inspect attached files, images, or videos. See [API examples, pagination, and limits](docs/course-api.md). Reconnect the MCP server after building to expose the new tool in an existing client.
+
 ## Desktop controls
 
 - Left-click the Pokémon to open three action icons: **Switch**, **Talk**, and **Exit**.
@@ -134,6 +140,7 @@ npm test
 npm run smoke
 npm run test:input
 npm run test:windows
+npm run test:course
 ```
 
 The smoke test uses a real MCP SDK client, opens the real companion, selects all seven pets, captures a desktop screenshot, checks cursor output, and exercises task completion and visibility. It sends no clicks or keyboard input. `test:input` opens a disposable test window and verifies real clicks, Vietnamese text input, and keyboard shortcuts. `test:windows` verifies six API steps in one MCP call, field entry and button invocation, atomic compatibility, bounded text output, stale-id rejection, and zero screenshot images. Batch tests cover ambiguity, unsupported actions, partial failures, value checks, pauses/cancellation between steps, and isolation from other clients. Runtime tests cover serialized actions, user pauses, queued cancellation, and screenshot restoration on errors. Chat tests use an isolated local mock provider to verify requests, separate saved conversations, and failure handling.

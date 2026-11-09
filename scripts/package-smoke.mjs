@@ -31,7 +31,7 @@ try {
   const connected = await connect({root: relocated, command});
   client = connected.client;
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', 'windows']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', 'windows', 'course']);
   for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
     const selected = await connected.call('pokemon', {action: 'select', pet});
     assert.equal(selected.structuredContent.pet, pet);
