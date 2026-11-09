@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {spawn} from 'node:child_process';
+import {spawn, execFileSync} from 'node:child_process';
 import {createHash, randomUUID} from 'node:crypto';
 import {mkdir, mkdtemp, readFile, realpath, rm, writeFile} from 'node:fs/promises';
 import os from 'node:os';
@@ -9,13 +9,14 @@ import {fileURLToPath} from 'node:url';
 import {connect} from './client.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const options = {runs: 20, output: `benchmarks/results/windows-batch-${new Date().toISOString().slice(0, 10)}.json`};
+const options = {runs: 20, fixture: 'plain', output: `benchmarks/results/windows-batch-${new Date().toISOString().slice(0, 10)}.json`};
 for (let index = 2; index < process.argv.length; index += 2) {
   const flag = process.argv[index];
   const value = process.argv[index + 1];
   if (flag === '--runs' && value !== undefined) options.runs = Number(value);
+  else if (flag === '--fixture' && ['plain', 'nested'].includes(value)) options.fixture = value;
   else if (flag === '--output' && value?.endsWith('.json')) options.output = value;
-  else throw new Error('Usage: npm run benchmark:windows -- --runs 20 --output benchmarks/results/run.json');
+  else throw new Error('Usage: npm run benchmark:windows -- --runs 20 --fixture plain|nested --output benchmarks/results/run.json');
 }
 assert(process.platform === 'win32', 'This benchmark requires a Windows desktop session.');
 assert(Number.isInteger(options.runs) && options.runs >= 5 && options.runs <= 100, '--runs must be 5..100.');
@@ -33,7 +34,7 @@ const startup = [];
 async function launchFixture() {
   const appData = resolve(scratch, 'fixture');
   await mkdir(appData);
-  const env = {...process.env, APPDATA: appData, POKEMON_INPUT_FIXTURE_TITLE: title};
+  const env = {...process.env, APPDATA: appData, POKEMON_INPUT_FIXTURE_TITLE: title, POKEMON_INPUT_FIXTURE_WRAPPERS: options.fixture === 'nested' ? '1' : '0'};
   delete env.ELECTRON_RUN_AS_NODE;
   fixture = spawn(resolve(root, 'frontend/node_modules/electron/dist/electron.exe'), [resolve(root, 'scripts/input-fixture/index.cjs'), '--force-renderer-accessibility'], {env, windowsHide: true, stdio: ['ignore', 'pipe', 'inherit']});
   await new Promise((ready, reject) => {
@@ -118,6 +119,7 @@ async function workflow(mode, phase, pair) {
   }
   assert.equal(final.matched, 1);
   assert(!final.truncated);
+  assert(!final.nodes[0].value_clipped);
   assert.equal(final.nodes[0].value, text);
   metric.elapsed_ms = performance.now() - before;
   assert.equal(metric.screenshot_images, 0);
@@ -155,7 +157,7 @@ function markdown(report) {
   const pct = (n) => `${n.toFixed(1)}%`;
   return `# Windows atomic versus batch benchmark
 
-Measured at ${report.measured_at}. ${options.runs} warm runs per mode, with alternating order in each pair. All ${samples.length} recorded workflows passed independent field and button checks; no screenshot images were returned.
+Measured at ${report.measured_at}, source revision \`${report.source_revision}\`. Fixture: **${options.fixture}**${options.fixture === 'nested' ? ' (35 anonymous ARIA groups around the field and button)' : ''}. ${options.runs} warm runs per mode, with alternating order in each pair. All ${samples.length} recorded workflows passed independent field and button checks; no screenshot images were returned.
 
 | Metric | Atomic | Batch |
 | --- | ---: | ---: |
@@ -175,11 +177,11 @@ MCP calls decreased by ${pct(report.reductions.mcp_calls_pct)} and result text b
 
 The same visible disposable Electron window and the real Pokémon overlay are used for both modes. Each workflow discovers that uniquely named window, discovers its Edit control, sets a unique Unicode value, discovers the Verify button, invokes it, and reads the field again. Both modes use identical UI filters and per-step 2,000-character budgets. Batch additionally checks the expected field value inside the server. An independent HTTP fixture check validates the text and exactly one button click after every run, outside the timer.
 
-The timer covers the six API steps, MCP stdio transport, result parsing, and companion updates. It excludes MCP connection, companion launch, fixture launch, and independent HTTP verification. Fresh-worker runs below use separate MCP processes with an already started overlay; they include PowerShell startup/C# compilation and are single observations. The warm session performs one unreported warmup workflow per mode before the ${options.runs} alternating pairs. Warm p95 uses nearest rank; medians average the two middle samples when needed. Every sample is in the adjacent JSON file.
+The timer covers the six API steps, MCP stdio transport, result parsing, and companion updates. It excludes MCP connection, companion launch, fixture launch, and independent HTTP verification. First-in-session runs below use separate MCP processes and an already started overlay; they are single observations, not cold-start latency measurements. The server eagerly starts its native worker before the workflow, and loads the compiled DLL when present. Connection/overlay startup times are recorded separately. The warm session performs one unreported warmup workflow per mode before the ${options.runs} alternating pairs. Warm p95 uses nearest rank; medians average the two middle samples when needed. Every recorded sample is in the adjacent JSON file; the two verified warmups are excluded from the summaries.
 
-| Fresh worker (one observation each) | Execution |
+| First workflow in a separate session (one observation each) | Execution |
 | --- | ---: |
-${samples.filter((item) => item.phase === 'fresh_worker').map((item) => `| ${item.mode} | ${ms(item.elapsed_ms)} |`).join('\n')}
+${samples.filter((item) => item.phase === 'first_in_session').map((item) => `| ${item.mode} | ${ms(item.elapsed_ms)} |`).join('\n')}
 
 This is a local tool benchmark with no AI inference or network model latency. Six calls versus one offers five fewer opportunities for a sequential model round trip, but no end-to-end AI speedup or dollar/token saving is measured. Characters/bytes are measured, not tokenizer counts. Request/result JSON measurements exclude JSON-RPC envelopes, tool schemas, initialization, and Pokémon task announcement calls. Windows API operations still execute individually inside a batch. Results vary with the app, machine load and accessibility tree; this small fixture does not establish performance for arbitrary apps.
 
@@ -189,7 +191,8 @@ This is a local tool benchmark with no AI inference or network model latency. Si
 - CPU: ${report.environment.cpu}; ${report.environment.logical_cpus} logical processors
 - Node: ${report.environment.node}; Electron: ${report.environment.electron}
 - Overlay: enabled; transport: stdio
-- Reproduce: npm run benchmark:windows -- --runs ${options.runs} --output ${relative(root, resolve(root, options.output)).split(sep).join('/')}
+- Worker execution policy environment: ${report.environment.powershell_process_policy || 'not set'} (inherited for these test processes only)
+- Reproduce after building the backend/frontend: npm run benchmark:windows -- --runs ${options.runs} --fixture ${options.fixture} --output ${relative(root, resolve(root, options.output)).split(sep).join('/')}
 - Raw data includes SHA-256 hashes of the built backend files used in this run.
 `;
 }
@@ -198,8 +201,8 @@ try {
   await launchFixture();
   for (const mode of ['atomic', 'batch']) {
     await openSession(`fresh-${mode}`);
-    samples.push(await workflow(mode, 'fresh_worker', 0));
-    console.log(`${mode}: fresh worker ${samples.at(-1).elapsed_ms.toFixed(1)} ms`);
+    samples.push(await workflow(mode, 'first_in_session', 0));
+    console.log(`${mode}: first workflow ${samples.at(-1).elapsed_ms.toFixed(1)} ms`);
     await session.client.close();
     session = undefined;
   }
@@ -211,14 +214,16 @@ try {
     for (const mode of order) samples.push(await workflow(mode, 'warm', pair));
     if (pair % 5 === 0) console.log(`Verified ${pair}/${options.runs} warm pairs`);
   }
-  const builtFiles = ['backend/dist/tools/windows.js', 'backend/dist/windows/batch.js', 'backend/dist/windows/automation.js', 'backend/dist/windows/uia-worker.cs', 'backend/dist/windows/uia-worker.ps1', 'backend/dist/pokemon/runtime.js'];
+  const builtFiles = ['backend/dist/main.js', 'backend/dist/tools/windows.js', 'backend/dist/windows/batch.js', 'backend/dist/windows/automation.js', 'backend/dist/windows/uia-worker.cs', 'backend/dist/windows/uia-worker.ps1', 'backend/dist/windows/uia-worker.dll', 'backend/dist/pokemon/runtime.js', 'backend/dist/pokemon/companion.js', 'scripts/input-fixture/index.cjs', 'scripts/input-fixture/index.html', 'scripts/input-fixture/renderer.js', 'scripts/windows-benchmark.mjs'];
   const hashes = await Promise.all(builtFiles.map(async (file) => [file, createHash('sha256').update(await readFile(resolve(root, file))).digest('hex')]));
   const atomic = summary('atomic');
   const batch = summary('batch');
   const reduction = (a, b) => 100 * (a - b) / a;
   const report = {
-    schema_version: 1, measured_at: new Date().toISOString(), runs_per_mode: options.runs,
-    environment: {platform: process.platform, os_release: os.release(), arch: process.arch, cpu: os.cpus()[0].model.trim(), logical_cpus: os.cpus().length, node: process.version, electron: JSON.parse(await readFile(resolve(root, 'frontend/node_modules/electron/package.json'), 'utf8')).version, overlay: 'enabled', transport: 'stdio'},
+    schema_version: 2, measured_at: new Date().toISOString(), runs_per_mode: options.runs,
+    source_revision: execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim(),
+    fixture: {kind: options.fixture, anonymous_group_depth: options.fixture === 'nested' ? 35 : 0},
+    environment: {platform: process.platform, os_release: os.release(), arch: process.arch, cpu: os.cpus()[0].model.trim(), logical_cpus: os.cpus().length, node: process.version, electron: JSON.parse(await readFile(resolve(root, 'frontend/node_modules/electron/package.json'), 'utf8')).version, overlay: 'enabled', transport: 'stdio', powershell_process_policy: process.env.PSExecutionPolicyPreference || null},
     workflow: {native_steps: 6, field_and_button_verified_each_run: true, inference_measured: false, warmup_runs_per_mode: 1, alternating_pair_order: true, chars_are_utf16_code_units: true},
     built_backend_sha256: Object.fromEntries(hashes), startup, summary: {atomic, batch},
     reductions: {mcp_calls_pct: reduction(atomic.mcp_calls, batch.mcp_calls), response_text_chars_pct: reduction(atomic.response_text_chars, batch.response_text_chars), warm_median_execution_pct: reduction(atomic.elapsed_ms.median, batch.elapsed_ms.median)},
