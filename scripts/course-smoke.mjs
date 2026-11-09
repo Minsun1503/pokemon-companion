@@ -69,9 +69,9 @@ try {
   const launched = await windows({action: 'launch', text: url, query: title, timeout_ms: 15000});
   assert.equal(launched.windows.length, 1);
   windowId = launched.windows[0].id;
-  await windows({action: 'activate', window_id: windowId});
   const docs = await windows({action: 'wait_for', window_id: windowId, query: title, control_type: 'Document', timeout_ms: 5000});
   assert.equal(docs.nodes.length, 1);
+  await windows({action: 'focus', snapshot: docs.snapshot, element_id: docs.nodes[0].id});
   documentName = docs.nodes[0].name;
   const base = {window_id: windowId, document_name: documentName, timeout_ms: 15000};
   const course = (args, expectedError = false) => call('course', {...base, ...args}, expectedError);
@@ -156,7 +156,6 @@ try {
     const owned = await windows({action: 'get_windows', query: title});
     if (owned.windows.length === 1) {
       const win = owned.windows[0];
-      await windows({action: 'activate', window_id: win.id});
       const docs = await windows({action: 'get_ui', window_id: win.id, query: title, control_type: 'Document'});
       assert.equal(docs.nodes.length, 1, 'Refuse cleanup if this test document is not uniquely active.');
       await windows({action: 'focus', snapshot: docs.snapshot, element_id: docs.nodes[0].id});
