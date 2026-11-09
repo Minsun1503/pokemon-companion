@@ -110,6 +110,12 @@ The Windows-only **`excel`** tool provides `inspect_workbook`, `read_range`, `wr
 
 Use `windows get_windows` to choose Excel, then `excel inspect_workbook` for exact workbook/sheet names. See [Excel API examples and limits](docs/excel-api.md). Requires installed Windows desktop Excel with a normal workbook window; Protected View and Excel Online are unsupported. Reconnect the MCP server after building to expose this tool.
 
+## Windows benchmark
+
+The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visual.md) compares six atomic calls with one batch on a normal window and controls behind 35 anonymous groups, with 30 warm runs per mode per fixture. Batch used **83.3% fewer MCP calls** and about **64.7% less result text**; local median execution times were close. Every field and button action was independently verified. No AI inference or token/dollar savings were measured.
+
+![Windows benchmark: latency distributions, MCP calls and result text for atomic and batch workflows.](benchmarks/results/windows-main-2026-11-09-visual.png)
+
 ## Desktop controls
 
 - Left-click the Pokémon to open three action icons: **Switch**, **Talk**, and **Exit**.
