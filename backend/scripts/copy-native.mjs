@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 mkdirSync(join(root, 'dist/windows'), {recursive: true});
-for (const file of ['uia-worker.cs', 'uia-worker.ps1']) {
+for (const file of ['uia-worker.cs', 'uia-worker.ps1', 'excel-worker.cs']) {
 	copyFileSync(join(root, 'src/windows', file), join(root, 'dist/windows', file));
 }
 

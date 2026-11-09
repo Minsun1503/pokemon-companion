@@ -33,6 +33,14 @@
     {
       "name": "windows",
       "description": "Preferred on Windows: read compact UI Automation controls and operate them through native APIs without screenshots."
+    },
+    {
+      "name": "course",
+      "description": "Windows course navigation, verified search, versioned lesson text pages, and completion-message checks."
+    },
+    {
+      "name": "excel",
+      "description": "Native desktop Excel workbook inspection, range reads/writes, formulas, search, selection, and verified saving."
     }
   ],
   "compatibility": {

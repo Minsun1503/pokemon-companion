@@ -2,6 +2,10 @@
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {registerAll} from './tools/index.js';
 import {PokemonRuntime} from './pokemon/runtime.js';
+export {courseSchema, runCourse} from './windows/course.js';
+export type {CourseRequest} from './windows/course.js';
+export {excelSchema, runExcel} from './windows/excel.js';
+export type {ExcelRequest} from './windows/excel.js';
 
 export function createServer(runtime?: PokemonRuntime): McpServer {
 	const ownedRuntime = runtime || new PokemonRuntime();

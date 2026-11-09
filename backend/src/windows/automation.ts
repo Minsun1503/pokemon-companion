@@ -20,6 +20,24 @@ export type WindowsRequest = {
 	direction?: string | undefined;
 	expect_value?: string | undefined;
 	timeout_ms?: number | undefined;
+	text_offset?: number;
+	text_length?: number;
+	expected_version?: string | undefined;
+	required_text?: string | undefined;
+	workbook_name?: string;
+	sheet?: string;
+	range?: string;
+	data?: (string | number | boolean | null)[][];
+	mode?: 'values' | 'formulas';
+	version?: string;
+	offset?: number;
+	page_size?: number;
+	cell_chars?: number;
+	require_empty?: boolean;
+	match?: 'contains' | 'exact';
+	look_in?: 'values' | 'formulas';
+	case_sensitive?: boolean;
+	expected_path?: string;
 };
 
 export type RequestOptions = {signal?: AbortSignal | undefined; timeoutMs: number; paused: () => boolean; timeoutError: string};

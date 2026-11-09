@@ -15,7 +15,7 @@ const transport = new StdioClientTransport({command: 'powershell.exe', args: ['-
 try {
   await client.connect(transport, {timeout: 300000});
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', 'windows']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', 'windows', 'course', 'excel']);
   const selected = await client.callTool({name: 'pokemon', arguments: {action: 'select', pet: 'pikachu'}});
   assert(!selected.isError);
   assert.equal(selected.structuredContent.pet, 'pikachu');
