@@ -70,7 +70,17 @@ async function main() {
   // Ship only repository defaults. Never copy a developer profile, keys, chat history or tunnel address.
   copy(path.join(root, 'frontend/config/setting.json'), path.join(appRoot, 'frontend/config/setting.json'));
   copy(path.join(root, 'frontend/LICENSE'), path.join(appRoot, 'frontend/LICENSE'));
-  copy(path.join(root, 'frontend/node_modules/electron/dist'), path.join(appRoot, 'frontend/node_modules/electron/dist'));
+  const electronSource = path.join(root, 'frontend/node_modules/electron/dist');
+  const electronTarget = path.join(appRoot, 'frontend/node_modules/electron/dist');
+  if (platform === 'darwin') {
+    // Use the native copier for framework symlinks and app bundle metadata.
+    fs.mkdirSync(path.dirname(electronTarget), {recursive: true});
+    run('ditto', [electronSource, electronTarget]);
+    const framework = 'Electron.app/Contents/Frameworks/Electron Framework.framework/Electron Framework';
+    if (!fs.existsSync(path.join(electronTarget, framework))) throw new Error('The copied Electron framework is incomplete.');
+  } else {
+    copy(electronSource, electronTarget);
+  }
   json(path.join(appRoot, 'frontend/package.json'), {name: 'pokemon-companion', version, main: 'main.js'});
   fs.writeFileSync(path.join(appRoot, 'frontend/main.js'), "require('./build/main/companion/index.js');\n");
   json(path.join(appRoot, 'package.json'), {name: 'pokemon-computer-companion', version, private: true});
