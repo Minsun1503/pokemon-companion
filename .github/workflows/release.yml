@@ -55,6 +55,12 @@ jobs:
       - name: Test extracted app and MCP connection
         if: runner.os != 'Linux'
         run: npm run test:desktop-package
+      - name: Allow sandbox namespaces on the isolated Linux test runner
+        if: runner.os == 'Linux'
+        run: |
+          # Ubuntu 24.04 restricts unprivileged namespaces by default. Permit them
+          # only on this disposable runner; shipped Electron keeps its sandbox.
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Test Linux extracted app and MCP connection
         if: runner.os == 'Linux'
         run: xvfb-run -a npm run test:desktop-package
