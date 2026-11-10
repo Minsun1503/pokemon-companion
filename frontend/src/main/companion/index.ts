@@ -5,7 +5,6 @@ import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tra
 import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
-import { CompanionChat } from './chat'
 
 app.setName('pokemon-mcp')
 if (process.env.POKEMON_USER_DATA_DIR) {
@@ -143,6 +142,10 @@ async function syncDisplays(): Promise<void> {
       focusable: false,
     })
     windows.set(display.id, win)
+    if (process.env.POKEMON_WINDOW_TITLE) {
+      win.on('page-title-updated', (event) => event.preventDefault())
+      win.setTitle(process.env.POKEMON_WINDOW_TITLE)
+    }
     await new Promise<void>((resolve, reject) => {
       win.webContents.once('did-finish-load', resolve)
       win.webContents.once('did-fail-load', (_event, code, description) =>
@@ -190,17 +193,9 @@ app
       win.setFocusable(open === true)
       if (open === true) win.focus()
     })
-    const chat = new CompanionChat(rootDir, app.getPath('userData'), registry)
-    ipcMain.handle('companion:chat-history', (_event, pet: unknown) => {
-      if (typeof pet !== 'string' || !registry.list().some((entry) => entry.id === pet)) return []
-      return chat.history(pet)
-    })
-    ipcMain.handle('companion:chat-send', (_event, pet: unknown, text: unknown) => {
-      if (typeof pet !== 'string' || !registry.list().some((entry) => entry.id === pet)) {
-        return { ok: false, error: 'Please select a Pokémon first.' }
-      }
-      return chat.reply(pet, text)
-    })
+    // Talk is deferred. Preserve its implementation and saved conversations without starting its worker.
+    ipcMain.handle('companion:chat-history', () => [])
+    ipcMain.handle('companion:chat-send', () => ({ ok: false, error: 'Talk is currently disabled.' }))
     ipcMain.on('companion:ignore-mouse', (event, ignore: unknown) => {
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
       const busy = !paused && Boolean(state.interactionLocked)

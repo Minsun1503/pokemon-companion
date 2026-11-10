@@ -17,7 +17,7 @@ function fixture(pet = 'pikachu', reduced = false) {
   vm.runInNewContext(code.replace(/^export /gm, '') + '\nexports.PetMotionController = PetMotionController;', context);
   const motion = new context.exports.PetMotionController({petDefinition: registry.load(pet), petImage: image,
     petContainer: container, initialPosition: {x: 20, y: 30}, canWalk: () => false,
-    getAnimation: pet === 'pikachu' ? () => animation : undefined, onPositionApplied: () => {}});
+    getAnimation: () => animation, onPositionApplied: () => {}});
   return {motion, image, container, tick: () => tick(), assignments: () => assignments,
     setActivity: value => {animation = value;}};
 }
@@ -79,6 +79,34 @@ test('other Pokémon keep their existing directional sprites', () => {
   tick();
   assert.equal(container.dataset.animation, 'walk');
   assert.match(image.src, /^data:image\/png/);
+});
+
+test('all seven Pokémon show work gestures, settle after fast calls, and honor pause and reduced motion', () => {
+  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
+    const {motion, container, tick, setActivity} = fixture(pet);
+    for (const gesture of ['thinking', 'typing', 'clicking']) {
+      motion.playAnimation(gesture, Infinity);
+      for (let frame = 0; frame < 80; frame++) tick();
+      assert.equal(container.dataset.animation, gesture, pet + ' must remain at work until the call finishes');
+      assert.deepEqual({...motion.position}, {x:20, y:30}, pet + ' must not wander while working');
+      motion.playAnimation(gesture, 1200);
+      for (let frame = 0; frame < 20; frame++) tick();
+      assert.equal(container.dataset.animation, gesture, pet + ' must keep a fast call visible');
+      for (let frame = 0; frame < 25; frame++) tick();
+      assert.equal(container.dataset.animation, 'idle');
+    }
+    motion.playAnimation('thinking', Infinity);
+    setActivity('paused');
+    tick();
+    assert.equal(container.dataset.animation, 'paused');
+    assert.equal(motion.isPerformingAction, false);
+    const reduced = fixture(pet, true);
+    reduced.motion.playAnimation('thinking', Infinity);
+    reduced.motion.moveTo(500, 500);
+    reduced.tick();
+    assert.deepEqual({...reduced.motion.position}, {x:500, y:500});
+    assert.ok(!reduced.image.src.endsWith('.gif'));
+  }
 });
 
 test('Pikachu assets contain transparent, distinct leg and paw poses at the intended speed', async () => {

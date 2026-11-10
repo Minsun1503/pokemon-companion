@@ -1,8 +1,8 @@
 {
   "name": "pokemon-companion",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Seven animated Pokémon for native Windows computer control.",
   "author": { "name": "Minsun1503" },
   "homepage": "https://github.com/Minsun1503/pokemon-companion",
-  "mcpServers": "https://github.com/Minsun1503/pokemon-companion/releases/download/v0.1.0/pokemon-companion-win32-x64.mcpb"
+  "mcpServers": "https://github.com/Minsun1503/pokemon-companion/releases/download/v0.2.0/pokemon-companion-win32-x64.mcpb"
 }

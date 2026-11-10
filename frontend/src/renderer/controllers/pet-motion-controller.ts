@@ -9,6 +9,7 @@ interface PetMotionControllerOptions {
   getAnimation?: () => string
   getMinY?: () => number
   onPositionApplied: () => void
+  onAnimationApplied?: () => void
 }
 
 const SPAWN_MARGIN = 10
@@ -144,7 +145,7 @@ export class PetMotionController {
       this.jumpTick = 0
       this.playAnimation(undefined, 0)
     }
-    const reducedMotion = Boolean(this.opts.petDefinition.sprites.run && this.reducedMotion?.matches)
+    const reducedMotion = Boolean(this.reducedMotion?.matches)
     if (reducedMotion && this.target) {
       this.setPosition(this.target.x, this.target.y)
       this.target = null
@@ -301,7 +302,7 @@ export class PetMotionController {
   private setFrame(action: string, dir: string, idx: number): void {
     const sprites = this.opts.petDefinition.sprites
     const key = action === 'run' && dir.startsWith('up') && sprites.run_back ? 'run_back' : action
-    const reducedMotion = Boolean(sprites.run && this.reducedMotion?.matches)
+    const reducedMotion = Boolean(this.reducedMotion?.matches)
     const frames = (!reducedMotion ? sprites[key] : undefined) ?? sprites[this.getSpriteKey(dir)] ?? sprites.down
     if (!frames?.length) {
       return
@@ -312,6 +313,7 @@ export class PetMotionController {
     this.opts.petContainer.dataset.animation = action
     this.opts.petContainer.dataset.direction = dir
     this.updateSpriteTransform(action, dir, idx)
+    this.opts.onAnimationApplied?.()
   }
 
   private updateSpriteTransform(action: string, dir: string, idx: number): void {

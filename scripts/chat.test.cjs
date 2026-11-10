@@ -74,3 +74,30 @@ test('companion chat streams replies, scopes history, and recovers from provider
   assert.equal((await pending).ok, true);
   assert.equal(chat.history('pikachu').length, 4);
 });
+
+test('Talk follows the latest request instead of replaying an earlier unexecuted plan', async t => {
+  const userData = fs.mkdtempSync(path.join(os.tmpdir(), 'pokemon-talk-intent-'));
+  t.after(() => fs.rmSync(userData, {recursive: true, force: true}));
+  const settings = JSON.parse(fs.readFileSync(path.join(root, 'config/setting.json'), 'utf8'));
+  settings.ai.provider = 'ollama';
+  let rounds = 0;
+  const server = http.createServer(async (req, res) => {
+    let text = ''; for await (const chunk of req) text += chunk;
+    const body = JSON.parse(text);
+    assert.deepEqual(body.messages.filter(message => message.role === 'user').map(message => message.content), ['Hello']);
+    assert.match(body.messages[0].content, /Previous tasks are not pending/);
+    assert.match(body.messages[0].content, /I will open Teams/);
+    rounds++;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({message: {role: 'assistant', content: 'Hello!'}}));
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => {server.close(resolve); server.closeAllConnections();}));
+  settings.ai.ollama.baseUrl = `http://127.0.0.1:${server.address().port}`;
+  fs.writeFileSync(path.join(userData, 'setting.json'), JSON.stringify(settings));
+  fs.writeFileSync(path.join(userData, 'companion_chats.json'), JSON.stringify({pikachu: [{role: 'user', content: 'Open Teams'}, {role: 'assistant', content: 'I will open Teams'}]}));
+  const tools = {list: async () => [], authorize: async text => assert.equal(text, 'Hello'), call: async () => {throw new Error('A greeting should not act');}};
+  const chat = new CompanionChat(root, userData, new PetRegistry(path.join(root, 'pets')), tools);
+  assert.deepEqual(await chat.reply('pikachu', 'Hello'), {ok: true, content: 'Hello!'});
+  assert.equal(rounds, 1);
+});

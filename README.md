@@ -6,6 +6,8 @@ All seven characters from the pet repository are included: **Pikachu, Riolu, Luc
 
 ## Easy installation
 
+Download a desktop app ZIP from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest) for **Windows x64**, **macOS Intel**, **macOS Apple Silicon**, or **Linux x64**. Extract the entire folder and open `Pokemon Companion.exe`, `Pokemon Companion.app`, or the Linux `Pokemon Companion` executable. All runtimes are bundled. The ZIP's `README.txt` explains how to connect the included MCP server to your AI client. Talk is disabled. macOS/Linux desktop workflows remain experimental, and Linux requires X11 and user namespaces. The macOS app is ad-hoc signed without notarization.
+
 Windows users can download the **[Claude Desktop extension](https://github.com/Minsun1503/pokemon-companion/releases/latest/download/pokemon-companion-win32-x64.mcpb)** and open it to install, or extract the **[portable ZIP](https://github.com/Minsun1503/pokemon-companion/releases/latest/download/pokemon-companion-win32-x64.zip)** and double-click **Install Claude Code.cmd** or **Install Codex.cmd**. The package bundles Node, Electron, native dependencies, and all seven Pokémon. See [installation steps](INSTALL.md).
 
 Claude Code and Codex also support the same two-command installation style as Ponytail, using **`Minsun1503/pokemon-companion`** as the marketplace. The plugin downloads its Windows runtime on the first connection. Developers can build release files with `npm run package:windows`.
@@ -37,7 +39,7 @@ This generates configuration using the actual Node executable and checkout paths
 - `config/claude-desktop.json`: merge its `mcpServers` entry into your Claude Desktop MCP configuration, then restart Claude Desktop.
 - `config/codex.toml`: add its server table to your Codex `config.toml`, then reconnect the MCP server. See [official Codex MCP configuration](https://developers.openai.com/codex/mcp/).
 
-Use a local MCP client on the same computer as the companion. A cloud-only client cannot manipulate this desktop without a local connection. Computer control uses the connected AI client's model. The companion's separate Talk feature uses its configured AI provider.
+Use a local MCP client on the same computer as the companion. A cloud-only client cannot manipulate this desktop without a local connection. Computer control uses the connected AI client's model. Talk is deferred and disabled in the companion.
 
 Try: **“Use Pikachu to help me with my computer. Announce the task, inspect the screen, perform the actions, and tell me when you’ve verified the result.”**
 
@@ -129,18 +131,18 @@ The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visua
 
 ## Desktop controls
 
-- Left-click the Pokémon to open three action icons: **Switch**, **Talk**, and **Exit**.
+- Left-click the Pokémon to open **Switch** and **Exit**.
 - **Switch** opens all seven Pokémon; selecting one changes the companion immediately.
-- **Talk** opens a conversation with the selected Pokémon. Enter sends a message; Shift+Enter adds a line. Each Pokémon keeps its own conversation history.
+- **Talk** is deferred and disabled. Its implementation and existing saved conversations are retained for later.
 - **Exit** closes the companion and stops further computer actions.
-- Click the Pokémon again, use the Close button, or press Escape to close the menu. Escape returns from Switch/Talk to the action menu first.
+- Click the Pokémon again, use the Close button, or press Escape to close the menu. Escape returns from Switch to the action menu first.
 - Use **Ctrl+Shift+P** or the tray menu to pause/resume computer control. The AI cannot resume a user pause. A pause prevents the next input action; an input already being executed may finish.
 - Use the tray’s **Summon at cursor** to reposition the Pokémon.
 - Quit the companion to stop further computer actions. Restart the MCP connection to restore it.
 
 The overlay stays above other windows and follows action targets with an offset. Clicks pass through during an individual computer action; the menu is available between actions. Opening it during a task pauses further computer control until you resume. Screenshots and coordinates use the computer backend’s image space. This retains the backend’s existing primary-display capture behavior; it does not add full multi-monitor capture.
 
-Talk defaults to Ollama at `http://localhost:11434` with model `qwen3:8b`. Start Ollama with that model available, or configure OpenAI, Anthropic, or Gemini in `frontend/config/setting.json`. A setting file at `%APPDATA%/pokemon-mcp/setting.json` takes precedence. Cloud providers use their configured API key environment variable; `.env` files in the frontend repository or app data folder are also supported. If the provider is offline, Talk shows an error and retains your message for retry. Talk does not automatically forward messages to an existing AI chat; give computer-control tasks to your connected MCP client.
+The companion does not start a chat worker or contact a model provider. Give computer-control tasks to your connected MCP client. The dormant Talk source and existing conversations remain available for future development.
 
 ## Configuration
 

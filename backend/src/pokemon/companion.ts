@@ -17,7 +17,7 @@ export type PokemonState = {
 	paused: boolean;
 	completedActions: number;
 	interactionLocked?: boolean;
-	action?: {animation: 'typing' | 'clicking'; id: number; active: boolean} | undefined;
+	action?: {animation: 'typing' | 'clicking' | 'thinking'; id: number; active: boolean} | undefined;
 };
 
 export type Companion = {
@@ -50,6 +50,8 @@ export class DesktopCompanion implements Companion {
 	private animating = false;
 	private animationDirty = false;
 	private animationCoordinate: number[] | undefined;
+
+	constructor(private readonly onDisconnect?: () => void) {}
 
 	async start(): Promise<void> {
 		if (this.closed) {
@@ -242,6 +244,9 @@ export class DesktopCompanion implements Companion {
 					}
 
 					this.pending.clear();
+					if (!this.closed) {
+						this.onDisconnect?.();
+					}
 				});
 			});
 			this.server.on('error', fail);
@@ -254,7 +259,13 @@ export class DesktopCompanion implements Companion {
 
 				const env: NodeJS.ProcessEnv = {...process.env, POKEMON_BRIDGE_PORT: String(address.port), POKEMON_BRIDGE_TOKEN: token};
 				delete env.ELECTRON_RUN_AS_NODE;
-				this.child = spawn(electron, [root, '--mcp-companion'], {
+				const args = [root, '--mcp-companion'];
+				if (process.platform === 'linux') {
+					// A portable ZIP cannot install a root-owned setuid helper; retain the user-namespace sandbox.
+					args.push('--disable-setuid-sandbox');
+				}
+
+				this.child = spawn(electron, args, {
 					cwd: root, env, windowsHide: true, stdio: ['ignore', 'ignore', 'pipe'],
 				});
 				this.child.stderr?.on('data', (data: Buffer) => process.stderr.write(data));
