@@ -7,7 +7,9 @@ import {
 } from './batch.js';
 
 // These cases exercise native Windows validation even when the test host is macOS/Linux.
-const validateWindowsRequest = (args: Parameters<typeof validateRequest>[0]) => validateRequest(args, 'win32');
+const validateWindowsRequest = (args: Parameters<typeof validateRequest>[0]) => {
+	validateRequest(args, 'win32');
+};
 
 afterEach(() => vi.useRealTimers());
 const control = {
