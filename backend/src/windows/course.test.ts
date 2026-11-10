@@ -32,6 +32,7 @@ function fixture() {
 		async capture() {/* These helpers must never capture the desktop. */},
 	};
 	const runtime = new PokemonRuntime(companion);
+	vi.spyOn(runtime.windows, 'withControlLease').mockImplementation(async (run) => run());
 	const state = {
 		text: 'Old lesson', version: oldVersion, search: '', navigated: false, staleReads: 0,
 		duplicate: '', truncated: false, sourceTruncated: false, nextText: 'New lesson READY CHAPTER TWO',
@@ -335,7 +336,7 @@ describe('course reading helpers', () => {
 
 describe.runIf(process.platform === 'win32')('course MCP registration', () => {
 	it('exposes the helpers through a real MCP schema/client exchange', async () => {
-		const {runtime} = fixture();
+		const {runtime, request} = fixture();
 		const server = new McpServer({name: 'test', version: '1'});
 		registerCourse(server, runtime);
 		const client = new Client({name: 'test', version: '1'});
@@ -346,6 +347,9 @@ describe.runIf(process.platform === 'win32')('course MCP registration', () => {
 			expect(tools.tools.map((t) => t.name)).toEqual(['course']);
 			const result = await client.callTool({name: 'course', arguments: {action: 'read_lesson', ...base}});
 			expect(parse(result as CallToolResult)).toMatchObject({ok: true, text: 'Old lesson'});
+			request.mockRejectedValueOnce(new Error('lost native read response'));
+			const failed = await client.callTool({name: 'course', arguments: {action: 'read_lesson', ...base}});
+			expect(parse(failed as CallToolResult)).toMatchObject({contract_version: 1, error_details: {disposition: {delivery: 'not_delivered', retry: 'safe'}}});
 		} finally {
 			await client.close();
 			await server.close();

@@ -21,6 +21,9 @@ import {
 	measure, measureSync, serialize, timedCall,
 } from '../utils/timing.js';
 import {jsonResult} from '../utils/response.js';
+import {
+	DesktopError, errorResult, executionErrorDetails, rejectedAction,
+} from '../utils/errors.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 
 /**
@@ -155,7 +158,7 @@ const actionDescription = `The action to perform. The available actions are:
 * scroll: Scroll the screen in a specified direction. Requires coordinate (moves there first) and text parameter with direction: "up", "down", "left", or "right". Optionally append ":N" to scroll N pixels (default 300), e.g. "down:500".
 * get_screenshot: Take a screenshot of the screen.`;
 
-const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool for compact UI Automation inspection, control invocation, field values, and result verification. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses. Shortcuts: use windows focus/invoke/set_value and batch first. Use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only when no control is exposed or no UIA pattern fits; on Windows pass window_id for the foreground guard and verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation.';
+const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool in default batch mode for known UI Automation inspection, control invocation, field values, and result verification steps. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses. Shortcuts: use windows focus/invoke/set_value and batch first. Use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only when no control is exposed or no UIA pattern fits; on Windows pass window_id for the foreground guard and verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation.';
 
 const coordinateSchema = z
 	.array(z.number())
@@ -173,6 +176,7 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 				coordinate: coordinateSchema.optional(),
 				text: z.string().optional().describe('Text to type or key command to execute'),
 				window_id: z.string().regex(/^\d+$/).optional().describe('Windows key/type only: require this foreground window or its owned dialog. No automatic activation. Focus can still change between the check and input; verify afterward.'),
+				window_ref: z.string().regex(/^[a-f0-9]{32}$/).optional().describe('Preserve the window identity from discovery when using window_id.'),
 			}).strict(),
 			// Note: No outputSchema because this tool returns varying content types including images
 			annotations: {
@@ -180,324 +184,392 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 			},
 		},
 		async (args, extra) => timedCall('computer', args.action, async () => {
-			const {action, coordinate, text, window_id: windowId} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string; window_id?: string};
-			if (windowId !== undefined && (process.platform !== 'win32' || !['key', 'type'].includes(action))) {
-				throw new Error('window_id is supported only for Windows key and type actions.');
-			}
-
-			// Scale coordinates from API image space to logical screen space
-			let scaledCoordinate = coordinate;
-			if (coordinate) {
-				const scale = await getApiToLogicalScale();
-				scaledCoordinate = [
-					Math.round(coordinate[0] * scale),
-					Math.round(coordinate[1] * scale),
-				];
-
-				// Validate coordinates are within display bounds
-				const [x, y] = scaledCoordinate;
-				const [width, height] = [await screen.width(), await screen.height()];
-				if (x < 0 || x >= width || y < 0 || y >= height) {
-					throw new Error(`Coordinates (${x}, ${y}) are outside display bounds of ${width}x${height}`);
+			let inputState = 'not_sent';
+			let submittedCharacters = 0;
+			let completedInputs = 0;
+			const dispatch = async <T>(run: () => Promise<T>): Promise<T> => {
+				runtime.windows.assertControlLease();
+				if (extra.signal.aborted || runtime.companion.state.paused) {
+					throw rejectedAction(extra.signal.aborted ? 'CANCELLED' : 'PAUSED', 'Computer action cancelled or paused before execution.');
 				}
-			}
 
-			return runtime.computer(action, scaledCoordinate, async () => {
-				const beforeInput = async () => {
-					if (extra.signal.aborted || runtime.companion.state.paused) {
-						throw new Error('Computer action cancelled or paused before execution.');
+				inputState = 'unknown';
+				const result = await run();
+				completedInputs += 1;
+				return result;
+			};
+
+			const withRelease = async (press: () => Promise<unknown>, release: () => Promise<unknown>, body?: () => Promise<unknown>) => {
+				let failed = false;
+				let failure: unknown;
+				try {
+					await dispatch(press);
+					if (body) {
+						await body();
 					}
+				} catch (error) {
+					failed = true;
+					failure = error;
+				} finally {
+					try {
+						await release();
+					} catch (error) {
+						if (!failed) {
+							failure = error;
+						}
 
-					if (windowId !== undefined) {
+						failed = true;
+					}
+				}
+
+				if (failed) {
+					throw failure;
+				}
+			};
+
+			try {
+				const {action, coordinate, text, window_id: windowId, window_ref: windowRef} = args as {action: z.infer<typeof ActionEnum>; coordinate?: [number, number]; text?: string; window_id?: string; window_ref?: string};
+				if (windowRef && !windowId) {
+					throw rejectedAction('INVALID_ARGS', 'window_ref requires window_id.');
+				}
+
+				if (windowId !== undefined && (process.platform !== 'win32' || !['key', 'type'].includes(action))) {
+					throw new Error('window_id is supported only for Windows key and type actions.');
+				}
+
+				// Scale coordinates from API image space to logical screen space
+				let scaledCoordinate = coordinate;
+				if (coordinate) {
+					const scale = await getApiToLogicalScale();
+					scaledCoordinate = [
+						Math.round(coordinate[0] * scale),
+						Math.round(coordinate[1] * scale),
+					];
+
+					// Validate coordinates are within display bounds
+					const [x, y] = scaledCoordinate;
+					const [width, height] = [await screen.width(), await screen.height()];
+					if (x < 0 || x >= width || y < 0 || y >= height) {
+						throw new Error(`Coordinates (${x}, ${y}) are outside display bounds of ${width}x${height}`);
+					}
+				}
+
+				return await runtime.computer(action, scaledCoordinate, async () => {
+					const beforeInput = async () => {
+						if (extra.signal.aborted || runtime.companion.state.paused) {
+							throw rejectedAction(extra.signal.aborted ? 'CANCELLED' : 'PAUSED', 'Computer action cancelled or paused before execution.');
+						}
+
+						if (windowId !== undefined) {
 						// shortcut: focus can change after this check; use app APIs when atomic targeting is required.
-						await measure('foreground_guard', async () => runtime.windows.requireForeground(windowId, {
-							signal: extra.signal, timeoutMs: 20_000, paused: () => runtime.companion.state.paused, timeoutError: 'Foreground check timed out. No input was sent; read the window again before continuing.',
-						}));
-					}
-
-					if (extra.signal.aborted || runtime.companion.state.paused) {
-						throw new Error('Computer action cancelled or paused before execution.');
-					}
-				};
-
-				// Implement system actions using nut-js
-				switch (action) {
-					case 'key': {
-						if (!text) {
-							throw new Error('Text required for key');
-						}
-
-						const keys = toKeys(text);
-						await beforeInput();
-						await keyboard.pressKey(...keys);
-						await keyboard.releaseKey(...keys);
-
-						return jsonResult({ok: true});
-					}
-
-					case 'type': {
-						if (!text) {
-							throw new Error('Text required for type');
-						}
-
-						let inputMethod: Record<string, unknown> | undefined;
-						if (process.platform === 'win32') {
-							try {
-								inputMethod = await runtime.windows.request({action: 'input_method'}, {
-									signal: extra.signal, timeoutMs: 200, paused: () => runtime.companion.state.paused, timeoutError: 'Input method observation timed out.',
-								});
-							} catch {
-								inputMethod = {status: 'unavailable'};
-							}
+							await measure('foreground_guard', async () => runtime.windows.requireForeground(windowId, {
+								signal: extra.signal, timeoutMs: 20_000, paused: () => runtime.companion.state.paused, timeoutError: 'Foreground check timed out. No input was sent; read the window again before continuing.',
+							}, windowRef));
 						}
 
 						if (extra.signal.aborted || runtime.companion.state.paused) {
-							throw new Error('Computer action cancelled or paused before execution.');
+							throw rejectedAction(extra.signal.aborted ? 'CANCELLED' : 'PAUSED', 'Computer action cancelled or paused before execution.');
+						}
+					};
+
+					// Implement system actions using nut-js
+					switch (action) {
+						case 'key': {
+							if (!text) {
+								throw new Error('Text required for key');
+							}
+
+							const keys = toKeys(text);
+							await beforeInput();
+							await withRelease(async () => keyboard.pressKey(...keys), async () => keyboard.releaseKey(...keys));
+
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						if (process.platform === 'linux' && hasXdotool()) {
-							xdotoolType(text);
-						} else if (process.platform === 'win32' && [...text].some((character) => character.codePointAt(0)! > 127) && runtime.companion.clipboard) {
-							await runtime.companion.clipboard(text);
-							let pasteStarted = false;
-							try {
+						case 'type': {
+							if (!text) {
+								throw new Error('Text required for type');
+							}
+
+							let inputMethod: Record<string, unknown> | undefined;
+							if (process.platform === 'win32') {
+								try {
+									inputMethod = await runtime.windows.request({action: 'input_method'}, {
+										signal: extra.signal, timeoutMs: 200, paused: () => runtime.companion.state.paused, timeoutError: 'Input method observation timed out.',
+									});
+								} catch {
+									inputMethod = {status: 'unavailable'};
+								}
+							}
+
+							if (extra.signal.aborted || runtime.companion.state.paused) {
+								throw rejectedAction(extra.signal.aborted ? 'CANCELLED' : 'PAUSED', 'Computer action cancelled or paused before execution.');
+							}
+
+							if (process.platform === 'linux' && hasXdotool()) {
+								await dispatch(async () => {
+									xdotoolType(text);
+								});
+							} else if (process.platform === 'win32' && [...text].some((character) => character.codePointAt(0)! > 127) && runtime.companion.clipboard) {
+								await runtime.companion.clipboard(text);
+								let pasteFailed = false;
+								let pasteFailure: unknown;
+								try {
+									await beforeInput();
+									await withRelease(async () => keyboard.pressKey(Key.LeftControl, Key.V), async () => keyboard.releaseKey(Key.LeftControl, Key.V));
+									await new Promise<void>((resolve) => {
+										setTimeout(resolve, 200);
+									});
+								} catch (error) {
+									pasteFailed = true;
+									pasteFailure = error;
+								}
+
+								try {
+									await runtime.companion.clipboard(null);
+								} catch {
+									inputState = 'unknown';
+									pasteFailed = true;
+									pasteFailure = new DesktopError('Clipboard restoration failed. Inspect the clipboard and field before continuing.', {code: 'CLIPBOARD_RESTORE_FAILED', disposition: {delivery: 'delivery_uncertain', retry: 'unsafe'}});
+								}
+
+								if (pasteFailed) {
+									throw pasteFailure;
+								}
+							} else if (process.platform === 'win32' && [...text].every((character) => character.codePointAt(0)! > 0 && character.codePointAt(0)! <= 127)) {
 								await beforeInput();
-								pasteStarted = true;
-								await keyboard.pressKey(Key.LeftControl, Key.V);
-								await keyboard.releaseKey(Key.LeftControl, Key.V);
-								await new Promise<void>((resolve) => {
-									setTimeout(resolve, 200);
-								});
-							} finally {
-								if (pasteStarted) {
-									await keyboard.releaseKey(Key.LeftControl, Key.V);
-								}
+								// Bypass per-character JS waits while yielding for pause/cancellation between chunks.
+								for (let index = 0; index < text.length; index += 32) {
+									if (extra.signal.aborted || runtime.companion.state.paused) {
+										throw rejectedAction(extra.signal.aborted ? 'CANCELLED' : 'PAUSED', `Computer action cancelled. Submitted ${index} of ${text.length} characters; input methods may transform them. Read the field before continuing; do not retype from the start.`);
+									}
 
-								await runtime.companion.clipboard(null);
+									// eslint-disable-next-line no-await-in-loop
+									await beforeInput();
+									// eslint-disable-next-line no-await-in-loop
+									await dispatch(async () => providerRegistry.getKeyboard().type(text.slice(index, index + 32)));
+									submittedCharacters = Math.min(text.length, index + 32);
+									// eslint-disable-next-line no-await-in-loop
+									await new Promise<void>((resolve) => {
+										setImmediate(resolve);
+									});
+								}
+							} else {
+								await beforeInput();
+								await dispatch(async () => keyboard.type(text));
 							}
-						} else if (process.platform === 'win32' && [...text].every((character) => character.codePointAt(0)! > 0 && character.codePointAt(0)! <= 127)) {
-							await beforeInput();
-							// Bypass per-character JS waits while yielding for pause/cancellation between chunks.
-							for (let index = 0; index < text.length; index += 32) {
-								if (extra.signal.aborted || runtime.companion.state.paused) {
-									throw new Error(`Computer action cancelled. Submitted ${index} of ${text.length} characters; input methods may transform them. Read the field before continuing; do not retype from the start.`);
-								}
 
-								// eslint-disable-next-line no-await-in-loop
-								await providerRegistry.getKeyboard().type(text.slice(index, index + 32));
-								// eslint-disable-next-line no-await-in-loop
-								await new Promise<void>((resolve) => {
-									setImmediate(resolve);
-								});
+							return jsonResult({
+								contract_version: 1, ok: true, verified: false, verify: 'read the field to confirm the text; an active input method can alter letters', ...(inputMethod ? {input_method: inputMethod} : {}),
+							});
+						}
+
+						case 'get_cursor_position': {
+							const pos = await mouse.getPosition();
+							const scale = await getApiToLogicalScale();
+							// Return coordinates in API image space (scaled down from logical)
+							// so Claude can correlate with what it sees in screenshots
+							return jsonResult({
+								x: Math.round(pos.x / scale),
+								y: Math.round(pos.y / scale),
+							});
+						}
+
+						case 'mouse_move': {
+							if (!scaledCoordinate) {
+								throw new Error('Coordinate required for mouse_move');
 							}
-						} else {
-							await beforeInput();
-							await keyboard.type(text);
+
+							await dispatch(async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						return jsonResult({ok: true, verify: 'read the field to confirm the text; an active input method can alter letters', ...(inputMethod ? {input_method: inputMethod} : {})});
-					}
+						case 'left_click': {
+							if (scaledCoordinate) {
+								await dispatch(async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+							}
 
-					case 'get_cursor_position': {
-						const pos = await mouse.getPosition();
-						const scale = await getApiToLogicalScale();
-						// Return coordinates in API image space (scaled down from logical)
-						// so Claude can correlate with what it sees in screenshots
-						return jsonResult({
-							x: Math.round(pos.x / scale),
-							y: Math.round(pos.y / scale),
-						});
-					}
-
-					case 'mouse_move': {
-						if (!scaledCoordinate) {
-							throw new Error('Coordinate required for mouse_move');
+							await dispatch(async () => mouse.leftClick());
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
-						return jsonResult({ok: true});
-					}
+						case 'left_click_drag': {
+							if (!scaledCoordinate) {
+								throw new Error('Coordinate required for left_click_drag');
+							}
 
-					case 'left_click': {
-						if (scaledCoordinate) {
-							await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
+							await withRelease(async () => mouse.pressButton(Button.LEFT), async () => mouse.releaseButton(Button.LEFT), async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						await mouse.leftClick();
-						return jsonResult({ok: true});
-					}
+						case 'right_click': {
+							if (scaledCoordinate) {
+								await dispatch(async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+							}
 
-					case 'left_click_drag': {
-						if (!scaledCoordinate) {
-							throw new Error('Coordinate required for left_click_drag');
+							await dispatch(async () => mouse.rightClick());
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						await mouse.pressButton(Button.LEFT);
-						await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
-						await mouse.releaseButton(Button.LEFT);
-						return jsonResult({ok: true});
-					}
+						case 'middle_click': {
+							if (scaledCoordinate) {
+								await dispatch(async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+							}
 
-					case 'right_click': {
-						if (scaledCoordinate) {
-							await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
+							await dispatch(async () => mouse.click(Button.MIDDLE));
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						await mouse.rightClick();
-						return jsonResult({ok: true});
-					}
+						case 'double_click': {
+							if (scaledCoordinate) {
+								await dispatch(async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+							}
 
-					case 'middle_click': {
-						if (scaledCoordinate) {
-							await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
+							await dispatch(async () => mouse.doubleClick(Button.LEFT));
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						await mouse.click(Button.MIDDLE);
-						return jsonResult({ok: true});
-					}
+						case 'scroll': {
+							if (!scaledCoordinate) {
+								throw new Error('Coordinate required for scroll');
+							}
 
-					case 'double_click': {
-						if (scaledCoordinate) {
-							await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
+							if (!text) {
+								throw new Error('Text required for scroll (direction like "up", "down:5")');
+							}
+
+							// Parse direction and optional amount from text (e.g. "down" or "down:5")
+							const parts = text.split(':');
+							const direction = parts[0];
+							const amountStr = parts[1];
+							const amount = amountStr ? parseInt(amountStr, 10) : 300;
+
+							if (!direction) {
+								throw new Error('Scroll direction required');
+							}
+
+							if (amountStr !== undefined && (isNaN(amount) || amount <= 0)) {
+								throw new Error(`Invalid scroll amount: ${amountStr}`);
+							}
+
+							// Move to position first
+							await dispatch(async () => mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1])));
+
+							// Scroll in the specified direction
+							switch (direction.toLowerCase()) {
+								case 'up':
+									await dispatch(async () => mouse.scrollUp(amount));
+									break;
+								case 'down':
+									await dispatch(async () => mouse.scrollDown(amount));
+									break;
+								case 'left':
+									await dispatch(async () => mouse.scrollLeft(amount));
+									break;
+								case 'right':
+									await dispatch(async () => mouse.scrollRight(amount));
+									break;
+								default:
+									throw new Error(`Invalid scroll direction: ${direction}. Use "up", "down", "left", or "right"`);
+							}
+
+							return jsonResult({contract_version: 1, ok: true, verified: false});
 						}
 
-						await mouse.doubleClick(Button.LEFT);
-						return jsonResult({ok: true});
-					}
+						case 'get_screenshot': {
+							// Get cursor position in logical coordinates
+							const cursorPos = await mouse.getPosition();
 
-					case 'scroll': {
-						if (!scaledCoordinate) {
-							throw new Error('Coordinate required for scroll');
-						}
+							// Capture the entire screen (may be at Retina resolution)
+							const image = await measure('screenshot_capture', grabScreen);
 
-						if (!text) {
-							throw new Error('Text required for scroll (direction like "up", "down:5")');
-						}
+							// Then resize to fit within API limits
+							const apiScaleFactor = getSizeToApiScale(image.getWidth(), image.getHeight());
+							const imageWidth = Math.floor(image.getWidth() * apiScaleFactor);
+							const imageHeight = Math.floor(image.getHeight() * apiScaleFactor);
 
-						// Parse direction and optional amount from text (e.g. "down" or "down:5")
-						const parts = text.split(':');
-						const direction = parts[0];
-						const amountStr = parts[1];
-						const amount = amountStr ? parseInt(amountStr, 10) : 300;
+							// Calculate cursor position in API image coordinates
+							// cursor is in logical coords, need to convert to API image coords
+							const scale = await getApiToLogicalScale();
+							const cursorInImageX = Math.floor(cursorPos.x / scale);
+							const cursorInImageY = Math.floor(cursorPos.y / scale);
 
-						if (!direction) {
-							throw new Error('Scroll direction required');
-						}
+							// Draw a crosshair at cursor position (red color)
+							const crosshairSize = 20;
+							const crosshairColor = 0xFF0000FF; // Red with full opacity (RGBA)
+							const crosshair = new Jimp(imageWidth, imageHeight, 0x00000000);
 
-						if (amountStr !== undefined && (isNaN(amount) || amount <= 0)) {
-							throw new Error(`Invalid scroll amount: ${amountStr}`);
-						}
+							// Draw horizontal line
+							for (let x = Math.max(0, cursorInImageX - crosshairSize); x <= Math.min(imageWidth - 1, cursorInImageX + crosshairSize); x++) {
+								if (cursorInImageY >= 0 && cursorInImageY < imageHeight) {
+									crosshair.setPixelColor(crosshairColor, x, cursorInImageY);
+									// Make it thicker
+									if (cursorInImageY > 0) {
+										crosshair.setPixelColor(crosshairColor, x, cursorInImageY - 1);
+									}
 
-						// Move to position first
-						await mouse.setPosition(new Point(scaledCoordinate[0], scaledCoordinate[1]));
-
-						// Scroll in the specified direction
-						switch (direction.toLowerCase()) {
-							case 'up':
-								await mouse.scrollUp(amount);
-								break;
-							case 'down':
-								await mouse.scrollDown(amount);
-								break;
-							case 'left':
-								await mouse.scrollLeft(amount);
-								break;
-							case 'right':
-								await mouse.scrollRight(amount);
-								break;
-							default:
-								throw new Error(`Invalid scroll direction: ${direction}. Use "up", "down", "left", or "right"`);
-						}
-
-						return jsonResult({ok: true});
-					}
-
-					case 'get_screenshot': {
-					// Get cursor position in logical coordinates
-						const cursorPos = await mouse.getPosition();
-
-						// Capture the entire screen (may be at Retina resolution)
-						const image = await measure('screenshot_capture', grabScreen);
-
-						// Then resize to fit within API limits
-						const apiScaleFactor = getSizeToApiScale(image.getWidth(), image.getHeight());
-						const imageWidth = Math.floor(image.getWidth() * apiScaleFactor);
-						const imageHeight = Math.floor(image.getHeight() * apiScaleFactor);
-
-						// Calculate cursor position in API image coordinates
-						// cursor is in logical coords, need to convert to API image coords
-						const scale = await getApiToLogicalScale();
-						const cursorInImageX = Math.floor(cursorPos.x / scale);
-						const cursorInImageY = Math.floor(cursorPos.y / scale);
-
-						// Draw a crosshair at cursor position (red color)
-						const crosshairSize = 20;
-						const crosshairColor = 0xFF0000FF; // Red with full opacity (RGBA)
-						const crosshair = new Jimp(imageWidth, imageHeight, 0x00000000);
-
-						// Draw horizontal line
-						for (let x = Math.max(0, cursorInImageX - crosshairSize); x <= Math.min(imageWidth - 1, cursorInImageX + crosshairSize); x++) {
-							if (cursorInImageY >= 0 && cursorInImageY < imageHeight) {
-								crosshair.setPixelColor(crosshairColor, x, cursorInImageY);
-								// Make it thicker
-								if (cursorInImageY > 0) {
-									crosshair.setPixelColor(crosshairColor, x, cursorInImageY - 1);
-								}
-
-								if (cursorInImageY < imageHeight - 1) {
-									crosshair.setPixelColor(crosshairColor, x, cursorInImageY + 1);
+									if (cursorInImageY < imageHeight - 1) {
+										crosshair.setPixelColor(crosshairColor, x, cursorInImageY + 1);
+									}
 								}
 							}
-						}
 
-						// Draw vertical line
-						for (let y = Math.max(0, cursorInImageY - crosshairSize); y <= Math.min(imageHeight - 1, cursorInImageY + crosshairSize); y++) {
-							if (cursorInImageX >= 0 && cursorInImageX < imageWidth) {
-								crosshair.setPixelColor(crosshairColor, cursorInImageX, y);
-								// Make it thicker
-								if (cursorInImageX > 0) {
-									crosshair.setPixelColor(crosshairColor, cursorInImageX - 1, y);
-								}
+							// Draw vertical line
+							for (let y = Math.max(0, cursorInImageY - crosshairSize); y <= Math.min(imageHeight - 1, cursorInImageY + crosshairSize); y++) {
+								if (cursorInImageX >= 0 && cursorInImageX < imageWidth) {
+									crosshair.setPixelColor(crosshairColor, cursorInImageX, y);
+									// Make it thicker
+									if (cursorInImageX > 0) {
+										crosshair.setPixelColor(crosshairColor, cursorInImageX - 1, y);
+									}
 
-								if (cursorInImageX < imageWidth - 1) {
-									crosshair.setPixelColor(crosshairColor, cursorInImageX + 1, y);
+									if (cursorInImageX < imageWidth - 1) {
+										crosshair.setPixelColor(crosshairColor, cursorInImageX + 1, y);
+									}
 								}
 							}
+
+							// Resize before compositing so the calibrated crosshair stays sharp and three pixels thick.
+							const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(image.bitmap.data, {
+								raw: {width: image.getWidth(), height: image.getHeight(), channels: 4},
+							})
+								.resize(imageWidth, imageHeight, {fit: 'fill', kernel: 'linear'})
+								.composite([{input: crosshair.bitmap.data, raw: {width: imageWidth, height: imageHeight, channels: 4}}])
+								.png({quality: 80, compressionLevel: 9})
+								.toBuffer());
+
+							// Convert optimized buffer to base64
+							const base64Data = measureSync('screenshot_base64', () => optimizedBuffer.toString('base64'));
+
+							return {
+								content: [
+									{
+										type: 'text',
+										text: serialize({
+											// Report the image dimensions - Claude should use coordinates within this space
+											// These may differ from the actual display due to scaling for API limits
+											image_width: imageWidth,
+											image_height: imageHeight,
+										}),
+									},
+									{
+										type: 'image',
+										data: base64Data,
+										mimeType: 'image/png',
+									},
+								],
+							};
 						}
-
-						// Resize before compositing so the calibrated crosshair stays sharp and three pixels thick.
-						const optimizedBuffer = await measure('screenshot_encode_png', async () => sharp(image.bitmap.data, {
-							raw: {width: image.getWidth(), height: image.getHeight(), channels: 4},
-						})
-							.resize(imageWidth, imageHeight, {fit: 'fill', kernel: 'linear'})
-							.composite([{input: crosshair.bitmap.data, raw: {width: imageWidth, height: imageHeight, channels: 4}}])
-							.png({quality: 80, compressionLevel: 9})
-							.toBuffer());
-
-						// Convert optimized buffer to base64
-						const base64Data = measureSync('screenshot_base64', () => optimizedBuffer.toString('base64'));
-
-						return {
-							content: [
-								{
-									type: 'text',
-									text: serialize({
-									// Report the image dimensions - Claude should use coordinates within this space
-									// These may differ from the actual display due to scaling for API limits
-										image_width: imageWidth,
-										image_height: imageHeight,
-									}),
-								},
-								{
-									type: 'image',
-									data: base64Data,
-									mimeType: 'image/png',
-								},
-							],
-						};
 					}
+				}, extra.signal);
+			} catch (error) {
+				const details = executionErrorDetails(error, inputState, !['get_screenshot', 'get_cursor_position'].includes(args.action), completedInputs > 0);
+				if (args.action === 'type' && args.text && submittedCharacters) {
+					details.progress = {submitted_characters: submittedCharacters, total_characters: args.text.length};
 				}
-			}, extra.signal);
+
+				return errorResult(new DesktopError(error instanceof Error ? error.message : String(error), details), 16000);
+			}
 		}),
 	);
 }

@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-11-10T02:20:31.591Z",
+  "scenarios": [
+    {
+      "fixture": "WinForms",
+      "whole_controls": 40,
+      "subtree_controls": 1,
+      "whole_characters": 6334,
+      "subtree_characters": 482,
+      "reduction_percent": 92.39027470792549
+    },
+    {
+      "fixture": "Electron",
+      "whole_controls": 39,
+      "subtree_controls": 1,
+      "whole_characters": 6450,
+      "subtree_characters": 462,
+      "reduction_percent": 92.83720930232559
+    }
+  ],
+  "scope": "Owned dense WinForms/Electron fixtures. Character counts measure returned JSON context, not execution speed or coverage of unexposed controls."
+}

@@ -28,16 +28,33 @@ try {
     }
   };
   scan(relocated);
-  const connected = await connect({root: relocated, command});
+  const connected = await connect({root: relocated, command, env: {...process.env,
+    APPDATA: path.join(relocated, '.test-appdata'), LOCALAPPDATA: path.join(relocated, '.test-localappdata'), POKEMON_USER_DATA_DIR: path.join(relocated, '.test-userdata')}});
   client = connected.client;
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', 'windows', 'course', 'excel']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel']);
+  assert.equal(tools.tools.find(tool => tool.name === 'windows').inputSchema.properties.action.default, 'batch');
+  assert.deepEqual(manifest.tools.map(tool => tool.name).sort(), tools.tools.map(tool => tool.name).sort(), 'Bundle metadata omitted a live tool.');
+  for (const file of ['backend/package.json', 'frontend/package.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json', 'plugin.json']) {
+    assert.equal(JSON.parse(fs.readFileSync(path.join(relocated, file), 'utf8')).version, manifest.version, file + ' version differs from bundle.');
+  }
+  const guide = fs.readFileSync(path.join(relocated, 'AGENT_GUIDE.md'), 'utf8');
+  assert(guide.startsWith('Package version: ' + manifest.version + '\nResponse contract version: 1\n'));
+  assert(guide.includes('stopped_step') && guide.includes('window_ref') && guide.includes('user pause'));
+  assert.equal(client.getServerVersion().version, manifest.version, 'MCP handshake version differs from bundle.');
+  const status = await connected.call('desktop', {action: 'status'});
+  assert.equal(status.structuredContent.native.ready, true, 'Bundled native worker is not ready.');
+  assert.equal(status.structuredContent.contract_version, 1);
+  assert.equal(status.structuredContent.server_version, manifest.version);
+  assert.deepEqual(status.structuredContent.native.actions, tools.tools.find(tool => tool.name === 'windows').inputSchema.properties.action.enum.filter(action => action !== 'batch'));
   for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
     const selected = await connected.call('pokemon', {action: 'select', pet});
     assert.equal(selected.structuredContent.pet, pet);
   }
-  const windows = await connected.call('windows', {action: 'get_windows', max_chars: 2000});
+  assert(fs.existsSync(path.join(relocated, '.test-userdata')), 'Companion ignored its isolated profile folder.');
+  const windows = await connected.call('windows', {steps: [{action: 'get_windows'}], max_chars: 2000});
   assert(windows.content.every((item) => item.type !== 'image'));
+  assert.equal(JSON.parse(windows.content.find(item => item.type === 'text').text).completed, 1);
   const cursor = await connected.call('computer', {action: 'get_cursor_position'});
   assert(!cursor.isError);
   await connected.call('pokemon', {action: 'done', message: 'Standalone package verified!'});

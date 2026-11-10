@@ -26,9 +26,11 @@ export async function timedCall<T>(tool: string, action: string, run: () => Prom
 		try {
 			return await run();
 		} finally {
-			process.stderr.write(`[pokemon-timing] ${JSON.stringify({
-				tool, action, total_ms: performance.now() - call.started, breakdown_ms: call.breakdown_ms,
-			})}\n`);
+			try {
+				process.stderr.write(`[pokemon-timing] ${JSON.stringify({
+					tool, action, total_ms: performance.now() - call.started, breakdown_ms: call.breakdown_ms,
+				})}\n`);
+			} catch {/* Optional diagnostics must not alter delivery or mask the original error. */}
 		}
 	});
 }

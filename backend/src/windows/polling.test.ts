@@ -8,10 +8,59 @@ import {
 
 afterEach(() => vi.useRealTimers());
 const control = {
-	window: {id: '123'}, snapshot: 'a'.repeat(32), truncated: false, matched: 1, nodes: [{id: 1, value: 'ready', actions: ['focus']}],
+	window: {id: '123', window_ref: 'b'.repeat(32)}, snapshot: 'a'.repeat(32), truncated: false, matched: 1, nodes: [{id: 1, value: 'ready', actions: ['focus']}],
 };
 
 describe('Windows polling actions', () => {
+	it('pins polling to the first observed window identity', async () => {
+		const runtime = new PokemonRuntime();
+		const request = vi.spyOn(runtime.windows, 'request')
+			.mockResolvedValueOnce({...control, window: {id: '123', window_ref: 'b'.repeat(32)}, nodes: []})
+			.mockRejectedValueOnce(new Error('window replaced'));
+		await expect(runWindowsRequest(runtime, {action: 'wait_for', window_id: '123', query: 'Note'})).rejects.toThrow('window replaced');
+		expect(request.mock.calls[1]![0].window_ref).toBe('b'.repeat(32));
+	});
+
+	it('requires complete zero-match coverage for absence after a verified baseline', async () => {
+		const runtime = new PokemonRuntime();
+		const request = vi.spyOn(runtime.windows, 'request')
+			.mockResolvedValueOnce({window_ref: 'b'.repeat(32)})
+			.mockResolvedValueOnce({
+				...control, nodes: [], matched: 0, complete: false, truncated: true,
+			})
+			.mockResolvedValueOnce({
+				...control, nodes: [], matched: 0, complete: true, truncated: false,
+			});
+		const result = await runWindowsRequest(runtime, {
+			action: 'wait_for', window_id: '123', query: 'Note', wait_condition: 'absent', snapshot: control.snapshot, element_id: 1,
+		});
+		expect(result).toMatchObject({condition: 'absent', verified: true});
+		expect(request.mock.calls.map(([args]) => args.action)).toEqual(['wait_baseline', 'get_ui', 'get_ui']);
+		expect(request.mock.calls[1]![0].window_ref).toBe('b'.repeat(32));
+	});
+
+	it('propagates cancellation controls on ordinary native actions', async () => {
+		const runtime = new PokemonRuntime();
+		const controller = new AbortController();
+		const request = vi.spyOn(runtime.windows, 'request').mockResolvedValue({ok: true});
+		await runWindowsRequest(runtime, {action: 'invoke', snapshot: control.snapshot, element_id: 1}, controller.signal);
+		expect(request.mock.calls[0]![1]?.signal).toBe(controller.signal);
+		expect(request.mock.calls[0]![1]?.paused()).toBe(false);
+		runtime.companion.state.paused = true;
+		expect(request.mock.calls[0]![1]?.paused()).toBe(true);
+	});
+
+	it('rejects unsupported absence and partial subtree inputs before executing', () => {
+		expect(() => {
+			validateWindowsRequest({
+				action: 'wait_for', window_id: '123', query: 'Note', wait_condition: 'absent',
+			});
+		}).toThrow('earlier unique observation');
+		expect(() => {
+			validateWindowsRequest({action: 'get_ui', window_id: '123', root_snapshot: control.snapshot});
+		}).toThrow('together');
+	});
+
 	it('waits through absent and stale values, rejecting clipped previews', async () => {
 		const runtime = new PokemonRuntime();
 		const request = vi.spyOn(runtime.windows, 'request')
@@ -154,5 +203,16 @@ describe('Windows polling actions', () => {
 		expect(JSON.stringify(result).length).toBeLessThanOrEqual(1000);
 		expect(result.started_clipped).toBe(true);
 		expect(result.truncated).toBe(true);
+	});
+
+	it('refuses to retry a launch after a successful dispatch and timed-out observation', async () => {
+		vi.useFakeTimers();
+		const runtime = new PokemonRuntime();
+		const request = vi.spyOn(runtime.windows, 'request').mockResolvedValueOnce({started: 'C:/Test.exe', query: 'Test'}).mockResolvedValue({windows: []});
+		const pending = runWindowsRequest(runtime, {action: 'launch', text: 'Test.exe', timeout_ms: 250});
+		const rejection = expect(pending).rejects.toMatchObject({details: {code: 'TIMEOUT', disposition: {delivery: 'delivery_uncertain', retry: 'unsafe'}}});
+		await vi.advanceTimersByTimeAsync(300);
+		await rejection;
+		expect(request.mock.calls.filter(([args]) => args.action === 'launch')).toHaveLength(1);
 	});
 });

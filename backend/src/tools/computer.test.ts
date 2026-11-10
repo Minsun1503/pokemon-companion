@@ -1,13 +1,17 @@
 import {
 	afterEach, describe, expect, it, vi,
 } from 'vitest';
-import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
+import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
+import {Client} from '@modelcontextprotocol/sdk/client/index.js';
+import {InMemoryTransport} from '@modelcontextprotocol/sdk/inMemory.js';
+import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import {
 	keyboard, providerRegistry, screen, mouse, Point,
 } from '@nut-tree-fork/nut-js';
 import sharp from 'sharp';
 import {PokemonRuntime} from '../pokemon/runtime.js';
 import {registerComputer} from './computer.js';
+import {DesktopError} from '../utils/errors.js';
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -17,14 +21,24 @@ function fixture() {
 	const request = vi.spyOn(runtime.windows, 'request').mockResolvedValue({keyboard_layout: '00000409', language_id: '0409', imm_ime: false});
 	const registerTool = vi.fn();
 	registerComputer({registerTool} as unknown as McpServer, runtime);
-	const handle = registerTool.mock.calls[0]![2];
+	const rawHandle = registerTool.mock.calls[0]![2];
+	const handle: typeof rawHandle = async (...args: Parameters<typeof rawHandle>) => {
+		const result = await rawHandle(...args);
+		if (result.isError) {
+			const payload = JSON.parse(result.content[0].text);
+			throw new DesktopError(payload.error, payload.error_details);
+		}
+
+		return result;
+	};
+
 	const controller = new AbortController();
 	const native = vi.spyOn(providerRegistry.getKeyboard(), 'type').mockResolvedValue(undefined);
 	const wrapper = vi.spyOn(keyboard, 'type').mockResolvedValue(keyboard);
 	const press = vi.spyOn(keyboard, 'pressKey').mockResolvedValue(keyboard);
 	const release = vi.spyOn(keyboard, 'releaseKey').mockResolvedValue(keyboard);
 	return {
-		runtime, controller, native, wrapper, request, press, release, handle, schema: registerTool.mock.calls[0]![1].inputSchema,
+		runtime, controller, native, wrapper, request, press, release, handle, rawHandle, schema: registerTool.mock.calls[0]![1].inputSchema,
 		type: async (text: string) => handle({action: 'type', text}, {signal: controller.signal}),
 		input: async (action: 'key' | 'type', text: string, windowId: string) => handle({action, text, window_id: windowId}, {signal: controller.signal}),
 		screenshot: async () => handle({action: 'get_screenshot'}, {signal: controller.signal}),
@@ -32,6 +46,65 @@ function fixture() {
 }
 
 describe.runIf(process.platform === 'win32')('plain Windows typing', () => {
+	it('does not classify focus loss after a completed chunk as a safe full retry', async () => {
+		const {rawHandle, request, native, controller} = fixture();
+		let guards = 0;
+		request.mockImplementation(async (args) => {
+			if (args.action !== 'foreground') {
+				return {status: 'available'};
+			}
+
+			guards += 1;
+			return guards >= 3 ? {id: '456', root_owner_id: '456'} : {id: '123', root_owner_id: '123'};
+		});
+		const result = await rawHandle({action: 'type', text: '1234 '.repeat(100), window_id: '123'}, {signal: controller.signal});
+		expect(JSON.parse(result.content[0].text)).toMatchObject({error_details: {code: 'FOREGROUND_MISMATCH', disposition: {retry: 'unsafe'}, progress: {submitted_characters: 32}}});
+		expect(native).toHaveBeenCalledOnce();
+	});
+
+	it('returns partial typing evidence instead of allowing a full replay', async () => {
+		const {rawHandle, native, controller} = fixture();
+		native.mockImplementationOnce(async () => {
+			controller.abort();
+		});
+		const result = await rawHandle({action: 'type', text: '1234 '.repeat(100)}, {signal: controller.signal});
+		expect(result.isError).toBe(true);
+		expect(JSON.parse(result.content[0].text)).toMatchObject({
+			contract_version: 1, error_details: {
+				code: 'CANCELLED', disposition: {delivery: 'delivery_uncertain', retry: 'unsafe'}, progress: {submitted_characters: 32, total_characters: 500},
+			},
+		});
+		expect(native).toHaveBeenCalledOnce();
+	});
+
+	it('attempts modifier release after a partially failed key press', async () => {
+		const {rawHandle, press, release, controller} = fixture();
+		press.mockRejectedValueOnce(new Error('partial native press'));
+		const result = await rawHandle({action: 'key', text: 'ctrl+l'}, {signal: controller.signal});
+		expect(JSON.parse(result.content[0].text).error_details.disposition).toEqual({delivery: 'delivery_uncertain', retry: 'unsafe'});
+		expect(release).toHaveBeenCalledOnce();
+		expect(press).toHaveBeenCalledOnce();
+	});
+
+	it('keeps retry metadata through the actual MCP transport', async () => {
+		const {runtime, press} = fixture();
+		const server = new McpServer({name: 'test', version: '1'});
+		registerComputer(server, runtime);
+		const client = new Client({name: 'test', version: '1'});
+		const [ct, st] = InMemoryTransport.createLinkedPair();
+		await Promise.all([server.connect(st), client.connect(ct)]);
+		try {
+			press.mockRejectedValueOnce(new Error('lost native response'));
+			const response = await client.callTool({name: 'computer', arguments: {action: 'key', text: 'ctrl+l'}}) as CallToolResult;
+			expect(response.isError).toBe(true);
+			const text = response.content.find((item) => item.type === 'text')!;
+			expect(JSON.parse(text.text).error_details.disposition.retry).toBe('unsafe');
+		} finally {
+			await client.close();
+			await server.close();
+		}
+	});
+
 	it('sends text in order without changing keyboard calibration', async () => {
 		const {native, wrapper, type} = fixture();
 		const text = '1234 '.repeat(100);
@@ -81,7 +154,7 @@ describe.runIf(process.platform === 'win32')('plain Windows typing', () => {
 		const {native, wrapper, type} = fixture();
 		const error = new Error('Native input failed');
 		native.mockRejectedValueOnce(error);
-		await expect(type('12345')).rejects.toBe(error);
+		await expect(type('12345')).rejects.toThrow(error.message);
 		await type('one\0two');
 		expect(wrapper).toHaveBeenCalledWith('one\0two');
 		expect(native).toHaveBeenCalledTimes(1);
@@ -162,7 +235,7 @@ describe.runIf(process.platform === 'win32')('foreground input guard', () => {
 		request.mockResolvedValue({id: '123', root_owner_id: '123'});
 		const error = new Error('Native press failed');
 		press.mockRejectedValueOnce(error);
-		await expect(input('key', 'f8', '123')).rejects.toBe(error);
+		await expect(input('key', 'f8', '123')).rejects.toThrow(error.message);
 		expect(press).toHaveBeenCalledOnce();
 	});
 

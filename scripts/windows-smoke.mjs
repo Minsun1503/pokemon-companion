@@ -68,7 +68,7 @@ try {
   assert.equal(fixtureState.text, text);
   assert.equal(fixtureState.clicks, 1);
   const batchText = 'One call: Pokémon APIs fill and verify!';
-  const batch = await api({action: 'batch', max_chars: 2000, steps: [
+  const batch = await api({max_chars: 2000, steps: [
     {action: 'get_windows', query: title},
     {action: 'get_ui', window_step: 0, query: 'Test note', control_type: 'Edit'},
     {action: 'set_value', target_step: 1, text: batchText},
@@ -100,8 +100,8 @@ try {
   const small = await api({action: 'get_ui', window_id, max_elements: 1, max_chars: 1000});
   assert.equal(small.nodes.length, 1);
   assert.equal(small.truncated, true);
-  assert.equal(small.matched, 2);
-  assert(small.scanned < longEditor.scanned);
+  assert(small.matched >= 2);
+  assert.equal(small.scanned, longEditor.scanned, 'A response limit must not cut short the complete capture proof.');
   assert(JSON.stringify(small).length <= 1000);
   let recent = longEditor;
   for (let read = 0; read < 9; read += 1) {
@@ -116,7 +116,7 @@ try {
   await assert.rejects(api({action: 'invoke', snapshot: '0'.repeat(32), element_id: 1}), /Unknown or expired/);
   assert.equal(screenshots, 0);
   await call('pokemon', {action: 'done', message: 'Windows API reading, typing, and buttons verified!'});
-  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, password hiding, early element/depth limits, clipping flags at 160/161 characters and full read_text, atomic compatibility, Unicode, stale-id rejection, bounded responses, zero screenshot images.`);
+  console.log(`PASS: 6 sequential Windows API steps in 1 MCP call (${JSON.stringify(batch).length} response characters), verified field value and button click, password hiding, bounded responses with complete capture proof, depth limits, clipping flags at 160/161 characters and full read_text, atomic compatibility, Unicode, stale-id rejection, zero screenshot images.`);
 } finally {
   if (fixtureUrl) await fetch(`${fixtureUrl}/quit`, {method: 'POST'}).catch(() => {});
   fixture?.kill();

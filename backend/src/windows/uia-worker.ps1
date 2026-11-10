@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
 Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, WindowsBase, System.Web.Extensions
 $uiaReferences = @([System.Windows.Automation.AutomationElement].Assembly.Location, [System.Windows.Automation.AutomationPattern].Assembly.Location, [System.Windows.Rect].Assembly.Location, [System.Web.Script.Serialization.JavaScriptSerializer].Assembly.Location) | Select-Object -Unique
-$uiaSources = @((Join-Path $PSScriptRoot 'uia-worker.cs'), (Join-Path $PSScriptRoot 'excel-worker.cs'))
+$uiaSources = @('uia-worker.cs', 'uia-identity.cs', 'uia-observation.cs', 'uia-coordination.cs', 'excel-worker.cs') | ForEach-Object { Join-Path $PSScriptRoot $_ }
 $assemblyPath = Join-Path $PSScriptRoot 'uia-worker.dll'
 if ($CompileOnly) {
     if (Test-Path -LiteralPath $assemblyPath) { Remove-Item -LiteralPath $assemblyPath }
@@ -22,10 +22,15 @@ while ($null -ne ($line = [Console]::ReadLine())) {
     try {
         $request = ConvertFrom-Json -InputObject $line
         $uiaArgs = $request.args
+        if ($uiaArgs.window_ref) { [PokemonWindowsAutomation]::CheckWindow($uiaArgs.window_id, $uiaArgs.window_ref) }
         switch ($uiaArgs.action) {
+            'acquire_control' { $result = [PokemonWindowsAutomation]::AcquireControl() }
+            'release_control' { $result = [PokemonWindowsAutomation]::ReleaseControl() }
+            'status' { $result = [PokemonWindowsAutomation]::Status() }
             'get_windows' { $result = [PokemonWindowsAutomation]::Windows($uiaArgs.query) }
-            'get_ui' { $result = [PokemonWindowsAutomation]::UI($uiaArgs.window_id, $uiaArgs.query, $uiaArgs.control_type, $uiaArgs.max_elements, $uiaArgs.max_depth) }
-            'activate' { $result = [PokemonWindowsAutomation]::Activate($uiaArgs.window_id) }
+            'get_ui' { $result = [PokemonWindowsAutomation]::UI($uiaArgs.window_id, $uiaArgs.query, $uiaArgs.control_type, $uiaArgs.max_elements, $uiaArgs.max_depth, $uiaArgs.view, $uiaArgs.root_snapshot, $uiaArgs.root_element_id, $uiaArgs.window_ref) }
+            'wait_baseline' { $result = [PokemonWindowsAutomation]::WaitBaseline($uiaArgs.window_id, $uiaArgs.snapshot, $uiaArgs.element_id, $uiaArgs.query, $uiaArgs.control_type) }
+            'activate' { $result = [PokemonWindowsAutomation]::Activate($uiaArgs.window_id, $uiaArgs.window_ref) }
             'launch' { $result = [PokemonWindowsAutomation]::Launch($uiaArgs.text) }
             'input_method' { $result = [PokemonWindowsAutomation]::InputMethod() }
             'foreground' { $result = [PokemonWindowsAutomation]::Foreground() }
@@ -38,6 +43,10 @@ while ($null -ne ($line = [Console]::ReadLine())) {
         $cause = $_.Exception.GetBaseException()
         $message = $cause.Message
         if ([string]::IsNullOrWhiteSpace($message)) { $message = $cause.ToString() }
-        [Console]::WriteLine((@{ id = $request.id; error = $message } | ConvertTo-Json -Compress))
+        $failure = @{ id = $request.id; error = $message }
+        if ($cause.Data.Contains('code')) {
+            $failure.error_details = @{ code = $cause.Data['code']; disposition = @{ delivery = $cause.Data['delivery']; retry = $cause.Data['retry'] } }
+        }
+        [Console]::WriteLine(($failure | ConvertTo-Json -Depth 6 -Compress))
     }
 }

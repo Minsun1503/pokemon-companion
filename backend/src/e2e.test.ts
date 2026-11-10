@@ -188,11 +188,12 @@ describe.each([
 			});
 
 			expect(result.tools.map((t) => t.name)).toEqual([
+				'desktop',
 				'computer',
 				'pokemon',
 				...(process.platform === 'win32' ? ['windows', 'course', 'excel'] : []),
 			]);
-			expect(result.tools[0]).toMatchObject({
+			expect(result.tools.find((tool) => tool.name === 'computer')).toMatchObject({
 				name: 'computer',
 				description: expect.any(String),
 				inputSchema: expect.objectContaining({

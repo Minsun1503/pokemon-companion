@@ -152,16 +152,16 @@ try {
   console.log(`PASS: course MCP registration, ${pages} native text pages beyond 8000 characters, emoji boundaries, duplicate-target rejection, delayed navigation, stale-version rejection, completion evidence, verified/idempotent search, and native source cap; no screenshots.`);
 } finally {
   try {
-    // Close only this uniquely named test tab, after a fresh foreground check.
+    // Root cleanup at the uniquely observed test tab, then invoke its own close control.
     const owned = await windows({action: 'get_windows', query: title});
     if (owned.windows.length === 1) {
       const win = owned.windows[0];
-      const docs = await windows({action: 'get_ui', window_id: win.id, query: title, control_type: 'Document'});
-      assert.equal(docs.nodes.length, 1, 'Refuse cleanup if this test document is not uniquely active.');
-      await windows({action: 'focus', snapshot: docs.snapshot, element_id: docs.nodes[0].id});
-      const active = await windows({action: 'get_windows', query: title});
-      assert(active.windows[0]?.active && active.windows[0]?.title.includes(title));
-      await call('computer', {action: 'key', text: 'ctrl+w', window_id: win.id});
+      const tab = await windows({action: 'get_ui', window_id: win.id, window_ref: win.window_ref, query: title, control_type: 'TabItem'});
+      assert.equal(tab.nodes.length, 1, 'Refuse cleanup if this test tab is not unique.');
+      const close = await windows({action: 'get_ui', window_id: win.id, window_ref: win.window_ref, root_snapshot: tab.snapshot,
+        root_element_id: tab.nodes[0].id, query: 'Close tab', control_type: 'Button'});
+      assert.equal(close.nodes.length, 1, 'Refuse cleanup unless this tab exposes one close control.');
+      await windows({action: 'invoke', snapshot: close.snapshot, element_id: close.nodes[0].id});
       const deadline = performance.now() + 3000;
       while ((await windows({action: 'get_windows', query: title})).windows.length) {
         assert(performance.now() < deadline, 'Owned test page did not close.');

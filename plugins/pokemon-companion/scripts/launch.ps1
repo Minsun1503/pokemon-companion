@@ -1,12 +1,15 @@
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
-$taskVersion = 'v0.1.0'
+$taskPluginDirectory = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
+$taskRuntimeVersion = (Get-Content -LiteralPath (Join-Path $taskPluginDirectory 'runtime.json') -Raw | ConvertFrom-Json).package_version
+if ($taskRuntimeVersion -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$') { throw 'Invalid runtime package version.' }
+$taskVersion = 'v' + $taskRuntimeVersion
 $taskArchiveName = 'pokemon-companion-win32-x64.zip'
 $taskBaseUrl = "https://github.com/Minsun1503/pokemon-companion/releases/download/$taskVersion"
 $taskCacheBase = [IO.Path]::GetFullPath((Join-Path $env:LOCALAPPDATA 'pokemon-companion\packages'))
 $taskPackage = [IO.Path]::GetFullPath((Join-Path $taskCacheBase $taskVersion))
 if (-not $taskPackage.StartsWith($taskCacheBase + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Invalid package cache path.' }
-$taskMutex = New-Object Threading.Mutex($false, 'Local\pokemon-companion-package-v0.1.0')
+$taskMutex = New-Object Threading.Mutex($false, "Local\pokemon-companion-package-$taskVersion")
 $taskLocked = $false
 try {
   $taskLocked = $taskMutex.WaitOne(300000)

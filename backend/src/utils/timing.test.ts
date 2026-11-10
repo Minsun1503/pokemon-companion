@@ -9,6 +9,16 @@ afterEach(() => {
 });
 
 describe('optional tool timing', () => {
+	it('preserves results and original failures if the diagnostic sink throws', async () => {
+		vi.stubEnv('POKEMON_TIMING', '1');
+		vi.spyOn(process.stderr, 'write').mockImplementation(() => {
+			throw new Error('diagnostic sink unavailable');
+		});
+		expect(await timedCall('windows', 'invoke', async () => 'acknowledged')).toBe('acknowledged');
+		await expect(timedCall('windows', 'invoke', async () => {
+			throw new Error('original action failure');
+		})).rejects.toThrow('original action failure');
+	});
 	it('does not log or change results when disabled', async () => {
 		vi.stubEnv('POKEMON_TIMING', '0');
 		const write = vi.spyOn(process.stderr, 'write').mockReturnValue(true);

@@ -4,6 +4,7 @@ import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import type {WindowsRequest} from './automation.js';
 import {serialize} from '../utils/timing.js';
+import {executionErrorDetails, rejectedAction} from '../utils/errors.js';
 
 // Reject multiline/control characters in accessible names.
 // eslint-disable-next-line no-control-regex
@@ -11,6 +12,7 @@ const name = z.string().min(1).max(160).refine((value) => !/[\u0000-\u001f]/.tes
 const version = z.string().regex(/^[a-f0-9]{64}$/);
 const shared = {
 	window_id: z.string().regex(/^[1-9]\d*$/),
+	window_ref: z.string().regex(/^[a-f0-9]{32}$/).optional(),
 	document_name: name.describe('Exact accessible name of the selected course/lesson Document, not a broad browser query.'),
 	timeout_ms: z.number().int().min(1).max(15000).default(5000),
 	max_chars: z.number().int().min(1000).max(16000).default(8000),
@@ -97,6 +99,7 @@ class CourseRun {
 	phase = 'discovery';
 	input: 'not_sent' | 'applied' | 'unknown' = 'not_sent';
 	private readonly deadline: number;
+	private windowRef: string | undefined;
 	constructor(
 		readonly runtime: PokemonRuntime,
 		readonly args: CourseRequest,
@@ -104,19 +107,20 @@ class CourseRun {
 		readonly signal?: AbortSignal,
 	) {
 		this.deadline = performance.now() + args.timeout_ms;
+		this.windowRef = args.window_ref;
 	}
 
 	check(): void {
 		if (this.signal?.aborted) {
-			throw new Error('Course action cancelled. Re-read the current UI before continuing.');
+			throw rejectedAction('CANCELLED', 'Course action cancelled. Re-read the current UI before continuing.');
 		}
 
 		if (this.runtime.companion.state.paused) {
-			throw new Error('Computer control is paused by the user. Resume from the companion controls, then re-read the current UI.');
+			throw rejectedAction('PAUSED', 'Computer control is paused by the user. Resume from the companion controls, then re-read the current UI.');
 		}
 
 		if (performance.now() >= this.deadline) {
-			throw new Error(`Course operation timed out during ${this.phase}; input was not replayed. Re-read the current UI.`);
+			throw rejectedAction('TIMEOUT', `Course operation timed out during ${this.phase}; input was not replayed. Re-read the current UI.`);
 		}
 	}
 
@@ -130,11 +134,16 @@ class CourseRun {
 				this.input = 'unknown';
 			}
 
-			result = await this.runtime.windows.request(args, {
+			result = await this.runtime.windows.request({...args, ...(args.window_id ? {window_ref: this.windowRef} : {})}, {
 				signal: this.signal, timeoutMs: Math.max(1, this.deadline - performance.now()),
 				paused: () => this.runtime.companion.state.paused,
 				timeoutError: `Course native request timed out during ${this.phase}; re-read the current UI.`,
 			});
+			const window = result.window as Record<string, unknown> | undefined;
+			if (typeof window?.window_ref === 'string') {
+				this.windowRef = window.window_ref;
+			}
+
 			if (sendsInput) {
 				this.input = 'applied';
 			}
@@ -311,14 +320,18 @@ export async function runCourse(runtime: PokemonRuntime, input: unknown, signal?
 		try {
 			const result = await run.run();
 			return courseResult({
-				ok: true, action: args.action, window_id: args.window_id, document_name: args.document_name,
+				contract_version: 1, ok: true, action: args.action, window_id: args.window_id, document_name: args.document_name,
 				input_state: run.input, native_calls: run.calls, ...result,
 			}, args.max_chars);
 		} catch (error) {
 			return courseResult({
-				ok: false, action: args.action, phase: run.phase, input_state: run.input,
+				contract_version: 1, ok: false, action: args.action, phase: run.phase, input_state: run.input,
 				native_calls: run.calls, error: (error instanceof Error ? error.message : String(error)).slice(0, 400),
+				error_details: executionErrorDetails(error, run.input, ['open_lesson', 'search_courses'].includes(args.action)),
 			}, args.max_chars);
 		}
-	}, signal);
+	}, signal).catch((error: unknown) => courseResult({
+		contract_version: 1, ok: false, action: args.action, phase: 'queue', input_state: 'not_sent', native_calls: 0,
+		error: (error instanceof Error ? error.message : String(error)).slice(0, 400), error_details: executionErrorDetails(error, 'not_sent', false),
+	}, args.max_chars));
 }

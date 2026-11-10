@@ -1,0 +1,45 @@
+{
+  "created_at": "2026-11-10T02:16:58.126Z",
+  "baseline_commit": "348d98cab48e121da6e696d76c588f284d560494",
+  "scenario": "native ValuePattern.SetValue on one owned WinForms field in a fixture with 30 unrelated fields",
+  "runs": 7,
+  "independently_verified": 16,
+  "timing_scope": "Warm native worker request/response; independent field verification, startup, and warmup excluded. No model, MCP, or companion latency included.",
+  "before": {
+    "min_ms": 4.497400000000198,
+    "median_ms": 5.011700000000019,
+    "max_ms": 34.633600000000115,
+    "samples_ms": [
+      34.633600000000115,
+      5.480999999999767,
+      4.962699999999131,
+      5.011700000000019,
+      4.497400000000198,
+      4.884399999999914,
+      10.71099999999933
+    ]
+  },
+  "after": {
+    "min_ms": 298.1091999999999,
+    "median_ms": 324.27800000000025,
+    "max_ms": 339.3139000000001,
+    "samples_ms": [
+      339.3139000000001,
+      324.27800000000025,
+      302.23339999999916,
+      298.1091999999999,
+      335.84569999999985,
+      304.65359999999964,
+      325.15819999999985
+    ]
+  },
+  "artifact_sha256": {
+    "uia-worker.cs": "c89aee400542483bc818e62d29be3e93529e1d950bfbdada06d8c5459999e0d9",
+    "uia-identity.cs": "0c65ac3e2508e824339c8bef3c95e689ea4d07d2301f734bc37afc9be3b6feb5",
+    "uia-observation.cs": "461fb7771b50ee01a77c332c836eacaaf074682fe6538243812efdb087ceb918",
+    "uia-coordination.cs": "16c90c45ff0ebb4a702c24d725a4c41006ef06c9b916efd5f4982ba3d57de528",
+    "excel-worker.cs": "95798bdfea8f828e503681bc78fad81fef935c1d849d3a18eafe82a88f86e762",
+    "uia-worker.ps1": "a35679ee44ddc8dcb8553c014becdcdc46696a869add9acff3043e4dc5f101dc",
+    "uia-worker.dll": "b99a38d9c6f430fbee685bf9810cbfd79f70abbec0cd8d9a83f9c0eeff8761b3"
+  }
+}

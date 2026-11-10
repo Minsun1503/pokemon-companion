@@ -128,6 +128,41 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 		const result = await readUI({nodes: [...nodes], matched: nodes.length, truncated: false});
 		expect(JSON.stringify(result).length).toBeLessThanOrEqual(1000);
 		expect(result.truncated).toBe(true);
+		expect(result.complete).toBe(false);
 		expect(result.nodes).toEqual(nodes.slice(0, (result.nodes as unknown[]).length));
+	});
+
+	it('preserves native rejection evidence through the worker protocol', async () => {
+		const worker = Object.assign(new EventEmitter(), {
+			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
+		});
+		vi.mocked(spawn).mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
+		const automation = new WindowsAutomation();
+		try {
+			const pending = automation.request({action: 'invoke', snapshot: 'a'.repeat(32), element_id: 1});
+			const rejection = expect(pending).rejects.toMatchObject({details: {code: 'STALE_REF', disposition: {delivery: 'not_delivered', retry: 'safe'}}});
+			worker.stdout.write(`${JSON.stringify({id: 1, error: 'expired', error_details: {code: 'STALE_REF', disposition: {delivery: 'not_delivered', retry: 'safe'}}})}\n`);
+			await rejection;
+		} finally {
+			automation.close();
+		}
+	});
+
+	it('marks a lost invocation response as uncertain and never replays it', async () => {
+		const worker = Object.assign(new EventEmitter(), {
+			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
+		});
+		vi.mocked(spawn).mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
+		const automation = new WindowsAutomation();
+		try {
+			const pending = automation.request({action: 'invoke', snapshot: 'a'.repeat(32), element_id: 1});
+			const rejection = expect(pending).rejects.toMatchObject({details: {disposition: {delivery: 'delivery_uncertain', retry: 'unsafe'}}});
+			worker.emit('exit', 1);
+			await rejection;
+			expect(worker.stdin.read().toString().trim().split('\n')).toHaveLength(1);
+			expect(worker.kill).toHaveBeenCalledOnce();
+		} finally {
+			automation.close();
+		}
 	});
 });

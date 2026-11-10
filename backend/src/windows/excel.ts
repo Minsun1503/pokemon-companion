@@ -3,6 +3,7 @@ import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import type {WindowsRequest} from './automation.js';
 import {serialize} from '../utils/timing.js';
+import {executionErrorDetails} from '../utils/errors.js';
 
 const singleLine = (limit: number) => z.string().min(1).max(limit).refine((value) => [...value].every((char) => char.charCodeAt(0) >= 32), 'Use a single-line name.');
 const version = z.string().regex(/^[a-f0-9]{64}$/);
@@ -29,6 +30,7 @@ export function excelBounds(address: string): {rows: number; columns: number; co
 const range = z.string().max(30).refine((value) => Boolean(excelBounds(value)), 'Use a rectangular A1 range within Excel bounds, at most 1,000 cells.').transform((value) => value.replaceAll('$', '').toUpperCase());
 const common = {
 	window_id: z.string().regex(/^[1-9]\d{0,18}$/),
+	window_ref: z.string().regex(/^[a-f0-9]{32}$/).optional(),
 	timeout_ms: z.number().int().min(1).max(15000).default(5000),
 	max_chars: z.number().int().min(2000).max(16000).default(8000),
 };
@@ -204,14 +206,19 @@ export async function runExcel(runtime: PokemonRuntime, input: unknown, signal?:
 				return compact({ok: true});
 			});
 			return excelResult({
-				action: args.action, window_id: args.window_id, input_state: inputState, native_calls: calls,
+				contract_version: 1, action: args.action, window_id: args.window_id, input_state: inputState, native_calls: calls,
 				...('workbook_name' in args ? {workbook_name: args.workbook_name} : {}), ...('sheet' in args ? {sheet: args.sheet} : {}), ...result,
+				...(result.ok === false ? {error_details: executionErrorDetails(new Error(String(result.error)), inputState, mutation)} : {}),
 			}, args.max_chars);
 		} catch (error) {
 			return compact({
-				ok: false, action: args.action, phase: 'native_request', input_state: inputState, native_calls: calls,
+				contract_version: 1, ok: false, action: args.action, phase: 'native_request', input_state: inputState, native_calls: calls,
 				error: (error instanceof Error ? error.message : String(error)).slice(0, 400),
+				error_details: executionErrorDetails(error, inputState, mutation),
 			});
 		}
-	}, signal);
+	}, signal).catch((error: unknown) => compact({
+		contract_version: 1, ok: false, action: args.action, phase: 'queue', input_state: 'not_sent', native_calls: 0,
+		error: (error instanceof Error ? error.message : String(error)).slice(0, 400), error_details: executionErrorDetails(error, 'not_sent', false),
+	}));
 }

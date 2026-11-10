@@ -10,6 +10,7 @@ import {PokemonRuntime} from '../pokemon/runtime.js';
 import {registerWindows} from '../tools/windows.js';
 import {jsonResult} from '../utils/response.js';
 import {runWindowsBatch, windowsStepSchema} from './batch.js';
+import {workerFailure} from '../utils/errors.js';
 
 const snapshot = 'a'.repeat(32);
 const listed = {windows: [{id: '123', title: 'Test'}]};
@@ -48,6 +49,7 @@ function fixture() {
 		capture: vi.fn(async () => undefined),
 	};
 	const runtime = new PokemonRuntime(companion);
+	vi.spyOn(runtime.windows, 'withControlLease').mockImplementation(async (run) => run());
 	const request = vi.spyOn(runtime.windows, 'request')
 		.mockResolvedValueOnce(structuredClone(listed))
 		.mockResolvedValueOnce(structuredClone(control))
@@ -111,6 +113,18 @@ describe('Windows batch execution', () => {
 		expect(request).toHaveBeenCalledTimes(3);
 	});
 
+	it('limits a safe rejection retry to the stopped step after earlier input succeeded', async () => {
+		const {runtime, request} = fixture();
+		const failed = workerFailure('Element expired', {code: 'STALE_REF', disposition: {delivery: 'not_delivered', retry: 'safe'}}, 'invoke');
+		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce({...control, nodes: [{...control.nodes[0], actions: ['set_value', 'invoke']}]})
+			.mockResolvedValueOnce({ok: true}).mockRejectedValueOnce(failed);
+		const result = await runWindowsBatch(runtime, steps([...plan.slice(0, 3), {action: 'invoke', target_step: 1}]), 2000);
+		expect(parse(result)).toMatchObject({
+			completed: 3, stopped_step: 3, retry_scope: 'stopped_step', error_details: {code: 'STALE_REF', disposition: {retry: 'safe'}},
+		});
+		expect(request.mock.calls.filter(([args]) => args.action === 'set_value')).toHaveLength(1);
+	});
+
 	it('stops on a failed expectation and retains the observed value', async () => {
 		const {runtime, request} = fixture();
 		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce(control).mockResolvedValueOnce({ok: true}).mockResolvedValue(control);
@@ -129,20 +143,6 @@ describe('Windows batch execution', () => {
 		expect(parse(result)).toMatchObject({ok: true, completed: 4, result: {nodes: [{value: 'Hello'}]}});
 		expect(request.mock.calls.filter(([args]) => args.action === 'set_value')).toHaveLength(1);
 		expect(request).toHaveBeenCalledTimes(5);
-	});
-
-	it('rejects clipped field values even when their prefix equals the expectation', async () => {
-		const {runtime, request} = fixture();
-		const clipped = {...control, nodes: [{...control.nodes[0], value: 'Hello', value_clipped: true}]};
-		request.mockReset().mockResolvedValue(clipped);
-		const result = await runWindowsBatch(runtime, steps([
-			{
-				action: 'get_ui', window_id: '123', query: 'Note', expect_value: 'Hello',
-			},
-			{action: 'invoke', target_step: 0},
-		]), 2000);
-		expect(parse(result)).toMatchObject({ok: false, completed: 0, stopped_step: 0});
-		expect(request).toHaveBeenCalledTimes(2);
 	});
 
 	it.each(['pause', 'cancel'])('honors %s before rechecking a stale value', async (reason) => {
@@ -241,6 +241,20 @@ describe('Windows batch execution', () => {
 		expect(parse(failure).truncated).toBe(true);
 	});
 
+	it('rejects clipped field values even when their prefix equals the expectation', async () => {
+		const {runtime, request} = fixture();
+		const clipped = {...control, nodes: [{...control.nodes[0], value: 'Hello', value_clipped: true}]};
+		request.mockReset().mockResolvedValue(clipped);
+		const result = await runWindowsBatch(runtime, steps([
+			{
+				action: 'get_ui', window_id: '123', query: 'Note', expect_value: 'Hello',
+			},
+			{action: 'invoke', target_step: 0},
+		]), 2000);
+		expect(parse(result)).toMatchObject({ok: false, completed: 0, stopped_step: 0});
+		expect(request).toHaveBeenCalledTimes(2);
+	});
+
 	it('supports element ref format @s<snapshot>:e<element_id> (Credit: Vercel agent-desktop)', async () => {
 		const {runtime, request} = fixture();
 		request.mockReset().mockResolvedValueOnce({ok: true});
@@ -251,7 +265,7 @@ describe('Windows batch execution', () => {
 		}), expect.objectContaining({timeoutMs: 20_000, paused: expect.any(Function)}));
 	});
 
-	it.runIf(process.platform === 'win32')('exposes batches through MCP while preserving atomic calls and validating size', async () => {
+	it.runIf(process.platform === 'win32')('defaults to batches through MCP while preserving explicit modes and validating size', async () => {
 		const {runtime, request} = fixture();
 		const server = new McpServer({name: 'batch-test', version: '1'});
 		registerWindows(server, runtime);
@@ -260,15 +274,55 @@ describe('Windows batch execution', () => {
 		await server.connect(serverTransport);
 		await client.connect(clientTransport);
 		try {
-			const batch = await client.callTool({name: 'windows', arguments: {action: 'batch', steps: plan, max_chars: 2000}});
+			const tools = await client.listTools();
+			const tool = tools.tools.find((entry) => entry.name === 'windows')!;
+			expect(tool.inputSchema.properties?.action).toMatchObject({default: 'batch'});
+			expect(tool.inputSchema.required ?? []).not.toContain('action');
+			const batch = await client.callTool({name: 'windows', arguments: {steps: plan, max_chars: 2000}});
 			expect(parse(batch as CallToolResult)).toMatchObject({ok: true, completed: 4});
+			request.mockResolvedValueOnce(listed);
+			const explicitBatch = await client.callTool({name: 'windows', arguments: {action: 'batch', steps: [{action: 'get_windows', query: 'Test'}]}});
+			expect(parse(explicitBatch as CallToolResult)).toMatchObject({ok: true, completed: 1, result: listed});
 			request.mockResolvedValueOnce(listed);
 			const atomic = await client.callTool({name: 'windows', arguments: {action: 'get_windows', query: 'Test'}});
 			expect(parse(atomic as CallToolResult)).toEqual(listed);
+			const missingSteps = await client.callTool({name: 'windows', arguments: {query: 'Test'}});
+			expect(parse(missingSteps as CallToolResult)).toMatchObject({error_details: {code: 'INVALID_ARGS', disposition: {delivery: 'not_delivered'}}});
+			const invalidPlan = await client.callTool({name: 'windows', arguments: {steps: [{action: 'get_windows'}, {action: 'set_value', snapshot, element_id: 1}]}});
+			expect(parse(invalidPlan as CallToolResult)).toMatchObject({error_details: {code: 'INVALID_ARGS', disposition: {delivery: 'not_delivered'}}});
 			await Promise.all([[], Array.from({length: 17}, () => ({action: 'get_windows'})), [{action: 'batch'}]].map(async (input) => {
 				const result = await client.callTool({name: 'windows', arguments: {action: 'batch', steps: input}});
 				expect(result.isError).toBe(true);
 			}));
+			expect(request).toHaveBeenCalledTimes(6);
+		} finally {
+			await client.close();
+			await server.close();
+		}
+	});
+
+	it.runIf(process.platform === 'win32')('returns bounded error evidence through MCP for atomic actions and prevalidation', async () => {
+		const {runtime, request} = fixture();
+		const server = new McpServer({name: 'error-test', version: '1'});
+		registerWindows(server, runtime);
+		const client = new Client({name: 'test', version: '1'});
+		const [serverTransport, clientTransport] = InMemoryTransport.createLinkedPair();
+		await server.connect(serverTransport);
+		await client.connect(clientTransport);
+		try {
+			request.mockReset().mockRejectedValueOnce(workerFailure('STALE_REF: input state unknown', undefined, 'invoke'));
+			const atomic = await client.callTool({
+				name: 'windows', arguments: {
+					action: 'invoke', snapshot, element_id: 1, max_chars: 1000,
+				},
+			});
+			expect(atomic.isError).toBe(true);
+			expect(parse(atomic as CallToolResult)).toMatchObject({error: 'STALE_REF: input state unknown', error_details: {code: 'ACTION_FAILED', disposition: {delivery: 'delivery_uncertain', retry: 'unsafe'}}});
+			const invalid = await client.callTool({name: 'windows', arguments: {action: 'set_value', snapshot, element_id: 1}});
+			expect(parse(invalid as CallToolResult)).toMatchObject({error_details: {code: 'INVALID_ARGS', disposition: {delivery: 'not_delivered'}}});
+			const invalidUrl = await client.callTool({name: 'windows', arguments: {action: 'launch', text: 'https://', query: 'Browser'}});
+			expect(parse(invalidUrl as CallToolResult)).toMatchObject({error_details: {code: 'INVALID_ARGS', disposition: {delivery: 'not_delivered'}}});
+			expect(request).toHaveBeenCalledTimes(1);
 		} finally {
 			await client.close();
 			await server.close();
