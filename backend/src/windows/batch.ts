@@ -51,16 +51,16 @@ function compactResult(data: Record<string, unknown>): CallToolResult {
 	return {content: [{type: 'text', text: serialize(data)}]};
 }
 
-export function validateWindowsRequest(args: WindowsRequest): void {
+export function validateWindowsRequest(args: WindowsRequest, platform: NodeJS.Platform = process.platform): void {
 	if (!Object.hasOwn(windowsActionCatalog, args.action)) {
 		throw rejectedAction('INVALID_ARGS', 'Unknown Windows action.');
 	}
 
-	if (process.platform === 'win32' && args.window_id !== undefined && !/^\d+$/.test(args.window_id)) {
+	if (platform === 'win32' && args.window_id !== undefined && !/^\d+$/.test(args.window_id)) {
 		throw rejectedAction('INVALID_ARGS', 'Windows window_id must be decimal, from get_windows.');
 	}
 
-	if (['darwin', 'linux'].includes(process.platform)) {
+	if (['darwin', 'linux'].includes(platform)) {
 		if (args.action === 'select' || (args.action === 'launch' && ((args.text ?? '').startsWith('-') || /[\\/:]/.test(args.text ?? '')))) {
 			throw rejectedAction('ACTION_NOT_SUPPORTED', 'macOS/Linux bridge does not support select or URL/path launch.');
 		}

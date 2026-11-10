@@ -68,7 +68,7 @@ async function main() {
     try {
       await client.connect(new StdioClientTransport({command: node, args: generated.args, env: {...process.env, POKEMON_UI: 'off'}}));
       assert.equal(client.getServerVersion().version, version);
-      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel']);
+      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'excel'] : [])]);
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError, 'The packaged MCP server failed its status check');
     } finally {
