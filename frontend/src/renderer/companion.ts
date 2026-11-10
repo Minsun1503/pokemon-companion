@@ -47,6 +47,32 @@ let visualActivity = ''
 let hoveringPet = false
 let visualTimer: ReturnType<typeof setTimeout> | undefined
 const log: string[] = []
+const activityLabels: Record<string, string> = {
+  idle: 'Ready',
+  working: 'Working',
+  thinking: 'Thinking',
+  success: 'All done!',
+  error: 'Needs help',
+  paused: 'Paused',
+}
+const gestureLabels: Record<string, string> = {
+  typing: 'Typing',
+  clicking: 'Clicking',
+  thinking: 'Checking',
+  run: 'Moving',
+  walk: 'Moving',
+}
+const ACTION_FINISH_MS = 1200
+
+function updateActivityBadge(): void {
+  const gesture = petContainer.dataset.animation ?? ''
+  const label =
+    motion?.isPerformingAction && !['paused', 'success', 'error'].includes(visualActivity)
+      ? (gestureLabels[gesture] ?? activityLabels[visualActivity])
+      : activityLabels[visualActivity]
+  const badge = element('state-badge')
+  if (badge.textContent !== label) badge.textContent = label ?? 'Ready'
+}
 
 function positionPanel(): void {
   if (panel.hidden) return
@@ -66,6 +92,7 @@ function positionPanel(): void {
 }
 
 function setView(view: PanelView): void {
+  if (view === 'talk') view = 'actions'
   panelView = view
   panel.dataset.view = view
   for (const name of ['actions', 'switch', 'talk'] as const) {
@@ -182,34 +209,52 @@ function apply(snapshot: CompanionSnapshot): void {
   const changedPet = current?.state.pet !== snapshot.state.pet
   current = snapshot
   const { state, definition } = snapshot
+  if (pendingChats.has(chatPet) && chatPet === state.pet) {
+    for (const entry of Array.from(element('chat-messages').querySelectorAll('.thinking')))
+      entry.textContent = state.paused ? 'Computer control is paused.' : state.message || 'Thinking…'
+  }
   document.body.classList.toggle('inactive', !snapshot.active || !state.visible)
   if (!snapshot.active || !state.visible) closePanel()
   const activity = state.paused ? 'paused' : state.activity
   document.body.dataset.pet = state.pet
+  const gestureChanged =
+    state.action?.id !== previous?.state.action?.id ||
+    state.action?.active !== previous?.state.action?.active ||
+    state.action?.animation !== previous?.state.action?.animation
   const actionChanged =
     changedPet ||
+    !snapshot.active ||
+    !state.visible ||
     activity === 'paused' ||
     activity === 'success' ||
     activity === 'error' ||
-    state.action?.id !== previous?.state.action?.id ||
-    state.action?.active !== previous?.state.action?.active
+    gestureChanged
+  const displayActivity =
+    activity === 'idle' && gestureChanged && state.action
+      ? state.action.animation === 'thinking'
+        ? 'thinking'
+        : 'working'
+      : activity
   // Keep very short tool actions visible long enough to read as animation.
-  if (activity !== 'idle' || (visualActivity !== 'working' && visualActivity !== 'thinking')) {
+  if (displayActivity !== 'idle' || (visualActivity !== 'working' && visualActivity !== 'thinking')) {
     clearTimeout(visualTimer)
-    visualActivity = activity
-    document.body.dataset.activity = activity
+    visualActivity = displayActivity
+    document.body.dataset.activity = displayActivity
     if (activity === 'success') {
       visualTimer = setTimeout(() => {
         visualActivity = 'idle'
         document.body.dataset.activity = 'idle'
+        updateActivityBadge()
       }, 2600)
     }
-  } else {
+  }
+  if (activity === 'idle' && ['working', 'thinking'].includes(visualActivity)) {
     clearTimeout(visualTimer)
     visualTimer = setTimeout(() => {
       visualActivity = 'idle'
       document.body.dataset.activity = 'idle'
-    }, 900)
+      updateActivityBadge()
+    }, ACTION_FINISH_MS)
   }
   document.documentElement.style.setProperty('--accent', definition.theme.accentColor)
   if (changedPet) {
@@ -230,8 +275,8 @@ function apply(snapshot: CompanionSnapshot): void {
             !hoveringPet &&
             panel.hidden,
         ),
-      getAnimation:
-        state.pet === 'pikachu' ? () => (visualActivity === 'working' ? 'idle' : visualActivity) : undefined,
+      getAnimation: () => (visualActivity === 'working' ? 'idle' : visualActivity),
+      onAnimationApplied: updateActivityBadge,
       getMinY: () => bubble.getRequiredAnchorTop(),
       onPositionApplied: () => {
         bubble.updatePosition()
@@ -242,25 +287,20 @@ function apply(snapshot: CompanionSnapshot): void {
     element('active-name').textContent = state.pet
     if (panelView === 'talk') void loadChat()
   }
-  if (state.pet === 'pikachu' && actionChanged) {
-    const animation = ['paused', 'success', 'error'].includes(activity) ? undefined : state.action?.animation
-    motion?.playAnimation(animation, state.action?.active ? Infinity : 1000)
+  if (actionChanged) {
+    const animation =
+      !snapshot.active || !state.visible || ['paused', 'success', 'error'].includes(activity)
+        ? undefined
+        : state.action?.animation
+    motion?.playAnimation(animation, state.action?.active ? Infinity : ACTION_FINISH_MS)
   }
   const targetKey = JSON.stringify(snapshot.target)
   if (snapshot.active && snapshot.target && (targetKey !== previousTarget || changedPet)) {
     motion?.moveTo(snapshot.target.x, snapshot.target.y)
     previousTarget = targetKey
   }
-  const labels = {
-    idle: 'Ready',
-    working: 'Working',
-    thinking: 'Thinking',
-    success: 'All done!',
-    error: 'Needs help',
-    paused: 'Paused',
-  }
-  element('state-badge').textContent = labels[activity]
-  element('task-title').textContent = state.paused ? 'Taking a break' : state.task || labels[activity]
+  updateActivityBadge()
+  element('task-title').textContent = state.paused ? 'Taking a break' : state.task || activityLabels[activity]
   const message = state.paused ? 'Computer control paused. Resume when you’re ready.' : state.message
   element('task-message').textContent = message
   element('action-count').textContent = `${state.completedActions} action${state.completedActions === 1 ? '' : 's'}`
@@ -343,11 +383,6 @@ petContainer.addEventListener('mouseleave', () => {
 element('close-panel').addEventListener('click', closePanel)
 element('back-panel').addEventListener('click', () => setView('actions'))
 element('action-switch').addEventListener('click', () => setView('switch'))
-element('action-talk').addEventListener('click', () => {
-  setView('talk')
-  void loadChat()
-  element<HTMLTextAreaElement>('chat-input').focus()
-})
 element('action-exit').addEventListener('click', () => window.pokemonAPI.quit())
 element('chat-form').addEventListener('submit', (event) => {
   event.preventDefault()

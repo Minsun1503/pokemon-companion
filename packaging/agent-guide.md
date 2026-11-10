@@ -12,4 +12,4 @@ On failure, inspect `error_details.disposition`. Retry only when `retry:"safe"`,
 
 Use physical keyboard or mouse input when suitable native controls are unavailable. For guarded Windows key/type calls, provide the observed `window_id` and `window_ref` and verify afterward. Avoid blind Tab or Alt+Tab navigation. Foreground focus can change between a check and dispatch.
 
-Ctrl+Shift+P pauses or resumes control. Pokémon Talk is a separate character conversation; it does not relay instructions to the desktop-control planner. These tools do not automatically retry inputs.
+Ctrl+Shift+P pauses or resumes control. Pokémon Talk is deferred and disabled; the connected AI client provides the task loop. These tools do not automatically retry inputs.

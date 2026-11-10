@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const {spawnSync} = require('node:child_process');
+const {addClientMetadata} = require('./client-package-metadata.cjs');
 const root = path.resolve(__dirname, '..');
 const version = require('../package.json').version;
 const npmCli = process.env.npm_execpath;
@@ -85,6 +86,7 @@ async function main() {
   fs.writeFileSync(path.join(stage, 'AGENT_GUIDE.md'), `Package version: ${version}\nResponse contract version: 1\n\n` + fs.readFileSync(path.join(root, 'packaging/agent-guide.md'), 'utf8'));
   for (const file of ['THIRD_PARTY.md', 'LICENSE']) copy(path.join(root, file), path.join(stage, file));
   fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokémon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included in their folders. Electron and Node licenses are included with their runtimes. Dependencies retain their own licenses.\n');
+  addClientMetadata(stage, stage, 'win32', version);
   fs.renameSync(stage, output);
   run(['exec', '--yes', '--package=@anthropic-ai/mcpb@2.1.2', '--', 'mcpb', 'validate', path.join(output, 'manifest.json')], root);
   run(['exec', '--yes', '--package=@anthropic-ai/mcpb@2.1.2', '--', 'mcpb', 'pack', output, path.join(release, name + '.mcpb')], root);

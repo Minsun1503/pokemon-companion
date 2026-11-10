@@ -1,6 +1,6 @@
 {
   "name": "pokemon-computer-companion",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "description": "An animated Pokémon desktop companion for AI computer use through MCP",
   "scripts": {
@@ -18,10 +18,15 @@
     "test:windows:contract": "node scripts/windows-contract-smoke.mjs",
     "test:windows:identity": "node scripts/windows-identity-smoke.mjs",
     "test:windows:coordination": "node scripts/windows-coordination-smoke.mjs",
+    "test:work-animation": "node scripts/work-animation-smoke.mjs",
     "test:course": "node scripts/course-smoke.mjs",
     "test:excel": "node scripts/excel-smoke.mjs",
     "benchmark:windows": "node scripts/windows-benchmark.mjs",
     "package:windows": "npm run build && node scripts/package-windows.cjs",
+    "package:test-app": "node scripts/package-standalone.cjs",
+    "package:desktop": "node scripts/package-desktop.cjs",
+    "test:desktop-package": "node scripts/desktop-package-smoke.cjs",
+    "test:client-package": "node scripts/client-package-smoke.cjs",
     "test:package": "node scripts/package-smoke.mjs",
     "test:installers": "node scripts/installer-smoke.cjs",
     "test:marketplace": "node scripts/marketplace-smoke.mjs"

@@ -6,9 +6,13 @@ All seven characters from the pet repository are included: **Pikachu, Riolu, Luc
 
 ## Easy installation
 
-Windows users can download the **[Claude Desktop extension](https://github.com/Minsun1503/pokemon-companion/releases/latest/download/pokemon-companion-win32-x64.mcpb)** and open it to install, or extract the **[portable ZIP](https://github.com/Minsun1503/pokemon-companion/releases/latest/download/pokemon-companion-win32-x64.zip)** and double-click **Install Claude Code.cmd** or **Install Codex.cmd**. The package bundles Node, Electron, native dependencies, and all seven Pokémon. See [installation steps](INSTALL.md).
+For **Claude Desktop on Windows or macOS**, download the matching **`.mcpb` extension** from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest), open it in Claude, confirm **Install**, and enable Pokémon Companion. Claude launches the companion and uses its tools from your chat. Node, Electron, native desktop helpers, and all seven Pokémon are included. No terminal commands, additional software, GitHub login, model API key, or manual MCP settings are required. macOS still requires its normal Accessibility and Screen Recording permissions. See [installation steps](INSTALL.md).
 
-Claude Code and Codex also support the same two-command installation style as Ponytail, using **`Minsun1503/pokemon-companion`** as the marketplace. The plugin downloads its Windows runtime on the first connection. Developers can build release files with `npm run package:windows`.
+The **ChatGPT desktop plugin ZIPs** contain the complete local MCP server and its runtimes, with native plugin manifests. Public installation from ChatGPT's Plugins directory requires **OpenAI local-MCP partner approval and plugin review**. That approval has not been obtained; these files are prepared for submission, and opening a ZIP in ChatGPT does not install them. See [OpenAI's desktop-only distribution requirements](https://developers.openai.com/plugins/deploy/desktop-only).
+
+Windows, macOS Intel, macOS Apple Silicon, and Linux x64 have separate plugin downloads. Claude's official desktop extension loader supports Windows/macOS. The Linux package is for hosts supporting local desktop plugins and requires an Ubuntu 24.04-compatible X11 desktop with user namespaces. macOS/Linux desktop workflows remain experimental. The macOS binaries are ad-hoc signed and not notarized.
+
+Existing Windows Claude Code and Codex installers remain available in the compatibility ZIP. They require the selected AI client to already be installed. Developers build the native client packages with `npm run package:desktop`; see [INSTALL.md](INSTALL.md).
 
 ## Original repositories
 
@@ -37,7 +41,7 @@ This generates configuration using the actual Node executable and checkout paths
 - `config/claude-desktop.json`: merge its `mcpServers` entry into your Claude Desktop MCP configuration, then restart Claude Desktop.
 - `config/codex.toml`: add its server table to your Codex `config.toml`, then reconnect the MCP server. See [official Codex MCP configuration](https://developers.openai.com/codex/mcp/).
 
-Use a local MCP client on the same computer as the companion. A cloud-only client cannot manipulate this desktop without a local connection. Computer control uses the connected AI client's model. The companion's separate Talk feature uses its configured AI provider.
+Use a local MCP client on the same computer as the companion. A cloud-only client cannot manipulate this desktop without a local connection. Computer control uses the connected AI client's model. Talk is deferred and disabled in the companion.
 
 Try: **“Use Pikachu to help me with my computer. Announce the task, inspect the screen, perform the actions, and tell me when you’ve verified the result.”**
 
@@ -129,18 +133,18 @@ The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visua
 
 ## Desktop controls
 
-- Left-click the Pokémon to open three action icons: **Switch**, **Talk**, and **Exit**.
+- Left-click the Pokémon to open **Switch** and **Exit**.
 - **Switch** opens all seven Pokémon; selecting one changes the companion immediately.
-- **Talk** opens a conversation with the selected Pokémon. Enter sends a message; Shift+Enter adds a line. Each Pokémon keeps its own conversation history.
+- **Talk** is deferred and disabled. Its implementation and existing saved conversations are retained for later.
 - **Exit** closes the companion and stops further computer actions.
-- Click the Pokémon again, use the Close button, or press Escape to close the menu. Escape returns from Switch/Talk to the action menu first.
+- Click the Pokémon again, use the Close button, or press Escape to close the menu. Escape returns from Switch to the action menu first.
 - Use **Ctrl+Shift+P** or the tray menu to pause/resume computer control. The AI cannot resume a user pause. A pause prevents the next input action; an input already being executed may finish.
 - Use the tray’s **Summon at cursor** to reposition the Pokémon.
 - Quit the companion to stop further computer actions. Restart the MCP connection to restore it.
 
 The overlay stays above other windows and follows action targets with an offset. Clicks pass through during an individual computer action; the menu is available between actions. Opening it during a task pauses further computer control until you resume. Screenshots and coordinates use the computer backend’s image space. This retains the backend’s existing primary-display capture behavior; it does not add full multi-monitor capture.
 
-Talk defaults to Ollama at `http://localhost:11434` with model `qwen3:8b`. Start Ollama with that model available, or configure OpenAI, Anthropic, or Gemini in `frontend/config/setting.json`. A setting file at `%APPDATA%/pokemon-mcp/setting.json` takes precedence. Cloud providers use their configured API key environment variable; `.env` files in the frontend repository or app data folder are also supported. If the provider is offline, Talk shows an error and retains your message for retry. Talk does not automatically forward messages to an existing AI chat; give computer-control tasks to your connected MCP client.
+The companion does not start a chat worker or contact a model provider. Give computer-control tasks to your connected MCP client. The dormant Talk source and existing conversations remain available for future development.
 
 ## Configuration
 
@@ -148,6 +152,8 @@ Talk defaults to Ollama at `http://localhost:11434` with model `qwen3:8b`. Start
 | --- | --- | --- |
 | `POKEMON_PET` | `pikachu` | Initial character |
 | `POKEMON_FRONTEND_DIR` | adjacent `frontend` | Location of the built frontend |
+| `POKEMON_ELECTRON_BINARY` | bundled Electron | Runtime executable override used by the macOS extension bootstrap |
+| `POKEMON_AGENT_DESKTOP` | `agent-desktop` on PATH | Native bridge override; client packages set it to their included binary |
 | `POKEMON_USER_DATA_DIR` | OS app-data profile | Optional separate companion settings, chat and cache folder |
 | `POKEMON_UI` | enabled | Set `off` only for explicitly headless use |
 | `MCP_TRANSPORT` | `stdio` | Optional `http` transport on localhost `/mcp` |
@@ -187,6 +193,6 @@ Run `npm run benchmark:windows` to compare six atomic Windows API calls with one
 - `scripts`: shared setup, build, demo, and verification commands.
 - `config`: generated MCP client configuration for this project location.
 
-Windows is the verified platform. The source build and self-contained ZIP/MCPB packages are supported development and distribution paths; this project is not published as an npm package. macOS/Linux generic-input paths require platform testing and their usual desktop accessibility/capture permissions. Windows uses native application controls; macOS/Linux retain the optional agent-desktop 2.6 bridge, which still needs live-host validation. See the [adoption audit](docs/reference-adoption.md) for verified improvements and remaining work.
+Windows is the verified computer-control platform. The source build and self-contained client packages are supported development and distribution paths; this project is not published as an npm package. macOS/Linux native desktop helpers are bundled, but full desktop workflows still need live-host validation and their usual OS permissions. Release checks verify extraction through the MCPB loader, bundled runtimes, MCP connection, and real companion startup; they do not establish installation through Claude or ChatGPT's own UI. See the [adoption audit](docs/reference-adoption.md) for verified improvements and remaining work.
 
 Pokémon names and assets belong to Nintendo / Creatures Inc. / GAME FREAK. This is an unofficial fan project. Original repositories retain their MIT licenses.

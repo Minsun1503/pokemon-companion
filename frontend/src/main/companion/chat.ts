@@ -9,6 +9,7 @@ import { OllamaProvider } from '../ai/providers/ollama-provider'
 import { OpenAIProvider } from '../ai/providers/openai-provider'
 import type { PetRegistry } from '../services/pet-registry'
 import { PetScopedStore } from '../services/pet-scoped-store'
+import { type AgentMessage, type AgentTools, agentInstructions, isDesktopRequest, runAgent } from './agent'
 
 /** Conversations are separate from the AI client's computer-control session. */
 export class CompanionChat {
@@ -18,6 +19,7 @@ export class CompanionChat {
     private readonly rootDir: string,
     private readonly userData: string,
     private readonly pets: PetRegistry,
+    private readonly tools?: AgentTools,
   ) {}
 
   history(pet: string): ChatMessage[] {
@@ -51,14 +53,32 @@ export class CompanionChat {
         ...history.slice(-10),
         user,
       ]
-      await providers.get(settings.ai.provider).streamChat(
-        { messages, model: settings.ai[settings.ai.provider].model },
-        {
-          onChunk: (chunk) => {
-            content += chunk
+      if (this.tools && settings.ai.provider === 'ollama') {
+        const activeTools = this.tools.forPet?.(pet) || this.tools
+        await activeTools.authorize?.(text.trim())
+        const desktopRequest = isDesktopRequest(text)
+        const reference = desktopRequest && !/continue|tiep tuc|tiếp tục/i.test(text) ? [] : history.slice(-6)
+        const task: AgentMessage[] = [
+          {
+            role: 'system',
+            content: `You are ${pet}, the user's friendly Pokémon desktop companion. Keep replies short and natural.\n${agentInstructions}\nOnly the latest user message defines what to do now. Previous tasks are not pending unless the user asks to continue them. Recent conversation is provided only for reference and memory:\n${JSON.stringify(reference)}`,
           },
-        },
-      )
+        ]
+        task.push(user)
+        try {
+          content = await runAgent(settings.ai.ollama, task, activeTools, undefined, desktopRequest)
+        } finally {
+          activeTools.progress?.('')
+        }
+      } else
+        await providers.get(settings.ai.provider).streamChat(
+          { messages, model: settings.ai[settings.ai.provider].model },
+          {
+            onChunk: (chunk) => {
+              content += chunk
+            },
+          },
+        )
       content = content.replace(/<think>[\s\S]*?(<\/think>|$)/g, '').trim()
       if (!content) throw new Error('No reply was received. Please try again.')
       const assistant: ChatMessage = { role: 'assistant', content }

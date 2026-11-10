@@ -100,15 +100,13 @@ export class PokemonRuntime {
 		await measure('companion_before', async () => this.companion.update({interactionLocked: true}));
 		const animation = ['key', 'type', 'set_value'].includes(action)
 			? 'typing' as const
-			: ['left_click', 'right_click', 'middle_click', 'double_click', 'left_click_drag', 'invoke', 'select', 'toggle', 'expand', 'collapse', 'scroll'].includes(action) ? 'clicking' as const : undefined;
-		if (animation) {
-			this.gestureSequence += 1;
-		}
+			: action.startsWith('get_') || action === 'wait_for' ? 'thinking' as const : 'clicking' as const;
+		this.gestureSequence += 1;
 
-		const gesture = animation ? {animation, id: this.gestureSequence} : undefined;
+		const gesture = {animation, id: this.gestureSequence};
 		this.animate({
-			activity: action.startsWith('get_') ? 'thinking' : 'working',
-			...(gesture ? {action: {...gesture, active: true}} : {}), message: labels[action] || action,
+			activity: animation === 'thinking' ? 'thinking' : 'working',
+			action: {...gesture, active: true}, message: labels[action] || action,
 		}, coordinate);
 		try {
 			if (action === 'get_screenshot') {
@@ -126,11 +124,11 @@ export class PokemonRuntime {
 
 			this.animate({
 				activity: this.companion.state.task ? 'working' : 'idle',
-				...(gesture ? {action: {...gesture, active: false}} : {}), completedActions: this.companion.state.completedActions + 1,
+				action: {...gesture, active: false}, completedActions: this.companion.state.completedActions + 1,
 			});
 			return result;
 		} catch (error) {
-			this.animate({activity: 'error', message: error instanceof Error ? error.message : String(error)});
+			this.animate({activity: 'error', action: {...gesture, active: false}, message: error instanceof Error ? error.message : String(error)});
 			throw error;
 		} finally {
 			try {

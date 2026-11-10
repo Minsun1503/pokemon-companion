@@ -51,19 +51,27 @@ bridge.listen(0, '127.0.0.1', async () => {
     try {
       const url = new URL(req.url, 'http://127.0.0.1');
       if (url.pathname === '/action') {
+        const selected = url.searchParams.get('pet');
+        if (selected) {
+          if (!['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle'].includes(selected))
+            throw new Error('Unknown fixture Pokémon.');
+          state.pet = selected;
+        }
         const name = url.searchParams.get('name');
         if (!['type', 'key', 'set_value', 'left_click', 'invoke', 'get_ui', 'idle', 'success', 'error'].includes(name))
           throw new Error('Unknown fixture action.');
         const animation = ['type', 'key', 'set_value'].includes(name) ? 'typing'
-          : ['left_click', 'invoke'].includes(name) ? 'clicking' : undefined;
+          : ['left_click', 'invoke'].includes(name) ? 'clicking' : name === 'get_ui' ? 'thinking' : undefined;
         const coordinate = url.searchParams.has('x') && url.searchParams.has('y')
           ? screen.dipToScreenPoint({x:Number(url.searchParams.get('x')), y:Number(url.searchParams.get('y'))}) : undefined;
-        await send({state: {...state, activity: ['idle', 'success', 'error'].includes(name) ? name : name === 'get_ui' ? 'thinking' : 'working',
+        await send({state: {...state, activity: ['idle', 'success', 'error'].includes(name) ? name : url.searchParams.get('finished') === '1' ? 'idle' : name === 'get_ui' ? 'thinking' : 'working',
           action: animation ? {animation, id:sequence + 1, active:url.searchParams.get('busy') === '1'} : undefined},
           ...(coordinate ? {coordinate:[coordinate.x, coordinate.y]} : {})});
       }
       if (url.pathname === '/frame') {
-        const bounds = await pet.webContents.executeJavaScript('(() => {document.getElementById("work-prop").style.animation="none";document.querySelector(".pet-aura").style.animation="none";const r=document.getElementById("pet-container").getBoundingClientRect();return {x:Math.floor(r.x),y:Math.floor(r.y),width:Math.ceil(r.width),height:Math.ceil(r.height)}})()');
+        if (url.searchParams.get('freezeProps') !== '0')
+          await pet.webContents.executeJavaScript('document.getElementById("work-prop").style.animation="none";document.querySelector(".pet-aura").style.animation="none";');
+        const bounds = await pet.webContents.executeJavaScript('(() => {const r=document.getElementById("pet-container").getBoundingClientRect();return {x:Math.floor(r.x),y:Math.floor(r.y),width:Math.ceil(r.width),height:Math.ceil(r.height)}})()');
         const png = (await pet.webContents.capturePage(bounds)).toPNG();
         const output = path.join(process.env.POKEMON_FOCUS_FIXTURE_DATA, 'animation-frame.png');
         await fs.writeFile(output, png);
@@ -92,7 +100,7 @@ bridge.listen(0, '127.0.0.1', async () => {
       }
       if (url.pathname === '/quit') {res.end('{}'); app.quit(); return;}
       const counts = await input.webContents.executeJavaScript('(() => {const r=document.getElementById("test").getBoundingClientRect();return {keys,clicks,point:{x:r.x+r.width/2,y:r.y+r.height/2}}})()');
-      const petState = await pet.webContents.executeJavaScript('({x:document.getElementById("pet-container").getBoundingClientRect().x,y:document.getElementById("pet-container").getBoundingClientRect().y,panel:!document.getElementById("team-panel").hidden,text:document.getElementById("chat-input").value,animation:document.getElementById("pet-container").dataset.animation,source:document.getElementById("pet-image").src,imageReady:document.getElementById("pet-image").complete&&document.getElementById("pet-image").naturalWidth>0,keyboard:getComputedStyle(document.getElementById("work-prop")).display!=="none",mouse:getComputedStyle(document.getElementById("mouse-prop")).display!=="none"})');
+      const petState = await pet.webContents.executeJavaScript('({pet:document.body.dataset.pet,x:document.getElementById("pet-container").getBoundingClientRect().x,y:document.getElementById("pet-container").getBoundingClientRect().y,panel:!document.getElementById("team-panel").hidden,text:document.getElementById("chat-input").value,animation:document.getElementById("pet-container").dataset.animation,source:document.getElementById("pet-image").src,imageReady:document.getElementById("pet-image").complete&&document.getElementById("pet-image").naturalWidth>0,keyboard:getComputedStyle(document.getElementById("work-prop")).display!=="none",mouse:getComputedStyle(document.getElementById("mouse-prop")).display!=="none",scanning:getComputedStyle(document.getElementById("scan-prop")).display!=="none",badge:document.getElementById("state-badge").textContent})');
       const bounds = input.getContentBounds();
       const point = screen.dipToScreenPoint({x: Math.round(bounds.x + counts.point.x), y: Math.round(bounds.y + counts.point.y)});
       res.setHeader('Content-Type', 'application/json');

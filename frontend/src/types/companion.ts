@@ -10,7 +10,7 @@ export interface CompanionState {
   paused: boolean
   completedActions: number
   interactionLocked?: boolean
-  action?: { animation: 'typing' | 'clicking'; id: number; active: boolean }
+  action?: { animation: 'typing' | 'clicking' | 'thinking'; id: number; active: boolean }
 }
 
 export type CompanionChatReply = { ok: true; content: string } | { ok: false; error: string }

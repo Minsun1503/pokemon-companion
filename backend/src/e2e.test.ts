@@ -191,7 +191,8 @@ describe.each([
 				'desktop',
 				'computer',
 				'pokemon',
-				...(process.platform === 'win32' ? ['windows', 'course', 'excel'] : []),
+				'windows',
+				...(process.platform === 'win32' ? ['course', 'excel'] : []),
 			]);
 			expect(result.tools.find((tool) => tool.name === 'computer')).toMatchObject({
 				name: 'computer',

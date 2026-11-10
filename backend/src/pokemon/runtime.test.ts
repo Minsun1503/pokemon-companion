@@ -35,9 +35,9 @@ function fixture() {
 }
 
 describe('Pokémon desktop execution', () => {
-	it.each(['type', 'key', 'set_value', 'left_click', 'invoke'])('keeps %s visible to the renderer even when cosmetic states coalesce', async (action) => {
+	it.each(['type', 'key', 'set_value', 'left_click', 'invoke', 'get_windows', 'get_ui', 'get_ui_text', 'wait_for', 'launch', 'activate', 'focus', 'save_workbook'])('keeps %s visible to the renderer even when cosmetic states coalesce', async (action) => {
 		const {runtime, companion} = fixture();
-		const animation = ['type', 'key', 'set_value'].includes(action) ? 'typing' : 'clicking';
+		const animation = ['type', 'key', 'set_value'].includes(action) ? 'typing' : action.startsWith('get_') || action === 'wait_for' ? 'thinking' : 'clicking';
 		await runtime.computer(action, undefined, async () => {
 			expect(companion.state.action).toEqual({animation, id: 1, active: true});
 			return jsonResult({ok: true});
@@ -45,14 +45,18 @@ describe('Pokémon desktop execution', () => {
 		expect(companion.state.action).toEqual({animation, id: 1, active: false});
 		expect(companion.state.completedActions).toBe(1);
 	});
-	it('does not lose a short input gesture when subsequent UI reads coalesce with it', async () => {
+	it('shows the latest inspection instead of a stale typing gesture when batch states coalesce', async () => {
 		const {runtime, companion} = fixture();
-		for (const action of ['type', 'get_ui', 'get_windows']) {
-			// eslint-disable-next-line no-await-in-loop
-			await runtime.computer(action, undefined, async () => jsonResult({ok: true}));
-		}
+		await runtime.computerBatch(async (perform) => {
+			for (const action of ['type', 'get_ui', 'get_windows']) {
+				// eslint-disable-next-line no-await-in-loop
+				await perform(action, async () => jsonResult({ok: true}));
+			}
 
-		expect(companion.state.action).toEqual({animation: 'typing', id: 1, active: false});
+			return jsonResult({ok: true});
+		});
+
+		expect(companion.state.action).toEqual({animation: 'thinking', id: 3, active: false});
 		expect(companion.state.completedActions).toBe(3);
 	});
 	it('gives a retried input a new gesture after an error', async () => {
@@ -60,6 +64,7 @@ describe('Pokémon desktop execution', () => {
 		await expect(runtime.computer('type', undefined, async () => {
 			throw new Error('Input failed');
 		})).rejects.toThrow('Input failed');
+		expect(companion.state.action).toEqual({animation: 'typing', id: 1, active: false});
 		await runtime.computer('type', undefined, async () => {
 			expect(companion.state.action).toEqual({animation: 'typing', id: 2, active: true});
 			return jsonResult({ok: true});

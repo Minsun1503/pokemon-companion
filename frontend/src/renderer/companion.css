@@ -114,7 +114,7 @@ button:focus-visible {
 }
 .action-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-top: 18px;
 }
@@ -426,8 +426,7 @@ footer span {
   background: #d8daca;
   border-radius: 1px;
 }
-body:not([data-pet="pikachu"])[data-activity="working"] #work-prop,
-body[data-pet="pikachu"] #pet-container[data-animation="typing"] #work-prop {
+#pet-container[data-animation="typing"] #work-prop {
   display: grid;
   animation: keyboard-tap 0.5s infinite alternate;
 }
@@ -451,8 +450,60 @@ body[data-pet="pikachu"] #pet-container[data-animation="typing"] #work-prop {
   margin: 2px auto;
   background: #d8daca;
 }
-body[data-pet="pikachu"] #pet-container[data-animation="clicking"] #mouse-prop {
+#pet-container[data-animation="clicking"] #mouse-prop {
   display: block;
+  animation: mouse-press 0.45s ease-in-out infinite;
+}
+#scan-prop {
+  display: none;
+  position: absolute;
+  bottom: 37px;
+  right: 19px;
+  width: 23px;
+  height: 23px;
+  border: 3px solid var(--accent, #f3c83c);
+  border-radius: 50%;
+  background: #b4ecf355;
+  box-shadow:
+    inset 2px 2px 0 #ffffff75,
+    0 2px 5px #0006;
+  z-index: 4;
+}
+#scan-prop::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 12px;
+  right: -6px;
+  bottom: -9px;
+  border-radius: 3px;
+  background: var(--accent, #f3c83c);
+  transform: rotate(-38deg);
+}
+#pet-container[data-animation="thinking"] #scan-prop {
+  display: block;
+  animation: scan-controls 1.1s ease-in-out infinite alternate;
+}
+body:not([data-pet="pikachu"]) #pet-container[data-animation="typing"] #pet-image,
+body:not([data-pet="pikachu"]) #pet-container[data-animation="clicking"] #pet-image {
+  animation: work-nod 0.45s ease-in-out infinite;
+}
+body:not([data-pet="pikachu"]) #pet-container[data-animation="thinking"] #pet-image {
+  animation: work-nod 1.1s ease-in-out infinite;
+}
+#pet-container:is([data-animation="typing"], [data-animation="clicking"], [data-animation="thinking"]) #state-badge {
+  border-color: var(--accent, #f3c83c);
+}
+#pet-container:is([data-animation="typing"], [data-animation="clicking"], [data-animation="thinking"])
+  #state-badge::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background: var(--accent, #f3c83c);
+  animation: work-light 0.6s ease-in-out infinite alternate;
 }
 body[data-activity="working"] .pet-aura,
 body[data-activity="thinking"] .pet-aura {
@@ -511,6 +562,27 @@ body[data-activity="paused"] #state-badge {
 @keyframes keyboard-tap {
   to {
     transform: perspective(80px) rotateX(25deg) translateY(-2px);
+  }
+}
+@keyframes mouse-press {
+  50% {
+    transform: translateY(2px);
+    border-color: var(--accent, #f3c83c);
+  }
+}
+@keyframes scan-controls {
+  to {
+    transform: translateX(-9px) rotate(-12deg);
+  }
+}
+@keyframes work-nod {
+  50% {
+    transform: translateY(-2px);
+  }
+}
+@keyframes work-light {
+  to {
+    opacity: 0.35;
   }
 }
 @keyframes thinking-spin {
