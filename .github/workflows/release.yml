@@ -8,15 +8,17 @@ permissions:
 jobs:
   windows:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '24.16.0'
-      - run: npm run setup
+      - run: npm run setup:ci
       - run: npm run check
-      - run: npm test
       - run: npm run package:windows
+      - run: npm test
+      - run: npm run test:package
       - name: Publish release assets
         shell: pwsh
         env:

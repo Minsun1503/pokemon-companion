@@ -33,6 +33,7 @@ function fixture() {
 		},
 	};
 	const runtime = new PokemonRuntime(companion);
+	vi.spyOn(runtime.windows, 'withControlLease').mockImplementation(async (run) => run());
 	const request = vi.spyOn(runtime.windows, 'request').mockResolvedValue({
 		ok: true, cells: [{
 			offset: 0, address: 'A1', value: '00123', formula: null,
@@ -198,7 +199,7 @@ describe('serialized native Excel operations', () => {
 
 describe.runIf(process.platform === 'win32')('Excel MCP registration', () => {
 	it('exposes the Excel schema through a real MCP exchange', async () => {
-		const {runtime} = fixture();
+		const {runtime, request} = fixture();
 		const server = new McpServer({name: 'test', version: '1'});
 		registerExcel(server, runtime);
 		const client = new Client({name: 'test', version: '1'});
@@ -208,6 +209,9 @@ describe.runIf(process.platform === 'win32')('Excel MCP registration', () => {
 			expect((await client.listTools()).tools.map((tool) => tool.name)).toEqual(['excel']);
 			const response = await client.callTool({name: 'excel', arguments: {action: 'read_range', ...base}});
 			expect(parse(response as CallToolResult).ok).toBe(true);
+			request.mockRejectedValueOnce(new Error('lost native write response'));
+			const failed = await client.callTool({name: 'excel', arguments: {action: 'write_range', ...base, data: [[1, 2], [3, 4]]}});
+			expect(parse(failed as CallToolResult)).toMatchObject({contract_version: 1, error_details: {disposition: {delivery: 'delivery_uncertain', retry: 'unsafe'}}});
 		} finally {
 			await client.close();
 			await server.close();

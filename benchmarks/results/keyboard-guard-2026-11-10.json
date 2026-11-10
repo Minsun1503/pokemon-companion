@@ -1,0 +1,4305 @@
+{
+  "measured_at": "2026-11-10T02:13:50.309Z",
+  "companion": "on",
+  "runs_per_mode": 40,
+  "actions": "alternating key F8 and type 7",
+  "counter": "F8 key-downs plus input events; raw DOM events retain extra IME Process wrappers",
+  "guard": {
+    "samples": 80,
+    "median_ms": 5.382699999999659,
+    "p95_ms": 11.062999999999192
+  },
+  "get_windows": {
+    "samples": 83,
+    "median_ms": 63.8141999999998,
+    "p95_ms": 84.66070000000036
+  },
+  "observed": [
+    {
+      "mode": "mismatch",
+      "run": 0,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 1,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 2,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 3,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 4,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 5,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 6,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 7,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 8,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 9,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 10,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 11,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 12,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 13,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 14,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 15,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 16,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 17,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 18,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 19,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 20,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 21,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 22,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 23,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 24,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 25,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 26,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 27,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 28,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 29,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 30,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 31,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 32,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 33,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 34,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 35,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 36,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 37,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 38,
+      "action": "key",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "mismatch",
+      "run": 39,
+      "action": "type",
+      "a": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 0,
+      "action": "key",
+      "a": {
+        "down": 1,
+        "up": 1,
+        "logical": 1,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 1,
+      "action": "type",
+      "a": {
+        "down": 2,
+        "up": 2,
+        "logical": 2,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 2,
+      "action": "key",
+      "a": {
+        "down": 3,
+        "up": 3,
+        "logical": 3,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 3,
+      "action": "type",
+      "a": {
+        "down": 4,
+        "up": 4,
+        "logical": 4,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 4,
+      "action": "key",
+      "a": {
+        "down": 5,
+        "up": 5,
+        "logical": 5,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 5,
+      "action": "type",
+      "a": {
+        "down": 6,
+        "up": 6,
+        "logical": 6,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 6,
+      "action": "key",
+      "a": {
+        "down": 7,
+        "up": 7,
+        "logical": 7,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 7,
+      "action": "type",
+      "a": {
+        "down": 8,
+        "up": 8,
+        "logical": 8,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 8,
+      "action": "key",
+      "a": {
+        "down": 9,
+        "up": 9,
+        "logical": 9,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 9,
+      "action": "type",
+      "a": {
+        "down": 10,
+        "up": 10,
+        "logical": 10,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 10,
+      "action": "key",
+      "a": {
+        "down": 11,
+        "up": 11,
+        "logical": 11,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 11,
+      "action": "type",
+      "a": {
+        "down": 12,
+        "up": 12,
+        "logical": 12,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 12,
+      "action": "key",
+      "a": {
+        "down": 13,
+        "up": 13,
+        "logical": 13,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 13,
+      "action": "type",
+      "a": {
+        "down": 14,
+        "up": 14,
+        "logical": 14,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 14,
+      "action": "key",
+      "a": {
+        "down": 15,
+        "up": 15,
+        "logical": 15,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 15,
+      "action": "type",
+      "a": {
+        "down": 16,
+        "up": 16,
+        "logical": 16,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 16,
+      "action": "key",
+      "a": {
+        "down": 17,
+        "up": 17,
+        "logical": 17,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 17,
+      "action": "type",
+      "a": {
+        "down": 18,
+        "up": 18,
+        "logical": 18,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 18,
+      "action": "key",
+      "a": {
+        "down": 19,
+        "up": 19,
+        "logical": 19,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 19,
+      "action": "type",
+      "a": {
+        "down": 20,
+        "up": 20,
+        "logical": 20,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 20,
+      "action": "key",
+      "a": {
+        "down": 21,
+        "up": 21,
+        "logical": 21,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 21,
+      "action": "type",
+      "a": {
+        "down": 22,
+        "up": 22,
+        "logical": 22,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 22,
+      "action": "key",
+      "a": {
+        "down": 23,
+        "up": 23,
+        "logical": 23,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 23,
+      "action": "type",
+      "a": {
+        "down": 24,
+        "up": 24,
+        "logical": 24,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 24,
+      "action": "key",
+      "a": {
+        "down": 25,
+        "up": 25,
+        "logical": 25,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 25,
+      "action": "type",
+      "a": {
+        "down": 26,
+        "up": 26,
+        "logical": 26,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 26,
+      "action": "key",
+      "a": {
+        "down": 27,
+        "up": 27,
+        "logical": 27,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 27,
+      "action": "type",
+      "a": {
+        "down": 28,
+        "up": 28,
+        "logical": 28,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 28,
+      "action": "key",
+      "a": {
+        "down": 29,
+        "up": 29,
+        "logical": 29,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 29,
+      "action": "type",
+      "a": {
+        "down": 30,
+        "up": 30,
+        "logical": 30,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 30,
+      "action": "key",
+      "a": {
+        "down": 31,
+        "up": 31,
+        "logical": 31,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 31,
+      "action": "type",
+      "a": {
+        "down": 32,
+        "up": 32,
+        "logical": 32,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 32,
+      "action": "key",
+      "a": {
+        "down": 33,
+        "up": 33,
+        "logical": 33,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 33,
+      "action": "type",
+      "a": {
+        "down": 34,
+        "up": 34,
+        "logical": 34,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 34,
+      "action": "key",
+      "a": {
+        "down": 35,
+        "up": 35,
+        "logical": 35,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 35,
+      "action": "type",
+      "a": {
+        "down": 36,
+        "up": 36,
+        "logical": 36,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 36,
+      "action": "key",
+      "a": {
+        "down": 37,
+        "up": 37,
+        "logical": 37,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 37,
+      "action": "type",
+      "a": {
+        "down": 38,
+        "up": 38,
+        "logical": 38,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 38,
+      "action": "key",
+      "a": {
+        "down": 39,
+        "up": 39,
+        "logical": 39,
+        "events": [
+          [
+            "down",
+            "F8",
+            "F8"
+          ],
+          [
+            "up",
+            "F8",
+            "F8"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    },
+    {
+      "mode": "match",
+      "run": 39,
+      "action": "type",
+      "a": {
+        "down": 40,
+        "up": 40,
+        "logical": 40,
+        "events": [
+          [
+            "down",
+            "7",
+            "Digit7"
+          ],
+          [
+            "up",
+            "7",
+            "Digit7"
+          ]
+        ]
+      },
+      "b": {
+        "down": 0,
+        "up": 0,
+        "logical": 0,
+        "events": []
+      },
+      "verified": true
+    }
+  ],
+  "timing": [
+    {
+      "tool": "pokemon",
+      "action": "task",
+      "total_ms": 246.64,
+      "breakdown_ms": {
+        "queue_wait": 0.03999999999996362,
+        "companion_before": 246.24260000000004,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0141999999999598
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 178.46410000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.10149999999998727,
+        "companion_before": 0.6893000000000029,
+        "action": 72.72349999999994,
+        "companion_after": 0.5471000000000004,
+        "serialization": 0.0243999999999005,
+        "worker_round_trip": 175.663,
+        "post_processing": 0.01710000000002765
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 77.8759,
+      "breakdown_ms": {
+        "queue_wait": 0.061100000000124055,
+        "companion_before": 0.5178999999998268,
+        "action": 75.1078,
+        "companion_after": 0.4776999999999134,
+        "serialization": 0.029999999999972715,
+        "worker_round_trip": 76.63949999999977,
+        "post_processing": 0.02729999999996835
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 84.38789999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.0364999999999327,
+        "companion_before": 0.6474000000000615,
+        "action": 81.25450000000001,
+        "companion_after": 0.7725000000000364,
+        "serialization": 0.016400000000203363,
+        "worker_round_trip": 82.75170000000003,
+        "post_processing": 0.015100000000074942
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 196.74569999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.05400000000008731,
+        "companion_before": 4.351900000000114,
+        "action": 188.0679,
+        "companion_after": 0.8644000000001597,
+        "serialization": 0.03739999999970678,
+        "worker_round_trip": 189.23439999999982,
+        "post_processing": 0.09950000000003456,
+        "uia_tree_walk": 42.8618
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 78.92399999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.02419999999983702,
+        "companion_before": 0.6812999999999647,
+        "action": 76.55309999999986,
+        "companion_after": 0.4169000000001688,
+        "serialization": 0.015599999999722058,
+        "worker_round_trip": 77.64650000000006,
+        "post_processing": 0.015099999999847569
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 9.79690000000005,
+      "breakdown_ms": {
+        "queue_wait": 0.026299999999991996,
+        "companion_before": 0.43990000000007967,
+        "action": 6.890999999999849,
+        "companion_after": 0.5304000000000997,
+        "serialization": 0.012300000000095679,
+        "worker_round_trip": 7.658699999999726,
+        "post_processing": 0.01369999999974425,
+        "foreground_guard": 6.506800000000112
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 75.14290000000005,
+      "breakdown_ms": {
+        "queue_wait": 0.025300000000015643,
+        "companion_before": 0.6094999999997981,
+        "action": 72.69679999999994,
+        "companion_after": 0.47069999999985157,
+        "serialization": 0.023400000000037835,
+        "worker_round_trip": 73.88609999999994,
+        "post_processing": 0.01110000000016953
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.28650000000016,
+      "breakdown_ms": {
+        "queue_wait": 0.026200000000244472,
+        "companion_before": 0.433100000000195,
+        "action": 7.593299999999999,
+        "companion_after": 0.43140000000039436,
+        "serialization": 0.01959999999962747,
+        "worker_round_trip": 8.936999999999898,
+        "post_processing": 0.009700000000520959,
+        "foreground_guard": 5.538100000000213
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.99789999999985,
+      "breakdown_ms": {
+        "queue_wait": 0.029399999999895954,
+        "companion_before": 0.4118999999996049,
+        "action": 62.733000000000175,
+        "companion_after": 0.5223000000000866,
+        "serialization": 0.015500000000429281,
+        "worker_round_trip": 63.871999999999844,
+        "post_processing": 0.009999999999763531
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 8.126900000000205,
+      "breakdown_ms": {
+        "queue_wait": 0.024800000000141154,
+        "companion_before": 0.33559999999988577,
+        "action": 5.649400000000242,
+        "companion_after": 0.46150000000034197,
+        "serialization": 0.011700000000018917,
+        "worker_round_trip": 6.925900000000183,
+        "post_processing": 0.005700000000160799,
+        "foreground_guard": 5.633899999999812
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.15910000000031,
+      "breakdown_ms": {
+        "queue_wait": 0.027299999999740976,
+        "companion_before": 0.5329999999999018,
+        "action": 61.809999999999945,
+        "companion_after": 0.467200000000048,
+        "serialization": 0.012400000000525324,
+        "worker_round_trip": 62.97449999999981,
+        "post_processing": 0.03349999999954889
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.975600000000213,
+      "breakdown_ms": {
+        "queue_wait": 0.019200000000182627,
+        "companion_before": 0.3305000000000291,
+        "action": 5.140000000000327,
+        "companion_after": 0.35019999999985885,
+        "serialization": 0.012400000000070577,
+        "worker_round_trip": 6.052599999999984,
+        "post_processing": 0.0037000000002080924,
+        "foreground_guard": 4.741800000000239
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.42399999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.021000000000185537,
+        "companion_before": 0.3396000000002459,
+        "action": 58.177900000000136,
+        "companion_after": 0.5552999999999884,
+        "serialization": 0.01139999999986685,
+        "worker_round_trip": 59.39080000000013,
+        "post_processing": 0.01040000000011787
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.596900000000005,
+      "breakdown_ms": {
+        "queue_wait": 0.030700000000251748,
+        "companion_before": 0.3801000000003114,
+        "action": 4.571599999999762,
+        "companion_after": 0.2737000000001899,
+        "serialization": 0.011099999999714782,
+        "worker_round_trip": 5.690499999999702,
+        "post_processing": 0.002900000000408909,
+        "foreground_guard": 4.555500000000393
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.994500000000244,
+      "breakdown_ms": {
+        "queue_wait": 0.03179999999974825,
+        "companion_before": 0.31999999999970896,
+        "action": 60.13239999999996,
+        "companion_after": 0.41609999999991487,
+        "serialization": 0.012500000000272848,
+        "worker_round_trip": 61.11420000000044,
+        "post_processing": 0.010200000000622822
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.405699999999797,
+      "breakdown_ms": {
+        "queue_wait": 0.01900000000023283,
+        "companion_before": 0.36439999999993233,
+        "action": 4.7666000000003805,
+        "companion_after": 0.4208000000003267,
+        "serialization": 0.0226000000006934,
+        "worker_round_trip": 6.2599999999997635,
+        "post_processing": 0.003499999999803549,
+        "foreground_guard": 4.48070000000007
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.35940000000028,
+      "breakdown_ms": {
+        "queue_wait": 0.02140000000008513,
+        "companion_before": 0.4032999999999447,
+        "action": 61.99110000000019,
+        "companion_after": 0.5747000000001208,
+        "serialization": 0.019399999999677675,
+        "worker_round_trip": 63.20169999999962,
+        "post_processing": 0.01139999999986685
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.309600000000046,
+      "breakdown_ms": {
+        "queue_wait": 0.019400000000132422,
+        "companion_before": 0.274199999999837,
+        "action": 4.553399999999783,
+        "companion_after": 0.30589999999983775,
+        "serialization": 0.009799999999813735,
+        "worker_round_trip": 5.519699999999375,
+        "post_processing": 0.003000000000156433,
+        "foreground_guard": 4.540100000000166
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.67819999999983,
+      "breakdown_ms": {
+        "queue_wait": 0.021600000000034925,
+        "companion_before": 0.32229999999981374,
+        "action": 61.757100000000264,
+        "companion_after": 0.3831000000000131,
+        "serialization": 0.01610000000027867,
+        "worker_round_trip": 62.81389999999965,
+        "post_processing": 0.009900000000016007
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.534499999999753,
+      "breakdown_ms": {
+        "queue_wait": 0.01639999999997599,
+        "companion_before": 0.4145999999996093,
+        "action": 6.05390000000034,
+        "companion_after": 0.5671999999999571,
+        "serialization": 0.01679999999987558,
+        "worker_round_trip": 7.302400000000034,
+        "post_processing": 0.00489999999945212,
+        "foreground_guard": 5.59270000000015
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.14710000000014,
+      "breakdown_ms": {
+        "queue_wait": 0.019800000000032014,
+        "companion_before": 0.3761999999996988,
+        "action": 61.1880000000001,
+        "companion_after": 0.3136999999996988,
+        "serialization": 0.01349999999956708,
+        "worker_round_trip": 62.33219999999983,
+        "post_processing": 0.009999999999763531
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.52370000000019,
+      "breakdown_ms": {
+        "queue_wait": 0.018500000000130967,
+        "companion_before": 0.5795000000002801,
+        "action": 4.495000000000346,
+        "companion_after": 0.3162000000002081,
+        "serialization": 0.009800000000268483,
+        "worker_round_trip": 5.384700000000066,
+        "post_processing": 0.0030999999999039574,
+        "foreground_guard": 4.467999999999847
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.64060000000018,
+      "breakdown_ms": {
+        "queue_wait": 0.02330000000029031,
+        "companion_before": 0.6427000000003318,
+        "action": 60.16910000000007,
+        "companion_after": 0.44000000000005457,
+        "serialization": 0.014800000000377622,
+        "worker_round_trip": 61.43020000000024,
+        "post_processing": 0.010099999999965803
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.60819999999967,
+      "breakdown_ms": {
+        "queue_wait": 0.041300000000319415,
+        "companion_before": 0.5255000000001928,
+        "action": 5.172599999999875,
+        "companion_after": 0.2757000000001426,
+        "serialization": 0.025500000000192813,
+        "worker_round_trip": 6.4046999999991385,
+        "post_processing": 0.004600000000209548,
+        "foreground_guard": 4.547599999999875
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.99079999999958,
+      "breakdown_ms": {
+        "queue_wait": 0.028000000000247383,
+        "companion_before": 0.37820000000010623,
+        "action": 63.87019999999984,
+        "companion_after": 0.44070000000010623,
+        "serialization": 0.014200000000073487,
+        "worker_round_trip": 65.04230000000052,
+        "post_processing": 0.010399999999663123
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.276100000000042,
+      "breakdown_ms": {
+        "queue_wait": 0.01830000000018117,
+        "companion_before": 0.4189999999994143,
+        "action": 5.21369999999979,
+        "companion_after": 0.4493999999999687,
+        "serialization": 0.009199999999964348,
+        "worker_round_trip": 6.180100000000039,
+        "post_processing": 0.0030999999999039574,
+        "foreground_guard": 5.190299999999752
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.93510000000015,
+      "breakdown_ms": {
+        "queue_wait": 0.02010000000018408,
+        "companion_before": 0.3105000000000473,
+        "action": 61.79790000000003,
+        "companion_after": 0.5587000000000444,
+        "serialization": 0.01859999999987849,
+        "worker_round_trip": 62.94750000000022,
+        "post_processing": 0.011799999999766442
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.217399999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.018700000000080763,
+        "companion_before": 0.9725000000003092,
+        "action": 5.785699999999906,
+        "companion_after": 0.262000000000171,
+        "serialization": 0.011700000000018917,
+        "worker_round_trip": 6.773899999999685,
+        "post_processing": 0.0033999999996012775,
+        "foreground_guard": 5.1393999999995685
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.94290000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.021200000000135333,
+        "companion_before": 0.3046999999996842,
+        "action": 61.78719999999976,
+        "companion_after": 0.4997000000003027,
+        "serialization": 0.02539999999999054,
+        "worker_round_trip": 63.007800000000316,
+        "post_processing": 0.01499999999987267
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 9.890700000000379,
+      "breakdown_ms": {
+        "queue_wait": 0.029800000000250293,
+        "companion_before": 0.5050000000001091,
+        "action": 6.149099999999635,
+        "companion_after": 0.39079999999967185,
+        "serialization": 0.0136000000002241,
+        "worker_round_trip": 8.722299999999905,
+        "post_processing": 0.0052999999998064595,
+        "foreground_guard": 6.123499999999694
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 72.00200000000041,
+      "breakdown_ms": {
+        "queue_wait": 0.01999999999998181,
+        "companion_before": 0.4178999999999178,
+        "action": 69.87009999999964,
+        "companion_after": 0.49080000000003565,
+        "serialization": 0.015199999999822467,
+        "worker_round_trip": 70.95389999999952,
+        "post_processing": 0.02109999999993306
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.2697000000002845,
+      "breakdown_ms": {
+        "queue_wait": 0.01999999999998181,
+        "companion_before": 0.36839999999983775,
+        "action": 4.775200000000041,
+        "companion_after": 0.4325999999996384,
+        "serialization": 0.01680000000033033,
+        "worker_round_trip": 6.099800000000414,
+        "post_processing": 0.00959999999986394,
+        "foreground_guard": 4.3233000000000175
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 57.92920000000004,
+      "breakdown_ms": {
+        "queue_wait": 0.022800000000188447,
+        "companion_before": 0.3975000000000364,
+        "action": 55.791699999999764,
+        "companion_after": 0.4175000000000182,
+        "serialization": 0.015800000001036096,
+        "worker_round_trip": 56.98720000000003,
+        "post_processing": 0.014100000000325963
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.403099999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.01999999999998181,
+        "companion_before": 0.5223999999998341,
+        "action": 5.284900000000107,
+        "companion_after": 0.2953000000002248,
+        "serialization": 0.0136000000002241,
+        "worker_round_trip": 6.295999999999822,
+        "post_processing": 0.004100000000107684,
+        "foreground_guard": 5.250300000000152
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.96600000000035,
+      "breakdown_ms": {
+        "queue_wait": 0.041300000000319415,
+        "companion_before": 0.3366000000000895,
+        "action": 57.666099999999915,
+        "companion_after": 0.43280000000004293,
+        "serialization": 0.02459999999973661,
+        "worker_round_trip": 59.01999999999953,
+        "post_processing": 0.01599999999962165
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.057299999999941,
+      "breakdown_ms": {
+        "queue_wait": 0.02070000000003347,
+        "companion_before": 0.3681000000001404,
+        "action": 5.007900000000063,
+        "companion_after": 0.40479999999979555,
+        "serialization": 0.013700000000426371,
+        "worker_round_trip": 6.041999999999916,
+        "post_processing": 0.005599999999958527,
+        "foreground_guard": 4.615699999999833
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.000400000000354,
+      "breakdown_ms": {
+        "queue_wait": 0.03279999999995198,
+        "companion_before": 0.48900000000003274,
+        "action": 58.40480000000025,
+        "companion_after": 0.4313999999999396,
+        "serialization": 0.015900000000328873,
+        "worker_round_trip": 59.91980000000012,
+        "post_processing": 0.01620000000048094
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 8.74519999999984,
+      "breakdown_ms": {
+        "queue_wait": 0.05449999999973443,
+        "companion_before": 0.48210000000017317,
+        "action": 4.7820999999999,
+        "companion_after": 1.8940999999999804,
+        "serialization": 0.02019999999947686,
+        "worker_round_trip": 6.051000000000386,
+        "post_processing": 0.007100000000718865,
+        "foreground_guard": 4.7555999999999585
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.582400000000234,
+      "breakdown_ms": {
+        "queue_wait": 0.021199999999680585,
+        "companion_before": 0.3472999999999047,
+        "action": 59.50969999999961,
+        "companion_after": 0.4619999999999891,
+        "serialization": 0.015700000000379077,
+        "worker_round_trip": 60.63810000000012,
+        "post_processing": 0.015600000000631553
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.913500000000113,
+      "breakdown_ms": {
+        "queue_wait": 0.028299999999944703,
+        "companion_before": 0.3079000000002452,
+        "action": 5.186499999999796,
+        "companion_after": 0.38550000000032014,
+        "serialization": 0.013500000000021828,
+        "worker_round_trip": 5.988100000000031,
+        "post_processing": 0.005100000000311411,
+        "foreground_guard": 4.7179000000001
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.02880000000005,
+      "breakdown_ms": {
+        "queue_wait": 0.0227999999997337,
+        "companion_before": 0.5037000000002081,
+        "action": 60.677799999999934,
+        "companion_after": 0.42059999999992215,
+        "serialization": 0.017100000000482396,
+        "worker_round_trip": 61.978000000000065,
+        "post_processing": 0.010300000000370346
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.8134000000000015,
+      "breakdown_ms": {
+        "queue_wait": 0.024600000000191358,
+        "companion_before": 0.39380000000028303,
+        "action": 4.646200000000135,
+        "companion_after": 0.340900000000147,
+        "serialization": 0.014300000000275759,
+        "worker_round_trip": 5.854500000000371,
+        "post_processing": 0.0031000000003587047,
+        "foreground_guard": 4.621700000000146
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.83979999999974,
+      "breakdown_ms": {
+        "queue_wait": 0.019800000000032014,
+        "companion_before": 0.33240000000068903,
+        "action": 57.74760000000015,
+        "companion_after": 0.4385000000002037,
+        "serialization": 0.01680000000033033,
+        "worker_round_trip": 58.955800000000636,
+        "post_processing": 0.010599999999612919
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.74350000000004,
+      "breakdown_ms": {
+        "queue_wait": 0.05819999999994252,
+        "companion_before": 0.4715000000001055,
+        "action": 8.226200000000063,
+        "companion_after": 0.41390000000001237,
+        "serialization": 0.02250000000003638,
+        "worker_round_trip": 9.552699999999732,
+        "post_processing": 0.005099999999401916,
+        "foreground_guard": 7.894900000000234
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 58.94140000000016,
+      "breakdown_ms": {
+        "queue_wait": 0.023799999999937427,
+        "companion_before": 0.3611000000000786,
+        "action": 56.879999999999654,
+        "companion_after": 0.5689000000002125,
+        "serialization": 0.02080000000023574,
+        "worker_round_trip": 57.88709999999992,
+        "post_processing": 0.011899999999968713
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.449099999999817,
+      "breakdown_ms": {
+        "queue_wait": 0.020899999999983265,
+        "companion_before": 0.3636999999994259,
+        "action": 4.646700000000237,
+        "companion_after": 0.3876999999997679,
+        "serialization": 0.012799999999515421,
+        "worker_round_trip": 5.475599999999758,
+        "post_processing": 0.0036000000000058208,
+        "foreground_guard": 4.629500000000007
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.83190000000013,
+      "breakdown_ms": {
+        "queue_wait": 0.01830000000018117,
+        "companion_before": 0.34449999999969805,
+        "action": 57.74469999999974,
+        "companion_after": 0.4325000000003456,
+        "serialization": 0.01269999999931315,
+        "worker_round_trip": 58.94250000000011,
+        "post_processing": 0.010800000000017462
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.898200000000088,
+      "breakdown_ms": {
+        "queue_wait": 0.02430000000003929,
+        "companion_before": 0.32540000000017244,
+        "action": 4.892900000000282,
+        "companion_after": 0.2510000000002037,
+        "serialization": 0.013699999999971624,
+        "worker_round_trip": 6.088200000000143,
+        "post_processing": 0.0045999999997548,
+        "foreground_guard": 4.436200000000099
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.0329999999999,
+      "breakdown_ms": {
+        "queue_wait": 0.018700000000080763,
+        "companion_before": 0.3605000000002292,
+        "action": 57.94450000000006,
+        "companion_after": 0.40839999999980137,
+        "serialization": 0.015600000000176806,
+        "worker_round_trip": 59.113900000000285,
+        "post_processing": 0.015100000000074942
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.066000000000258,
+      "breakdown_ms": {
+        "queue_wait": 0.019099999999980355,
+        "companion_before": 0.44590000000016516,
+        "action": 5.308999999999742,
+        "companion_after": 0.277299999999741,
+        "serialization": 0.010400000001027365,
+        "worker_round_trip": 6.124299999999948,
+        "post_processing": 0.0027000000000043656,
+        "foreground_guard": 5.290100000000166
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.74400000000014,
+      "breakdown_ms": {
+        "queue_wait": 0.022400000000288856,
+        "companion_before": 0.44489999999996144,
+        "action": 61.401400000000194,
+        "companion_after": 0.4596999999998843,
+        "serialization": 0.02250000000003638,
+        "worker_round_trip": 62.67520000000013,
+        "post_processing": 0.0216999999993277
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.9792999999999665,
+      "breakdown_ms": {
+        "queue_wait": 0.020899999999983265,
+        "companion_before": 0.882799999999861,
+        "action": 5.259299999999712,
+        "companion_after": 0.3983000000002903,
+        "serialization": 0.015600000000176806,
+        "worker_round_trip": 6.394900000000234,
+        "post_processing": 0.0054000000004634785,
+        "foreground_guard": 4.797599999999875
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.60939999999982,
+      "breakdown_ms": {
+        "queue_wait": 0.026299999999991996,
+        "companion_before": 0.6929000000000087,
+        "action": 56.87519999999995,
+        "companion_after": 0.41620000000011714,
+        "serialization": 0.016299999999773718,
+        "worker_round_trip": 58.34090000000015,
+        "post_processing": 0.012699999999767897
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.931599999999889,
+      "breakdown_ms": {
+        "queue_wait": 0.01540000000022701,
+        "companion_before": 1.398200000000088,
+        "action": 5.040899999999965,
+        "companion_after": 0.2602999999999156,
+        "serialization": 0.014899999999670399,
+        "worker_round_trip": 6.05180000000064,
+        "post_processing": 0.00430000000005748,
+        "foreground_guard": 5.015999999999622
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.861399999999776,
+      "breakdown_ms": {
+        "queue_wait": 0.0181999999999789,
+        "companion_before": 0.30549999999993815,
+        "action": 60.70990000000029,
+        "companion_after": 0.5338999999999032,
+        "serialization": 0.019799999999577267,
+        "worker_round_trip": 61.8741,
+        "post_processing": 0.01110000000016953
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.858099999999922,
+      "breakdown_ms": {
+        "queue_wait": 0.01919999999972788,
+        "companion_before": 0.4713000000001557,
+        "action": 4.717799999999897,
+        "companion_after": 0.42830000000003565,
+        "serialization": 0.020500000000083674,
+        "worker_round_trip": 5.722899999999754,
+        "post_processing": 0.003699999999753345,
+        "foreground_guard": 4.4229999999997744
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.92169999999987,
+      "breakdown_ms": {
+        "queue_wait": 0.01929999999993015,
+        "companion_before": 0.3058000000000902,
+        "action": 59.75999999999976,
+        "companion_after": 0.4812000000001717,
+        "serialization": 0.013699999999062129,
+        "worker_round_trip": 61.00879999999961,
+        "post_processing": 0.011899999999968713
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.297399999999925,
+      "breakdown_ms": {
+        "queue_wait": 0.021600000000034925,
+        "companion_before": 0.36459999999988213,
+        "action": 4.98510000000033,
+        "companion_after": 0.4760999999998603,
+        "serialization": 0.060899999999946886,
+        "worker_round_trip": 6.160800000000108,
+        "post_processing": 0.004200000000309956,
+        "foreground_guard": 4.967000000000098
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.41130000000021,
+      "breakdown_ms": {
+        "queue_wait": 0.019099999999980355,
+        "companion_before": 0.3852000000001681,
+        "action": 59.321899999999914,
+        "companion_after": 0.4250000000001819,
+        "serialization": 0.01319999999986976,
+        "worker_round_trip": 60.490200000000186,
+        "post_processing": 0.010800000000017462
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.884299999999712,
+      "breakdown_ms": {
+        "queue_wait": 0.024600000000191358,
+        "companion_before": 0.3781999999996515,
+        "action": 4.833900000000085,
+        "companion_after": 0.33239999999977954,
+        "serialization": 0.017599999999674765,
+        "worker_round_trip": 5.880799999999908,
+        "post_processing": 0.0052999999998064595,
+        "foreground_guard": 4.384900000000016
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.80250000000024,
+      "breakdown_ms": {
+        "queue_wait": 0.0181999999999789,
+        "companion_before": 0.37439999999969586,
+        "action": 59.29320000000007,
+        "companion_after": 0.45089999999981956,
+        "serialization": 0.014299999999366264,
+        "worker_round_trip": 60.85140000000001,
+        "post_processing": 0.010599999999158172
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.811200000000099,
+      "breakdown_ms": {
+        "queue_wait": 0.01959999999962747,
+        "companion_before": 0.36859999999978754,
+        "action": 4.7247000000006665,
+        "companion_after": 0.33370000000013533,
+        "serialization": 0.01190000000042346,
+        "worker_round_trip": 5.9002999999993335,
+        "post_processing": 0.0033999999996012775,
+        "foreground_guard": 4.70850000000064
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 67.80909999999949,
+      "breakdown_ms": {
+        "queue_wait": 0.017300000000432192,
+        "companion_before": 0.9455999999991036,
+        "action": 65.2494000000006,
+        "companion_after": 0.4018000000005486,
+        "serialization": 0.019500000000334694,
+        "worker_round_trip": 66.31460000000061,
+        "post_processing": 0.014200000000528235
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 10.726599999999962,
+      "breakdown_ms": {
+        "queue_wait": 0.029600000000755244,
+        "companion_before": 0.4710000000004584,
+        "action": 7.798099999999977,
+        "companion_after": 0.4709000000002561,
+        "serialization": 0.022100000000136788,
+        "worker_round_trip": 9.524999999999636,
+        "post_processing": 0.004300000000512227,
+        "foreground_guard": 7.241500000000087
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 98.70940000000064,
+      "breakdown_ms": {
+        "queue_wait": 0.018399999999928696,
+        "companion_before": 0.47890000000006694,
+        "action": 96.60460000000057,
+        "companion_after": 0.3993000000000393,
+        "serialization": 0.015599999999722058,
+        "worker_round_trip": 97.6916999999994,
+        "post_processing": 0.01540000000022701
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 9.071399999999812,
+      "breakdown_ms": {
+        "queue_wait": 0.02250000000003638,
+        "companion_before": 0.7989999999999782,
+        "action": 6.4716000000007625,
+        "companion_after": 0.35010000000056607,
+        "serialization": 0.013400000000729051,
+        "worker_round_trip": 7.655999999999949,
+        "post_processing": 0.004600000000209548,
+        "foreground_guard": 6.45049999999992
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.40679999999975,
+      "breakdown_ms": {
+        "queue_wait": 0.018299999999726424,
+        "companion_before": 0.342000000000553,
+        "action": 62.454899999999725,
+        "companion_after": 0.37590000000000146,
+        "serialization": 0.015099999999620195,
+        "worker_round_trip": 63.555099999999584,
+        "post_processing": 0.012100000000828004
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.509500000000116,
+      "breakdown_ms": {
+        "queue_wait": 0.019400000000132422,
+        "companion_before": 0.7566999999999098,
+        "action": 6.193000000000211,
+        "companion_after": 0.43099999999958527,
+        "serialization": 0.01310000000103173,
+        "worker_round_trip": 7.085200000000441,
+        "post_processing": 0.004599999999300053,
+        "foreground_guard": 5.826099999999315
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.29880000000048,
+      "breakdown_ms": {
+        "queue_wait": 0.04209999999966385,
+        "companion_before": 0.326799999999821,
+        "action": 58.61130000000048,
+        "companion_after": 0.4614000000001397,
+        "serialization": 0.01280000000133441,
+        "worker_round_trip": 60.3131999999996,
+        "post_processing": 0.01190000000042346
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 10.50130000000081,
+      "breakdown_ms": {
+        "queue_wait": 0.019699999999829743,
+        "companion_before": 0.6051000000006752,
+        "action": 8.030700000000252,
+        "companion_after": 0.4165000000002692,
+        "serialization": 0.012100000000828004,
+        "worker_round_trip": 9.240199999999277,
+        "post_processing": 0.0034999999988940544,
+        "foreground_guard": 8.014599999999518
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.271999999999935,
+      "breakdown_ms": {
+        "queue_wait": 0.03330000000005384,
+        "companion_before": 0.39170000000012806,
+        "action": 60.754800000000614,
+        "companion_after": 0.5617999999994936,
+        "serialization": 0.017199999999320426,
+        "worker_round_trip": 62.168399999999565,
+        "post_processing": 0.014299999999821011
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 7.999899999999798,
+      "breakdown_ms": {
+        "queue_wait": 0.17600000000038563,
+        "companion_before": 0.6624000000001615,
+        "action": 5.248800000000301,
+        "companion_after": 0.30609999999978754,
+        "serialization": 0.012899999999717693,
+        "worker_round_trip": 6.648200000000543,
+        "post_processing": 0.005200000001423177,
+        "foreground_guard": 4.650899999999638
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.21689999999944,
+      "breakdown_ms": {
+        "queue_wait": 0.019699999999829743,
+        "companion_before": 0.3118000000004031,
+        "action": 62.43149999999969,
+        "companion_after": 0.3632999999999811,
+        "serialization": 0.014600000001337321,
+        "worker_round_trip": 63.42450000000008,
+        "post_processing": 0.010800000000017462
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 7.4122000000006665,
+      "breakdown_ms": {
+        "queue_wait": 0.0194999999994252,
+        "companion_before": 0.3507999999992535,
+        "action": 4.864500000000589,
+        "companion_after": 0.618399999999383,
+        "serialization": 0.012600000000020373,
+        "worker_round_trip": 6.159599999999955,
+        "post_processing": 0.007199999999102147,
+        "foreground_guard": 4.849299999999857
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.16619999999966,
+      "breakdown_ms": {
+        "queue_wait": 0.019699999999829743,
+        "companion_before": 0.370600000000195,
+        "action": 60.58719999999994,
+        "companion_after": 0.6440000000002328,
+        "serialization": 0.024400000001151056,
+        "worker_round_trip": 62.9332000000004,
+        "post_processing": 0.02700000000095315
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.472600000000057,
+      "breakdown_ms": {
+        "queue_wait": 0.01749999999992724,
+        "companion_before": 0.28729999999995925,
+        "action": 4.808899999999994,
+        "companion_after": 0.33320000000003347,
+        "serialization": 0.01630000000113796,
+        "worker_round_trip": 5.651900000000751,
+        "post_processing": 0.0033000000012179953,
+        "foreground_guard": 4.533699999999953
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.52620000000024,
+      "breakdown_ms": {
+        "queue_wait": 0.018199999999524152,
+        "companion_before": 0.29359999999996944,
+        "action": 66.54739999999947,
+        "companion_after": 0.6269000000002052,
+        "serialization": 0.016799999999420834,
+        "worker_round_trip": 67.48150000000078,
+        "post_processing": 0.015200000000731961
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 8.057699999999386,
+      "breakdown_ms": {
+        "queue_wait": 0.019099999999525608,
+        "companion_before": 0.32070000000021537,
+        "action": 5.591199999999844,
+        "companion_after": 0.3973999999998341,
+        "serialization": 0.012600000000020373,
+        "worker_round_trip": 7.122399999999288,
+        "post_processing": 0.0039999999999054126,
+        "foreground_guard": 5.57549999999992
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 84.66070000000036,
+      "breakdown_ms": {
+        "queue_wait": 0.024200000000746513,
+        "companion_before": 0.37180000000080327,
+        "action": 82.34090000000015,
+        "companion_after": 0.559200000000601,
+        "serialization": 0.020599999998921703,
+        "worker_round_trip": 83.58540000000085,
+        "post_processing": 0.011800000001130684
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 6.650800000000345,
+      "breakdown_ms": {
+        "queue_wait": 0.018399999999928696,
+        "companion_before": 0.28469999999924767,
+        "action": 4.820099999999911,
+        "companion_after": 0.22559999999975844,
+        "serialization": 0.012399999998706335,
+        "worker_round_trip": 5.933499999999185,
+        "post_processing": 0.003800000000410364,
+        "foreground_guard": 4.561799999999494
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.949499999999716,
+      "breakdown_ms": {
+        "queue_wait": 0.01890000000003056,
+        "companion_before": 0.37329999999928987,
+        "action": 58.90020000000004,
+        "companion_after": 0.42410000000018044,
+        "serialization": 0.0136000000002241,
+        "worker_round_trip": 60.03649999999925,
+        "post_processing": 0.009899999999106512
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 6.558199999999488,
+      "breakdown_ms": {
+        "queue_wait": 0.018999999999323336,
+        "companion_before": 0.6291999999994005,
+        "action": 4.590900000000147,
+        "companion_after": 0.41820000000006985,
+        "serialization": 0.015900000001238368,
+        "worker_round_trip": 5.302000000000589,
+        "post_processing": 0.002900000000408909,
+        "foreground_guard": 4.576700000000528
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.024600000000646,
+      "breakdown_ms": {
+        "queue_wait": 0.01900000000023283,
+        "companion_before": 0.323500000000422,
+        "action": 59.15900000000056,
+        "companion_after": 0.3860999999997148,
+        "serialization": 0.013200000000324508,
+        "worker_round_trip": 60.20000000000073,
+        "post_processing": 0.010299999999915599
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 8.74659999999949,
+      "breakdown_ms": {
+        "queue_wait": 0.019800000000032014,
+        "companion_before": 0.3768000000000029,
+        "action": 6.108400000000074,
+        "companion_after": 0.33699999999953434,
+        "serialization": 0.013500000000931323,
+        "worker_round_trip": 7.739800000000287,
+        "post_processing": 0.0059999999994033715,
+        "foreground_guard": 5.295900000000074
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 76.75970000000052,
+      "breakdown_ms": {
+        "queue_wait": 0.017800000000534055,
+        "companion_before": 3.5565000000005966,
+        "action": 70.4971000000005,
+        "companion_after": 1.1346999999996115,
+        "serialization": 0.03339999999934662,
+        "worker_round_trip": 71.48570000000018,
+        "post_processing": 0.0316000000011627,
+        "uia_tree_walk": 18.2148
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.73350000000028,
+      "breakdown_ms": {
+        "queue_wait": 0.025900000000547152,
+        "companion_before": 1.8524000000006708,
+        "action": 62.134900000000016,
+        "companion_after": 0.506800000000112,
+        "serialization": 0.02109999999993306,
+        "worker_round_trip": 63.21020000000044,
+        "post_processing": 0.01209999999991851
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 47.45859999999993,
+      "breakdown_ms": {
+        "queue_wait": 0.03580000000056316,
+        "companion_before": 0.7195999999994456,
+        "action": 44.75560000000041,
+        "companion_after": 0.42770000000018626,
+        "serialization": 0.016099999999823922,
+        "worker_round_trip": 7.146200000000135,
+        "post_processing": 0.004899999999906868,
+        "foreground_guard": 5.740000000000691
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.09590000000026,
+      "breakdown_ms": {
+        "queue_wait": 0.019200000000637374,
+        "companion_before": 0.3896999999997206,
+        "action": 65.58340000000044,
+        "companion_after": 0.4227999999993699,
+        "serialization": 0.014900000000125146,
+        "worker_round_trip": 67.1271999999999,
+        "post_processing": 0.016100000000733417
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 22.457499999999527,
+      "breakdown_ms": {
+        "queue_wait": 0.019699999999829743,
+        "companion_before": 0.416599999999562,
+        "action": 17.272800000000643,
+        "companion_after": 1.8488999999999578,
+        "serialization": 0.040899999999965075,
+        "worker_round_trip": 18.387300000000323,
+        "post_processing": 0.00830000000041764,
+        "foreground_guard": 14.9937000000009
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 99.35899999999947,
+      "breakdown_ms": {
+        "queue_wait": 0.029099999999743886,
+        "companion_before": 0.6493999999993321,
+        "action": 96.39379999999983,
+        "companion_after": 0.6642999999994572,
+        "serialization": 0.019999999999527063,
+        "worker_round_trip": 97.84670000000096,
+        "post_processing": 0.017899999999826832
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 51.58780000000024,
+      "breakdown_ms": {
+        "queue_wait": 0.018299999999726424,
+        "companion_before": 0.9416000000001077,
+        "action": 48.66910000000007,
+        "companion_after": 0.40499999999974534,
+        "serialization": 0.014799999999922875,
+        "worker_round_trip": 9.128200000000106,
+        "post_processing": 0.005500000000211003,
+        "foreground_guard": 7.682699999999386
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 99.10620000000017,
+      "breakdown_ms": {
+        "queue_wait": 0.024400000000241562,
+        "companion_before": 0.37629999999990105,
+        "action": 97.0052999999998,
+        "companion_after": 0.4980999999997948,
+        "serialization": 0.013199999999415013,
+        "worker_round_trip": 98.08959999999934,
+        "post_processing": 0.011800000000221189
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 14.557599999999184,
+      "breakdown_ms": {
+        "queue_wait": 0.018399999999928696,
+        "companion_before": 0.5205000000005384,
+        "action": 12.145400000000336,
+        "companion_after": 0.3818999999994048,
+        "serialization": 0.024500000000443833,
+        "worker_round_trip": 12.504100000000108,
+        "post_processing": 0.008600000001024455,
+        "foreground_guard": 10.561299999999392
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.60230000000047,
+      "breakdown_ms": {
+        "queue_wait": 0.019400000000132422,
+        "companion_before": 0.3388999999997395,
+        "action": 62.466699999999946,
+        "companion_after": 0.43260000000009313,
+        "serialization": 0.021199999999225838,
+        "worker_round_trip": 63.70090000000073,
+        "post_processing": 0.01099999999951251
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 44.16569999999956,
+      "breakdown_ms": {
+        "queue_wait": 0.016300000000228465,
+        "companion_before": 0.26300000000082946,
+        "action": 42.04440000000068,
+        "companion_after": 0.5817999999999302,
+        "serialization": 0.01539999999840802,
+        "worker_round_trip": 6.453399999999419,
+        "post_processing": 0.003500000000713044,
+        "foreground_guard": 5.273599999999533
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.765300000000025,
+      "breakdown_ms": {
+        "queue_wait": 0.017600000000129512,
+        "companion_before": 0.3573000000005777,
+        "action": 59.86449999999968,
+        "companion_after": 0.5442000000002736,
+        "serialization": 0.021999999999934516,
+        "worker_round_trip": 60.74339999999938,
+        "post_processing": 0.010700000000724685
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.168399999999565,
+      "breakdown_ms": {
+        "queue_wait": 0.0158000000001266,
+        "companion_before": 0.3102000000008047,
+        "action": 9.932300000000396,
+        "companion_after": 0.748899999999594,
+        "serialization": 0.019700000000739237,
+        "worker_round_trip": 9.403000000000247,
+        "post_processing": 0.008100000000922591,
+        "foreground_guard": 8.142300000000432
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 73.10569999999916,
+      "breakdown_ms": {
+        "queue_wait": 0.019100000000435102,
+        "companion_before": 0.2903999999998632,
+        "action": 71.0618999999997,
+        "companion_after": 0.5208000000002357,
+        "serialization": 0.02380000000084692,
+        "worker_round_trip": 72.16269999999986,
+        "post_processing": 0.023799999999937427
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 49.87790000000041,
+      "breakdown_ms": {
+        "queue_wait": 0.02449999999953434,
+        "companion_before": 1.759700000000521,
+        "action": 45.46780000000035,
+        "companion_after": 0.5050000000001091,
+        "serialization": 0.019299999999020656,
+        "worker_round_trip": 7.438100000000304,
+        "post_processing": 0.004299999999602733,
+        "foreground_guard": 5.429000000000087
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 76.75929999999971,
+      "breakdown_ms": {
+        "queue_wait": 0.02260000000023865,
+        "companion_before": 0.39320000000043365,
+        "action": 74.8126000000002,
+        "companion_after": 0.3287000000000262,
+        "serialization": 0.014699999998811109,
+        "worker_round_trip": 75.91030000000046,
+        "post_processing": 0.012000000000625732
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 15.982500000000073,
+      "breakdown_ms": {
+        "queue_wait": 0.039299999999457214,
+        "companion_before": 1.0801999999994223,
+        "action": 13.113500000000386,
+        "companion_after": 0.3029999999998836,
+        "serialization": 0.024299999999129795,
+        "worker_round_trip": 13.408200000000761,
+        "post_processing": 0.006099999999605643,
+        "foreground_guard": 11.062999999999192
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 67.73700000000008,
+      "breakdown_ms": {
+        "queue_wait": 0.019200000000637374,
+        "companion_before": 0.4057999999995445,
+        "action": 64.71500000000015,
+        "companion_after": 0.44359999999960564,
+        "serialization": 0.012999999999919964,
+        "worker_round_trip": 66.74619999999959,
+        "post_processing": 0.012299999999413558
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 46.07600000000002,
+      "breakdown_ms": {
+        "queue_wait": 0.01650000000063301,
+        "companion_before": 0.25120000000060827,
+        "action": 43.646999999999935,
+        "companion_after": 0.43099999999958527,
+        "serialization": 0.01419999999961874,
+        "worker_round_trip": 6.633200000000215,
+        "post_processing": 0.004700000000411819,
+        "foreground_guard": 4.986200000000281
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 66.72959999999966,
+      "breakdown_ms": {
+        "queue_wait": 0.01989999999932479,
+        "companion_before": 0.29759999999987485,
+        "action": 64.79839999999967,
+        "companion_after": 0.36639999999988504,
+        "serialization": 0.014699999998811109,
+        "worker_round_trip": 65.93589999999949,
+        "post_processing": 0.01599999999962165
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 14.969099999999344,
+      "breakdown_ms": {
+        "queue_wait": 0.01860000000033324,
+        "companion_before": 0.4137000000000626,
+        "action": 12.80159999999978,
+        "companion_after": 0.342200000000048,
+        "serialization": 0.02269999999953143,
+        "worker_round_trip": 13.09979999999996,
+        "post_processing": 0.00739999999950669,
+        "foreground_guard": 11.477899999999863
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 72.16740000000027,
+      "breakdown_ms": {
+        "queue_wait": 0.025099999999838474,
+        "companion_before": 0.4944000000004962,
+        "action": 69.52059999999983,
+        "companion_after": 0.39769999999953143,
+        "serialization": 0.01449999999931606,
+        "worker_round_trip": 71.11329999999998,
+        "post_processing": 0.012700000000222644
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 38.89719999999943,
+      "breakdown_ms": {
+        "queue_wait": 0.02070000000003347,
+        "companion_before": 0.3364000000010492,
+        "action": 36.352499999999964,
+        "companion_after": 0.6512000000002445,
+        "serialization": 0.014200000000528235,
+        "worker_round_trip": 5.898599999998623,
+        "post_processing": 0.005199999998694693,
+        "foreground_guard": 4.475000000000364
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 67.91029999999955,
+      "breakdown_ms": {
+        "queue_wait": 0.016999999999825377,
+        "companion_before": 0.3234999999995125,
+        "action": 65.9414999999999,
+        "companion_after": 0.5345999999999549,
+        "serialization": 0.018799999998918793,
+        "worker_round_trip": 66.91720000000078,
+        "post_processing": 0.011499999999614374
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 18.995499999999993,
+      "breakdown_ms": {
+        "queue_wait": 0.01599999999962165,
+        "companion_before": 0.8569999999990614,
+        "action": 16.024000000000342,
+        "companion_after": 0.4234999999998763,
+        "serialization": 0.02449999999953434,
+        "worker_round_trip": 16.20680000000084,
+        "post_processing": 0.008399999998800922,
+        "foreground_guard": 13.94419999999991
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 82.99549999999999,
+      "breakdown_ms": {
+        "queue_wait": 0.023799999999937427,
+        "companion_before": 0.3930999999993219,
+        "action": 80.93170000000009,
+        "companion_after": 0.3954999999996289,
+        "serialization": 0.01629999999931897,
+        "worker_round_trip": 82.06620000000112,
+        "post_processing": 0.016300000000228465
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 39.89710000000014,
+      "breakdown_ms": {
+        "queue_wait": 0.02190000000064174,
+        "companion_before": 0.5619000000006054,
+        "action": 37.1252999999997,
+        "companion_after": 0.7917999999999665,
+        "serialization": 0.018699999999626016,
+        "worker_round_trip": 8.507000000000517,
+        "post_processing": 0.004800000000614091,
+        "foreground_guard": 7.233400000000074
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.01230000000032,
+      "breakdown_ms": {
+        "queue_wait": 0.05749999999989086,
+        "companion_before": 0.38619999999900756,
+        "action": 61.10770000000048,
+        "companion_after": 0.4456000000000131,
+        "serialization": 0.012600000000929867,
+        "worker_round_trip": 63.00660000000153,
+        "post_processing": 0.009900000000016007
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 13.754300000000512,
+      "breakdown_ms": {
+        "queue_wait": 0.016200000000026193,
+        "companion_before": 0.4774999999999636,
+        "action": 11.642699999999422,
+        "companion_after": 0.3632000000006883,
+        "serialization": 0.08500000000094587,
+        "worker_round_trip": 11.852600000001075,
+        "post_processing": 0.007199999999102147,
+        "foreground_guard": 9.245899999999892
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.88580000000002,
+      "breakdown_ms": {
+        "queue_wait": 0.03819999999996071,
+        "companion_before": 0.5640999999995984,
+        "action": 62.009000000000015,
+        "companion_after": 0.480199999999968,
+        "serialization": 0.01710000000002765,
+        "worker_round_trip": 63.673499999999876,
+        "post_processing": 0.011799999999311694
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 49.858900000000176,
+      "breakdown_ms": {
+        "queue_wait": 0.03210000000035507,
+        "companion_before": 0.4227000000000771,
+        "action": 45.724199999999655,
+        "companion_after": 1.04779999999937,
+        "serialization": 0.016999999998915882,
+        "worker_round_trip": 7.514500000001135,
+        "post_processing": 0.004700000000411819,
+        "foreground_guard": 4.992799999999988
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.52890000000025,
+      "breakdown_ms": {
+        "queue_wait": 0.018500000000130967,
+        "companion_before": 0.28549999999904685,
+        "action": 60.20139999999992,
+        "companion_after": 0.7209000000002561,
+        "serialization": 0.023699999999735155,
+        "worker_round_trip": 61.35850000000028,
+        "post_processing": 0.023000000000138243
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 16.092000000000553,
+      "breakdown_ms": {
+        "queue_wait": 0.01749999999992724,
+        "companion_before": 0.7867999999998574,
+        "action": 11.977300000000469,
+        "companion_after": 1.1153999999996813,
+        "serialization": 0.027499999999236024,
+        "worker_round_trip": 12.597400000001471,
+        "post_processing": 0.009099999999307329,
+        "foreground_guard": 10.159999999999854
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.4417999999996,
+      "breakdown_ms": {
+        "queue_wait": 0.02430000000003929,
+        "companion_before": 0.3396000000002459,
+        "action": 63.47260000000006,
+        "companion_after": 0.4256999999997788,
+        "serialization": 0.010500000001229637,
+        "worker_round_trip": 64.52629999999954,
+        "post_processing": 0.012200000000120781
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 48.67499999999927,
+      "breakdown_ms": {
+        "queue_wait": 0.018399999999928696,
+        "companion_before": 0.37179999999989377,
+        "action": 46.060999999999694,
+        "companion_after": 0.37439999999969586,
+        "serialization": 0.014600000000427826,
+        "worker_round_trip": 7.6830999999992855,
+        "post_processing": 0.005600000000413274,
+        "foreground_guard": 5.949999999999818
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.3094000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.018100000000231375,
+        "companion_before": 0.38260000000082073,
+        "action": 61.97360000000026,
+        "companion_after": 0.4014999999999418,
+        "serialization": 0.011700000000018917,
+        "worker_round_trip": 63.40239999999994,
+        "post_processing": 0.013500000000021828
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 14.102899999999863,
+      "breakdown_ms": {
+        "queue_wait": 0.016200000000026193,
+        "companion_before": 0.3331000000007407,
+        "action": 12.03899999999976,
+        "companion_after": 0.3625999999994747,
+        "serialization": 0.020700000000942964,
+        "worker_round_trip": 12.255700000000616,
+        "post_processing": 0.0058999999992011,
+        "foreground_guard": 10.445200000000114
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.65419999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.019999999999527063,
+        "companion_before": 0.3010000000003856,
+        "action": 62.674699999999575,
+        "companion_after": 0.4305999999996857,
+        "serialization": 0.01389999999992142,
+        "worker_round_trip": 63.79699999999957,
+        "post_processing": 0.011999999999716238
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 49.422199999999975,
+      "breakdown_ms": {
+        "queue_wait": 0.03920000000016444,
+        "companion_before": 0.327900000000227,
+        "action": 47.33519999999953,
+        "companion_after": 0.32150000000001455,
+        "serialization": 0.017600000000129512,
+        "worker_round_trip": 8.432200000000194,
+        "post_processing": 0.005799999999908323,
+        "foreground_guard": 7.143900000000031
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.32220000000052,
+      "breakdown_ms": {
+        "queue_wait": 0.023499999999330612,
+        "companion_before": 0.3022000000000844,
+        "action": 59.6226000000006,
+        "companion_after": 0.373899999999594,
+        "serialization": 0.012499999998908606,
+        "worker_round_trip": 60.538800000000265,
+        "post_processing": 0.011000000000422006
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.94340000000011,
+      "breakdown_ms": {
+        "queue_wait": 0.01840000000083819,
+        "companion_before": 0.5385999999998603,
+        "action": 10.83469999999943,
+        "companion_after": 0.37990000000081636,
+        "serialization": 0.01950000000124419,
+        "worker_round_trip": 10.846599999998944,
+        "post_processing": 0.005199999999604188,
+        "foreground_guard": 9.412900000000263
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 64.11589999999978,
+      "breakdown_ms": {
+        "queue_wait": 0.020299999999224383,
+        "companion_before": 0.4162000000005719,
+        "action": 61.959899999999834,
+        "companion_after": 0.4283999999997832,
+        "serialization": 0.0110000000013315,
+        "worker_round_trip": 63.14550000000054,
+        "post_processing": 0.011700000000018917
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 42.53350000000046,
+      "breakdown_ms": {
+        "queue_wait": 0.016300000000228465,
+        "companion_before": 1.2782999999999447,
+        "action": 39.212499999999636,
+        "companion_after": 0.41960000000017317,
+        "serialization": 0.015400000001136505,
+        "worker_round_trip": 6.855099999999766,
+        "post_processing": 0.004500000000007276,
+        "foreground_guard": 5.349699999999757
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.472900000000664,
+      "breakdown_ms": {
+        "queue_wait": 0.01860000000033324,
+        "companion_before": 0.2601999999997133,
+        "action": 60.02689999999984,
+        "companion_after": 0.3878999999997177,
+        "serialization": 0.015199999998912972,
+        "worker_round_trip": 61.70670000000064,
+        "post_processing": 0.013799999999719148
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 13.087800000000243,
+      "breakdown_ms": {
+        "queue_wait": 0.01769999999942229,
+        "companion_before": 0.30349999999907595,
+        "action": 10.163499999999658,
+        "companion_after": 0.3429999999998472,
+        "serialization": 0.018600000001242734,
+        "worker_round_trip": 11.354500000000371,
+        "post_processing": 0.007899999998699059,
+        "foreground_guard": 8.727300000000469
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.987999999999374,
+      "breakdown_ms": {
+        "queue_wait": 0.0419000000001688,
+        "companion_before": 0.3362999999999374,
+        "action": 62.165899999999965,
+        "companion_after": 0.308100000000195,
+        "serialization": 0.01419999999961874,
+        "worker_round_trip": 63.21110000000044,
+        "post_processing": 0.011799999999311694
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 37.57930000000033,
+      "breakdown_ms": {
+        "queue_wait": 0.03159999999934371,
+        "companion_before": 0.2856999999994514,
+        "action": 34.95439999999962,
+        "companion_after": 0.5208999999995285,
+        "serialization": 0.014400000000023283,
+        "worker_round_trip": 6.592400000000453,
+        "post_processing": 0.004500000001826265,
+        "foreground_guard": 4.895900000000438
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.82299999999941,
+      "breakdown_ms": {
+        "queue_wait": 0.019800000000032014,
+        "companion_before": 0.3203000000003158,
+        "action": 60.946500000000015,
+        "companion_after": 0.40650000000005093,
+        "serialization": 0.011500000001433364,
+        "worker_round_trip": 61.98829999999907,
+        "post_processing": 0.010800000000926957
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 14.70260000000053,
+      "breakdown_ms": {
+        "queue_wait": 0.01680000000033033,
+        "companion_before": 0.5531000000000859,
+        "action": 12.696100000000115,
+        "companion_after": 0.3636999999998807,
+        "serialization": 0.021199999999225838,
+        "worker_round_trip": 12.51129999999921,
+        "post_processing": 0.00559999999950378,
+        "foreground_guard": 11.124199999999291
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.8141999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.018500000000130967,
+        "companion_before": 0.329000000000633,
+        "action": 61.818099999999504,
+        "companion_after": 0.5032000000001062,
+        "serialization": 0.011299999999209831,
+        "worker_round_trip": 62.872699999999895,
+        "post_processing": 0.010800000000017462
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 36.03279999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.01769999999942229,
+        "companion_before": 0.30019999999876745,
+        "action": 33.777900000000045,
+        "companion_after": 0.5334999999995489,
+        "serialization": 0.013500000000931323,
+        "worker_round_trip": 8.097199999999248,
+        "post_processing": 0.0039000000006126356,
+        "foreground_guard": 6.77849999999944
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 68.20620000000054,
+      "breakdown_ms": {
+        "queue_wait": 0.03819999999996071,
+        "companion_before": 0.31850000000031287,
+        "action": 66.40749999999935,
+        "companion_after": 0.31459999999970023,
+        "serialization": 0.012400000000525324,
+        "worker_round_trip": 67.4368999999997,
+        "post_processing": 0.010800000000017462
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.235099999999875,
+      "breakdown_ms": {
+        "queue_wait": 0.018000000000029104,
+        "companion_before": 0.5820000000003347,
+        "action": 9.279999999999745,
+        "companion_after": 0.30540000000019063,
+        "serialization": 0.01950000000124419,
+        "worker_round_trip": 9.398099999999431,
+        "post_processing": 0.0049000000008163624,
+        "foreground_guard": 7.99829999999929
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.95169999999962,
+      "breakdown_ms": {
+        "queue_wait": 0.01809999999932188,
+        "companion_before": 0.34760000000005675,
+        "action": 58.751500000000306,
+        "companion_after": 0.4068999999999505,
+        "serialization": 0.012799999999515421,
+        "worker_round_trip": 60.07539999999881,
+        "post_processing": 0.013099999999212741
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 50.65349999999944,
+      "breakdown_ms": {
+        "queue_wait": 0.02250000000003638,
+        "companion_before": 0.8115999999999985,
+        "action": 46.59029999999984,
+        "companion_after": 0.6504999999997381,
+        "serialization": 0.018499999999221473,
+        "worker_round_trip": 7.074200000000019,
+        "post_processing": 0.004200000000309956,
+        "foreground_guard": 4.604699999999866
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.633600000000115,
+      "breakdown_ms": {
+        "queue_wait": 0.01870000000053551,
+        "companion_before": 0.27890000000024884,
+        "action": 60.42669999999998,
+        "companion_after": 0.5153000000000247,
+        "serialization": 0.02010000000063883,
+        "worker_round_trip": 61.729199999999764,
+        "post_processing": 0.011400000000321597
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 15.876900000000205,
+      "breakdown_ms": {
+        "queue_wait": 0.01749999999992724,
+        "companion_before": 0.3396999999995387,
+        "action": 12.384600000000319,
+        "companion_after": 0.7689999999993233,
+        "serialization": 0.031500000000960426,
+        "worker_round_trip": 12.871699999998782,
+        "post_processing": 0.008900000000721775,
+        "foreground_guard": 10.217000000000553
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.46839999999975,
+      "breakdown_ms": {
+        "queue_wait": 0.018999999999323336,
+        "companion_before": 0.3831000000000131,
+        "action": 61.57209999999941,
+        "companion_after": 0.3208999999997104,
+        "serialization": 0.011199999999917054,
+        "worker_round_trip": 62.65729999999985,
+        "post_processing": 0.011599999999816646
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 35.21090000000004,
+      "breakdown_ms": {
+        "queue_wait": 0.018200000000433647,
+        "companion_before": 0.720499999999447,
+        "action": 31.523200000000543,
+        "companion_after": 0.6255000000001019,
+        "serialization": 0.015899999998509884,
+        "worker_round_trip": 6.703900000000431,
+        "post_processing": 0.005700000000615546,
+        "foreground_guard": 4.476599999999962
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 63.259100000001126,
+      "breakdown_ms": {
+        "queue_wait": 0.019099999999525608,
+        "companion_before": 0.3364999999994325,
+        "action": 61.42749999999978,
+        "companion_after": 0.45269999999982247,
+        "serialization": 0.01569999999992433,
+        "worker_round_trip": 62.35939999999937,
+        "post_processing": 0.01149999999870488
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 13.543099999998958,
+      "breakdown_ms": {
+        "queue_wait": 0.016800000001239823,
+        "companion_before": 0.482399999998961,
+        "action": 10.967599999999948,
+        "companion_after": 0.3996000000006461,
+        "serialization": 0.021300000002156594,
+        "worker_round_trip": 11.619200000001001,
+        "post_processing": 0.005599999998594285,
+        "foreground_guard": 9.715500000000247
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.5067999999992,
+      "breakdown_ms": {
+        "queue_wait": 0.019699999998920248,
+        "companion_before": 0.3478999999988446,
+        "action": 60.54269999999997,
+        "companion_after": 0.3811999999998079,
+        "serialization": 0.011700000000928412,
+        "worker_round_trip": 61.66989999999896,
+        "post_processing": 0.011899999999513966
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 39.13669999999911,
+      "breakdown_ms": {
+        "queue_wait": 0.01659999999901629,
+        "companion_before": 0.31420000000071013,
+        "action": 37.17109999999957,
+        "companion_after": 0.455999999998312,
+        "serialization": 0.015900000003966852,
+        "worker_round_trip": 5.694700000000012,
+        "post_processing": 0.0036000000000058208,
+        "foreground_guard": 4.596700000000055
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.6953999999987,
+      "breakdown_ms": {
+        "queue_wait": 0.01900000000023283,
+        "companion_before": 0.31239999999888823,
+        "action": 58.97990000000027,
+        "companion_after": 0.319099999998798,
+        "serialization": 0.011900000003151945,
+        "worker_round_trip": 59.96190000000024,
+        "post_processing": 0.010599999999612919
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.958800000000338,
+      "breakdown_ms": {
+        "queue_wait": 0.017899999998917338,
+        "companion_before": 0.7919000000001688,
+        "action": 10.802499999999782,
+        "companion_after": 0.26889999999912106,
+        "serialization": 0.01780000000144355,
+        "worker_round_trip": 10.915200000001278,
+        "post_processing": 0.0046999999995023245,
+        "foreground_guard": 9.556499999998778
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.794599999999264,
+      "breakdown_ms": {
+        "queue_wait": 0.019400000001041917,
+        "companion_before": 0.2651000000005297,
+        "action": 59.000599999999395,
+        "companion_after": 0.46039999999993597,
+        "serialization": 0.013100000000122236,
+        "worker_round_trip": 59.96600000000217,
+        "post_processing": 0.010099999999511056
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 43.40979999999945,
+      "breakdown_ms": {
+        "queue_wait": 0.016999999999825377,
+        "companion_before": 0.3202000000019325,
+        "action": 41.123600000000806,
+        "companion_after": 0.37809999999990396,
+        "serialization": 0.013999999999214197,
+        "worker_round_trip": 6.60399999999936,
+        "post_processing": 0.005100000000311411,
+        "foreground_guard": 5.129100000000108
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.15410000000156,
+      "breakdown_ms": {
+        "queue_wait": 0.017599999999220017,
+        "companion_before": 0.26519999999982247,
+        "action": 57.139100000000326,
+        "companion_after": 0.43619999999827996,
+        "serialization": 0.014999999999417923,
+        "worker_round_trip": 58.33640000000014,
+        "post_processing": 0.013699999997697887
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 17.42699999999968,
+      "breakdown_ms": {
+        "queue_wait": 0.11280000000078871,
+        "companion_before": 0.3364999999994325,
+        "action": 13.411599999999453,
+        "companion_after": 1.2943000000013853,
+        "serialization": 0.0283999999955995,
+        "worker_round_trip": 13.640700000001743,
+        "post_processing": 0.007799999999406282,
+        "foreground_guard": 7.968800000002375
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.98079999999936,
+      "breakdown_ms": {
+        "queue_wait": 0.01720000000022992,
+        "companion_before": 0.34020000000055006,
+        "action": 63.86030000000028,
+        "companion_after": 0.42890000000079453,
+        "serialization": 0.010900000001129229,
+        "worker_round_trip": 65.09319999999934,
+        "post_processing": 0.013199999999415013
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 48.262800000000425,
+      "breakdown_ms": {
+        "queue_wait": 0.01599999999962165,
+        "companion_before": 0.37989999999990687,
+        "action": 46.23480000000018,
+        "companion_after": 0.3780000000006112,
+        "serialization": 0.015199999999822467,
+        "worker_round_trip": 6.584100000000035,
+        "post_processing": 0.004300000000512227,
+        "foreground_guard": 5.4156999999995605
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 61.496900000000096,
+      "breakdown_ms": {
+        "queue_wait": 0.01720000000022992,
+        "companion_before": 0.26189999999951397,
+        "action": 59.7487000000001,
+        "companion_after": 0.47079999999914435,
+        "serialization": 0.011099999999714782,
+        "worker_round_trip": 60.65589999999975,
+        "post_processing": 0.012500000000727596
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 14.397500000000946,
+      "breakdown_ms": {
+        "queue_wait": 0.015499999999519787,
+        "companion_before": 0.948499999998603,
+        "action": 11.310199999999895,
+        "companion_after": 0.528600000001461,
+        "serialization": 0.023099999996702536,
+        "worker_round_trip": 11.030699999999342,
+        "post_processing": 0.009000000001833541,
+        "foreground_guard": 9.130699999999706
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 62.25810000000092,
+      "breakdown_ms": {
+        "queue_wait": 0.016999999999825377,
+        "companion_before": 0.333199999999124,
+        "action": 60.5671999999995,
+        "companion_after": 0.3092000000015105,
+        "serialization": 0.012799999998605927,
+        "worker_round_trip": 61.51130000000194,
+        "post_processing": 0.010999999998603016
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 41.744300000000294,
+      "breakdown_ms": {
+        "queue_wait": 0.016799999999420834,
+        "companion_before": 0.36050000000068394,
+        "action": 39.697000000000116,
+        "companion_after": 0.38429999999971187,
+        "serialization": 0.012000000000625732,
+        "worker_round_trip": 5.692600000000311,
+        "post_processing": 0.005099999998492422,
+        "foreground_guard": 4.494699999999284
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.27679999999964,
+      "breakdown_ms": {
+        "queue_wait": 0.015000000001236913,
+        "companion_before": 0.4315999999998894,
+        "action": 60.34259999999995,
+        "companion_after": 0.3852000000006228,
+        "serialization": 0.01089999999931024,
+        "worker_round_trip": 64.34339999999975,
+        "post_processing": 0.012100000001737499
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 12.352300000000469,
+      "breakdown_ms": {
+        "queue_wait": 0.042999999999665306,
+        "companion_before": 0.39499999999861757,
+        "action": 10.1278999999995,
+        "companion_after": 0.3503000000000611,
+        "serialization": 0.020100000001548324,
+        "worker_round_trip": 10.539300000002186,
+        "post_processing": 0.008300000001327135,
+        "foreground_guard": 8.761600000001636
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.8732,
+      "breakdown_ms": {
+        "queue_wait": 0.029399999999441206,
+        "companion_before": 0.45650000000023283,
+        "action": 58.374399999998786,
+        "companion_after": 0.4304000000011001,
+        "serialization": 0.0150999999987107,
+        "worker_round_trip": 59.84439999999995,
+        "post_processing": 0.01299999999901047
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 38.88130000000092,
+      "breakdown_ms": {
+        "queue_wait": 0.01569999999992433,
+        "companion_before": 0.38149999999950523,
+        "action": 36.705299999999625,
+        "companion_after": 0.40020000000004075,
+        "serialization": 0.016099999998914427,
+        "worker_round_trip": 8.03060000000005,
+        "post_processing": 0.004199999997581472,
+        "foreground_guard": 6.738099999998667
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 60.60989999999947,
+      "breakdown_ms": {
+        "queue_wait": 0.01660000000083528,
+        "companion_before": 0.3251000000000204,
+        "action": 58.762800000000425,
+        "companion_after": 0.43800000000010186,
+        "serialization": 0.015499999999519787,
+        "worker_round_trip": 59.74670000000333,
+        "post_processing": 0.011099999999714782
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "type",
+      "total_ms": 11.969500000001062,
+      "breakdown_ms": {
+        "queue_wait": 0.01810000000114087,
+        "companion_before": 0.2481999999999971,
+        "action": 10.091899999999441,
+        "companion_after": 0.3677000000006956,
+        "serialization": 0.01840000000083819,
+        "worker_round_trip": 10.206900000002861,
+        "post_processing": 0.008400000002438901,
+        "foreground_guard": 8.633700000000317
+      }
+    }
+  ]
+}

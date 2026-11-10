@@ -43,13 +43,23 @@ Try: **“Use Pikachu to help me with my computer. Announce the task, inspect th
 
 ## Tools
 
+`desktop` with `{"action":"status"}` checks backend readiness, supported native actions, platform limits, and pause state. It sends no input, works while paused, and is bounded to five seconds including queue time. Readiness does not establish permission to control every app.
+
 On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests.
 
+Discovery results report `complete` and `truncated`. Windows errors include `error_details` with an error code and delivery/retry evidence; retry a failed operation only when its evidence permits it. In a partial batch, this applies only to the stopped step, and earlier steps remain applied. See the [Windows discovery and error contract](docs/windows-api.md).
+
+See the [agent-desktop comparison and improvement roadmap](docs/agent-desktop-comparison.md) for the architecture review and implemented reliability changes.
+
 Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window. Narrow `query` or `control_type` (such as `Button`, `Edit`, or `TabItem`) to return only relevant controls. Results default to 60 elements and 6,000 characters; lower `max_elements`/`max_chars` when possible. `truncated` indicates that you should narrow the query or increase the budget. For actions, pass the returned `snapshot` and `element_id`:
+
+Preserve discovery's `window_ref` with `window_id` on later reads and activation. Batch window references propagate it automatically. `get_ui` with `view:"skeleton"` lists named containers without field-value previews. Select a targetable container and supply its `root_snapshot` and `root_element_id` to read its subtree. Partial or ambiguous root identities cannot be used for actions.
 
 `max_chars` must be at most 16,000. Field previews are limited to 160 characters and carry `value_clipped: true` when shortened, even if the tree has `truncated: false`; use `read_text` for the full field text. If only title-bar controls appear, call `activate` on the window and read again: Electron/Chromium may expose their controls only after activation. After navigation or `invoke`, the first read may still show the previous view; re-read once before concluding.
 
 `matched` is a lower bound when `truncated` is true. Use `wait_for` to poll controls or exact values with a bounded timeout (default 5 seconds, maximum 15 seconds). After an interrupted wait, call `get_ui` again for fresh snapshots. Use `launch` to start an executable name/path or HTTP(S) URL and wait for a window; URLs require a window-title/process `query`, and command shells, script hosts and arguments are unsupported. Interrupted Windows ASCII typing reports submitted characters; input methods may transform them, so inspect the field before continuing instead of retyping from the start.
+
+`wait_condition` supports `present`, `absent`, `enabled`, `disabled`, `selected`, and `unselected`. An absence wait requires `snapshot` and `element_id` from an earlier complete whole-window observation of a unique control; its query must equal the captured stable name or automation ID. It succeeds only after complete zero-match coverage within the same observed window. See the [Windows contract](docs/windows-api.md) for examples and limits.
 
 ```json
 {"action":"get_ui","window_id":"12345","query":"Search","control_type":"Edit","max_chars":2000}
@@ -58,11 +68,10 @@ Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window.
 
 Supported control actions include `invoke`, `set_value`, `select`, `toggle`, `expand`, `collapse`, `scroll`, `focus`, and `read_text`. Only use actions listed for the returned control. Re-read `get_ui` after changes to verify the result. IDs belong to their snapshot, expire after two minutes, and are never rebound to a different control. Password controls are omitted.
 
-For known sequences, prefer **`action: "batch"`** to reduce exchanges with the AI. The MCP runs up to 16 steps sequentially and returns just the final result and completed count. For example, finding a window, filling a field, pressing a button, and checking the field takes one MCP call:
+**Batch is the default Windows mode.** Supply `steps` and omit the top-level `action`, or set `action:"batch"` explicitly. The MCP runs 1-16 steps sequentially and returns just the final result and completed count. Use an explicit atomic action when the next step needs judgment. For example, finding a window, filling a field, pressing a button, and checking the field takes one MCP call:
 
 ```json
 {
-  "action": "batch",
   "max_chars": 2000,
   "steps": [
     {"action":"get_windows","query":"Pokémon Input Test"},
@@ -80,6 +89,8 @@ For known sequences, prefer **`action: "batch"`** to reduce exchanges with the A
 The whole sequence excludes input from other MCP clients, checks user pauses and cancellation before each step, and stops on an error or ambiguous target. Failure output reports `completed`, `stopped_step`, `failed_step_started`, and bounded diagnostics. Earlier successful steps remain applied; a failed native step may also have applied its action. Inputs are never retried automatically. Inspect the failure before continuing. Top-level `max_chars` bounds the entire response, while each step has its own discovery budget; narrow filters if results are truncated. Use atomic calls when the next step requires the AI to interpret new information. Batching reduces model round trips; Windows API calls still execute individually on the computer.
 
 `computer` retains native mouse/keyboard input, cursor actions, and screenshot capture. Prefer keyboard shortcuts when UI Automation lacks a pattern, and screenshots when the task requires visual information (for example, canvas content). The tool descriptions and `pokemon-work` prompt specify this order: **Windows APIs → keyboard shortcuts → screenshots**. Both tools update the Pokémon before and after actions. Screenshots briefly hide the companion.
+
+Handled failures from `computer`, Course, and Excel include `contract_version:1` and delivery/retry evidence. Generic input success reports `verified:false`: it confirms dispatch, and you still need to inspect the result. Interrupted ASCII typing exposes `error_details.progress` with submitted/total character counts; later focus loss does not permit replaying the full string. Key and drag cleanup attempt to release held inputs even after a partial failure.
 
 Use Windows `focus`, `invoke`, `set_value` and batch first. When no control is exposed or no UIA pattern fits, use a known direct shortcut: `ctrl+l` for the browser address bar, `ctrl+1..8` for an indexed browser tab (`ctrl+9` selects the last tab), `escape` to dismiss, or `ctrl+,` for settings where supported. On Windows, pass `window_id` for the foreground guard and verify the result immediately. Never use `tab`, `ctrl+tab`, or `alt+tab` as blind navigation. Windows `computer key` and `type` accept optional `window_id` to reject input when another window is foreground. An owned dialog also matches its root owner's ID. The guard never activates a window, and focus can still change between the check and input. Calls without `window_id` retain their existing behavior.
 
@@ -137,6 +148,7 @@ Talk defaults to Ollama at `http://localhost:11434` with model `qwen3:8b`. Start
 | --- | --- | --- |
 | `POKEMON_PET` | `pikachu` | Initial character |
 | `POKEMON_FRONTEND_DIR` | adjacent `frontend` | Location of the built frontend |
+| `POKEMON_USER_DATA_DIR` | OS app-data profile | Optional separate companion settings, chat and cache folder |
 | `POKEMON_UI` | enabled | Set `off` only for explicitly headless use |
 | `MCP_TRANSPORT` | `stdio` | Optional `http` transport on localhost `/mcp` |
 | `PORT` | `3000` | Local HTTP MCP port |
@@ -154,6 +166,10 @@ npm run test:input
 npm run test:windows
 npm run test:course
 npm run test:excel
+npm run test:windows:contract
+npm run test:windows:identity
+npm run test:windows:coordination
+npm run test:package
 ```
 
 The smoke test uses a real MCP SDK client, opens the real companion, selects all seven pets, captures a desktop screenshot, checks cursor output, and exercises task completion and visibility. It sends no clicks or keyboard input. `test:input` opens a disposable test window and verifies real clicks, Vietnamese text input, and keyboard shortcuts. `test:windows` verifies six API steps in one MCP call, field entry and button invocation, atomic compatibility, bounded text output, stale-id rejection, and zero screenshot images. Batch tests cover ambiguity, unsupported actions, partial failures, value checks, pauses/cancellation between steps, and isolation from other clients. Runtime tests cover serialized actions, user pauses, queued cancellation, and screenshot restoration on errors. Chat tests use an isolated local mock provider to verify requests, separate saved conversations, and failure handling.
@@ -171,6 +187,6 @@ Run `npm run benchmark:windows` to compare six atomic Windows API calls with one
 - `scripts`: shared setup, build, demo, and verification commands.
 - `config`: generated MCP client configuration for this project location.
 
-This is a local development integration, not a published npm package or standalone installer. Windows is the verified platform. macOS/Linux paths are implemented but require platform testing and their usual desktop accessibility/capture permissions.
+Windows is the verified platform. The source build and self-contained ZIP/MCPB packages are supported development and distribution paths; this project is not published as an npm package. macOS/Linux generic-input paths require platform testing and their usual desktop accessibility/capture permissions. Windows uses native application controls; macOS/Linux retain the optional agent-desktop 2.6 bridge, which still needs live-host validation. See the [adoption audit](docs/reference-adoption.md) for verified improvements and remaining work.
 
 Pokémon names and assets belong to Nintendo / Creatures Inc. / GAME FREAK. This is an unofficial fan project. Original repositories retain their MIT licenses.

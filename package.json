@@ -5,6 +5,7 @@
   "description": "An animated Pokémon desktop companion for AI computer use through MCP",
   "scripts": {
     "setup": "node scripts/repos.cjs install",
+    "setup:ci": "node scripts/repos.cjs ci",
     "build": "node scripts/repos.cjs run build",
     "check": "node scripts/repos.cjs check",
     "test": "node scripts/repos.cjs test && node --test scripts/chat.test.cjs scripts/pikachu-animation.test.cjs",
@@ -14,6 +15,9 @@
     "config": "node scripts/config.cjs",
     "test:input": "node scripts/input-smoke.mjs",
     "test:windows": "node scripts/windows-smoke.mjs && node scripts/windows-fast-path-smoke.mjs && node scripts/keyboard-guard-smoke.mjs && node scripts/companion-focus-smoke.mjs",
+    "test:windows:contract": "node scripts/windows-contract-smoke.mjs",
+    "test:windows:identity": "node scripts/windows-identity-smoke.mjs",
+    "test:windows:coordination": "node scripts/windows-coordination-smoke.mjs",
     "test:course": "node scripts/course-smoke.mjs",
     "test:excel": "node scripts/excel-smoke.mjs",
     "benchmark:windows": "node scripts/windows-benchmark.mjs",

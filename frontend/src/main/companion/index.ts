@@ -1,3 +1,4 @@
+import { mkdirSync } from 'node:fs'
 import net from 'node:net'
 import path from 'node:path'
 import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tray } from 'electron'
@@ -7,6 +8,11 @@ import { createPetWindow, type PetWindow } from '../window/pet-window'
 import { CompanionChat } from './chat'
 
 app.setName('pokemon-mcp')
+if (process.env.POKEMON_USER_DATA_DIR) {
+  const profileDirectory = path.resolve(process.env.POKEMON_USER_DATA_DIR)
+  mkdirSync(profileDirectory, { recursive: true })
+  app.setPath('userData', profileDirectory)
+}
 const rootDir = path.resolve(__dirname, '../../..')
 const registry = new PetRegistry(path.join(rootDir, 'pets'))
 const windows = new Map<number, PetWindow>()

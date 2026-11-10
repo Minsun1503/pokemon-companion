@@ -3,6 +3,8 @@ import {type Companion, DesktopCompanion, type PokemonState} from './companion.j
 import {WindowsAutomation} from '../windows/automation.js';
 import {performance} from 'node:perf_hooks';
 import {measure, recordTiming} from '../utils/timing.js';
+import {rejectedAction} from '../utils/errors.js';
+import type {DesktopAdapter} from '../desktop/adapter.js';
 
 const labels: Record<string, string> = {
 	key: 'Using a keyboard shortcut', type: 'Typing', mouse_move: 'Moving to the target',
@@ -18,10 +20,9 @@ const labels: Record<string, string> = {
 };
 
 export class PokemonRuntime {
-	readonly windows = new WindowsAutomation();
 	private queue: Promise<unknown> = Promise.resolve();
 	private gestureSequence = 0;
-	constructor(readonly companion: Companion = new DesktopCompanion()) {}
+	constructor(readonly companion: Companion = new DesktopCompanion(), readonly windows: DesktopAdapter = new WindowsAutomation()) {}
 
 	async close(): Promise<void> {
 		this.windows.close();
@@ -29,23 +30,54 @@ export class PokemonRuntime {
 	}
 
 	/** Serialize all input and character commands across clients sharing this desktop. */
-	async exclusive<T>(run: () => Promise<T>): Promise<T> {
+	async exclusive<T>(run: () => Promise<T>, options?: {signal?: AbortSignal | undefined; queueTimeoutMs?: number}): Promise<T> {
 		const queued = performance.now();
+		let stopped: Error | undefined;
+		let timer: ReturnType<typeof setTimeout> | undefined;
+		let cancel = () => {/* Replaced before the queue can run. */};
+		const interruption = new Promise<never>((_resolve, reject) => {
+			cancel = () => {
+				stopped = rejectedAction('CANCELLED', 'Computer action cancelled before leaving the queue.');
+				reject(stopped);
+			};
+
+			options?.signal?.addEventListener('abort', cancel, {once: true});
+			if (options?.signal?.aborted) {
+				cancel();
+			}
+
+			if (options?.queueTimeoutMs !== undefined) {
+				timer = setTimeout(() => {
+					stopped = rejectedAction('TIMEOUT', 'Desktop action expired while waiting in the queue. No input was sent.');
+					reject(stopped);
+				}, options.queueTimeoutMs);
+			}
+		});
+		const cleanup = () => {
+			clearTimeout(timer);
+			options?.signal?.removeEventListener('abort', cancel);
+		};
+
 		const result = this.queue.then(async () => {
+			cleanup();
+			if (stopped) {
+				throw stopped;
+			}
+
 			recordTiming('queue_wait', performance.now() - queued);
 			return run();
 		});
 		this.queue = result.catch(() => undefined);
-		return result;
+		return Promise.race([result, interruption]).finally(cleanup);
 	}
 
 	async computer(action: string, coordinate: number[] | undefined, execute: () => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
-		return this.exclusive(async () => this.executeComputer(action, coordinate, execute, signal));
+		return this.exclusive(async () => this.windows.withControlLease(async () => this.executeComputer(action, coordinate, execute, signal), signal, () => this.companion.state.paused), {signal});
 	}
 
 	/** Keep a whole sequence exclusive while checking pause/cancellation before every step. */
 	async computerBatch(run: (perform: (action: string, execute: () => Promise<CallToolResult>) => Promise<CallToolResult>) => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
-		return this.exclusive(async () => run(async (action, execute) => this.executeComputer(action, undefined, execute, signal)));
+		return this.exclusive(async () => this.windows.withControlLease(async () => run(async (action, execute) => this.executeComputer(action, undefined, execute, signal)), signal, () => this.companion.state.paused), {signal});
 	}
 
 	async update(patch: Partial<PokemonState>): Promise<PokemonState> {
@@ -58,11 +90,11 @@ export class PokemonRuntime {
 	private async executeComputer(action: string, coordinate: number[] | undefined, execute: () => Promise<CallToolResult>, signal?: AbortSignal): Promise<CallToolResult> {
 		await measure('companion_before', async () => this.companion.start());
 		if (signal?.aborted) {
-			throw new Error('Computer action cancelled.');
+			throw rejectedAction('CANCELLED', 'Computer action cancelled.');
 		}
 
 		if (this.companion.state.paused) {
-			throw new Error('Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
+			throw rejectedAction('PAUSED', 'Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P.');
 		}
 
 		await measure('companion_before', async () => this.companion.update({interactionLocked: true}));
@@ -84,7 +116,7 @@ export class PokemonRuntime {
 			}
 
 			if (signal?.aborted || this.companion.state.paused) {
-				throw new Error('Computer action cancelled or paused before execution.');
+				throw rejectedAction(signal?.aborted ? 'CANCELLED' : 'PAUSED', 'Computer action cancelled or paused before execution.');
 			}
 
 			const result = await measure('action', execute);

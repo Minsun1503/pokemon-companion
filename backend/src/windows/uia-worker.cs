@@ -8,12 +8,11 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Windows.Automation;
 
-public static class PokemonWindowsAutomation {
+public static partial class PokemonWindowsAutomation {
     [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc callback, IntPtr data);
     [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr window);
     [DllImport("user32.dll")] static extern bool IsWindow(IntPtr window);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr window, StringBuilder text, int count);
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetClassName(IntPtr window, StringBuilder className, int count);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
     [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] static extern IntPtr GetAncestor(IntPtr window, uint flags);
@@ -25,21 +24,39 @@ public static class PokemonWindowsAutomation {
 
     class Snapshot {
         public IntPtr Window;
+        public WindowProof Proof;
+        public int MaxDepth;
+        public bool CaptureComplete;
+        public Snapshot Scope;
+        public ElementIdentity RootIdentity;
+        public int ScopeDepth;
         public DateTime Created = DateTime.UtcNow;
-        public Dictionary<int, AutomationElement> Elements = new Dictionary<int, AutomationElement>();
-        public Dictionary<int, string> RuntimeIds = new Dictionary<int, string>();
+        public Dictionary<int, ElementIdentity> Identities = new Dictionary<int, ElementIdentity>();
     }
     class Visit {
         public AutomationElement Element;
         public int Depth;
+        public int RawDepth;
         public bool IsRoot;
-        public Visit(AutomationElement element, int depth, bool isRoot = false) { Element = element; Depth = depth; IsRoot = isRoot; }
+        public Visit(AutomationElement element, int depth, bool isRoot = false, int rawDepth = 0) { Element = element; Depth = depth; IsRoot = isRoot; RawDepth = rawDepth; }
     }
     static Dictionary<string, Snapshot> snapshots = new Dictionary<string, Snapshot>();
+    public static object Status() {
+        return Obj("protocol_version", 1, "worker", "ready", "automation", "UIAutomation", "snapshot_count", snapshots.Count,
+            "snapshot_ttl_seconds", 120, "snapshot_limit", 8, "permissions", "not_checked_per_target",
+            "foreground_available", GetForegroundWindow() != IntPtr.Zero, "coordination", "windows_named_mutex");
+    }
     static Dictionary<string, object> Obj(params object[] values) {
         var result = new Dictionary<string, object>();
         for (int i = 0; i < values.Length; i += 2) result[(string)values[i]] = values[i + 1];
         return result;
+    }
+    static Exception Rejected(string code, string message) {
+        var error = new Exception(message);
+        error.Data["code"] = code;
+        error.Data["delivery"] = "not_delivered";
+        error.Data["retry"] = code == "INVALID_ARGS" || code == "PAUSED" || code == "CANCELLED" ? "unsafe" : "safe";
+        return error;
     }
     static string Clip(string value, int length, Dictionary<string, object> node = null) {
         if (String.IsNullOrEmpty(value)) return "";
@@ -51,7 +68,7 @@ public static class PokemonWindowsAutomation {
     }
     static IntPtr Handle(string id) {
         long value;
-        if (!Int64.TryParse(id, out value) || !IsWindow(new IntPtr(value))) throw new Exception("Window no longer exists. Call get_windows again.");
+        if (!Int64.TryParse(id, out value) || !IsWindow(new IntPtr(value))) throw Rejected("WINDOW_NOT_FOUND", "Window no longer exists. Call get_windows again.");
         return new IntPtr(value);
     }
     static Dictionary<string, object> WindowInfo(IntPtr handle) {
@@ -61,10 +78,14 @@ public static class PokemonWindowsAutomation {
         GetWindowThreadProcessId(handle, out pid);
         string process = "";
         try { process = Process.GetProcessById((int)pid).ProcessName; } catch { }
-        return Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process);
+        var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process);
+        string token = RememberWindow(handle);
+        if (token != null) result["window_ref"] = token;
+        return result;
     }
     public static object Windows(string query) {
         var windows = new List<object>();
+        bool truncated = false;
         EnumWindows(delegate(IntPtr handle, IntPtr unused) {
             if (!IsWindowVisible(handle)) return true;
             var info = WindowInfo(handle);
@@ -73,10 +94,11 @@ public static class PokemonWindowsAutomation {
             if (!String.IsNullOrEmpty(query) && (title + " " + info["process"]).IndexOf(query, StringComparison.OrdinalIgnoreCase) < 0) return true;
             var foreground = GetForegroundWindow();
             info["active"] = handle == foreground || handle == GetAncestor(foreground, 3);
+            if (windows.Count == 100) { truncated = true; return false; }
             windows.Add(info);
-            return windows.Count < 100;
+            return true;
         }, IntPtr.Zero);
-        return Obj("windows", windows);
+        return Obj("windows", windows, "complete", !truncated, "truncated", truncated);
     }
     static List<string> Actions(AutomationElement element) {
         var actions = new List<string>();
@@ -92,14 +114,23 @@ public static class PokemonWindowsAutomation {
         if (element.Cached.IsKeyboardFocusable) actions.Add("focus");
         return actions;
     }
-    static string RuntimeId(AutomationElement element) { return String.Join(".", element.GetRuntimeId()); }
     public static object UI(string windowId, string query, string roleFilter, int limit, int maxDepth) {
+        return UI(windowId, query, roleFilter, limit, maxDepth, null, null, 0, null);
+    }
+    public static object UI(string windowId, string query, string roleFilter, int limit, int maxDepth, string view, string rootSnapshot, int rootId, string windowRef) {
         var handle = Handle(windowId);
+        CheckWindow(windowId, windowRef);
+        var windowProof = String.IsNullOrEmpty(windowRef) ? CaptureWindow(handle) : windowProofs[windowRef];
         var root = AutomationElement.FromHandle(handle);
+        Snapshot scope = null;
+        ElementIdentity rootIdentity = null;
+        if (!String.IsNullOrEmpty(rootSnapshot)) {
+            root = Target(rootSnapshot, rootId);
+            scope = snapshots[rootSnapshot];
+            if (scope.Window != handle || scope.ScopeDepth >= 4) throw Rejected("INVALID_ARGS", "Subtree roots must belong to this window; at most four nested scopes are supported.");
+            rootIdentity = scope.Identities[rootId];
+        }
         if (root == null) throw new Exception("UI Automation is unavailable for this window. Use keyboard shortcuts or a screenshot fallback.");
-        var classNameBuilder = new StringBuilder(256);
-        GetClassName(handle, classNameBuilder, classNameBuilder.Capacity);
-        bool isChromium = classNameBuilder.ToString().IndexOf("Chrome_WidgetWin", StringComparison.OrdinalIgnoreCase) >= 0;
         var expired = new List<string>();
         foreach (var entry in snapshots) if ((DateTime.UtcNow - entry.Value.Created).TotalSeconds > 120) expired.Add(entry.Key);
         foreach (var key in expired) snapshots.Remove(key);
@@ -109,85 +140,65 @@ public static class PokemonWindowsAutomation {
             foreach (var entry in snapshots) if (entry.Value.Created < oldest) { oldest = entry.Value.Created; oldestId = entry.Key; }
             snapshots.Remove(oldestId);
         }
-        var snapshot = new Snapshot { Window = handle };
+        var snapshot = new Snapshot { Window = handle, Proof = windowProof, MaxDepth = maxDepth,
+            Scope = scope, RootIdentity = rootIdentity, ScopeDepth = scope == null ? 0 : scope.ScopeDepth + 1 };
         var snapshotId = Guid.NewGuid().ToString("N");
         snapshots[snapshotId] = snapshot;
-        var watch = Stopwatch.StartNew();
-        var cache = new CacheRequest { TreeScope = TreeScope.Element };
-        foreach (var property in new AutomationProperty[] {
-            AutomationElement.IsOffscreenProperty, AutomationElement.IsPasswordProperty, AutomationElement.IsEnabledProperty,
-            AutomationElement.IsKeyboardFocusableProperty, AutomationElement.ControlTypeProperty, AutomationElement.NameProperty,
-            AutomationElement.AutomationIdProperty,
-            ValuePattern.IsReadOnlyProperty, TogglePattern.ToggleStateProperty, SelectionItemPattern.IsSelectedProperty
-        }) cache.Add(property);
-        foreach (var pattern in new AutomationPattern[] {
-            InvokePattern.Pattern, ValuePattern.Pattern, SelectionItemPattern.Pattern, TogglePattern.Pattern,
-            ExpandCollapsePattern.Pattern, ScrollPattern.Pattern, TextPattern.Pattern
-        }) cache.Add(pattern);
+        var observed = new List<ElementIdentity>();
         var nodes = new List<object>();
-        var pending = new Stack<Visit>();
-        pending.Push(new Visit(root.GetUpdatedCache(cache), 0, true));
-        int scanned = 0, matched = 0;
-        bool depthLimited = false;
-        while (pending.Count > 0 && scanned < 2500 && watch.ElapsedMilliseconds < 8000) {
-            var visit = pending.Pop();
-            scanned++;
-            try {
-                var element = visit.Element;
-                // Queue one sibling at a time instead of fetching hundreds before inspecting any.
-                if (!visit.IsRoot) {
-                    var sibling = TreeWalker.ControlViewWalker.GetNextSibling(element, cache);
-                    if (sibling != null) pending.Push(new Visit(sibling, visit.Depth));
-                }
-                var info = element.Cached;
-                if (info.IsOffscreen || info.IsPassword) continue;
-                string role = info.ControlType.ProgrammaticName.Replace("ControlType.", ""), name = info.Name ?? "", automationId = info.AutomationId ?? "";
-                var actions = Actions(element);
-                bool matches = String.IsNullOrEmpty(query) || (name + " " + automationId).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
-                if (matches && (String.IsNullOrEmpty(roleFilter) || role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) {
-                    bool useful = actions.Count > 0 || (!String.IsNullOrEmpty(name) && role != "Pane" && role != "Group" && role != "Window");
-                    if (useful) {
-                        matched++;
-                        // One extra match proves truncation/ambiguity without walking the remaining tree.
-                        if (nodes.Count == limit) break;
-                        int id = nodes.Count + 1;
-                        snapshot.Elements[id] = element;
-                        snapshot.RuntimeIds[id] = RuntimeId(element);
-                        var node = Obj("id", id, "role", role, "name", Clip(name, 160));
-                        if (actions.Count > 0) node["actions"] = actions;
-                        if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
-                        object pattern;
-                        // Mutable field values stay live so fast reads preserve existing verification behavior.
-                        if (element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node);
-                        if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Cached.ToggleState.ToString();
-                        if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Cached.IsSelected;
-                        if (!info.IsEnabled) node["enabled"] = false;
-                        nodes.Add(node);
-                    }
-                }
-                // Credit: Adapted from Vercel Labs agent-desktop (https://github.com/vercel-labs/agent-desktop)
-                // A transparent web wrapper in Chromium/Electron (Group, Custom, Pane with no name, no automationId, no actions)
-                // consumes raw depth but skips logical depth to avoid hitting maxDepth prematurely.
-                bool isWebWrapper = isChromium &&
-                    (role == "Pane" || role == "Group" || role == "Custom") &&
-                    String.IsNullOrEmpty(name) &&
-                    String.IsNullOrEmpty(automationId) &&
-                    actions.Count == 0;
-                int nextDepth = isWebWrapper ? visit.Depth : visit.Depth + 1;
-                if (nextDepth <= maxDepth) {
-                    var child = TreeWalker.ControlViewWalker.GetFirstChild(element, cache);
-                    if (child != null) pending.Push(new Visit(child, nextDepth));
-                } else depthLimited = true;
-            } catch (ElementNotAvailableException) { } catch (InvalidOperationException) { }
+        int matched = 0;
+        var scan = WalkWindow(root, DiscoveryCache(), maxDepth, delegate(AutomationElement element, int depth) {
+            var identity = Identity(element);
+            observed.Add(identity);
+            var info = element.Cached;
+            string role = identity.Role, name = info.Name ?? "", automationId = info.AutomationId ?? "";
+            bool matches = String.IsNullOrEmpty(query) || (name + " " + automationId).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+            if (!matches || (!String.IsNullOrEmpty(roleFilter) && !role.Equals(roleFilter, StringComparison.OrdinalIgnoreCase))) return;
+            var actions = Actions(element);
+            bool container = Array.IndexOf(new string[] { "Window", "Pane", "Group", "ToolBar", "Tab", "MenuBar" }, role) >= 0;
+            if (view == "skeleton") {
+                if (!container || String.IsNullOrEmpty(name)) return;
+            } else if (actions.Count == 0 && (String.IsNullOrEmpty(name) || container)) return;
+            matched++;
+            if (nodes.Count >= limit) return;
+            int id = nodes.Count + 1;
+            var node = Obj("id", id, "role", role, "name", Clip(name, 160));
+            if (view == "skeleton" || scope != null) node["depth"] = depth;
+            if (actions.Count > 0) node["actions"] = actions;
+            if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
+            object pattern;
+            if (view != "skeleton" && element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node);
+            if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Cached.ToggleState.ToString();
+            if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Cached.IsSelected;
+            if (!info.IsEnabled) node["enabled"] = false;
+            nodes.Add(node);
+            snapshot.Identities[id] = identity;
+        }, handle);
+        if (snapshot.Proof != null) VerifyWindow(snapshot.Proof);
+        snapshot.CaptureComplete = scan.Complete && snapshot.Proof != null;
+        foreach (var entry in snapshot.Identities) {
+            int count = 0;
+            foreach (var identity in observed) if (entry.Value.Matches(identity)) count++;
+            entry.Value.UniqueAtCapture = snapshot.CaptureComplete && entry.Value.Meaningful && count == 1;
+            ((Dictionary<string, object>)nodes[entry.Key - 1])["targetable"] = entry.Value.UniqueAtCapture;
         }
+        bool truncated = matched > nodes.Count || !scan.Complete;
         var result = Obj("window", WindowInfo(handle), "snapshot", snapshotId, "nodes", nodes, "matched", matched,
-            "truncated", matched > nodes.Count || pending.Count > 0 || depthLimited, "scanned", scanned);
-        if (Environment.GetEnvironmentVariable("POKEMON_TIMING") == "1") result["uia_tree_walk_ms"] = watch.Elapsed.TotalMilliseconds;
+            "truncated", truncated, "complete", !truncated, "scanned", scan.Scanned);
+        if (view == "skeleton") result["view"] = "skeleton";
+        if (scope != null) result["scope"] = Obj("root_snapshot", rootSnapshot, "root_element_id", rootId);
+        if (Environment.GetEnvironmentVariable("POKEMON_TIMING") == "1") result["uia_tree_walk_ms"] = scan.Elapsed;
         return result;
     }
     public static object Activate(string windowId) {
+        return Activate(windowId, null);
+    }
+    public static object Activate(string windowId, string windowRef) {
         var handle = Handle(windowId);
+        CheckWindow(windowId, windowRef);
         ShowWindow(handle, 9);
+        try { CheckWindow(windowId, windowRef); }
+        catch (Exception error) { throw new Exception("Window identity changed after the restore attempt. Inspect the window before continuing. " + error.Message); }
         if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle && GetAncestor(GetForegroundWindow(), 3) != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. Re-read its UI and use windows focus on a known control when available.");
         return Obj("ok", true);
     }
@@ -263,21 +274,12 @@ public static class PokemonWindowsAutomation {
     }
     static AutomationElement Target(string snapshotId, int id) {
         Snapshot snapshot;
-        AutomationElement element;
+        ElementIdentity identity;
         if (String.IsNullOrEmpty(snapshotId) || !snapshots.TryGetValue(snapshotId, out snapshot) ||
-            (DateTime.UtcNow - snapshot.Created).TotalSeconds > 120 || !snapshot.Elements.TryGetValue(id, out element)) {
-            throw new Exception("Unknown or expired element. Call get_ui again; do not reuse an old element id with a new snapshot.");
+            (DateTime.UtcNow - snapshot.Created).TotalSeconds > 120 || !snapshot.Identities.TryGetValue(id, out identity)) {
+            throw Rejected("STALE_REF", "Unknown or expired element. Call get_ui again; do not reuse an old element id with a new snapshot.");
         }
-        if (!IsWindow(snapshot.Window) || RuntimeId(element) != snapshot.RuntimeIds[id]) throw new Exception("Element has changed. Call get_ui again.");
-        var root = element;
-        bool belongs = false;
-        for (int i = 0; root != null && i < 80; i++) {
-            if (root.Current.NativeWindowHandle == snapshot.Window.ToInt64()) { belongs = true; break; }
-            root = TreeWalker.RawViewWalker.GetParent(root);
-        }
-        if (!belongs) throw new Exception("Element no longer belongs to the selected window. Call get_ui again.");
-        if (element.Current.IsPassword) throw new Exception("Password controls are not exposed.");
-        return element;
+        return ResolveIdentity(snapshot, identity);
     }
     public static object TextPage(string snapshotId, int id, int offset, int count, string expectedVersion, string requiredText) {
         if (offset < 0 || offset > 1000000 || count < 1 || count > 12000) throw new Exception("Invalid course text page bounds.");
@@ -331,19 +333,29 @@ public static class PokemonWindowsAutomation {
             if (documentText.Length > 8000) documentResult["truncated"] = true;
             return documentResult;
         }
-        if (element.Current.IsOffscreen || !element.Current.IsEnabled) throw new Exception("Control is hidden or disabled. Call get_ui again.");
+        if (element.Current.IsOffscreen || !element.Current.IsEnabled) throw Rejected("ACTION_NOT_SUPPORTED", "Control is hidden or disabled. Call get_ui again.");
         object value;
         switch (action) {
-            case "focus": element.SetFocus(); break;
-            case "invoke": ((InvokePattern)element.GetCurrentPattern(InvokePattern.Pattern)).Invoke(); break;
+            case "focus": ConfirmTarget(snapshotId, id, element); element.SetFocus(); break;
+            case "invoke":
+                var invoking = (InvokePattern)element.GetCurrentPattern(InvokePattern.Pattern);
+                ConfirmTarget(snapshotId, id, element); invoking.Invoke(); break;
             case "set_value":
                 var editable = (ValuePattern)element.GetCurrentPattern(ValuePattern.Pattern);
-                if (editable.Current.IsReadOnly) throw new Exception("Control is read-only.");
-                editable.SetValue(text ?? ""); break;
-            case "select": ((SelectionItemPattern)element.GetCurrentPattern(SelectionItemPattern.Pattern)).Select(); break;
-            case "toggle": ((TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern)).Toggle(); break;
-            case "expand": ((ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Expand(); break;
-            case "collapse": ((ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern)).Collapse(); break;
+                if (editable.Current.IsReadOnly) throw Rejected("ACTION_NOT_SUPPORTED", "Control is read-only.");
+                ConfirmTarget(snapshotId, id, element); editable.SetValue(text ?? ""); break;
+            case "select":
+                var selection = (SelectionItemPattern)element.GetCurrentPattern(SelectionItemPattern.Pattern);
+                ConfirmTarget(snapshotId, id, element); selection.Select(); break;
+            case "toggle":
+                var toggle = (TogglePattern)element.GetCurrentPattern(TogglePattern.Pattern);
+                ConfirmTarget(snapshotId, id, element); toggle.Toggle(); break;
+            case "expand":
+                var expanding = (ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+                ConfirmTarget(snapshotId, id, element); expanding.Expand(); break;
+            case "collapse":
+                var collapsing = (ExpandCollapsePattern)element.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+                ConfirmTarget(snapshotId, id, element); collapsing.Collapse(); break;
             case "scroll":
                 var scrolling = (ScrollPattern)element.GetCurrentPattern(ScrollPattern.Pattern);
                 ScrollAmount horizontal = ScrollAmount.NoAmount, vertical = ScrollAmount.NoAmount;
@@ -352,7 +364,7 @@ public static class PokemonWindowsAutomation {
                 else if (direction == "left") horizontal = ScrollAmount.LargeDecrement;
                 else if (direction == "right") horizontal = ScrollAmount.LargeIncrement;
                 else throw new Exception("Scroll requires up, down, left, or right.");
-                scrolling.Scroll(horizontal, vertical); break;
+                ConfirmTarget(snapshotId, id, element); scrolling.Scroll(horizontal, vertical); break;
             default: throw new Exception("Unsupported UI Automation action.");
         }
         var result = Obj("ok", true);

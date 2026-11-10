@@ -1,0 +1,42 @@
+{
+  "created_at": "2026-11-09T11:00:27.293Z",
+  "baseline_commit": "348d98cab48e121da6e696d76c588f284d560494",
+  "scenario": "native ValuePattern.SetValue on one owned WinForms field",
+  "runs": 7,
+  "independently_verified": 16,
+  "timing_scope": "Warm native worker request/response; independent field verification, startup, and warmup excluded. No model, MCP, or companion latency included.",
+  "before": {
+    "min_ms": 4.559900000000198,
+    "median_ms": 5.658599999999751,
+    "max_ms": 6.587400000000343,
+    "samples_ms": [
+      5.782400000000052,
+      6.587400000000343,
+      5.658599999999751,
+      5.481300000000374,
+      5.7400000000002365,
+      4.559900000000198,
+      5.364500000000589
+    ]
+  },
+  "after": {
+    "min_ms": 54.11269999999968,
+    "median_ms": 57.44769999999971,
+    "max_ms": 80.91359999999986,
+    "samples_ms": [
+      58.27459999999974,
+      55.929999999999836,
+      56.845800000000054,
+      58.247100000000046,
+      54.11269999999968,
+      57.44769999999971,
+      80.91359999999986
+    ]
+  },
+  "artifact_sha256": {
+    "uia-worker.cs": "79563c63907301374e4bf52ae9f5d0cf19597ad9cc891b70513206be03e6b5cd",
+    "uia-identity.cs": "47ecc975692b1906517fa340e0a42e16697ad2edb3d8dd33203be85ab0c37f53",
+    "uia-observation.cs": "461fb7771b50ee01a77c332c836eacaaf074682fe6538243812efdb087ceb918",
+    "uia-worker.dll": "728cb20349673caa8a558824e759f747ffa5a7d0736c21158fb469ca474c410d"
+  }
+}

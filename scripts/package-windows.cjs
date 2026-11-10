@@ -32,6 +32,13 @@ async function main() {
   const stage = fs.mkdtempSync(path.join(release, '.package-'));
   console.log(`Preparing self-contained Windows package at ${stage}`);
   for (const file of ['package.json', 'package-lock.json', 'LICENSE']) copy(path.join(root, 'backend', file), path.join(stage, 'backend', file));
+  // Imported component versions describe upstream provenance, not this app release.
+  const backendManifest = JSON.parse(fs.readFileSync(path.join(stage, 'backend/package.json'), 'utf8'));
+  json(path.join(stage, 'backend/package.json'), {...backendManifest, version});
+  const backendLock = JSON.parse(fs.readFileSync(path.join(stage, 'backend/package-lock.json'), 'utf8'));
+  backendLock.version = version;
+  backendLock.packages[''].version = version;
+  json(path.join(stage, 'backend/package-lock.json'), backendLock);
   copy(path.join(root, 'backend/dist'), path.join(stage, 'backend/dist'));
   run(['ci', '--omit=dev', '--no-audit', '--no-fund'], path.join(stage, 'backend'));
   for (const directory of ['build', 'pets', 'assets']) copy(path.join(root, 'frontend', directory), path.join(stage, 'frontend', directory));
@@ -75,6 +82,7 @@ async function main() {
     fs.writeFileSync(path.join(stage, `Install ${label}.cmd`), `@echo off\r\npowershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0install-client.ps1" -Client ${client}\r\npause\r\n`);
   }
   copy(path.join(root, 'INSTALL.md'), path.join(stage, 'README.md'));
+  fs.writeFileSync(path.join(stage, 'AGENT_GUIDE.md'), `Package version: ${version}\nResponse contract version: 1\n\n` + fs.readFileSync(path.join(root, 'packaging/agent-guide.md'), 'utf8'));
   for (const file of ['THIRD_PARTY.md', 'LICENSE']) copy(path.join(root, file), path.join(stage, file));
   fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokémon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included in their folders. Electron and Node licenses are included with their runtimes. Dependencies retain their own licenses.\n');
   fs.renameSync(stage, output);

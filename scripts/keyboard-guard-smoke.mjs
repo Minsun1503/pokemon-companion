@@ -102,7 +102,7 @@ try {
   const windows = timing.filter(row => row.tool === 'windows' && row.action === 'get_windows');
   const report = {measured_at: new Date().toISOString(), companion: 'on', runs_per_mode: 40, actions: 'alternating key F8 and type 7', counter: 'F8 key-downs plus input events; raw DOM events retain extra IME Process wrappers', guard: distribution(guards.map(row => row.breakdown_ms.foreground_guard)), get_windows: distribution(windows.map(row => row.total_ms)), observed, timing};
   await mkdir(resolve(root, 'benchmarks/results'), {recursive: true});
-  await writeFile(resolve(root, 'benchmarks/results/keyboard-guard-2026-11-07.json'), JSON.stringify(report, null, 2) + '\n');
+  await writeFile(resolve(root, 'benchmarks/results/keyboard-guard-' + report.measured_at.slice(0, 10) + '.json'), JSON.stringify(report, null, 2) + '\n');
   console.log('PASS: 40 mismatches sent zero events to both windows; 40 matches delivered exactly 20 F8 presses and 20 typed digits to A, with all F8 releases verified. Raw events retain IME Process wrappers. Both key and type covered, zero screenshots.');
   console.log(JSON.stringify({guard: report.guard, get_windows: report.get_windows}));
   await session.call('pokemon', {action: 'done', message: 'Keyboard foreground guard verified'});

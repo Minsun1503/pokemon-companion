@@ -20,6 +20,7 @@
     }
   },
   "tools": [
+    { "name": "desktop", "description": "Read-only backend readiness, supported actions, platform limits and pause status." },
     { "name": "windows", "description": "Preferred: read and operate compact Windows UI Automation controls without screenshots." },
     { "name": "course", "description": "Course navigation, verified search, versioned lesson reading, and completion-message checks through Windows APIs." },
     { "name": "excel", "description": "Desktop Excel workbook inspection, versioned range reading, verified writes/formulas, finding cells, selection and saving through native Windows APIs." },

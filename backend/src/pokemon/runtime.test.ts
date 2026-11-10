@@ -29,7 +29,9 @@ function fixture() {
 			events.push(hidden ? 'hide' : 'restore');
 		},
 	};
-	return {runtime: new PokemonRuntime(companion), companion, events};
+	const runtime = new PokemonRuntime(companion);
+	vi.spyOn(runtime.windows, 'withControlLease').mockImplementation(async (run) => run());
+	return {runtime, companion, events};
 }
 
 describe('Pokémon desktop execution', () => {

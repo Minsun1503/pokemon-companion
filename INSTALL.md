@@ -42,6 +42,8 @@ Left-click your Pokémon for **Switch**, **Talk**, and **Exit**. Switch includes
 
 Send computer tasks in the AI client's chat. The Pokémon Talk panel currently uses a separate configured character-chat provider; it does not forward to that AI chat automatically.
 
+The portable package includes `AGENT_GUIDE.md`, matched to its package and response-contract versions. It explains discovery, verification, safe recovery, and pause handling. The read-only `desktop` status tool reports backend readiness and supported actions.
+
 ## Build a release from source
 
 For developers on x64 Windows with Node 22.12+:

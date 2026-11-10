@@ -52,7 +52,7 @@ $blocked = $shell.CreateShortcut($shortcut.Replace(' Shortcut.lnk', ' Shell.lnk'
 $blocked.TargetPath = Join-Path $env:SystemRoot 'System32/cmd.exe'
 $blocked.Save()
 `);
-  execFileSync(powershell, ['-NoLogo', '-NoProfile', '-NonInteractive', '-File', compile, resolve(root, 'scripts/windows-fast-path-fixture.cs'), executable, shortcut], {windowsHide: true});
+  execFileSync(powershell, ['-NoLogo', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'RemoteSigned', '-File', compile, resolve(root, 'scripts/windows-fast-path-fixture.cs'), executable, shortcut], {windowsHide: true});
   session = await connect({env: {...process.env, PATH: scratch + ';' + process.env.PATH}});
   await session.call('pokemon', {action: 'task', message: 'Checking Windows launch and waits'});
   const measurements = [];
