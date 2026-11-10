@@ -24,8 +24,8 @@ jobs:
             backend/package-lock.json
       - run: npm run setup:ci
       - run: npm run check
-      - run: npm test
       - run: npm run build
+      - run: npm test
       - run: npm run test:windows:contract
       - run: npm run test:windows:identity
       - run: npm run test:windows:coordination
