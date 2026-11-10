@@ -1,18 +1,18 @@
-Download the ZIP for your computer, extract the entire folder, and open the included app. Node.js and Electron are bundled; no separate Node install or GitHub login is required.
+Install Pokémon Companion through your AI desktop client. Node, Electron, native desktop helpers, and all seven Pokémon are bundled. No terminal commands, extra components, GitHub login, model API key, or manual MCP configuration are required for Claude Desktop.
 
-| Download | Included app |
-| --- | --- |
-| Windows x64 | `Pokemon Companion.exe` |
-| macOS Apple Silicon (arm64) | `Pokemon Companion.app` |
-| macOS Intel (x64) | `Pokemon Companion.app` |
-| Linux x64 | `Pokemon Companion` executable |
+| Computer | Claude Desktop download | Desktop plugin payload |
+| --- | --- | --- |
+| Windows x64 | `pokemon-companion-0.2.1-claude-windows-x64.mcpb` | `pokemon-companion-0.2.1-plugin-windows-x64.zip` |
+| macOS Apple Silicon | `pokemon-companion-0.2.1-claude-macos-arm64.mcpb` | `pokemon-companion-0.2.1-plugin-macos-arm64.zip` |
+| macOS Intel | `pokemon-companion-0.2.1-claude-macos-x64.mcpb` | `pokemon-companion-0.2.1-plugin-macos-x64.zip` |
+| Linux x64 | Official Claude Desktop loader unavailable | `pokemon-companion-0.2.1-plugin-linux-x64.zip` |
 
-Click the Pokémon to switch among seven companions or exit. Talk is disabled for now. For AI computer tasks, connect Pokémon MCP to your local AI client using the instructions in `README.txt` inside the ZIP. Opening the standalone companion alone does not start an AI task loop.
+**Claude:** open your `.mcpb` in Claude Desktop, confirm Install, enable the extension, and give Claude a computer task. Claude starts the Pokémon automatically. Normal tool confirmations and OS permissions still apply. macOS automatically unpacks its included Electron runtime on first use, preserving its framework links.
 
-Every ZIP is tested after extraction to a different path: the native launcher opens and closes the real Electron companion, the bundled Node runtime starts, and the MCP server connects and exposes its tools. `SHA256SUMS.txt` contains download checksums.
+**ChatGPT:** the plugin ZIPs contain native desktop-only manifests and the complete local MCP runtime. Public installation through ChatGPT's Plugins directory is **pending OpenAI local-MCP partner approval and plugin review**. These are payloads prepared for submission; opening or uploading a ZIP does not install it in ChatGPT. No ChatGPT approval or in-client installation is claimed. See [OpenAI's requirements](https://developers.openai.com/plugins/deploy/desktop-only).
 
-The existing Windows MCPB extension and client-installer ZIP are also included for Claude Desktop, Claude Code, and Codex installation.
+The Windows compatibility MCPB and client-installer ZIP remain included. Talk is disabled; the connected AI client supplies the task loop. Click the Pokémon to switch characters or exit; Ctrl+Shift+P pauses/resumes controls.
 
-Windows native computer control is verified. macOS/Linux desktop workflows remain experimental; their generic input needs the usual OS permissions, and window automation needs a separately installed agent-desktop 2.6 bridge. Linux requires an X11 desktop and user namespaces. These builds are unsigned on Windows and ad-hoc signed on macOS, without Apple notarization.
+Client packages are extracted and launched from their shipped configurations using only system tools on PATH. Windows/macOS checks use Anthropic's MCPB unpacker. Tests verify bundled Node, platform helpers, MCP tools, and real companion startup. They do not verify installation through Claude or ChatGPT's own UI. `SHA256SUMS.txt` contains download checksums.
 
-This is an unofficial Pokémon fan project. Asset attribution and original software licenses are included.
+Windows native controls are verified. macOS/Linux full desktop workflows remain experimental. Linux targets Ubuntu 24.04-compatible X11 desktops with user namespaces; Wayland is unsupported. Windows binaries are unsigned; macOS is ad-hoc signed without notarization. This is an unofficial Pokémon fan project; attribution and software licenses are included.

@@ -20,7 +20,7 @@ jobs:
           - os: macos-15
             platform: macos
             arch: arm64
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             platform: linux
             arch: x64
     runs-on: ${{ matrix.os }}
@@ -40,7 +40,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb zip unzip libgtk-3-0 libnss3 libasound2 libxtst6 libxkbcommon0 libgbm1 libxss1 libatk-bridge2.0-0
+          sudo apt-get install -y xvfb zip unzip libgtk-3-0t64 libnss3 libasound2t64 libxtst6 libxkbcommon0 libgbm1 libxss1 libatk-bridge2.0-0t64 dbus-x11
       - run: npm run setup:ci
       - run: npm run check
       - run: npm run build
@@ -58,13 +58,22 @@ jobs:
       - name: Test Linux extracted app and MCP connection
         if: runner.os == 'Linux'
         run: xvfb-run -a npm run test:desktop-package
+      - name: Test client-native extension and plugin packages
+        if: runner.os != 'Linux'
+        run: npm run test:client-package
+      - name: Test Linux local-plugin package
+        if: runner.os == 'Linux'
+        run: xvfb-run -a dbus-run-session -- npm run test:client-package
       - uses: actions/upload-artifact@v4
         with:
           name: desktop-${{ matrix.platform }}-${{ matrix.arch }}
           path: |
-            release/pokemon-companion-*.zip
-            release/pokemon-companion-*.zip.sha256
-            release/pokemon-companion-*.mcpb
+            release/pokemon-companion-*-plugin-*.zip
+            release/pokemon-companion-*-plugin-*.zip.sha256
+            release/pokemon-companion-*-claude-*.mcpb
+            release/pokemon-companion-*-claude-*.mcpb.sha256
+            release/pokemon-companion-win32-x64.zip
+            release/pokemon-companion-win32-x64.mcpb
             release/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 7
@@ -85,8 +94,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd release
-          cat *.zip.sha256 > SHA256SUMS.txt
+          cat *.zip.sha256 *.mcpb.sha256 > SHA256SUMS.txt
           test "$(find . -maxdepth 1 -name '*.zip' | wc -l)" -eq 5
+          test "$(find . -maxdepth 1 -name '*.mcpb' | wc -l)" -eq 4
           sha256sum -c SHA256SUMS.txt
           sha256sum pokemon-companion-win32-x64.zip pokemon-companion-win32-x64.mcpb >> SHA256SUMS.txt
           cd ..

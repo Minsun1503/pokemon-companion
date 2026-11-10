@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "pokemon-companion",
   "display_name": "Pokémon Companion",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Seven animated Pokémon help your AI control Windows through native APIs, keyboard input, and screenshots when needed.",
   "long_description": "Install, enable, and ask your AI to use Pokémon Companion. Includes Pikachu, Riolu, Lucario, Clodsire, Bulbasaur, Charmander, and Squirtle. Node, Electron, and native dependencies are included. Left-click the Pokémon to switch characters or exit. Talk is deferred and disabled; use your connected AI client for computer-control tasks.",
   "author": { "name": "Minsun1503", "url": "https://github.com/Minsun1503" },

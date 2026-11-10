@@ -2,6 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const {execFileSync} = require('node:child_process');
+const {addClientMetadata} = require('./client-package-metadata.cjs');
+const {bundleAgentDesktop} = require('./bundle-agent-desktop.cjs');
+const {packageClientBundles} = require('./package-client-bundles.cjs');
 
 const root = path.resolve(__dirname, '..');
 const release = path.join(root, 'release');
@@ -40,7 +43,7 @@ function readme() {
   const appRoot = platform === 'darwin' ? './Pokemon Companion.app/Contents/Resources/app' : '.';
   const node = platform === 'win32' ? '.\\runtime\\node.exe' : `"${appRoot}/runtime/node"`;
   const config = platform === 'win32' ? '.\\scripts\\config.cjs' : `"${appRoot}/scripts/config.cjs"`;
-  return `Pokemon Companion ${version}\n\nExtract the entire ZIP before opening the app. Keep its accompanying files together.\n${open}\n\nClick the Pokemon to choose Switch or Exit. Use Ctrl+Shift+P or the tray menu to pause desktop controls. Talk is disabled and deferred. No model service or GitHub login is needed to open the companion.\n\nCONNECT YOUR AI CLIENT\nComputer tasks are driven by a connected MCP client such as Claude or Codex. The standalone companion does not run an AI task loop. To generate connection settings for this extracted location, run:\n${node} ${config} --output ./config\nMerge the generated config/claude-desktop.json or config/codex.toml into your client settings, then restart its MCP connection. The client will launch its own companion; close the standalone app first to avoid two pets. Regenerate these settings after moving the package.\n\nPLATFORM SUPPORT\nWindows native desktop controls are verified. macOS and Linux builds verify app startup and MCP connection; full desktop workflows on those systems remain experimental. Generic input requires the usual desktop permissions. macOS/Linux windows UI operations require the separately installed agent-desktop 2.6 bridge. Linux generic input requires X11; Wayland is not supported by the bundled input library.\nThese apps are not signed with a commercial Windows/macOS developer certificate. The macOS app is ad-hoc signed and is not notarized.\n\nSettings and app.log are stored in your OS application-data folder under pokemon-companion. Existing conversations are not removed.\n\nUnofficial Pokemon fan project. See NOTICE.txt, LICENSE, and THIRD_PARTY.md for asset and software attribution.\n`;
+  return `Pokemon Companion ${version}\n\nExtract the entire ZIP before opening the app. Keep its accompanying files together.\n${open}\n\nClick the Pokemon to choose Switch or Exit. Use Ctrl+Shift+P or the tray menu to pause desktop controls. Talk is disabled and deferred. No model service or GitHub login is needed to open the companion.\n\nCONNECT YOUR AI CLIENT\nComputer tasks are driven by a connected MCP client such as Claude or Codex. The standalone companion does not run an AI task loop. To generate connection settings for this extracted location, run:\n${node} ${config} --output ./config\nMerge the generated config/claude-desktop.json or config/codex.toml into your client settings, then restart its MCP connection. The client will launch its own companion; close the standalone app first to avoid two pets. Regenerate these settings after moving the package.\n\nPLATFORM SUPPORT\nWindows native desktop controls are verified. macOS and Linux builds verify app startup and MCP connection; full desktop workflows on those systems remain experimental. Generic input requires the usual desktop permissions. macOS/Linux window operations use the included agent-desktop bridge (contract 2.6). Linux generic input requires X11; Wayland is not supported by the bundled input library.\nThese apps are not signed with a commercial Windows/macOS developer certificate. The macOS app is ad-hoc signed and is not notarized.\n\nSettings and app.log are stored in your OS application-data folder under pokemon-companion. Existing conversations are not removed.\n\nUnofficial Pokemon fan project. See NOTICE.txt, LICENSE, and THIRD_PARTY.md for asset and software attribution.\n`;
 }
 
 async function main() {
@@ -113,6 +116,8 @@ async function main() {
     fs.unlinkSync(archive);
   }
 
+  await bundleAgentDesktop(appRoot, platform, arch);
+
   if (platform === 'win32') {
     const sharp = require(path.join(root, 'frontend/node_modules/sharp'));
     const png = await sharp(path.join(root, 'frontend/assets/icon.png')).resize(256, 256).png().toBuffer();
@@ -153,6 +158,7 @@ async function main() {
   for (const file of ['LICENSE', 'THIRD_PARTY.md']) copy(path.join(root, file), path.join(stage, file));
   fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokemon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included. Electron, Node and dependencies retain their own licenses.\n');
   fs.writeFileSync(path.join(stage, 'README.txt'), readme());
+  addClientMetadata(stage, appRoot, platform, version);
   json(path.join(stage, 'build-info.json'), {version, platform, arch, nodeVersion, chatEnabled: false, builtAt: new Date().toISOString(), sourceCommit: process.env.GITHUB_SHA || execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim()});
   fs.renameSync(stage, output);
   const zip = output + '.zip';
@@ -167,5 +173,7 @@ async function main() {
   }
   fs.writeFileSync(zip + '.sha256', `${hash(zip)}  ${path.basename(zip)}\n`);
   console.log(`Ready: ${zip}`);
+  const relocatedAppRoot = path.join(output, path.relative(stage, appRoot));
+  await packageClientBundles({root, appRoot: relocatedAppRoot, release, version, platform, arch});
 }
 main().catch(error => {console.error(error.message); process.exitCode = 1;});

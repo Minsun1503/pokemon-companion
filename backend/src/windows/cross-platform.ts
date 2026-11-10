@@ -9,7 +9,7 @@ export type DesktopExecutor = (args: string[], signal: AbortSignal, input?: stri
 
 // No shell, headed input, automatic installation, action retries or fallback on failure.
 export const executeDesktop: DesktopExecutor = async (args, signal, input) => new Promise((resolve, reject) => {
-	const child = childProcess.spawn('agent-desktop', args, {stdio: 'pipe', windowsHide: true, signal});
+	const child = childProcess.spawn(process.env.POKEMON_AGENT_DESKTOP || 'agent-desktop', args, {stdio: 'pipe', windowsHide: true, signal});
 	let stdout = '';
 	let stderr = '';
 	child.stdout.setEncoding('utf8');

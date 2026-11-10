@@ -168,7 +168,7 @@ export class DesktopCompanion implements Companion {
 
 	private async launch(): Promise<void> {
 		const root = resolve(process.env.POKEMON_FRONTEND_DIR || resolve(dirname(fileURLToPath(import.meta.url)), '../../../frontend'));
-		const electron = resolve(root, 'node_modules/electron/dist', process.platform === 'win32' ? 'electron.exe' : process.platform === 'darwin' ? 'Electron.app/Contents/MacOS/Electron' : 'electron');
+		const electron = process.env.POKEMON_ELECTRON_BINARY || resolve(root, 'node_modules/electron/dist', process.platform === 'win32' ? 'electron.exe' : process.platform === 'darwin' ? 'Electron.app/Contents/MacOS/Electron' : 'electron');
 		if (!existsSync(electron) || !existsSync(resolve(root, 'build/main/companion/index.js'))) {
 			throw new Error(`Pokémon desktop is not built at ${root}. Run npm install and npm run build there first.`);
 		}

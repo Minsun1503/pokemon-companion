@@ -14,3 +14,5 @@ The original copyright notices and MIT licenses remain in [frontend/LICENSE](fro
 Pokémon names and graphics belong to Nintendo / Creatures Inc. / GAME FREAK. This is an unofficial fan project. The MIT licenses cover the project code; they do not grant ownership of Pokémon trademarks or character artwork.
 
 Release bundles include Node, Electron, and npm dependencies with their license files. See the bundled `NOTICE.txt` and component licenses.
+
+macOS/Linux packages also include [vercel-labs/agent-desktop v1.2.0](https://github.com/vercel-labs/agent-desktop/releases/tag/v1.2.0) and its platform helpers, under the Apache License 2.0. The archive checksums are pinned in the build script, and the upstream license is included in `runtime/agent-desktop/LICENSE`. Pokémon uses its JSON response contract version 2.6.

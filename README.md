@@ -6,11 +6,13 @@ All seven characters from the pet repository are included: **Pikachu, Riolu, Luc
 
 ## Easy installation
 
-Download a desktop app ZIP from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest) for **Windows x64**, **macOS Intel**, **macOS Apple Silicon**, or **Linux x64**. Extract the entire folder and open `Pokemon Companion.exe`, `Pokemon Companion.app`, or the Linux `Pokemon Companion` executable. All runtimes are bundled. The ZIP's `README.txt` explains how to connect the included MCP server to your AI client. Talk is disabled. macOS/Linux desktop workflows remain experimental, and Linux requires X11 and user namespaces. The macOS app is ad-hoc signed without notarization.
+For **Claude Desktop on Windows or macOS**, download the matching **`.mcpb` extension** from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest), open it in Claude, confirm **Install**, and enable Pokémon Companion. Claude launches the companion and uses its tools from your chat. Node, Electron, native desktop helpers, and all seven Pokémon are included. No terminal commands, additional software, GitHub login, model API key, or manual MCP settings are required. macOS still requires its normal Accessibility and Screen Recording permissions. See [installation steps](INSTALL.md).
 
-Windows users can download the **[Claude Desktop extension](https://github.com/Minsun1503/pokemon-companion/releases/latest/download/pokemon-companion-win32-x64.mcpb)** and open it to install, or extract the **[portable ZIP](https://github.com/Minsun1503/pokemon-companion/releases/latest/download/pokemon-companion-win32-x64.zip)** and double-click **Install Claude Code.cmd** or **Install Codex.cmd**. The package bundles Node, Electron, native dependencies, and all seven Pokémon. See [installation steps](INSTALL.md).
+The **ChatGPT desktop plugin ZIPs** contain the complete local MCP server and its runtimes, with native plugin manifests. Public installation from ChatGPT's Plugins directory requires **OpenAI local-MCP partner approval and plugin review**. That approval has not been obtained; these files are prepared for submission, and opening a ZIP in ChatGPT does not install them. See [OpenAI's desktop-only distribution requirements](https://developers.openai.com/plugins/deploy/desktop-only).
 
-Claude Code and Codex also support the same two-command installation style as Ponytail, using **`Minsun1503/pokemon-companion`** as the marketplace. The plugin downloads its Windows runtime on the first connection. Developers can build release files with `npm run package:windows`.
+Windows, macOS Intel, macOS Apple Silicon, and Linux x64 have separate plugin downloads. Claude's official desktop extension loader supports Windows/macOS. The Linux package is for hosts supporting local desktop plugins and requires an Ubuntu 24.04-compatible X11 desktop with user namespaces. macOS/Linux desktop workflows remain experimental. The macOS binaries are ad-hoc signed and not notarized.
+
+Existing Windows Claude Code and Codex installers remain available in the compatibility ZIP. They require the selected AI client to already be installed. Developers build the native client packages with `npm run package:desktop`; see [INSTALL.md](INSTALL.md).
 
 ## Original repositories
 
@@ -150,6 +152,8 @@ The companion does not start a chat worker or contact a model provider. Give com
 | --- | --- | --- |
 | `POKEMON_PET` | `pikachu` | Initial character |
 | `POKEMON_FRONTEND_DIR` | adjacent `frontend` | Location of the built frontend |
+| `POKEMON_ELECTRON_BINARY` | bundled Electron | Runtime executable override used by the macOS extension bootstrap |
+| `POKEMON_AGENT_DESKTOP` | `agent-desktop` on PATH | Native bridge override; client packages set it to their included binary |
 | `POKEMON_USER_DATA_DIR` | OS app-data profile | Optional separate companion settings, chat and cache folder |
 | `POKEMON_UI` | enabled | Set `off` only for explicitly headless use |
 | `MCP_TRANSPORT` | `stdio` | Optional `http` transport on localhost `/mcp` |
@@ -189,6 +193,6 @@ Run `npm run benchmark:windows` to compare six atomic Windows API calls with one
 - `scripts`: shared setup, build, demo, and verification commands.
 - `config`: generated MCP client configuration for this project location.
 
-Windows is the verified platform. The source build and self-contained ZIP/MCPB packages are supported development and distribution paths; this project is not published as an npm package. macOS/Linux generic-input paths require platform testing and their usual desktop accessibility/capture permissions. Windows uses native application controls; macOS/Linux retain the optional agent-desktop 2.6 bridge, which still needs live-host validation. See the [adoption audit](docs/reference-adoption.md) for verified improvements and remaining work.
+Windows is the verified computer-control platform. The source build and self-contained client packages are supported development and distribution paths; this project is not published as an npm package. macOS/Linux native desktop helpers are bundled, but full desktop workflows still need live-host validation and their usual OS permissions. Release checks verify extraction through the MCPB loader, bundled runtimes, MCP connection, and real companion startup; they do not establish installation through Claude or ChatGPT's own UI. See the [adoption audit](docs/reference-adoption.md) for verified improvements and remaining work.
 
 Pokémon names and assets belong to Nintendo / Creatures Inc. / GAME FREAK. This is an unofficial fan project. Original repositories retain their MIT licenses.

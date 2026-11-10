@@ -1,6 +1,6 @@
 {
   "name": "pokemon-computer-companion",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "An animated Pokémon desktop companion for AI computer use through MCP",
   "scripts": {
@@ -26,6 +26,7 @@
     "package:test-app": "node scripts/package-standalone.cjs",
     "package:desktop": "node scripts/package-desktop.cjs",
     "test:desktop-package": "node scripts/desktop-package-smoke.cjs",
+    "test:client-package": "node scripts/client-package-smoke.cjs",
     "test:package": "node scripts/package-smoke.mjs",
     "test:installers": "node scripts/installer-smoke.cjs",
     "test:marketplace": "node scripts/marketplace-smoke.mjs"
