@@ -40,6 +40,10 @@ bridge.listen(0, '127.0.0.1', async () => {
   await app.whenReady();
   await connected;
   const pet = BrowserWindow.getAllWindows().find(win => win.displayId === screen.getPrimaryDisplay().id);
+  // Animation checks must not inherit the runner's reduced-motion preference.
+  pet.webContents.debugger.attach('1.3');
+  await pet.webContents.debugger.sendCommand('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'no-preference'}]});
+  if (await pet.webContents.executeJavaScript('matchMedia("(prefers-reduced-motion: reduce)").matches')) throw new Error('Animation fixture requires motion enabled.');
   pet.setTitle('Pokemon Focus Overlay');
   input = new BrowserWindow({...screen.getPrimaryDisplay().workArea, frame: false, title: 'Pokemon Focus Input', webPreferences: {contextIsolation: true, nodeIntegration: false}});
   await input.loadURL('data:text/html,' + encodeURIComponent('<!doctype html><title>Pokemon Focus Input</title><button id="test" aria-label="Background button" style="margin:50px;width:180px;height:60px">Background button</button><script>window.keys=0;window.clicks=0;document.addEventListener("keydown",e=>{if(e.key==="F8"){e.preventDefault();keys++}});document.getElementById("test").onclick=()=>clicks++;</script>'));

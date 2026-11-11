@@ -56,10 +56,6 @@ try {
         assert.equal(state.containerAnimation, 'none');
       }
       assert.equal(state.badge, badge, pet + ' must name its work even after a coalesced fast call');
-      // DOM/IPC readiness precedes compositor painting; wait for the actual visual frame.
-      await delay(180);
-      const frame = await fixture('/frame?freezeProps=0');
-      images.push(await readFile(frame.path));
       await delay(350);
       const held = await fixture('/state');
       assert.equal(held.animation, animation, pet + ' must hold fast feedback');
@@ -67,6 +63,10 @@ try {
       assert.equal(held[prop], !spriteProps);
       assert.equal(held.x, state.x, 'Work feedback must not drift across the screen');
       assert.equal(held.y, state.y);
+      // Capture after the timing assertion so slow screenshot I/O cannot expire the feedback hold.
+      await delay(180);
+      const frame = await fixture('/frame?freezeProps=0');
+      images.push(await readFile(frame.path));
     }
   }
   for (let read = 0; read < 60 && (await fixture('/state')).badge !== 'Ready'; read++) await delay(40);
