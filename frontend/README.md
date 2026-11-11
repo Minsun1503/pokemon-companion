@@ -23,7 +23,7 @@ A transparent desktop pet powered by an LLM. Your Pokémon wanders around your s
 - **Per-pet profiles:** Nicknames and chat history are saved separately for each pet.
 - **Message menu:** Right-click any message to copy, delete, or resend.
 
-## Included Pokemon
+## Included companions
 
 | Pokemon | Pet ID | Development launch |
 |---|---|---|
@@ -34,6 +34,10 @@ A transparent desktop pet powered by an LLM. Your Pokémon wanders around your s
 | 이상해씨 (Bulbasaur) | `bulbasaur` | `npm start -- bulbasaur` |
 | 파이리 (Charmander) | `charmander` | `npm start -- charmander` |
 | 꼬부기 (Squirtle) | `squirtle` | `npm start -- squirtle` |
+| Hello Kitty | `hello-kitty` | `npm start -- hello-kitty` |
+| Kuromi | `kuromi` | `npm start -- kuromi` |
+
+Hello Kitty and Kuromi use detailed fan pixel artwork generated through ChatGPT with the Pokémon sprites as style references. Each atlas contains 64 individual poses: four directional walks plus expressive idle, typing, clicking, thinking, celebration and error cycles. Source atlases are preserved in each pack's `source/` folder. Re-extract the transparent sprites with `node scripts/generate-sanrio-pets.cjs`.
 
 ## Download
 

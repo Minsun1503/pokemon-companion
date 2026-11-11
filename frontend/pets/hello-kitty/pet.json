@@ -1,0 +1,44 @@
+{
+  "id": "hello-kitty",
+  "name": "Hello Kitty",
+  "promptFile": "prompt.txt",
+  "spritesFile": "sprites.json",
+  "spritesManifestFile": "sprites-manifest.json",
+  "cryUrl": "",
+  "recallText": "Hello Kitty!",
+  "responseCryKeywords": [
+    "Hello Kitty"
+  ],
+  "greeting": "Hello! Let’s make today lovely.",
+  "thinkingText": "Hello Kitty is thinking…",
+  "fallbackText": "Could you say that again?",
+  "errorText": "I couldn’t connect. Please check your AI settings.",
+  "appearance": {
+    "width": 76,
+    "height": 84,
+    "imageWidth": 60,
+    "imageHeight": 68
+  },
+  "movement": {
+    "speed": 0.9,
+    "jumpHeight": 10,
+    "jumpDuration": 18,
+    "walkFrameInterval": 3,
+    "idleFrameInterval": 6,
+    "idleTalkMinMs": 180000,
+    "idleTalkMaxMs": 600000
+  },
+  "theme": {
+    "accentColor": "#ea4562",
+    "accentHoverColor": "#a62e51",
+    "accentGlowColor": "rgba(234, 69, 98, 0.72)",
+    "assistantBackground": "#fff0f3",
+    "assistantBorderColor": "#f3b0be"
+  },
+  "idlePhrases": [
+    "A little kindness goes a long way.",
+    "I’m here with you!",
+    "Let’s take a cozy break."
+  ],
+  "spritesIncludeProps": true
+}

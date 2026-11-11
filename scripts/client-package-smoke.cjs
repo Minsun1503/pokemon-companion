@@ -80,6 +80,12 @@ async function main() {
       assert.deepEqual(tools, manifest.tools.map(tool => tool.name));
       const selected = await client.callTool({name: 'pokemon', arguments: {action: 'select', pet: 'pikachu'}});
       assert(!selected.isError, JSON.stringify(selected.content));
+      for (const pet of ['hello-kitty', 'kuromi']) {
+        const result = await client.callTool({name: 'pokemon', arguments: {action: 'select', pet}});
+        assert(!result.isError, JSON.stringify(result.content));
+        assert.equal(result.structuredContent.pet, pet);
+        assert.deepEqual(fs.readFileSync(path.join(appRoot, 'frontend/pets', pet, 'sprites.json')), fs.readFileSync(path.join(root, 'frontend/pets', pet, 'sprites.json')));
+      }
       assert(fs.existsSync(profile), 'The manifest launch did not open the actual companion');
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError);

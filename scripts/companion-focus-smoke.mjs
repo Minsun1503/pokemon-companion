@@ -111,11 +111,11 @@ try {
   assert.match(checking.source, /thinking\.gif$/);
   assert.equal(checking.scanning, true);
   assert.equal(checking.badge, 'Checking');
-  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
+  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi']) {
     for (const [action, animation, badge, prop] of [['get_ui', 'thinking', 'Checking', 'scanning'], ['set_value', 'typing', 'Typing', 'keyboard'], ['invoke', 'clicking', 'Clicking', 'mouse']]) {
       await fixture(`/action?name=${action}&pet=${pet}&finished=1`);
       const working = await waitAnimation(animation);
-      assert.equal(working[prop], true, pet + ' must show its work prop');
+      assert.equal(working[prop], !['hello-kitty', 'kuromi'].includes(pet), pet + ' must avoid duplicating props already drawn in its sprites');
       assert.equal(working.badge, badge, pet + ' must name the current work');
       await delay(350);
       assert.equal((await fixture('/state')).animation, animation, pet + ' must keep a completed fast call visible');
@@ -153,7 +153,7 @@ try {
   assert.equal(closed.panel, false);
   assert.equal(closed.petFocused, false);
   assert.equal(closed.petFocusable, false);
-  console.log('PASS: all seven Pokémon showed checking, typing and clicking props and labels after fast calls; moving Pokémon retained background focus, keyboard and button input; native hit-testing passed through the overlay; Pikachu GIFs animated; Talk accepted input and closing released focus. No desktop screenshots; animation frames were captured from the test renderer.');
+  console.log('PASS: all nine companions showed checking, typing and clicking props and labels after fast calls; moving companions retained background focus, keyboard and button input; native hit-testing passed through the overlay; Pikachu GIFs animated; Talk accepted input and closing released focus. No desktop screenshots; animation frames were captured from the test renderer.');
 } finally {
   if (url) await fetch(url + '/quit').catch(() => {});
   child.kill();

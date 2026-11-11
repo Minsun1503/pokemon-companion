@@ -1,0 +1,82 @@
+{
+  "source_sheet": {
+    "filename": "source/chatgpt-atlas.png",
+    "size": {
+      "width": 1254,
+      "height": 1254
+    },
+    "background_rgba": [
+      255,
+      0,
+      255,
+      255
+    ]
+  },
+  "method": "Generated in the user-authorized ChatGPT browser conversation, then keyed and extracted by scripts/generate-sanrio-pets.cjs with one common nearest-neighbor scale and fixed foot baseline.",
+  "source_conversation": "https://chatgpt.com/c/6af332bb-8024-83ec-aeb4-5ded2da1e3de",
+  "design": "Detailed handheld RPG pixel sprites with articulated limbs, cloth shading, four walk directions, expressive idle, typing, clicking, thinking, celebration and error poses.",
+  "directions": [
+    "down",
+    "side",
+    "back_side",
+    "back_up"
+  ],
+  "frames_per_direction": 8,
+  "distinct_source_poses": 64,
+  "normalized_canvas": {
+    "width": 56,
+    "height": 64,
+    "foot_baseline": 60
+  },
+  "actions": {
+    "idle": [
+      8,
+      260
+    ],
+    "run": [
+      8,
+      100
+    ],
+    "run_back": [
+      8,
+      100
+    ],
+    "run_down": [
+      8,
+      100
+    ],
+    "run_side": [
+      8,
+      100
+    ],
+    "run_back_side": [
+      8,
+      100
+    ],
+    "run_back_up": [
+      8,
+      100
+    ],
+    "typing": [
+      4,
+      140
+    ],
+    "clicking": [
+      4,
+      140
+    ],
+    "thinking": [
+      8,
+      240
+    ],
+    "success": [
+      4,
+      180
+    ],
+    "error": [
+      4,
+      260
+    ]
+  },
+  "character_rights": "Hello Kitty and Kuromi are Sanrio characters. Unofficial fan artwork."
+}

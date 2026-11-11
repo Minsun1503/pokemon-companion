@@ -81,8 +81,8 @@ test('other Pokémon keep their existing directional sprites', () => {
   assert.match(image.src, /^data:image\/png/);
 });
 
-test('all seven Pokémon show work gestures, settle after fast calls, and honor pause and reduced motion', () => {
-  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
+test('all companions show work gestures, settle after fast calls, and honor pause and reduced motion', () => {
+  for (const {id: pet} of registry.list()) {
     const {motion, container, tick, setActivity} = fixture(pet);
     for (const gesture of ['thinking', 'typing', 'clicking']) {
       motion.playAnimation(gesture, Infinity);
@@ -106,6 +106,66 @@ test('all seven Pokémon show work gestures, settle after fast calls, and honor 
     reduced.tick();
     assert.deepEqual({...reduced.motion.position}, {x:500, y:500});
     assert.ok(!reduced.image.src.endsWith('.gif'));
+  }
+});
+
+test('Sanrio packs have distinct transparent directional and action frames with matching pixel dimensions', async () => {
+  for (const pet of ['hello-kitty', 'kuromi']) {
+    const definition = registry.load(pet);
+    const manifest = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../frontend/pets', pet, 'sprites-manifest.json'), 'utf8'));
+    assert.equal(manifest.distinct_source_poses, 64);
+    assert.equal(definition.spritesIncludeProps, true);
+    const fronts = [];
+    for (const direction of ['down', 'side', 'back_side', 'back_up']) {
+      assert.equal(definition.sprites[direction].length, 8);
+      const pixels = [];
+      for (const source of definition.sprites[direction]) {
+        const {data, info} = await sharp(Buffer.from(source.split(',')[1], 'base64')).ensureAlpha().raw().toBuffer({resolveWithObject: true});
+        assert.equal(info.width, 56);
+        assert.equal(info.height, 64);
+        const alphas = new Set(Array.from({length: 56 * 64}, (_, i) => data[i * 4 + 3]));
+        assert.deepEqual([...alphas].sort((a, b) => a - b), [0, 255], 'Pixel artwork must not have antialiasing or an opaque backdrop');
+        pixels.push(data.toString('base64'));
+      }
+      assert.ok(new Set(pixels).size >= 4, `${pet}/${direction} needs a changing gait`);
+      fronts.push(pixels[0]);
+    }
+    assert.equal(new Set(fronts).size, 4, 'All four views must be individually drawn');
+    for (const [name, [count, delay]] of Object.entries(manifest.actions)) {
+      const file = path.resolve(__dirname, '../frontend/pets', pet, 'animations', name + '.gif');
+      const metadata = await sharp(file, {animated: true}).metadata();
+      assert.equal(metadata.width, 56);
+      assert.equal(metadata.pageHeight, 64);
+      assert.equal(metadata.pages, count);
+      assert.equal(metadata.loop, 0);
+      assert.deepEqual(metadata.delay, Array(count).fill(delay));
+      const {data} = await sharp(file, {animated: true}).ensureAlpha().raw().toBuffer({resolveWithObject: true});
+      const frames = Array.from({length: count}, (_, i) => data.subarray(i * 56 * 64 * 4, (i + 1) * 56 * 64 * 4));
+      assert.equal(data[3], 0);
+      assert.ok(new Set(frames.map(frame => frame.toString('base64'))).size > 1, `${pet}/${name}`);
+      if (name.startsWith('run_') || name === 'idle' || name === 'typing') {
+        const floors = frames.map(frame => {
+          for (let y = 63; y >= 0; y--) for (let x = 0; x < 56; x++) if (frame[(y * 56 + x) * 4 + 3]) return y;
+        });
+        assert.ok(Math.max(...floors) - Math.min(...floors) <= 1, `${pet}/${name} must keep ground contact`);
+      }
+    }
+  }
+});
+
+test('Sanrio running chooses the matching view rather than sliding a front-facing sprite', () => {
+  for (const pet of ['hello-kitty', 'kuromi']) {
+    for (const [x, y, view] of [[500, 30, 'side'], [20, 500, 'down'], [20, 0, 'back_up'], [500, 0, 'side']]) {
+      const {motion, image, tick} = fixture(pet);
+      motion.moveTo(x, y);
+      tick();
+      assert.ok(image.src.endsWith(`/run_${view}.gif`), `${pet} must use ${view} while running`);
+    }
+    const diagonal = fixture(pet);
+    diagonal.motion.setPosition(400, 400);
+    diagonal.motion.moveTo(700, 100);
+    diagonal.tick();
+    assert.match(diagonal.image.src, /run_back_side\.gif$/);
   }
 });
 

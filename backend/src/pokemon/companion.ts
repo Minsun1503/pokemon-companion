@@ -5,7 +5,7 @@ import {createServer, type Server, type Socket} from 'node:net';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-export const pokemonIds = ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle'] as const;
+export const pokemonIds = ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi'] as const;
 export type PokemonId = typeof pokemonIds[number];
 export type Activity = 'idle' | 'thinking' | 'working' | 'success' | 'error' | 'paused';
 export type PokemonState = {

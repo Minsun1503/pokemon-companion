@@ -6,7 +6,7 @@
     {
       "name": "pokemon-companion",
       "source": "./plugins/pokemon-companion",
-      "description": "Seven animated Pokémon for native Windows computer control.",
+      "description": "Nine animated companions for native Windows computer control.",
       "category": "productivity"
     }
   ]
