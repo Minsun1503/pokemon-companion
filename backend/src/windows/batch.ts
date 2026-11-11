@@ -143,7 +143,7 @@ export function validateWindowsRequest(args: WindowsRequest, platform: NodeJS.Pl
 	}
 }
 
-function validateSteps(steps: WindowsStep[]): void {
+export function validateWindowsBatchSteps(steps: WindowsStep[]): void {
 	for (const [index, step] of steps.entries()) {
 		if (step.window_step !== undefined) {
 			if (!windowActions.includes(step.action) || step.window_id !== undefined || step.window_step >= index || !windowSources.includes(steps[step.window_step]!.action)) {
@@ -256,7 +256,7 @@ function bounded(outcome: Record<string, unknown>, maxChars: number): Record<str
 }
 
 export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsStep[], maxChars: number, signal?: AbortSignal) {
-	validateSteps(steps);
+	validateWindowsBatchSteps(steps);
 	return runtime.computerBatch(async (perform) => {
 		const results: Record<string, unknown>[] = [];
 		for (const [index, step] of steps.entries()) {

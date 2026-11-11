@@ -10,6 +10,8 @@ export interface CompanionState {
   paused: boolean
   completedActions: number
   interactionLocked?: boolean
+  learningTaskId?: string
+  learningFeedbackPending?: boolean
   action?: { animation: 'typing' | 'clicking' | 'thinking'; id: number; active: boolean }
 }
 
@@ -18,5 +20,6 @@ export interface CompanionSnapshot {
   state: CompanionState
   definition: PetDefinition
   active: boolean
+  idleAnimation?: boolean
   target?: { x: number; y: number }
 }

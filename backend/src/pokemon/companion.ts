@@ -17,10 +17,13 @@ export type PokemonState = {
 	paused: boolean;
 	completedActions: number;
 	interactionLocked?: boolean;
+	learningTaskId?: string;
+	learningFeedbackPending?: boolean;
 	action?: {animation: 'typing' | 'clicking' | 'thinking'; id: number; active: boolean} | undefined;
 };
 
 export type Companion = {
+	onLearningFeedback?: (id: string, satisfaction: 'satisfied' | 'unsatisfied') => Promise<void>;
 	state: PokemonState;
 	start: () => Promise<void>;
 	update: (patch: Partial<PokemonState>, coordinate?: number[]) => Promise<void>;
@@ -32,6 +35,7 @@ export type Companion = {
 
 /** One local, authenticated companion per MCP process. stdout stays exclusively MCP. */
 export class DesktopCompanion implements Companion {
+	onLearningFeedback?: (id: string, satisfaction: 'satisfied' | 'unsatisfied') => Promise<void>;
 	state: PokemonState = {
 		pet: pokemonIds.includes(process.env.POKEMON_PET as PokemonId) ? process.env.POKEMON_PET as PokemonId : 'pikachu',
 		activity: 'idle', message: 'Ready when you are!', task: '', visible: true, paused: false, completedActions: 0,
@@ -221,6 +225,20 @@ export class DesktopCompanion implements Companion {
 								this.state.activity = message.paused ? 'paused' : 'idle';
 							} else if (message.kind === 'select' && pokemonIds.includes(message.pet)) {
 								this.state.pet = message.pet;
+							} else if (message.kind === 'learning_feedback' && message.task_id === this.state.learningTaskId
+								&& this.state.learningFeedbackPending && ['satisfied', 'unsatisfied'].includes(message.satisfaction)) {
+								const feedbackId = message.id;
+								if (typeof feedbackId === 'number' && this.onLearningFeedback) {
+									void this.onLearningFeedback(message.task_id, message.satisfaction).then(() => {
+										if (!socket.destroyed) {
+											socket.write(`${JSON.stringify({kind: 'learning_feedback_result', id: feedbackId, recorded: true})}\n`);
+										}
+									}).catch(() => {
+										if (!socket.destroyed) {
+											socket.write(`${JSON.stringify({kind: 'learning_feedback_result', id: feedbackId, recorded: false})}\n`);
+										}
+									});
+								}
 							}
 						} catch {
 							socket.destroy();

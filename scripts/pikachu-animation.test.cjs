@@ -7,20 +7,40 @@ const sharp = require('../frontend/node_modules/sharp');
 const {PetRegistry} = require('../frontend/build/main/services/pet-registry.js');
 const registry = new PetRegistry(path.resolve(__dirname, '../frontend/pets'));
 
-function fixture(pet = 'pikachu', reduced = false) {
+function fixture(pet = 'pikachu', reduced = false, staticIdle = false, random) {
   let tick, source = '', assignments = 0, animation = 'idle';
   const image = {style: {}, get src() {return source;}, set src(value) {source = value; assignments++;}};
   const container = {style: {}, dataset: {}};
-  const context = {window: {innerWidth: 1200, innerHeight: 900, matchMedia: () => ({matches: reduced})},
-    setInterval: callback => {tick = callback;}, clearInterval: () => {}, exports: {}};
+  const context = {document: {hidden: false}, window: {innerWidth: 1200, innerHeight: 900, matchMedia: () => ({matches: reduced})},
+    setInterval: callback => {tick = callback;}, clearInterval: () => {}, exports: {},
+    Math: random ? Object.assign(Object.create(Math), {random}) : Math};
   const code = fs.readFileSync(path.resolve(__dirname, '../frontend/build/renderer/controllers/pet-motion-controller.js'), 'utf8');
   vm.runInNewContext(code.replace(/^export /gm, '') + '\nexports.PetMotionController = PetMotionController;', context);
   const motion = new context.exports.PetMotionController({petDefinition: registry.load(pet), petImage: image,
     petContainer: container, initialPosition: {x: 20, y: 30}, canWalk: () => false,
-    getAnimation: () => animation, onPositionApplied: () => {}});
+    staticIdle: () => staticIdle, getAnimation: () => animation, onPositionApplied: () => {}});
   return {motion, image, container, tick: () => tick(), assignments: () => assignments,
     setActivity: value => {animation = value;}};
 }
+
+test('static idle keeps the pet still while real work continues to animate and travel', () => {
+  const {motion, image, container, tick, assignments} = fixture('pikachu', false, true, () => 0);
+  assert.ok(!image.src.endsWith('.gif'));
+  const count = assignments();
+  for (let i = 0; i < 200; i++) tick();
+  assert.equal(assignments(), count);
+  assert.deepEqual({...motion.position}, {x: 20, y: 30});
+  motion.playAnimation('typing', 1000);
+  motion.moveTo(700, 200);
+  tick();
+  assert.equal(container.dataset.animation, 'run');
+  for (let i = 0; i < 200 && container.dataset.animation === 'run'; i++) tick();
+  assert.equal(container.dataset.animation, 'typing');
+  assert.match(image.src, /typing\.gif$/);
+  for (let i = 0; i < 100; i++) tick();
+  assert.equal(container.dataset.animation, 'idle');
+  assert.ok(!image.src.endsWith('.gif'));
+});
 
 test('running yields to typing after arrival, GIFs finish their cycles, and short actions settle', () => {
   const {motion, image, container, tick, assignments} = fixture();

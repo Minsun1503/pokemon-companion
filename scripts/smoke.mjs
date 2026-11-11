@@ -3,7 +3,7 @@ import {connect} from './client.mjs';
 const {client, call} = await connect();
 try {
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', ...(process.platform === 'win32' ? ['windows', 'course', 'excel'] : [])]);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(process.platform === 'win32' ? ['course', 'excel'] : []), 'learning']);
   const prompts = await client.listPrompts();
   assert(prompts.prompts.some((prompt) => prompt.name === 'pokemon-work'));
   for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi']) {

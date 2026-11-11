@@ -1,7 +1,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 import {performance} from 'node:perf_hooks';
 
-type Timing = {tool: string; action: string; started: number; breakdown_ms: Record<string, number>};
+type Timing = {tool: string; action: string; started: number; breakdown_ms: Record<string, number>; counts: Record<string, number>};
 const calls = new AsyncLocalStorage<Timing>();
 
 export function recordTiming(name: string, elapsed: number): void {
@@ -11,13 +11,55 @@ export function recordTiming(name: string, elapsed: number): void {
 	}
 }
 
+const nativePhases = new Set([
+	'window_metadata_inclusive',
+	'window_enumeration_inclusive',
+	'discovery_inclusive',
+	'act_inclusive',
+	'window_capture_inclusive',
+	'window_verify',
+	'element_verify_inclusive',
+	'identity_resolve_inclusive',
+	'identity_projection',
+	'identity_cache_fetch',
+	'ancestor_navigation',
+	'tree_walk_inclusive',
+	'navigation_cache_fetch',
+	'visit_projection_inclusive',
+	'discovery_value_read',
+	'pattern_dispatch_inclusive',
+	'pattern_action',
+	'post_action_value_read',
+]);
+
+/** Consume internal diagnostics in the requesting async context, never in the shared stdout callback. */
+export function recordNativeProfile(profile: unknown): void {
+	const call = calls.getStore();
+	if (!call || !profile || typeof profile !== 'object') {
+		return;
+	}
+
+	const {phase_ms: phases, counts} = profile as {phase_ms?: unknown; counts?: unknown};
+	for (const [source, destination, prefix] of [[phases, call.breakdown_ms, 'native_'], [counts, call.counts, 'native_']] as const) {
+		if (!source || typeof source !== 'object' || Array.isArray(source)) {
+			continue;
+		}
+
+		for (const [name, value] of Object.entries(source)) {
+			if (nativePhases.has(name) && typeof value === 'number' && Number.isFinite(value) && value >= 0) {
+				destination[prefix + name] = (destination[prefix + name] ?? 0) + value;
+			}
+		}
+	}
+}
+
 export async function timedCall<T>(tool: string, action: string, run: () => Promise<T>): Promise<T> {
 	if (process.env.POKEMON_TIMING !== '1') {
 		return run();
 	}
 
 	const call: Timing = {
-		tool, action, started: performance.now(),
+		tool, action, started: performance.now(), counts: {},
 		breakdown_ms: {
 			queue_wait: 0, companion_before: 0, action: 0, companion_after: 0, serialization: 0,
 		},
@@ -28,7 +70,7 @@ export async function timedCall<T>(tool: string, action: string, run: () => Prom
 		} finally {
 			try {
 				process.stderr.write(`[pokemon-timing] ${JSON.stringify({
-					tool, action, total_ms: performance.now() - call.started, breakdown_ms: call.breakdown_ms,
+					tool, action, total_ms: performance.now() - call.started, breakdown_ms: call.breakdown_ms, counts: call.counts,
 				})}\n`);
 			} catch {/* Optional diagnostics must not alter delivery or mask the original error. */}
 		}

@@ -11,6 +11,7 @@ declare global {
       list(): Promise<(PetSummary & { definition: PetDefinition })[]>
       select(pet: string): Promise<boolean>
       pause(): Promise<boolean>
+      feedback(satisfaction: 'satisfied' | 'unsatisfied'): Promise<boolean>
       quit(): void
       panel(open: boolean): void
       chat: {
@@ -271,6 +272,8 @@ function apply(snapshot: CompanionSnapshot): void {
       canWalk: () =>
         Boolean(
           current?.active &&
+            current.state.visible &&
+            current.idleAnimation &&
             !current.state.paused &&
             visualActivity === 'idle' &&
             !motion?.isPerformingAction &&
@@ -278,6 +281,7 @@ function apply(snapshot: CompanionSnapshot): void {
             panel.hidden,
         ),
       getAnimation: () => (visualActivity === 'working' ? 'idle' : visualActivity),
+      staticIdle: () => !current?.idleAnimation,
       onAnimationApplied: updateActivityBadge,
       getMinY: () => bubble.getRequiredAnchorTop(),
       onPositionApplied: () => {
@@ -307,6 +311,10 @@ function apply(snapshot: CompanionSnapshot): void {
   element('task-message').textContent = message
   element('action-count').textContent = `${state.completedActions} action${state.completedActions === 1 ? '' : 's'}`
   element('pause-button').textContent = state.paused ? 'Resume control' : 'Pause control'
+  element('learning-feedback').hidden = !state.learningFeedbackPending
+  if (state.learningTaskId !== previous?.state.learningTaskId) element('feedback-status').textContent = ''
+  element<HTMLButtonElement>('feedback-good').disabled = !state.learningFeedbackPending
+  element<HTMLButtonElement>('feedback-bad').disabled = !state.learningFeedbackPending
   element('activity-icon').textContent = {
     idle: '✦',
     working: '⌨',
@@ -408,6 +416,22 @@ document.addEventListener('keydown', (event) => {
 element('pause-button').addEventListener('click', () => {
   void window.pokemonAPI.pause()
 })
+for (const [id, satisfaction] of [
+  ['feedback-good', 'satisfied'],
+  ['feedback-bad', 'unsatisfied'],
+] as const) {
+  element(id).addEventListener('click', () => {
+    element('feedback-status').textContent = 'Saving feedback…'
+    void window.pokemonAPI
+      .feedback(satisfaction)
+      .then((accepted) => {
+        element('feedback-status').textContent = accepted ? 'Thank you.' : 'Feedback is unavailable for this task.'
+      })
+      .catch(() => {
+        element('feedback-status').textContent = 'Could not save feedback. Please try again.'
+      })
+  })
+}
 document.addEventListener('mousemove', (event) => {
   const inside = [petContainer, ...(!panel.hidden ? [panel] : [])].some((entry) => {
     const bounds = entry.getBoundingClientRect()
@@ -426,6 +450,7 @@ window.addEventListener('resize', () => {
   positionPanel()
 })
 setInterval(() => {
+  if (document.hidden || !current?.active || !current.state.visible) return
   const regions = [petContainer, element('bubble'), panel]
     .filter((entry) => !entry.hidden && getComputedStyle(entry).display !== 'none')
     .map((entry) => {

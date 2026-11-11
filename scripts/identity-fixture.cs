@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 class IdentityForm : Form {
     protected override bool ShowWithoutActivation { get { return true; } }
+    public void ReplaceHandle() { RecreateHandle(); }
 }
 class IdentityFixture {
     [STAThread] static void Main(string[] args) {
@@ -14,6 +15,7 @@ class IdentityFixture {
         var field = new TextBox { Name = "editor", AccessibleName = "Editable field", Text = "initial", Location = new Point(20, 20), Width = 240 };
         var button = new Button { Name = "action", AccessibleName = "Original item", AccessibleDescription = "Original description", Text = "Item", Location = new Point(20, 60), Width = 160 };
         CheckBox replacementRole = null;
+        Button twin = null;
         var region = new Panel { AccessibleName = "Nested region", Location = new Point(20, 110), Width = 280, Height = 50 };
         var nested = new TextBox { AccessibleName = "Nested field", Text = "nested", Width = 200 };
         region.Controls.Add(nested);
@@ -37,6 +39,25 @@ class IdentityFixture {
                 if (command == "title") form.Text += " changed";
                 if (command == "hide") button.Visible = false;
                 if (command == "show") button.Visible = true;
+                if (command == "disable") button.Enabled = false;
+                if (command == "enable") button.Enabled = true;
+                if (command == "move") button.Location = new Point(210, 60);
+                if (command == "recreate-window") form.ReplaceHandle();
+                if (command == "twin") {
+                    twin = new Button { Name = button.Name, AccessibleName = button.AccessibleName,
+                        AccessibleDescription = button.AccessibleDescription, Text = "Twin", Location = new Point(390, 60), Width = 160 };
+                    twin.Click += delegate { clicks += 100; };
+                    form.Controls.Add(twin);
+                }
+                if (command == "reset-benchmark") {
+                    button.AccessibleName = "Original item"; button.Enabled = true; button.Visible = true; button.Location = new Point(20, 60);
+                    if (twin != null) { form.Controls.Remove(twin); twin.Dispose(); twin = null; }
+                }
+                if (command == "delayed-rename") {
+                    var delayed = new Timer { Interval = 200 };
+                    delayed.Tick += delegate { button.AccessibleName = "Replacement item"; delayed.Stop(); delayed.Dispose(); sequence++; };
+                    delayed.Start();
+                }
                 if (command == "automation-id") button.Name = "replacement-action";
                 if (command == "description") button.AccessibleDescription = "Replacement description";
                 if (command == "role") {
@@ -53,7 +74,8 @@ class IdentityFixture {
                 if (command == "quit") { timer.Stop(); Application.Exit(); return; }
                 sequence++;
             }
-            var state = new { clicks = clicks, text = field.Text, nested = nested.Text, name = button.AccessibleName, sequence = sequence };
+            var state = new { clicks = clicks, text = field.Text, nested = nested.Text, name = button.AccessibleName, sequence = sequence,
+                window_id = form.Handle.ToInt64().ToString() };
             string path = Path.Combine(folder, "state.json");
             File.WriteAllText(path, new JavaScriptSerializer().Serialize(state));
         };

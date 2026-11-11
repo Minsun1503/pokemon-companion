@@ -1,0 +1,342 @@
+{
+  "created_at": "2026-11-11T14:37:32.221Z",
+  "feedback_buttons_verified": true,
+  "authenticated_production_bridge": true,
+  "encrypted_feedback_verified": true,
+  "samples": [
+    {
+      "mode": "idle_visible",
+      "id": "3db78536-1820-4a71-ae9b-5898c1594df9",
+      "state": {
+        "panel": false,
+        "feedback": false,
+        "status": "",
+        "goodDisabled": true,
+        "sprite": "file:///C:/Users/ADMIN/Downloads/Pikachu/pokemon-companion/.publish/frontend/pets/pikachu/animations/run_back.gif"
+      },
+      "metrics": [
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.446266,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 4296,
+          "type": "Browser",
+          "creationTime": 1794407842410.848,
+          "memory": {
+            "workingSetSize": 112656,
+            "peakWorkingSetSize": 113804,
+            "privateBytes": 75628
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.67567,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 6292,
+          "type": "GPU",
+          "creationTime": 1794407842542.544,
+          "serviceName": "GPU",
+          "memory": {
+            "workingSetSize": 136348,
+            "peakWorkingSetSize": 141800,
+            "privateBytes": 65896
+          },
+          "integrityLevel": "low",
+          "sandboxed": true
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.075027,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 5160,
+          "type": "Utility",
+          "creationTime": 1794407842545.592,
+          "serviceName": "network.mojom.NetworkService",
+          "name": "Network Service",
+          "memory": {
+            "workingSetSize": 79384,
+            "peakWorkingSetSize": 79384,
+            "privateBytes": 14444
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.202911,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 12856,
+          "type": "Tab",
+          "creationTime": 1794407842594.037,
+          "memory": {
+            "workingSetSize": 90724,
+            "peakWorkingSetSize": 90724,
+            "privateBytes": 31392
+          },
+          "integrityLevel": "untrusted",
+          "sandboxed": true
+        }
+      ],
+      "gpu": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "enabled",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webnn": "disabled_off"
+      }
+    },
+    {
+      "mode": "idle_visible",
+      "id": "a25fe084-6f37-4044-bc82-2a9d6d7670f2",
+      "state": {
+        "panel": false,
+        "feedback": false,
+        "status": "",
+        "goodDisabled": true,
+        "sprite": "file:///C:/Users/ADMIN/Downloads/Pikachu/pokemon-companion/.publish/frontend/pets/pikachu/animations/run.gif"
+      },
+      "metrics": [
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.565264,
+            "percentCPUUsage": 0.6405205032444254,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 4296,
+          "type": "Browser",
+          "creationTime": 1794407842410.848,
+          "memory": {
+            "workingSetSize": 112764,
+            "peakWorkingSetSize": 113804,
+            "privateBytes": 75664
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 1.246585,
+            "percentCPUUsage": 3.0730150507575114,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 6292,
+          "type": "GPU",
+          "creationTime": 1794407842542.544,
+          "serviceName": "GPU",
+          "memory": {
+            "workingSetSize": 136484,
+            "peakWorkingSetSize": 141800,
+            "privateBytes": 66028
+          },
+          "integrityLevel": "low",
+          "sandboxed": true
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.075027,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 5160,
+          "type": "Utility",
+          "creationTime": 1794407842545.592,
+          "serviceName": "network.mojom.NetworkService",
+          "name": "Network Service",
+          "memory": {
+            "workingSetSize": 79384,
+            "peakWorkingSetSize": 79384,
+            "privateBytes": 14444
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.502512,
+            "percentCPUUsage": 1.6126240265752665,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 12856,
+          "type": "Tab",
+          "creationTime": 1794407842594.037,
+          "memory": {
+            "workingSetSize": 91628,
+            "peakWorkingSetSize": 91628,
+            "privateBytes": 32124
+          },
+          "integrityLevel": "untrusted",
+          "sandboxed": true
+        }
+      ],
+      "gpu": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "enabled",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webnn": "disabled_off"
+      }
+    },
+    {
+      "mode": "hidden",
+      "id": "1f13d260-a168-4c34-968c-1fb3681aac1f",
+      "state": {
+        "panel": false,
+        "feedback": false,
+        "status": "Thank you.",
+        "goodDisabled": true,
+        "sprite": "file:///C:/Users/ADMIN/Downloads/Pikachu/pokemon-companion/.publish/frontend/pets/pikachu/animations/idle.gif"
+      },
+      "metrics": [
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.745248,
+            "percentCPUUsage": 0.21982281868556278,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 4296,
+          "type": "Browser",
+          "creationTime": 1794407842410.848,
+          "memory": {
+            "workingSetSize": 115884,
+            "peakWorkingSetSize": 116536,
+            "privateBytes": 77796
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 1.549212,
+            "percentCPUUsage": 0.03916952928068786,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 6292,
+          "type": "GPU",
+          "creationTime": 1794407842542.544,
+          "serviceName": "GPU",
+          "memory": {
+            "workingSetSize": 166840,
+            "peakWorkingSetSize": 170508,
+            "privateBytes": 91488
+          },
+          "integrityLevel": "low",
+          "sandboxed": true
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.083364,
+            "percentCPUUsage": 0.04405345472081423,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 5160,
+          "type": "Utility",
+          "creationTime": 1794407842545.592,
+          "serviceName": "network.mojom.NetworkService",
+          "name": "Network Service",
+          "memory": {
+            "workingSetSize": 79460,
+            "peakWorkingSetSize": 79588,
+            "privateBytes": 14528
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.607729,
+            "percentCPUUsage": 0.025581969840439454,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 12856,
+          "type": "Tab",
+          "creationTime": 1794407842594.037,
+          "memory": {
+            "workingSetSize": 95116,
+            "peakWorkingSetSize": 95116,
+            "privateBytes": 36644
+          },
+          "integrityLevel": "untrusted",
+          "sandboxed": true
+        }
+      ],
+      "gpu": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "enabled",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webnn": "disabled_off"
+      }
+    }
+  ],
+  "learning": {
+    "enabled": true,
+    "retention_days": 30,
+    "tasks": 2,
+    "recipes": 1,
+    "api_counts": {
+      "desktop.status": {
+        "successes": 2,
+        "failures": 0
+      }
+    },
+    "recording_error": null,
+    "model": {
+      "family": "online_logistic_workflow_ranker",
+      "features": 2048,
+      "gpu": false,
+      "background_training": false,
+      "examples": 1,
+      "last_inference_ms": 0.39170000000012806
+    },
+    "security": {
+      "encryption": "AES-256-GCM",
+      "key_protection": "DPAPI-current-user",
+      "uploads": false,
+      "screenshot_collection": false
+    },
+    "state_bytes": 4004,
+    "directory": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-learning-ui-57HDTx\\learning"
+  },
+  "limits": [
+    "Test harness clicks actual production DOM buttons; ratings are synthetic, not user satisfaction.",
+    "Electron CPU percentages include the test harness; GPU process CPU is not hardware GPU utilization.",
+    "Short idle samples are descriptive; no before/after CPU reduction claim."
+  ]
+}

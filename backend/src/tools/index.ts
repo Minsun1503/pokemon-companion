@@ -6,12 +6,16 @@ import {registerCourse} from './course.js';
 import {registerExcel} from './excel.js';
 import {registerDesktop} from './desktop.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
+import {instrument} from '../learning/instrument.js';
+import {registerLearning} from './learning.js';
 
 export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
-	registerDesktop(server, runtime);
-	registerComputer(server, runtime);
-	registerPokemon(server, runtime);
-	registerWindows(server, runtime);
-	registerCourse(server, runtime);
-	registerExcel(server, runtime);
+	const traced = instrument(server, runtime.learning);
+	registerDesktop(traced, runtime);
+	registerComputer(traced, runtime);
+	registerPokemon(traced, runtime);
+	registerWindows(traced, runtime);
+	registerCourse(traced, runtime);
+	registerExcel(traced, runtime);
+	registerLearning(server, runtime);
 }

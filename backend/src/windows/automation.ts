@@ -3,7 +3,7 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {performance} from 'node:perf_hooks';
 import {setTimeout as delay} from 'node:timers/promises';
-import {recordTiming, serialize} from '../utils/timing.js';
+import {recordNativeProfile, recordTiming, serialize} from '../utils/timing.js';
 import {CrossPlatformAutomation} from './cross-platform.js';
 import {
 	DesktopError, nativeFailure, rejectedAction, workerFailure,
@@ -13,6 +13,8 @@ import type {DesktopAdapter, DesktopRequest as WindowsRequest, DesktopRequestOpt
 export type {DesktopRequest as WindowsRequest} from '../desktop/adapter.js';
 export type {DesktopRequestOptions as RequestOptions} from '../desktop/adapter.js';
 
+type NativeReply = {result?: Record<string, unknown>; failure?: Error; profile?: unknown};
+
 export class WindowsAutomation implements DesktopAdapter {
 	readonly platform = process.platform === 'darwin' || process.platform === 'linux' ? process.platform : 'win32';
 	private readonly desktop = new CrossPlatformAutomation();
@@ -20,7 +22,7 @@ export class WindowsAutomation implements DesktopAdapter {
 	private leaseOwner: ChildProcessWithoutNullStreams | undefined;
 	private sequence = 0;
 	private buffer = '';
-	private readonly pending = new Map<number, {action: string; resolve: (value: Record<string, unknown>) => void; reject: (error: Error) => void; cleanup: () => void}>();
+	private readonly pending = new Map<number, {action: string; resolve: (value: NativeReply) => void; reject: (error: Error) => void; cleanup: () => void}>();
 
 	warm(): void {
 		if (process.platform === 'win32') {
@@ -107,37 +109,48 @@ export class WindowsAutomation implements DesktopAdapter {
 		this.start();
 		this.sequence += 1;
 		const id = this.sequence;
-		const result = await new Promise<Record<string, unknown>>((resolveRequest, reject) => {
-			const timer = setTimeout(() => {
-				this.close(nativeFailure('TIMEOUT', options?.timeoutError ?? 'Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.', args.action));
-			}, options?.timeoutMs ?? 20_000);
-			const cancel = () => {
-				this.close(nativeFailure('CANCELLED', 'Computer action cancelled. After an interrupted wait, call get_ui again for fresh snapshots.', args.action));
-			};
+		let reply: NativeReply;
+		try {
+			reply = await new Promise<NativeReply>((resolveRequest, reject) => {
+				const timer = setTimeout(() => {
+					this.close(nativeFailure('TIMEOUT', options?.timeoutError ?? 'Windows UI Automation timed out. The app may be unresponsive; re-read its UI or use a screenshot fallback.', args.action));
+				}, options?.timeoutMs ?? 20_000);
+				const cancel = () => {
+					this.close(nativeFailure('CANCELLED', 'Computer action cancelled. After an interrupted wait, call get_ui again for fresh snapshots.', args.action));
+				};
 
-			const pauseTimer = options
-				? setInterval(() => {
-					if (options.paused()) {
-						this.close(nativeFailure('PAUSED', 'Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P. After an interrupted wait, call get_ui again for fresh snapshots.', args.action));
-					}
-				}, 100)
-				: undefined;
-			this.pending.set(id, {
-				action: args.action, resolve: resolveRequest, reject, cleanup() {
-					clearTimeout(timer);
-					clearInterval(pauseTimer);
-					options?.signal?.removeEventListener('abort', cancel);
-				},
+				const pauseTimer = options
+					? setInterval(() => {
+						if (options.paused()) {
+							this.close(nativeFailure('PAUSED', 'Computer control is paused by the user. Ask them to resume from the Pokémon tray or Ctrl+Shift+P. After an interrupted wait, call get_ui again for fresh snapshots.', args.action));
+						}
+					}, 100)
+					: undefined;
+				this.pending.set(id, {
+					action: args.action, resolve: resolveRequest, reject, cleanup() {
+						clearTimeout(timer);
+						clearInterval(pauseTimer);
+						options?.signal?.removeEventListener('abort', cancel);
+					},
+				});
+				options?.signal?.addEventListener('abort', cancel, {once: true});
+				if (options?.signal?.aborted) {
+					cancel();
+					return;
+				}
+
+				this.worker!.stdin.write(`${serialize({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
 			});
-			options?.signal?.addEventListener('abort', cancel, {once: true});
-			if (options?.signal?.aborted) {
-				cancel();
-				return;
-			}
+		} finally {
+			recordTiming('worker_round_trip', performance.now() - roundTrip);
+		}
 
-			this.worker!.stdin.write(`${serialize({id, args: {max_elements: 60, max_depth: 24, ...args}})}\n`);
-		});
-		recordTiming('worker_round_trip', performance.now() - roundTrip);
+		recordNativeProfile(reply.profile);
+		if (reply.failure) {
+			throw reply.failure;
+		}
+
+		const result = reply.result!;
 		if (typeof result.uia_tree_walk_ms === 'number') {
 			recordTiming('uia_tree_walk', result.uia_tree_walk_ms);
 			delete result.uia_tree_walk_ms;
@@ -221,7 +234,7 @@ export class WindowsAutomation implements DesktopAdapter {
 				const line = this.buffer.slice(0, newline);
 				this.buffer = this.buffer.slice(newline + 1);
 				try {
-					const response = JSON.parse(line) as {id: number; result: Record<string, unknown>; error?: string; error_details?: unknown};
+					const response = JSON.parse(line) as {id: number; result: Record<string, unknown>; error?: string; error_details?: unknown; profile?: unknown};
 					const item = this.pending.get(response.id);
 					if (!item) {
 						continue;
@@ -230,11 +243,11 @@ export class WindowsAutomation implements DesktopAdapter {
 					item.cleanup();
 					this.pending.delete(response.id);
 					if (response.error !== undefined) {
-						item.reject(workerFailure(response.error || 'Windows UI Automation failed without an error message. Call get_ui again for fresh snapshots.', response.error_details, item.action));
+						item.resolve({failure: workerFailure(response.error || 'Windows UI Automation failed without an error message. Call get_ui again for fresh snapshots.', response.error_details, item.action), profile: response.profile});
 					} else if (!response.result || typeof response.result !== 'object' || Array.isArray(response.result)) {
 						item.reject(new Error('Windows UI Automation returned an invalid response.'));
 					} else {
-						item.resolve(response.result);
+						item.resolve({result: response.result, profile: response.profile});
 					}
 				} catch {
 					this.close(new Error('Windows UI Automation returned an invalid response.'));

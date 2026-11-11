@@ -5,6 +5,7 @@ import {performance} from 'node:perf_hooks';
 import {measure, recordTiming} from '../utils/timing.js';
 import {rejectedAction} from '../utils/errors.js';
 import type {DesktopAdapter} from '../desktop/adapter.js';
+import {LocalLearning} from '../learning/service.js';
 
 const labels: Record<string, string> = {
 	key: 'Using a keyboard shortcut', type: 'Typing', mouse_move: 'Moving to the target',
@@ -22,11 +23,26 @@ const labels: Record<string, string> = {
 export class PokemonRuntime {
 	private queue: Promise<unknown> = Promise.resolve();
 	private gestureSequence = 0;
-	constructor(readonly companion: Companion = new DesktopCompanion(), readonly windows: DesktopAdapter = new WindowsAutomation()) {}
+	constructor(readonly companion: Companion = new DesktopCompanion(), readonly windows: DesktopAdapter = new WindowsAutomation(), readonly learning = new LocalLearning(undefined, undefined, async (input, decrypt) => {
+		const result = await windows.request({action: decrypt ? 'learning_decrypt_key' : 'learning_encrypt_key', text: input.toString('base64')});
+		if (typeof result.key !== 'string') {
+			throw new Error('Native worker did not return a protected learning key.');
+		}
+
+		return Buffer.from(result.key, 'base64');
+	})) {
+		companion.onLearningFeedback = async (id, satisfaction) => {
+			await learning.feedback(id, satisfaction, 'user_ui');
+			if (companion.state.learningTaskId === id) {
+				await companion.update({learningFeedbackPending: false});
+			}
+		};
+	}
 
 	async close(): Promise<void> {
 		this.windows.close();
 		await this.companion.close();
+		await this.learning.close();
 	}
 
 	/** Serialize all input and character commands across clients sharing this desktop. */

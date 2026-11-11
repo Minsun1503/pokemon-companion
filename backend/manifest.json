@@ -22,6 +22,7 @@
     }
   },
   "tools": [
+    {"name": "desktop", "description": "Native backend readiness, capabilities and pause status."},
     {
       "name": "computer",
       "description": "Use a computer to complete tasks while an animated Pokémon shows the work. This tool can take screenshots, click, type, scroll, and more."
@@ -41,7 +42,8 @@
     {
       "name": "excel",
       "description": "Native desktop Excel workbook inspection, range reads/writes, formulas, search, selection, and verified saving."
-    }
+    },
+    {"name": "learning", "description": "Encrypted local task records, explicit user feedback and CPU-only workflow learning with fresh target discovery."}
   ],
   "compatibility": {
     "claude_desktop": ">=0.10.0",

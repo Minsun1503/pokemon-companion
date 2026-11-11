@@ -1,0 +1,342 @@
+{
+  "created_at": "2026-11-11T14:50:17.424Z",
+  "feedback_buttons_verified": true,
+  "authenticated_production_bridge": true,
+  "encrypted_feedback_verified": true,
+  "samples": [
+    {
+      "mode": "idle_visible",
+      "id": "27d49699-05b8-4991-9533-6faf69e7176c",
+      "state": {
+        "panel": false,
+        "feedback": false,
+        "status": "",
+        "goodDisabled": true,
+        "sprite": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABACAYAAABP97SyAAAACXBIWXMAAAPoAAAD6AG1e1JrAAACwUlEQVR4nO2ZP5biMAzGXXKEbSkpuQLllpTb5ghzhT3ClGn3GLRzDNo5AqX2OfjLaIXsKF4c+zH+3lNBCEQ/LOuPca6rq6urq6urq6urq2sLkXth0eFwoFeGpG8BeHhRSALctwAcjrvXBDydftLtsn8aIP/RQmRUEwEOlgvJgfx3cqsZ/sThcgDHsyNv0+c/z5NJQG9NAo7BeW4PYAGKWytwkzwQB4Tj13dHdPszG5z312Ng3t7efrcDJwG98xJMg0yZAEvCyagoCnl9v6/K/8AxqEWneRQUhxwTITfbZT87zxMKQnZNKGrPKwY5hNWTjmuh54XaqaycSYiUTQGdc5PzKUCsHupaDmAMrijkcNzNSQEP4ntyKUQtjiF5LW2DIoDj+R5ypn3I7PPXaTLsw1iDsOZ7nw44+BKhPMhfRy1MwXn72P/gq5sNVwRyOO7uqxBCDivhH+Id98YLP0IV78E0wBy4IoAfwUHZzXCAudcMZgZMJK2qgLcAiTCUgBwSrzmgdr8FrkhbN2rOGAClwbnFe9MdUDFRDNICx6cQ6/1bgUE2p2wOP0wokdXedMogZMhcOLmHNMgaYNBD17IWTksSHHKTsSghPbMpQFM9TCcLF4Osdmp3ZR1LqkAv9ZMKwNcPUhGQrBCWhpmt4j9wNSFJ6yYs1+YwFoCYRuYpIoQ2RrPNAa9iZcyA2JPsNb6PmwereWpO0nkLsHqdlQLAVT9VcwqgdN60ykq9Y6dm9VbvJhyOnXvi3ui5qNKXVocchaOp0+rk+5GORZyIV8iel/XzmppBlVKAwblue3axz2pJuMQq1gCDzPOaGooJOLEP62m0zm4rraV/iunZcK3UPq6vw1zmJHN0tqVBtjm4IWQ71DZjWp8zJI4Tc/6AKa4hHPryAs+aYcr987QpSCfCL/fz/IdqDfBZaqLudXV1uc30F2rT8oiNfJqCAAAAAElFTkSuQmCC"
+      },
+      "metrics": [
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.454607,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 11512,
+          "type": "Browser",
+          "creationTime": 1794408607352.509,
+          "memory": {
+            "workingSetSize": 111860,
+            "peakWorkingSetSize": 113064,
+            "privateBytes": 78424
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.543744,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 4932,
+          "type": "GPU",
+          "creationTime": 1794408607501.664,
+          "serviceName": "GPU",
+          "memory": {
+            "workingSetSize": 131684,
+            "peakWorkingSetSize": 139060,
+            "privateBytes": 65052
+          },
+          "integrityLevel": "low",
+          "sandboxed": true
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.079273,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 5572,
+          "type": "Utility",
+          "creationTime": 1794408607505.096,
+          "serviceName": "network.mojom.NetworkService",
+          "name": "Network Service",
+          "memory": {
+            "workingSetSize": 75876,
+            "peakWorkingSetSize": 75876,
+            "privateBytes": 14568
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.127063,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 11888,
+          "type": "Tab",
+          "creationTime": 1794408607568.045,
+          "memory": {
+            "workingSetSize": 86332,
+            "peakWorkingSetSize": 87300,
+            "privateBytes": 31992
+          },
+          "integrityLevel": "untrusted",
+          "sandboxed": true
+        }
+      ],
+      "gpu": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "enabled",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webnn": "disabled_off"
+      }
+    },
+    {
+      "mode": "idle_visible",
+      "id": "daea26e4-54ed-4cf7-97bd-81c75be3290f",
+      "state": {
+        "panel": false,
+        "feedback": false,
+        "status": "",
+        "goodDisabled": true,
+        "sprite": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABACAYAAABP97SyAAAACXBIWXMAAAPoAAAD6AG1e1JrAAACwUlEQVR4nO2ZP5biMAzGXXKEbSkpuQLllpTb5ghzhT3ClGn3GLRzDNo5AqX2OfjLaIXsKF4c+zH+3lNBCEQ/LOuPca6rq6urq6urq6urq2sLkXth0eFwoFeGpG8BeHhRSALctwAcjrvXBDydftLtsn8aIP/RQmRUEwEOlgvJgfx3cqsZ/sThcgDHsyNv0+c/z5NJQG9NAo7BeW4PYAGKWytwkzwQB4Tj13dHdPszG5z312Ng3t7efrcDJwG98xJMg0yZAEvCyagoCnl9v6/K/8AxqEWneRQUhxwTITfbZT87zxMKQnZNKGrPKwY5hNWTjmuh54XaqaycSYiUTQGdc5PzKUCsHupaDmAMrijkcNzNSQEP4ntyKUQtjiF5LW2DIoDj+R5ypn3I7PPXaTLsw1iDsOZ7nw44+BKhPMhfRy1MwXn72P/gq5sNVwRyOO7uqxBCDivhH+Id98YLP0IV78E0wBy4IoAfwUHZzXCAudcMZgZMJK2qgLcAiTCUgBwSrzmgdr8FrkhbN2rOGAClwbnFe9MdUDFRDNICx6cQ6/1bgUE2p2wOP0wokdXedMogZMhcOLmHNMgaYNBD17IWTksSHHKTsSghPbMpQFM9TCcLF4Osdmp3ZR1LqkAv9ZMKwNcPUhGQrBCWhpmt4j9wNSFJ6yYs1+YwFoCYRuYpIoQ2RrPNAa9iZcyA2JPsNb6PmwereWpO0nkLsHqdlQLAVT9VcwqgdN60ykq9Y6dm9VbvJhyOnXvi3ui5qNKXVocchaOp0+rk+5GORZyIV8iel/XzmppBlVKAwblue3axz2pJuMQq1gCDzPOaGooJOLEP62m0zm4rraV/iunZcK3UPq6vw1zmJHN0tqVBtjm4IWQ71DZjWp8zJI4Tc/6AKa4hHPryAs+aYcr987QpSCfCL/fz/IdqDfBZaqLudXV1uc30F2rT8oiNfJqCAAAAAElFTkSuQmCC"
+      },
+      "metrics": [
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.49227,
+            "percentCPUUsage": 0.19801331599198715,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 11512,
+          "type": "Browser",
+          "creationTime": 1794408607352.509,
+          "memory": {
+            "workingSetSize": 111956,
+            "peakWorkingSetSize": 113064,
+            "privateBytes": 78444
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.546981,
+            "percentCPUUsage": 0.01701841206070731,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 4932,
+          "type": "GPU",
+          "creationTime": 1794408607501.664,
+          "serviceName": "GPU",
+          "memory": {
+            "workingSetSize": 131316,
+            "peakWorkingSetSize": 139060,
+            "privateBytes": 64320
+          },
+          "integrityLevel": "low",
+          "sandboxed": true
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.079273,
+            "percentCPUUsage": 0,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 5572,
+          "type": "Utility",
+          "creationTime": 1794408607505.096,
+          "serviceName": "network.mojom.NetworkService",
+          "name": "Network Service",
+          "memory": {
+            "workingSetSize": 75876,
+            "peakWorkingSetSize": 75876,
+            "privateBytes": 14568
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.144736,
+            "percentCPUUsage": 0.09291220703319068,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 11888,
+          "type": "Tab",
+          "creationTime": 1794408607568.045,
+          "memory": {
+            "workingSetSize": 86388,
+            "peakWorkingSetSize": 87300,
+            "privateBytes": 32008
+          },
+          "integrityLevel": "untrusted",
+          "sandboxed": true
+        }
+      ],
+      "gpu": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "enabled",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webnn": "disabled_off"
+      }
+    },
+    {
+      "mode": "hidden",
+      "id": "f8661b8a-e62a-4463-9d15-1c5a96d33260",
+      "state": {
+        "panel": false,
+        "feedback": false,
+        "status": "Thank you.",
+        "goodDisabled": true,
+        "sprite": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAABACAYAAABP97SyAAAACXBIWXMAAAPoAAAD6AG1e1JrAAACwUlEQVR4nO2ZP5biMAzGXXKEbSkpuQLllpTb5ghzhT3ClGn3GLRzDNo5AqX2OfjLaIXsKF4c+zH+3lNBCEQ/LOuPca6rq6urq6urq6urq2sLkXth0eFwoFeGpG8BeHhRSALctwAcjrvXBDydftLtsn8aIP/RQmRUEwEOlgvJgfx3cqsZ/sThcgDHsyNv0+c/z5NJQG9NAo7BeW4PYAGKWytwkzwQB4Tj13dHdPszG5z312Ng3t7efrcDJwG98xJMg0yZAEvCyagoCnl9v6/K/8AxqEWneRQUhxwTITfbZT87zxMKQnZNKGrPKwY5hNWTjmuh54XaqaycSYiUTQGdc5PzKUCsHupaDmAMrijkcNzNSQEP4ntyKUQtjiF5LW2DIoDj+R5ypn3I7PPXaTLsw1iDsOZ7nw44+BKhPMhfRy1MwXn72P/gq5sNVwRyOO7uqxBCDivhH+Id98YLP0IV78E0wBy4IoAfwUHZzXCAudcMZgZMJK2qgLcAiTCUgBwSrzmgdr8FrkhbN2rOGAClwbnFe9MdUDFRDNICx6cQ6/1bgUE2p2wOP0wokdXedMogZMhcOLmHNMgaYNBD17IWTksSHHKTsSghPbMpQFM9TCcLF4Osdmp3ZR1LqkAv9ZMKwNcPUhGQrBCWhpmt4j9wNSFJ6yYs1+YwFoCYRuYpIoQ2RrPNAa9iZcyA2JPsNb6PmwereWpO0nkLsHqdlQLAVT9VcwqgdN60ykq9Y6dm9VbvJhyOnXvi3ui5qNKXVocchaOp0+rk+5GORZyIV8iel/XzmppBlVKAwblue3axz2pJuMQq1gCDzPOaGooJOLEP62m0zm4rraV/iunZcK3UPq6vw1zmJHN0tqVBtjm4IWQ71DZjWp8zJI4Tc/6AKa4hHPryAs+aYcr987QpSCfCL/fz/IdqDfBZaqLudXV1uc30F2rT8oiNfJqCAAAAAElFTkSuQmCC"
+      },
+      "metrics": [
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.783212,
+            "percentCPUUsage": 0.3371253434831765,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 11512,
+          "type": "Browser",
+          "creationTime": 1794408607352.509,
+          "memory": {
+            "workingSetSize": 114968,
+            "peakWorkingSetSize": 115708,
+            "privateBytes": 79132
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.80531,
+            "percentCPUUsage": 0.03439680328747093,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 4932,
+          "type": "GPU",
+          "creationTime": 1794408607501.664,
+          "serviceName": "GPU",
+          "memory": {
+            "workingSetSize": 154756,
+            "peakWorkingSetSize": 158120,
+            "privateBytes": 87192
+          },
+          "integrityLevel": "low",
+          "sandboxed": true
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.090233,
+            "percentCPUUsage": 0.05702292734500683,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 5572,
+          "type": "Utility",
+          "creationTime": 1794408607505.096,
+          "serviceName": "network.mojom.NetworkService",
+          "name": "Network Service",
+          "memory": {
+            "workingSetSize": 75864,
+            "peakWorkingSetSize": 76000,
+            "privateBytes": 14512
+          },
+          "integrityLevel": "medium",
+          "sandboxed": false
+        },
+        {
+          "cpu": {
+            "cumulativeCPUUsage": 0.24597,
+            "percentCPUUsage": 0.04834605036665792,
+            "idleWakeupsPerSecond": 0
+          },
+          "pid": 11888,
+          "type": "Tab",
+          "creationTime": 1794408607568.045,
+          "memory": {
+            "workingSetSize": 90216,
+            "peakWorkingSetSize": 90216,
+            "privateBytes": 34792
+          },
+          "integrityLevel": "untrusted",
+          "sandboxed": true
+        }
+      ],
+      "gpu": {
+        "2d_canvas": "enabled",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "enabled",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "enabled_on",
+        "rasterization": "enabled",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "enabled",
+        "video_encode": "enabled",
+        "webgl": "enabled",
+        "webgpu": "enabled",
+        "webnn": "disabled_off"
+      }
+    }
+  ],
+  "learning": {
+    "enabled": true,
+    "retention_days": 30,
+    "tasks": 2,
+    "recipes": 1,
+    "api_counts": {
+      "desktop.status": {
+        "successes": 2,
+        "failures": 0
+      }
+    },
+    "recording_error": null,
+    "model": {
+      "family": "online_logistic_workflow_ranker",
+      "features": 2048,
+      "gpu": false,
+      "background_training": false,
+      "examples": 1,
+      "last_inference_ms": 0.8591999999998734
+    },
+    "security": {
+      "encryption": "AES-256-GCM",
+      "key_protection": "DPAPI-current-user",
+      "uploads": false,
+      "screenshot_collection": false
+    },
+    "state_bytes": 4003,
+    "directory": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-learning-ui-Jg3ajc\\learning"
+  },
+  "limits": [
+    "Test harness clicks actual production DOM buttons; ratings are synthetic, not user satisfaction.",
+    "Electron CPU percentages include the test harness; GPU process CPU is not hardware GPU utilization.",
+    "Short idle samples are descriptive; no before/after CPU reduction claim."
+  ]
+}

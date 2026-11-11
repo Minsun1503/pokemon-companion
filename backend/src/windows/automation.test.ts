@@ -5,6 +5,7 @@ import {
 	describe, expect, it, vi,
 } from 'vitest';
 import {WindowsAutomation} from './automation.js';
+import {timedCall} from '../utils/timing.js';
 
 vi.mock('node:child_process', () => ({spawn: vi.fn()}));
 
@@ -26,6 +27,31 @@ async function readUI(result: Record<string, unknown>) {
 const captions = ['Minimize', 'Maximize', 'Close'].map((name) => ({role: 'Button', name}));
 
 describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
+	it.each([false, true])('consumes internal profiles while preserving success/failure and public budgets: failure=%s', async (failure) => {
+		vi.stubEnv('POKEMON_TIMING', '1');
+		const write = vi.spyOn(process.stderr, 'write').mockReturnValue(true);
+		const worker = Object.assign(new EventEmitter(), {
+			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
+		});
+		vi.mocked(spawn).mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
+		const automation = new WindowsAutomation();
+		try {
+			const pending = timedCall('windows', 'get_ui', async () => automation.request({action: 'get_ui', window_id: '123', max_chars: 1000}));
+			const checked = failure ? expect(pending).rejects.toThrow('original native rejection') : expect(pending).resolves.toEqual({nodes: []});
+			worker.stdout.write(`${JSON.stringify({id: 1, ...(failure ? {error: 'original native rejection', error_details: {code: 'STALE_REF', disposition: {delivery: 'not_delivered', retry: 'safe'}}} : {result: {nodes: []}}), profile: {phase_ms: {tree_walk_inclusive: 42, secret: 1}, counts: {tree_walk_inclusive: 1}}})}\n`);
+			await checked;
+			const log = JSON.parse(String(write.mock.calls[0][0]).slice('[pokemon-timing] '.length));
+			expect(log.breakdown_ms.native_tree_walk_inclusive).toBe(42);
+			expect(log.counts.native_tree_walk_inclusive).toBe(1);
+			expect(log.breakdown_ms.worker_round_trip).toBeGreaterThanOrEqual(0);
+			expect(JSON.stringify(log)).not.toContain('secret');
+			expect(worker.stdin.read().toString().trim().split('\n')).toHaveLength(1);
+		} finally {
+			automation.close();
+			vi.restoreAllMocks();
+			vi.unstubAllEnvs();
+		}
+	});
 	it.each([{error: ''}, {}, {result: null}, {result: []}])('rejects an empty error or missing object result without replay: %j', async (response) => {
 		const worker = Object.assign(new EventEmitter(), {
 			stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),

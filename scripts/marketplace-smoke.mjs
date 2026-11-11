@@ -23,7 +23,7 @@ try {
   if (!process.argv.includes('--download')) fs.cpSync(path.join(release, 'pokemon-companion-win32-x64'), cache, {recursive: true});
   await client.connect(transport, {timeout: 300000});
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel', 'learning']);
   const status = await client.callTool({name: 'desktop', arguments: {action: 'status'}});
   assert.equal(status.structuredContent.native.ready, true);
   assert.equal(status.structuredContent.server_version, version);

@@ -29,6 +29,7 @@ export function excelBounds(address: string): {rows: number; columns: number; co
 
 const range = z.string().max(30).refine((value) => Boolean(excelBounds(value)), 'Use a rectangular A1 range within Excel bounds, at most 1,000 cells.').transform((value) => value.replaceAll('$', '').toUpperCase());
 const common = {
+	task_id: z.uuid().optional(),
 	window_id: z.string().regex(/^[1-9]\d{0,18}$/),
 	window_ref: z.string().regex(/^[a-f0-9]{32}$/).optional(),
 	timeout_ms: z.number().int().min(1).max(15000).default(5000),

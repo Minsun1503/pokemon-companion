@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-11-11T15:49:02.069Z",
+  "changed_state_rejections": 3,
+  "repeated_matrix_cases": 0,
+  "wrong_target_actions": 0,
+  "allowed_moved_control_actions": 1,
+  "fixture": "Owned WinForms",
+  "cases": [
+    "delayed rename",
+    "incomplete depth",
+    "recreated window"
+  ],
+  "limits": [
+    "Repeated synthetic cases exercise guards; they are not 200 independent real-world application samples.",
+    "Electron identity and subtree coverage is tested by windows-identity-smoke.mjs."
+  ]
+}

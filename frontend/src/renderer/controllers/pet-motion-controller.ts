@@ -7,6 +7,7 @@ interface PetMotionControllerOptions {
   initialPosition: { x: number; y: number }
   canWalk: () => boolean
   getAnimation?: () => string
+  staticIdle?: () => boolean
   getMinY?: () => number
   onPositionApplied: () => void
   onAnimationApplied?: () => void
@@ -72,7 +73,8 @@ export class PetMotionController {
     this.resetRandomMoveVector()
     this.jumpCooldown = randomBetween(80, 220)
     this.applyPosition()
-    this.setFrame(opts.petDefinition.sprites.idle ? 'idle' : 'walk', this.direction, 0)
+    this.action = opts.petDefinition.sprites.idle ? 'idle' : 'walk'
+    this.setFrame(this.action, this.direction, 0)
     this.timer = setInterval(() => this.tick(), 30)
   }
 
@@ -137,7 +139,16 @@ export class PetMotionController {
   }
 
   private tick(): void {
+    if (document.hidden) return
     const activity = this.opts.getAnimation?.() ?? 'idle'
+    if (
+      this.opts.staticIdle?.() &&
+      activity === 'idle' &&
+      this.action === 'idle' &&
+      !this.target &&
+      this.animationTime <= 0
+    )
+      return
     const animation =
       activity !== 'paused' && this.requestedAnimation && this.animationTime > 0 ? this.requestedAnimation : activity
     if (animation === 'paused') {
@@ -309,7 +320,8 @@ export class PetMotionController {
           ? 'run_back'
           : action
     const reducedMotion = Boolean(this.reducedMotion?.matches)
-    const frames = (!reducedMotion ? sprites[key] : undefined) ?? sprites[this.getSpriteKey(dir)] ?? sprites.down
+    const still = reducedMotion || (action === 'idle' && this.opts.staticIdle?.())
+    const frames = (!still ? sprites[key] : undefined) ?? sprites[this.getSpriteKey(dir)] ?? sprites.down
     if (!frames?.length) {
       return
     }

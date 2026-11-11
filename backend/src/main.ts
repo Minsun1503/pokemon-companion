@@ -2,6 +2,7 @@
 import {execSync} from 'node:child_process';
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {createHash, timingSafeEqual} from 'node:crypto';
 
 // Clear macOS quarantine attributes from native binaries before importing them
 // This is needed for MCPB packages downloaded from the internet
@@ -34,6 +35,12 @@ function setupSignalHandlers(cleanup: () => Promise<void>): void {
 
 (async () => {
 	const transport = process.env.MCP_TRANSPORT || 'stdio';
+	const token = process.env.POKEMON_HTTP_TOKEN;
+	if (transport === 'http' && (!token || token.length < 32)) {
+		console.error('HTTP transport requires POKEMON_HTTP_TOKEN with at least 32 characters. Use stdio or configure a Bearer token.');
+		process.exit(1);
+	}
+
 	const runtime = new PokemonRuntime();
 	runtime.windows.warm();
 
@@ -54,6 +61,17 @@ function setupSignalHandlers(cleanup: () => Promise<void>): void {
 		console.error('Computer Use MCP server running on stdio');
 	} else if (transport === 'http') {
 		const app = express();
+		const expected = createHash('sha256').update(token!).digest();
+		app.use('/mcp', (req, res, next) => {
+			const authorization = req.headers.authorization ?? '';
+			const supplied = createHash('sha256').update(authorization.startsWith('Bearer ') ? authorization.slice(7) : '').digest();
+			if (!timingSafeEqual(expected, supplied)) {
+				res.status(401).json({error: 'Bearer authentication required.'});
+				return;
+			}
+
+			next();
+		});
 		app.use(express.json());
 
 		// Stateless: fresh server + transport per request — sharing either misroutes responses on concurrent requests with colliding JSON-RPC IDs (GHSA-345p-7cg4-v4c7).
@@ -72,7 +90,7 @@ function setupSignalHandlers(cleanup: () => Promise<void>): void {
 		const port = parseInt(process.env.PORT || '3000', 10);
 		const httpServer = app.listen(port, '127.0.0.1', () => {
 			console.error(`Computer Use MCP server running on http://localhost:${port}/mcp`);
-			console.error('WARNING: HTTP transport has no authentication. Only use behind a reverse proxy or in a secured setup.');
+			console.error('HTTP MCP requests require Bearer authentication.');
 		});
 
 		setupSignalHandlers(async () => {

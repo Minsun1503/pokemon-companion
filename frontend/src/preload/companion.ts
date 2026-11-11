@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('pokemonAPI', {
   list: () => ipcRenderer.invoke('companion:list'),
   select: (pet: string) => ipcRenderer.invoke('companion:select', pet),
   pause: () => ipcRenderer.invoke('companion:pause'),
+  feedback: (satisfaction: 'satisfied' | 'unsatisfied') => ipcRenderer.invoke('companion:feedback', satisfaction),
   quit: () => ipcRenderer.send('companion:quit'),
   panel: (open: boolean) => ipcRenderer.send('companion:panel', open),
   chat: {

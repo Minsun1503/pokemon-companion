@@ -32,7 +32,7 @@ try {
     APPDATA: path.join(relocated, '.test-appdata'), LOCALAPPDATA: path.join(relocated, '.test-localappdata'), POKEMON_USER_DATA_DIR: path.join(relocated, '.test-userdata')}});
   client = connected.client;
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel', 'learning']);
   assert.equal(tools.tools.find(tool => tool.name === 'windows').inputSchema.properties.action.default, 'batch');
   assert.deepEqual(manifest.tools.map(tool => tool.name).sort(), tools.tools.map(tool => tool.name).sort(), 'Bundle metadata omitted a live tool.');
   for (const file of ['backend/package.json', 'frontend/package.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json', 'plugin.json']) {

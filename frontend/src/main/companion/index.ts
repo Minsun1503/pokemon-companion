@@ -33,12 +33,17 @@ let state: CompanionState = {
   paused: false,
   completedActions: 0,
 }
+let feedbackSequence = 0
+const pendingFeedback = new Map<number, { resolve: (saved: boolean) => void; timer: ReturnType<typeof setTimeout> }>()
+const shapeCache = new Map<number, string>()
+let trayKey = ''
 
 function snapshot(displayId: number): CompanionSnapshot {
   return {
     state: { ...state, paused, activity: paused ? 'paused' : state.activity },
     definition: registry.load(state.pet),
     active: displayId === activeDisplayId,
+    idleAnimation: process.env.POKEMON_IDLE_ANIMATION === 'on',
     target,
   }
 }
@@ -95,6 +100,9 @@ function selectPet(pet: unknown): boolean {
 
 function updateTray(): void {
   if (!tray) return
+  const key = `${state.pet}:${paused}:${state.activity}`
+  if (key === trayKey) return
+  trayKey = key
   tray.setToolTip(`Pokémon • ${state.pet} • ${paused ? 'Paused' : state.activity}`)
   tray.setContextMenu(
     Menu.buildFromTemplate([
@@ -184,6 +192,26 @@ app
     )
     ipcMain.handle('companion:select', (_event, pet: unknown) => selectPet(pet))
     ipcMain.handle('companion:pause', () => togglePause())
+    ipcMain.handle('companion:feedback', (event, satisfaction: unknown) => {
+      const trusted = [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender)
+      if (
+        !trusted ||
+        !state.learningTaskId ||
+        !state.learningFeedbackPending ||
+        !['satisfied', 'unsatisfied'].includes(String(satisfaction))
+      )
+        return false
+      if (pendingFeedback.size || !socket || socket.destroyed) return false
+      return new Promise<boolean>((resolve) => {
+        const id = ++feedbackSequence
+        const timer = setTimeout(() => {
+          pendingFeedback.delete(id)
+          resolve(false)
+        }, 5000)
+        pendingFeedback.set(id, { resolve, timer })
+        send({ kind: 'learning_feedback', id, task_id: state.learningTaskId, satisfaction })
+      })
+    })
     ipcMain.on('companion:quit', () => app.quit())
     ipcMain.on('companion:panel', (event, open: unknown) => {
       if (open === true && !paused && (state.task || state.interactionLocked)) togglePause()
@@ -221,7 +249,12 @@ app
         )
       )
         return
-      win.setShape(regions.map(({ x, y, width, height }) => ({ x, y, width, height })))
+      const shape = regions.map(({ x, y, width, height }) => ({ x, y, width, height }))
+      const shapeKey = JSON.stringify(shape)
+      if (shapeCache.get(win.id) !== shapeKey) {
+        win.setShape(shape)
+        shapeCache.set(win.id, shapeKey)
+      }
       const cursor = screen.getCursorScreenPoint()
       const bounds = win.getBounds()
       // The bubble must stay painted while clicks pass through it to the app below.
@@ -268,6 +301,15 @@ app
           .then(async () => {
             const command = JSON.parse(line)
             try {
+              if (command.kind === 'learning_feedback_result') {
+                const pending = pendingFeedback.get(command.id)
+                if (pending) {
+                  clearTimeout(pending.timer)
+                  pendingFeedback.delete(command.id)
+                  pending.resolve(command.recorded === true)
+                }
+                return
+              }
               if (command.kind === 'state') {
                 if (command.lock_only) {
                   state.interactionLocked = Boolean(command.state?.interactionLocked)
@@ -344,6 +386,11 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  for (const pending of pendingFeedback.values()) {
+    clearTimeout(pending.timer)
+    pending.resolve(false)
+  }
+  pendingFeedback.clear()
   if (clipboardBackup && clipboard.readText() === pastedText) clipboard.write(clipboardBackup)
   globalShortcut.unregisterAll()
   tray?.destroy()

@@ -1,0 +1,55 @@
+{
+  "source": "Windows WMI formatted GPU engine counters",
+  "engines": [
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_0_engtype_3D",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_10_engtype_VideoProcessing",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_1_engtype_VideoDecode",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_2_engtype_Copy",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_3_engtype_VideoProcessing",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_4_engtype_VideoDecode",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_5_engtype_",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_6_engtype_",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_7_engtype_",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_8_engtype_LegacyOverlay",
+      "UtilizationPercentage": 0
+    },
+    {
+      "Name": "pid_9696_luid_0x00000000_0x0000E171_phys_0_eng_9_engtype_GDI Render",
+      "UtilizationPercentage": 0
+    }
+  ],
+  "created_at": "2026-11-11T14:51:03.2736944Z",
+  "mode": "idle_still_live_companion",
+  "limits": [
+    "One instantaneous sample, engine percentages cannot be summed into total GPU utilization.",
+    "Includes only the running server and its owned descendants; no comparative GPU reduction claim."
+  ]
+}

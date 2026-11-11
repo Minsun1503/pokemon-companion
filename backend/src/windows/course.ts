@@ -11,6 +11,7 @@ import {executionErrorDetails, rejectedAction} from '../utils/errors.js';
 const name = z.string().min(1).max(160).refine((value) => !/[\u0000-\u001f]/.test(value), 'Accessible names must be single-line text.');
 const version = z.string().regex(/^[a-f0-9]{64}$/);
 const shared = {
+	task_id: z.uuid().optional(),
 	window_id: z.string().regex(/^[1-9]\d*$/),
 	window_ref: z.string().regex(/^[a-f0-9]{32}$/).optional(),
 	document_name: name.describe('Exact accessible name of the selected course/lesson Document, not a broad browser query.'),

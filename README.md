@@ -156,10 +156,22 @@ The companion does not start a chat worker or contact a model provider. Give com
 | `POKEMON_AGENT_DESKTOP` | `agent-desktop` on PATH | Native bridge override; client packages set it to their included binary |
 | `POKEMON_USER_DATA_DIR` | OS app-data profile | Optional separate companion settings, chat and cache folder |
 | `POKEMON_UI` | enabled | Set `off` only for explicitly headless use |
+| `POKEMON_IDLE_ANIMATION` | off | Set `on` for idle wandering/GIF animation; action animations stay enabled |
+| `POKEMON_LEARNING` | enabled | Set `off` to disable task collection and workflow reuse |
+| `POKEMON_LEARNING_DIR` | local app-data `pokemon-companion/learning` | Separate encrypted learning profile; one live writer per profile |
 | `MCP_TRANSPORT` | `stdio` | Optional `http` transport on localhost `/mcp` |
 | `PORT` | `3000` | Local HTTP MCP port |
+| `POKEMON_HTTP_TOKEN` | required for HTTP | Bearer token, at least 32 characters; stdio needs no token |
 
-Stdio is recommended. HTTP binds only to `127.0.0.1`; it retains the original server’s lack of authentication. The separate companion bridge uses a random loopback port and a per-process authentication token. Do not expose the HTTP endpoint remotely.
+Stdio is recommended. HTTP binds only to `127.0.0.1` and authenticates every `/mcp` request before parsing its body. Supply `Authorization: Bearer <token>` from the client. On Windows, `powershell -NoProfile -File scripts/start-http.ps1` creates or loads a current-user DPAPI-protected token in local app-data and starts the server without printing the token. The companion bridge separately uses a random loopback port and a per-process token.
+
+## Local workflow learning
+
+The `learning` tool records task queries, named parameters, API names, durations, tool delivery outcomes, observed final outcomes, and explicit user ratings. A tiny CPU-only online model ranks reusable workflows; there is no neural runtime, GPU allocation or background training. Clients must use `learning begin`, propagate `task_id`, and finish with an observed outcome. Satisfaction stays unknown until the user rates the task. After finishing, click the Pokémon and choose **Yes** or **No**; the UI waits for encrypted persistence before confirming feedback.
+
+Known Windows workflows can compile into parameterized batches. Every replay previews current values and discovers fresh windows and controls, using the existing ambiguity, pause, cancellation and stale-reference guards. Mixed-tool tasks become process guides that the client executes with current judgment. Similarity alone never authorizes an action. Screenshots remain an on-demand fallback for visual content that apps do not expose through APIs; screenshot pixels and complete app contents are excluded from learning records.
+
+Records use AES-256-GCM and Windows current-user DPAPI key protection. Collection is local, bounded and defaults to 30-day retention. `learning configure` changes collection and retention, `forget` removes records/model state, and `export` provides versioned JSON chunks within `max_chars`. See [capabilities, privacy and measured limits](docs/local-learning.md) and [verification scope](docs/local-learning-plan.md).
 
 ## Checks
 
@@ -181,6 +193,9 @@ npm run test:package
 The smoke test uses a real MCP SDK client, opens the real companion, selects all seven pets, captures a desktop screenshot, checks cursor output, and exercises task completion and visibility. It sends no clicks or keyboard input. `test:input` opens a disposable test window and verifies real clicks, Vietnamese text input, and keyboard shortcuts. `test:windows` verifies six API steps in one MCP call, field entry and button invocation, atomic compatibility, bounded text output, stale-id rejection, and zero screenshot images. Batch tests cover ambiguity, unsupported actions, partial failures, value checks, pauses/cancellation between steps, and isolation from other clients. Runtime tests cover serialized actions, user pauses, queued cancellation, and screenshot restoration on errors. Chat tests use an isolated local mock provider to verify requests, separate saved conversations, and failure handling.
 
 Run `npm run benchmark:windows` to compare six atomic Windows API calls with one batch containing the same six steps. It verifies each workflow, separates fresh-worker startup from warm runs, alternates run order, and writes JSON samples plus a Markdown report. See [benchmark method and recorded results](benchmarks/README.md). Time and character/byte counts are measured locally; model inference and token costs are not measured.
+
+Native phase timings and call counts are available with `POKEMON_TIMING=1`. See [native profiling and controlled cache benchmarks](docs/native-profiling.md) for same-binary ABBA comparisons, unrecorded/recorded/batch/replay baselines, and changed-control safety checks.
+The [Claude-guided experiment report](benchmarks/results/windows-phases-2026-11-11.md) records the fixture measurements and their limits.
 
 ## Structure
 

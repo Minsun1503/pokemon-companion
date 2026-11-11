@@ -25,7 +25,8 @@
     { "name": "course", "description": "Course navigation, verified search, versioned lesson reading, and completion-message checks through Windows APIs." },
     { "name": "excel", "description": "Desktop Excel workbook inspection, versioned range reading, verified writes/formulas, finding cells, selection and saving through native Windows APIs." },
     { "name": "computer", "description": "Native mouse and keyboard actions, cursor position, and screenshot fallback." },
-    { "name": "pokemon", "description": "Switch Pokémon, announce tasks, show progress, and celebrate completion." }
+    { "name": "pokemon", "description": "Switch Pokémon, announce tasks, show progress, and celebrate completion." },
+    { "name": "learning", "description": "Encrypted local task records, explicit user feedback and CPU-only workflow learning with fresh guarded replay." }
   ],
   "prompts_generated": true,
   "compatibility": { "platforms": ["win32"] }
