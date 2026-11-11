@@ -2,7 +2,7 @@
 
 An AI controls your computer through MCP while an animated Pokémon appears to do the work on your desktop. Claude, Codex, or another MCP client is the brain. The local computer-use backend performs the actions, and the Electron companion shows movement, typing, thinking, speech, and celebrations.
 
-All seven characters from the pet repository are included: **Pikachu, Riolu, Lucario, Clodsire, Bulbasaur, Charmander, and Squirtle**. Pikachu is the default. Change the character from its team panel, the tray menu, or the `pokemon` tool.
+All seven Pokémon from the pet repository are included: **Pikachu, Riolu, Lucario, Clodsire, Bulbasaur, Charmander, and Squirtle**, alongside **Hello Kitty and Kuromi** in matching pixel-art style. Pikachu is the default. Change among all nine companions from the team panel, the tray menu, or the `pokemon` tool (`hello-kitty` and `kuromi`).
 
 ## Easy installation
 
@@ -103,7 +103,7 @@ Use Windows `focus`, `invoke`, `set_value` and batch first. When no control is e
 | Action | Inputs | Behavior |
 | --- | --- | --- |
 | `status` | none | Current character, activity, task, action count, visibility, and user pause state |
-| `select` | `pet` | Switch among all seven characters without restarting |
+| `select` | `pet` | Switch among all nine characters without restarting |
 | `task` | `message` | Announce a task and begin working animation |
 | `think` | optional `message` | Thinking animation and bubble |
 | `say` | `message` | Short progress bubble |
@@ -134,7 +134,7 @@ The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visua
 ## Desktop controls
 
 - Left-click the Pokémon to open **Switch** and **Exit**.
-- **Switch** opens all seven Pokémon; selecting one changes the companion immediately.
+- **Switch** opens all nine companions; selecting one changes the companion immediately.
 - **Talk** is deferred and disabled. Its implementation and existing saved conversations are retained for later.
 - **Exit** closes the companion and stops further computer actions.
 - Click the Pokémon again, use the Close button, or press Escape to close the menu. Escape returns from Switch to the action menu first.

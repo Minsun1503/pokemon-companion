@@ -47,6 +47,11 @@ async function main() {
       }
     };
     scan(extracted);
+    for (const pet of ['hello-kitty', 'kuromi']) {
+      for (const file of ['sprites.json', 'animations/run_side.gif', 'animations/typing.gif']) {
+        assert.deepEqual(fs.readFileSync(path.join(appRoot, 'frontend/pets', pet, file)), fs.readFileSync(path.join(root, 'frontend/pets', pet, file)), `${pet}/${file} was not rebuilt`);
+      }
+    }
     if (platform === 'darwin') execFileSync('codesign', ['--verify', '--deep', '--strict', app]);
     const profile = path.join(scratch, 'test-profile');
     const launched = spawnSync(executable, ['--smoke-test'], {
@@ -71,6 +76,11 @@ async function main() {
       assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'excel'] : [])]);
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError, 'The packaged MCP server failed its status check');
+      for (const pet of ['hello-kitty', 'kuromi']) {
+        const selected = await client.callTool({name: 'pokemon', arguments: {action: 'select', pet}});
+        assert(!selected.isError);
+        assert.equal(selected.structuredContent.pet, pet);
+      }
     } finally {
       await client.close();
     }

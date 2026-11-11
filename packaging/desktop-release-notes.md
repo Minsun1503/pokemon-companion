@@ -1,4 +1,4 @@
-Install Pokémon Companion through your AI desktop client. Node, Electron, native desktop helpers, and all seven Pokémon are bundled. No terminal commands, extra components, GitHub login, model API key, or manual MCP configuration are required for Claude Desktop.
+Install Pokémon Companion through your AI desktop client. Node, Electron, native desktop helpers, and all nine companions (seven Pokémon, Hello Kitty and Kuromi) are bundled. No terminal commands, extra components, GitHub login, model API key, or manual MCP configuration are required for Claude Desktop.
 
 | Computer | Claude Desktop download | Desktop plugin payload |
 | --- | --- | --- |

@@ -484,12 +484,24 @@ footer span {
   display: block;
   animation: scan-controls 1.1s ease-in-out infinite alternate;
 }
-body:not([data-pet="pikachu"]) #pet-container[data-animation="typing"] #pet-image,
-body:not([data-pet="pikachu"]) #pet-container[data-animation="clicking"] #pet-image {
+#pet-container:not([data-sprite-actions="true"])[data-animation="typing"] #pet-image,
+#pet-container:not([data-sprite-actions="true"])[data-animation="clicking"] #pet-image {
   animation: work-nod 0.45s ease-in-out infinite;
 }
-body:not([data-pet="pikachu"]) #pet-container[data-animation="thinking"] #pet-image {
+#pet-container:not([data-sprite-actions="true"])[data-animation="thinking"] #pet-image {
   animation: work-nod 1.1s ease-in-out infinite;
+}
+#pet-container[data-sprite-props="true"] :is(#work-prop, #mouse-prop, #scan-prop) {
+  display: none;
+}
+#pet-container[data-sprite-props="true"] .pet-aura {
+  animation: none;
+  width: 46px;
+  height: 6px;
+  bottom: 20px;
+  background: #111;
+  filter: blur(1px);
+  opacity: 0.22;
 }
 #pet-container:is([data-animation="typing"], [data-animation="clicking"], [data-animation="thinking"]) #state-badge {
   border-color: var(--accent, #f3c83c);
@@ -515,7 +527,7 @@ body[data-activity="thinking"] #state-badge::after {
 body[data-activity="thinking"] #activity-icon {
   animation: thinking-spin 3s linear infinite;
 }
-body[data-activity="success"] #pet-container {
+body[data-activity="success"] #pet-container:not([data-sprite-actions="true"]) {
   animation: celebration 0.45s ease-in-out 5;
 }
 .spark {
@@ -542,7 +554,7 @@ body[data-activity="success"] .spark {
   display: block;
   animation: confetti 0.9s ease-out infinite;
 }
-body[data-activity="error"] #pet-container {
+body[data-activity="error"] #pet-container:not([data-sprite-actions="true"]) {
   animation: wobble 0.35s 3;
 }
 body[data-activity="error"] #state-badge {

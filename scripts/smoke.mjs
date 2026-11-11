@@ -3,10 +3,10 @@ import {connect} from './client.mjs';
 const {client, call} = await connect();
 try {
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['computer', 'pokemon', ...(process.platform === 'win32' ? ['windows', 'course', 'excel'] : [])]);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', ...(process.platform === 'win32' ? ['windows', 'course', 'excel'] : [])]);
   const prompts = await client.listPrompts();
   assert(prompts.prompts.some((prompt) => prompt.name === 'pokemon-work'));
-  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
+  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi']) {
     const result = await call('pokemon', {action: 'select', pet});
     assert.equal(result.structuredContent.pet, pet);
   }
@@ -25,5 +25,5 @@ try {
   await call('pokemon', {action: 'hide'});
   const shown = await call('pokemon', {action: 'show'});
   assert.equal(shown.structuredContent.visible, true);
-  console.log(`PASS: stdio handshake, ${tools.tools.length} tools, prompt, all 7 pets, real ${dimensions.image_width}×${dimensions.image_height} screenshot, cursor, lifecycle.`);
+  console.log(`PASS: stdio handshake, ${tools.tools.length} tools, prompt, all 9 pets, real ${dimensions.image_width}×${dimensions.image_height} screenshot, cursor, lifecycle.`);
 } finally { await client.close(); }

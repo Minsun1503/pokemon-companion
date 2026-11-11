@@ -1,9 +1,15 @@
 import {
 	afterEach, expect, it, vi,
 } from 'vitest';
-import {DesktopCompanion} from './companion.js';
+import {DesktopCompanion, pokemonIds} from './companion.js';
 
 afterEach(() => vi.unstubAllEnvs());
+
+it.each(['hello-kitty', 'kuromi'])('accepts %s as the configured companion', (pet) => {
+	vi.stubEnv('POKEMON_PET', pet);
+	expect(pokemonIds).toContain(pet);
+	expect(new DesktopCompanion().state.pet).toBe(pet);
+});
 
 it('coalesces rapid cosmetic updates and keeps only one bridge request in flight', async () => {
 	vi.stubEnv('POKEMON_UI', 'on');

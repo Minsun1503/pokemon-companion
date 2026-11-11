@@ -217,6 +217,8 @@ function apply(snapshot: CompanionSnapshot): void {
   if (!snapshot.active || !state.visible) closePanel()
   const activity = state.paused ? 'paused' : state.activity
   document.body.dataset.pet = state.pet
+  petContainer.dataset.spriteActions = String(Boolean(definition.sprites.typing?.length))
+  petContainer.dataset.spriteProps = String(Boolean(definition.spritesIncludeProps))
   const gestureChanged =
     state.action?.id !== previous?.state.action?.id ||
     state.action?.active !== previous?.state.action?.active ||

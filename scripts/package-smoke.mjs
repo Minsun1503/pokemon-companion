@@ -47,7 +47,7 @@ try {
   assert.equal(status.structuredContent.contract_version, 1);
   assert.equal(status.structuredContent.server_version, manifest.version);
   assert.deepEqual(status.structuredContent.native.actions, tools.tools.find(tool => tool.name === 'windows').inputSchema.properties.action.enum.filter(action => action !== 'batch'));
-  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
+  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi']) {
     const selected = await connected.call('pokemon', {action: 'select', pet});
     assert.equal(selected.structuredContent.pet, pet);
   }
@@ -58,7 +58,7 @@ try {
   const cursor = await connected.call('computer', {action: 'get_cursor_position'});
   assert(!cursor.isError);
   await connected.call('pokemon', {action: 'done', message: 'Standalone package verified!'});
-  console.log('PASS: actual MCPB unpacked to a different path, bundled Node/Electron, native worker, all 7 Pokémon, Windows API, cursor, no screenshots, no source secrets.');
+  console.log('PASS: actual MCPB unpacked to a different path, bundled Node/Electron, native worker, all 9 companions, Windows API, cursor, no screenshots, no source secrets.');
 } finally {
   await client?.close();
   // Remove only the exact verification directory created above, within release.

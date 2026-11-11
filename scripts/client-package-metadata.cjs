@@ -18,7 +18,7 @@ function addClientMetadata(root, appRoot, platform, version, serverEntry = 'back
       ...(platform === 'win32' ? {} : {POKEMON_AGENT_DESKTOP: `${variable}/${relative('runtime/agent-desktop/agent-desktop')}`}),
     },
   });
-  const identity = {name: 'pokemon-companion', version, description: 'Seven animated Pokémon for local AI computer control.', author: {name: 'Minsun1503', url: 'https://github.com/Minsun1503'}};
+  const identity = {name: 'pokemon-companion', version, description: 'Nine animated companions for local AI computer control.', author: {name: 'Minsun1503', url: 'https://github.com/Minsun1503'}};
   const interface = {displayName: 'Pokémon Companion', shortDescription: 'Use Pokémon to control your computer', developerName: 'Minsun1503', category: 'Productivity', capabilities: ['Read', 'Write'], logo: './icon.png'};
   write(root, 'manifest.json', {
     manifest_version: '0.3', ...identity, display_name: 'Pokémon Companion', icon: 'icon.png', license: 'MIT',

@@ -40,6 +40,10 @@ bridge.listen(0, '127.0.0.1', async () => {
   await app.whenReady();
   await connected;
   const pet = BrowserWindow.getAllWindows().find(win => win.displayId === screen.getPrimaryDisplay().id);
+  // Animation checks must not inherit the runner's reduced-motion preference.
+  pet.webContents.debugger.attach('1.3');
+  await pet.webContents.debugger.sendCommand('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'no-preference'}]});
+  if (await pet.webContents.executeJavaScript('matchMedia("(prefers-reduced-motion: reduce)").matches')) throw new Error('Animation fixture requires motion enabled.');
   pet.setTitle('Pokemon Focus Overlay');
   input = new BrowserWindow({...screen.getPrimaryDisplay().workArea, frame: false, title: 'Pokemon Focus Input', webPreferences: {contextIsolation: true, nodeIntegration: false}});
   await input.loadURL('data:text/html,' + encodeURIComponent('<!doctype html><title>Pokemon Focus Input</title><button id="test" aria-label="Background button" style="margin:50px;width:180px;height:60px">Background button</button><script>window.keys=0;window.clicks=0;document.addEventListener("keydown",e=>{if(e.key==="F8"){e.preventDefault();keys++}});document.getElementById("test").onclick=()=>clicks++;</script>'));
@@ -53,7 +57,7 @@ bridge.listen(0, '127.0.0.1', async () => {
       if (url.pathname === '/action') {
         const selected = url.searchParams.get('pet');
         if (selected) {
-          if (!['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle'].includes(selected))
+          if (!['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi'].includes(selected))
             throw new Error('Unknown fixture Pokémon.');
           state.pet = selected;
         }
@@ -102,9 +106,10 @@ bridge.listen(0, '127.0.0.1', async () => {
       const counts = await input.webContents.executeJavaScript('(() => {const r=document.getElementById("test").getBoundingClientRect();return {keys,clicks,point:{x:r.x+r.width/2,y:r.y+r.height/2}}})()');
       const petState = await pet.webContents.executeJavaScript('({pet:document.body.dataset.pet,x:document.getElementById("pet-container").getBoundingClientRect().x,y:document.getElementById("pet-container").getBoundingClientRect().y,panel:!document.getElementById("team-panel").hidden,text:document.getElementById("chat-input").value,animation:document.getElementById("pet-container").dataset.animation,source:document.getElementById("pet-image").src,imageReady:document.getElementById("pet-image").complete&&document.getElementById("pet-image").naturalWidth>0,keyboard:getComputedStyle(document.getElementById("work-prop")).display!=="none",mouse:getComputedStyle(document.getElementById("mouse-prop")).display!=="none",scanning:getComputedStyle(document.getElementById("scan-prop")).display!=="none",badge:document.getElementById("state-badge").textContent})');
       const bounds = input.getContentBounds();
+      const spriteStyle = await pet.webContents.executeJavaScript('({imageAnimation:getComputedStyle(document.getElementById("pet-image")).animationName,containerAnimation:getComputedStyle(document.getElementById("pet-container")).animationName})');
       const point = screen.dipToScreenPoint({x: Math.round(bounds.x + counts.point.x), y: Math.round(bounds.y + counts.point.y)});
       res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({...counts, ...petState, focused: input.isFocused(), petFocused: pet.isFocused(), petFocusable: pet.isFocusable(), point}));
+      res.end(JSON.stringify({...counts, ...petState, ...spriteStyle, focused: input.isFocused(), petFocused: pet.isFocused(), petFocusable: pet.isFocusable(), point}));
     } catch (error) {res.statusCode = 500; res.end(JSON.stringify({error: error.message}));}
   });
   server.listen(0, '127.0.0.1', () => console.log(JSON.stringify({port: server.address().port})));

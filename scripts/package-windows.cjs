@@ -72,7 +72,7 @@ async function main() {
   const server = (variable) => ({command: `${variable}/runtime/node.exe`, args: [`${variable}/backend/dist/main.js`], env: {MCP_TRANSPORT: 'stdio', POKEMON_FRONTEND_DIR: `${variable}/frontend`}});
   json(path.join(stage, '.claude-plugin/plugin.json'), {...basePlugin, mcpServers: {'pokemon-companion': server('${CLAUDE_PLUGIN_ROOT}')}});
   json(path.join(stage, 'plugin.json'), {$schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...basePlugin, license: 'MIT'});
-  json(path.join(stage, '.codex-plugin/plugin.json'), {...basePlugin, interface: {displayName: 'Pokémon Companion', shortDescription: 'Seven Pokémon for Windows computer control', developerName: manifest.author.name, category: 'Productivity', capabilities: ['Read', 'Write'], logo: './icon.png'}});
+  json(path.join(stage, '.codex-plugin/plugin.json'), {...basePlugin, interface: {displayName: 'Pokémon Companion', shortDescription: 'Nine companions for Windows computer control', developerName: manifest.author.name, category: 'Productivity', capabilities: ['Read', 'Write'], logo: './icon.png'}});
   json(path.join(stage, 'mcp.json'), {$schema: 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json', mcpServers: {'pokemon-companion': {...server('${PLUGIN_ROOT}'), type: 'stdio', command: './runtime/node.exe'}}});
   const claudeMarketplace = require('../.claude-plugin/marketplace.json');
   json(path.join(stage, '.claude-plugin/marketplace.json'), {...claudeMarketplace, plugins: claudeMarketplace.plugins.map((plugin) => ({...plugin, source: './'}))});

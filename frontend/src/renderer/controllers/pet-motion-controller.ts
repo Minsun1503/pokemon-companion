@@ -301,7 +301,13 @@ export class PetMotionController {
 
   private setFrame(action: string, dir: string, idx: number): void {
     const sprites = this.opts.petDefinition.sprites
-    const key = action === 'run' && dir.startsWith('up') && sprites.run_back ? 'run_back' : action
+    const directionalRun = `run_${this.getSpriteKey(dir)}`
+    const key =
+      action === 'run' && sprites[directionalRun]
+        ? directionalRun
+        : action === 'run' && dir.startsWith('up') && sprites.run_back
+          ? 'run_back'
+          : action
     const reducedMotion = Boolean(this.reducedMotion?.matches)
     const frames = (!reducedMotion ? sprites[key] : undefined) ?? sprites[this.getSpriteKey(dir)] ?? sprites.down
     if (!frames?.length) {

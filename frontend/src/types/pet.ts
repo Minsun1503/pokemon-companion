@@ -33,6 +33,7 @@ export interface PetDefinition {
   promptFile: string
   spritesFile: string
   spritesManifestFile?: string
+  spritesIncludeProps?: boolean
   cryUrl: string
   appearance: PetAppearance
   movement: PetMovement

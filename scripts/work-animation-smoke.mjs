@@ -44,23 +44,29 @@ try {
     child.once('exit', () => {clearTimeout(timer); reject(new Error('Animation fixture exited.'));});
   });
   const images = [];
-  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle']) {
+  for (const pet of ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi']) {
+    const spriteProps = ['hello-kitty', 'kuromi'].includes(pet);
     for (const [name, animation, badge, prop] of [['get_ui', 'thinking', 'Checking', 'scanning'], ['set_value', 'typing', 'Typing', 'keyboard'], ['invoke', 'clicking', 'Clicking', 'mouse']]) {
       await fixture(`/action?name=${name}&pet=${pet}&finished=1`);
       const state = await waitAnimation(animation, pet);
-      assert.equal(state[prop], true, pet + ' must show its work prop');
+      assert.equal(state[prop], !spriteProps, pet + ' must use its drawn props without a duplicate overlay');
+      if (spriteProps) {
+        assert.ok(state.source.endsWith(`/${animation}.gif`), 'Work must use drawn sprite poses');
+        assert.equal(state.imageAnimation, 'none', 'Sprite poses must not get an extra floating transform');
+        assert.equal(state.containerAnimation, 'none');
+      }
       assert.equal(state.badge, badge, pet + ' must name its work even after a coalesced fast call');
-      // DOM/IPC readiness precedes compositor painting; wait for the actual visual frame.
-      await delay(180);
-      const frame = await fixture('/frame?freezeProps=0');
-      images.push(await readFile(frame.path));
       await delay(350);
       const held = await fixture('/state');
       assert.equal(held.animation, animation, pet + ' must hold fast feedback');
       assert.equal(held.badge, badge);
-      assert.equal(held[prop], true);
+      assert.equal(held[prop], !spriteProps);
       assert.equal(held.x, state.x, 'Work feedback must not drift across the screen');
       assert.equal(held.y, state.y);
+      // Capture after the timing assertion so slow screenshot I/O cannot expire the feedback hold.
+      await delay(180);
+      const frame = await fixture('/frame?freezeProps=0');
+      images.push(await readFile(frame.path));
     }
   }
   for (let read = 0; read < 60 && (await fixture('/state')).badge !== 'Ready'; read++) await delay(40);
@@ -77,10 +83,10 @@ try {
   assert.equal(error.scanning || error.keyboard || error.mouse, false);
   const output = resolve(root, 'release/qa/work-animation-preview.png');
   await mkdir(dirname(output), {recursive:true});
-  await sharp({create:{width:420,height:1120,channels:4,background:'#182024'}})
+  await sharp({create:{width:420,height:1440,channels:4,background:'#182024'}})
     .composite(await Promise.all(images.map(async (input, index) => ({input:await sharp(input).resize(120,142).png().toBuffer(),left:10 + index % 3 * 140,top:Math.floor(index / 3) * 160}))))
     .png().toFile(output);
-  console.log('PASS: all seven rendered pets show distinct checking, typing and clicking props/labels; short calls stay visible, long calls stay active, errors clear work, and completion returns to Ready. Preview: ' + output);
+  console.log('PASS: all nine rendered pets show distinct checking, typing and clicking props/labels; short calls stay visible, long calls stay active, errors clear work, and completion returns to Ready. Preview: ' + output);
 } finally {
   if (url) await fetch(url + '/quit').catch(() => {});
   child.kill();

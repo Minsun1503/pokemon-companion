@@ -8,7 +8,7 @@ import {measure, timedCall} from '../utils/timing.js';
 export function registerPokemon(server: McpServer, runtime: PokemonRuntime): void {
 	server.registerTool('pokemon', {
 		title: 'Pokémon Companion',
-		description: 'Present an animated Pokémon on the user’s desktop while you work. Start a task with action=task and a short message; select any of the seven pets; say short progress updates; finish with done or error. Computer actions automatically animate the selected Pokémon. status reports the user-controlled pause state. You cannot resume a user pause: ask the user to use the tray or Ctrl+Shift+P. Never claim a task is done until you have verified its result.',
+		description: 'Present an animated companion on the user’s desktop while you work. Start a task with action=task and a short message; select any of the nine pets, including Hello Kitty and Kuromi; say short progress updates; finish with done or error. Computer actions automatically animate the selected companion. status reports the user-controlled pause state. You cannot resume a user pause: ask the user to use the tray or Ctrl+Shift+P. Never claim a task is done until you have verified its result.',
 		inputSchema: z.object({
 			action: z.enum(['status', 'select', 'say', 'task', 'think', 'done', 'error', 'show', 'hide']),
 			pet: z.enum(pokemonIds).optional(),
