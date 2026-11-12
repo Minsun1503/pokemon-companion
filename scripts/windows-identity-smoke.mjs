@@ -118,6 +118,9 @@ try {
       assert(output, '--benchmark requires a report path.');
       await benchmarkIdentity({root, scratch, fixture, windowId: window_id, output: resolve(root, output), waitFor});
     }
+    // Chromium may expose the initial controls before the appended dense region.
+    const whole = await waitFor(() => worker.request({action: 'get_ui', window_id, window_ref, max_depth: 30, max_elements: 100, max_chars: 16000}),
+      ui => ui.complete && ui.nodes.filter(node => node.name.startsWith('Other field ')).length === 30, 'Dense fixture was not accessibility-ready.');
     const inspect = (query, depth = 30) => worker.request({action: 'get_ui', window_id, query, max_depth: depth, max_chars: 6000});
     let button = await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].targetable, 'Original control was not capture-proven.');
     const editor = await inspect('Editable field');
@@ -130,7 +133,6 @@ try {
     const subtree = await worker.request({action: 'get_ui', window_id, window_ref, root_snapshot: skeleton.snapshot, root_element_id: skeleton.nodes[0].id, max_depth: 30});
     assert.equal(subtree.nodes.length, 1, 'Subtree included controls from outside the root.');
     assert.equal(subtree.nodes[0].name, 'Nested field');
-    const whole = await worker.request({action: 'get_ui', window_id, window_ref, max_depth: 30, max_elements: 100, max_chars: 16000});
     assert.equal(whole.complete, true, 'Dense fixture observation was incomplete.');
     assert(whole.nodes.length >= 30, 'Dense fixture did not expose its unrelated controls.');
     const wholeChars = JSON.stringify(whole).length, subtreeChars = JSON.stringify(subtree).length;
