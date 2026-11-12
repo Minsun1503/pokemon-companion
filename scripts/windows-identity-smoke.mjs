@@ -97,9 +97,17 @@ async function rejectsBeforeInput(request, code) {
   });
 }
 
+async function apply(fixture, step, request) {
+  try {return await worker.request(request);}
+  catch (error) {
+    throw new Error(fixture.kind + ' ' + step + ' failed; fixture state: ' + JSON.stringify(await fixture.state()), {cause: error});
+  }
+}
+
 try {
   for (const create of [nativeFixture, electronFixture]) {
     const fixture = await create();
+    console.log('Checking ' + fixture.kind + ' identity fixture.');
     const windows = await waitFor(() => worker.request({action: 'get_windows', query: fixture.title}), result => result.windows.length === 1, 'Owned window was not discovered.');
     const window_id = windows.windows[0].id;
     const window_ref = windows.windows[0].window_ref;
@@ -110,6 +118,9 @@ try {
       assert(output, '--benchmark requires a report path.');
       await benchmarkIdentity({root, scratch, fixture, windowId: window_id, output: resolve(root, output), waitFor});
     }
+    // Chromium may expose the initial controls before the appended dense region.
+    const whole = await waitFor(() => worker.request({action: 'get_ui', window_id, window_ref, max_depth: 30, max_elements: 100, max_chars: 16000}),
+      ui => ui.complete && ui.nodes.filter(node => node.name.startsWith('Other field ')).length === 30, 'Dense fixture was not accessibility-ready.');
     const inspect = (query, depth = 30) => worker.request({action: 'get_ui', window_id, query, max_depth: depth, max_chars: 6000});
     let button = await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].targetable, 'Original control was not capture-proven.');
     const editor = await inspect('Editable field');
@@ -122,21 +133,28 @@ try {
     const subtree = await worker.request({action: 'get_ui', window_id, window_ref, root_snapshot: skeleton.snapshot, root_element_id: skeleton.nodes[0].id, max_depth: 30});
     assert.equal(subtree.nodes.length, 1, 'Subtree included controls from outside the root.');
     assert.equal(subtree.nodes[0].name, 'Nested field');
-    const whole = await worker.request({action: 'get_ui', window_id, window_ref, max_depth: 30, max_elements: 100, max_chars: 16000});
     assert.equal(whole.complete, true, 'Dense fixture observation was incomplete.');
     assert(whole.nodes.length >= 30, 'Dense fixture did not expose its unrelated controls.');
     const wholeChars = JSON.stringify(whole).length, subtreeChars = JSON.stringify(subtree).length;
     assert(subtreeChars < wholeChars * 0.4, 'Rooted discovery did not substantially reduce response context.');
     discoverySizes.push({fixture: fixture.kind, whole_controls: whole.nodes.length, subtree_controls: subtree.nodes.length,
       whole_characters: wholeChars, subtree_characters: subtreeChars, reduction_percent: 100 * (1 - subtreeChars / wholeChars)});
-    await worker.request({action: 'set_value', ...reference(subtree), text: 'verified subtree edit'});
+    await apply(fixture, 'subtree edit', {action: 'set_value', ...reference(subtree), text: 'verified subtree edit'});
     await waitFor(fixture.state, state => state.nested === 'verified subtree edit', 'Subtree edit did not reach the owned field.');
     await fixture.command('value');
-    await worker.request({action: 'set_value', ...reference(editor), text: 'updated through original reference'});
+    await apply(fixture, 'original editor reference', {action: 'set_value', ...reference(editor), text: 'updated through original reference'});
     await waitFor(fixture.state, state => state.text === 'updated through original reference', 'Editing through the original ref did not work.');
     await fixture.command('title');
-    await worker.request({action: 'invoke', ...reference(button)});
+    await apply(fixture, 'button after title change', {action: 'invoke', ...reference(button)});
     await waitFor(fixture.state, state => state.clicks === 1, 'Title drift incorrectly prevented invocation.');
+    if (fixture.kind === 'WinForms') {
+      await fixture.command('disable');
+      await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].enabled === false, 'Disabled button was not exposed.');
+      await rejectsBeforeInput({action: 'invoke', ...reference(button)}, 'ACTION_NOT_SUPPORTED');
+      assert.equal(await clickCount(fixture), 1, 'Disabled control dispatched an input.');
+      await fixture.command('enable');
+      await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].actions?.includes('invoke'), 'Enabled button was not exposed.');
+    }
     const fieldChanges = fixture.kind === 'WinForms' ? ['automation-id', 'description', 'role'] : ['automation-id', 'role'];
     for (const changed of fieldChanges) {
       const prior = await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].automation_id === 'action' && ui.nodes[0].role === 'Button', 'Reset identity was not exposed by accessibility.');
@@ -157,7 +175,7 @@ try {
     const replacement = await waitFor(() => inspect('Replacement item'), ui => ui.nodes.length === 1 && ui.nodes[0].targetable, 'Replacement control not observed.');
     await rejectsBeforeInput({action: 'invoke', ...reference(button)}, 'STALE_REF');
     assert.equal(await clickCount(fixture), 1, 'Stale control invocation changed the fixture.');
-    await worker.request({action: 'invoke', ...reference(replacement)});
+    await apply(fixture, 'fresh replacement button', {action: 'invoke', ...reference(replacement)});
     await waitFor(fixture.state, state => state.clicks === 2, 'Fresh replacement reference did not work.');
     await fixture.command('hide');
     const runtime = {windows: worker, companion: {state: {paused: false}}};

@@ -8,12 +8,15 @@ class IdentityForm : Form {
     protected override bool ShowWithoutActivation { get { return true; } }
     public void ReplaceHandle() { RecreateHandle(); }
 }
+class IdentityButton : Button {
+    public void ReplaceHandle() { RecreateHandle(); }
+}
 class IdentityFixture {
     [STAThread] static void Main(string[] args) {
         string folder = args[0];
         var form = new IdentityForm { Text = args[1], Width = 620, Height = 520, ShowInTaskbar = false };
         var field = new TextBox { Name = "editor", AccessibleName = "Editable field", Text = "initial", Location = new Point(20, 20), Width = 240 };
-        var button = new Button { Name = "action", AccessibleName = "Original item", AccessibleDescription = "Original description", Text = "Item", Location = new Point(20, 60), Width = 160 };
+        var button = new IdentityButton { Name = "action", AccessibleName = "Original item", AccessibleDescription = "Original description", Text = "Item", Location = new Point(20, 60), Width = 160 };
         CheckBox replacementRole = null;
         Button twin = null;
         var region = new Panel { AccessibleName = "Nested region", Location = new Point(20, 110), Width = 280, Height = 50 };
@@ -67,7 +70,11 @@ class IdentityFixture {
                     form.Controls.Add(replacementRole);
                 }
                 if (command == "identity-reset") {
-                    if (replacementRole != null) { form.Controls.Remove(replacementRole); replacementRole.Dispose(); replacementRole = null; form.Controls.Add(button); }
+                    if (replacementRole != null) {
+                        form.Controls.Remove(replacementRole); replacementRole.Dispose(); replacementRole = null; form.Controls.Add(button);
+                        // Reparenting can leave UIA holding the parked control's visibility state.
+                        button.ReplaceHandle();
+                    }
                     button.Name = "action";
                     button.AccessibleDescription = "Original description";
                 }
@@ -75,7 +82,8 @@ class IdentityFixture {
                 sequence++;
             }
             var state = new { clicks = clicks, text = field.Text, nested = nested.Text, name = button.AccessibleName, sequence = sequence,
-                window_id = form.Handle.ToInt64().ToString() };
+                window_id = form.Handle.ToInt64().ToString(), bounds = form.Bounds.ToString(), working_area = Screen.FromControl(form).WorkingArea.ToString(),
+                window_state = form.WindowState.ToString(), button_visible = button.Visible, nested_visible = nested.Visible };
             string path = Path.Combine(folder, "state.json");
             File.WriteAllText(path, new JavaScriptSerializer().Serialize(state));
         };
