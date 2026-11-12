@@ -64,6 +64,12 @@ class Fixture {
     assert.equal(result.windows.length, 100);
     assert.equal(result.complete, count === 100);
     assert.equal(result.truncated, count > 100);
+    const offscreen = result.windows.at(-1);
+    assert.equal(offscreen.minimized, false);
+    const ui = await worker.request({action: 'get_ui', window_id: offscreen.id, window_ref: offscreen.window_ref});
+    assert.equal(ui.complete, false, 'Offscreen root was reported complete: ' + JSON.stringify(ui));
+    assert.equal(ui.truncated, true);
+    assert.equal(ui.nodes.length, 0);
     await stopFixture();
   }
 
@@ -78,7 +84,7 @@ class Fixture {
     assert.equal(error.details.disposition.delivery, 'not_delivered');
     return true;
   });
-  console.log('PASS: real native worker reports exact/overflow window coverage and preserves pre-action rejection evidence.');
+  console.log('PASS: real native worker reports exact/overflow window coverage, rejects offscreen-root coverage, and preserves pre-action rejection evidence.');
 } finally {
   worker.close();
   await stopFixture();

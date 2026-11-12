@@ -19,12 +19,14 @@ const discoverySizes = [];
 
 async function waitFor(read, accept, message) {
   const deadline = performance.now() + 10000;
+  let last;
   while (performance.now() < deadline) {
     const value = await read();
+    last = value;
     if (accept(value)) return value;
     await delay(50);
   }
-  throw new Error(message);
+  throw new Error(message + ' Last observation: ' + JSON.stringify(last));
 }
 
 async function stop(child) {
@@ -197,9 +199,33 @@ try {
       await rejectsBeforeInput({action: 'invoke', ...reference(partial)}, 'INCOMPLETE_SNAPSHOT');
     }
     const liveEditor = await inspect('Editable field');
+    assert.equal(liveEditor.complete, true);
+    assert.equal(liveEditor.nodes[0].targetable, true);
+    await fixture.command('minimize');
+    await waitFor(fixture.state, state => state.window_state === 'Minimized', 'Owned window did not minimize.');
+    const minimized = await inspect('Editable field');
+    assert.equal(minimized.complete, false, 'Minimized UI was reported complete: ' + JSON.stringify(minimized));
+    assert.equal(minimized.truncated, true);
+    assert.equal(minimized.nodes.length, 0);
+    assert.equal(minimized.window.minimized, true);
+    assert.match(minimized.hint, /activate/);
+    const minimizedWindows = await worker.request({action: 'get_windows', query: fixture.title});
+    assert.equal(minimizedWindows.complete, true);
+    assert.equal(minimizedWindows.windows.length, 1, 'Minimized window disappeared from discovery.');
+    assert.equal(minimizedWindows.windows[0].id, window_id);
+    assert.equal(minimizedWindows.windows[0].window_ref, window_ref);
+    assert.equal(minimizedWindows.windows[0].minimized, true);
+    await assert.rejects(runWindowsRequest(runtime, {action: 'wait_for', window_id, window_ref, ...reference(liveEditor), query: 'Editable field', control_type: 'Edit', wait_condition: 'absent', timeout_ms: 500, max_depth: 30}), /timed out/);
+    await rejectsBeforeInput({action: 'set_value', ...reference(liveEditor), text: 'must not be sent'}, 'INCOMPLETE_SNAPSHOT');
+    assert.equal((await fixture.state()).window_state, 'Minimized', 'Read-only discovery restored the window.');
+    assert.equal((await fixture.state()).text, liveEditor.nodes[0].value, 'Minimized target received input.');
+    await apply(fixture, 'restore minimized window', {action: 'activate', window_id, window_ref});
+    await waitFor(fixture.state, state => state.window_state !== 'Minimized', 'activate did not restore the owned window.');
+    const restoredUI = await inspect('Editable field');
+    assert.equal(restoredUI.window.minimized, false);
     await stop(fixture.child);
     await rejectsBeforeInput({action: 'set_value', ...reference(liveEditor), text: 'must not be sent'}, 'STALE_REF');
-    console.log('PASS: ' + fixture.kind + ' verifies dense rooted discovery, subtree editing, pinned absence, and independent name/ID/role' + (fixture.kind === 'WinForms' ? '/description' : '') + ' rejection.');
+    console.log('PASS: ' + fixture.kind + ' verifies minimized discovery, restore, false-absence/input rejection, dense rooted discovery, subtree editing, pinned absence, and independent name/ID/role' + (fixture.kind === 'WinForms' ? '/description' : '') + ' rejection.');
   }
   if (process.argv.includes('--discovery-report')) {
     const output = process.argv[process.argv.indexOf('--discovery-report') + 1];

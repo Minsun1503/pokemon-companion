@@ -16,6 +16,7 @@ app.whenReady().then(async () => {
       if (request.url === '/title') await window.webContents.executeJavaScript('document.title += " changed"');
       if (request.url === '/hide') await window.webContents.executeJavaScript('document.getElementById("action").hidden = true');
       if (request.url === '/show') await window.webContents.executeJavaScript('document.getElementById("action").hidden = false');
+      if (request.url === '/minimize') window.minimize();
       // Chromium does not reliably invalidate AutomationId for an in-place ID
       // edit. Replace the fixture node so the changed provider identity is real.
       if (['/automation-id', '/role', '/identity-reset'].includes(request.url)) {
@@ -24,6 +25,7 @@ app.whenReady().then(async () => {
       if (request.url === '/quit') {response.end('{}'); app.quit(); return;}
       const state = await window.webContents.executeJavaScript('({clicks: window.fixtureClicks, text: document.getElementById("editor").value, nested: document.querySelector("section input").value, name: document.querySelector("button").getAttribute("aria-label")})');
       clicks = state.clicks;
+      state.window_state = window.isMinimized() ? 'Minimized' : 'Normal';
       response.setHeader('Content-Type', 'application/json');
       response.end(JSON.stringify(state));
     } catch (error) {response.statusCode = 500; response.end(JSON.stringify({error: error.message, clicks}));}

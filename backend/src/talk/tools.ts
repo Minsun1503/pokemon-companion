@@ -8,6 +8,7 @@ import {registerComputer} from '../tools/computer.js';
 import {registerExcel} from '../tools/excel.js';
 import {registerCourse} from '../tools/course.js';
 import {windowsActions} from '../windows/actions.js';
+import {nativeWindowInstructions} from '../learning/instructions.js';
 
 type Registered = {schema: z.ZodType; description: string; handler(args: unknown, extra: {signal: AbortSignal}): Promise<CallToolResult>};
 type ControlTarget = {time: number; window_id: string; window_ref: string; snapshot: string; element_id: number; actions: string[]};
@@ -88,7 +89,7 @@ export class TalkTools {
 				name, description: name === 'computer'
 					? 'Keyboard fallback: key presses a direct shortcut (text="ctrl+e" or "Return"), type enters literal text. Requires freshly discovered foreground window_id/window_ref. Prefer windows set_value/focus/invoke. Verify with windows get_ui afterward. This model cannot interpret screenshots; never guess coordinates.'
 					: name === 'windows'
-						? 'Pokémon native Windows controls. get_windows finds apps. activate opens an existing window using window_id/window_ref. get_ui reads controls; query="Search" finds search boxes. Control actions need only action and the short target from get_ui: {action:"set_value",target:"c1",text:"Damien"}, {action:"focus",target:"c1"}, {action:"invoke",target:"c2"}. select chooses an item. launch needs text=executable or URL. Use keyboard Return after focusing a search if needed. Re-read after actions. Never invent targets.'
+						? `${nativeWindowInstructions}Pokémon native Windows controls. get_windows finds apps. activate opens an existing window using window_id/window_ref. get_ui reads controls; query="Search" finds search boxes. Control actions need only action and the short target from get_ui: {action:"set_value",target:"c1",text:"Damien"}, {action:"focus",target:"c1"}, {action:"invoke",target:"c2"}. select chooses an item. launch needs text=executable or URL. Use keyboard Return after focusing a search if needed. Re-read after actions. Never invent targets.`
 						: tool.description, schema: name === 'computer' ? keyboardSchema : name === 'windows' ? windowsSchema : tool.schema,
 			})),
 			{name: 'human_handoff', description: 'Stop with an exact instruction when the task needs a password, CAPTCHA, final authorization, user decision, or an inaccessible control. Give the actual obstacle, not a promise.', schema: handoffSchema},

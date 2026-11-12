@@ -42,6 +42,7 @@ class IdentityFixture {
                 if (command == "title") form.Text += " changed";
                 if (command == "hide") button.Visible = false;
                 if (command == "show") button.Visible = true;
+                if (command == "minimize") form.WindowState = FormWindowState.Minimized;
                 if (command == "disable") button.Enabled = false;
                 if (command == "enable") button.Enabled = true;
                 if (command == "move") button.Location = new Point(210, 60);
