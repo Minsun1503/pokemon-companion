@@ -1,0 +1,1194 @@
+{
+  "created_at": "2026-11-12T10:12:30.399Z",
+  "source_revision": "a05e76b9f3986b08df8d85d2aeca4d17eca37fb9",
+  "environment": {
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "node": "v22.12.0",
+    "os": "10.0.26200",
+    "profiling": false,
+    "overlay": false
+  },
+  "startup_ms": {
+    "before": 433.4226,
+    "after": 336.299
+  },
+  "hashes": {
+    "before": {
+      "automation.js": "5752df8ac8bc54a4521c2f0236b531d7fc4404b9fa189b210f89f50a2aa40f3d",
+      "uia-worker.ps1": "3c4171be6bd0d43a5c6e5c3a1b86069cf2600f5ec3793a0a2dd85f2037214fd3",
+      "uia-worker.dll": "35ac2131296eef3c3e89892d019a8ed90b146e30d53cac6d49fb339ef1b6c3de",
+      "uia-worker.cs": "4a8a079be7114853f45ccc5272367ad0d53bbd618131656668e208d4f54d7b30",
+      "uia-identity.cs": "309688f45208b1a84b4b910c48163f9f61b3be76d871c8a0caf28e7fb586dd38",
+      "uia-observation.cs": "34641cf4d3463f86c96c181d622bd0461a6b31bd3256b395294fccc9dd2d6d7a",
+      "uia-profile.cs": "00422fe9e11afb0f44b5c031ba1c7c7357b8f5f945e99c08d3af426586620e96",
+      "uia-coordination.cs": "16c90c45ff0ebb4a702c24d725a4c41006ef06c9b916efd5f4982ba3d57de528",
+      "excel-worker.cs": "95798bdfea8f828e503681bc78fad81fef935c1d849d3a18eafe82a88f86e762"
+    },
+    "after": {
+      "automation.js": "5752df8ac8bc54a4521c2f0236b531d7fc4404b9fa189b210f89f50a2aa40f3d",
+      "uia-worker.ps1": "bf259e43276d0f8cc53328885bcf8777b9834e32e9d6729d35e6ff43d1e04456",
+      "uia-worker.dll": "1c75517c3a51aa66c5657a76ef8332cb0c60da0ac87d8babc3caaf38e8a07659",
+      "uia-worker.cs": "4a8a079be7114853f45ccc5272367ad0d53bbd618131656668e208d4f54d7b30",
+      "uia-identity.cs": "309688f45208b1a84b4b910c48163f9f61b3be76d871c8a0caf28e7fb586dd38",
+      "uia-observation.cs": "34641cf4d3463f86c96c181d622bd0461a6b31bd3256b395294fccc9dd2d6d7a",
+      "uia-profile.cs": "00422fe9e11afb0f44b5c031ba1c7c7357b8f5f945e99c08d3af426586620e96",
+      "uia-coordination.cs": "16c90c45ff0ebb4a702c24d725a4c41006ef06c9b916efd5f4982ba3d57de528",
+      "excel-worker.cs": "95798bdfea8f828e503681bc78fad81fef935c1d849d3a18eafe82a88f86e762"
+    }
+  },
+  "summary": {
+    "status": {
+      "before": {
+        "n": 30,
+        "median_ms": 0.6287500000003092,
+        "p95_ms": 1.6605349999998182
+      },
+      "after": {
+        "n": 30,
+        "median_ms": 0.4715000000001055,
+        "p95_ms": 1.1254400000000242
+      }
+    },
+    "narrow": {
+      "before": {
+        "n": 30,
+        "median_ms": 429.1345000000001,
+        "p95_ms": 531.688695000001
+      },
+      "after": {
+        "n": 30,
+        "median_ms": 434.29539999999906,
+        "p95_ms": 592.9270949999991
+      }
+    },
+    "dense": {
+      "before": {
+        "n": 30,
+        "median_ms": 458.96060000000216,
+        "p95_ms": 685.2766399999964
+      },
+      "after": {
+        "n": 30,
+        "median_ms": 482.28265000000465,
+        "p95_ms": 721.3660850000024
+      }
+    }
+  },
+  "comparisons": {
+    "status": {
+      "paired_median_saved_ms": 0.13259999999991123,
+      "bootstrap_95_ci_ms": [
+        0.10620000000017171,
+        0.1380999999996675
+      ]
+    },
+    "narrow": {
+      "paired_median_saved_ms": 8.44235000000208,
+      "bootstrap_95_ci_ms": [
+        -19.987999999997555,
+        31.840739999998227
+      ]
+    },
+    "dense": {
+      "paired_median_saved_ms": -34.4230000000025,
+      "bootstrap_95_ci_ms": [
+        -46.84389999999985,
+        22.115900000000693
+      ]
+    }
+  },
+  "samples": [
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 2.311999999999898,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 1.5661000000000058,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5244000000002416,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5790999999999258,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.4821999999999207,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.35550000000012005,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4240999999997257,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6159999999999854,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.48319999999966967,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.40459999999984575,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.2798999999999978,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.44610000000011496,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.4493999999999687,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.32100000000036744,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.3328000000001339,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6797999999998865,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6817000000000917,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.606499999999869,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5642000000002554,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6527000000000953,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5203000000001339,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.41409999999996217,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 1.390400000000227,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.823699999999917,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5926999999996951,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.45460000000002765,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4016999999998916,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5873999999998887,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5455000000001746,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4126000000001113,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.44290000000000873,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.755500000000211,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5259000000000924,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4515000000001237,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4434999999998581,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 16.40159999999969,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.8642999999997301,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.8015999999997803,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.7046999999997752,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.8532999999997628,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.702900000000227,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5686000000000604,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.6070999999997184,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.676600000000235,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6137000000003354,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.6529000000000451,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5058999999996558,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6533000000003995,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6346000000003187,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.443000000000211,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5187999999998283,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6480999999998858,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6229000000002998,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5204999999996289,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5307999999999993,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6718999999998232,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6150000000002365,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4818000000000211,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4612000000001899,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5934999999999491,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 347.0880000000002,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 312.09379999999965,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 271.4049,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 430.33320000000003,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 404.3236999999999,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 378.9273999999996,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 582.6701999999996,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 448.6329999999998,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 430.20679999999993,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 404.17059999999947,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 458.0621000000001,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 397.3292000000001,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 443.40939999999955,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 381.5648000000001,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 371.83510000000024,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 397.6710000000003,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 414.59779999999955,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 368.9412000000011,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 453.91110000000117,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 438.5792000000001,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 467.85360000000037,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 456.46389999999883,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 379.8961999999992,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 376.27450000000135,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 385.3786999999993,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 557.6269000000011,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 601.3190999999988,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 460.97730000000047,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 448.5483000000004,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 473.41759999999886,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 439.52479999999923,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 419.5368000000017,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 398.3429999999971,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 463.64949999999953,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 437.2527999999984,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 514.9660000000003,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 396.2993000000024,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 390.8042999999998,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 399.8827999999994,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 404.16820000000007,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 397.39580000000205,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 419.5400000000009,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 410.8771000000015,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 452.35280000000057,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 489.59389999999985,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 612.7272000000012,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 440.84330000000045,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 545.3709000000017,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 566.2183000000005,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 431.33799999999974,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 454.85609999999724,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 428.0622000000003,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 412.2540000000008,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 487.9406999999992,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 389.0472000000009,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 411.15989999999874,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 470.7956000000013,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 405.88630000000194,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 439.4930999999997,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 512.3263999999981,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 429.53960000000006,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 442.3654999999999,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 440.41010000000097,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 400.7043999999987,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 398.642399999997,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 430.84619999999995,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 386.36339999999836,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 408.47929999999906,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 452.5774999999994,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 402.5277999999962,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 484.4033000000054,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 459.42719999999827,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 432.23540000000503,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 381.1411999999982,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 458.96770000000106,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 566.5280999999959,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 477.4802000000054,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 584.5852000000014,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 467.5984000000026,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 429.8692999999985,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 457.9837000000043,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 392.0905999999959,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 380.94919999999547,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 411.7613999999958,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 440.65170000000217,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 480.1620000000039,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 518.6906999999992,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 477.2207999999955,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 380.6738999999943,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 444.83439999999973,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 373.28190000000177,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 407.55029999999533,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 458.49400000000605,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 530.1037999999971,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 468.8309999999983,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 654.3338000000003,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 583.7796999999991,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 576.0232000000033,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 475.54149999999936,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 427.4213000000018,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 546.107299999996,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 563.3883999999962,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 544.2877999999982,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 643.0823000000019,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 693.0790999999954,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 954.4295999999958,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 815.1428000000014,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 675.7402999999977,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 700.0742000000027,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 518.0198000000019,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 606.7501000000047,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 559.9062000000049,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 544.7077999999965,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 581.3499999999985,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 506.52390000000014,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 457.3775999999998,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 531.6479999999938,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 592.1860000000015,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 541.8954000000012,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 476.6791000000012,
+      "verified": true
+    }
+  ],
+  "verification": {
+    "timed_requests": 180,
+    "expected_dense_values": 1800,
+    "unicode_writes_and_reads": 2,
+    "error_dispositions": 2
+  },
+  "limits": [
+    "One owned WinForms fixture; no general application speed claim.",
+    "Adapter/native transport timing excludes MCP framing, overlay and model inference.",
+    "Thirty warm samples per arm/scenario in fifteen ABBA blocks, one excluded warmup; bootstrap preserves paired blocks.",
+    "Native source and adapter hashes are identical; DLL hashes can differ after recompilation. Only PowerShell response encoding changes."
+  ]
+}
