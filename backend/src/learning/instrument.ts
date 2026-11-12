@@ -5,6 +5,7 @@ import {z} from 'zod';
 import {errorDetails} from '../utils/errors.js';
 import type {LocalLearning} from './service.js';
 import {mcpObjectSchema} from '../utils/mcp-schema.js';
+import {traceClientCall} from '../utils/client-timing.js';
 
 type Handler = (args: Record<string, unknown>, extra: {signal: AbortSignal}) => Promise<CallToolResult>;
 type Config = {[key: string]: unknown; inputSchema: z.ZodType};
@@ -36,18 +37,20 @@ export function instrument(server: McpServer, learning: LocalLearning): McpServe
 					throw new Error('Invalid learning task id.');
 				}
 
-				await learning.enter(taskId);
-				const start = performance.now();
-				try {
-					const result = await handler(args, extra);
-					await learning.record(taskId, name, args, result, performance.now() - start);
-					return result;
-				} catch (error) {
-					await learning.record(taskId, name, args, {isError: true, content: [{type: 'text', text: JSON.stringify({ok: false, error_details: errorDetails(error)})}]}, performance.now() - start);
-					throw error;
-				} finally {
-					learning.leave(taskId);
-				}
+				return traceClientCall(taskId, name, typeof args.action === 'string' ? args.action : 'batch', async () => {
+					await learning.enter(taskId);
+					const start = performance.now();
+					try {
+						const result = await handler(args, extra);
+						await learning.record(taskId, name, args, result, performance.now() - start);
+						return result;
+					} catch (error) {
+						await learning.record(taskId, name, args, {isError: true, content: [{type: 'text', text: JSON.stringify({ok: false, error_details: errorDetails(error)})}]}, performance.now() - start);
+						throw error;
+					} finally {
+						learning.leave(taskId);
+					}
+				});
 			});
 		},
 	});

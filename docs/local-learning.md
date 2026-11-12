@@ -37,6 +37,8 @@ Stdio needs no HTTP token. HTTP binds to `127.0.0.1` and requires `POKEMON_HTTP_
 
 ## Resource choices and evidence
 
+The [November 12 local-model comparison](../benchmarks/results/local-model-2026-11-12.md) measures sparse scoring, dense arrays, context-only ranking, Model2Vec and BM25 on the same synthetic workflow corpus. The selected sparse implementation preserves existing journal data and exact tested scores while reducing CPU cost. Semantic paraphrases, negation and different-action requests expose retrieval limits; matching still requires current-intent review. The report separates measured alternatives from researched-only options and includes reproducible scripts and raw samples.
+
 Idle wandering/GIF playback is off by default: the companion uses a still idle sprite and preserves animations for actual work and travel. `POKEMON_IDLE_ANIMATION=on` restores continuous idle animation. Unchanged window shapes and tray menus are cached; hidden windows skip motion/layout polling. `POKEMON_UI=off` avoids Electron entirely for explicitly headless use. Hardware acceleration remains available for work animations; disabling it globally can move work to the CPU.
 
 Measurements on Windows, Intel i5-8500T, Node 24.16.0:

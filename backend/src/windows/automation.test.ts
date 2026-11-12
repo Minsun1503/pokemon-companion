@@ -4,19 +4,19 @@ import {spawn, type ChildProcessWithoutNullStreams} from 'node:child_process';
 import {
 	describe, expect, it, vi,
 } from 'vitest';
-import {WindowsAutomation} from './automation.js';
+import {WindowsAutomation, type WindowsRequest} from './automation.js';
 import {timedCall} from '../utils/timing.js';
 
 vi.mock('node:child_process', () => ({spawn: vi.fn()}));
 
-async function readUI(result: Record<string, unknown>) {
+async function readUI(result: Record<string, unknown>, args: WindowsRequest = {action: 'get_ui', window_id: '123', max_chars: 1000}) {
 	const worker = Object.assign(new EventEmitter(), {
 		stdin: new PassThrough(), stdout: new PassThrough(), stderr: new PassThrough(), kill: vi.fn(),
 	});
 	vi.mocked(spawn).mockReturnValue(worker as unknown as ChildProcessWithoutNullStreams);
 	const automation = new WindowsAutomation();
 	try {
-		const pending = automation.request({action: 'get_ui', window_id: '123', max_chars: 1000});
+		const pending = automation.request(args);
 		worker.stdout.write(`${JSON.stringify({id: 1, result})}\n`);
 		return await pending;
 	} finally {
@@ -27,6 +27,29 @@ async function readUI(result: Record<string, unknown>) {
 const captions = ['Minimize', 'Maximize', 'Close'].map((name) => ({role: 'Button', name}));
 
 describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
+	it.each(['plain', '\n"\\', '\u0001', '🐱', 'a🐱"\n', 'chữ 日本語'])('keeps the longest complete text prefix inside its escaped JSON budget: %s', async (unit) => {
+		const text = unit.repeat(3000);
+		const result = await readUI({text, source: 'native', truncated: true}, {action: 'read_text', max_chars: 1000});
+		let expected = '';
+		for (const character of text) {
+			if (JSON.stringify({...result, text: expected + character}).length > 1000) {
+				break;
+			}
+
+			expected += character;
+		}
+
+		expect(result.text).toBe(expected);
+		expect(expected.length).toBeGreaterThan(0);
+		expect(JSON.stringify(result).length).toBeLessThanOrEqual(1000);
+		expect(result).toMatchObject({source: 'native', truncated: true});
+	});
+
+	it('leaves text that fits its response budget unchanged', async () => {
+		const input = {text: 'chữ 🐱\n"\\', source: 'native'};
+		expect(await readUI(input, {action: 'read_text', max_chars: 1000})).toEqual(input);
+	});
+
 	it.each([false, true])('consumes internal profiles while preserving success/failure and public budgets: failure=%s', async (failure) => {
 		vi.stubEnv('POKEMON_TIMING', '1');
 		const write = vi.spyOn(process.stderr, 'write').mockReturnValue(true);

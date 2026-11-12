@@ -2,11 +2,15 @@
 
 The `windows` MCP tool uses Win32 and UI Automation. It returns compact JSON in one text content block. Examples and actions are in the [main README](../README.md#tools).
 
-Batch is the default request mode. Omit the top-level `action` and provide `steps` (1-16 sequential atomic actions). Explicit `action:"batch"` and explicit individual actions remain supported. Missing or malformed steps fail before execution; no actions are inferred from top-level fields. Use an individual action when further planning requires judgment, then continue with a new batch of known steps.
+Batch is the default request mode. Omit the top-level `action` and provide `steps` (1-16 sequential atomic actions). Explicit `action:"batch"` and explicit individual actions remain supported. Missing or malformed steps fail before execution; no actions are inferred from top-level fields. Once an input is chosen, batch it with `get_ui` or a bounded `wait_for`, then interpret that observation before choosing the next segment. Use an individual action when only one step is known.
+
+For external MCP clients, this avoids a separate client turn just to request the known follow-up observation. It cannot choose an unknown future branch or reduce the client's model inference directly. See [client timing and reproduction](tool-selection.md) and the [measured dependent-workflow comparison](../benchmarks/results/tool-selection-2026-11-12.md).
 
 ## Discovery coverage
 
 `get_windows` and `get_ui` return `complete` and `truncated`. A complete result covered the requested discovery scope within the native traversal and response budgets. It does not establish coverage of controls the application does not expose through accessibility.
+
+Field previews in `get_ui` use values from the same fresh per-node cache as identity evidence. This avoids an additional provider read for each returned field; it is not an atomic whole-window snapshot. Explicit `read_text`, target revalidation, and post-action value verification still read fresh/live state. Text response trimming accounts for JSON escaping and preserves complete UTF-16 pairs when shortening the returned prefix.
 
 `get_windows` keeps up to 100 native matches. Exactly 100 matches can be complete; finding a 101st sets `complete: false` and `truncated: true`. Lower `max_elements` and `max_chars` can truncate the returned list further. Narrow `query` rather than treating a partial list as exhaustive.
 

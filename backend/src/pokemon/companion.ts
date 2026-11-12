@@ -44,7 +44,7 @@ export class DesktopCompanion implements Companion {
 	private server?: Server;
 	private socket?: Socket;
 	private child?: ChildProcess;
-	private starting?: Promise<void>;
+	private starting: Promise<void> | undefined;
 	private sequence = 0;
 	private closed = false;
 	private closing?: Promise<void>;
@@ -66,7 +66,10 @@ export class DesktopCompanion implements Companion {
 			return;
 		}
 
-		this.starting ||= this.launch();
+		this.starting ||= this.launch().catch((error: unknown) => {
+			this.starting = undefined;
+			throw error;
+		});
 		await this.starting;
 		if (!this.socket || this.socket.destroyed) {
 			throw new Error('Pokémon desktop disconnected. Restart the MCP server to reconnect.');
@@ -179,10 +182,16 @@ export class DesktopCompanion implements Companion {
 
 		const token = randomBytes(32).toString('hex');
 		await new Promise<void>((ready, reject) => {
+			let failed = false;
 			const timeout = setTimeout(() => {
 				fail(new Error('Pokémon desktop did not become ready within 20 seconds.'));
 			}, 20_000);
 			const fail = (error: Error) => {
+				if (failed) {
+					return;
+				}
+
+				failed = true;
 				clearTimeout(timeout);
 				this.child?.kill();
 				this.server?.close();

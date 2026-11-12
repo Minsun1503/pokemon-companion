@@ -7,6 +7,7 @@ import {runWindowsBatch} from '../windows/batch.js';
 import {jsonResult} from '../utils/response.js';
 import {errorDetails} from '../utils/errors.js';
 import {timedCall} from '../utils/timing.js';
+import {traceClientCall} from '../utils/client-timing.js';
 
 export function registerLearning(server: McpServer, runtime: PokemonRuntime): void {
 	server.registerTool('learning', {
@@ -29,7 +30,7 @@ export function registerLearning(server: McpServer, runtime: PokemonRuntime): vo
 			version: z.string().regex(/^[a-f0-9]{64}$/).optional(),
 		}).strict(),
 		annotations: {readOnlyHint: false},
-	}, async (args, extra) => timedCall('learning', args.action, async () => {
+	}, async (args, extra) => timedCall('learning', args.action, async () => traceClientCall(args.action === 'begin' ? undefined : args.task_id, 'learning', args.action, async () => {
 		const required = <T>(value: T | undefined, name: string): T => {
 			if (value === undefined) {
 				throw new Error(`${args.action} requires ${name}.`);
@@ -42,8 +43,10 @@ export function registerLearning(server: McpServer, runtime: PokemonRuntime): vo
 		switch (args.action) {
 			case 'begin': {
 				const task = await learning.begin(required(args.query, 'query'), args.parameters ?? {});
-				await runtime.update({learningTaskId: task.id, learningFeedbackPending: false});
-				return jsonResult({task_id: task.id, suggestions: await learning.suggest(task.query)});
+				return traceClientCall(task.id, 'learning', 'begin', async () => {
+					await runtime.update({learningTaskId: task.id, learningFeedbackPending: false});
+					return jsonResult({task_id: task.id, suggestions: await learning.suggest(task.query)});
+				});
 			}
 
 			case 'suggest':
@@ -97,5 +100,5 @@ export function registerLearning(server: McpServer, runtime: PokemonRuntime): vo
 				return {content: [{type: 'text', text: JSON.stringify(page)}]};
 			}
 		}
-	}));
+	})));
 }

@@ -183,7 +183,7 @@ public static partial class PokemonWindowsAutomation {
                 if (actions.Count > 0) node["actions"] = actions;
                 if (!String.IsNullOrEmpty(automationId)) node["automation_id"] = Clip(automationId, 100);
                 object pattern;
-                if (view != "skeleton" && element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) { using (Profile("discovery_value_read")) node["value"] = Clip(((ValuePattern)pattern).Current.Value, 160, node); }
+                if (view != "skeleton" && element.TryGetCachedPattern(ValuePattern.Pattern, out pattern)) { using (Profile("discovery_value_read")) node["value"] = Clip(((ValuePattern)pattern).Cached.Value, 160, node); }
                 if (element.TryGetCachedPattern(TogglePattern.Pattern, out pattern)) node["state"] = ((TogglePattern)pattern).Cached.ToggleState.ToString();
                 if (element.TryGetCachedPattern(SelectionItemPattern.Pattern, out pattern)) node["selected"] = ((SelectionItemPattern)pattern).Cached.IsSelected;
                 if (!info.IsEnabled) node["enabled"] = false;

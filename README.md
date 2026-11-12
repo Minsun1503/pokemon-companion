@@ -49,7 +49,7 @@ Try: **“Use Pikachu to help me with my computer. Announce the task, inspect th
 
 `desktop` with `{"action":"status"}` checks backend readiness, supported native actions, platform limits, and pause state. It sends no input, works while paused, and is bounded to five seconds including queue time. Readiness does not establish permission to control every app.
 
-On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests.
+On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests. Discovery values come from each fresh per-node cache; actions still revalidate targets and verify field changes with live reads.
 
 Discovery results report `complete` and `truncated`. Windows errors include `error_details` with an error code and delivery/retry evidence; retry a failed operation only when its evidence permits it. In a partial batch, this applies only to the stopped step, and earlier steps remain applied. See the [Windows discovery and error contract](docs/windows-api.md).
 
@@ -126,6 +126,10 @@ The Windows-only **`excel`** tool provides `inspect_workbook`, `read_range`, `wr
 Use `windows get_windows` to choose Excel, then `excel inspect_workbook` for exact workbook/sheet names. See [Excel API examples and limits](docs/excel-api.md). Requires installed Windows desktop Excel with a normal workbook window; Protected View and Excel Online are unsupported. Reconnect the MCP server after building to expose this tool.
 
 ## Windows benchmark
+
+The [November 12 tool-selection benchmark](benchmarks/results/tool-selection-2026-11-12.md) measures an active Codex agent choosing actions from changing native UI instructions. Combining each chosen action with its observation used **50% fewer workflow calls** and reduced mean measured execution-window time from **34.652 to 10.098 seconds**, with **8/8 correct actions**. Four short trials demonstrate fewer client pauses; they do not isolate model inference or establish a production speedup. [Enable client-gap timing](docs/tool-selection.md) to measure the actual MCP client.
+
+The [November 12 research and observation benchmark](benchmarks/results/windows-observation-2026-11-12.md) studies three related GitHub repositories and measures two implemented changes. Quoted text retains **12.46% more content** within the same response limit. The cached-value read phase saves about **1.121 ms per 30-field capture**; full-request timing remains within measurement noise. Raw samples and reproduction steps are included.
 
 The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visual.md) compares six atomic calls with one batch on a normal window and controls behind 35 anonymous groups, with 30 warm runs per mode per fixture. Batch used **83.3% fewer MCP calls** and about **64.7% less result text**; local median execution times were close. Every field and button action was independently verified. No AI inference or token/dollar savings were measured.
 
