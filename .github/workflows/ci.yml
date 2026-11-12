@@ -28,9 +28,9 @@ jobs:
       - run: npm test
       - run: npm run test:work-animation
       - run: npm run test:windows:contract
-      - name: Check identity on three fresh WinForms and Electron fixtures
+      - name: Diagnose identity across twenty fresh fixture pairs
         run: |
-          1..3 | ForEach-Object {
+          1..20 | ForEach-Object {
             npm run test:windows:identity
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
