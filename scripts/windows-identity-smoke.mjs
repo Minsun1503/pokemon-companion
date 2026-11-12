@@ -97,9 +97,17 @@ async function rejectsBeforeInput(request, code) {
   });
 }
 
+async function apply(fixture, step, request) {
+  try {return await worker.request(request);}
+  catch (error) {
+    throw new Error(fixture.kind + ' ' + step + ' failed; fixture state: ' + JSON.stringify(await fixture.state()), {cause: error});
+  }
+}
+
 try {
   for (const create of [nativeFixture, electronFixture]) {
     const fixture = await create();
+    console.log('Checking ' + fixture.kind + ' identity fixture.');
     const windows = await waitFor(() => worker.request({action: 'get_windows', query: fixture.title}), result => result.windows.length === 1, 'Owned window was not discovered.');
     const window_id = windows.windows[0].id;
     const window_ref = windows.windows[0].window_ref;
@@ -129,13 +137,13 @@ try {
     assert(subtreeChars < wholeChars * 0.4, 'Rooted discovery did not substantially reduce response context.');
     discoverySizes.push({fixture: fixture.kind, whole_controls: whole.nodes.length, subtree_controls: subtree.nodes.length,
       whole_characters: wholeChars, subtree_characters: subtreeChars, reduction_percent: 100 * (1 - subtreeChars / wholeChars)});
-    await worker.request({action: 'set_value', ...reference(subtree), text: 'verified subtree edit'});
+    await apply(fixture, 'subtree edit', {action: 'set_value', ...reference(subtree), text: 'verified subtree edit'});
     await waitFor(fixture.state, state => state.nested === 'verified subtree edit', 'Subtree edit did not reach the owned field.');
     await fixture.command('value');
-    await worker.request({action: 'set_value', ...reference(editor), text: 'updated through original reference'});
+    await apply(fixture, 'original editor reference', {action: 'set_value', ...reference(editor), text: 'updated through original reference'});
     await waitFor(fixture.state, state => state.text === 'updated through original reference', 'Editing through the original ref did not work.');
     await fixture.command('title');
-    await worker.request({action: 'invoke', ...reference(button)});
+    await apply(fixture, 'button after title change', {action: 'invoke', ...reference(button)});
     await waitFor(fixture.state, state => state.clicks === 1, 'Title drift incorrectly prevented invocation.');
     const fieldChanges = fixture.kind === 'WinForms' ? ['automation-id', 'description', 'role'] : ['automation-id', 'role'];
     for (const changed of fieldChanges) {
@@ -157,7 +165,7 @@ try {
     const replacement = await waitFor(() => inspect('Replacement item'), ui => ui.nodes.length === 1 && ui.nodes[0].targetable, 'Replacement control not observed.');
     await rejectsBeforeInput({action: 'invoke', ...reference(button)}, 'STALE_REF');
     assert.equal(await clickCount(fixture), 1, 'Stale control invocation changed the fixture.');
-    await worker.request({action: 'invoke', ...reference(replacement)});
+    await apply(fixture, 'fresh replacement button', {action: 'invoke', ...reference(replacement)});
     await waitFor(fixture.state, state => state.clicks === 2, 'Fresh replacement reference did not work.');
     await fixture.command('hide');
     const runtime = {windows: worker, companion: {state: {paused: false}}};
