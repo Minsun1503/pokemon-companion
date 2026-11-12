@@ -215,11 +215,19 @@ try {
     assert.equal(minimizedWindows.windows[0].id, window_id);
     assert.equal(minimizedWindows.windows[0].window_ref, window_ref);
     assert.equal(minimizedWindows.windows[0].minimized, true);
-    await assert.rejects(runWindowsRequest(runtime, {action: 'wait_for', window_id, window_ref, ...reference(liveEditor), query: 'Editable field', control_type: 'Edit', wait_condition: 'absent', timeout_ms: 500, max_depth: 30}), /timed out/);
     await rejectsBeforeInput({action: 'set_value', ...reference(liveEditor), text: 'must not be sent'}, 'INCOMPLETE_SNAPSHOT');
+    await assert.rejects(runWindowsRequest(runtime, {action: 'wait_for', window_id, window_ref, ...reference(liveEditor), query: 'Editable field', control_type: 'Edit', wait_condition: 'absent', timeout_ms: 500, max_depth: 30}), /timed out/);
     assert.equal((await fixture.state()).window_state, 'Minimized', 'Read-only discovery restored the window.');
     assert.equal((await fixture.state()).text, liveEditor.nodes[0].value, 'Minimized target received input.');
-    await apply(fixture, 'restore minimized window', {action: 'activate', window_id, window_ref});
+    // A timed-out read can restart the worker; exercise rediscovery deterministically.
+    worker.close();
+    const refreshed = await worker.request({action: 'get_windows', query: fixture.title});
+    assert.equal(refreshed.complete, true);
+    assert.equal(refreshed.windows.length, 1);
+    assert.equal(refreshed.windows[0].id, window_id);
+    assert.equal(refreshed.windows[0].minimized, true);
+    assert.match(refreshed.windows[0].window_ref, /^[a-f0-9]{32}$/);
+    await apply(fixture, 'restore minimized window', {action: 'activate', window_id, window_ref: refreshed.windows[0].window_ref});
     await waitFor(fixture.state, state => state.window_state !== 'Minimized', 'activate did not restore the owned window.');
     const restoredUI = await inspect('Editable field');
     assert.equal(restoredUI.window.minimized, false);
