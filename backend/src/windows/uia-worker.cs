@@ -11,6 +11,7 @@ using System.Windows.Automation;
 public static partial class PokemonWindowsAutomation {
     [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc callback, IntPtr data);
     [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr window);
+    [DllImport("user32.dll")] static extern bool IsIconic(IntPtr window);
     [DllImport("user32.dll")] static extern bool IsWindow(IntPtr window);
     [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowText(IntPtr window, StringBuilder text, int count);
     [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint process);
@@ -90,7 +91,7 @@ public static partial class PokemonWindowsAutomation {
             GetWindowThreadProcessId(handle, out pid);
             string process = "";
             try { process = Process.GetProcessById((int)pid).ProcessName; } catch { }
-            var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process);
+            var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process, "minimized", IsIconic(handle));
             string token = RememberWindow(handle);
             if (token != null) result["window_ref"] = token;
             return result;

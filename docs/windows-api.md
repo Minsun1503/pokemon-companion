@@ -14,6 +14,10 @@ Field previews in `get_ui` use values from the same fresh per-node cache as iden
 
 `get_windows` keeps up to 100 native matches. Exactly 100 matches can be complete; finding a 101st sets `complete: false` and `truncated: true`. Lower `max_elements` and `max_chars` can truncate the returned list further. Narrow `query` rather than treating a partial list as exhaustive.
 
+Window metadata includes `minimized`. Normally minimized windows retain the Win32 visible style and remain listed. Read-only discovery does not restore them. `get_ui` on a minimized window returns no controls with `complete:false`, `truncated:true`, and a restore hint; an offscreen accessibility root also makes the scan incomplete. These results cannot prove absence or authorize control input. Use `activate` with the observed `window_id`/`window_ref`, then read again. Prefer this to clicking a taskbar icon, which can toggle minimization. Hidden tray-only windows and other virtual desktops are not guaranteed by this discovery contract.
+
+Native Teams/Zalo targets are identified by window title/process and discovery proofs. Native targeting does not require a browser page address. The server cannot change an external client's approval decision: report an actual client rejection separately from window-not-found, and do not invent a URL or claim that a message was sent without verification.
+
 `get_ui` reports an incomplete result when its node, depth, time, or response budget is exhausted, or an unavailable provider prevents part of the traversal. `matched` is a lower bound when truncated. Batch control references require exactly one match from an untruncated result. Clipped values retain their separate `value_clipped` flag; use `read_text` for full values.
 
 ## Identity and scoped reads

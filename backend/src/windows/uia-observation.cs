@@ -37,6 +37,8 @@ public static partial class PokemonWindowsAutomation {
         using (Profile("tree_walk_inclusive")) {
             if (root == null) throw Rejected("WINDOW_NOT_FOUND", "The target window has no accessibility root.");
             var report = new WalkReport();
+            // Providers may expose stale or empty controls while the window is minimized.
+            if (IsIconic(window)) { report.Complete = false; return report; }
             bool isChromium = WindowClass(window).IndexOf("Chrome_WidgetWin", StringComparison.OrdinalIgnoreCase) >= 0;
             if (isChromium) cache = DiscoveryCache(); // Wrapper actionability must be observed during capture and resolution alike.
             bool cacheChildren = Environment.GetEnvironmentVariable("POKEMON_UIA_CHILD_CACHE") != "0";
@@ -59,7 +61,10 @@ public static partial class PokemonWindowsAutomation {
                         using (Profile("navigation_cache_fetch")) sibling = TreeWalker.ControlViewWalker.GetNextSibling(element, cache);
                         if (sibling != null) pending.Push(new Visit(sibling, entry.Depth, false, entry.RawDepth));
                     }
-                    if (element.Cached.IsOffscreen || element.Cached.IsPassword) continue;
+                    if (element.Cached.IsOffscreen || element.Cached.IsPassword) {
+                        if (entry.IsRoot) report.Complete = false;
+                        continue;
+                    }
                     using (Profile("visit_projection_inclusive")) visit(element, entry.Depth);
                     AutomationElement child = null;
                     AutomationElementCollection children = null;
@@ -89,7 +94,7 @@ public static partial class PokemonWindowsAutomation {
                 } catch (ElementNotAvailableException) { report.Complete = false; }
                 catch (InvalidOperationException) { report.Complete = false; }
             }
-            if (pending.Count > 0) report.Complete = false;
+            if (pending.Count > 0 || IsIconic(window)) report.Complete = false;
             report.Elapsed = watch.Elapsed.TotalMilliseconds;
             return report;
         }

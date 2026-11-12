@@ -177,6 +177,10 @@ export class WindowsAutomation implements DesktopAdapter {
 		const postProcessing = performance.now();
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;
+		if (args.action === 'get_ui' && (result.window as Record<string, unknown> | undefined)?.minimized === true) {
+			result.hint = 'Window is minimized; controls are not observable. Call activate with its window_id/window_ref, then get_ui again.';
+		}
+
 		// shortcut: match English caption names; add native caption IDs if localized apps need the hint.
 		if (args.action === 'get_ui' && !result.truncated && entries?.length && entries.every((node: Record<string, unknown>) => node.role === 'TitleBar'
 			|| (node.role === 'Button' && /^(Minimize|Maximize|Restore|Close)$/i.test(String(node.name))))) {

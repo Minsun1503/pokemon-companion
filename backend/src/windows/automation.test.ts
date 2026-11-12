@@ -154,6 +154,16 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 		expect(result.nodes).toEqual(nodes);
 	});
 
+	it('preserves minimized-window coverage and gives restore guidance even with no controls', async () => {
+		const result = await readUI({
+			window: {id: '123', minimized: true}, nodes: [], matched: 0, complete: false, truncated: true,
+		});
+		expect(result.hint).toBe('Window is minimized; controls are not observable. Call activate with its window_id/window_ref, then get_ui again.');
+		expect(result).toMatchObject({
+			window: {minimized: true}, nodes: [], complete: false, truncated: true,
+		});
+	});
+
 	it.each([
 		{nodes: [], truncated: false},
 		{nodes: [...captions, {role: 'Edit', name: 'Note'}], truncated: false},
