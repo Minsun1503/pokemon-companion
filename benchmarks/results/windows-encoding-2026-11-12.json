@@ -1,0 +1,1182 @@
+{
+  "created_at": "2026-11-12T10:05:03.452Z",
+  "source_revision": "a05e76b9f3986b08df8d85d2aeca4d17eca37fb9",
+  "environment": {
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "node": "v22.12.0",
+    "os": "10.0.26200",
+    "profiling": false,
+    "overlay": false
+  },
+  "startup_ms": {
+    "before": 880.7911,
+    "after": 334.0976999999998
+  },
+  "hashes": {
+    "before": {
+      "automation.js": "5752df8ac8bc54a4521c2f0236b531d7fc4404b9fa189b210f89f50a2aa40f3d",
+      "uia-worker.ps1": "3c4171be6bd0d43a5c6e5c3a1b86069cf2600f5ec3793a0a2dd85f2037214fd3",
+      "uia-worker.dll": "35ac2131296eef3c3e89892d019a8ed90b146e30d53cac6d49fb339ef1b6c3de"
+    },
+    "after": {
+      "automation.js": "5752df8ac8bc54a4521c2f0236b531d7fc4404b9fa189b210f89f50a2aa40f3d",
+      "uia-worker.ps1": "bf259e43276d0f8cc53328885bcf8777b9834e32e9d6729d35e6ff43d1e04456",
+      "uia-worker.dll": "1c75517c3a51aa66c5657a76ef8332cb0c60da0ac87d8babc3caaf38e8a07659"
+    }
+  },
+  "summary": {
+    "status": {
+      "before": {
+        "n": 30,
+        "median_ms": 0.5375500000000102,
+        "p95_ms": 1.4766100000000462
+      },
+      "after": {
+        "n": 30,
+        "median_ms": 0.44219999999995707,
+        "p95_ms": 1.197920000000065
+      }
+    },
+    "narrow": {
+      "before": {
+        "n": 30,
+        "median_ms": 477.8182500000021,
+        "p95_ms": 611.0616099999991
+      },
+      "after": {
+        "n": 30,
+        "median_ms": 406.75465000000077,
+        "p95_ms": 538.3355400000008
+      }
+    },
+    "dense": {
+      "before": {
+        "n": 30,
+        "median_ms": 522.6918000000005,
+        "p95_ms": 684.1229400000003
+      },
+      "after": {
+        "n": 30,
+        "median_ms": 505.51304999999775,
+        "p95_ms": 767.8997999999983
+      }
+    }
+  },
+  "comparisons": {
+    "status": {
+      "paired_median_saved_ms": 0.10844999999994798,
+      "bootstrap_95_ci_ms": [
+        0.09600000000000364,
+        0.12424500000020064
+      ]
+    },
+    "narrow": {
+      "paired_median_saved_ms": 60.17829999999958,
+      "bootstrap_95_ci_ms": [
+        -9.101149999998597,
+        111.47665000000143
+      ]
+    },
+    "dense": {
+      "paired_median_saved_ms": 5.78009999999631,
+      "bootstrap_95_ci_ms": [
+        -39.93269999999029,
+        29.785749999999098
+      ]
+    }
+  },
+  "samples": [
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 2.1651999999999134,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 1.5950000000002547,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.37540000000035434,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5244999999999891,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.4704999999999018,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.34809999999970387,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.7125999999998385,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6350000000002183,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.49690000000009604,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.3505000000000109,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.2644000000000233,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.41390000000001237,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.40990000000010696,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.29149999999981446,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.2557000000001608,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.3867000000000189,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.37030000000004293,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.27089999999998327,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.2472000000002481,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.3686000000002423,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.31950000000006185,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.42399999999997817,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.3866000000002714,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5565999999998894,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5412000000001171,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4452000000001135,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.43919999999980064,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.43460000000004584,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5338999999999032,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5729000000001179,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.45479999999997744,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5644999999999527,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5102000000001681,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.38419999999996435,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.41309999999975844,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 4.598899999999958,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5016999999998006,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5269000000002961,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 1.6712000000002263,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5981999999999061,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.44430000000011205,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5085999999996602,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5147000000001754,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.6132999999999811,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5898999999999432,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4905999999996311,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.45839999999998327,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.565599999999904,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5835999999999331,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5142000000000735,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.46860000000015134,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5803000000000793,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.574800000000323,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.5120999999999185,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.4534000000003289,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.554899999999634,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5555999999996857,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.42039999999997235,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "status",
+      "elapsed_ms": 0.38779999999997017,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "status",
+      "elapsed_ms": 0.5082000000002154,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 470.87609999999995,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 308.5763000000002,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 304.35220000000027,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 424.46280000000024,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 428.52469999999994,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 579.7709000000004,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 530.9222,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 486.64140000000043,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 509.8239000000003,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 389.89769999999953,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 392.8127000000004,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 405.7322000000004,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 392.2354000000014,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 528.7091,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 464.6893,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 427.53750000000036,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 521.845800000001,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 459.90589999999975,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 397.65720000000147,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 456.0738999999994,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 402.1206999999995,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 446.39150000000154,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 393.91449999999895,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 526.6939999999995,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 486.8070000000007,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 367.4282000000003,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 409.0188999999991,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 551.1503999999986,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 476.77370000000155,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 380.22109999999884,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 393.26960000000327,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 527.343499999999,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 610.3882999999987,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 447.0498000000007,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 544.4010000000017,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 515.8317000000025,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 611.6124999999993,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 404.4904000000024,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 397.32970000000205,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 435.23279999999795,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 389.4457000000002,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 398.4542000000001,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 399.8535000000011,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 478.8628000000026,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 408.6258999999991,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 505.3780999999981,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 431.0509999999995,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 482.7527000000009,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 620.9036999999989,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 397.97769999999946,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 383.5803999999989,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 414.99329999999827,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 568.0168000000012,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 464.4422999999988,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 519.237000000001,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 594.9454000000005,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 428.71659999999974,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 437.910399999997,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "narrow",
+      "elapsed_ms": 465.9756000000016,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "narrow",
+      "elapsed_ms": 412.28570000000036,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 408.70910000000003,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 453.58410000000003,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 395.21489999999903,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 382.6035000000011,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 526.6087000000043,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 488.1374999999971,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 658.7968000000037,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 395.6906000000017,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 436.0370000000039,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 478.20530000000144,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 508.23749999999563,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 420.86099999999715,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 421.5048999999999,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 424.93560000000434,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 491.78770000000077,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 506.8235000000059,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 565.9159,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 796.1903999999995,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 550.2400999999954,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 510.30740000000515,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 631.4163000000044,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 466.47839999999997,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 461.34479999999894,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 485.35149999999703,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 474.1512999999977,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 459.16040000000066,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 459.90149999999994,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 439.72030000000086,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 471.6612000000023,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 563.5369999999966,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 466.1099000000031,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 507.1267000000007,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 521.0069000000003,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 538.7525999999998,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 507.48139999999694,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 583.5627999999997,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 599.8413,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 669.1822000000029,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 733.3223999999973,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 623.4320000000007,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 626.9472999999998,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 591.3824999999997,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 587.8761999999988,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 687.3966,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 634.0769,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 588.9573999999993,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 2719.7522000000026,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 1452.650499999996,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 524.3767000000007,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 428.35339999999997,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 456.6403000000064,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 420.9628999999986,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 526.9353999999948,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 426.6915000000008,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 583.4699000000037,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 603.4375,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 566.1877999999997,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 549.0876999999964,
+      "verified": true
+    },
+    {
+      "arm": "after",
+      "scenario": "dense",
+      "elapsed_ms": 503.54469999999856,
+      "verified": true
+    },
+    {
+      "arm": "before",
+      "scenario": "dense",
+      "elapsed_ms": 680.1218000000008,
+      "verified": true
+    }
+  ],
+  "verification": {
+    "timed_requests": 180,
+    "expected_dense_values": 1800,
+    "unicode_writes_and_reads": 2,
+    "error_dispositions": 2
+  },
+  "limits": [
+    "One owned WinForms fixture; no general application speed claim.",
+    "Adapter/native transport timing excludes MCP framing, overlay and model inference.",
+    "Thirty warm samples per arm/scenario in fifteen ABBA blocks, one excluded warmup; bootstrap preserves paired blocks.",
+    "Native source/DLL and adapter are identical between arms; only PowerShell response encoding changes."
+  ]
+}

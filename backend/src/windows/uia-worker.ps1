@@ -3,6 +3,8 @@ $ErrorActionPreference = 'Stop'
 [Console]::InputEncoding = [System.Text.UTF8Encoding]::new($false)
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
 Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, WindowsBase, System.Web.Extensions, System.Security
+$serializer = New-Object System.Web.Script.Serialization.JavaScriptSerializer
+$serializer.MaxJsonLength = 2000000
 $uiaReferences = @([System.Windows.Automation.AutomationElement].Assembly.Location, [System.Windows.Automation.AutomationPattern].Assembly.Location, [System.Windows.Rect].Assembly.Location, [System.Web.Script.Serialization.JavaScriptSerializer].Assembly.Location, [System.Security.Cryptography.ProtectedData].Assembly.Location) | Select-Object -Unique
 $uiaSources = @('uia-worker.cs', 'uia-identity.cs', 'uia-observation.cs', 'uia-profile.cs', 'uia-coordination.cs', 'excel-worker.cs') | ForEach-Object { Join-Path $PSScriptRoot $_ }
 $assemblyPath = Join-Path $PSScriptRoot 'uia-worker.dll'
@@ -44,7 +46,7 @@ while ($null -ne ($line = [Console]::ReadLine())) {
         $response = @{ id = $request.id; result = $result }
         $profile = [PokemonWindowsAutomation]::EndProfile()
         if ($null -ne $profile) { $response.profile = $profile }
-        [Console]::WriteLine(($response | ConvertTo-Json -Depth 12 -Compress))
+        [Console]::WriteLine($serializer.Serialize($response))
     } catch {
         $cause = $_.Exception.GetBaseException()
         $message = $cause.Message
@@ -55,6 +57,6 @@ while ($null -ne ($line = [Console]::ReadLine())) {
         }
         $profile = [PokemonWindowsAutomation]::EndProfile()
         if ($null -ne $profile) { $failure.profile = $profile }
-        [Console]::WriteLine(($failure | ConvertTo-Json -Depth 6 -Compress))
+        [Console]::WriteLine($serializer.Serialize($failure))
     }
 }
