@@ -1,0 +1,1957 @@
+{
+  "created_at": "2026-11-12T06:41:12.970Z",
+  "environment": {
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "node": "v22.12.0",
+    "os": "10.0.26200"
+  },
+  "client": "Active Codex agent selecting calls interactively via CLI -> loopback controller -> actual MCP client/server -> native UIA. Model ID/token counters unavailable.",
+  "contract": {
+    "before": {
+      "instructions_chars": 3642,
+      "instructions_utf8_bytes": 3642,
+      "tools_utf8_bytes": 25758,
+      "tools": [
+        {
+          "name": "desktop",
+          "description_chars": 363,
+          "schema_utf8_bytes": 503
+        },
+        {
+          "name": "computer",
+          "description_chars": 1091,
+          "schema_utf8_bytes": 2725
+        },
+        {
+          "name": "pokemon",
+          "description_chars": 488,
+          "schema_utf8_bytes": 752
+        },
+        {
+          "name": "windows",
+          "description_chars": 3545,
+          "schema_utf8_bytes": 5790
+        },
+        {
+          "name": "course",
+          "description_chars": 1114,
+          "schema_utf8_bytes": 2225
+        },
+        {
+          "name": "excel",
+          "description_chars": 1465,
+          "schema_utf8_bytes": 2251
+        },
+        {
+          "name": "learning",
+          "description_chars": 832,
+          "schema_utf8_bytes": 1474
+        }
+      ],
+      "expanded_descriptions_chars": 34392
+    },
+    "after": {
+      "instructions_chars": 3042,
+      "instructions_utf8_bytes": 3042,
+      "tools_utf8_bytes": 25799,
+      "tools": [
+        {
+          "name": "desktop",
+          "description_chars": 363,
+          "schema_utf8_bytes": 503
+        },
+        {
+          "name": "computer",
+          "description_chars": 1091,
+          "schema_utf8_bytes": 2725
+        },
+        {
+          "name": "pokemon",
+          "description_chars": 488,
+          "schema_utf8_bytes": 752
+        },
+        {
+          "name": "windows",
+          "description_chars": 3545,
+          "schema_utf8_bytes": 5831
+        },
+        {
+          "name": "course",
+          "description_chars": 1114,
+          "schema_utf8_bytes": 2225
+        },
+        {
+          "name": "excel",
+          "description_chars": 1465,
+          "schema_utf8_bytes": 2251
+        },
+        {
+          "name": "learning",
+          "description_chars": 832,
+          "schema_utf8_bytes": 1474
+        }
+      ],
+      "expanded_descriptions_chars": 30192
+    }
+  },
+  "trials": [
+    {
+      "index": 0,
+      "arm": "atomic",
+      "directory": "C:\\Users\\84845~1.DES\\AppData\\Local\\Temp\\pokemon-tool-selection-uHN87y\\trial-0",
+      "calls": [
+        {
+          "submitted_at": "2026-11-12T06:43:27.571Z",
+          "client_started_at": "2026-11-12T06:43:27.556Z",
+          "elapsed_ms": 122.95230000000447,
+          "mcp_ms": 117.02109999998356,
+          "args": {
+            "action": "set_value",
+            "window_id": "4654294",
+            "window_ref": "747099f6ce8e4f96a2372b79746db5ef",
+            "snapshot": "8c470e1f3044461bad42c0771dbd112d",
+            "element_id": 2,
+            "text": "code-60789"
+          },
+          "isError": false,
+          "before_stage": 0,
+          "after_stage": 1,
+          "response_utf8_bytes": 32
+        },
+        {
+          "submitted_at": "2026-11-12T06:43:35.862Z",
+          "client_started_at": "2026-11-12T06:43:35.846Z",
+          "elapsed_ms": 63.99439999999595,
+          "mcp_ms": 63.28719999999157,
+          "args": {
+            "action": "get_ui",
+            "window_id": "4654294",
+            "window_ref": "747099f6ce8e4f96a2372b79746db5ef",
+            "query": "Task",
+            "max_chars": 4000
+          },
+          "isError": false,
+          "before_stage": 1,
+          "after_stage": 1,
+          "response_utf8_bytes": 616
+        },
+        {
+          "submitted_at": "2026-11-12T06:43:43.038Z",
+          "client_started_at": "2026-11-12T06:43:43.022Z",
+          "elapsed_ms": 97.14579999999842,
+          "mcp_ms": 69.48739999998361,
+          "args": {
+            "action": "invoke",
+            "window_id": "4654294",
+            "window_ref": "747099f6ce8e4f96a2372b79746db5ef",
+            "snapshot": "a831e69dbe704c6685331c2242be9ed8",
+            "element_id": 3
+          },
+          "isError": false,
+          "before_stage": 1,
+          "after_stage": 2,
+          "response_utf8_bytes": 11
+        },
+        {
+          "submitted_at": "2026-11-12T06:44:07.687Z",
+          "client_started_at": "2026-11-12T06:44:07.668Z",
+          "elapsed_ms": 63.77040000000852,
+          "mcp_ms": 62.95709999999963,
+          "args": {
+            "action": "get_ui",
+            "window_id": "4654294",
+            "window_ref": "747099f6ce8e4f96a2372b79746db5ef",
+            "query": "Task",
+            "max_chars": 4000
+          },
+          "isError": false,
+          "before_stage": 2,
+          "after_stage": 2,
+          "response_utf8_bytes": 589
+        }
+      ],
+      "started_at": "2026-11-12T06:43:18.610Z",
+      "stages": [
+        {
+          "kind": "edit",
+          "name": "Task Cedar 798",
+          "value": "code-60789",
+          "instruction": "Task stage 1: Write code-60789 into Task Cedar 798."
+        },
+        {
+          "kind": "button",
+          "name": "Task Harbor 962",
+          "value": "pressed",
+          "instruction": "Task stage 2: Press Task Harbor 962."
+        }
+      ],
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "window": {
+        "id": "4654294",
+        "title": "Tool Selection Fixture 83593092",
+        "process": "fixture",
+        "window_ref": "747099f6ce8e4f96a2372b79746db5ef",
+        "active": false
+      },
+      "finished_at": "2026-11-12T06:44:19.505Z",
+      "verified_state": {
+        "stage": 2,
+        "correct": 2,
+        "wrong": 0,
+        "complete": true,
+        "window_id": "4654294"
+      },
+      "traces": [
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "learning",
+          "action": "begin",
+          "started_at": "2026-11-12T06:43:18.900Z",
+          "finished_at": "2026-11-12T06:43:18.903Z",
+          "server_ms": 3.4394000000029337,
+          "client_gap_ms": null,
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "windows",
+          "action": "get_windows",
+          "started_at": "2026-11-12T06:43:18.907Z",
+          "finished_at": "2026-11-12T06:43:19.456Z",
+          "server_ms": 549.0792000000074,
+          "client_gap_ms": 3.4635999999882188,
+          "previous_tool": "learning",
+          "previous_action": "begin",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:43:19.457Z",
+          "finished_at": "2026-11-12T06:43:19.661Z",
+          "server_ms": 204.10109999999986,
+          "client_gap_ms": 0.6762000000016997,
+          "previous_tool": "windows",
+          "previous_action": "get_windows",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "windows",
+          "action": "set_value",
+          "started_at": "2026-11-12T06:43:27.571Z",
+          "finished_at": "2026-11-12T06:43:27.687Z",
+          "server_ms": 115.9998000000196,
+          "client_gap_ms": 7910.6786999999895,
+          "previous_tool": "windows",
+          "previous_action": "get_ui",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:43:35.863Z",
+          "finished_at": "2026-11-12T06:43:35.925Z",
+          "server_ms": 62.04389999998966,
+          "client_gap_ms": 8175.300199999998,
+          "previous_tool": "windows",
+          "previous_action": "set_value",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "windows",
+          "action": "invoke",
+          "started_at": "2026-11-12T06:43:43.039Z",
+          "finished_at": "2026-11-12T06:43:43.108Z",
+          "server_ms": 68.73620000001392,
+          "client_gap_ms": 7114.091899999999,
+          "previous_tool": "windows",
+          "previous_action": "get_ui",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:44:07.687Z",
+          "finished_at": "2026-11-12T06:44:07.750Z",
+          "server_ms": 62.350700000009965,
+          "client_gap_ms": 24579.925899999973,
+          "previous_tool": "windows",
+          "previous_action": "invoke",
+          "overlapping_calls": false
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "arm": "fused",
+      "directory": "C:\\Users\\84845~1.DES\\AppData\\Local\\Temp\\pokemon-tool-selection-uHN87y\\trial-1",
+      "calls": [
+        {
+          "submitted_at": "2026-11-12T06:44:28.926Z",
+          "client_started_at": "2026-11-12T06:44:28.911Z",
+          "elapsed_ms": 141.09390000000712,
+          "mcp_ms": 140.43270000000484,
+          "args": {
+            "steps": [
+              {
+                "action": "set_value",
+                "window_id": "657784",
+                "window_ref": "71c243713233428da4305b2e750f3a42",
+                "snapshot": "5b8e8287fc39493d922e6ea831dc3aa8",
+                "element_id": 2,
+                "text": "code-60789"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "657784",
+                "window_ref": "71c243713233428da4305b2e750f3a42",
+                "query": "Task",
+                "max_chars": 4000
+              }
+            ],
+            "max_chars": 5000
+          },
+          "isError": false,
+          "before_stage": 0,
+          "after_stage": 1,
+          "response_utf8_bytes": 676
+        },
+        {
+          "submitted_at": "2026-11-12T06:44:37.077Z",
+          "client_started_at": "2026-11-12T06:44:37.062Z",
+          "elapsed_ms": 107.31020000000717,
+          "mcp_ms": 106.62589999998454,
+          "args": {
+            "steps": [
+              {
+                "action": "invoke",
+                "window_id": "657784",
+                "window_ref": "71c243713233428da4305b2e750f3a42",
+                "snapshot": "412720e0fddd44a19a67726c10b60c04",
+                "element_id": 3
+              },
+              {
+                "action": "get_ui",
+                "window_id": "657784",
+                "window_ref": "71c243713233428da4305b2e750f3a42",
+                "query": "Task",
+                "max_chars": 4000
+              }
+            ],
+            "max_chars": 5000
+          },
+          "isError": false,
+          "before_stage": 1,
+          "after_stage": 2,
+          "response_utf8_bytes": 649
+        }
+      ],
+      "started_at": "2026-11-12T06:44:19.559Z",
+      "stages": [
+        {
+          "kind": "edit",
+          "name": "Task Cedar 798",
+          "value": "code-60789",
+          "instruction": "Task stage 1: Write code-60789 into Task Cedar 798."
+        },
+        {
+          "kind": "button",
+          "name": "Task Harbor 962",
+          "value": "pressed",
+          "instruction": "Task stage 2: Press Task Harbor 962."
+        }
+      ],
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "window": {
+        "id": "657784",
+        "title": "Tool Selection Fixture d30dad17",
+        "process": "fixture",
+        "window_ref": "71c243713233428da4305b2e750f3a42",
+        "active": false
+      },
+      "finished_at": "2026-11-12T06:45:00.031Z",
+      "verified_state": {
+        "stage": 2,
+        "correct": 2,
+        "wrong": 0,
+        "complete": true,
+        "window_id": "657784"
+      },
+      "traces": [
+        {
+          "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+          "tool": "learning",
+          "action": "begin",
+          "started_at": "2026-11-12T06:44:19.757Z",
+          "finished_at": "2026-11-12T06:44:19.757Z",
+          "server_ms": 0.43760000000474975,
+          "client_gap_ms": null,
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+          "tool": "windows",
+          "action": "get_windows",
+          "started_at": "2026-11-12T06:44:19.758Z",
+          "finished_at": "2026-11-12T06:44:19.825Z",
+          "server_ms": 67.26999999998952,
+          "client_gap_ms": 0.7688999999954831,
+          "previous_tool": "learning",
+          "previous_action": "begin",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:44:19.827Z",
+          "finished_at": "2026-11-12T06:44:19.892Z",
+          "server_ms": 65.8980000000156,
+          "client_gap_ms": 1.1805999999924097,
+          "previous_tool": "windows",
+          "previous_action": "get_windows",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+          "tool": "windows",
+          "action": "batch",
+          "started_at": "2026-11-12T06:44:28.927Z",
+          "finished_at": "2026-11-12T06:44:29.067Z",
+          "server_ms": 139.8794999999809,
+          "client_gap_ms": 9034.184500000003,
+          "previous_tool": "windows",
+          "previous_action": "get_ui",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+          "tool": "windows",
+          "action": "batch",
+          "started_at": "2026-11-12T06:44:37.078Z",
+          "finished_at": "2026-11-12T06:44:37.184Z",
+          "server_ms": 106.09619999999995,
+          "client_gap_ms": 8011.155300000013,
+          "previous_tool": "windows",
+          "previous_action": "batch",
+          "overlapping_calls": false
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "arm": "fused",
+      "directory": "C:\\Users\\84845~1.DES\\AppData\\Local\\Temp\\pokemon-tool-selection-uHN87y\\trial-2",
+      "calls": [
+        {
+          "submitted_at": "2026-11-12T06:45:09.213Z",
+          "client_started_at": "2026-11-12T06:45:09.198Z",
+          "elapsed_ms": 138.6869000000006,
+          "mcp_ms": 137.76999999998952,
+          "args": {
+            "steps": [
+              {
+                "action": "toggle",
+                "window_id": "1706268",
+                "window_ref": "a9d3ca912b4447e0a20ea37845fd57a6",
+                "snapshot": "6f1d5383d3fa496180ac78eafe531ebf",
+                "element_id": 2
+              },
+              {
+                "action": "get_ui",
+                "window_id": "1706268",
+                "window_ref": "a9d3ca912b4447e0a20ea37845fd57a6",
+                "query": "Task",
+                "max_chars": 4000
+              }
+            ],
+            "max_chars": 5000
+          },
+          "isError": false,
+          "before_stage": 0,
+          "after_stage": 1,
+          "response_utf8_bytes": 672
+        },
+        {
+          "submitted_at": "2026-11-12T06:45:21.047Z",
+          "client_started_at": "2026-11-12T06:45:21.031Z",
+          "elapsed_ms": 104.34410000001662,
+          "mcp_ms": 103.74299999998766,
+          "args": {
+            "steps": [
+              {
+                "action": "invoke",
+                "window_id": "1706268",
+                "window_ref": "a9d3ca912b4447e0a20ea37845fd57a6",
+                "snapshot": "61535ea5b5694ca9863464fd2c33b5aa",
+                "element_id": 3
+              },
+              {
+                "action": "get_ui",
+                "window_id": "1706268",
+                "window_ref": "a9d3ca912b4447e0a20ea37845fd57a6",
+                "query": "Task",
+                "max_chars": 4000
+              }
+            ],
+            "max_chars": 5000
+          },
+          "isError": false,
+          "before_stage": 1,
+          "after_stage": 2,
+          "response_utf8_bytes": 645
+        }
+      ],
+      "started_at": "2026-11-12T06:45:00.062Z",
+      "stages": [
+        {
+          "kind": "toggle",
+          "name": "Task Cedar 156",
+          "value": "on",
+          "instruction": "Task stage 1: Enable the Task Cedar 156 option."
+        },
+        {
+          "kind": "button",
+          "name": "Task Harbor 934",
+          "value": "pressed",
+          "instruction": "Task stage 2: Press Task Harbor 934."
+        }
+      ],
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "window": {
+        "id": "1706268",
+        "title": "Tool Selection Fixture 2b9164bc",
+        "process": "fixture",
+        "window_ref": "a9d3ca912b4447e0a20ea37845fd57a6",
+        "active": false
+      },
+      "finished_at": "2026-11-12T06:45:31.850Z",
+      "verified_state": {
+        "stage": 2,
+        "correct": 2,
+        "wrong": 0,
+        "complete": true,
+        "window_id": "1706268"
+      },
+      "traces": [
+        {
+          "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+          "tool": "learning",
+          "action": "begin",
+          "started_at": "2026-11-12T06:45:00.304Z",
+          "finished_at": "2026-11-12T06:45:00.304Z",
+          "server_ms": 0.3013000000210013,
+          "client_gap_ms": null,
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+          "tool": "windows",
+          "action": "get_windows",
+          "started_at": "2026-11-12T06:45:00.305Z",
+          "finished_at": "2026-11-12T06:45:00.365Z",
+          "server_ms": 60.578200000018114,
+          "client_gap_ms": 0.36549999998533167,
+          "previous_tool": "learning",
+          "previous_action": "begin",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:45:00.365Z",
+          "finished_at": "2026-11-12T06:45:00.435Z",
+          "server_ms": 69.50370000000112,
+          "client_gap_ms": 0.3047999999835156,
+          "previous_tool": "windows",
+          "previous_action": "get_windows",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+          "tool": "windows",
+          "action": "batch",
+          "started_at": "2026-11-12T06:45:09.213Z",
+          "finished_at": "2026-11-12T06:45:09.350Z",
+          "server_ms": 137.04860000000917,
+          "client_gap_ms": 8778.185499999992,
+          "previous_tool": "windows",
+          "previous_action": "get_ui",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+          "tool": "windows",
+          "action": "batch",
+          "started_at": "2026-11-12T06:45:21.047Z",
+          "finished_at": "2026-11-12T06:45:21.151Z",
+          "server_ms": 103.27580000000307,
+          "client_gap_ms": 11696.8946,
+          "previous_tool": "windows",
+          "previous_action": "batch",
+          "overlapping_calls": false
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "arm": "atomic",
+      "directory": "C:\\Users\\84845~1.DES\\AppData\\Local\\Temp\\pokemon-tool-selection-uHN87y\\trial-3",
+      "calls": [
+        {
+          "submitted_at": "2026-11-12T06:45:51.761Z",
+          "client_started_at": "2026-11-12T06:45:51.747Z",
+          "elapsed_ms": 154.06609999999637,
+          "mcp_ms": 128.26799999998184,
+          "args": {
+            "action": "toggle",
+            "window_id": "919630",
+            "window_ref": "a3f0d5bf66b94934820035651ed61c01",
+            "snapshot": "bf34ddc6def9481584119378101e3521",
+            "element_id": 2
+          },
+          "isError": false,
+          "before_stage": 0,
+          "after_stage": 1,
+          "response_utf8_bytes": 11
+        },
+        {
+          "submitted_at": "2026-11-12T06:46:06.162Z",
+          "client_started_at": "2026-11-12T06:46:06.145Z",
+          "elapsed_ms": 48.01569999998901,
+          "mcp_ms": 47.39139999996405,
+          "args": {
+            "action": "get_ui",
+            "window_id": "919630",
+            "window_ref": "a3f0d5bf66b94934820035651ed61c01",
+            "query": "Task",
+            "max_chars": 4000
+          },
+          "isError": false,
+          "before_stage": 1,
+          "after_stage": 1,
+          "response_utf8_bytes": 611
+        },
+        {
+          "submitted_at": "2026-11-12T06:46:13.883Z",
+          "client_started_at": "2026-11-12T06:46:13.868Z",
+          "elapsed_ms": 93.03120000002673,
+          "mcp_ms": 63.81570000003558,
+          "args": {
+            "action": "invoke",
+            "window_id": "919630",
+            "window_ref": "a3f0d5bf66b94934820035651ed61c01",
+            "snapshot": "31ca2d8588504a17b1442b9802791031",
+            "element_id": 3
+          },
+          "isError": false,
+          "before_stage": 1,
+          "after_stage": 2,
+          "response_utf8_bytes": 11
+        },
+        {
+          "submitted_at": "2026-11-12T06:46:20.836Z",
+          "client_started_at": "2026-11-12T06:46:20.821Z",
+          "elapsed_ms": 49.4890000000014,
+          "mcp_ms": 48.78110000002198,
+          "args": {
+            "action": "get_ui",
+            "window_id": "919630",
+            "window_ref": "a3f0d5bf66b94934820035651ed61c01",
+            "query": "Task",
+            "max_chars": 4000
+          },
+          "isError": false,
+          "before_stage": 2,
+          "after_stage": 2,
+          "response_utf8_bytes": 584
+        }
+      ],
+      "started_at": "2026-11-12T06:45:31.906Z",
+      "stages": [
+        {
+          "kind": "toggle",
+          "name": "Task Cedar 156",
+          "value": "on",
+          "instruction": "Task stage 1: Enable the Task Cedar 156 option."
+        },
+        {
+          "kind": "button",
+          "name": "Task Harbor 934",
+          "value": "pressed",
+          "instruction": "Task stage 2: Press Task Harbor 934."
+        }
+      ],
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "window": {
+        "id": "919630",
+        "title": "Tool Selection Fixture 8b46ff15",
+        "process": "fixture",
+        "window_ref": "a3f0d5bf66b94934820035651ed61c01",
+        "active": false
+      },
+      "finished_at": "2026-11-12T06:46:31.090Z",
+      "verified_state": {
+        "stage": 2,
+        "correct": 2,
+        "wrong": 0,
+        "complete": true,
+        "window_id": "919630"
+      },
+      "traces": [
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "learning",
+          "action": "begin",
+          "started_at": "2026-11-12T06:45:32.115Z",
+          "finished_at": "2026-11-12T06:45:32.115Z",
+          "server_ms": 0.4176000000152271,
+          "client_gap_ms": null,
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "windows",
+          "action": "get_windows",
+          "started_at": "2026-11-12T06:45:32.116Z",
+          "finished_at": "2026-11-12T06:45:32.205Z",
+          "server_ms": 89.11639999999898,
+          "client_gap_ms": 0.5157999999937601,
+          "previous_tool": "learning",
+          "previous_action": "begin",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:45:32.206Z",
+          "finished_at": "2026-11-12T06:45:32.300Z",
+          "server_ms": 93.47239999999874,
+          "client_gap_ms": 1.0011999999987893,
+          "previous_tool": "windows",
+          "previous_action": "get_windows",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "windows",
+          "action": "toggle",
+          "started_at": "2026-11-12T06:45:51.761Z",
+          "finished_at": "2026-11-12T06:45:51.889Z",
+          "server_ms": 127.8354999999865,
+          "client_gap_ms": 19461.940700000036,
+          "previous_tool": "windows",
+          "previous_action": "get_ui",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:46:06.162Z",
+          "finished_at": "2026-11-12T06:46:06.209Z",
+          "server_ms": 46.91849999997066,
+          "client_gap_ms": 14272.68650000001,
+          "previous_tool": "windows",
+          "previous_action": "toggle",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "windows",
+          "action": "invoke",
+          "started_at": "2026-11-12T06:46:13.883Z",
+          "finished_at": "2026-11-12T06:46:13.947Z",
+          "server_ms": 63.31729999999516,
+          "client_gap_ms": 7674.2966000000015,
+          "previous_tool": "windows",
+          "previous_action": "get_ui",
+          "overlapping_calls": false
+        },
+        {
+          "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+          "tool": "windows",
+          "action": "get_ui",
+          "started_at": "2026-11-12T06:46:20.837Z",
+          "finished_at": "2026-11-12T06:46:20.885Z",
+          "server_ms": 48.34590000001481,
+          "client_gap_ms": 6890.227599999984,
+          "previous_tool": "windows",
+          "previous_action": "invoke",
+          "overlapping_calls": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Synthetic owned branching WinForms fixture, not unconstrained tasks in arbitrary applications.",
+    "Client gaps include active-agent deliberation, tool rendering, CLI startup and transport; they are not isolated model inference. Native/server time is measured separately.",
+    "Atomic vs fused is a controlled orchestration comparison using existing batch capability; it does not prove shorter instructions make a model faster.",
+    "Two unknown-until-observed instructions per trial, three action kinds. Final fixture state independently verifies completion and wrong actions.",
+    "In-memory MCP transport isolates server/native work; loopback HTTP and CLI bridge are additional benchmark overhead, not production stdio latency.",
+    "Test key and no overlay isolate execution and journal overhead; no real user data or satisfaction labels."
+  ],
+  "hashes": {
+    "index.js": "4ef4254f3644e331271b1460049eab0038823a313e6845d6ba573f6ee9b96c12",
+    "learning/instructions.js": "611fe1cdac09342f919c53ef15d5f6c9cab455c6c3d4563fe46b4227777b5be1",
+    "learning/instrument.js": "aa1354aadaf9c25571c9ea2e027b1e432d8ee3e79c34803c8721b786bdb195ef",
+    "tools/windows.js": "d03776d8b1f5380aa2f8daf1d0f8ba2a39b3cc541a022a245bbcfa3be28e69f6",
+    "utils/client-timing.js": "008f5b1bf63c94145993d7ba771ec315244bf051b925a571ae53ad7e473b17f3",
+    "windows/uia-worker.dll": "69c849e05d1090e914488331d397b4f6b197e629bba1f8026cd35b071416ab3e"
+  },
+  "native_spans": [
+    {
+      "tool": "learning",
+      "action": "begin",
+      "total_ms": 17.134900000004563,
+      "breakdown_ms": {
+        "queue_wait": 0.21850000000267755,
+        "companion_before": 0.11630000000877772,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.018299999996088445
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 543.5063000000082,
+      "breakdown_ms": {
+        "queue_wait": 0.11310000000230502,
+        "companion_before": 0.09679999998479616,
+        "action": 75.50800000000163,
+        "companion_after": 0.06380000000353903,
+        "serialization": 0.03340000001480803,
+        "worker_round_trip": 541.1189000000013,
+        "post_processing": 0.01680000001215376,
+        "native_window_verify": 2.5197,
+        "native_window_capture_inclusive": 8.4857,
+        "native_window_metadata_inclusive": 65.3169,
+        "native_window_enumeration_inclusive": 68.059
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_window_capture_inclusive": 16,
+        "native_window_metadata_inclusive": 16,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 201.60540000000037,
+      "breakdown_ms": {
+        "queue_wait": 0.04629999998724088,
+        "companion_before": 0.03190000000176951,
+        "action": 197.869200000001,
+        "companion_after": 0.009500000000116415,
+        "serialization": 0.03500000000349246,
+        "worker_round_trip": 201.01440000000002,
+        "post_processing": 0.1521000000066124,
+        "native_window_verify": 0.693,
+        "native_navigation_cache_fetch": 76.00319999999999,
+        "native_identity_projection": 1.0495999999999999,
+        "native_visit_projection_inclusive": 4.5508,
+        "native_discovery_value_read": 0.0063,
+        "native_tree_walk_inclusive": 81.41,
+        "native_window_metadata_inclusive": 2.8001,
+        "native_discovery_inclusive": 179.5772,
+        "uia_tree_walk": 80.9693
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "set_value",
+      "total_ms": 111.62249999999767,
+      "breakdown_ms": {
+        "queue_wait": 0.03840000001946464,
+        "companion_before": 0.015100000018719584,
+        "action": 107.82489999997779,
+        "companion_after": 0.15180000002146699,
+        "serialization": 0.02850000004400499,
+        "worker_round_trip": 110.57070000001113,
+        "post_processing": 0.012400000006891787,
+        "native_window_verify": 0.8586,
+        "native_navigation_cache_fetch": 40.94749999999999,
+        "native_identity_projection": 0.0333,
+        "native_visit_projection_inclusive": 0.2683,
+        "native_tree_walk_inclusive": 41.2692,
+        "native_identity_cache_fetch": 2.2836999999999996,
+        "native_ancestor_navigation": 9.6745,
+        "native_element_verify_inclusive": 13.1131,
+        "native_identity_resolve_inclusive": 57.0391,
+        "native_pattern_action": 30.4637,
+        "native_pattern_dispatch_inclusive": 36.9932,
+        "native_post_action_value_read": 1.3807,
+        "native_act_inclusive": 96.3544
+      },
+      "counts": {
+        "native_window_verify": 5,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 12,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 60.78049999999348,
+      "breakdown_ms": {
+        "queue_wait": 0.07520000002114102,
+        "companion_before": 0.02890000000479631,
+        "action": 58.149800000013784,
+        "companion_after": 0.009000000020023435,
+        "serialization": 0.034099999989848584,
+        "worker_round_trip": 60.3637999999919,
+        "post_processing": 0.04120000000693835,
+        "native_window_verify": 0.537,
+        "native_navigation_cache_fetch": 33.3523,
+        "native_identity_projection": 0.015199999999999998,
+        "native_visit_projection_inclusive": 0.19519999999999998,
+        "native_discovery_value_read": 0.0004,
+        "native_tree_walk_inclusive": 33.5731,
+        "native_window_metadata_inclusive": 2.6082,
+        "native_discovery_inclusive": 56.7105,
+        "uia_tree_walk": 33.5626
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 67.27059999998892,
+      "breakdown_ms": {
+        "queue_wait": 0.03740000000107102,
+        "companion_before": 0.027000000001862645,
+        "action": 64.94479999999749,
+        "companion_after": 0.00990000000456348,
+        "serialization": 0.0181999999913387,
+        "worker_round_trip": 66.90260000000126,
+        "post_processing": 0.01029999999445863,
+        "native_window_verify": 1.0953000000000002,
+        "native_navigation_cache_fetch": 32.779799999999994,
+        "native_identity_projection": 0.025500000000000005,
+        "native_visit_projection_inclusive": 0.022699999999999998,
+        "native_tree_walk_inclusive": 32.8303,
+        "native_identity_cache_fetch": 1.8886,
+        "native_ancestor_navigation": 8.896899999999999,
+        "native_element_verify_inclusive": 11.0468,
+        "native_identity_resolve_inclusive": 44.965,
+        "native_pattern_action": 9.2396,
+        "native_pattern_dispatch_inclusive": 13.7068,
+        "native_post_action_value_read": 0.0266,
+        "native_act_inclusive": 58.7419
+      },
+      "counts": {
+        "native_window_verify": 5,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 12,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 60.85669999997481,
+      "breakdown_ms": {
+        "queue_wait": 0.03169999999227002,
+        "companion_before": 0.03740000000107102,
+        "action": 58.62839999998687,
+        "companion_after": 0.013299999991431832,
+        "serialization": 0.0478000000002794,
+        "worker_round_trip": 60.443700000003446,
+        "post_processing": 0.03579999998328276,
+        "native_window_verify": 0.7262000000000001,
+        "native_navigation_cache_fetch": 45.0271,
+        "native_identity_projection": 0.0175,
+        "native_visit_projection_inclusive": 0.048100000000000004,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 45.1046,
+        "native_window_metadata_inclusive": 5.1797,
+        "native_discovery_inclusive": 56.7514,
+        "uia_tree_walk": 45.093900000000005
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "learning",
+      "action": "finish",
+      "total_ms": 1.0106999999843538,
+      "breakdown_ms": {
+        "queue_wait": 0.02530000000842847,
+        "companion_before": 0.020700000022770837,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0021000000124331564
+      },
+      "counts": {}
+    },
+    {
+      "tool": "learning",
+      "action": "begin",
+      "total_ms": 1.6698000000033062,
+      "breakdown_ms": {
+        "queue_wait": 0.023199999995995313,
+        "companion_before": 0.01720000000204891,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0022000000171829015
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 65.03349999999045,
+      "breakdown_ms": {
+        "queue_wait": 0.04469999999855645,
+        "companion_before": 0.026000000012572855,
+        "action": 62.000700000004144,
+        "companion_after": 0.00829999998677522,
+        "serialization": 0.020600000047124922,
+        "worker_round_trip": 64.67280000000028,
+        "post_processing": 0.018299999966984615,
+        "native_window_verify": 2.1168,
+        "native_window_metadata_inclusive": 59.9268,
+        "native_window_capture_inclusive": 0.3429,
+        "native_window_enumeration_inclusive": 60.6322
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_window_metadata_inclusive": 16,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 63.42119999998249,
+      "breakdown_ms": {
+        "queue_wait": 0.0687000000034459,
+        "companion_before": 0.021599999978207052,
+        "action": 60.11390000002575,
+        "companion_after": 0.006799999973736703,
+        "serialization": 0.03359999993699603,
+        "worker_round_trip": 63.05010000002221,
+        "post_processing": 0.023000000015599653,
+        "native_window_verify": 0.5892,
+        "native_navigation_cache_fetch": 35.816599999999994,
+        "native_identity_projection": 0.0139,
+        "native_visit_projection_inclusive": 0.04020000000000001,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 35.8821,
+        "native_window_metadata_inclusive": 2.5667,
+        "native_discovery_inclusive": 58.6789,
+        "uia_tree_walk": 35.8718
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 138.4242999999842,
+      "breakdown_ms": {
+        "queue_wait": 0.030800000007729977,
+        "companion_before": 0.028000000020256266,
+        "action": 135.5516999999818,
+        "companion_after": 0.014599999965867028,
+        "serialization": 0.05180000001564622,
+        "worker_round_trip": 134.7056000000157,
+        "post_processing": 0.045799999992595986,
+        "native_window_verify": 1.4874999999999998,
+        "native_navigation_cache_fetch": 72.5018,
+        "native_identity_projection": 0.0475,
+        "native_visit_projection_inclusive": 0.0922,
+        "native_tree_walk_inclusive": 72.6551,
+        "native_identity_cache_fetch": 2.2401999999999997,
+        "native_ancestor_navigation": 7.132,
+        "native_element_verify_inclusive": 9.6331,
+        "native_identity_resolve_inclusive": 45.1243,
+        "native_pattern_action": 26.9843,
+        "native_pattern_dispatch_inclusive": 31.5771,
+        "native_post_action_value_read": 2.1561,
+        "native_act_inclusive": 79.0378,
+        "native_discovery_value_read": 0.0004,
+        "native_window_metadata_inclusive": 4.1479,
+        "native_discovery_inclusive": 50.6321,
+        "uia_tree_walk": 37.4406
+      },
+      "counts": {
+        "native_window_verify": 9,
+        "native_navigation_cache_fetch": 22,
+        "native_identity_projection": 22,
+        "native_visit_projection_inclusive": 20,
+        "native_tree_walk_inclusive": 2,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 104.82990000001155,
+      "breakdown_ms": {
+        "queue_wait": 0.025399999984074384,
+        "companion_before": 0.037700000015320256,
+        "action": 102.449099999998,
+        "companion_after": 0.06440000000293367,
+        "serialization": 0.04789999997592531,
+        "worker_round_trip": 103.96189999999478,
+        "post_processing": 0.02569999999832362,
+        "native_window_verify": 1.113,
+        "native_navigation_cache_fetch": 67.37719999999999,
+        "native_identity_projection": 0.0376,
+        "native_visit_projection_inclusive": 0.058300000000000005,
+        "native_tree_walk_inclusive": 67.49260000000001,
+        "native_identity_cache_fetch": 1.9397,
+        "native_ancestor_navigation": 7.7472,
+        "native_element_verify_inclusive": 9.8852,
+        "native_identity_resolve_inclusive": 42.7597,
+        "native_pattern_action": 8.9619,
+        "native_pattern_dispatch_inclusive": 15.055,
+        "native_post_action_value_read": 0.0153,
+        "native_act_inclusive": 57.8485,
+        "native_discovery_value_read": 0.0004,
+        "native_window_metadata_inclusive": 2.5893,
+        "native_discovery_inclusive": 41.4294,
+        "uia_tree_walk": 34.005500000000005
+      },
+      "counts": {
+        "native_window_verify": 9,
+        "native_navigation_cache_fetch": 22,
+        "native_identity_projection": 22,
+        "native_visit_projection_inclusive": 20,
+        "native_tree_walk_inclusive": 2,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "learning",
+      "action": "finish",
+      "total_ms": 0.9140999999945052,
+      "breakdown_ms": {
+        "queue_wait": 0.011499999993247911,
+        "companion_before": 0.014500000019324943,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0031000000017229468
+      },
+      "counts": {}
+    },
+    {
+      "tool": "learning",
+      "action": "begin",
+      "total_ms": 2.805900000006659,
+      "breakdown_ms": {
+        "queue_wait": 0.011900000012246892,
+        "companion_before": 0.011599999997997656,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0026999999827239662
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 59.37739999999758,
+      "breakdown_ms": {
+        "queue_wait": 0.024000000004889444,
+        "companion_before": 0.0826000000233762,
+        "action": 55.57170000000042,
+        "companion_after": 0.013199999986682087,
+        "serialization": 0.030900000070687383,
+        "worker_round_trip": 58.81549999999697,
+        "post_processing": 0.01860000001033768,
+        "native_window_verify": 2.5415000000000005,
+        "native_window_metadata_inclusive": 53.729299999999995,
+        "native_window_capture_inclusive": 0.2302,
+        "native_window_enumeration_inclusive": 54.0864
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_window_metadata_inclusive": 16,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 67.82300000000396,
+      "breakdown_ms": {
+        "queue_wait": 0.018099999986588955,
+        "companion_before": 0.02890000000479631,
+        "action": 65.82070000001113,
+        "companion_after": 0.006800000002840534,
+        "serialization": 0.02989999996498227,
+        "worker_round_trip": 67.54200000004494,
+        "post_processing": 0.02569999999832362,
+        "native_window_verify": 0.6391,
+        "native_navigation_cache_fetch": 41.471000000000004,
+        "native_identity_projection": 0.020700000000000003,
+        "native_visit_projection_inclusive": 0.5017,
+        "native_tree_walk_inclusive": 42.0061,
+        "native_window_metadata_inclusive": 2.5226,
+        "native_discovery_inclusive": 64.2195,
+        "uia_tree_walk": 41.9945
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 135.7231000000029,
+      "breakdown_ms": {
+        "queue_wait": 0.033499999990453944,
+        "companion_before": 0.017099999968195334,
+        "action": 133.8171999999613,
+        "companion_after": 0.008600000001024455,
+        "serialization": 0.045399999973597005,
+        "worker_round_trip": 134.99740000002203,
+        "post_processing": 0.027199999982258305,
+        "native_window_verify": 1.1947,
+        "native_navigation_cache_fetch": 72.65610000000001,
+        "native_identity_projection": 0.0309,
+        "native_visit_projection_inclusive": 0.0733,
+        "native_tree_walk_inclusive": 72.7831,
+        "native_identity_cache_fetch": 1.6038000000000001,
+        "native_ancestor_navigation": 7.301,
+        "native_element_verify_inclusive": 9.0964,
+        "native_identity_resolve_inclusive": 46.6463,
+        "native_pattern_action": 33.4238,
+        "native_pattern_dispatch_inclusive": 38.488,
+        "native_post_action_value_read": 0.0202,
+        "native_act_inclusive": 85.1727,
+        "native_window_metadata_inclusive": 4.7832,
+        "native_discovery_inclusive": 45.5322,
+        "uia_tree_walk": 34.8278
+      },
+      "counts": {
+        "native_window_verify": 9,
+        "native_navigation_cache_fetch": 22,
+        "native_identity_projection": 22,
+        "native_visit_projection_inclusive": 20,
+        "native_tree_walk_inclusive": 2,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 102.33670000001439,
+      "breakdown_ms": {
+        "queue_wait": 0.023100000020349398,
+        "companion_before": 0.012799999967683107,
+        "action": 100.54159999996773,
+        "companion_after": 0.009599999990314245,
+        "serialization": 0.04469999996945262,
+        "worker_round_trip": 101.44679999997607,
+        "post_processing": 0.03149999998277053,
+        "native_window_verify": 1.3201,
+        "native_navigation_cache_fetch": 67.21019999999999,
+        "native_identity_projection": 0.0334,
+        "native_visit_projection_inclusive": 0.07579999999999999,
+        "native_tree_walk_inclusive": 67.3397,
+        "native_identity_cache_fetch": 1.7291,
+        "native_ancestor_navigation": 7.1876999999999995,
+        "native_element_verify_inclusive": 9.1493,
+        "native_identity_resolve_inclusive": 42.052,
+        "native_pattern_action": 8.7783,
+        "native_pattern_dispatch_inclusive": 13.3924,
+        "native_post_action_value_read": 0.0233,
+        "native_act_inclusive": 55.4986,
+        "native_window_metadata_inclusive": 2.7357,
+        "native_discovery_inclusive": 41.0145,
+        "uia_tree_walk": 34.300000000000004
+      },
+      "counts": {
+        "native_window_verify": 9,
+        "native_navigation_cache_fetch": 22,
+        "native_identity_projection": 22,
+        "native_visit_projection_inclusive": 20,
+        "native_tree_walk_inclusive": 2,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "learning",
+      "action": "finish",
+      "total_ms": 1.3196999999927357,
+      "breakdown_ms": {
+        "queue_wait": 0.010999999998603016,
+        "companion_before": 0.007799999992130324,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0026000000070780516
+      },
+      "counts": {}
+    },
+    {
+      "tool": "learning",
+      "action": "begin",
+      "total_ms": 2.0234999999811407,
+      "breakdown_ms": {
+        "queue_wait": 0.01620000001275912,
+        "companion_before": 0.010999999998603016,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.003999999986262992
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 85.93150000000605,
+      "breakdown_ms": {
+        "queue_wait": 0.04839999999967404,
+        "companion_before": 0.013100000011036173,
+        "action": 83.64830000000075,
+        "companion_after": 0.0038000000058673322,
+        "serialization": 0.017699999996693805,
+        "worker_round_trip": 85.6193000000203,
+        "post_processing": 0.014100000029429793,
+        "native_window_verify": 1.4465,
+        "native_window_capture_inclusive": 7.227800000000001,
+        "native_window_metadata_inclusive": 81.7796,
+        "native_window_enumeration_inclusive": 82.2319
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_window_capture_inclusive": 16,
+        "native_window_metadata_inclusive": 16,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 92.29250000001048,
+      "breakdown_ms": {
+        "queue_wait": 0.043600000004516914,
+        "companion_before": 0.01619999998365529,
+        "action": 88.29739999998128,
+        "companion_after": 0.0031999999773688614,
+        "serialization": 0.03579999995417893,
+        "worker_round_trip": 92.00429999997141,
+        "post_processing": 0.02810000002500601,
+        "native_window_verify": 0.8696999999999999,
+        "native_navigation_cache_fetch": 59.6385,
+        "native_identity_projection": 0.0194,
+        "native_visit_projection_inclusive": 0.09319999999999999,
+        "native_tree_walk_inclusive": 59.7713,
+        "native_window_metadata_inclusive": 3.3013,
+        "native_discovery_inclusive": 86.8298,
+        "uia_tree_walk": 59.7552
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "toggle",
+      "total_ms": 126.4197999999742,
+      "breakdown_ms": {
+        "queue_wait": 0.022300000011455268,
+        "companion_before": 0.0062000000034458935,
+        "action": 124.62839999998687,
+        "companion_after": 0.0040000000153668225,
+        "serialization": 0.017899999977089465,
+        "worker_round_trip": 126.19439999997849,
+        "post_processing": 0.004200000024866313,
+        "native_window_verify": 0.6226,
+        "native_navigation_cache_fetch": 44.18759999999999,
+        "native_identity_projection": 0.0218,
+        "native_visit_projection_inclusive": 0.0233,
+        "native_tree_walk_inclusive": 44.241,
+        "native_identity_cache_fetch": 1.6297,
+        "native_ancestor_navigation": 6.2896,
+        "native_element_verify_inclusive": 8.1319,
+        "native_identity_resolve_inclusive": 77.4616,
+        "native_pattern_action": 36.6864,
+        "native_pattern_dispatch_inclusive": 40.7413,
+        "native_post_action_value_read": 0.0195,
+        "native_act_inclusive": 118.244
+      },
+      "counts": {
+        "native_window_verify": 5,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 12,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 46.00090000004275,
+      "breakdown_ms": {
+        "queue_wait": 0.024099999980535358,
+        "companion_before": 0.013100000040140003,
+        "action": 44.253300000040326,
+        "companion_after": 0.0031000000308267772,
+        "serialization": 0.030999999959021807,
+        "worker_round_trip": 45.794199999945704,
+        "post_processing": 0.022700000030454248,
+        "native_window_verify": 1.1317,
+        "native_navigation_cache_fetch": 34.110800000000005,
+        "native_identity_projection": 0.0192,
+        "native_visit_projection_inclusive": 0.0758,
+        "native_tree_walk_inclusive": 34.2227,
+        "native_window_metadata_inclusive": 3.8313,
+        "native_discovery_inclusive": 42.6818,
+        "uia_tree_walk": 34.2108
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 61.68589999998221,
+      "breakdown_ms": {
+        "queue_wait": 0.03160000004572794,
+        "companion_before": 0.011600000027101487,
+        "action": 59.412300000025425,
+        "companion_after": 0.005699999979697168,
+        "serialization": 0.02490000001853332,
+        "worker_round_trip": 61.3982000000542,
+        "post_processing": 0.005600000033155084,
+        "native_window_verify": 0.7935,
+        "native_navigation_cache_fetch": 32.9487,
+        "native_identity_projection": 0.0196,
+        "native_visit_projection_inclusive": 0.020700000000000003,
+        "native_tree_walk_inclusive": 32.9933,
+        "native_identity_cache_fetch": 1.5702,
+        "native_ancestor_navigation": 7.3224,
+        "native_element_verify_inclusive": 9.122300000000001,
+        "native_identity_resolve_inclusive": 41.409,
+        "native_pattern_action": 10.7659,
+        "native_pattern_dispatch_inclusive": 16.1874,
+        "native_post_action_value_read": 0.02,
+        "native_act_inclusive": 57.6365
+      },
+      "counts": {
+        "native_window_verify": 5,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 12,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 2,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 47.05960000003688,
+      "breakdown_ms": {
+        "queue_wait": 0.022699999972246587,
+        "companion_before": 0.009500000043772161,
+        "action": 45.05839999997988,
+        "companion_after": 0.005600000033155084,
+        "serialization": 0.0363999999826774,
+        "worker_round_trip": 46.82630000001518,
+        "post_processing": 0.027600000030361116,
+        "native_window_verify": 0.619,
+        "native_navigation_cache_fetch": 33.507999999999996,
+        "native_identity_projection": 0.0126,
+        "native_visit_projection_inclusive": 0.05710000000000001,
+        "native_tree_walk_inclusive": 33.5895,
+        "native_window_metadata_inclusive": 5.5882,
+        "native_discovery_inclusive": 43.7126,
+        "uia_tree_walk": 33.5809
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 11,
+        "native_identity_projection": 10,
+        "native_visit_projection_inclusive": 10,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "learning",
+      "action": "finish",
+      "total_ms": 1.2688999999663793,
+      "breakdown_ms": {
+        "queue_wait": 0.010000000009313226,
+        "companion_before": 0.007299999997485429,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.0032999999821186066
+      },
+      "counts": {}
+    }
+  ],
+  "client_traces": [
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "learning",
+      "action": "begin",
+      "started_at": "2026-11-12T06:43:18.900Z",
+      "finished_at": "2026-11-12T06:43:18.903Z",
+      "server_ms": 3.4394000000029337,
+      "client_gap_ms": null,
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "windows",
+      "action": "get_windows",
+      "started_at": "2026-11-12T06:43:18.907Z",
+      "finished_at": "2026-11-12T06:43:19.456Z",
+      "server_ms": 549.0792000000074,
+      "client_gap_ms": 3.4635999999882188,
+      "previous_tool": "learning",
+      "previous_action": "begin",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:43:19.457Z",
+      "finished_at": "2026-11-12T06:43:19.661Z",
+      "server_ms": 204.10109999999986,
+      "client_gap_ms": 0.6762000000016997,
+      "previous_tool": "windows",
+      "previous_action": "get_windows",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "windows",
+      "action": "set_value",
+      "started_at": "2026-11-12T06:43:27.571Z",
+      "finished_at": "2026-11-12T06:43:27.687Z",
+      "server_ms": 115.9998000000196,
+      "client_gap_ms": 7910.6786999999895,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:43:35.863Z",
+      "finished_at": "2026-11-12T06:43:35.925Z",
+      "server_ms": 62.04389999998966,
+      "client_gap_ms": 8175.300199999998,
+      "previous_tool": "windows",
+      "previous_action": "set_value",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "windows",
+      "action": "invoke",
+      "started_at": "2026-11-12T06:43:43.039Z",
+      "finished_at": "2026-11-12T06:43:43.108Z",
+      "server_ms": 68.73620000001392,
+      "client_gap_ms": 7114.091899999999,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:44:07.687Z",
+      "finished_at": "2026-11-12T06:44:07.750Z",
+      "server_ms": 62.350700000009965,
+      "client_gap_ms": 24579.925899999973,
+      "previous_tool": "windows",
+      "previous_action": "invoke",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "0252c553-c36c-4273-ae94-cd28d2601fd6",
+      "tool": "learning",
+      "action": "finish",
+      "started_at": "2026-11-12T06:44:19.505Z",
+      "finished_at": "2026-11-12T06:44:19.506Z",
+      "server_ms": 0.9567000000097323,
+      "client_gap_ms": 11755.6918,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "tool": "learning",
+      "action": "begin",
+      "started_at": "2026-11-12T06:44:19.757Z",
+      "finished_at": "2026-11-12T06:44:19.757Z",
+      "server_ms": 0.43760000000474975,
+      "client_gap_ms": null,
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "tool": "windows",
+      "action": "get_windows",
+      "started_at": "2026-11-12T06:44:19.758Z",
+      "finished_at": "2026-11-12T06:44:19.825Z",
+      "server_ms": 67.26999999998952,
+      "client_gap_ms": 0.7688999999954831,
+      "previous_tool": "learning",
+      "previous_action": "begin",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:44:19.827Z",
+      "finished_at": "2026-11-12T06:44:19.892Z",
+      "server_ms": 65.8980000000156,
+      "client_gap_ms": 1.1805999999924097,
+      "previous_tool": "windows",
+      "previous_action": "get_windows",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "tool": "windows",
+      "action": "batch",
+      "started_at": "2026-11-12T06:44:28.927Z",
+      "finished_at": "2026-11-12T06:44:29.067Z",
+      "server_ms": 139.8794999999809,
+      "client_gap_ms": 9034.184500000003,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "tool": "windows",
+      "action": "batch",
+      "started_at": "2026-11-12T06:44:37.078Z",
+      "finished_at": "2026-11-12T06:44:37.184Z",
+      "server_ms": 106.09619999999995,
+      "client_gap_ms": 8011.155300000013,
+      "previous_tool": "windows",
+      "previous_action": "batch",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "815dbf60-8cce-4b2d-8cbb-c6c57a103b64",
+      "tool": "learning",
+      "action": "finish",
+      "started_at": "2026-11-12T06:45:00.032Z",
+      "finished_at": "2026-11-12T06:45:00.033Z",
+      "server_ms": 0.8649999999906868,
+      "client_gap_ms": 22847.96770000001,
+      "previous_tool": "windows",
+      "previous_action": "batch",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "tool": "learning",
+      "action": "begin",
+      "started_at": "2026-11-12T06:45:00.304Z",
+      "finished_at": "2026-11-12T06:45:00.304Z",
+      "server_ms": 0.3013000000210013,
+      "client_gap_ms": null,
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "tool": "windows",
+      "action": "get_windows",
+      "started_at": "2026-11-12T06:45:00.305Z",
+      "finished_at": "2026-11-12T06:45:00.365Z",
+      "server_ms": 60.578200000018114,
+      "client_gap_ms": 0.36549999998533167,
+      "previous_tool": "learning",
+      "previous_action": "begin",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:45:00.365Z",
+      "finished_at": "2026-11-12T06:45:00.435Z",
+      "server_ms": 69.50370000000112,
+      "client_gap_ms": 0.3047999999835156,
+      "previous_tool": "windows",
+      "previous_action": "get_windows",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "tool": "windows",
+      "action": "batch",
+      "started_at": "2026-11-12T06:45:09.213Z",
+      "finished_at": "2026-11-12T06:45:09.350Z",
+      "server_ms": 137.04860000000917,
+      "client_gap_ms": 8778.185499999992,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "tool": "windows",
+      "action": "batch",
+      "started_at": "2026-11-12T06:45:21.047Z",
+      "finished_at": "2026-11-12T06:45:21.151Z",
+      "server_ms": 103.27580000000307,
+      "client_gap_ms": 11696.8946,
+      "previous_tool": "windows",
+      "previous_action": "batch",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "8ab02083-7e13-4425-bb91-63c774cf8fe7",
+      "tool": "learning",
+      "action": "finish",
+      "started_at": "2026-11-12T06:45:31.851Z",
+      "finished_at": "2026-11-12T06:45:31.852Z",
+      "server_ms": 1.2718999999924563,
+      "client_gap_ms": 10699.980299999996,
+      "previous_tool": "windows",
+      "previous_action": "batch",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "learning",
+      "action": "begin",
+      "started_at": "2026-11-12T06:45:32.115Z",
+      "finished_at": "2026-11-12T06:45:32.115Z",
+      "server_ms": 0.4176000000152271,
+      "client_gap_ms": null,
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "windows",
+      "action": "get_windows",
+      "started_at": "2026-11-12T06:45:32.116Z",
+      "finished_at": "2026-11-12T06:45:32.205Z",
+      "server_ms": 89.11639999999898,
+      "client_gap_ms": 0.5157999999937601,
+      "previous_tool": "learning",
+      "previous_action": "begin",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:45:32.206Z",
+      "finished_at": "2026-11-12T06:45:32.300Z",
+      "server_ms": 93.47239999999874,
+      "client_gap_ms": 1.0011999999987893,
+      "previous_tool": "windows",
+      "previous_action": "get_windows",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "windows",
+      "action": "toggle",
+      "started_at": "2026-11-12T06:45:51.761Z",
+      "finished_at": "2026-11-12T06:45:51.889Z",
+      "server_ms": 127.8354999999865,
+      "client_gap_ms": 19461.940700000036,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:46:06.162Z",
+      "finished_at": "2026-11-12T06:46:06.209Z",
+      "server_ms": 46.91849999997066,
+      "client_gap_ms": 14272.68650000001,
+      "previous_tool": "windows",
+      "previous_action": "toggle",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "windows",
+      "action": "invoke",
+      "started_at": "2026-11-12T06:46:13.883Z",
+      "finished_at": "2026-11-12T06:46:13.947Z",
+      "server_ms": 63.31729999999516,
+      "client_gap_ms": 7674.2966000000015,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "windows",
+      "action": "get_ui",
+      "started_at": "2026-11-12T06:46:20.837Z",
+      "finished_at": "2026-11-12T06:46:20.885Z",
+      "server_ms": 48.34590000001481,
+      "client_gap_ms": 6890.227599999984,
+      "previous_tool": "windows",
+      "previous_action": "invoke",
+      "overlapping_calls": false
+    },
+    {
+      "task_id": "08b86b04-1cc4-422d-bbbe-eadb10d7b665",
+      "tool": "learning",
+      "action": "finish",
+      "started_at": "2026-11-12T06:46:31.090Z",
+      "finished_at": "2026-11-12T06:46:31.091Z",
+      "server_ms": 1.216599999985192,
+      "client_gap_ms": 10205.633900000015,
+      "previous_tool": "windows",
+      "previous_action": "get_ui",
+      "overlapping_calls": false
+    }
+  ]
+}

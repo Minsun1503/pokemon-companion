@@ -69,6 +69,32 @@ describe('efficient local model', () => {
 		expect(predict(model, vector)).toBeLessThan(positive);
 		expect(model.examples).toBe(2);
 	});
+	it('keeps persisted sparse scores and feedback updates compatible', () => {
+		const dot = (first: Record<string, number>, second: Record<string, number>) => Object.entries(first).reduce((sum, [key, value]) => sum + (value * (second[key] ?? 0)), 0);
+		const score = (model: {weights: Record<string, number>; bias: number}, vector: Record<string, number>) => 1 / (1 + Math.exp(-Math.max(-20, Math.min(20, model.bias + dot(model.weights, vector)))));
+		const original: {weights: Record<string, number>; bias: number; examples: number} = {weights: {0: -0.3, 2047: 0.8}, bias: 0.2, examples: 4};
+		const optimized = structuredClone(original);
+		for (let index = 0; index < 256; index++) {
+			const vector = features(index % 17 === 0 ? '' : `Type the field ${index} please`);
+			const label = index % 3 === 0 ? 0 : 1;
+			expect(similarity(vector, original.weights)).toBe(dot(vector, original.weights));
+			expect(similarity(vector, original.weights, Object.keys(vector))).toBe(dot(vector, original.weights));
+			expect(predict(optimized, vector)).toBe(score(original, vector));
+			expect(predict(optimized, vector, Object.keys(vector))).toBe(score(original, vector));
+			const gradient = (label - score(original, vector)) * 0.4;
+			for (const [key, value] of Object.entries(vector)) {
+				original.weights[key] = ((original.weights[key] ?? 0) * 0.999) + (gradient * value);
+			}
+
+			original.bias = Math.max(-4, Math.min(4, original.bias + gradient));
+			original.examples += 1;
+			train(optimized, vector, label);
+			expect(optimized).toEqual(original);
+		}
+
+		const inherited = Object.assign(Object.create({7: 100}) as Record<string, number>, {1: 0.5});
+		expect(similarity(inherited, {1: 2, 7: 1})).toBe(1);
+	});
 });
 
 describe('local learning and secure reuse', () => {
@@ -283,6 +309,25 @@ describe('local learning and secure reuse', () => {
 		await learning.forget();
 		expect((await learning.stats()).tasks).toBe(0);
 		expect((await learning.stats()).enabled).toBe(false);
+	});
+	it('withholds existing suggestions while disabled and restores them when enabled', async () => {
+		const {learning} = await fixture();
+		const task = await learning.begin('Type a note', parameters);
+		await learning.record(task.id, 'windows', {steps: plan}, success, 1);
+		await learning.finish(task.id, 'met', 'Observed');
+		await learning.feedback(task.id, 'satisfied', 'explicit_user_report');
+		expect(await learning.suggest(task.query)).toHaveLength(1);
+		await learning.configure(false, 30);
+		expect(await learning.suggest(task.query)).toEqual([]);
+		await learning.configure(true, 30);
+		vi.stubEnv('POKEMON_LEARNING', 'off');
+		try {
+			expect(await learning.suggest(task.query)).toEqual([]);
+		} finally {
+			vi.unstubAllEnvs();
+		}
+
+		expect(await learning.suggest(task.query)).toHaveLength(1);
 	});
 });
 

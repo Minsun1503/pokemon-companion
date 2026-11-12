@@ -1,0 +1,7770 @@
+{
+  "created_at": "2026-11-12T06:00:53.270Z",
+  "environment": {
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "logical_cpus": 8,
+    "node": "v22.12.0",
+    "os": "10.0.26200"
+  },
+  "hashes": {
+    "before": {
+      "model.js": "c9deca7a6900b32e50081832c849feb8e5db3cb7afd39bc25d3748090a80e449",
+      "service.js": "9a1193825a59d04e6d25788fab95d66e454ac7ab922809061e0d7d89c6624d0a",
+      "privacy.js": "399c50faacd9f1e3b6e510ede3ad9093950030c8ce4cf3435b34daa5e4c77ddd"
+    },
+    "after": {
+      "model.js": "3470811b47c4d8b5b4649de517e1d78ac512f98c2fb682800e891dc14a901573",
+      "service.js": "974aab8557284b68fcf7a28ffffdb06c368d144cf4fcfd30f4e1ce7134dc1374",
+      "privacy.js": "399c50faacd9f1e3b6e510ede3ad9093950030c8ce4cf3435b34daa5e4c77ddd"
+    }
+  },
+  "fixture": {
+    "topics": [
+      "invoice",
+      "shipping",
+      "customer",
+      "inventory",
+      "payment",
+      "budget",
+      "report",
+      "appointment",
+      "meeting",
+      "travel",
+      "recipe",
+      "address",
+      "calendar",
+      "project",
+      "reminder",
+      "contact",
+      "account",
+      "ticket",
+      "reference",
+      "description",
+      "comment",
+      "message",
+      "schedule",
+      "purchase",
+      "request",
+      "supplier",
+      "employee",
+      "service",
+      "document",
+      "order",
+      "delivery",
+      "reservation"
+    ],
+    "phrases": [
+      [
+        "Type the invoice field",
+        "Enter invoice field please",
+        "Complete invoice entry",
+        "Write invoice information",
+        "Populate invoice details",
+        "Update the invoice input",
+        "Set the invoice textbox",
+        "Put invoice into the form"
+      ],
+      [
+        "Type the shipping field",
+        "Enter shipping field please",
+        "Complete shipping entry",
+        "Write shipping information",
+        "Populate shipping details",
+        "Update the shipping input",
+        "Set the shipping textbox",
+        "Put shipping into the form"
+      ],
+      [
+        "Type the customer field",
+        "Enter customer field please",
+        "Complete customer entry",
+        "Write customer information",
+        "Populate customer details",
+        "Update the customer input",
+        "Set the customer textbox",
+        "Put customer into the form"
+      ],
+      [
+        "Type the inventory field",
+        "Enter inventory field please",
+        "Complete inventory entry",
+        "Write inventory information",
+        "Populate inventory details",
+        "Update the inventory input",
+        "Set the inventory textbox",
+        "Put inventory into the form"
+      ],
+      [
+        "Type the payment field",
+        "Enter payment field please",
+        "Complete payment entry",
+        "Write payment information",
+        "Populate payment details",
+        "Update the payment input",
+        "Set the payment textbox",
+        "Put payment into the form"
+      ],
+      [
+        "Type the budget field",
+        "Enter budget field please",
+        "Complete budget entry",
+        "Write budget information",
+        "Populate budget details",
+        "Update the budget input",
+        "Set the budget textbox",
+        "Put budget into the form"
+      ],
+      [
+        "Type the report field",
+        "Enter report field please",
+        "Complete report entry",
+        "Write report information",
+        "Populate report details",
+        "Update the report input",
+        "Set the report textbox",
+        "Put report into the form"
+      ],
+      [
+        "Type the appointment field",
+        "Enter appointment field please",
+        "Complete appointment entry",
+        "Write appointment information",
+        "Populate appointment details",
+        "Update the appointment input",
+        "Set the appointment textbox",
+        "Put appointment into the form"
+      ],
+      [
+        "Type the meeting field",
+        "Enter meeting field please",
+        "Complete meeting entry",
+        "Write meeting information",
+        "Populate meeting details",
+        "Update the meeting input",
+        "Set the meeting textbox",
+        "Put meeting into the form"
+      ],
+      [
+        "Type the travel field",
+        "Enter travel field please",
+        "Complete travel entry",
+        "Write travel information",
+        "Populate travel details",
+        "Update the travel input",
+        "Set the travel textbox",
+        "Put travel into the form"
+      ],
+      [
+        "Type the recipe field",
+        "Enter recipe field please",
+        "Complete recipe entry",
+        "Write recipe information",
+        "Populate recipe details",
+        "Update the recipe input",
+        "Set the recipe textbox",
+        "Put recipe into the form"
+      ],
+      [
+        "Type the address field",
+        "Enter address field please",
+        "Complete address entry",
+        "Write address information",
+        "Populate address details",
+        "Update the address input",
+        "Set the address textbox",
+        "Put address into the form"
+      ],
+      [
+        "Type the calendar field",
+        "Enter calendar field please",
+        "Complete calendar entry",
+        "Write calendar information",
+        "Populate calendar details",
+        "Update the calendar input",
+        "Set the calendar textbox",
+        "Put calendar into the form"
+      ],
+      [
+        "Type the project field",
+        "Enter project field please",
+        "Complete project entry",
+        "Write project information",
+        "Populate project details",
+        "Update the project input",
+        "Set the project textbox",
+        "Put project into the form"
+      ],
+      [
+        "Type the reminder field",
+        "Enter reminder field please",
+        "Complete reminder entry",
+        "Write reminder information",
+        "Populate reminder details",
+        "Update the reminder input",
+        "Set the reminder textbox",
+        "Put reminder into the form"
+      ],
+      [
+        "Type the contact field",
+        "Enter contact field please",
+        "Complete contact entry",
+        "Write contact information",
+        "Populate contact details",
+        "Update the contact input",
+        "Set the contact textbox",
+        "Put contact into the form"
+      ],
+      [
+        "Type the account field",
+        "Enter account field please",
+        "Complete account entry",
+        "Write account information",
+        "Populate account details",
+        "Update the account input",
+        "Set the account textbox",
+        "Put account into the form"
+      ],
+      [
+        "Type the ticket field",
+        "Enter ticket field please",
+        "Complete ticket entry",
+        "Write ticket information",
+        "Populate ticket details",
+        "Update the ticket input",
+        "Set the ticket textbox",
+        "Put ticket into the form"
+      ],
+      [
+        "Type the reference field",
+        "Enter reference field please",
+        "Complete reference entry",
+        "Write reference information",
+        "Populate reference details",
+        "Update the reference input",
+        "Set the reference textbox",
+        "Put reference into the form"
+      ],
+      [
+        "Type the description field",
+        "Enter description field please",
+        "Complete description entry",
+        "Write description information",
+        "Populate description details",
+        "Update the description input",
+        "Set the description textbox",
+        "Put description into the form"
+      ],
+      [
+        "Type the comment field",
+        "Enter comment field please",
+        "Complete comment entry",
+        "Write comment information",
+        "Populate comment details",
+        "Update the comment input",
+        "Set the comment textbox",
+        "Put comment into the form"
+      ],
+      [
+        "Type the message field",
+        "Enter message field please",
+        "Complete message entry",
+        "Write message information",
+        "Populate message details",
+        "Update the message input",
+        "Set the message textbox",
+        "Put message into the form"
+      ],
+      [
+        "Type the schedule field",
+        "Enter schedule field please",
+        "Complete schedule entry",
+        "Write schedule information",
+        "Populate schedule details",
+        "Update the schedule input",
+        "Set the schedule textbox",
+        "Put schedule into the form"
+      ],
+      [
+        "Type the purchase field",
+        "Enter purchase field please",
+        "Complete purchase entry",
+        "Write purchase information",
+        "Populate purchase details",
+        "Update the purchase input",
+        "Set the purchase textbox",
+        "Put purchase into the form"
+      ],
+      [
+        "Type the request field",
+        "Enter request field please",
+        "Complete request entry",
+        "Write request information",
+        "Populate request details",
+        "Update the request input",
+        "Set the request textbox",
+        "Put request into the form"
+      ],
+      [
+        "Type the supplier field",
+        "Enter supplier field please",
+        "Complete supplier entry",
+        "Write supplier information",
+        "Populate supplier details",
+        "Update the supplier input",
+        "Set the supplier textbox",
+        "Put supplier into the form"
+      ],
+      [
+        "Type the employee field",
+        "Enter employee field please",
+        "Complete employee entry",
+        "Write employee information",
+        "Populate employee details",
+        "Update the employee input",
+        "Set the employee textbox",
+        "Put employee into the form"
+      ],
+      [
+        "Type the service field",
+        "Enter service field please",
+        "Complete service entry",
+        "Write service information",
+        "Populate service details",
+        "Update the service input",
+        "Set the service textbox",
+        "Put service into the form"
+      ],
+      [
+        "Type the document field",
+        "Enter document field please",
+        "Complete document entry",
+        "Write document information",
+        "Populate document details",
+        "Update the document input",
+        "Set the document textbox",
+        "Put document into the form"
+      ],
+      [
+        "Type the order field",
+        "Enter order field please",
+        "Complete order entry",
+        "Write order information",
+        "Populate order details",
+        "Update the order input",
+        "Set the order textbox",
+        "Put order into the form"
+      ],
+      [
+        "Type the delivery field",
+        "Enter delivery field please",
+        "Complete delivery entry",
+        "Write delivery information",
+        "Populate delivery details",
+        "Update the delivery input",
+        "Set the delivery textbox",
+        "Put delivery into the form"
+      ],
+      [
+        "Type the reservation field",
+        "Enter reservation field please",
+        "Complete reservation entry",
+        "Write reservation information",
+        "Populate reservation details",
+        "Update the reservation input",
+        "Set the reservation textbox",
+        "Put reservation into the form"
+      ]
+    ],
+    "recipes": 32,
+    "contexts": 8,
+    "state_sha256": "61df8913c38d982b70503a796ae1631c1f009b50dead4ad87cdc6e8fd1f4fb1d"
+  },
+  "seed_training_with_journal": {
+    "runs": 256,
+    "median_ms": 17.450350000000014,
+    "p95_ms": 24.774250000000052,
+    "cpu_ms": 4406,
+    "samples": [
+      {
+        "ms": 16.352599999999995,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 4.5686000000000035,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 3.7605000000000075,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 5.6976999999999975,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.772500000000008,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.293700000000001,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 3.5010999999999797,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.071100000000001,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 7.427700000000016,
+        "cpu_ms": 77,
+        "operations": 1
+      },
+      {
+        "ms": 4.461299999999994,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.194999999999993,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 3.751499999999993,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.0523000000000025,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 3.800299999999993,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.663600000000002,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 3.939300000000003,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 4.628600000000006,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.264999999999986,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.019799999999975,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.760999999999967,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 3.761099999999999,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 3.957400000000007,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 3.9775999999999954,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.095300000000009,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 3.932900000000018,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.115700000000004,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 6.776400000000024,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 4.4757000000000176,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.3659000000000106,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 4.629400000000032,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 5.47890000000001,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 4.347999999999956,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 9.515100000000018,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 7.571100000000001,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.848500000000001,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 8.205500000000029,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.883399999999995,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 8.500499999999988,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.894100000000037,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 7.919800000000009,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.093200000000024,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 8.11930000000001,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 8.620299999999986,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 10.93829999999997,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 9.289300000000026,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 7.697600000000023,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 9.267499999999984,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.960299999999961,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 8.449600000000032,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 9.722199999999987,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.732500000000016,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 9.955299999999966,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 8.799900000000036,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 10.391700000000071,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 8.8827,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 9.69139999999993,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 9.670799999999986,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 9.318699999999922,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 10.962499999999977,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 11.04589999999996,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 10.038699999999949,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 11.569600000000037,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 9.898899999999912,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 13.600599999999986,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.832499999999982,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 12.74350000000004,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 13.782699999999977,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 12.872899999999959,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.04959999999994,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 15.635099999999966,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 13.815600000000018,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.312999999999988,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 14.4529,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 13.910099999999943,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 13.377899999999954,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 16.290300000000002,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 11.107399999999984,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 11.239299999999957,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 12.240299999999934,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 12.040099999999939,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 13.84089999999992,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 12.460199999999986,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 12.880300000000034,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 12.551999999999907,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 11.283100000000104,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.859000000000037,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 14.822599999999966,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.772000000000048,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.466099999999983,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 20.70810000000006,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.354999999999905,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 21.774900000000002,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.802999999999884,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 19.16730000000007,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.870699999999943,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 19.169200000000046,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.04489999999987,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.426899999999932,
+        "cpu_ms": 46,
+        "operations": 1
+      },
+      {
+        "ms": 19.83270000000016,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.56139999999982,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 20.75909999999999,
+        "cpu_ms": 48,
+        "operations": 1
+      },
+      {
+        "ms": 20.26949999999988,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.27080000000001,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 26.280300000000125,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 19.639599999999973,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 17.832499999999982,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 15.119400000000041,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 13.614299999999957,
+        "cpu_ms": 0,
+        "operations": 1
+      },
+      {
+        "ms": 14.75630000000001,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 14.638500000000022,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 14.600300000000061,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.770400000000109,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 14.742700000000013,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.404999999999973,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.977099999999837,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 14.636400000000094,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 14.048700000000053,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 14.014300000000048,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 14.367299999999886,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 14.101499999999987,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 13.572800000000143,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 13.95530000000008,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.913600000000088,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 15.536000000000058,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 16.761099999999942,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 21.7808,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.449299999999994,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.374300000000176,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.39500000000021,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 17.267000000000053,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.79009999999994,
+        "cpu_ms": 30,
+        "operations": 1
+      },
+      {
+        "ms": 16.492300000000114,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.340599999999995,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.182600000000093,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 15.881000000000085,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 16.867300000000114,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.028600000000097,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.022900000000163,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 16.436899999999923,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 15.94789999999989,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.75909999999999,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.000500000000102,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.824699999999893,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.16210000000001,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 16.138799999999947,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.813700000000154,
+        "cpu_ms": 47,
+        "operations": 1
+      },
+      {
+        "ms": 16.86090000000013,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 17.434600000000046,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 16.313000000000102,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 18.727099999999837,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 21.28410000000008,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 17.69840000000022,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.355999999999767,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 19.72340000000031,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.558899999999994,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 19.064800000000105,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 18.981900000000223,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 17.786099999999806,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 20.814100000000053,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.746399999999994,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.63070000000016,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 17.79459999999972,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 18.53179999999975,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 17.12480000000005,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 19.706300000000283,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 17.937199999999848,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 18.829899999999725,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 18.766799999999876,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.22340000000031,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 18.811899999999696,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 20.177299999999832,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.271400000000085,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 19.051899999999932,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 19.661399999999958,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 18.985499999999774,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 18.793099999999868,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 19.788900000000012,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 24.254199999999855,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 21.044900000000325,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 25.43190000000004,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.534400000000005,
+        "cpu_ms": 47,
+        "operations": 1
+      },
+      {
+        "ms": 21.31190000000015,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.76319999999987,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 24.640800000000127,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 22.9054000000001,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 21.8742000000002,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 20.33030000000008,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.158100000000104,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 22.641599999999926,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 20.233099999999922,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.977499999999964,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 23.231199999999717,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 21.487300000000232,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 20.996599999999944,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.9375,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.85849999999982,
+        "cpu_ms": 47,
+        "operations": 1
+      },
+      {
+        "ms": 23.04910000000018,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 22.078999999999724,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 21.55529999999999,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 22.533200000000306,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 21.16930000000002,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.22799999999961,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 21.281400000000303,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 22.227699999999913,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.41919999999982,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 20.54260000000022,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 21.547500000000127,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 21.761999999999716,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.429399999999987,
+        "cpu_ms": 46,
+        "operations": 1
+      },
+      {
+        "ms": 20.590899999999692,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 21.50739999999996,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 21.148199999999633,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.605399999999918,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 24.315799999999854,
+        "cpu_ms": 30,
+        "operations": 1
+      },
+      {
+        "ms": 22.266700000000128,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.241799999999785,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 21.245600000000195,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.783699999999953,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 23.873099999999795,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 21.86750000000029,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.82439999999997,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 23.26890000000003,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 23.221900000000005,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 24.35050000000001,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 22.692999999999756,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.260899999999765,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 22.697700000000168,
+        "cpu_ms": 47,
+        "operations": 1
+      },
+      {
+        "ms": 22.696500000000015,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.9707999999996,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 23.00109999999995,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 24.822700000000168,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 23.803799999999683,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 23.77019999999993,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 24.364000000000033,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 22.49440000000004,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 23.27390000000014,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.801899999999932,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 23.77059999999983,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 23.261299999999665,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 25.266099999999824,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 24.758100000000013,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.772500000000036,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 24.200900000000274,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 29.49440000000004,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 24.86130000000003,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 25.85819999999967,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 24.930899999999383,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 24.167900000000373,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 30.2496000000001,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 24.70169999999962,
+        "cpu_ms": 15,
+        "operations": 1
+      },
+      {
+        "ms": 25.217500000000655,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 26.989700000000084,
+        "cpu_ms": 16,
+        "operations": 1
+      },
+      {
+        "ms": 23.728000000000065,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 33.116799999999785,
+        "cpu_ms": 32,
+        "operations": 1
+      },
+      {
+        "ms": 28.263500000000022,
+        "cpu_ms": 31,
+        "operations": 1
+      },
+      {
+        "ms": 24.587499999999636,
+        "cpu_ms": 15,
+        "operations": 1
+      }
+    ]
+  },
+  "retrieval": [
+    {
+      "recipes": 1,
+      "contexts": 1,
+      "before": {
+        "runs": 10,
+        "median_ms": 0.027299500000003717,
+        "p95_ms": 0.04608319999999775,
+        "cpu_ms": 47,
+        "samples": [
+          {
+            "ms": 0.03819700000000012,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0259440000000086,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04164799999999559,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.028654999999998834,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.029387999999999012,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.025028999999994993,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.025079999999998107,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.024669999999996434,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.049711999999999534,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.024411000000000058,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "runs": 10,
+        "median_ms": 0.025765999999998714,
+        "p95_ms": 0.03533730000000059,
+        "cpu_ms": 31,
+        "samples": [
+          {
+            "ms": 0.032496000000001,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.026586999999999535,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.026810999999997875,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02494499999999789,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.027236999999995532,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.037662000000000265,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.020362999999997557,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.019287000000003898,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.024589999999998325,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.019309000000002925,
+            "cpu_ms": 15,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 1,
+      "contexts": 8,
+      "before": {
+        "runs": 10,
+        "median_ms": 0.06689649999999801,
+        "p95_ms": 0.07630944999999838,
+        "cpu_ms": 110,
+        "samples": [
+          {
+            "ms": 0.0664390000000003,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.07079899999999725,
+            "cpu_ms": 32,
+            "operations": 100
+          },
+          {
+            "ms": 0.06462100000000646,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.06733500000000277,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.08081799999999931,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07035200000000259,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.06834100000000035,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.06645799999999326,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.06314300000000003,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.06506100000000516,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "runs": 10,
+        "median_ms": 0.032096000000001366,
+        "p95_ms": 0.04044319999999606,
+        "cpu_ms": 15,
+        "samples": [
+          {
+            "ms": 0.03329399999999623,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04461199999999735,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.028695999999999913,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.032182000000002514,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03201000000000022,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.031340000000000146,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.031518999999998416,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.031193999999995867,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.035100000000002185,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0353479999999945,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 8,
+      "contexts": 1,
+      "before": {
+        "runs": 10,
+        "median_ms": 0.10840349999999944,
+        "p95_ms": 0.13416345000000043,
+        "cpu_ms": 156,
+        "samples": [
+          {
+            "ms": 0.140634,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.10785299999999552,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.10895400000000337,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.08947200000000521,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.126255000000001,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.1119419999999991,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.09970099999999547,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.10671500000000378,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.10709899999999833,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.11256499999999506,
+            "cpu_ms": 31,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "runs": 10,
+        "median_ms": 0.04011800000000221,
+        "p95_ms": 0.058900299999999337,
+        "cpu_ms": 16,
+        "samples": [
+          {
+            "ms": 0.05940700000000106,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.058280999999997224,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.041815999999998896,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.040929000000005544,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.034264000000002855,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.035673000000006144,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.035911999999998445,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03515400000000227,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04098700000000463,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.03930699999999888,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 8,
+      "contexts": 8,
+      "before": {
+        "runs": 10,
+        "median_ms": 0.4522524999999996,
+        "p95_ms": 0.477681049999996,
+        "cpu_ms": 438,
+        "samples": [
+          {
+            "ms": 0.44719699999999646,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.44396499999999833,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.45344500000000154,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.4831309999999939,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms": 0.4683570000000054,
+            "cpu_ms": 32,
+            "operations": 100
+          },
+          {
+            "ms": 0.4710199999999986,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.44391599999999926,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.4703560000000016,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.41955399999999826,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.4510599999999977,
+            "cpu_ms": 47,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "runs": 10,
+        "median_ms": 0.1225229999999965,
+        "p95_ms": 0.13128225000000293,
+        "cpu_ms": 140,
+        "samples": [
+          {
+            "ms": 0.1328729999999996,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.11656500000000052,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.129338000000007,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.12255199999999604,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.12914499999999862,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.12249399999999695,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.12662899999999355,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.12052999999999883,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.12110200000000076,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.12248000000000502,
+            "cpu_ms": 15,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 32,
+      "contexts": 1,
+      "before": {
+        "runs": 10,
+        "median_ms": 0.35740850000000135,
+        "p95_ms": 0.36326930000000035,
+        "cpu_ms": 344,
+        "samples": [
+          {
+            "ms": 0.35797999999999774,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.32742600000000494,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.36076900000000023,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.3653150000000005,
+            "cpu_ms": 32,
+            "operations": 100
+          },
+          {
+            "ms": 0.35332300000000033,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.3541660000000047,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.35946500000000015,
+            "cpu_ms": 32,
+            "operations": 100
+          },
+          {
+            "ms": 0.3561210000000028,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.3587740000000031,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.356837000000005,
+            "cpu_ms": 31,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "runs": 10,
+        "median_ms": 0.07952099999999973,
+        "p95_ms": 0.09713140000000248,
+        "cpu_ms": 93,
+        "samples": [
+          {
+            "ms": 0.07310800000000199,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07357999999999265,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.08409899999999652,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07898199999999633,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.09420100000000275,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.09952900000000227,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07951799999999822,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.08000199999999495,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07952400000000125,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07852899999999863,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 32,
+      "contexts": 8,
+      "before": {
+        "runs": 10,
+        "median_ms": 1.7136380000000009,
+        "p95_ms": 1.8234450999999936,
+        "cpu_ms": 1703,
+        "samples": [
+          {
+            "ms": 1.6200429999999961,
+            "cpu_ms": 156,
+            "operations": 100
+          },
+          {
+            "ms": 1.7326080000000001,
+            "cpu_ms": 172,
+            "operations": 100
+          },
+          {
+            "ms": 1.6946680000000014,
+            "cpu_ms": 172,
+            "operations": 100
+          },
+          {
+            "ms": 1.6799129999999969,
+            "cpu_ms": 172,
+            "operations": 100
+          },
+          {
+            "ms": 1.821320999999989,
+            "cpu_ms": 172,
+            "operations": 100
+          },
+          {
+            "ms": 1.7343890000000102,
+            "cpu_ms": 172,
+            "operations": 100
+          },
+          {
+            "ms": 1.5495010000000002,
+            "cpu_ms": 156,
+            "operations": 100
+          },
+          {
+            "ms": 1.7412490000000072,
+            "cpu_ms": 171,
+            "operations": 100
+          },
+          {
+            "ms": 1.6931490000000122,
+            "cpu_ms": 188,
+            "operations": 100
+          },
+          {
+            "ms": 1.8251829999999973,
+            "cpu_ms": 172,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "runs": 10,
+        "median_ms": 0.3798970000000008,
+        "p95_ms": 0.4292716000000018,
+        "cpu_ms": 406,
+        "samples": [
+          {
+            "ms": 0.3611700000000019,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.38631600000000615,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.37347799999999554,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.36243900000001306,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.41869399999999585,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.41075699999999415,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.4017349999999897,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.43792600000000675,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.3542230000000018,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.3733029999999962,
+            "cpu_ms": 47,
+            "operations": 100
+          }
+        ]
+      }
+    }
+  ],
+  "candidate_retrieval": [
+    {
+      "recipes": 1,
+      "contexts": 1,
+      "dense_cache_bytes": 32768,
+      "sparse": {
+        "runs": 10,
+        "median_ms": 0.018229999999998654,
+        "p95_ms": 0.022417449999999006,
+        "cpu_ms": 32,
+        "samples": [
+          {
+            "ms": 0.018127999999996973,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.017997999999997773,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.01837999999999738,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.018332000000000334,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.017734999999993305,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.017445999999999913,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.017255000000004656,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.022110000000002402,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02266899999999623,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.019026999999996404,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "prepared_sparse": {
+        "runs": 10,
+        "median_ms": 0.01882100000000264,
+        "p95_ms": 0.02213330000000178,
+        "cpu_ms": 30,
+        "samples": [
+          {
+            "ms": 0.02189900000000307,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021347999999998136,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.017279000000007726,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.018197000000000116,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.018174000000008163,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.020072000000000118,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.016976999999997133,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.022325000000000726,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.019445000000005166,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.01750500000000102,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "dense": {
+        "runs": 10,
+        "median_ms": 0.029057999999995445,
+        "p95_ms": 0.03677070000000229,
+        "cpu_ms": 16,
+        "samples": [
+          {
+            "ms": 0.026337000000003174,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04162800000000061,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.025684000000001105,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02986300000000483,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02937699999999495,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.025913999999993394,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03083400000000438,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02873899999999594,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.029989999999997963,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.024706000000005588,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "context_only": {
+        "runs": 10,
+        "median_ms": 0.02038850000000366,
+        "p95_ms": 0.026403550000000452,
+        "cpu_ms": 16,
+        "samples": [
+          {
+            "ms": 0.017363000000004833,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.020227000000004408,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.019000999999998384,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021032999999997627,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.024823000000005778,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02055000000000291,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.026530000000002475,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.016919000000007144,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02624899999999798,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.01951199999999517,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 1,
+      "contexts": 8,
+      "dense_cache_bytes": 147456,
+      "sparse": {
+        "runs": 10,
+        "median_ms": 0.028713999999995396,
+        "p95_ms": 0.038930049999998106,
+        "cpu_ms": 32,
+        "samples": [
+          {
+            "ms": 0.043695999999999915,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.028631999999997788,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.027852999999995517,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02922500000000582,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.028795999999993,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.027947000000003754,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.027695999999996276,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.029665999999997437,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03310499999999592,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.027800999999999475,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "prepared_sparse": {
+        "runs": 10,
+        "median_ms": 0.025171500000005835,
+        "p95_ms": 0.0323632999999977,
+        "cpu_ms": 31,
+        "samples": [
+          {
+            "ms": 0.02526400000000649,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03383299999999508,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02499499999999898,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021248999999997978,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02654899999999543,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.030567000000000916,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.025484000000005835,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02507900000000518,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0228899999999976,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02121399999999994,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "dense": {
+        "runs": 10,
+        "median_ms": 0.04747849999999744,
+        "p95_ms": 0.054651799999997815,
+        "cpu_ms": 46,
+        "samples": [
+          {
+            "ms": 0.04185199999999895,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.04809799999999995,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04784899999999652,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.045109000000002196,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0472440000000006,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0413340000000062,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05788099999999759,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.04197400000000016,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.050704999999998106,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04771299999999428,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      },
+      "context_only": {
+        "runs": 10,
+        "median_ms": 0.021472500000004405,
+        "p95_ms": 0.028160700000004445,
+        "cpu_ms": 16,
+        "samples": [
+          {
+            "ms": 0.02322400000000016,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021293000000005124,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.023906999999999245,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021652000000003682,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.020810999999994237,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.025194000000001323,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.030588000000007012,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021005999999997586,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.021135000000003856,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02070600000000013,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 8,
+      "contexts": 1,
+      "dense_cache_bytes": 262144,
+      "sparse": {
+        "runs": 10,
+        "median_ms": 0.03960250000000087,
+        "p95_ms": 0.0434313500000012,
+        "cpu_ms": 32,
+        "samples": [
+          {
+            "ms": 0.040357999999996536,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.040615999999999985,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.044402000000000046,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03884700000000521,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04224500000000262,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.035025999999998024,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.04088999999999942,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.03577900000000227,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.035757000000003245,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.036014000000004674,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "prepared_sparse": {
+        "runs": 10,
+        "median_ms": 0.028539000000000668,
+        "p95_ms": 0.031506399999999754,
+        "cpu_ms": 31,
+        "samples": [
+          {
+            "ms": 0.03001499999999396,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.031527999999998425,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.03148000000000138,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.026707000000005792,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.025702000000001134,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.028815999999997077,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02722600000000057,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.030560999999997875,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.026606000000001587,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.028262000000004263,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "dense": {
+        "runs": 10,
+        "median_ms": 0.052078500000002345,
+        "p95_ms": 0.05809379999999918,
+        "cpu_ms": 47,
+        "samples": [
+          {
+            "ms": 0.05293900000000576,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.06014400000000023,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05482399999999871,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.05558799999999792,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05121799999999894,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.05354699999999866,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.049556000000002313,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0473909999999978,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04679799999999887,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05021899999999732,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "context_only": {
+        "runs": 10,
+        "median_ms": 0.029674500000000992,
+        "p95_ms": 0.04327255000000105,
+        "cpu_ms": 31,
+        "samples": [
+          {
+            "ms": 0.029556000000002313,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02998700000000099,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.043041000000002896,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.030147999999999227,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.02483400000000074,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.027707000000000336,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.025270000000000438,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.02480899999999565,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.043461999999999536,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.029792999999999667,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 8,
+      "contexts": 8,
+      "dense_cache_bytes": 1179648,
+      "sparse": {
+        "runs": 10,
+        "median_ms": 0.15071699999999966,
+        "p95_ms": 0.15568884999999955,
+        "cpu_ms": 127,
+        "samples": [
+          {
+            "ms": 0.15565200000000004,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.14929600000000393,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.15019800000000033,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.15340600000000448,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.15271999999999936,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.14205600000000232,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.1459979999999996,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.15123599999999895,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.14976700000000165,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.15571899999999914,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      },
+      "prepared_sparse": {
+        "runs": 10,
+        "median_ms": 0.07611650000000736,
+        "p95_ms": 0.08686815000000342,
+        "cpu_ms": 93,
+        "samples": [
+          {
+            "ms": 0.07681099999999788,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.08275800000000345,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.0748359999999957,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07636100000000624,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07414600000000064,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0697360000000026,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07587200000000849,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.0902310000000034,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.07472200000000156,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.0765769999999975,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "dense": {
+        "runs": 10,
+        "median_ms": 0.23618450000000396,
+        "p95_ms": 0.24106505000000197,
+        "cpu_ms": 248,
+        "samples": [
+          {
+            "ms": 0.23466300000000045,
+            "cpu_ms": 46,
+            "operations": 100
+          },
+          {
+            "ms": 0.2403610000000026,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.2409600000000046,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.23618000000000394,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.23441800000000512,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.23873499999999695,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.24115099999999984,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.23618900000000395,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.23543499999999767,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.23142299999999522,
+            "cpu_ms": 31,
+            "operations": 100
+          }
+        ]
+      },
+      "context_only": {
+        "runs": 10,
+        "median_ms": 0.07474749999999858,
+        "p95_ms": 0.07696820000000117,
+        "cpu_ms": 79,
+        "samples": [
+          {
+            "ms": 0.07669100000000072,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07313199999999596,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.0745759999999973,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07310499999999592,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.07491899999999987,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07510800000000017,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07620300000000498,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07294299999999566,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.07719500000000153,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.07231300000000374,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 32,
+      "contexts": 1,
+      "dense_cache_bytes": 1048576,
+      "sparse": {
+        "runs": 10,
+        "median_ms": 0.09130800000000364,
+        "p95_ms": 0.09833004999999775,
+        "cpu_ms": 111,
+        "samples": [
+          {
+            "ms": 0.09634100000000217,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.096875,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.09939699999999903,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.0963760000000002,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.0970259999999962,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.0862750000000051,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.08288099999999758,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.08316100000000005,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.0814850000000024,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.08425400000000081,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      },
+      "prepared_sparse": {
+        "runs": 10,
+        "median_ms": 0.05209550000000036,
+        "p95_ms": 0.05558680000000004,
+        "cpu_ms": 47,
+        "samples": [
+          {
+            "ms": 0.05335599999999431,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05432399999999689,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05235700000000179,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.05662000000000262,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05183399999999892,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04697699999999713,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.04420700000000579,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.046288999999997034,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05431599999999889,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.05066400000000613,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      },
+      "dense": {
+        "runs": 10,
+        "median_ms": 0.12823499999999968,
+        "p95_ms": 0.15497230000000214,
+        "cpu_ms": 109,
+        "samples": [
+          {
+            "ms": 0.13740499999999883,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.13657799999999953,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.13751800000000003,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.14213200000000142,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.1654780000000028,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.11452400000000125,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.11965799999999945,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.11989199999999983,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.11800199999999678,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.11984300000000075,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      },
+      "context_only": {
+        "runs": 10,
+        "median_ms": 0.04456850000000486,
+        "p95_ms": 0.05213530000000219,
+        "cpu_ms": 62,
+        "samples": [
+          {
+            "ms": 0.05218300000000454,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.05207699999999932,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.049745999999995544,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.049212999999999736,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.043234000000002194,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04274599999999737,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.04334300000000439,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04436700000000201,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms": 0.04477000000000771,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.04315899999999601,
+            "cpu_ms": 0,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    {
+      "recipes": 32,
+      "contexts": 8,
+      "dense_cache_bytes": 4718592,
+      "sparse": {
+        "runs": 10,
+        "median_ms": 0.5335725000000002,
+        "p95_ms": 0.5698652999999949,
+        "cpu_ms": 563,
+        "samples": [
+          {
+            "ms": 0.5540450000000056,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms": 0.551252999999997,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.5091120000000047,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms": 0.48853399999999964,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.5508230000000003,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms": 0.5763659999999982,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms": 0.561919999999991,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms": 0.47849700000000667,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms": 0.5002750000000015,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms": 0.5163220000000002,
+            "cpu_ms": 47,
+            "operations": 100
+          }
+        ]
+      },
+      "prepared_sparse": {
+        "runs": 10,
+        "median_ms": 0.24101450000000113,
+        "p95_ms": 0.2623122999999923,
+        "cpu_ms": 186,
+        "samples": [
+          {
+            "ms": 0.24523299999998927,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.24280899999999747,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.22125099999999293,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.2398700000000099,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.24215899999999238,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.25394899999999326,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.26915499999999154,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.22966300000000048,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.23141200000000026,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms": 0.2315780000000086,
+            "cpu_ms": 31,
+            "operations": 100
+          }
+        ]
+      },
+      "dense": {
+        "runs": 10,
+        "median_ms": 0.8751449999999932,
+        "p95_ms": 0.9116895000000095,
+        "cpu_ms": 891,
+        "samples": [
+          {
+            "ms": 0.871924999999992,
+            "cpu_ms": 94,
+            "operations": 100
+          },
+          {
+            "ms": 0.9260040000000117,
+            "cpu_ms": 94,
+            "operations": 100
+          },
+          {
+            "ms": 0.7516170000000056,
+            "cpu_ms": 78,
+            "operations": 100
+          },
+          {
+            "ms": 0.7717710000000079,
+            "cpu_ms": 78,
+            "operations": 100
+          },
+          {
+            "ms": 0.8672309999999925,
+            "cpu_ms": 93,
+            "operations": 100
+          },
+          {
+            "ms": 0.8783649999999943,
+            "cpu_ms": 94,
+            "operations": 100
+          },
+          {
+            "ms": 0.8804269999999996,
+            "cpu_ms": 94,
+            "operations": 100
+          },
+          {
+            "ms": 0.8809119999999894,
+            "cpu_ms": 94,
+            "operations": 100
+          },
+          {
+            "ms": 0.8941940000000068,
+            "cpu_ms": 94,
+            "operations": 100
+          },
+          {
+            "ms": 0.8460419999999976,
+            "cpu_ms": 78,
+            "operations": 100
+          }
+        ]
+      },
+      "context_only": {
+        "runs": 10,
+        "median_ms": 0.24079550000000383,
+        "p95_ms": 0.26533624999999844,
+        "cpu_ms": 235,
+        "samples": [
+          {
+            "ms": 0.2754320000000007,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.2386460000000079,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.24070600000000922,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.22396800000000439,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.24648300000000745,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.2352270000000135,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.25299699999999575,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms": 0.2408849999999984,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.25139799999999013,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms": 0.22483000000000175,
+            "cpu_ms": 31,
+            "operations": 100
+          }
+        ]
+      }
+    }
+  ],
+  "training": {
+    "before": {
+      "runs": 10,
+      "median_ms": 0.03319420000000082,
+      "p95_ms": 0.03457735499999917,
+      "cpu_ms": 328,
+      "samples": [
+        {
+          "ms": 0.034760999999998606,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.03281919999999991,
+          "cpu_ms": 32,
+          "operations": 1000
+        },
+        {
+          "ms": 0.03320660000000134,
+          "cpu_ms": 30,
+          "operations": 1000
+        },
+        {
+          "ms": 0.03355309999999918,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.033149200000001655,
+          "cpu_ms": 32,
+          "operations": 1000
+        },
+        {
+          "ms": 0.03435289999999986,
+          "cpu_ms": 30,
+          "operations": 1000
+        },
+        {
+          "ms": 0.033708199999999126,
+          "cpu_ms": 32,
+          "operations": 1000
+        },
+        {
+          "ms": 0.033181800000000296,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.03302230000000054,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.03203340000000025,
+          "cpu_ms": 32,
+          "operations": 1000
+        }
+      ]
+    },
+    "after": {
+      "runs": 10,
+      "median_ms": 0.004167850000000726,
+      "p95_ms": 0.004995705000000543,
+      "cpu_ms": 78,
+      "samples": [
+        {
+          "ms": 0.00473660000000018,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.005207700000000841,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.003977199999999357,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.004577800000000934,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.004569600000000719,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.0036872999999995955,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.003987499999999272,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.003974500000000262,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.00401720000000023,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.004318500000001222,
+          "cpu_ms": 0,
+          "operations": 1000
+        }
+      ]
+    },
+    "dense": {
+      "runs": 10,
+      "median_ms": 0.01360554999999931,
+      "p95_ms": 0.014460569999999826,
+      "cpu_ms": 141,
+      "samples": [
+        {
+          "ms": 0.014354199999999765,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014073599999999714,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014330900000000838,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.012335299999998824,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.012411299999999756,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.01414639999999963,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.013137499999998909,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014547599999999874,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.012305899999999382,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.010813599999999497,
+          "cpu_ms": 0,
+          "operations": 1000
+        }
+      ]
+    }
+  },
+  "training_with_features": {
+    "before": {
+      "runs": 10,
+      "median_ms": 0.04292450000000008,
+      "p95_ms": 0.04793687000000045,
+      "cpu_ms": 453,
+      "samples": [
+        {
+          "ms": 0.044882799999999404,
+          "cpu_ms": 46,
+          "operations": 1000
+        },
+        {
+          "ms": 0.047793100000000775,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.04805450000000019,
+          "cpu_ms": 63,
+          "operations": 1000
+        },
+        {
+          "ms": 0.043172099999999776,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.04249489999999969,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.04208759999999893,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.042109800000000176,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.042676900000000385,
+          "cpu_ms": 47,
+          "operations": 1000
+        },
+        {
+          "ms": 0.043845300000000864,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.042191499999998994,
+          "cpu_ms": 31,
+          "operations": 1000
+        }
+      ]
+    },
+    "after": {
+      "runs": 10,
+      "median_ms": 0.018603449999999612,
+      "p95_ms": 0.020759210000000437,
+      "cpu_ms": 187,
+      "samples": [
+        {
+          "ms": 0.01960610000000088,
+          "cpu_ms": 32,
+          "operations": 1000
+        },
+        {
+          "ms": 0.01911609999999928,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.021617000000000188,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.018686700000000202,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.018520199999999022,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.019710800000000746,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.01816660000000047,
+          "cpu_ms": 31,
+          "operations": 1000
+        },
+        {
+          "ms": 0.01820520000000033,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.018390400000000227,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.018197699999998804,
+          "cpu_ms": 31,
+          "operations": 1000
+        }
+      ]
+    }
+  },
+  "feature_extraction": {
+    "before": {
+      "runs": 10,
+      "median_ms": 0.01479005000000052,
+      "p95_ms": 0.015440905000000837,
+      "cpu_ms": 140,
+      "samples": [
+        {
+          "ms": 0.01513340000000062,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014758100000000923,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.01476890000000094,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.01498949999999968,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014747400000000199,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014516399999998611,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014730999999999767,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014811200000000099,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.015692500000001018,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014953999999999723,
+          "cpu_ms": 16,
+          "operations": 1000
+        }
+      ]
+    },
+    "after": {
+      "runs": 10,
+      "median_ms": 0.014912800000000972,
+      "p95_ms": 0.018127105000000206,
+      "cpu_ms": 126,
+      "samples": [
+        {
+          "ms": 0.014967500000000656,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.015186499999999796,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014723899999999047,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.015082400000001144,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.020287599999999656,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.015486500000000888,
+          "cpu_ms": 0,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014858100000001286,
+          "cpu_ms": 15,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014630099999998493,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014731200000000172,
+          "cpu_ms": 16,
+          "operations": 1000
+        },
+        {
+          "ms": 0.014685800000001109,
+          "cpu_ms": 15,
+          "operations": 1000
+        }
+      ]
+    }
+  },
+  "quality": {
+    "before": {
+      "supported_phrasing": {
+        "correct": 64,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "after": {
+      "supported_phrasing": {
+        "correct": 64,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "dense": {
+      "supported_phrasing": {
+        "correct": 64,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "context_only": {
+      "supported_phrasing": {
+        "correct": 64,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    }
+  },
+  "evaluation": [
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the invoice field now",
+      "expected": "invoice",
+      "results": {
+        "before": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice",
+            "message",
+            "service"
+          ]
+        },
+        "after": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice",
+            "message",
+            "service"
+          ]
+        },
+        "dense": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice",
+            "message",
+            "service"
+          ]
+        },
+        "context_only": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice",
+            "message",
+            "service"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type invoice information please",
+      "expected": "invoice",
+      "results": {
+        "before": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "after": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "dense": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "context_only": {
+          "actual": "invoice",
+          "correct": true,
+          "ranked_topics": [
+            "invoice"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the shipping field now",
+      "expected": "shipping",
+      "results": {
+        "before": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping",
+            "meeting"
+          ]
+        },
+        "after": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping",
+            "meeting"
+          ]
+        },
+        "dense": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping",
+            "meeting"
+          ]
+        },
+        "context_only": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping",
+            "meeting"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type shipping information please",
+      "expected": "shipping",
+      "results": {
+        "before": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "after": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "dense": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "context_only": {
+          "actual": "shipping",
+          "correct": true,
+          "ranked_topics": [
+            "shipping"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the customer field now",
+      "expected": "customer",
+      "results": {
+        "before": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer",
+            "order"
+          ]
+        },
+        "after": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer",
+            "order"
+          ]
+        },
+        "dense": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer",
+            "order"
+          ]
+        },
+        "context_only": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer",
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type customer information please",
+      "expected": "customer",
+      "results": {
+        "before": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "after": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "dense": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "context_only": {
+          "actual": "customer",
+          "correct": true,
+          "ranked_topics": [
+            "customer"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the inventory field now",
+      "expected": "inventory",
+      "results": {
+        "before": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory",
+            "report",
+            "invoice"
+          ]
+        },
+        "after": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory",
+            "report",
+            "invoice"
+          ]
+        },
+        "dense": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory",
+            "report",
+            "invoice"
+          ]
+        },
+        "context_only": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory",
+            "report",
+            "invoice"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type inventory information please",
+      "expected": "inventory",
+      "results": {
+        "before": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "after": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "dense": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "context_only": {
+          "actual": "inventory",
+          "correct": true,
+          "ranked_topics": [
+            "inventory"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the payment field now",
+      "expected": "payment",
+      "results": {
+        "before": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment",
+            "document",
+            "comment"
+          ]
+        },
+        "after": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment",
+            "document",
+            "comment"
+          ]
+        },
+        "dense": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment",
+            "document",
+            "comment"
+          ]
+        },
+        "context_only": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment",
+            "document",
+            "comment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type payment information please",
+      "expected": "payment",
+      "results": {
+        "before": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment"
+          ]
+        },
+        "after": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment"
+          ]
+        },
+        "dense": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment"
+          ]
+        },
+        "context_only": {
+          "actual": "payment",
+          "correct": true,
+          "ranked_topics": [
+            "payment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the budget field now",
+      "expected": "budget",
+      "results": {
+        "before": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget",
+            "ticket",
+            "order"
+          ]
+        },
+        "after": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget",
+            "ticket",
+            "order"
+          ]
+        },
+        "dense": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget",
+            "ticket",
+            "order"
+          ]
+        },
+        "context_only": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget",
+            "ticket",
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type budget information please",
+      "expected": "budget",
+      "results": {
+        "before": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "after": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "dense": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "context_only": {
+          "actual": "budget",
+          "correct": true,
+          "ranked_topics": [
+            "budget"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the report field now",
+      "expected": "report",
+      "results": {
+        "before": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report",
+            "inventory",
+            "recipe"
+          ]
+        },
+        "after": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report",
+            "inventory",
+            "recipe"
+          ]
+        },
+        "dense": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report",
+            "inventory",
+            "recipe"
+          ]
+        },
+        "context_only": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report",
+            "inventory",
+            "recipe"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type report information please",
+      "expected": "report",
+      "results": {
+        "before": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "after": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "dense": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "context_only": {
+          "actual": "report",
+          "correct": true,
+          "ranked_topics": [
+            "report"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the appointment field now",
+      "expected": "appointment",
+      "results": {
+        "before": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment",
+            "payment",
+            "comment"
+          ]
+        },
+        "after": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment",
+            "payment",
+            "comment"
+          ]
+        },
+        "dense": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment",
+            "payment",
+            "comment"
+          ]
+        },
+        "context_only": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment",
+            "payment",
+            "comment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type appointment information please",
+      "expected": "appointment",
+      "results": {
+        "before": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "after": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "dense": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "context_only": {
+          "actual": "appointment",
+          "correct": true,
+          "ranked_topics": [
+            "appointment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the meeting field now",
+      "expected": "meeting",
+      "results": {
+        "before": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting",
+            "shipping",
+            "message"
+          ]
+        },
+        "after": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting",
+            "shipping",
+            "message"
+          ]
+        },
+        "dense": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting",
+            "shipping",
+            "message"
+          ]
+        },
+        "context_only": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting",
+            "shipping",
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type meeting information please",
+      "expected": "meeting",
+      "results": {
+        "before": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting"
+          ]
+        },
+        "after": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting"
+          ]
+        },
+        "dense": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting"
+          ]
+        },
+        "context_only": {
+          "actual": "meeting",
+          "correct": true,
+          "ranked_topics": [
+            "meeting"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the travel field now",
+      "expected": "travel",
+      "results": {
+        "before": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel",
+            "order",
+            "recipe"
+          ]
+        },
+        "after": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel",
+            "order",
+            "recipe"
+          ]
+        },
+        "dense": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel",
+            "order",
+            "recipe"
+          ]
+        },
+        "context_only": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel",
+            "order",
+            "recipe"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type travel information please",
+      "expected": "travel",
+      "results": {
+        "before": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel"
+          ]
+        },
+        "after": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel"
+          ]
+        },
+        "dense": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel"
+          ]
+        },
+        "context_only": {
+          "actual": "travel",
+          "correct": true,
+          "ranked_topics": [
+            "travel"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the recipe field now",
+      "expected": "recipe",
+      "results": {
+        "before": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe",
+            "report",
+            "request"
+          ]
+        },
+        "after": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe",
+            "report",
+            "request"
+          ]
+        },
+        "dense": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe",
+            "report",
+            "request"
+          ]
+        },
+        "context_only": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe",
+            "report",
+            "request"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type recipe information please",
+      "expected": "recipe",
+      "results": {
+        "before": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe"
+          ]
+        },
+        "after": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe"
+          ]
+        },
+        "dense": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe"
+          ]
+        },
+        "context_only": {
+          "actual": "recipe",
+          "correct": true,
+          "ranked_topics": [
+            "recipe"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the address field now",
+      "expected": "address",
+      "results": {
+        "before": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address",
+            "message",
+            "order"
+          ]
+        },
+        "after": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address",
+            "message",
+            "order"
+          ]
+        },
+        "dense": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address",
+            "message",
+            "order"
+          ]
+        },
+        "context_only": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address",
+            "message",
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type address information please",
+      "expected": "address",
+      "results": {
+        "before": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address"
+          ]
+        },
+        "after": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address"
+          ]
+        },
+        "dense": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address"
+          ]
+        },
+        "context_only": {
+          "actual": "address",
+          "correct": true,
+          "ranked_topics": [
+            "address"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the calendar field now",
+      "expected": "calendar",
+      "results": {
+        "before": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar",
+            "report"
+          ]
+        },
+        "after": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar",
+            "report"
+          ]
+        },
+        "dense": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar",
+            "report"
+          ]
+        },
+        "context_only": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar",
+            "report"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type calendar information please",
+      "expected": "calendar",
+      "results": {
+        "before": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar"
+          ]
+        },
+        "after": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar"
+          ]
+        },
+        "dense": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar"
+          ]
+        },
+        "context_only": {
+          "actual": "calendar",
+          "correct": true,
+          "ranked_topics": [
+            "calendar"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the project field now",
+      "expected": "project",
+      "results": {
+        "before": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project",
+            "service",
+            "contact"
+          ]
+        },
+        "after": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project",
+            "service",
+            "contact"
+          ]
+        },
+        "dense": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project",
+            "service",
+            "contact"
+          ]
+        },
+        "context_only": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project",
+            "service",
+            "contact"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type project information please",
+      "expected": "project",
+      "results": {
+        "before": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project"
+          ]
+        },
+        "after": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project"
+          ]
+        },
+        "dense": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project"
+          ]
+        },
+        "context_only": {
+          "actual": "project",
+          "correct": true,
+          "ranked_topics": [
+            "project"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the reminder field now",
+      "expected": "reminder",
+      "results": {
+        "before": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder",
+            "order",
+            "recipe"
+          ]
+        },
+        "after": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder",
+            "order",
+            "recipe"
+          ]
+        },
+        "dense": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder",
+            "order",
+            "recipe"
+          ]
+        },
+        "context_only": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder",
+            "order",
+            "recipe"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type reminder information please",
+      "expected": "reminder",
+      "results": {
+        "before": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder"
+          ]
+        },
+        "after": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder"
+          ]
+        },
+        "dense": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder"
+          ]
+        },
+        "context_only": {
+          "actual": "reminder",
+          "correct": true,
+          "ranked_topics": [
+            "reminder"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the contact field now",
+      "expected": "contact",
+      "results": {
+        "before": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact",
+            "project",
+            "comment"
+          ]
+        },
+        "after": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact",
+            "project",
+            "comment"
+          ]
+        },
+        "dense": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact",
+            "project",
+            "comment"
+          ]
+        },
+        "context_only": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact",
+            "project",
+            "comment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type contact information please",
+      "expected": "contact",
+      "results": {
+        "before": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact"
+          ]
+        },
+        "after": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact"
+          ]
+        },
+        "dense": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact"
+          ]
+        },
+        "context_only": {
+          "actual": "contact",
+          "correct": true,
+          "ranked_topics": [
+            "contact"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the account field now",
+      "expected": "account",
+      "results": {
+        "before": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account",
+            "payment",
+            "comment"
+          ]
+        },
+        "after": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account",
+            "payment",
+            "comment"
+          ]
+        },
+        "dense": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account",
+            "payment",
+            "comment"
+          ]
+        },
+        "context_only": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account",
+            "payment",
+            "comment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type account information please",
+      "expected": "account",
+      "results": {
+        "before": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account"
+          ]
+        },
+        "after": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account"
+          ]
+        },
+        "dense": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account"
+          ]
+        },
+        "context_only": {
+          "actual": "account",
+          "correct": true,
+          "ranked_topics": [
+            "account"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the ticket field now",
+      "expected": "ticket",
+      "results": {
+        "before": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket",
+            "budget",
+            "order"
+          ]
+        },
+        "after": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket",
+            "budget",
+            "order"
+          ]
+        },
+        "dense": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket",
+            "budget",
+            "order"
+          ]
+        },
+        "context_only": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket",
+            "budget",
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type ticket information please",
+      "expected": "ticket",
+      "results": {
+        "before": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket"
+          ]
+        },
+        "after": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket"
+          ]
+        },
+        "dense": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket"
+          ]
+        },
+        "context_only": {
+          "actual": "ticket",
+          "correct": true,
+          "ranked_topics": [
+            "ticket"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the reference field now",
+      "expected": "reference",
+      "results": {
+        "before": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference",
+            "message",
+            "recipe"
+          ]
+        },
+        "after": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference",
+            "message",
+            "recipe"
+          ]
+        },
+        "dense": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference",
+            "message",
+            "recipe"
+          ]
+        },
+        "context_only": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference",
+            "message",
+            "recipe"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type reference information please",
+      "expected": "reference",
+      "results": {
+        "before": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference"
+          ]
+        },
+        "after": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference"
+          ]
+        },
+        "dense": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference"
+          ]
+        },
+        "context_only": {
+          "actual": "reference",
+          "correct": true,
+          "ranked_topics": [
+            "reference"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the description field now",
+      "expected": "description",
+      "results": {
+        "before": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description",
+            "document"
+          ]
+        },
+        "after": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description",
+            "document"
+          ]
+        },
+        "dense": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description",
+            "document"
+          ]
+        },
+        "context_only": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description",
+            "document"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type description information please",
+      "expected": "description",
+      "results": {
+        "before": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description"
+          ]
+        },
+        "after": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description"
+          ]
+        },
+        "dense": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description"
+          ]
+        },
+        "context_only": {
+          "actual": "description",
+          "correct": true,
+          "ranked_topics": [
+            "description"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the comment field now",
+      "expected": "comment",
+      "results": {
+        "before": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment",
+            "payment",
+            "document"
+          ]
+        },
+        "after": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment",
+            "payment",
+            "document"
+          ]
+        },
+        "dense": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment",
+            "payment",
+            "document"
+          ]
+        },
+        "context_only": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment",
+            "payment",
+            "document"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type comment information please",
+      "expected": "comment",
+      "results": {
+        "before": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment"
+          ]
+        },
+        "after": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment"
+          ]
+        },
+        "dense": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment"
+          ]
+        },
+        "context_only": {
+          "actual": "comment",
+          "correct": true,
+          "ranked_topics": [
+            "comment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the message field now",
+      "expected": "message",
+      "results": {
+        "before": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message",
+            "service",
+            "invoice"
+          ]
+        },
+        "after": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message",
+            "service",
+            "invoice"
+          ]
+        },
+        "dense": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message",
+            "service",
+            "invoice"
+          ]
+        },
+        "context_only": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message",
+            "invoice",
+            "service"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type message information please",
+      "expected": "message",
+      "results": {
+        "before": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message"
+          ]
+        },
+        "after": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message"
+          ]
+        },
+        "dense": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message"
+          ]
+        },
+        "context_only": {
+          "actual": "message",
+          "correct": true,
+          "ranked_topics": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the schedule field now",
+      "expected": "schedule",
+      "results": {
+        "before": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        },
+        "after": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        },
+        "dense": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        },
+        "context_only": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type schedule information please",
+      "expected": "schedule",
+      "results": {
+        "before": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        },
+        "after": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        },
+        "dense": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        },
+        "context_only": {
+          "actual": "schedule",
+          "correct": true,
+          "ranked_topics": [
+            "schedule"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the purchase field now",
+      "expected": "purchase",
+      "results": {
+        "before": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        },
+        "after": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        },
+        "dense": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        },
+        "context_only": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type purchase information please",
+      "expected": "purchase",
+      "results": {
+        "before": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        },
+        "after": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        },
+        "dense": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        },
+        "context_only": {
+          "actual": "purchase",
+          "correct": true,
+          "ranked_topics": [
+            "purchase"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the request field now",
+      "expected": "request",
+      "results": {
+        "before": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request",
+            "recipe",
+            "report"
+          ]
+        },
+        "after": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request",
+            "recipe",
+            "report"
+          ]
+        },
+        "dense": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request",
+            "recipe",
+            "report"
+          ]
+        },
+        "context_only": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request",
+            "recipe",
+            "report"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type request information please",
+      "expected": "request",
+      "results": {
+        "before": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request"
+          ]
+        },
+        "after": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request"
+          ]
+        },
+        "dense": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request"
+          ]
+        },
+        "context_only": {
+          "actual": "request",
+          "correct": true,
+          "ranked_topics": [
+            "request"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the supplier field now",
+      "expected": "supplier",
+      "results": {
+        "before": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier",
+            "order"
+          ]
+        },
+        "after": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier",
+            "order"
+          ]
+        },
+        "dense": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier",
+            "order"
+          ]
+        },
+        "context_only": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier",
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type supplier information please",
+      "expected": "supplier",
+      "results": {
+        "before": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier"
+          ]
+        },
+        "after": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier"
+          ]
+        },
+        "dense": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier"
+          ]
+        },
+        "context_only": {
+          "actual": "supplier",
+          "correct": true,
+          "ranked_topics": [
+            "supplier"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the employee field now",
+      "expected": "employee",
+      "results": {
+        "before": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        },
+        "after": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        },
+        "dense": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        },
+        "context_only": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type employee information please",
+      "expected": "employee",
+      "results": {
+        "before": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        },
+        "after": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        },
+        "dense": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        },
+        "context_only": {
+          "actual": "employee",
+          "correct": true,
+          "ranked_topics": [
+            "employee"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the service field now",
+      "expected": "service",
+      "results": {
+        "before": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service",
+            "project",
+            "message"
+          ]
+        },
+        "after": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service",
+            "project",
+            "message"
+          ]
+        },
+        "dense": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service",
+            "project",
+            "message"
+          ]
+        },
+        "context_only": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service",
+            "project",
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type service information please",
+      "expected": "service",
+      "results": {
+        "before": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service"
+          ]
+        },
+        "after": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service"
+          ]
+        },
+        "dense": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service"
+          ]
+        },
+        "context_only": {
+          "actual": "service",
+          "correct": true,
+          "ranked_topics": [
+            "service"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the document field now",
+      "expected": "document",
+      "results": {
+        "before": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document",
+            "payment",
+            "comment"
+          ]
+        },
+        "after": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document",
+            "payment",
+            "comment"
+          ]
+        },
+        "dense": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document",
+            "payment",
+            "comment"
+          ]
+        },
+        "context_only": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document",
+            "payment",
+            "comment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type document information please",
+      "expected": "document",
+      "results": {
+        "before": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document"
+          ]
+        },
+        "after": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document"
+          ]
+        },
+        "dense": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document"
+          ]
+        },
+        "context_only": {
+          "actual": "document",
+          "correct": true,
+          "ranked_topics": [
+            "document"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the order field now",
+      "expected": "order",
+      "results": {
+        "before": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order",
+            "reminder",
+            "recipe"
+          ]
+        },
+        "after": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order",
+            "reminder",
+            "recipe"
+          ]
+        },
+        "dense": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order",
+            "reminder",
+            "recipe"
+          ]
+        },
+        "context_only": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order",
+            "reminder",
+            "customer"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type order information please",
+      "expected": "order",
+      "results": {
+        "before": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order"
+          ]
+        },
+        "after": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order"
+          ]
+        },
+        "dense": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order"
+          ]
+        },
+        "context_only": {
+          "actual": "order",
+          "correct": true,
+          "ranked_topics": [
+            "order"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the delivery field now",
+      "expected": "delivery",
+      "results": {
+        "before": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        },
+        "after": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        },
+        "dense": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        },
+        "context_only": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type delivery information please",
+      "expected": "delivery",
+      "results": {
+        "before": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        },
+        "after": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        },
+        "dense": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        },
+        "context_only": {
+          "actual": "delivery",
+          "correct": true,
+          "ranked_topics": [
+            "delivery"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the reservation field now",
+      "expected": "reservation",
+      "results": {
+        "before": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation",
+            "document",
+            "service"
+          ]
+        },
+        "after": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation",
+            "document",
+            "service"
+          ]
+        },
+        "dense": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation",
+            "document",
+            "service"
+          ]
+        },
+        "context_only": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation",
+            "document",
+            "service"
+          ]
+        }
+      }
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type reservation information please",
+      "expected": "reservation",
+      "results": {
+        "before": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation"
+          ]
+        },
+        "after": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation"
+          ]
+        },
+        "dense": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation"
+          ]
+        },
+        "context_only": {
+          "actual": "reservation",
+          "correct": true,
+          "ranked_topics": [
+            "reservation"
+          ]
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Change where the parcel goes",
+      "expected": "shipping",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Enter the client's name",
+      "expected": "customer",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Set how much money we can spend",
+      "expected": "budget",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Book a visit with the doctor",
+      "expected": "appointment",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Update the stock count",
+      "expected": "inventory",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Enter the street and house number",
+      "expected": "address",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Add a notification for later",
+      "expected": "reminder",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Book a table for dinner",
+      "expected": "reservation",
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": false,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the invoice field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "after": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "dense": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "context_only": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the invoice field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "after": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "dense": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        },
+        "context_only": {
+          "actual": "invoice",
+          "correct": false,
+          "ranked_topics": [
+            "invoice"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the shipping field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "after": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "dense": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "context_only": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the shipping field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "after": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "dense": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        },
+        "context_only": {
+          "actual": "shipping",
+          "correct": false,
+          "ranked_topics": [
+            "shipping"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the customer field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "after": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "dense": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "context_only": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the customer field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "after": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "dense": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        },
+        "context_only": {
+          "actual": "customer",
+          "correct": false,
+          "ranked_topics": [
+            "customer"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the inventory field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "after": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "dense": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "context_only": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the inventory field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "after": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "dense": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        },
+        "context_only": {
+          "actual": "inventory",
+          "correct": false,
+          "ranked_topics": [
+            "inventory"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the payment field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment",
+            "document"
+          ]
+        },
+        "after": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment",
+            "document"
+          ]
+        },
+        "dense": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment",
+            "document"
+          ]
+        },
+        "context_only": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment",
+            "document"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the payment field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment"
+          ]
+        },
+        "after": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment"
+          ]
+        },
+        "dense": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment"
+          ]
+        },
+        "context_only": {
+          "actual": "payment",
+          "correct": false,
+          "ranked_topics": [
+            "payment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the budget field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "after": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "dense": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "context_only": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the budget field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "after": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "dense": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        },
+        "context_only": {
+          "actual": "budget",
+          "correct": false,
+          "ranked_topics": [
+            "budget"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the report field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "after": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "dense": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "context_only": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the report field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "after": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "dense": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        },
+        "context_only": {
+          "actual": "report",
+          "correct": false,
+          "ranked_topics": [
+            "report"
+          ]
+        }
+      }
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the appointment field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "after": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "dense": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "context_only": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the appointment field",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "after": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "dense": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        },
+        "context_only": {
+          "actual": "appointment",
+          "correct": false,
+          "ranked_topics": [
+            "appointment"
+          ]
+        }
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Paint a watercolor landscape",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Play chess against me",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "What is the capital of France?",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Explain quantum physics",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Sing a lullaby",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        }
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Solve this algebra equation",
+      "expected": null,
+      "results": {
+        "before": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "after": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "dense": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        },
+        "context_only": {
+          "actual": null,
+          "correct": true,
+          "ranked_topics": []
+        }
+      }
+    }
+  ],
+  "feedback_tie": {
+    "query": "Type the details field",
+    "purpose": "Equal cosine, two still-eligible workflows; rank the one with stronger model feedback first.",
+    "original_and_optimized": [
+      {
+        "recipe_id": "30358b7b92049f14f0986b3399d6461d",
+        "match_score": 1,
+        "model_score": 0.799687115255061,
+        "topic": "shipping"
+      },
+      {
+        "recipe_id": "93264e54a57f4902f65e62de3ead9211",
+        "match_score": 1,
+        "model_score": 0.48016633410361903,
+        "topic": "invoice"
+      }
+    ],
+    "context_only": [
+      {
+        "recipe_id": "93264e54a57f4902f65e62de3ead9211",
+        "match_score": 1,
+        "model_score": 0,
+        "topic": "invoice"
+      },
+      {
+        "recipe_id": "30358b7b92049f14f0986b3399d6461d",
+        "match_score": 1,
+        "model_score": 0,
+        "topic": "shipping"
+      }
+    ],
+    "preserved_by_context_only": false
+  },
+  "parity": {
+    "public_suggestions": "exact scores and order, all workload and evaluation queries, including feedback tie",
+    "training": "exact sparse and dense weights, bias and examples after mixed-label updates",
+    "existing_journal": "version-1 snapshots reopened unchanged by both implementations"
+  },
+  "memory": {
+    "process": {
+      "rss": 152686592,
+      "heapTotal": 99475456,
+      "heapUsed": 63935848,
+      "external": 12980316,
+      "arrayBuffers": 10805744
+    },
+    "state_bytes": 343439,
+    "sparse_model_json_bytes": 259013,
+    "dense_additional_cache_bytes": 4718592
+  },
+  "idle": {
+    "window_ms": 2000,
+    "cpu_ms": 0,
+    "journal_changed": false
+  },
+  "limits": [
+    "Synthetic disposable profiles; no real user quality dataset. Near-miss results demonstrate heuristic limits, not permission to execute.",
+    "Training samples are block averages, p95 is across block averages; not per-request tail latency. CPU includes harness and uses OS timer resolution.",
+    "Production before/after includes feature extraction and async service access; experimental candidate rows use one shared in-memory ranking harness. Compare only within a row.",
+    "Same-process counterbalanced blocks limit drift; GC, JIT and other apps still affect timings. Process memory includes all arms, dependencies and the harness; cache bytes are exact Float64Array buffers, JSON bytes are serialized sizes rather than heap usage.",
+    "Seed training includes encrypted persistence and synthetic test feedback, measured for baseline only; test key bypasses DPAPI.",
+    "Dense is Float64 for score compatibility, preserves the sparse journal and would need an extra cache. Context-only has no logistic training and changes feedback-sensitive ranking in the controlled tie.",
+    "fastText and transformer embeddings were researched only. A separate static-model report measures Model2Vec and BM25. No GPU, cloud model, network latency or native action execution measured."
+  ]
+}

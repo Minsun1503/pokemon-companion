@@ -1,0 +1,4323 @@
+{
+  "created_at": "2026-11-12T06:01:05Z",
+  "environment": {
+    "python": "3.13.1",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "threads": 1,
+    "packages": {
+      "model2vec": "0.10.0",
+      "numpy": "2.5.4",
+      "rank-bm25": "0.2.2",
+      "tokenizers": "0.23.3",
+      "huggingface-hub": "2.4.0"
+    }
+  },
+  "source_fixture_sha256": "9d030ede25ea2b7a38b1dd54002459a64530c470bd414a75cf00362a89218cad",
+  "model": {
+    "id": "minishlab/potion-base-8M",
+    "revision": "bf8b056651a2c21b8d2565580b8569da283cab23",
+    "dimensions": 256,
+    "vocabulary": 29528,
+    "embedding_bytes": 30236672,
+    "context_and_head_bytes": 590080,
+    "files": {
+      "config.json": {
+        "bytes": 202,
+        "sha256": "2a6ac0e9aaa356a68a5688070db78fc3a464fefe85d2f06a1905ce3718687553"
+      },
+      "model.safetensors": {
+        "bytes": 30236760,
+        "sha256": "f65d0f325faadc1e121c319e2faa41170d3fa07d8c89abd48ca5358d9a223de2"
+      },
+      "README.md": {
+        "bytes": 5203,
+        "sha256": "de8ec91bf63c5f4c0e20751c227b2d049953e1cab5f8d5d44211c59a44795bdd"
+      },
+      "tokenizer.json": {
+        "bytes": 683666,
+        "sha256": "e67e803f624fb4d67dea1c730d06e1067e1b14d830e2c2202569e3ef0f70bb50"
+      }
+    },
+    "download_or_cache_ms": 19.696199989994057,
+    "local_load_ms": 114.24670000269543
+  },
+  "head_seed_256_examples_ms": 2.8221999964443967,
+  "bm25_index_256_contexts_ms": 2.3123999999370426,
+  "encoding": {
+    "runs": 10,
+    "median_ms": 0.07060235000244575,
+    "p95_ms": 0.07483057498830022,
+    "cpu_ms": 718.75,
+    "samples": [
+      {
+        "ms": 0.07526819998747669,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      },
+      {
+        "ms": 0.07043100000009872,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      },
+      {
+        "ms": 0.07244690001243725,
+        "cpu_ms": 62.5,
+        "operations": 1000
+      },
+      {
+        "ms": 0.0679453999910038,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      },
+      {
+        "ms": 0.06747880000330042,
+        "cpu_ms": 62.5,
+        "operations": 1000
+      },
+      {
+        "ms": 0.07028990000253543,
+        "cpu_ms": 62.5,
+        "operations": 1000
+      },
+      {
+        "ms": 0.07077370000479277,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      },
+      {
+        "ms": 0.07429569998930674,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      },
+      {
+        "ms": 0.06937979999929667,
+        "cpu_ms": 62.5,
+        "operations": 1000
+      },
+      {
+        "ms": 0.07156640000175685,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      }
+    ]
+  },
+  "static_retrieval": {
+    "runs": 10,
+    "median_ms": 0.12168649998784531,
+    "p95_ms": 0.1322964499777299,
+    "cpu_ms": 125,
+    "samples": [
+      {
+        "ms": 0.12308799996390007,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.12240900003234856,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.12166300002718344,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.12113499993574806,
+        "cpu_ms": 0,
+        "operations": 100
+      },
+      {
+        "ms": 0.12170999994850717,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.13870399998268113,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.12446499997167848,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.12042999995173886,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.11972699998295866,
+        "cpu_ms": 0,
+        "operations": 100
+      },
+      {
+        "ms": 0.11983799995505251,
+        "cpu_ms": 15.625,
+        "operations": 100
+      }
+    ]
+  },
+  "bm25_retrieval": {
+    "runs": 10,
+    "median_ms": 0.16032899999117944,
+    "p95_ms": 0.16132074999040924,
+    "cpu_ms": 156.25,
+    "samples": [
+      {
+        "ms": 0.16155699995579198,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.16080500005045906,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.16036499990150332,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.16103200003271922,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.15936399999191053,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.15940900004352443,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.16029300008085556,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.16087600000901148,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.15268400005879812,
+        "cpu_ms": 15.625,
+        "operations": 100
+      },
+      {
+        "ms": 0.14400800006114878,
+        "cpu_ms": 15.625,
+        "operations": 100
+      }
+    ]
+  },
+  "online_head_update": {
+    "runs": 10,
+    "median_ms": 0.009117049994529225,
+    "p95_ms": 0.009581155003252207,
+    "cpu_ms": 93.75,
+    "samples": [
+      {
+        "ms": 0.009418300003744662,
+        "cpu_ms": 15.625,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009121099996264093,
+        "cpu_ms": 15.625,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009102700001676567,
+        "cpu_ms": 0,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009223500004736707,
+        "cpu_ms": 15.625,
+        "operations": 1000
+      },
+      {
+        "ms": 0.0091822999966098,
+        "cpu_ms": 0,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009054200010723434,
+        "cpu_ms": 15.625,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009081399999558926,
+        "cpu_ms": 0,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009112999992794357,
+        "cpu_ms": 15.625,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009098299997276627,
+        "cpu_ms": 15.625,
+        "operations": 1000
+      },
+      {
+        "ms": 0.009714400002849288,
+        "cpu_ms": 0,
+        "operations": 1000
+      }
+    ]
+  },
+  "training_with_encoding": {
+    "runs": 10,
+    "median_ms": 0.0923423000058392,
+    "p95_ms": 0.09827150499695562,
+    "cpu_ms": 921.875,
+    "samples": [
+      {
+        "ms": 0.08850620000157505,
+        "cpu_ms": 78.125,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09122989999013953,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09230360000219662,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09258160000899807,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09309369999391492,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09215209999820217,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09224060000269674,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.10186029999749735,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.09388519999629352,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      },
+      {
+        "ms": 0.0923810000094818,
+        "cpu_ms": 93.75,
+        "operations": 1000
+      }
+    ]
+  },
+  "quality": {
+    "static_0.65": {
+      "supported_phrasing": {
+        "correct": 63,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "static_0.75": {
+      "supported_phrasing": {
+        "correct": 38,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 2,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "static_0.85": {
+      "supported_phrasing": {
+        "correct": 0,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 8,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "static_0.9": {
+      "supported_phrasing": {
+        "correct": 0,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 8,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "bm25_positive_score": {
+      "supported_phrasing": {
+        "correct": 64,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 0,
+        "total": 8
+      },
+      "negation": {
+        "correct": 0,
+        "total": 8
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      }
+    },
+    "static_positive_top1_no_cutoff": {
+      "supported_phrasing": {
+        "correct": 63,
+        "total": 64
+      },
+      "semantic_paraphrase": {
+        "correct": 5,
+        "total": 8
+      }
+    }
+  },
+  "evaluation": [
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the invoice field now",
+      "expected": "invoice",
+      "static_top1_without_cutoff": "invoice",
+      "static_at_cutoffs": {
+        "0.65": "invoice",
+        "0.75": "invoice",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "invoice",
+          0.8367577284413611
+        ],
+        [
+          "document",
+          0.5159299272128539
+        ],
+        [
+          "inventory",
+          0.5043868318416052
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          5.4002315940705214
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ],
+        [
+          "customer",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type invoice information please",
+      "expected": "invoice",
+      "static_top1_without_cutoff": "invoice",
+      "static_at_cutoffs": {
+        "0.65": "invoice",
+        "0.75": "invoice",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "invoice",
+          0.8364909697189561
+        ],
+        [
+          "request",
+          0.4763130312580201
+        ],
+        [
+          "order",
+          0.45697452362681756
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          6.21499342700305
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ],
+        [
+          "customer",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the shipping field now",
+      "expected": "shipping",
+      "static_top1_without_cutoff": "shipping",
+      "static_at_cutoffs": {
+        "0.65": "shipping",
+        "0.75": "shipping",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "shipping",
+          0.7723521799662196
+        ],
+        [
+          "delivery",
+          0.5747654326721956
+        ],
+        [
+          "inventory",
+          0.5478232135548561
+        ]
+      ],
+      "bm25_positive_score": "shipping",
+      "bm25_ranked": [
+        [
+          "shipping",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "customer",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type shipping information please",
+      "expected": "shipping",
+      "static_top1_without_cutoff": "shipping",
+      "static_at_cutoffs": {
+        "0.65": "shipping",
+        "0.75": "shipping",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "shipping",
+          0.7697916062566799
+        ],
+        [
+          "order",
+          0.5369050206224957
+        ],
+        [
+          "delivery",
+          0.5108659498829826
+        ]
+      ],
+      "bm25_positive_score": "shipping",
+      "bm25_ranked": [
+        [
+          "shipping",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "customer",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the customer field now",
+      "expected": "customer",
+      "static_top1_without_cutoff": "customer",
+      "static_at_cutoffs": {
+        "0.65": "customer",
+        "0.75": "customer",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "customer",
+          0.7642492900266477
+        ],
+        [
+          "service",
+          0.5865857057415462
+        ],
+        [
+          "contact",
+          0.5777415705815594
+        ]
+      ],
+      "bm25_positive_score": "customer",
+      "bm25_ranked": [
+        [
+          "customer",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type customer information please",
+      "expected": "customer",
+      "static_top1_without_cutoff": "customer",
+      "static_at_cutoffs": {
+        "0.65": "customer",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "customer",
+          0.732415708663027
+        ],
+        [
+          "request",
+          0.5528438439398102
+        ],
+        [
+          "contact",
+          0.5355323969690005
+        ]
+      ],
+      "bm25_positive_score": "customer",
+      "bm25_ranked": [
+        [
+          "customer",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the inventory field now",
+      "expected": "inventory",
+      "static_top1_without_cutoff": "inventory",
+      "static_at_cutoffs": {
+        "0.65": "inventory",
+        "0.75": "inventory",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "inventory",
+          0.793852733034569
+        ],
+        [
+          "supplier",
+          0.5190541880649118
+        ],
+        [
+          "service",
+          0.4859067366719366
+        ]
+      ],
+      "bm25_positive_score": "inventory",
+      "bm25_ranked": [
+        [
+          "inventory",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type inventory information please",
+      "expected": "inventory",
+      "static_top1_without_cutoff": "inventory",
+      "static_at_cutoffs": {
+        "0.65": "inventory",
+        "0.75": "inventory",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "inventory",
+          0.7710230548606081
+        ],
+        [
+          "order",
+          0.5101690991550767
+        ],
+        [
+          "request",
+          0.5086057644167501
+        ]
+      ],
+      "bm25_positive_score": "inventory",
+      "bm25_ranked": [
+        [
+          "inventory",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the payment field now",
+      "expected": "payment",
+      "static_top1_without_cutoff": "payment",
+      "static_at_cutoffs": {
+        "0.65": "payment",
+        "0.75": "payment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "payment",
+          0.7903618050180441
+        ],
+        [
+          "purchase",
+          0.5796187869259137
+        ],
+        [
+          "customer",
+          0.563702019628149
+        ]
+      ],
+      "bm25_positive_score": "payment",
+      "bm25_ranked": [
+        [
+          "payment",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type payment information please",
+      "expected": "payment",
+      "static_top1_without_cutoff": "payment",
+      "static_at_cutoffs": {
+        "0.65": "payment",
+        "0.75": "payment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "payment",
+          0.7643253629236263
+        ],
+        [
+          "request",
+          0.5438579473153133
+        ],
+        [
+          "purchase",
+          0.5266558896693896
+        ]
+      ],
+      "bm25_positive_score": "payment",
+      "bm25_ranked": [
+        [
+          "payment",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the budget field now",
+      "expected": "budget",
+      "static_top1_without_cutoff": "budget",
+      "static_at_cutoffs": {
+        "0.65": "budget",
+        "0.75": "budget",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "budget",
+          0.766081448761605
+        ],
+        [
+          "inventory",
+          0.5048047905226047
+        ],
+        [
+          "payment",
+          0.47593798164060547
+        ]
+      ],
+      "bm25_positive_score": "budget",
+      "bm25_ranked": [
+        [
+          "budget",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type budget information please",
+      "expected": "budget",
+      "static_top1_without_cutoff": "budget",
+      "static_at_cutoffs": {
+        "0.65": "budget",
+        "0.75": "budget",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "budget",
+          0.7542277221161653
+        ],
+        [
+          "request",
+          0.4605230094009125
+        ],
+        [
+          "purchase",
+          0.3912934954620334
+        ]
+      ],
+      "bm25_positive_score": "budget",
+      "bm25_ranked": [
+        [
+          "budget",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the report field now",
+      "expected": "report",
+      "static_top1_without_cutoff": "report",
+      "static_at_cutoffs": {
+        "0.65": "report",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "report",
+          0.7176123882614408
+        ],
+        [
+          "document",
+          0.6001232237674382
+        ],
+        [
+          "project",
+          0.5582536522671934
+        ]
+      ],
+      "bm25_positive_score": "report",
+      "bm25_ranked": [
+        [
+          "report",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type report information please",
+      "expected": "report",
+      "static_top1_without_cutoff": "report",
+      "static_at_cutoffs": {
+        "0.65": "report",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "report",
+          0.7008303593325755
+        ],
+        [
+          "request",
+          0.5318680060985486
+        ],
+        [
+          "description",
+          0.48825386663928694
+        ]
+      ],
+      "bm25_positive_score": "report",
+      "bm25_ranked": [
+        [
+          "report",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the appointment field now",
+      "expected": "appointment",
+      "static_top1_without_cutoff": "appointment",
+      "static_at_cutoffs": {
+        "0.65": "appointment",
+        "0.75": "appointment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "appointment",
+          0.7793501323165483
+        ],
+        [
+          "contact",
+          0.596367674299158
+        ],
+        [
+          "schedule",
+          0.589307880639933
+        ]
+      ],
+      "bm25_positive_score": "appointment",
+      "bm25_ranked": [
+        [
+          "appointment",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type appointment information please",
+      "expected": "appointment",
+      "static_top1_without_cutoff": "appointment",
+      "static_at_cutoffs": {
+        "0.65": "appointment",
+        "0.75": "appointment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "appointment",
+          0.7600261880161963
+        ],
+        [
+          "request",
+          0.5397710767704944
+        ],
+        [
+          "contact",
+          0.5054152316074904
+        ]
+      ],
+      "bm25_positive_score": "appointment",
+      "bm25_ranked": [
+        [
+          "appointment",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the meeting field now",
+      "expected": "meeting",
+      "static_top1_without_cutoff": "meeting",
+      "static_at_cutoffs": {
+        "0.65": "meeting",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "meeting",
+          0.7207517792637046
+        ],
+        [
+          "document",
+          0.5573754518117816
+        ],
+        [
+          "contact",
+          0.5461610964671769
+        ]
+      ],
+      "bm25_positive_score": "meeting",
+      "bm25_ranked": [
+        [
+          "meeting",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type meeting information please",
+      "expected": "meeting",
+      "static_top1_without_cutoff": "meeting",
+      "static_at_cutoffs": {
+        "0.65": "meeting",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "meeting",
+          0.7212543950588068
+        ],
+        [
+          "request",
+          0.5143881079324024
+        ],
+        [
+          "contact",
+          0.48678266652708063
+        ]
+      ],
+      "bm25_positive_score": "meeting",
+      "bm25_ranked": [
+        [
+          "meeting",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the travel field now",
+      "expected": "travel",
+      "static_top1_without_cutoff": "travel",
+      "static_at_cutoffs": {
+        "0.65": "travel",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "travel",
+          0.7403245345396268
+        ],
+        [
+          "service",
+          0.5639590290274763
+        ],
+        [
+          "inventory",
+          0.5409682391725172
+        ]
+      ],
+      "bm25_positive_score": "travel",
+      "bm25_ranked": [
+        [
+          "travel",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type travel information please",
+      "expected": "travel",
+      "static_top1_without_cutoff": "travel",
+      "static_at_cutoffs": {
+        "0.65": "travel",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "travel",
+          0.7020882792613088
+        ],
+        [
+          "request",
+          0.5201147032219781
+        ],
+        [
+          "reservation",
+          0.5030143785785112
+        ]
+      ],
+      "bm25_positive_score": "travel",
+      "bm25_ranked": [
+        [
+          "travel",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the recipe field now",
+      "expected": "recipe",
+      "static_top1_without_cutoff": "recipe",
+      "static_at_cutoffs": {
+        "0.65": "recipe",
+        "0.75": "recipe",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "recipe",
+          0.7849170175965619
+        ],
+        [
+          "document",
+          0.45581143852975664
+        ],
+        [
+          "inventory",
+          0.45036592249102847
+        ]
+      ],
+      "bm25_positive_score": "recipe",
+      "bm25_ranked": [
+        [
+          "recipe",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type recipe information please",
+      "expected": "recipe",
+      "static_top1_without_cutoff": "recipe",
+      "static_at_cutoffs": {
+        "0.65": "recipe",
+        "0.75": "recipe",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "recipe",
+          0.7832996337427303
+        ],
+        [
+          "order",
+          0.4156329374311789
+        ],
+        [
+          "request",
+          0.41589415721530676
+        ]
+      ],
+      "bm25_positive_score": "recipe",
+      "bm25_ranked": [
+        [
+          "recipe",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the address field now",
+      "expected": "address",
+      "static_top1_without_cutoff": "address",
+      "static_at_cutoffs": {
+        "0.65": "address",
+        "0.75": "address",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "address",
+          0.7646322139708936
+        ],
+        [
+          "contact",
+          0.6357558980885166
+        ],
+        [
+          "service",
+          0.6047029977550967
+        ]
+      ],
+      "bm25_positive_score": "address",
+      "bm25_ranked": [
+        [
+          "address",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type address information please",
+      "expected": "address",
+      "static_top1_without_cutoff": "address",
+      "static_at_cutoffs": {
+        "0.65": "address",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "address",
+          0.7347810129022614
+        ],
+        [
+          "request",
+          0.575886251527636
+        ],
+        [
+          "contact",
+          0.5433080451411334
+        ]
+      ],
+      "bm25_positive_score": "address",
+      "bm25_ranked": [
+        [
+          "address",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the calendar field now",
+      "expected": "calendar",
+      "static_top1_without_cutoff": "calendar",
+      "static_at_cutoffs": {
+        "0.65": "calendar",
+        "0.75": "calendar",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "calendar",
+          0.7670967752511404
+        ],
+        [
+          "schedule",
+          0.6726993342900729
+        ],
+        [
+          "reminder",
+          0.5880700684804803
+        ]
+      ],
+      "bm25_positive_score": "calendar",
+      "bm25_ranked": [
+        [
+          "calendar",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type calendar information please",
+      "expected": "calendar",
+      "static_top1_without_cutoff": "calendar",
+      "static_at_cutoffs": {
+        "0.65": "calendar",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "calendar",
+          0.7474832250508903
+        ],
+        [
+          "schedule",
+          0.58527057849006
+        ],
+        [
+          "appointment",
+          0.4814475823536482
+        ]
+      ],
+      "bm25_positive_score": "calendar",
+      "bm25_ranked": [
+        [
+          "calendar",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the project field now",
+      "expected": "project",
+      "static_top1_without_cutoff": "project",
+      "static_at_cutoffs": {
+        "0.65": "project",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "project",
+          0.6946257352387888
+        ],
+        [
+          "inventory",
+          0.5277609123971283
+        ],
+        [
+          "document",
+          0.5219809950680218
+        ]
+      ],
+      "bm25_positive_score": "project",
+      "bm25_ranked": [
+        [
+          "project",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type project information please",
+      "expected": "project",
+      "static_top1_without_cutoff": "project",
+      "static_at_cutoffs": {
+        "0.65": "project",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "project",
+          0.6657471594075367
+        ],
+        [
+          "request",
+          0.5602552351817632
+        ],
+        [
+          "description",
+          0.4895626713663071
+        ]
+      ],
+      "bm25_positive_score": "project",
+      "bm25_ranked": [
+        [
+          "project",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the reminder field now",
+      "expected": "reminder",
+      "static_top1_without_cutoff": "reminder",
+      "static_at_cutoffs": {
+        "0.65": "reminder",
+        "0.75": "reminder",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reminder",
+          0.7873632094901725
+        ],
+        [
+          "message",
+          0.5749643764763703
+        ],
+        [
+          "calendar",
+          0.5590152185560564
+        ]
+      ],
+      "bm25_positive_score": "reminder",
+      "bm25_ranked": [
+        [
+          "reminder",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type reminder information please",
+      "expected": "reminder",
+      "static_top1_without_cutoff": "reminder",
+      "static_at_cutoffs": {
+        "0.65": "reminder",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reminder",
+          0.7372711781528098
+        ],
+        [
+          "calendar",
+          0.4873260460851656
+        ],
+        [
+          "message",
+          0.46912091409155043
+        ]
+      ],
+      "bm25_positive_score": "reminder",
+      "bm25_ranked": [
+        [
+          "reminder",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the contact field now",
+      "expected": "contact",
+      "static_top1_without_cutoff": "contact",
+      "static_at_cutoffs": {
+        "0.65": "contact",
+        "0.75": "contact",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "contact",
+          0.7683059021118817
+        ],
+        [
+          "request",
+          0.634567292447098
+        ],
+        [
+          "service",
+          0.6349585674736666
+        ]
+      ],
+      "bm25_positive_score": "contact",
+      "bm25_ranked": [
+        [
+          "contact",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type contact information please",
+      "expected": "contact",
+      "static_top1_without_cutoff": "contact",
+      "static_at_cutoffs": {
+        "0.65": "contact",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "contact",
+          0.72594322982757
+        ],
+        [
+          "request",
+          0.6331970589134528
+        ],
+        [
+          "appointment",
+          0.5243905586299161
+        ]
+      ],
+      "bm25_positive_score": "contact",
+      "bm25_ranked": [
+        [
+          "contact",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the account field now",
+      "expected": "account",
+      "static_top1_without_cutoff": "account",
+      "static_at_cutoffs": {
+        "0.65": "account",
+        "0.75": "account",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "account",
+          0.7713885944332961
+        ],
+        [
+          "inventory",
+          0.6278401174604678
+        ],
+        [
+          "service",
+          0.6122941497374559
+        ]
+      ],
+      "bm25_positive_score": "account",
+      "bm25_ranked": [
+        [
+          "account",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type account information please",
+      "expected": "account",
+      "static_top1_without_cutoff": "account",
+      "static_at_cutoffs": {
+        "0.65": "account",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "account",
+          0.7252447519218141
+        ],
+        [
+          "request",
+          0.5481692630461533
+        ],
+        [
+          "purchase",
+          0.4786780495404903
+        ]
+      ],
+      "bm25_positive_score": "account",
+      "bm25_ranked": [
+        [
+          "account",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the ticket field now",
+      "expected": "ticket",
+      "static_top1_without_cutoff": "ticket",
+      "static_at_cutoffs": {
+        "0.65": "ticket",
+        "0.75": "ticket",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "ticket",
+          0.7899728434786805
+        ],
+        [
+          "service",
+          0.6132173029142232
+        ],
+        [
+          "customer",
+          0.6096893478862551
+        ]
+      ],
+      "bm25_positive_score": "ticket",
+      "bm25_ranked": [
+        [
+          "ticket",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type ticket information please",
+      "expected": "ticket",
+      "static_top1_without_cutoff": "ticket",
+      "static_at_cutoffs": {
+        "0.65": "ticket",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "ticket",
+          0.7496312469286535
+        ],
+        [
+          "request",
+          0.531677258808229
+        ],
+        [
+          "reservation",
+          0.5134385681086779
+        ]
+      ],
+      "bm25_positive_score": "ticket",
+      "bm25_ranked": [
+        [
+          "ticket",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the reference field now",
+      "expected": "reference",
+      "static_top1_without_cutoff": "reference",
+      "static_at_cutoffs": {
+        "0.65": "reference",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reference",
+          0.7436816731921168
+        ],
+        [
+          "document",
+          0.5674853328702418
+        ],
+        [
+          "inventory",
+          0.5319454056085593
+        ]
+      ],
+      "bm25_positive_score": "reference",
+      "bm25_ranked": [
+        [
+          "reference",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type reference information please",
+      "expected": "reference",
+      "static_top1_without_cutoff": "reference",
+      "static_at_cutoffs": {
+        "0.65": "reference",
+        "0.75": "reference",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reference",
+          0.75150479184995
+        ],
+        [
+          "request",
+          0.508925548865548
+        ],
+        [
+          "description",
+          0.4984922463613998
+        ]
+      ],
+      "bm25_positive_score": "reference",
+      "bm25_ranked": [
+        [
+          "reference",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the description field now",
+      "expected": "description",
+      "static_top1_without_cutoff": "description",
+      "static_at_cutoffs": {
+        "0.65": "description",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "description",
+          0.7217223918943776
+        ],
+        [
+          "document",
+          0.6313923790343239
+        ],
+        [
+          "inventory",
+          0.5721397721822961
+        ]
+      ],
+      "bm25_positive_score": "description",
+      "bm25_ranked": [
+        [
+          "description",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type description information please",
+      "expected": "description",
+      "static_top1_without_cutoff": "description",
+      "static_at_cutoffs": {
+        "0.65": "description",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "description",
+          0.7311299909783506
+        ],
+        [
+          "request",
+          0.5658082329091094
+        ],
+        [
+          "reference",
+          0.4932360500995344
+        ]
+      ],
+      "bm25_positive_score": "description",
+      "bm25_ranked": [
+        [
+          "description",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the comment field now",
+      "expected": "comment",
+      "static_top1_without_cutoff": "comment",
+      "static_at_cutoffs": {
+        "0.65": "comment",
+        "0.75": "comment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "comment",
+          0.7778266766624489
+        ],
+        [
+          "message",
+          0.5774268532653115
+        ],
+        [
+          "customer",
+          0.5769350897853452
+        ]
+      ],
+      "bm25_positive_score": "comment",
+      "bm25_ranked": [
+        [
+          "comment",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type comment information please",
+      "expected": "comment",
+      "static_top1_without_cutoff": "comment",
+      "static_at_cutoffs": {
+        "0.65": "comment",
+        "0.75": "comment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "comment",
+          0.7523249444922203
+        ],
+        [
+          "request",
+          0.4712886823438664
+        ],
+        [
+          "description",
+          0.44863346399551585
+        ]
+      ],
+      "bm25_positive_score": "comment",
+      "bm25_ranked": [
+        [
+          "comment",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the message field now",
+      "expected": "message",
+      "static_top1_without_cutoff": "message",
+      "static_at_cutoffs": {
+        "0.65": "message",
+        "0.75": "message",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "message",
+          0.7603559962238088
+        ],
+        [
+          "contact",
+          0.6088704419417155
+        ],
+        [
+          "service",
+          0.5792586514351201
+        ]
+      ],
+      "bm25_positive_score": "message",
+      "bm25_ranked": [
+        [
+          "message",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type message information please",
+      "expected": "message",
+      "static_top1_without_cutoff": "message",
+      "static_at_cutoffs": {
+        "0.65": "message",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "message",
+          0.7229281082762956
+        ],
+        [
+          "request",
+          0.5443674662411806
+        ],
+        [
+          "contact",
+          0.5261824034808679
+        ]
+      ],
+      "bm25_positive_score": "message",
+      "bm25_ranked": [
+        [
+          "message",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the schedule field now",
+      "expected": "schedule",
+      "static_top1_without_cutoff": "schedule",
+      "static_at_cutoffs": {
+        "0.65": "schedule",
+        "0.75": "schedule",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "schedule",
+          0.7623863267792033
+        ],
+        [
+          "calendar",
+          0.6088096935623513
+        ],
+        [
+          "appointment",
+          0.5627483603273384
+        ]
+      ],
+      "bm25_positive_score": "schedule",
+      "bm25_ranked": [
+        [
+          "schedule",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type schedule information please",
+      "expected": "schedule",
+      "static_top1_without_cutoff": "schedule",
+      "static_at_cutoffs": {
+        "0.65": "schedule",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "schedule",
+          0.7379630127593184
+        ],
+        [
+          "calendar",
+          0.5662981934995402
+        ],
+        [
+          "request",
+          0.5088361363343454
+        ]
+      ],
+      "bm25_positive_score": "schedule",
+      "bm25_ranked": [
+        [
+          "schedule",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the purchase field now",
+      "expected": "purchase",
+      "static_top1_without_cutoff": "purchase",
+      "static_at_cutoffs": {
+        "0.65": "purchase",
+        "0.75": "purchase",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "purchase",
+          0.7586696524297505
+        ],
+        [
+          "inventory",
+          0.6375195444412225
+        ],
+        [
+          "payment",
+          0.6150500286911502
+        ]
+      ],
+      "bm25_positive_score": "purchase",
+      "bm25_ranked": [
+        [
+          "purchase",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type purchase information please",
+      "expected": "purchase",
+      "static_top1_without_cutoff": "purchase",
+      "static_at_cutoffs": {
+        "0.65": "purchase",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "purchase",
+          0.7311812902624371
+        ],
+        [
+          "request",
+          0.5448519915677235
+        ],
+        [
+          "order",
+          0.49340809082944287
+        ]
+      ],
+      "bm25_positive_score": "purchase",
+      "bm25_ranked": [
+        [
+          "purchase",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the request field now",
+      "expected": "request",
+      "static_top1_without_cutoff": "request",
+      "static_at_cutoffs": {
+        "0.65": "request",
+        "0.75": "request",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "request",
+          0.7924983724801267
+        ],
+        [
+          "contact",
+          0.65989939988455
+        ],
+        [
+          "service",
+          0.6550473845280446
+        ]
+      ],
+      "bm25_positive_score": "request",
+      "bm25_ranked": [
+        [
+          "request",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type request information please",
+      "expected": "request",
+      "static_top1_without_cutoff": "request",
+      "static_at_cutoffs": {
+        "0.65": "request",
+        "0.75": "request",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "request",
+          0.7639659562026386
+        ],
+        [
+          "contact",
+          0.4772385215096495
+        ],
+        [
+          "reservation",
+          0.44959318364478096
+        ]
+      ],
+      "bm25_positive_score": "request",
+      "bm25_ranked": [
+        [
+          "request",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the supplier field now",
+      "expected": "supplier",
+      "static_top1_without_cutoff": "supplier",
+      "static_at_cutoffs": {
+        "0.65": "supplier",
+        "0.75": "supplier",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "supplier",
+          0.7881824876495199
+        ],
+        [
+          "inventory",
+          0.5784886366303441
+        ],
+        [
+          "delivery",
+          0.5205688723689148
+        ]
+      ],
+      "bm25_positive_score": "supplier",
+      "bm25_ranked": [
+        [
+          "supplier",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type supplier information please",
+      "expected": "supplier",
+      "static_top1_without_cutoff": "supplier",
+      "static_at_cutoffs": {
+        "0.65": "supplier",
+        "0.75": "supplier",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "supplier",
+          0.7970024760663097
+        ],
+        [
+          "delivery",
+          0.5188791956769603
+        ],
+        [
+          "purchase",
+          0.5181782789963858
+        ]
+      ],
+      "bm25_positive_score": "supplier",
+      "bm25_ranked": [
+        [
+          "supplier",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the employee field now",
+      "expected": "employee",
+      "static_top1_without_cutoff": "employee",
+      "static_at_cutoffs": {
+        "0.65": "employee",
+        "0.75": "employee",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "employee",
+          0.7692584671804075
+        ],
+        [
+          "customer",
+          0.5658347101806112
+        ],
+        [
+          "document",
+          0.5539851768472981
+        ]
+      ],
+      "bm25_positive_score": "employee",
+      "bm25_ranked": [
+        [
+          "employee",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type employee information please",
+      "expected": "employee",
+      "static_top1_without_cutoff": "employee",
+      "static_at_cutoffs": {
+        "0.65": "employee",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "employee",
+          0.7343960079324046
+        ],
+        [
+          "request",
+          0.47122023375951033
+        ],
+        [
+          "contact",
+          0.42232342712892224
+        ]
+      ],
+      "bm25_positive_score": "employee",
+      "bm25_ranked": [
+        [
+          "employee",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the service field now",
+      "expected": "service",
+      "static_top1_without_cutoff": "service",
+      "static_at_cutoffs": {
+        "0.65": "service",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "service",
+          0.6929759625784702
+        ],
+        [
+          "contact",
+          0.5697876457624249
+        ],
+        [
+          "inventory",
+          0.5670047463020575
+        ]
+      ],
+      "bm25_positive_score": "service",
+      "bm25_ranked": [
+        [
+          "service",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type service information please",
+      "expected": "service",
+      "static_top1_without_cutoff": "request",
+      "static_at_cutoffs": {
+        "0.65": "request",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "request",
+          0.6503304962836791
+        ],
+        [
+          "service",
+          0.6454399339540462
+        ],
+        [
+          "contact",
+          0.5515203020166461
+        ]
+      ],
+      "bm25_positive_score": "service",
+      "bm25_ranked": [
+        [
+          "service",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the document field now",
+      "expected": "document",
+      "static_top1_without_cutoff": "document",
+      "static_at_cutoffs": {
+        "0.65": "document",
+        "0.75": "document",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "document",
+          0.76296001758337
+        ],
+        [
+          "report",
+          0.5024001986716657
+        ],
+        [
+          "request",
+          0.4944566772977373
+        ]
+      ],
+      "bm25_positive_score": "document",
+      "bm25_ranked": [
+        [
+          "document",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type document information please",
+      "expected": "document",
+      "static_top1_without_cutoff": "document",
+      "static_at_cutoffs": {
+        "0.65": "document",
+        "0.75": "document",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "document",
+          0.7635632589849924
+        ],
+        [
+          "description",
+          0.5867081328044501
+        ],
+        [
+          "request",
+          0.5753325920653214
+        ]
+      ],
+      "bm25_positive_score": "document",
+      "bm25_ranked": [
+        [
+          "document",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the order field now",
+      "expected": "order",
+      "static_top1_without_cutoff": "order",
+      "static_at_cutoffs": {
+        "0.65": "order",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "order",
+          0.7206840403729422
+        ],
+        [
+          "inventory",
+          0.6504027014899463
+        ],
+        [
+          "delivery",
+          0.6220066169175316
+        ]
+      ],
+      "bm25_positive_score": "order",
+      "bm25_ranked": [
+        [
+          "order",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type order information please",
+      "expected": "order",
+      "static_top1_without_cutoff": "order",
+      "static_at_cutoffs": {
+        "0.65": "order",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "order",
+          0.7052210192000992
+        ],
+        [
+          "request",
+          0.5710123825683555
+        ],
+        [
+          "delivery",
+          0.5086471217983625
+        ]
+      ],
+      "bm25_positive_score": "order",
+      "bm25_ranked": [
+        [
+          "order",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the delivery field now",
+      "expected": "delivery",
+      "static_top1_without_cutoff": "delivery",
+      "static_at_cutoffs": {
+        "0.65": "delivery",
+        "0.75": "delivery",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "delivery",
+          0.778804153009927
+        ],
+        [
+          "inventory",
+          0.5919900015917006
+        ],
+        [
+          "order",
+          0.5761792051552619
+        ]
+      ],
+      "bm25_positive_score": "delivery",
+      "bm25_ranked": [
+        [
+          "delivery",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type delivery information please",
+      "expected": "delivery",
+      "static_top1_without_cutoff": "delivery",
+      "static_at_cutoffs": {
+        "0.65": "delivery",
+        "0.75": "delivery",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "delivery",
+          0.7570807643096154
+        ],
+        [
+          "order",
+          0.5444565212677255
+        ],
+        [
+          "request",
+          0.5061343285170284
+        ]
+      ],
+      "bm25_positive_score": "delivery",
+      "bm25_ranked": [
+        [
+          "delivery",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Fill the reservation field now",
+      "expected": "reservation",
+      "static_top1_without_cutoff": "reservation",
+      "static_at_cutoffs": {
+        "0.65": "reservation",
+        "0.75": "reservation",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reservation",
+          0.7957582526036966
+        ],
+        [
+          "inventory",
+          0.6166258430095571
+        ],
+        [
+          "schedule",
+          0.6060001419644439
+        ]
+      ],
+      "bm25_positive_score": "reservation",
+      "bm25_ranked": [
+        [
+          "reservation",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "supported_phrasing",
+      "query": "Type reservation information please",
+      "expected": "reservation",
+      "static_top1_without_cutoff": "reservation",
+      "static_at_cutoffs": {
+        "0.65": "reservation",
+        "0.75": "reservation",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reservation",
+          0.7670886622482463
+        ],
+        [
+          "request",
+          0.5235071297996523
+        ],
+        [
+          "appointment",
+          0.448254339941215
+        ]
+      ],
+      "bm25_positive_score": "reservation",
+      "bm25_ranked": [
+        [
+          "reservation",
+          6.21499342700305
+        ],
+        [
+          "invoice",
+          2.93792868715799
+        ],
+        [
+          "shipping",
+          2.93792868715799
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Change where the parcel goes",
+      "expected": "shipping",
+      "static_top1_without_cutoff": "travel",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "travel",
+          0.31410864594462395
+        ],
+        [
+          "delivery",
+          0.29611912152019904
+        ],
+        [
+          "shipping",
+          0.28537480235536766
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Enter the client's name",
+      "expected": "customer",
+      "static_top1_without_cutoff": "customer",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "customer",
+          0.5360238530330067
+        ],
+        [
+          "account",
+          0.4928749070054009
+        ],
+        [
+          "address",
+          0.4673950465105971
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ],
+        [
+          "customer",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Set how much money we can spend",
+      "expected": "budget",
+      "static_top1_without_cutoff": "budget",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "budget",
+          0.47627817910054915
+        ],
+        [
+          "payment",
+          0.383143190525563
+        ],
+        [
+          "purchase",
+          0.3516516699122272
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          1.8763452600452593
+        ],
+        [
+          "shipping",
+          1.8763452600452593
+        ],
+        [
+          "customer",
+          1.8763452600452593
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Book a visit with the doctor",
+      "expected": "appointment",
+      "static_top1_without_cutoff": "appointment",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "appointment",
+          0.3356968014163497
+        ],
+        [
+          "travel",
+          0.2975883656326661
+        ],
+        [
+          "calendar",
+          0.2053218884018449
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Update the stock count",
+      "expected": "inventory",
+      "static_top1_without_cutoff": "inventory",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "inventory",
+          0.5817094569576031
+        ],
+        [
+          "order",
+          0.5032195915403549
+        ],
+        [
+          "report",
+          0.4930289840770729
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          1.8763452600452593
+        ],
+        [
+          "shipping",
+          1.8763452600452593
+        ],
+        [
+          "customer",
+          1.8763452600452593
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Enter the street and house number",
+      "expected": "address",
+      "static_top1_without_cutoff": "address",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "address",
+          0.5552868020514972
+        ],
+        [
+          "contact",
+          0.4815138098649225
+        ],
+        [
+          "account",
+          0.4555592305511436
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ],
+        [
+          "customer",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Add a notification for later",
+      "expected": "reminder",
+      "static_top1_without_cutoff": "message",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "message",
+          0.41452237700219896
+        ],
+        [
+          "reminder",
+          0.39752126504315927
+        ],
+        [
+          "comment",
+          0.30145088418018484
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "semantic_paraphrase",
+      "query": "Book a table for dinner",
+      "expected": "reservation",
+      "static_top1_without_cutoff": "recipe",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "recipe",
+          0.2978981605113775
+        ],
+        [
+          "reservation",
+          0.27042715907747433
+        ],
+        [
+          "meeting",
+          0.2554495996091245
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the invoice field",
+      "expected": null,
+      "static_top1_without_cutoff": "invoice",
+      "static_at_cutoffs": {
+        "0.65": "invoice",
+        "0.75": "invoice",
+        "0.85": "invoice",
+        "0.9": "invoice"
+      },
+      "static_ranked": [
+        [
+          "invoice",
+          0.9678698742693931
+        ],
+        [
+          "report",
+          0.6158973447109684
+        ],
+        [
+          "service",
+          0.6136185361839553
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          5.4002315940705214
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ],
+        [
+          "customer",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the invoice field",
+      "expected": null,
+      "static_top1_without_cutoff": "invoice",
+      "static_at_cutoffs": {
+        "0.65": "invoice",
+        "0.75": "invoice",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "invoice",
+          0.8436726962338085
+        ],
+        [
+          "report",
+          0.5063259561578853
+        ],
+        [
+          "document",
+          0.4794793962372913
+        ]
+      ],
+      "bm25_positive_score": "invoice",
+      "bm25_ranked": [
+        [
+          "invoice",
+          4.338648166957791
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ],
+        [
+          "customer",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the shipping field",
+      "expected": null,
+      "static_top1_without_cutoff": "shipping",
+      "static_at_cutoffs": {
+        "0.65": "shipping",
+        "0.75": "shipping",
+        "0.85": "shipping",
+        "0.9": "shipping"
+      },
+      "static_ranked": [
+        [
+          "shipping",
+          0.952692978597964
+        ],
+        [
+          "order",
+          0.7350665173405169
+        ],
+        [
+          "delivery",
+          0.6934204678580465
+        ]
+      ],
+      "bm25_positive_score": "shipping",
+      "bm25_ranked": [
+        [
+          "shipping",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "customer",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the shipping field",
+      "expected": null,
+      "static_top1_without_cutoff": "shipping",
+      "static_at_cutoffs": {
+        "0.65": "shipping",
+        "0.75": "shipping",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "shipping",
+          0.7772943639838146
+        ],
+        [
+          "delivery",
+          0.5232885857177432
+        ],
+        [
+          "order",
+          0.5035180661831108
+        ]
+      ],
+      "bm25_positive_score": "shipping",
+      "bm25_ranked": [
+        [
+          "shipping",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "customer",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the customer field",
+      "expected": null,
+      "static_top1_without_cutoff": "customer",
+      "static_at_cutoffs": {
+        "0.65": "customer",
+        "0.75": "customer",
+        "0.85": "customer",
+        "0.9": "customer"
+      },
+      "static_ranked": [
+        [
+          "customer",
+          0.9474708714548863
+        ],
+        [
+          "service",
+          0.7372073680572457
+        ],
+        [
+          "contact",
+          0.7356635180315612
+        ]
+      ],
+      "bm25_positive_score": "customer",
+      "bm25_ranked": [
+        [
+          "customer",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the customer field",
+      "expected": null,
+      "static_top1_without_cutoff": "customer",
+      "static_at_cutoffs": {
+        "0.65": "customer",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "customer",
+          0.7412010565461913
+        ],
+        [
+          "service",
+          0.5189695144463586
+        ],
+        [
+          "message",
+          0.518344321177289
+        ]
+      ],
+      "bm25_positive_score": "customer",
+      "bm25_ranked": [
+        [
+          "customer",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the inventory field",
+      "expected": null,
+      "static_top1_without_cutoff": "inventory",
+      "static_at_cutoffs": {
+        "0.65": "inventory",
+        "0.75": "inventory",
+        "0.85": "inventory",
+        "0.9": "inventory"
+      },
+      "static_ranked": [
+        [
+          "inventory",
+          0.953477247354868
+        ],
+        [
+          "order",
+          0.701031991634542
+        ],
+        [
+          "service",
+          0.6682566707941667
+        ]
+      ],
+      "bm25_positive_score": "inventory",
+      "bm25_ranked": [
+        [
+          "inventory",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the inventory field",
+      "expected": null,
+      "static_top1_without_cutoff": "inventory",
+      "static_at_cutoffs": {
+        "0.65": "inventory",
+        "0.75": "inventory",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "inventory",
+          0.782734266190221
+        ],
+        [
+          "report",
+          0.4798640246954633
+        ],
+        [
+          "order",
+          0.4645720490878966
+        ]
+      ],
+      "bm25_positive_score": "inventory",
+      "bm25_ranked": [
+        [
+          "inventory",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the payment field",
+      "expected": null,
+      "static_top1_without_cutoff": "payment",
+      "static_at_cutoffs": {
+        "0.65": "payment",
+        "0.75": "payment",
+        "0.85": "payment",
+        "0.9": "payment"
+      },
+      "static_ranked": [
+        [
+          "payment",
+          0.9516789573252471
+        ],
+        [
+          "purchase",
+          0.7180816617723897
+        ],
+        [
+          "order",
+          0.6694548073805532
+        ]
+      ],
+      "bm25_positive_score": "payment",
+      "bm25_ranked": [
+        [
+          "payment",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the payment field",
+      "expected": null,
+      "static_top1_without_cutoff": "payment",
+      "static_at_cutoffs": {
+        "0.65": "payment",
+        "0.75": "payment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "payment",
+          0.7745196876736541
+        ],
+        [
+          "purchase",
+          0.5090233690192311
+        ],
+        [
+          "document",
+          0.4837765943918217
+        ]
+      ],
+      "bm25_positive_score": "payment",
+      "bm25_ranked": [
+        [
+          "payment",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the budget field",
+      "expected": null,
+      "static_top1_without_cutoff": "budget",
+      "static_at_cutoffs": {
+        "0.65": "budget",
+        "0.75": "budget",
+        "0.85": "budget",
+        "0.9": "budget"
+      },
+      "static_ranked": [
+        [
+          "budget",
+          0.9502651145640767
+        ],
+        [
+          "project",
+          0.6118533873138003
+        ],
+        [
+          "service",
+          0.6098728884617548
+        ]
+      ],
+      "bm25_positive_score": "budget",
+      "bm25_ranked": [
+        [
+          "budget",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the budget field",
+      "expected": null,
+      "static_top1_without_cutoff": "budget",
+      "static_at_cutoffs": {
+        "0.65": "budget",
+        "0.75": "budget",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "budget",
+          0.7737777775181844
+        ],
+        [
+          "report",
+          0.4211097000236541
+        ],
+        [
+          "calendar",
+          0.3755839265926977
+        ]
+      ],
+      "bm25_positive_score": "budget",
+      "bm25_ranked": [
+        [
+          "budget",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the report field",
+      "expected": null,
+      "static_top1_without_cutoff": "report",
+      "static_at_cutoffs": {
+        "0.65": "report",
+        "0.75": "report",
+        "0.85": "report",
+        "0.9": "report"
+      },
+      "static_ranked": [
+        [
+          "report",
+          0.9403243191851282
+        ],
+        [
+          "project",
+          0.7132019219968738
+        ],
+        [
+          "document",
+          0.7099385815685562
+        ]
+      ],
+      "bm25_positive_score": "report",
+      "bm25_ranked": [
+        [
+          "report",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the report field",
+      "expected": null,
+      "static_top1_without_cutoff": "report",
+      "static_at_cutoffs": {
+        "0.65": "report",
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "report",
+          0.7341336852298059
+        ],
+        [
+          "document",
+          0.5148270133801276
+        ],
+        [
+          "meeting",
+          0.4357886720629419
+        ]
+      ],
+      "bm25_positive_score": "report",
+      "bm25_ranked": [
+        [
+          "report",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "negation",
+      "query": "Do not type the appointment field",
+      "expected": null,
+      "static_top1_without_cutoff": "appointment",
+      "static_at_cutoffs": {
+        "0.65": "appointment",
+        "0.75": "appointment",
+        "0.85": "appointment",
+        "0.9": "appointment"
+      },
+      "static_ranked": [
+        [
+          "appointment",
+          0.9486594411160738
+        ],
+        [
+          "contact",
+          0.7452027628227115
+        ],
+        [
+          "service",
+          0.715053792249126
+        ]
+      ],
+      "bm25_positive_score": "appointment",
+      "bm25_ranked": [
+        [
+          "appointment",
+          5.4002315940705214
+        ],
+        [
+          "invoice",
+          2.1231668542254614
+        ],
+        [
+          "shipping",
+          2.1231668542254614
+        ]
+      ]
+    },
+    {
+      "group": "different_action",
+      "query": "Read the appointment field",
+      "expected": null,
+      "static_top1_without_cutoff": "appointment",
+      "static_at_cutoffs": {
+        "0.65": "appointment",
+        "0.75": "appointment",
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "appointment",
+          0.7535198426290255
+        ],
+        [
+          "meeting",
+          0.5157652711597034
+        ],
+        [
+          "document",
+          0.5080680007003537
+        ]
+      ],
+      "bm25_positive_score": "appointment",
+      "bm25_ranked": [
+        [
+          "appointment",
+          4.338648166957791
+        ],
+        [
+          "invoice",
+          1.0615834271127307
+        ],
+        [
+          "shipping",
+          1.0615834271127307
+        ]
+      ]
+    },
+    {
+      "group": "unrelated",
+      "query": "Paint a watercolor landscape",
+      "expected": null,
+      "static_top1_without_cutoff": "project",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "project",
+          0.2150476505576031
+        ],
+        [
+          "payment",
+          0.2140822170431545
+        ],
+        [
+          "shipping",
+          0.2078785634118237
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "unrelated",
+      "query": "Play chess against me",
+      "expected": null,
+      "static_top1_without_cutoff": "ticket",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "ticket",
+          0.2018403659856418
+        ],
+        [
+          "schedule",
+          0.18289417440621245
+        ],
+        [
+          "reminder",
+          0.1668721822903139
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "unrelated",
+      "query": "What is the capital of France?",
+      "expected": null,
+      "static_top1_without_cutoff": "travel",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "travel",
+          0.215021081912729
+        ],
+        [
+          "supplier",
+          0.14664132596839652
+        ],
+        [
+          "document",
+          0.1452950500928743
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "unrelated",
+      "query": "Explain quantum physics",
+      "expected": null,
+      "static_top1_without_cutoff": "message",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "message",
+          0.2035763703232238
+        ],
+        [
+          "shipping",
+          0.1940137579345495
+        ],
+        [
+          "description",
+          0.18764631755361946
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "unrelated",
+      "query": "Sing a lullaby",
+      "expected": null,
+      "static_top1_without_cutoff": "reminder",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "reminder",
+          0.14418452858762149
+        ],
+        [
+          "delivery",
+          0.13393122591385478
+        ],
+        [
+          "calendar",
+          0.12845601850323626
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    },
+    {
+      "group": "unrelated",
+      "query": "Solve this algebra equation",
+      "expected": null,
+      "static_top1_without_cutoff": "recipe",
+      "static_at_cutoffs": {
+        "0.65": null,
+        "0.75": null,
+        "0.85": null,
+        "0.9": null
+      },
+      "static_ranked": [
+        [
+          "recipe",
+          0.21067293190575667
+        ],
+        [
+          "payment",
+          0.1872719169623829
+        ],
+        [
+          "inventory",
+          0.16006868589233192
+        ]
+      ],
+      "bm25_positive_score": null,
+      "bm25_ranked": [
+        [
+          "invoice",
+          0
+        ],
+        [
+          "shipping",
+          0
+        ],
+        [
+          "customer",
+          0
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "Research-only Python process, no Node bridge, app packaging or encrypted journal cost measured; compare quality on the shared fixture, not Python/Node timing as algorithm-only speed.",
+    "Frozen pretrained English embeddings, only the existing logistic head algorithm is trained; distillation/fine-tuning are not timed.",
+    "Cutoffs were declared before evaluation and are diagnostic, not calibrated for this model. BM25 > 0 is an experimental acceptance rule with incompatible score scale; no production migration is proposed.",
+    "Same synthetic 94-case fixture, not a real user dataset or multilingual validation. No model can authorize actions; negation/different-action failures require client intent review.",
+    "Embedding/context buffer and file byte counts are exact; they exclude Python runtime, tokenizer, package and bridge memory.",
+    "Ten warm blocks per metric; p95 is of block averages, CPU includes harness. Single-thread configuration, no GPU and no multiprocessing."
+  ]
+}

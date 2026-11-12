@@ -48,19 +48,25 @@ export function features(query: string): Vector {
 	return vector;
 }
 
-export function similarity(first: Vector, second: Vector): number {
-	return Object.entries(first).reduce((sum, [key, value]) => sum + (value * (second[key] ?? 0)), 0);
+export function similarity(first: Vector, second: Vector, keys = Object.keys(first)): number {
+	let sum = 0;
+	for (const key of keys) {
+		sum += first[key]! * (second[key] ?? 0);
+	}
+
+	return sum;
 }
 
-export function predict(model: LocalModel, vector: Vector): number {
-	const logit = Math.max(-20, Math.min(20, model.bias + similarity(model.weights, vector)));
+export function predict(model: LocalModel, vector: Vector, keys = Object.keys(vector)): number {
+	const logit = Math.max(-20, Math.min(20, model.bias + similarity(vector, model.weights, keys)));
 	return 1 / (1 + Math.exp(-logit));
 }
 
 export function train(model: LocalModel, vector: Vector, label: 0 | 1): void {
-	const gradient = (label - predict(model, vector)) * 0.4;
-	for (const [key, value] of Object.entries(vector)) {
-		model.weights[key] = ((model.weights[key] ?? 0) * 0.999) + (gradient * value);
+	const keys = Object.keys(vector);
+	const gradient = (label - predict(model, vector, keys)) * 0.4;
+	for (const key of keys) {
+		model.weights[key] = ((model.weights[key] ?? 0) * 0.999) + (gradient * vector[key]!);
 	}
 
 	model.bias = Math.max(-4, Math.min(4, model.bias + gradient));

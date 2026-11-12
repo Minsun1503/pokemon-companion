@@ -11,6 +11,19 @@ it.each(['hello-kitty', 'kuromi'])('accepts %s as the configured companion', (pe
 	expect(new DesktopCompanion().state.pet).toBe(pet);
 });
 
+it('allows a failed startup to recover and shares the retry between concurrent callers', async () => {
+	vi.stubEnv('POKEMON_UI', 'on');
+	const companion = new DesktopCompanion();
+	const bridge = companion as unknown as {launch: () => Promise<void>; socket: {destroyed: boolean}};
+	const launch = vi.spyOn(bridge, 'launch').mockRejectedValueOnce(new Error('Desktop exited'))
+		.mockImplementationOnce(async () => {
+			bridge.socket = {destroyed: false};
+		});
+	await expect(companion.start()).rejects.toThrow('Desktop exited');
+	await Promise.all([companion.start(), companion.start()]);
+	expect(launch).toHaveBeenCalledTimes(2);
+});
+
 it('coalesces rapid cosmetic updates and keeps only one bridge request in flight', async () => {
 	vi.stubEnv('POKEMON_UI', 'on');
 	const companion = new DesktopCompanion();

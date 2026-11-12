@@ -226,13 +226,19 @@ export class LocalLearning {
 
 	async suggest(query: string): Promise<unknown[]> {
 		await this.open();
+		if (!this.state.enabled || process.env.POKEMON_LEARNING === 'off') {
+			this.lastInferenceMs = 0;
+			return [];
+		}
+
 		const start = performance.now();
 		const vector = features(query);
-		const suggestions = Object.values(this.state.recipes).map((recipe) => ({
-			recipe,
-			match: Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context))), prediction: predict(recipe.model, vector),
-		}))
-			.filter((item) => item.match >= 0.65 && item.recipe.successes > item.recipe.failures)
+		const keys = Object.keys(vector);
+		const suggestions = Object.values(this.state.recipes)
+			.filter((recipe) => recipe.successes > recipe.failures)
+			.map((recipe) => ({recipe, match: Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys)))}))
+			.filter((item) => item.match >= 0.65)
+			.map((item) => ({...item, prediction: predict(item.recipe.model, vector, keys)}))
 			.sort((a, b) => (b.match + (b.prediction * 0.2)) - (a.match + (a.prediction * 0.2))).slice(0, 3)
 			.map(({recipe, match, prediction}) => ({
 				recipe_id: recipe.id, match_score: match, model_score: prediction,
@@ -246,8 +252,10 @@ export class LocalLearning {
 	async preview(taskId: string, recipeId: string, parameters: Parameters): Promise<{preview_id: string; steps: WindowsStep[]}> {
 		await this.requireTask(taskId);
 		const recipe = this.state.recipes[recipeId];
+		const vector = features(this.state.tasks[taskId]!.query);
+		const keys = Object.keys(vector);
 		if (!this.state.enabled || process.env.POKEMON_LEARNING === 'off' || recipe?.kind !== 'windows' || recipe.failures >= recipe.successes
-			|| Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(features(this.state.tasks[taskId]!.query), context))) < 0.65) {
+			|| Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys))) < 0.65) {
 			throw new Error('Recipe is missing, unreliable, or does not match this current request.');
 		}
 
@@ -304,8 +312,10 @@ export class LocalLearning {
 	async useGuide(taskId: string, recipeId: string): Promise<Record<string, unknown>> {
 		await this.requireTask(taskId);
 		const recipe = this.state.recipes[recipeId];
+		const vector = features(this.state.tasks[taskId]!.query);
+		const keys = Object.keys(vector);
 		if (!this.state.enabled || process.env.POKEMON_LEARNING === 'off' || recipe?.kind !== 'guide' || recipe.successes <= recipe.failures
-			|| !(recipe.contexts ?? [recipe.vector]).some((context) => similarity(features(this.state.tasks[taskId]!.query), context) >= 0.65)) {
+			|| !(recipe.contexts ?? [recipe.vector]).some((context) => similarity(vector, context, keys) >= 0.65)) {
 			throw new Error('No reliable process guide matches this task.');
 		}
 

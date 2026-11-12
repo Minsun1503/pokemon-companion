@@ -196,11 +196,27 @@ export class WindowsAutomation implements DesktopAdapter {
 				}
 			}
 		} else if (typeof result.text === 'string') {
-			let {text} = result;
-			while (typeof text === 'string' && serialize(result).length > maxChars && text.length > 0) {
-				text = text.slice(0, Math.max(0, text.length - Math.max(1, serialize(result).length - maxChars)));
-				result.text = text;
+			const {text} = result;
+			if (serialize(result).length > maxChars && text.length > 0) {
 				result.truncated = true;
+				const overhead = serialize({...result, text: ''}).length;
+				const splitsPair = (end: number) => /[\uD800-\uDBFF]/.test(text[end - 1] ?? '') && /[\uDC00-\uDFFF]/.test(text[end] ?? '');
+				let low = 0;
+				let high = text.length;
+				while (low < high) {
+					let middle = Math.ceil((low + high) / 2);
+					if (splitsPair(middle)) {
+						middle += 1;
+					}
+
+					if (overhead + serialize(text.slice(0, middle)).length - 2 <= maxChars) {
+						low = middle;
+					} else {
+						high = splitsPair(middle - 1) ? middle - 2 : middle - 1;
+					}
+				}
+
+				result.text = text.slice(0, low);
 			}
 		}
 

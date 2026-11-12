@@ -115,11 +115,25 @@ First discover windows with windows action=get_windows, query matching the app o
 Read get_ui with the returned window_id AND window_ref. Empty controls: activate then read again. Search boxes can be ComboBox, not just Edit: get_ui query="Search". Every targetable control has a short target such as c1. For control input copy this target: windows {action:"set_value",target:"c1",text:"Damien"}; windows {action:"focus",target:"c1"}; windows {action:"invoke",target:"c2"}. The harness supplies its exact native IDs. Choose an action listed on the control. If search needs Enter, focus its target, then computer key text="Return" with window_id/window_ref. Read the resulting matches, then invoke/select the actual person result if the user asked to open it. Do not use a message composer to search. Typing a query alone is not completion.
 To find a person: fill the global search with the requested name, focus it, press Return, then get_ui query=<the requested person's name> to inspect People results. Avoid suggestions that add with:/from: message filters. The query argument filters control NAMES and automation IDs, not field VALUES. A search value such as with:Name is not a result control name. task_done query must name an actually observed result, such as the person's name. If a filter finds no controls, read get_ui without a query or try the requested name before declaring no results. Historical app states are stale; use current observations.
 Use one Windows action at a time. Re-read after each input; errors are not success. Never blindly retry an input with unknown delivery. Retry safe failures at most twice using fresh observations. Keep reads small using query/control_type. This model reads UI text, not screenshots; never guess mouse coordinates.
-Stay within the user's current intent. Do not send messages, delete data, change permissions or purchase anything unless the human explicitly requested that specific action. Never enter passwords/OTP, solve CAPTCHA or click final account authorization; use human_handoff. Respect user pauses immediately.`
+Stay within the user's current intent. Do not send messages, delete data, change permissions or purchase anything unless the human explicitly requested that specific action. Never enter passwords/OTP, solve CAPTCHA or click final account authorization; use human_handoff. Respect user pauses immediately.
+When the task needs current or missing public facts, look them up in the browser before asking the user: open an https search or page, read it and prefer primary sources over search snippets. For URL launch, query must identify the browser process; for the address bar, set_value, focus, press Return and re-read get_ui. Zero controls from a filtered get_ui does not prove information is absent; read unfiltered, refresh discovery or try another route first. For a lookup, task_done query must name text read from the primary source page, not a search snippet. Never put private data from the user's files or apps into search text or URLs. Keep lookups read-only and within the request. Use human_handoff when those routes fail or a password, OTP, CAPTCHA, final authorization, user decision or inaccessible control blocks progress; name the exact obstacle.`
 
 /** Completion checking is independent of login and applies to desktop commands in either language. */
 export function isDesktopRequest(text: string): boolean {
   const plain = text.normalize('NFD').replace(/\p{M}/gu, '').replace(/đ/gi, 'd').toLowerCase()
+  // shortcut: Common English/Vietnamese research cues; extend when real lookup requests are missed.
+  const latest = /\b(latest|newest|moi nhat)\b/
+  const now = /\b(current|currently|today|hien tai|hom nay)\b/
+  const release = /\b(versions?|releases?|phien ban)\b/
+  const volatile =
+    /\b(prices?|news|weather|exchange rates?|gia (ca|vang|xang|ve|bitcoin|btc|usd|co phieu)|tin tuc|thoi tiet|ty gia)\b/
+  const own =
+    /\b(trong (game|server|shop|he thong|code|du an)|cua (game|server|shop|toi|minh|du an)|(my|our|in the) (game|app|server|shop|project|code|file|economy)|vat pham|dungeon|npc|sink|faucet|can bang|balance|balancing)\b/
+  if (
+    !own.test(plain) &&
+    ((latest.test(plain) && (release.test(plain) || volatile.test(plain))) || (now.test(plain) && volatile.test(plain)))
+  )
+    return true
   if (/\b(how (do i|to)|explain|why|what (is|does))\b/.test(plain)) return false
   return /\b(open|launch|find|search|click|type|fill|select|navigate|scroll|switch|close|save|read|check|go to|mo|tim|bam|nhap|chon|dong|luu|doc|kiem tra|tiep tuc|continue)\b/.test(
     plain,

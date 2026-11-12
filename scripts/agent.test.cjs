@@ -122,6 +122,52 @@ test('desktop harness begins with real observation and provides it to the model'
   assert.deepEqual(events[0], {name: 'windows', args: {action: 'get_windows', max_chars: 6000}});
 });
 
+test('current public facts require verified research without turning ordinary questions into tasks', async t => {
+  for (const request of [
+    'Cho tôi biết phiên bản ổn định mới nhất của thư viện Zod',
+    'What is the latest stable version of Zod?',
+    'What is the current price of Bitcoin?',
+    'Thời tiết hôm nay ở Hà Nội thế nào?',
+    "What's the latest Node release?",
+    'Giá vàng hôm nay',
+    'Tỷ giá hôm nay',
+    'What are the latest versions of React and Vue?',
+    'Latest exchange rates USD to VND',
+    'What are the current prices of these stocks?',
+    'Explain why the latest release of Zod changed errors',
+    'Open my game and check the current prices',
+  ]) assert.equal(isDesktopRequest(request), true, request);
+  const ordinary = [
+    'What is Zod?', 'Explain version control', 'Explain the current scope in JavaScript', 'Tell me your latest joke',
+    'Hiện tại tôi đang dùng phiên bản Unity 6, lỗi này là gì?',
+    'Trong phiên bản hiện tại của server, tại sao packet bị trễ?',
+    'In my current version of the file, why does the loop skip?',
+    'Hiện tại gia đình tôi có 4 người, giúp tôi viết thư',
+    'Hôm nay gia đình mình đi chơi, gợi ý trò chơi nhóm',
+    'Explain the release process of a Unity game',
+    'Hiện tại giá vàng trong game quá cao, nên chỉnh sink thế nào?',
+    'Giá vé vào dungeon hiện tại là 500 gold, có hợp lý không?',
+    'Hôm nay giá cả vật phẩm trong shop bị lệch, cân bằng lại sao?',
+    'What is the current price of an item in my game economy?',
+  ];
+  for (const request of ordinary)
+    assert.equal(isDesktopRequest(request), false, request);
+  const config = await model(t, () => ({role: 'assistant', content: 'Zod is version 1.0, from memory.'}));
+  const result = await runAgent(config, [{role: 'user', content: 'What is the latest stable version of Zod?'}], {
+    list: async () => [{type: 'function', function: {name: 'windows'}}],
+    call: async () => ({windows: []}),
+  }, undefined, isDesktopRequest('What is the latest stable version of Zod?'));
+  assert.match(result, /task is unfinished/);
+  assert.doesNotMatch(result, /version 1.0/);
+  for (const request of ordinary) {
+    const answer = await runAgent(config, [{role: 'user', content: request}], {
+      list: async () => [{type: 'function', function: {name: 'windows'}}],
+      call: async () => {throw new Error('Ordinary conversation must not trigger desktop observation');},
+    }, undefined, isDesktopRequest(request));
+    assert.equal(answer, 'Zod is version 1.0, from memory.');
+  }
+});
+
 test('repeated plans report unfinished and never masquerade as completion', async t => {
   let rounds = 0;
   const config = await model(t, () => {rounds++; return {role: 'assistant', content: 'I will use the launch function.'};});
