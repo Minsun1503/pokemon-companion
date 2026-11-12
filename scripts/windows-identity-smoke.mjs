@@ -145,6 +145,14 @@ try {
     await fixture.command('title');
     await apply(fixture, 'button after title change', {action: 'invoke', ...reference(button)});
     await waitFor(fixture.state, state => state.clicks === 1, 'Title drift incorrectly prevented invocation.');
+    if (fixture.kind === 'WinForms') {
+      await fixture.command('disable');
+      await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].enabled === false, 'Disabled button was not exposed.');
+      await rejectsBeforeInput({action: 'invoke', ...reference(button)}, 'ACTION_NOT_SUPPORTED');
+      assert.equal(await clickCount(fixture), 1, 'Disabled control dispatched an input.');
+      await fixture.command('enable');
+      await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].actions?.includes('invoke'), 'Enabled button was not exposed.');
+    }
     const fieldChanges = fixture.kind === 'WinForms' ? ['automation-id', 'description', 'role'] : ['automation-id', 'role'];
     for (const changed of fieldChanges) {
       const prior = await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].automation_id === 'action' && ui.nodes[0].role === 'Button', 'Reset identity was not exposed by accessibility.');
