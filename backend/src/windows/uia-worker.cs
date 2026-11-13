@@ -83,17 +83,19 @@ public static partial class PokemonWindowsAutomation {
         if (!Int64.TryParse(id, out value) || !IsWindow(new IntPtr(value))) throw Rejected("WINDOW_NOT_FOUND", "Window no longer exists. Call get_windows again.");
         return new IntPtr(value);
     }
-    static Dictionary<string, object> WindowInfo(IntPtr handle) {
+    static Dictionary<string, object> WindowInfo(IntPtr handle, bool remember = true) {
         using (Profile("window_metadata_inclusive")) {
             var title = new StringBuilder(1024);
             GetWindowText(handle, title, title.Capacity);
             uint pid;
             GetWindowThreadProcessId(handle, out pid);
             string process = "";
-            try { process = Process.GetProcessById((int)pid).ProcessName; } catch { }
+            try { using (var owner = Process.GetProcessById((int)pid)) process = owner.ProcessName; } catch { }
             var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process, "minimized", IsIconic(handle));
-            string token = RememberWindow(handle);
-            if (token != null) result["window_ref"] = token;
+            if (remember) {
+                string token = RememberWindow(handle);
+                if (token != null) result["window_ref"] = token;
+            }
             return result;
         }
     }
@@ -103,13 +105,17 @@ public static partial class PokemonWindowsAutomation {
             bool truncated = false;
             EnumWindows(delegate(IntPtr handle, IntPtr unused) {
                 if (!IsWindowVisible(handle)) return true;
-                var info = WindowInfo(handle);
+                // Discovery filters need metadata, but only returned windows need
+                // process-start identity proofs and snapshot-token maintenance.
+                var info = WindowInfo(handle, false);
                 var title = (string)info["title"];
                 if (String.IsNullOrEmpty(title)) return true;
                 if (!String.IsNullOrEmpty(query) && (title + " " + info["process"]).IndexOf(query, StringComparison.OrdinalIgnoreCase) < 0) return true;
                 var foreground = GetForegroundWindow();
                 info["active"] = handle == foreground || handle == GetAncestor(foreground, 3);
                 if (windows.Count == 100) { truncated = true; return false; }
+                string token = RememberWindow(handle);
+                if (token != null) info["window_ref"] = token;
                 windows.Add(info);
                 return true;
             }, IntPtr.Zero);
