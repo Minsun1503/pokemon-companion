@@ -133,7 +133,13 @@ export async function runWorkflow(request, {adapter, store, signal, now = () => 
         ...(request.pr_number ? {pr_number: request.pr_number} : {}),
         timing_boundary: 'Structured request accepted by controller to durable verified-merge record. Includes GitHub calls, polling and resume gaps. Excludes content preparation, host inference, module startup and report export. API spans include network/server time; CI poll sleeps are not CI runtime.'};
     }
-    run = {started_at: iso(), prior_elapsed_ms: job.runs.length ? (job.total_elapsed_ms ?? 0) + Math.max(0, received - Date.parse(job.last_finished_at ?? new Date(received).toISOString())) : 0};
+    const lastRun = job.runs.at(-1);
+    // After a hard crash there is no final monotonic checkpoint. Preserve the
+    // original UTC boundary instead of dropping the interrupted run's duration.
+    const priorElapsed = !lastRun ? 0 : !lastRun.finished_at || !Number.isFinite(job.total_elapsed_ms)
+      ? Math.max(0, received - job.received_ms)
+      : job.total_elapsed_ms + Math.max(0, received - Date.parse(job.last_finished_at));
+    run = {started_at: iso(), prior_elapsed_ms: priorElapsed, previous_run_interrupted: Boolean(lastRun && !lastRun.finished_at)};
     job.runs.push(run); job.status = 'running'; delete job.error;
     await save(); checkStop();
     // Independent reads overlap; no desktop lease is held by this API controller.

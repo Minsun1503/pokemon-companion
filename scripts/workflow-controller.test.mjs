@@ -169,3 +169,21 @@ test('overlapping read spans are unioned and initial CI scheduling gaps can reco
   f.adapter.checks = async () => count++ ? [{name: 'CI', state: 'passed'}] : [];
   assert.equal((await f.run()).status, 'complete');
 });
+
+test('hard-crash journal preserves elapsed time when no final checkpoint exists', async () => {
+  const f = fixture(); let interrupted;
+  const originalPut = f.store.put;
+  f.store.put = async job => {
+    await originalPut(job);
+    if (job.phase === 'wait_ci' && !interrupted) interrupted = structuredClone(job);
+  };
+  await f.run();
+  assert(interrupted && !interrupted.runs[0].finished_at && interrupted.total_elapsed_ms === undefined);
+  // Restore the last durable checkpoint as if the first process disappeared.
+  await originalPut(interrupted); f.advance(500);
+  const recovered = await f.run();
+  assert.equal(recovered.status, 'complete'); assert(recovered.request_to_recorded_ms >= 500);
+  assert.equal(recovered.runs.at(-1).previous_run_interrupted, true);
+  assert.equal(f.calls.filter(call => call === 'create').length, 1);
+  assert.equal(f.calls.filter(call => call === 'merge').length, 1);
+});
