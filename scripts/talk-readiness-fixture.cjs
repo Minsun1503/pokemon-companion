@@ -13,6 +13,10 @@ const names=['window_discovery','control_discovery','enter_text_verify','search_
 const nonce=randomBytes(3).toString('hex');
 let web,control,window,excel,current,excelInfo,excelLines;
 const pending=[];
+const closeExcel=()=>{
+  const input=excel?.stdin;
+  if(input&&!input.destroyed&&!input.writableEnded)input.end('close\n');
+};
 const excelCommand=command=>new Promise((resolve,reject)=>{pending.push({resolve,reject});excel.stdin.write(command+'\n');});
 const listen=server=>new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const safeJson=value=>JSON.stringify(value).replaceAll('<','\\u003c');
@@ -62,10 +66,10 @@ const safeJson=value=>JSON.stringify(value).replaceAll('<','\\u003c');
         if(current.id.startsWith('excel_')) observation.excel=await excelCommand(`${current.id==='excel_read'?'read:1':'persist:'+current.row}`);
         res.end(JSON.stringify({current,observation}));return;
       }
-      if(url.pathname==='/quit') {res.end('{}');excel.stdin.end('close\n');app.quit();return;}
+      if(url.pathname==='/quit') {res.end('{}');closeExcel();app.quit();return;}
       res.end(JSON.stringify({cases:names,base,excel:excelInfo,current}));
     }catch(error){res.statusCode=500;res.end(JSON.stringify({error:error.message}));}
   });
   await listen(control);console.log(JSON.stringify({port:control.address().port,profile,nonce}));
 })().catch(error=>{console.error(error.stack);process.exitCode=1;app.quit();});
-app.on('will-quit',()=>{web?.close();control?.close();excel?.stdin.end('close\n');excelLines?.close();});
+app.on('will-quit',()=>{web?.close();control?.close();closeExcel();excelLines?.close();});

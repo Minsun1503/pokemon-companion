@@ -12,6 +12,7 @@ The implementation is in draft [PR #19](https://github.com/Minsun1503/pokemon-co
 - Windows CI passed for implementation commit `f7835542e1c2973b876b0c4377be9c8abf50d5d2`.
 - The live runner now saves model/tool traces incrementally with atomic replacement. An owned interrupted-request check verified that a pending request survives worker termination; this harness check is not a live model result.
 - Windows CI also passed for harness/report commit `35dd06774f9cd675034b976a0b26a81431b8f2f5`.
+- Post-run fixture shutdown exposed a duplicate Excel-pipe close (`ERR_STREAM_WRITE_AFTER_END`). The close now ends input once; a fresh owned fixture then exited successfully and removed its windows. This cleanup fix does not alter the recorded smoke outcomes.
 
 ## External cloud control
 
