@@ -19,6 +19,9 @@ public static partial class PokemonWindowsAutomation {
     [DllImport("user32.dll")] static extern IntPtr GetAncestor(IntPtr window, uint flags);
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr window);
     [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr window, int command);
+    [DllImport("kernel32.dll")] static extern IntPtr OpenProcess(uint access, bool inherit, uint process);
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)] static extern bool QueryFullProcessImageName(IntPtr process, uint flags, StringBuilder path, ref uint size);
+    [DllImport("kernel32.dll")] static extern bool CloseHandle(IntPtr handle);
     [DllImport("user32.dll")] static extern IntPtr GetKeyboardLayout(uint thread);
     [DllImport("imm32.dll")] static extern bool ImmIsIME(IntPtr layout);
     delegate bool EnumProc(IntPtr window, IntPtr data);
@@ -83,14 +86,29 @@ public static partial class PokemonWindowsAutomation {
         if (!Int64.TryParse(id, out value) || !IsWindow(new IntPtr(value))) throw Rejected("WINDOW_NOT_FOUND", "Window no longer exists. Call get_windows again.");
         return new IntPtr(value);
     }
+    static string ProcessName(uint pid) {
+        // .NET Framework's ProcessName enumerates system process metadata.
+        // Query only this owner; retain the managed fallback for restricted processes.
+        var process = OpenProcess(0x1000, false, pid); // PROCESS_QUERY_LIMITED_INFORMATION
+        if (process != IntPtr.Zero) {
+            try {
+                var path = new StringBuilder(1024);
+                uint size = (uint)path.Capacity;
+                if (QueryFullProcessImageName(process, 0, path, ref size)) {
+                    var name = Path.GetFileName(path.ToString());
+                    if (name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)) return name.Substring(0, name.Length - 4);
+                }
+            } finally { CloseHandle(process); }
+        }
+        try { using (var owner = Process.GetProcessById((int)pid)) return owner.ProcessName; } catch { return ""; }
+    }
     static Dictionary<string, object> WindowInfo(IntPtr handle, bool remember = true) {
         using (Profile("window_metadata_inclusive")) {
             var title = new StringBuilder(1024);
             GetWindowText(handle, title, title.Capacity);
             uint pid;
             GetWindowThreadProcessId(handle, out pid);
-            string process = "";
-            try { using (var owner = Process.GetProcessById((int)pid)) process = owner.ProcessName; } catch { }
+            string process = ProcessName(pid);
             var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process, "minimized", IsIconic(handle));
             if (remember) {
                 string token = RememberWindow(handle);
