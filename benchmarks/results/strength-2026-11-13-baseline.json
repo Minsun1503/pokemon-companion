@@ -1,0 +1,1220 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "started_at": "2026-11-13T11:01:04.971Z",
+  "options": {
+    "runs": 20,
+    "commonRuns": 5,
+    "output": "benchmarks/results/strength-2026-11-13-baseline.json",
+    "windowId": "394084"
+  },
+  "source_revision": "2d3962a874f2510a281196029b92548d9a497ca9",
+  "source_dirty": true,
+  "harness_sha256": "c7f1e58d745505c805a7f3b193017510e8b6557714983a7c735b18b1f2e1890f",
+  "environment": {
+    "platform": "win32",
+    "os": "10.0.22621",
+    "node": "v24.16.0",
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz"
+  },
+  "checks": [
+    {
+      "name": "static-checks",
+      "command": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:01:05.070Z",
+      "status": "passed",
+      "elapsed_ms": 15461.6609,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\static-checks.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\static-checks.stderr.txt"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:01:20.537Z",
+      "status": "passed",
+      "elapsed_ms": 12134.221099999999,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\build.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\build.stderr.txt"
+    },
+    {
+      "name": "automated-tests",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:01:32.675Z",
+      "status": "passed",
+      "elapsed_ms": 13540.802500000002,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\automated-tests.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\automated-tests.stderr.txt"
+    },
+    {
+      "name": "learning-contract",
+      "command": [
+        "node",
+        "scripts/learning-contract-smoke.mjs"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:01:46.220Z",
+      "status": "failed",
+      "elapsed_ms": 1571.7732000000033,
+      "exit_code": 1,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\learning-contract.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\learning-contract.stderr.txt"
+    },
+    {
+      "name": "http-authentication",
+      "command": [
+        "node",
+        "scripts/http-auth-smoke.mjs"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:01:47.795Z",
+      "status": "passed",
+      "elapsed_ms": 2582.1357999999964,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\http-authentication.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\http-authentication.stderr.txt"
+    },
+    {
+      "name": "windows-contract",
+      "command": [
+        "node",
+        "scripts/windows-contract-smoke.mjs"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:01:50.380Z",
+      "status": "passed",
+      "elapsed_ms": 11253.123200000002,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-contract.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-contract.stderr.txt"
+    },
+    {
+      "name": "windows-identity",
+      "command": [
+        "node",
+        "scripts/windows-identity-smoke.mjs"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:02:01.636Z",
+      "status": "passed",
+      "elapsed_ms": 34943.8602,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-identity.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-identity.stderr.txt"
+    },
+    {
+      "name": "windows-coordination",
+      "command": [
+        "node",
+        "scripts/windows-coordination-smoke.mjs"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:02:36.583Z",
+      "status": "passed",
+      "elapsed_ms": 5243.271500000003,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-coordination.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-coordination.stderr.txt"
+    },
+    {
+      "name": "windows-plain",
+      "command": [
+        "node",
+        "scripts/windows-benchmark.mjs",
+        "--runs",
+        "20",
+        "--fixture",
+        "plain",
+        "--output",
+        "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-plain.json"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:02:41.830Z",
+      "status": "passed",
+      "elapsed_ms": 28893.430000000008,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-plain.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-plain.stderr.txt",
+      "artifact": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-plain.json",
+      "results": {
+        "atomic": {
+          "runs": 20,
+          "elapsed_ms": {
+            "min": 326.8201000000008,
+            "median": 346.0536000000011,
+            "p95": 363.2534999999989,
+            "max": 378.954099999999,
+            "mean": 345.3290199999998
+          },
+          "mcp_calls": 6,
+          "request_json_chars": 812,
+          "request_json_bytes": 817,
+          "response_json_chars": 1984,
+          "response_json_bytes": 2000,
+          "response_text_chars": 1536,
+          "screenshot_images": 0
+        },
+        "batch": {
+          "runs": 20,
+          "elapsed_ms": {
+            "min": 324.21519999999873,
+            "median": 335.0772500000003,
+            "p95": 366.7891000000018,
+            "max": 371.2779999999984,
+            "mean": 340.7921900000001
+          },
+          "mcp_calls": 1,
+          "request_json_chars": 654,
+          "request_json_bytes": 663,
+          "response_json_chars": 612,
+          "response_json_bytes": 617,
+          "response_text_chars": 501,
+          "screenshot_images": 0
+        }
+      },
+      "verified_workflows": 42
+    },
+    {
+      "name": "windows-nested",
+      "command": [
+        "node",
+        "scripts/windows-benchmark.mjs",
+        "--runs",
+        "20",
+        "--fixture",
+        "nested",
+        "--output",
+        "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-nested.json"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:03:10.731Z",
+      "status": "passed",
+      "elapsed_ms": 37384.034,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-nested.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-nested.stderr.txt",
+      "artifact": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\windows-nested.json",
+      "results": {
+        "atomic": {
+          "runs": 20,
+          "elapsed_ms": {
+            "min": 507.6954000000005,
+            "median": 526.8286499999977,
+            "p95": 555.3535999999986,
+            "max": 555.4531999999999,
+            "mean": 529.7254999999998
+          },
+          "mcp_calls": 6,
+          "request_json_chars": 812,
+          "request_json_bytes": 817,
+          "response_json_chars": 1984,
+          "response_json_bytes": 2000,
+          "response_text_chars": 1536,
+          "screenshot_images": 0
+        },
+        "batch": {
+          "runs": 20,
+          "elapsed_ms": {
+            "min": 504.45270000000164,
+            "median": 535.1050000000014,
+            "p95": 576.2548999999999,
+            "max": 585.7394999999997,
+            "mean": 539.4614250000003
+          },
+          "mcp_calls": 1,
+          "request_json_chars": 654,
+          "request_json_bytes": 663,
+          "response_json_chars": 612,
+          "response_json_bytes": 617,
+          "response_text_chars": 501,
+          "screenshot_images": 0
+        }
+      },
+      "verified_workflows": 42
+    },
+    {
+      "name": "common-operations",
+      "command": [
+        "node",
+        "scripts/common-task-benchmark.mjs",
+        "--window-id",
+        "394084",
+        "--runs",
+        "5",
+        "--output",
+        "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\common-operations.json"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish",
+      "started_at": "2026-11-13T11:03:48.119Z",
+      "status": "passed",
+      "elapsed_ms": 207172.52719999998,
+      "exit_code": 0,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\common-operations.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\common-operations.stderr.txt",
+      "artifact": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\common-operations.json",
+      "results": {
+        "window_discovery:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 14.115499999999884,
+            "p95_ms": 14.359300000000076,
+            "min_ms": 13.428299999999581,
+            "max_ms": 14.359300000000076
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 14.110200000000987,
+            "p95_ms": 14.35150000000067,
+            "min_ms": 13.422499999999673,
+            "max_ms": 14.35150000000067
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.004299999999602733,
+            "p95_ms": 0.006400000000212458,
+            "min_ms": 0.003800000000410364,
+            "max_ms": 0.006400000000212458
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "response_chars": [
+            247,
+            247,
+            247,
+            247,
+            247
+          ]
+        },
+        "window_discovery:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 14.416200000001481,
+            "p95_ms": 16.96259999999893,
+            "min_ms": 13.888700000001336,
+            "max_ms": 16.96259999999893
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 14.410900000000765,
+            "p95_ms": 16.943599999998696,
+            "min_ms": 13.882700000000114,
+            "max_ms": 16.943599999998696
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.006600000000617001,
+            "p95_ms": 0.009200000000419095,
+            "min_ms": 0.0036000000000058208,
+            "max_ms": 0.009200000000419095
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "response_chars": [
+            247,
+            247,
+            247,
+            247,
+            247
+          ]
+        },
+        "control_discovery:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 91.94770000000062,
+            "p95_ms": 93.76849999999831,
+            "min_ms": 89.78549999999814,
+            "max_ms": 93.76849999999831
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 91.922300000002,
+            "p95_ms": 93.76090000000113,
+            "min_ms": 89.61299999999756,
+            "max_ms": 93.76090000000113
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.012500000000727596,
+            "p95_ms": 0.1706000000012864,
+            "min_ms": 0.006799999999202555,
+            "max_ms": 0.1706000000012864
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "response_chars": [
+            430,
+            430,
+            430,
+            430,
+            430
+          ]
+        },
+        "control_discovery:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 126.32240000000093,
+            "p95_ms": 150.3627000000015,
+            "min_ms": 122.85879999999815,
+            "max_ms": 150.3627000000015
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 126.3106000000007,
+            "p95_ms": 150.35269999999946,
+            "min_ms": 122.85009999999966,
+            "max_ms": 150.35269999999946
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.008700000002136221,
+            "p95_ms": 0.02500000000145519,
+            "min_ms": 0.0076999999982945155,
+            "max_ms": 0.02500000000145519
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "response_chars": [
+            520,
+            520,
+            520,
+            520,
+            520
+          ]
+        },
+        "enter_text_verify:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 399.33230000000185,
+            "p95_ms": 413.8246999999974,
+            "min_ms": 392.86469999999827,
+            "max_ms": 413.8246999999974
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 311.75410000000556,
+            "p95_ms": 322.78600000000006,
+            "min_ms": 305.40750000000116,
+            "max_ms": 322.78600000000006
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 87.81139999999868,
+            "p95_ms": 98.17320000000473,
+            "min_ms": 87.27790000000095,
+            "max_ms": 98.17320000000473
+          },
+          "calls": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "response_chars": [
+            1412,
+            1412,
+            1412,
+            1412,
+            1412
+          ]
+        },
+        "enter_text_verify:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 399.5405000000028,
+            "p95_ms": 418.6684000000023,
+            "min_ms": 378.51830000000336,
+            "max_ms": 418.6684000000023
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 304.8546999999962,
+            "p95_ms": 323.19980000000214,
+            "min_ms": 295.4554000000062,
+            "max_ms": 323.19980000000214
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 89.66829999999754,
+            "p95_ms": 95.46770000000106,
+            "min_ms": 83.06210000000283,
+            "max_ms": 95.46770000000106
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "response_chars": [
+            1021,
+            1021,
+            1021,
+            1021,
+            1021
+          ]
+        },
+        "search_and_open:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1572.7030999999988,
+            "p95_ms": 1609.4257999999973,
+            "min_ms": 1542.408899999995,
+            "max_ms": 1609.4257999999973
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 1569.7193999999872,
+            "p95_ms": 1607.8813999999984,
+            "min_ms": 1541.2842999999993,
+            "max_ms": 1607.8813999999984
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 1.5429000000003725,
+            "p95_ms": 2.9817000000039116,
+            "min_ms": 1.1236000000062631,
+            "max_ms": 2.9817000000039116
+          },
+          "calls": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "response_chars": [
+            19774,
+            19774,
+            19774,
+            19774,
+            19774
+          ]
+        },
+        "search_and_open:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1306.7704999999987,
+            "p95_ms": 1320.946100000001,
+            "min_ms": 1293.1604999999981,
+            "max_ms": 1320.946100000001
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 1303.3220000000001,
+            "p95_ms": 1319.5337,
+            "min_ms": 1291.6281999999992,
+            "max_ms": 1319.5337
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 1.4112999999997555,
+            "p95_ms": 3.435200000007171,
+            "min_ms": 0.8809000000037486,
+            "max_ms": 3.435200000007171
+          },
+          "calls": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "response_chars": [
+            2353,
+            2353,
+            2353,
+            2353,
+            2353
+          ]
+        },
+        "button_result:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 614.8264999999956,
+            "p95_ms": 638.0233000000007,
+            "min_ms": 613.915599999993,
+            "max_ms": 638.0233000000007
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 613.9869000000035,
+            "p95_ms": 636.2612999999983,
+            "min_ms": 612.178899999999,
+            "max_ms": 636.2612999999983
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 1.3686999999918044,
+            "p95_ms": 1.7608999999938533,
+            "min_ms": 0.8387999999977183,
+            "max_ms": 1.7608999999938533
+          },
+          "calls": [
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "response_chars": [
+            1107,
+            1107,
+            1107,
+            1107,
+            1107
+          ]
+        },
+        "button_result:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 606.550900000002,
+            "p95_ms": 677.3726000000024,
+            "min_ms": 587.1527999999962,
+            "max_ms": 677.3726000000024
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 605.7455999999947,
+            "p95_ms": 676.5531000000046,
+            "min_ms": 586.3505000000005,
+            "max_ms": 676.5531000000046
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.8040999999939231,
+            "p95_ms": 1.250899999999092,
+            "min_ms": 0.796200000011595,
+            "max_ms": 1.250899999999092
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "response_chars": [
+            736,
+            736,
+            736,
+            736,
+            736
+          ]
+        },
+        "document_passages:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 549.8620999999985,
+            "p95_ms": 558.1078000000125,
+            "min_ms": 520.0452000000078,
+            "max_ms": 558.1078000000125
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 549.0192999999999,
+            "p95_ms": 557.2612000000081,
+            "min_ms": 518.8991999999998,
+            "max_ms": 557.2612000000081
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.8457000000053085,
+            "p95_ms": 1.1444999999948777,
+            "min_ms": 0.7620000000024447,
+            "max_ms": 1.1444999999948777
+          },
+          "calls": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "response_chars": [
+            17515,
+            17515,
+            17515,
+            17515,
+            17515
+          ]
+        },
+        "document_passages:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 274.5371000000014,
+            "p95_ms": 279.3644000000204,
+            "min_ms": 267.62049999999,
+            "max_ms": 279.3644000000204
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 273.7878999999957,
+            "p95_ms": 278.3685000000114,
+            "min_ms": 266.56039999998757,
+            "max_ms": 278.3685000000114
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.9948999999905936,
+            "p95_ms": 1.2611999999935506,
+            "min_ms": 0.7482999999920139,
+            "max_ms": 1.2611999999935506
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "response_chars": [
+            1706,
+            1706,
+            1706,
+            1706,
+            1706
+          ]
+        },
+        "url_open:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1031.0333999999857,
+            "p95_ms": 1047.9575999999943,
+            "min_ms": 1010.6051000000152,
+            "max_ms": 1047.9575999999943
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 1030.2109999999811,
+            "p95_ms": 1046.101799999975,
+            "min_ms": 1008.6215000000084,
+            "max_ms": 1046.101799999975
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 1.0295999999798369,
+            "p95_ms": 1.973100000002887,
+            "min_ms": 0.8212000000057742,
+            "max_ms": 1.973100000002887
+          },
+          "calls": [
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "response_chars": [
+            2367,
+            2367,
+            2367,
+            2367,
+            2367
+          ]
+        },
+        "url_open:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1022.922900000005,
+            "p95_ms": 1038.183400000009,
+            "min_ms": 1006.5260000000126,
+            "max_ms": 1038.183400000009
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 1022.0187999999907,
+            "p95_ms": 1037.3635000000068,
+            "min_ms": 1005.7115000000049,
+            "max_ms": 1037.3635000000068
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 0.9028000000107568,
+            "p95_ms": 1.2754999999888241,
+            "min_ms": 0.8134999999892898,
+            "max_ms": 1.2754999999888241
+          },
+          "calls": [
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "response_chars": [
+            1760,
+            1760,
+            1760,
+            1760,
+            1760
+          ]
+        },
+        "pdf_open_read:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1316.780300000013,
+            "p95_ms": 1319.0149000000092,
+            "min_ms": 1256.0285999999905,
+            "max_ms": 1319.0149000000092
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 1208.257100000017,
+            "p95_ms": 1212.5860000000102,
+            "min_ms": 1158.8266000000003,
+            "max_ms": 1212.5860000000102
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 105.5510999999824,
+            "p95_ms": 115.69670000000042,
+            "min_ms": 97.19060000000172,
+            "max_ms": 115.69670000000042
+          },
+          "calls": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "response_chars": [
+            3447,
+            3430,
+            3447,
+            3447,
+            3430
+          ]
+        },
+        "pdf_open_read:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1292.3005999999878,
+            "p95_ms": 1311.7507999999798,
+            "min_ms": 1268.4103000000177,
+            "max_ms": 1311.7507999999798
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 1188.407600000006,
+            "p95_ms": 1201.3716999999888,
+            "min_ms": 1170.8412000000244,
+            "max_ms": 1201.3716999999888
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 102.29419999997481,
+            "p95_ms": 110.37820000000647,
+            "min_ms": 97.56789999999455,
+            "max_ms": 110.37820000000647
+          },
+          "calls": [
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "response_chars": [
+            2843,
+            2826,
+            2843,
+            2843,
+            2752
+          ]
+        },
+        "excel_read:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 424.3436999999976,
+            "p95_ms": 477.71080000000075,
+            "min_ms": 415.3579000000027,
+            "max_ms": 477.71080000000075
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 401.8918999999878,
+            "p95_ms": 453.73890000002575,
+            "min_ms": 391.8717999999935,
+            "max_ms": 453.73890000002575
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 23.484900000010384,
+            "p95_ms": 54.54260000001523,
+            "min_ms": 22.437999999994645,
+            "max_ms": 54.54260000001523
+          },
+          "calls": [
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "response_chars": [
+            3941,
+            3941,
+            3941,
+            3941,
+            3941
+          ]
+        },
+        "excel_read:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 66.60580000001937,
+            "p95_ms": 67.40450000000419,
+            "min_ms": 62.929899999988265,
+            "max_ms": 67.40450000000419
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 40.6308999999892,
+            "p95_ms": 42.42980000001262,
+            "min_ms": 37.835900000005495,
+            "max_ms": 42.42980000001262
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 24.459800000011455,
+            "p95_ms": 29.567399999999907,
+            "min_ms": 22.76610000000801,
+            "max_ms": 29.567399999999907
+          },
+          "calls": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "response_chars": [
+            876,
+            876,
+            876,
+            876,
+            876
+          ]
+        },
+        "excel_write_calculate_save:baseline": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 1201.4952000000048,
+            "p95_ms": 1286.146699999983,
+            "min_ms": 1158.2737000000197,
+            "max_ms": 1286.146699999983
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 630.9254000000074,
+            "p95_ms": 669.2994999999937,
+            "min_ms": 591.6003999999957,
+            "max_ms": 669.2994999999937
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 609.8935999999812,
+            "p95_ms": 633.0296000000089,
+            "min_ms": 527.3471000000136,
+            "max_ms": 633.0296000000089
+          },
+          "calls": [
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "response_chars": [
+            4033,
+            4033,
+            4033,
+            4033,
+            4033
+          ]
+        },
+        "excel_write_calculate_save:optimized": {
+          "scheduled": 5,
+          "attempted": 5,
+          "passed": 5,
+          "failed": 0,
+          "blocked": 0,
+          "timed_out": 0,
+          "elapsed": {
+            "samples": 5,
+            "median_ms": 745.2171999999846,
+            "p95_ms": 822.7823999999964,
+            "min_ms": 681.6817000000156,
+            "max_ms": 822.7823999999964
+          },
+          "action": {
+            "samples": 5,
+            "median_ms": 192.4555999999866,
+            "p95_ms": 252.31470000001718,
+            "min_ms": 181.59249999999884,
+            "max_ms": 252.31470000001718
+          },
+          "verification": {
+            "samples": 5,
+            "median_ms": 550.8053000000073,
+            "p95_ms": 602.5182999999961,
+            "min_ms": 498.67989999998827,
+            "max_ms": 602.5182999999961
+          },
+          "calls": [
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "response_chars": [
+            984,
+            987,
+            987,
+            990,
+            987
+          ]
+        }
+      },
+      "measured_outcomes": {
+        "scheduled": 100,
+        "attempted": 100,
+        "passed": 100,
+        "failed": 0,
+        "blocked": 0,
+        "timed_out": 0
+      }
+    },
+    {
+      "name": "backend-production-audit",
+      "command": [
+        "npm",
+        "audit",
+        "--omit=dev",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\backend",
+      "started_at": "2026-11-13T11:07:15.306Z",
+      "status": "findings",
+      "elapsed_ms": 6070.179000000004,
+      "exit_code": 1,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\backend-production-audit.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\backend-production-audit.stderr.txt",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 9,
+        "high": 0,
+        "critical": 0,
+        "total": 9
+      }
+    },
+    {
+      "name": "frontend-production-audit",
+      "command": [
+        "npm",
+        "audit",
+        "--omit=dev",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\frontend",
+      "started_at": "2026-11-13T11:07:21.382Z",
+      "status": "findings",
+      "elapsed_ms": 1945.622800000012,
+      "exit_code": 1,
+      "signal": null,
+      "stdout": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\frontend-production-audit.stdout.txt",
+      "stderr": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\benchmarks\\results\\strength-2026-11-13-baseline-evidence\\frontend-production-audit.stderr.txt",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 1,
+        "critical": 0,
+        "total": 1
+      }
+    }
+  ],
+  "limits": [
+    "Local implementation and deterministic execution checks, not an OSWorld/Windows Agent Arena score or an AI-model ranking.",
+    "Native desktop checks run serially against owned fixtures. Optional common operations reuse an existing Edge profile and disposable Excel workbooks.",
+    "npm audit reports known dependency advisories, including transitive dependencies; it does not demonstrate exploitability or constitute a penetration test.",
+    "No model inference, user-request latency, long-duration soak, or non-Windows hardware validation is measured."
+  ],
+  "finished_at": "2026-11-13T11:07:23.334Z",
+  "summary": {
+    "passed": 10,
+    "failed": 1,
+    "blocked": 0,
+    "findings": 2,
+    "skipped": 0,
+    "running": 0
+  },
+  "all_selected_checks_passed": false
+}

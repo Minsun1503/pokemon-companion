@@ -5,6 +5,9 @@ import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tra
 import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
+import { CompanionAgentTools } from './agent'
+import { CompanionChat } from './chat'
+import { registerCompanionChat } from './chat-ipc'
 
 app.setName('pokemon-mcp')
 if (process.env.POKEMON_USER_DATA_DIR) {
@@ -21,6 +24,7 @@ let socket: net.Socket
 let capturing = false
 let refreshQueued = false
 let paused = false
+let chatTools: CompanionAgentTools | undefined
 let clipboardBackup: Electron.Data | undefined
 let pastedText: string | undefined
 let target: { x: number; y: number } | undefined
@@ -173,6 +177,7 @@ function togglePause(): boolean {
     state.message = 'Ready to continue!'
   }
   send({ kind: 'pause', paused })
+  chatTools?.syncPause()
   refresh()
   return paused
 }
@@ -379,9 +384,20 @@ app
       win.setFocusable(open === true)
       if (open === true) win.focus()
     })
-    // Talk is deferred. Preserve its implementation and saved conversations without starting its worker.
-    ipcMain.handle('companion:chat-history', () => [])
-    ipcMain.handle('companion:chat-send', () => ({ ok: false, error: 'Talk is currently disabled.' }))
+    // The native worker remains lazy: opening Talk/history does not start it or contact a model.
+    chatTools = new CompanionAgentTools(
+      rootDir,
+      app.getPath('userData'),
+      () => paused,
+      (patch) => {
+        if (patch.pet && patch.pet !== state.pet) return
+        state = { ...state, ...patch, paused }
+        scheduleRefresh()
+      },
+    )
+    registerCompanionChat(ipcMain, new CompanionChat(rootDir, app.getPath('userData'), registry, chatTools), (sender) =>
+      [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === sender),
+    )
     ipcMain.on('companion:ignore-mouse', (event, ignore: unknown) => {
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
       if (dragOwner) return
@@ -550,6 +566,7 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  chatTools?.close()
   clearInterval(dragTimer)
   for (const pending of pendingFeedback.values()) {
     clearTimeout(pending.timer)

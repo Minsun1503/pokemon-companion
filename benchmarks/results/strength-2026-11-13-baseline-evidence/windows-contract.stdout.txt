@@ -1,0 +1,1 @@
+PASS: real native worker reports exact/overflow window coverage, rejects offscreen-root coverage, and preserves pre-action rejection evidence.

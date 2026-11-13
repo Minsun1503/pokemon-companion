@@ -1,0 +1,1584 @@
+{
+  "created_at": "2026-11-13T23:07:00.083Z",
+  "model": "qwen3:4b",
+  "endpoint": "http://localhost:11434",
+  "ollama": {
+    "version": "0.40.16"
+  },
+  "model_metadata": {
+    "name": "qwen3:4b",
+    "model": "qwen3:4b",
+    "modified_at": "2026-11-14T06:05:00.8916013+07:00",
+    "size": 2497293931,
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 2560,
+      "runner": "ggml"
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  },
+  "deadline_ms": 180000,
+  "limitations": [
+    "One smoke sample per task, fresh chat/worker per task; no fine tuning or prompt adaptation. External cloud arm uses its own full catalog. These runs do not establish a speedup.",
+    "All ten requests hit the existing client 90-second limit; no completed response supplied token counts or a model-selected action. The windows/get_windows execution in each trace is the existing harness initial perception, not a model selection.",
+    "Fresh chat and native worker per case share one Ollama process/model cache; first load is cold and later cases can reuse cache.",
+    "The stock tag resolves to Qwen3 4B Thinking 2507. Its official model card supports only thinking mode, while the existing Talk source sends think:false. This is a preflight compatibility issue, not a demonstrated cause of every timeout. https://huggingface.co/Qwen/Qwen3-4B-Thinking-2507"
+  ],
+  "cases": [
+    {
+      "id": "window_discovery",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-1' and the test workbook named below. Find the window 'Common Tasks 922a26-local-1', inspect it, and report its title.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93576.8728,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "4e822fa614f84c08b14ef2655ee75d37"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-1",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "fc5eb9e708b74758891057627a0b04f5"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f1680ca0c2d24ca19f1f214c6d573895"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "919e9995f2954e108ae6e4d58e1a6feb"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "7c445d153a4b48b3a68a4ea3f6cdf475"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "3b4723dd7aa44210b3ebb6cb3123c037"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "a2ef73e584ae493e8770aa0fdff00d00"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "050c6165da1e437bbf67fa66bdf52686"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2852.4232
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90017.3315,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "window_discovery",
+          "arm": "local",
+          "token": "922a26-local-1",
+          "title": "Common Tasks 922a26-local-1",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-1",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-1.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-1' and the test workbook named below. Find the window 'Common Tasks 922a26-local-1', inspect it, and report its title.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-1",
+          "title": "Common Tasks 922a26-local-1",
+          "token": "922a26-local-1",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "control_discovery",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-2' and the test workbook named below. Find the 'Record search' text input and report whether it supports entering text. Do not enter anything.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93993.67540000001,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "cfbeda67714146a694d4393610634c79"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-2",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "5cf7cdb974d54adb84242d560770d4cd"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f4c50ef94c86496c857edfb0a0c4b295"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "db1769634a0f46abab3dcee88311e9a4"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "9d0f17dbd8fb4ea0abad499f60618620"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "1594cffb18044b66aaa3306928221d0e"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "0edc6a818b2542218a717486bbe6a98a"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "382e2112223c4adeba80fdba44ea223e"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 3026.4396
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90019.78779999999,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "control_discovery",
+          "arm": "local",
+          "token": "922a26-local-2",
+          "title": "Common Tasks 922a26-local-2",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-2",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-2.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-2' and the test workbook named below. Find the 'Record search' text input and report whether it supports entering text. Do not enter anything.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-2",
+          "title": "Common Tasks 922a26-local-2",
+          "token": "922a26-local-2",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "enter_text_verify",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-3' and the test workbook named below. Enter 'smoke-922a26-local-3' into 'Record search' and read it back to verify the exact value.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93525.40000000001,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "ad63fe7bb58a4ce4acb1ca2e05c681e5"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-3",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "30f5280dd3264f5a8cac8388ca402b0e"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "d7ed1ad62ad943f7a9f1346f98c01412"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "c51c0af393c6483a99adacd8c83ad711"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f6b6df51c765443488b53c6410a92e1d"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "3b9b579104a44ae5996e63403a75cbb0"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "faa276dd3b3743df90a898f0d61fbe61"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "e1163d41df954ae79a0f9d703c6c2b6d"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2683.2801999999997
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90008.5324,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "enter_text_verify",
+          "arm": "local",
+          "token": "922a26-local-3",
+          "title": "Common Tasks 922a26-local-3",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-3",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-3.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-3' and the test workbook named below. Enter 'smoke-922a26-local-3' into 'Record search' and read it back to verify the exact value.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-3",
+          "title": "Common Tasks 922a26-local-3",
+          "token": "922a26-local-3",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "search_and_open",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-4' and the test workbook named below. Search for 'Record 922a26-local-4' using 'Record search' and 'Find record', open that result, and read the Shipment quantity and Invoice total from its document. Use the course tool if needed.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93356.11189999999,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f7a1617029484cb88292bfdfcfd23967"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-4",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "f6c08c46c7e645a2a6c0e3bd92f9a571"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "41fd3a89fcfc4b2fb5082b6744c439ac"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "26de328b8f064beba144e5c8fac7b7b2"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "0088d8de1b264c829a047b1654e2fc90"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "052ed02619044ce1873fc84d52551131"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "bb4e6e6681c94c4cae41d7bef3744fe2"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "185d96aa318d4831bfc8c8154f6368b1"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2569.9748
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "course",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90005.9877,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "search_and_open",
+          "arm": "local",
+          "token": "922a26-local-4",
+          "title": "Common Tasks 922a26-local-4",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-4",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-4.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-4' and the test workbook named below. Search for 'Record 922a26-local-4' using 'Record search' and 'Find record', open that result, and read the Shipment quantity and Invoice total from its document. Use the course tool if needed.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-4",
+          "title": "Common Tasks 922a26-local-4",
+          "token": "922a26-local-4",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "button_result",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-5' and the test workbook named below. Click 'Open details' and read the resulting Record status and Record key.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93366.72020000001,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "77736be15af848978ce35a6fb9aaf12b"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-5",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "23f449855b824e3186e18162be5d19ba"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "e0330a054de341a194dcc937dba35476"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "7520815ae52047b3a08431fd3aff3187"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "d520cde13a9b488d87fa5cdd6e57566f"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "1c2aff2e91824f8da97f19af59a5a8b8"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "218fbf1128bd4699af9126710e0fcbaf"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "d982b71218e74d50abe11790848cd41f"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2552.4501999999998
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90009.57549999999,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "button_result",
+          "arm": "local",
+          "token": "922a26-local-5",
+          "title": "Common Tasks 922a26-local-5",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-5",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-5.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-5' and the test workbook named below. Click 'Open details' and read the resulting Record status and Record key.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-5",
+          "title": "Common Tasks 922a26-local-5",
+          "token": "922a26-local-5",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "document_passages",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-6' and the test workbook named below. Click 'Load document' then read the Shipment quantity, Invoice total and Record key from the document using the course tool if needed.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93302.77979999999,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "8e6d78c841fc498293889d1155356330"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-6",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "43b8076f13cd4b9fabef198cef25742e"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "7972d9942f5240029848ef3fb344d1af"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "3fcf5250a95049cc8d5451dba18e8645"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "0e48f9b61c4b4e958dfa3457647bea1a"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "9a987eb3ee2a4b8f824b746bd1826636"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "ee59c48c2f724c5eabbfdc9a0cba4f57"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "2dbf43227de74343aebd28fb938da775"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2557.0559
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "course",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90009.02470000001,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "document_passages",
+          "arm": "local",
+          "token": "922a26-local-6",
+          "title": "Common Tasks 922a26-local-6",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-6",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-6.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-6' and the test workbook named below. Click 'Load document' then read the Shipment quantity, Invoice total and Record key from the document using the course tool if needed.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-6",
+          "title": "Common Tasks 922a26-local-6",
+          "token": "922a26-local-6",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "url_open",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-7' and the test workbook named below. Open http://127.0.0.1:49568/work?token=922a26-local-7&opened=1 and verify the loaded document title.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93363.8325,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "2048d6f339a44147826ce4fd1fc15987"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-7",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "b74bdc0ce88b463b8132501ce8bf4169"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "dcc3aa4e92a3469bb9c94bd1911421eb"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "4bc569f1503743d3b445c76614170d29"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "98138776bd5d458b98b962242e61c316"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "164a7f68f48c480d8a519253e92d36e1"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "006f799d9a9c40339dae4740d8a0c7aa"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "cb81e48212f345578b829a9a3bcace48"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2538.6047
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90014.167,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "url_open",
+          "arm": "local",
+          "token": "922a26-local-7",
+          "title": "Common Tasks 922a26-local-7",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-7",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-7.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-7' and the test workbook named below. Open http://127.0.0.1:49568/work?token=922a26-local-7&opened=1 and verify the loaded document title.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-7",
+          "title": "Common Tasks 922a26-local-7",
+          "token": "922a26-local-7",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "pdf_open_read",
+      "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-8' and the test workbook named below. Open http://127.0.0.1:49568/invoice-922a26-local-8.pdf and read the Shipment quantity and Invoice total in this actual invoice PDF using the course tool if needed.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93485.7225,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f70286a2d2ca4bdcbaf09ba69fc7e577"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-8",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "d7391a741c22446f90617f2d15e8ae08"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "b3baf3751635415ab3fe4c2e11a6c8b4"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "0c6c016039944b74b1817f3f8d8a65f7"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "1cb27bccdaa64a2c9fe6218b4d908670"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "a5aaae369008469db796ba33a5b9897e"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "56788dd376b741c485e4bde3db98d51a"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "b71f86d008bd448991e8036122f266f8"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2584.0258
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "course",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90005.80399999999,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "pdf_open_read",
+          "arm": "local",
+          "token": "922a26-local-8",
+          "title": "Common Tasks 922a26-local-8",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-8",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-8.pdf",
+          "prompt": "Use only the disposable test window 'Common Tasks 922a26-local-8' and the test workbook named below. Open http://127.0.0.1:49568/invoice-922a26-local-8.pdf and read the Shipment quantity and Invoice total in this actual invoice PDF using the course tool if needed.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-8",
+          "title": "Common Tasks 922a26-local-8",
+          "token": "922a26-local-8",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "excel_read",
+      "prompt": "Use only the disposable Excel workbook 'Common Tasks 922a26.xlsx', sheet Data. Read A1:J1 and report all ten cell values. The other workbook must remain untouched.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93414.5062,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "a834a2d75d4c475f964718c3e7418774"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-9",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "43d2b28586f349b286ce29ce58a3e2b5"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "a0b3005afb3e4df1b72e6b1dee9d0f93"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "29a6f1353f4841c3afad20d2687aff82"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "4408ce0b74c748028a65fd53089d5129"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f06dfe3694da4fd3a383b9c93a291a3f"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "e72ec5d5780540fdb93b5c9b7441a958"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "b67f6a408e4540668190c2bafe853f3e"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2554.5482
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90016.0743,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "excel_read",
+          "arm": "local",
+          "token": "922a26-local-9",
+          "title": "Common Tasks 922a26-local-9",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-9",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-9.pdf",
+          "prompt": "Use only the disposable Excel workbook 'Common Tasks 922a26.xlsx', sheet Data. Read A1:J1 and report all ten cell values. The other workbook must remain untouched.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-9",
+          "title": "Common Tasks 922a26-local-9",
+          "token": "922a26-local-9",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "excel": {
+            "kind": "verified",
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "formula": "",
+            "calculated": null,
+            "other_untouched": true,
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx",
+            "window_id": "7865552"
+          }
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    },
+    {
+      "id": "excel_write_calculate_save",
+      "prompt": "Use only the disposable Excel workbook 'Common Tasks 922a26.xlsx', sheet Data, at 'C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx'. Read A3:K3 to confirm it is empty, write numbers 1 through 10 to A3:J3, put formula =SUM(A3:J3) into K3, calculate, save the existing workbook, and read back the calculated result. The other workbook must remain untouched.",
+      "reply": {
+        "ok": false,
+        "error": "The operation was aborted due to timeout"
+      },
+      "elapsed_ms": 93599.4687,
+      "trace": [
+        {
+          "name": "windows",
+          "args": {
+            "action": "get_windows",
+            "max_chars": 6000
+          },
+          "status": "completed",
+          "result": {
+            "windows": [
+              {
+                "id": "4392054",
+                "title": "Pokémon Companion",
+                "process": "electron",
+                "minimized": false,
+                "active": false,
+                "window_ref": "713c691d822f406189774460a7ca56dd"
+              },
+              {
+                "id": "2623100",
+                "title": "Common Tasks 922a26-local-10",
+                "process": "electron",
+                "minimized": false,
+                "active": true,
+                "window_ref": "87c14ab384174933be5d3ba3e6e9f600"
+              },
+              {
+                "id": "7865552",
+                "title": "Common Tasks 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "8c55b4870a7d40e396b269e5e11284be"
+              },
+              {
+                "id": "6750920",
+                "title": "Untouched 922a26.xlsx - Excel",
+                "process": "EXCEL",
+                "minimized": false,
+                "active": false,
+                "window_ref": "143e71fd079b44daa3bc9d4e779de076"
+              },
+              {
+                "id": "4130400",
+                "title": "ChatGPT",
+                "process": "ChatGPT",
+                "minimized": false,
+                "active": false,
+                "window_ref": "3c75e7553b0441dea40d5b83098be546"
+              },
+              {
+                "id": "7340130",
+                "title": "Windows - Ollama and 1 more page - Personal - Microsoft​ Edge",
+                "process": "msedge",
+                "minimized": false,
+                "active": false,
+                "window_ref": "f4692d688395440b87a557cff9724307"
+              },
+              {
+                "id": "66436",
+                "title": "Windows Input Experience",
+                "process": "TextInputHost",
+                "minimized": false,
+                "active": false,
+                "window_ref": "068c10002a4d4db6afa63417e91a9c5e"
+              },
+              {
+                "id": "65830",
+                "title": "Program Manager",
+                "process": "explorer",
+                "minimized": false,
+                "active": false,
+                "window_ref": "1bc04ca6a97145ff90963b0b3f34aaaa"
+              }
+            ],
+            "complete": true,
+            "truncated": false
+          },
+          "elapsed_ms": 2749.3972
+        }
+      ],
+      "requests": [
+        {
+          "status": "failed",
+          "model": "qwen3:4b",
+          "options": {
+            "temperature": 0.7,
+            "top_p": 0.85,
+            "repeat_penalty": 1.18,
+            "num_ctx": 16384,
+            "num_predict": 1024
+          },
+          "tool_names": [
+            "desktop",
+            "windows",
+            "computer",
+            "excel",
+            "human_handoff",
+            "task_done"
+          ],
+          "elapsed_ms": 90021.41279999999,
+          "error": "The operation was aborted due to timeout"
+        }
+      ],
+      "worker_exit_code": 0,
+      "fixture": {
+        "current": {
+          "id": "excel_write_calculate_save",
+          "arm": "local",
+          "token": "922a26-local-10",
+          "title": "Common Tasks 922a26-local-10",
+          "work": "http://127.0.0.1:49568/work?token=922a26-local-10",
+          "pdf": "http://127.0.0.1:49568/invoice-922a26-local-10.pdf",
+          "prompt": "Use only the disposable Excel workbook 'Common Tasks 922a26.xlsx', sheet Data, at 'C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx'. Read A3:K3 to confirm it is empty, write numbers 1 through 10 to A3:J3, put formula =SUM(A3:J3) into K3, calculate, save the existing workbook, and read back the calculated result. The other workbook must remain untouched.",
+          "row": 3,
+          "excel": {
+            "kind": "ready",
+            "window_id": "7865552",
+            "name": "Common Tasks 922a26.xlsx",
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx"
+          }
+        },
+        "observation": {
+          "url": "http://127.0.0.1:49568/work?token=922a26-local-10",
+          "title": "Common Tasks 922a26-local-10",
+          "token": "922a26-local-10",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "excel": {
+            "kind": "verified",
+            "values": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ],
+            "formula": "",
+            "calculated": null,
+            "other_untouched": true,
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-UBEYOG\\Common Tasks 922a26.xlsx",
+            "window_id": "5899464"
+          }
+        }
+      },
+      "independent_verification": false,
+      "harness_verification": false,
+      "status": "fail"
+    }
+  ],
+  "setup_evidence": {
+    "weights_sha256": "3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f",
+    "weights_size_bytes": 2497280480,
+    "full_weights_hash_verified": true,
+    "official_pull_status": "success",
+    "runtime_executable_sha256": "4ccefcbfecc50fb6526471adabbc20869dd614e29e351120b15083cb174b0b8a",
+    "authenticode": "Valid; Ollama Inc.",
+    "stock_revision_version": "2507",
+    "stock_revision": "Qwen3 4B Thinking 2507",
+    "revision_evidence": {
+      "runner_metadata_name": "Qwen3 4B Thinking 2507",
+      "api_model_info_version": "2507",
+      "api_model_info_finetune": "Thinking"
+    }
+  },
+  "environment": {
+    "cpu": "Intel Core i5-8500T @ 2.10 GHz",
+    "cores": 6,
+    "logical_processors": 6,
+    "physical_memory_kib": 16596384,
+    "gpu_execution": false,
+    "runner": "llamacpp",
+    "observed_runner_threads": 3,
+    "observed_loaded_size_bytes": 5113412320,
+    "observed_size_vram_bytes": 0,
+    "context_length": 16384
+  },
+  "harness_source_commit": "35dd06774f9cd675034b976a0b26a81431b8f2f5",
+  "request_mode_from_harness_source": {
+    "think": false,
+    "stream": false
+  },
+  "summary": {
+    "attempted": 10,
+    "passed": 0,
+    "failed": 10,
+    "model_requests": 10,
+    "completed_model_responses": 0,
+    "model_selected_tool_calls": 0,
+    "harness_initial_perception_calls": 10,
+    "disposition": "NO-GO for Day 1; resolve revision/mode and serving-budget preflight, then rerun development smoke tasks"
+  }
+}

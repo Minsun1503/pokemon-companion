@@ -1,0 +1,1 @@
+PASS: HTTP refuses short configuration, rejects missing/wrong credentials before parsing, and accepts authenticated MCP requests.

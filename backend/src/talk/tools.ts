@@ -94,7 +94,7 @@ export class TalkTools {
 			})),
 			{name: 'human_handoff', description: 'Stop with an exact instruction when the task needs a password, CAPTCHA, final authorization, user decision, or an inaccessible control. Give the actual obstacle, not a promise.', schema: handoffSchema},
 			{name: 'task_done', description: 'Finish only after all requested steps are complete. Supply the observed window and query naming a result control (not merely the typed search field). Re-reads actual UI to verify the evidence. summary is the final reply in the user’s language.', schema: doneSchema},
-		].map(({name, description, schema}) => ({type: 'function', function: {name, description, parameters: z.toJSONSchema(schema)}}));
+		].map(({name, description, schema}) => ({type: 'function', function: {name, description, parameters: z.toJSONSchema(schema, {io: 'input'})}}));
 	}
 
 	async call(name: string, args: unknown, pet: string): Promise<unknown> {

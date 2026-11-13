@@ -1,0 +1,13 @@
+
+> pokemon-computer-companion@0.2.1 check
+> node scripts/repos.cjs check
+
+
+> pokemon-pet@0.0.2-5 check
+> biome check . && tsc -p tsconfig.json
+
+Checked 50 files in 73ms. No fixes applied.
+
+> computer-use-mcp@1.8.0 lint
+> eslint
+

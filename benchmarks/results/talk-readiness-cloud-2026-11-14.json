@@ -1,0 +1,527 @@
+{
+  "fixture": "http://127.0.0.1:49237",
+  "arms": {
+    "cloud": [
+      {
+        "id": "window_discovery",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-1' and the test workbook named below. Find the window 'Common Tasks ec4476-cloud-1', inspect it, and report its title.",
+        "elapsed_ms": 64907,
+        "status": "pass",
+        "summary": "Common Tasks ec4476-cloud-1",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-1",
+          "title": "Common Tasks ec4476-cloud-1",
+          "token": "ec4476-cloud-1",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        },
+        "mcp": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"459798\",\"title\":\"Common Tasks ec4476-cloud-1\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"074f39014629448099a38fb3b935edfd\"},\"snapshot\":\"0a95108432324bc49f477513eb186179\",\"nodes\":[{\"id\":1,\"role\":\"Document\",\"name\":\"Common Tasks ec4476-cloud-1\",\"actions\":[\"scroll\",\"read_text\",\"focus\"],\"automation_id\":\"RootWebArea\",\"value\":\"http://127.0.0.1:53249/work?token=ec4476-cloud-1\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":24}}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "control_discovery",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-2' and the test workbook named below. Find the 'Record search' text input and report whether it supports entering text. Do not enter anything.",
+        "elapsed_ms": 219926,
+        "status": "pass",
+        "summary": "Record search supports set_value; left empty.",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-2",
+          "title": "Common Tasks ec4476-cloud-2",
+          "token": "ec4476-cloud-2",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        },
+        "mcp": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"459798\",\"title\":\"Common Tasks ec4476-cloud-2\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"074f39014629448099a38fb3b935edfd\"},\"snapshot\":\"09791c56cafb40e384fc9d7272e68738\",\"nodes\":[{\"id\":1,\"role\":\"Edit\",\"name\":\"Record search\",\"actions\":[\"set_value\",\"read_text\",\"focus\"],\"value\":\"\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":24}}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "enter_text_verify",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-3' and the test workbook named below. Enter 'smoke-ec4476-cloud-3' into 'Record search' and read it back to verify the exact value.",
+        "elapsed_ms": 181539,
+        "status": "pass",
+        "summary": "Exact input readback.",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-3",
+          "title": "Common Tasks ec4476-cloud-3",
+          "token": "ec4476-cloud-3",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": "smoke-ec4476-cloud-3"
+        },
+        "mcp": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"ok\":true,\"completed\":4,\"total\":4,\"result_step\":3,\"result\":{\"text\":\"smoke-ec4476-cloud-3\",\"verified\":true,\"attempts\":1}}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "search_and_open",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-4' and the test workbook named below. Search for 'Record ec4476-cloud-4' using 'Record search' and 'Find record', open that result, and read the Shipment quantity and Invoice total from its document. Use the course tool if needed.",
+        "elapsed_ms": 206898,
+        "status": "pass",
+        "summary": "37 cases; 48.75 USD.",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-4#record",
+          "title": "Common Tasks ec4476-cloud-4",
+          "token": "ec4476-cloud-4",
+          "query": "Record ec4476-cloud-4",
+          "search": 1,
+          "click": 1,
+          "details": 0,
+          "load": 0,
+          "input": "Record ec4476-cloud-4"
+        },
+        "mcp": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"ok\":true,\"completed\":7,\"total\":7,\"result_step\":6,\"result\":{\"window\":{\"id\":\"459798\",\"title\":\"Common Tasks ec4476-cloud-4\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"c3f41a210f664b2b9c6d8f447a0e4601\"},\"snapshot\":\"621a079a68404e5b9fcc1dc8befc000c\",\"nodes\":[{\"id\":1,\"role\":\"Hyperlink\",\"name\":\"Record ec4476-cloud-4\",\"actions\":[\"invoke\",\"read_text\",\"focus\"],\"value\":\"http://127.0.0.1:53249/work?token=ec4476-cloud-4#record\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":25}}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"459798\",\"title\":\"Common Tasks ec4476-cloud-4\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"c3f41a210f664b2b9c6d8f447a0e4601\"},\"snapshot\":\"912f896dab354717b604e7408e722dff\",\"nodes\":[{\"id\":1,\"role\":\"Document\",\"name\":\"Common Tasks ec4476-cloud-4\",\"actions\":[\"scroll\",\"read_text\",\"focus\"],\"automation_id\":\"RootWebArea\",\"value\":\"http://127.0.0.1:53249/work?token=ec4476-cloud-4#record\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":208}}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"ok\":true,\"action\":\"find_many\",\"document_name\":\"Common Tasks ec4476-cloud-4\",\"requested_queries\":2,\"input_state\":\"not_sent\",\"native_calls\":2,\"results\":[{\"found\":true,\"text\":\": supporting background material without the requested current facts.\\nShipment quantity: 37 cases.\\nInvoice total: 48.75 USD.\\nRecord key: ec4476-cloud-4.\",\"method\":\"bounded_full_text_fallback\",\"fallback_reason\":\"inconsistent_match_range\",\"scope\":\"first_accessible_match\",\"source_truncated\":false,\"excerpt_sha256\":\"87d9fac467f8e870bf8787c26cb33182d613d48bfb08da5f027fa9f59e0599c5\",\"full_document_version\":false},{\"found\":true,\"text\":\"ial without the requested current facts.\\nShipment quantity: 37 cases.\\nInvoice total: 48.75 USD.\\nRecord key: ec4476-cloud-4.\",\"method\":\"bounded_full_text_fallback\",\"fallback_reason\":\"shared_full_text_fallback\",\"scope\":\"first_accessible_match\",\"source_truncated\":false,\"excerpt_sha256\":\"9a944e36535ff62c6e9eeff2fb1586b4b54bbcd54a1cd14a09c07bb3c9a87e08\",\"full_document_version\":false}],\"all_queries_returned\":true,\"atomic_document_snapshot\":false}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "button_result",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-5' and the test workbook named below. Click 'Open details' and read the resulting Record status and Record key.",
+        "elapsed_ms": 168971,
+        "status": "pass",
+        "summary": "Record status: Active. Record key: ec4476-cloud-5.",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-5",
+          "title": "Common Tasks ec4476-cloud-5",
+          "token": "ec4476-cloud-5",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 1,
+          "load": 0,
+          "input": ""
+        },
+        "mcp": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"ok\":true,\"completed\":4,\"total\":4,\"result_step\":3,\"result\":{\"window\":{\"id\":\"459798\",\"title\":\"Common Tasks ec4476-cloud-5\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"c3f41a210f664b2b9c6d8f447a0e4601\"},\"snapshot\":\"b7d1727485d64a10b46b94fcde22eed1\",\"nodes\":[{\"id\":1,\"role\":\"Text\",\"name\":\"Record status: Active. Record key: ec4476-cloud-5.\",\"actions\":[\"read_text\"],\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":25}}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "document_passages",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-6' and the test workbook named below. Click 'Load document' then read the Shipment quantity, Invoice total and Record key from the document using the course tool if needed.",
+        "elapsed_ms": 158064,
+        "status": "pass_after_read_recovery",
+        "summary": "Fresh reading verified 37 cases, 48.75 USD and a4bb7c-cloud-6.",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-6",
+          "title": "Common Tasks ec4476-cloud-6",
+          "token": "ec4476-cloud-6",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 1,
+          "input": ""
+        },
+        "mcp": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"ok\":true,\"completed\":4,\"total\":4,\"result_step\":3,\"result\":{\"window\":{\"id\":\"459798\",\"title\":\"Common Tasks ec4476-cloud-6\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"1b17939149aa4b49928ba8337d8fe44c\"},\"snapshot\":\"1774233aa91e42779e03459860ba8f72\",\"nodes\":[{\"id\":1,\"role\":\"Document\",\"name\":\"Common Tasks ec4476-cloud-6\",\"actions\":[\"scroll\",\"read_text\",\"focus\"],\"automation_id\":\"RootWebArea\",\"value\":\"http://127.0.0.1:53249/work?token=ec4476-cloud-6\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":207}}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"ok\":false,\"phase\":\"document_discovery\",\"input_state\":\"not_sent\",\"native_calls\":1,\"error\":\"Unknown, expired or mismatched window identity. Call get_windows again.\",\"error_details\":{\"code\":\"STALE_REF\",\"disposition\":{\"delivery\":\"not_delivered\",\"retry\":\"safe\"},\"recovery\":{\"strategy\":\"refresh_snapshot_then_retry_original\",\"requires_fresh_snapshot\":true}}}"
+              }
+            ],
+            "isError": true
+          }
+        ],
+        "failures": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"ok\":false,\"phase\":\"document_discovery\",\"input_state\":\"not_sent\",\"native_calls\":1,\"error\":\"Unknown, expired or mismatched window identity. Call get_windows again.\",\"error_details\":{\"code\":\"STALE_REF\",\"disposition\":{\"delivery\":\"not_delivered\",\"retry\":\"safe\"},\"recovery\":{\"strategy\":\"refresh_snapshot_then_retry_original\",\"requires_fresh_snapshot\":true}}}"
+              }
+            ],
+            "isError": true
+          }
+        ],
+        "recovery": {
+          "elapsed_ms": 1115,
+          "prompt": "Use only the disposable test window 'Common Tasks a4bb7c-cloud-6' and the test workbook named below. Click 'Load document' then read the Shipment quantity, Invoice total and Record key from the document using the course tool if needed.",
+          "evidence": {
+            "url": "http://127.0.0.1:49229/work?token=a4bb7c-cloud-6",
+            "title": "Common Tasks a4bb7c-cloud-6",
+            "token": "a4bb7c-cloud-6",
+            "query": "",
+            "search": 0,
+            "click": 0,
+            "details": 0,
+            "load": 1,
+            "input": ""
+          },
+          "mcp": [
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"ok\":true,\"completed\":4,\"total\":4,\"result_step\":3,\"result\":{\"window\":{\"id\":\"2753924\",\"title\":\"Common Tasks a4bb7c-cloud-6\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"599735c9bb05450185843d4d261fdce1\"},\"snapshot\":\"8039c38eea104340a26353eb39b5ff8c\",\"nodes\":[],\"matched\":0,\"truncated\":false,\"complete\":true,\"scanned\":207}}"
+                }
+              ]
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"2753924\",\"title\":\"Common Tasks a4bb7c-cloud-6\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"599735c9bb05450185843d4d261fdce1\"},\"snapshot\":\"548e50d8e697409183263b9af425f219\",\"nodes\":[],\"matched\":0,\"truncated\":false,\"complete\":true,\"scanned\":207}}"
+                }
+              ]
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"2753924\",\"title\":\"Common Tasks a4bb7c-cloud-6\",\"process\":\"electron\",\"minimized\":false,\"window_ref\":\"599735c9bb05450185843d4d261fdce1\"},\"snapshot\":\"c9e3adedaa7b4171b5845c9b4d196711\",\"nodes\":[],\"matched\":0,\"truncated\":false,\"complete\":true,\"scanned\":207}}"
+                }
+              ]
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"windows\":[{\"id\":\"2753924\",\"title\":\"Common Tasks a4bb7c-cloud-6\",\"process\":\"electron\",\"minimized\":false,\"active\":false,\"window_ref\":\"3a1c740fee264b9e89cdcb11bf2765a1\"}],\"complete\":true,\"truncated\":false}"
+                }
+              ]
+            },
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"contract_version\":1,\"ok\":true,\"action\":\"find_many\",\"document_name\":\"Common Tasks a4bb7c-cloud-6\",\"requested_queries\":3,\"input_state\":\"not_sent\",\"native_calls\":2,\"results\":[{\"found\":true,\"text\":\"e 179: supporting background material without the requested current facts.\\nShipment quantity: 37 cases.\\nInvoice total: 48.75 USD.\\nRecord key: a4bb7c-cloud-6.\",\"method\":\"bounded_full_text_fallback\",\"fallback_reason\":\"inconsistent_match_range\",\"scope\":\"first_accessible_match\",\"source_truncated\":false,\"excerpt_sha256\":\"06e793fbefafd0f0fe6bee28e33ef7a334a3a475400f6e245d05d7af333797d6\",\"full_document_version\":false},{\"found\":true,\"text\":\"material without the requested current facts.\\nShipment quantity: 37 cases.\\nInvoice total: 48.75 USD.\\nRecord key: a4bb7c-cloud-6.\",\"method\":\"bounded_full_text_fallback\",\"fallback_reason\":\"shared_full_text_fallback\",\"scope\":\"first_accessible_match\",\"source_truncated\":false,\"excerpt_sha256\":\"b18485211a370bdd7014ec916e35cd6255040f8f773e931fc38ae00f385d51bf\",\"full_document_version\":false},{\"found\":true,\"text\":\"sted current facts.\\nShipment quantity: 37 cases.\\nInvoice total: 48.75 USD.\\nRecord key: a4bb7c-cloud-6.\",\"method\":\"bounded_full_text_fallback\",\"fallback_reason\":\"shared_full_text_fallback\",\"scope\":\"first_accessible_match\",\"source_truncated\":false,\"excerpt_sha256\":\"771708082df1ba0431cf98d98c4d32042c13fb271ebd7daf72318ebe28c27046\",\"full_document_version\":false}],\"all_queries_returned\":true,\"atomic_document_snapshot\":false}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "url_open",
+        "prompt": "Use only the disposable test window 'Common Tasks ec4476-cloud-7' and the test workbook named below. Open http://127.0.0.1:53249/work?token=ec4476-cloud-7&opened=1 and verify the loaded document title.",
+        "elapsed_ms": 429760,
+        "status": "pass",
+        "summary": "Opened the exact fixture URL; verified the Document title and URL.",
+        "evidence": {
+          "url": "http://127.0.0.1:53249/work?token=ec4476-cloud-7",
+          "title": "Common Tasks ec4476-cloud-7",
+          "token": "ec4476-cloud-7",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "input": ""
+        },
+        "mcp": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"983896\",\"title\":\"Common Tasks ec4476-cloud-7 and 1 more page - Personal - Microsoft​ Edge\",\"process\":\"msedge\",\"minimized\":false,\"window_ref\":\"b346508f3ef84658a5a5ed6d299439f0\"},\"snapshot\":\"d1325a0cf54347d388efedc17b24bb60\",\"nodes\":[{\"id\":1,\"role\":\"Document\",\"name\":\"Common Tasks ec4476-cloud-7\",\"actions\":[\"scroll\",\"read_text\",\"focus\"],\"automation_id\":\"RootWebArea\",\"value\":\"http://127.0.0.1:53249/work?token=ec4476-cloud-7&opened=1\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":61}}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "pdf_open_read",
+        "elapsed_ms": 1738722,
+        "status": "pass_after_read_recovery",
+        "summary": "Actual PDF text: 37 cases; 48.75 USD; ec4476-cloud-8.",
+        "evidence": {
+          "pdf_url": "http://127.0.0.1:53249/invoice-ec4476-cloud-8.pdf",
+          "fixture_controller_closed_before_final_snapshot": true
+        },
+        "mcp": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"ok\":true,\"completed\":2,\"total\":2,\"result_step\":1,\"result\":{\"window\":{\"id\":\"983896\",\"title\":\"127.0.0.1:53249/invoice-ec4476-cloud-8.pdf and 2 more pages - Personal - Microsoft​ Edge\",\"process\":\"msedge\",\"minimized\":false,\"window_ref\":\"09856aaaa9a54fbcb0cdac5548cf61db\"},\"snapshot\":\"4408d34fb29640fea97c2f3851c05183\",\"nodes\":[{\"id\":1,\"role\":\"Document\",\"name\":\"\",\"actions\":[\"scroll\",\"read_text\",\"focus\"],\"automation_id\":\"RootWebArea\",\"value\":\"http://127.0.0.1:53249/invoice-ec4476-cloud-8.pdf\",\"targetable\":true}],\"matched\":1,\"truncated\":false,\"complete\":true,\"scanned\":54}}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"ok\":false,\"error\":\"Unknown, expired or mismatched window identity. Call get_windows again.\",\"error_details\":{\"code\":\"STALE_REF\",\"disposition\":{\"delivery\":\"not_delivered\",\"retry\":\"safe\"},\"recovery\":{\"strategy\":\"refresh_snapshot_then_retry_original\",\"requires_fresh_snapshot\":true}}}"
+              }
+            ],
+            "isError": true
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"ok\":false,\"completed\":1,\"total\":2,\"stopped_step\":1,\"action\":\"get_ui\",\"failed_step_started\":false,\"error\":\"Step 0 must contain exactly one untruncated window; narrow the query or increase its budget.\",\"error_details\":{\"code\":\"ELEMENT_NOT_FOUND\",\"disposition\":{\"delivery\":\"not_delivered\",\"retry\":\"safe\"}},\"retry_scope\":\"stopped_step\",\"result_step\":0,\"result\":{\"windows\":[],\"complete\":true,\"truncated\":false}}"
+              }
+            ],
+            "isError": true
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"ok\":false,\"error\":\"Unknown, expired or mismatched window identity. Call get_windows again.\",\"error_details\":{\"code\":\"STALE_REF\",\"disposition\":{\"delivery\":\"not_delivered\",\"retry\":\"safe\"},\"recovery\":{\"strategy\":\"refresh_snapshot_then_retry_original\",\"requires_fresh_snapshot\":true}}}"
+              }
+            ],
+            "isError": true
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"ok\":true,\"completed\":3,\"total\":3,\"result_step\":2,\"result\":{\"text\":\"￼\\nCommon invoice ec4476-cloud-8 Shipment quantity: 37 cases. Invoice total: 48.75 USD.\\nRecord key: ec4476-cloud-8.\\n￼\"}}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "excel_read",
+        "prompt": "Use only the disposable Excel workbook 'Common Tasks a4bb7c.xlsx', sheet Data. Read A1:J1 and report all ten cell values. The other workbook must remain untouched.",
+        "elapsed_ms": 186851,
+        "status": "pass",
+        "summary": "A1:J1 contains 1 through 10; other workbook untouched.",
+        "evidence": {
+          "url": "http://127.0.0.1:49229/work?token=a4bb7c-cloud-9",
+          "title": "Common Tasks a4bb7c-cloud-9",
+          "token": "a4bb7c-cloud-9",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "excel": {
+            "kind": "verified",
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "formula": "",
+            "calculated": null,
+            "other_untouched": true,
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-y1NuTN\\Common Tasks a4bb7c.xlsx",
+            "window_id": "6160492"
+          }
+        },
+        "mcp": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"windows\":[{\"id\":\"6160492\",\"title\":\"Common Tasks a4bb7c.xlsx - Excel\",\"process\":\"EXCEL\",\"minimized\":false,\"active\":false,\"window_ref\":\"adaa6b478f07491597a2c3d96b4a71e3\"}],\"complete\":true,\"truncated\":false}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"inspect_workbook\",\"window_id\":\"6160492\",\"input_state\":\"not_sent\",\"native_calls\":1,\"ok\":true,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"full_name\":\"C:\\\\Users\\\\ADMIN\\\\AppData\\\\Local\\\\Temp\\\\pokemon-readiness-y1NuTN\\\\Common Tasks a4bb7c.xlsx\",\"read_only\":false,\"saved\":true,\"sheet_count\":1,\"sheets\":[{\"name\":\"Data\",\"visible\":true,\"protected\":false,\"used_range\":\"$A$1:$J$1\"}],\"sheets_truncated\":false,\"calculation_mode\":-4105,\"calculation_state\":0}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"windows\":[{\"id\":\"6160492\",\"title\":\"Common Tasks a4bb7c.xlsx - Excel\",\"process\":\"EXCEL\",\"minimized\":false,\"active\":false,\"window_ref\":\"a15697d57a76476595ee57dd3585ade7\"}],\"complete\":true,\"truncated\":false}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"read_range\",\"window_id\":\"6160492\",\"input_state\":\"not_sent\",\"native_calls\":1,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"sheet\":\"Data\",\"ok\":true,\"cells\":[{\"offset\":0,\"address\":\"A1\",\"value\":1,\"formula\":null},{\"offset\":1,\"address\":\"B1\",\"value\":2,\"formula\":null},{\"offset\":2,\"address\":\"C1\",\"value\":3,\"formula\":null},{\"offset\":3,\"address\":\"D1\",\"value\":4,\"formula\":null},{\"offset\":4,\"address\":\"E1\",\"value\":5,\"formula\":null},{\"offset\":5,\"address\":\"F1\",\"value\":6,\"formula\":null},{\"offset\":6,\"address\":\"G1\",\"value\":7,\"formula\":null},{\"offset\":7,\"address\":\"H1\",\"value\":8,\"formula\":null},{\"offset\":8,\"address\":\"I1\",\"value\":9,\"formula\":null},{\"offset\":9,\"address\":\"J1\",\"value\":10,\"formula\":null}],\"range\":\"A1:J1\",\"offset\":0,\"next_offset\":null,\"has_more\":false,\"total_cells\":10,\"version\":\"e34fd2c01fdf384b6e63e7c61e47e3d617cdee719d33d51af2686b5b1cb52a9a\"}"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "excel_write_calculate_save",
+        "prompt": "Use only the disposable Excel workbook 'Common Tasks a4bb7c.xlsx', sheet Data, at 'C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-y1NuTN\\Common Tasks a4bb7c.xlsx'. Read A2:K2 to confirm it is empty, write numbers 1 through 10 to A2:J2, put formula =SUM(A2:J2) into K2, calculate, save the existing workbook, and read back the calculated result. The other workbook must remain untouched.",
+        "elapsed_ms": 281183,
+        "status": "pass",
+        "summary": "Values 1..10 and formula persisted; reopened K2=55; other workbook untouched.",
+        "evidence": {
+          "url": "http://127.0.0.1:49229/work?token=a4bb7c-cloud-10",
+          "title": "Common Tasks a4bb7c-cloud-10",
+          "token": "a4bb7c-cloud-10",
+          "query": "",
+          "search": 0,
+          "click": 0,
+          "details": 0,
+          "load": 0,
+          "excel": {
+            "kind": "verified",
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "formula": "=SUM(A2:J2)",
+            "calculated": 55,
+            "other_untouched": true,
+            "path": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\pokemon-readiness-y1NuTN\\Common Tasks a4bb7c.xlsx",
+            "window_id": "2361174"
+          }
+        },
+        "mcp": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"windows\":[{\"id\":\"6160492\",\"title\":\"Common Tasks a4bb7c.xlsx - Excel\",\"process\":\"EXCEL\",\"minimized\":false,\"active\":false,\"window_ref\":\"a15697d57a76476595ee57dd3585ade7\"}],\"complete\":true,\"truncated\":false}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"read_range\",\"window_id\":\"6160492\",\"input_state\":\"not_sent\",\"native_calls\":1,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"sheet\":\"Data\",\"ok\":true,\"cells\":[{\"offset\":0,\"address\":\"A2\",\"value\":null,\"formula\":null},{\"offset\":1,\"address\":\"B2\",\"value\":null,\"formula\":null},{\"offset\":2,\"address\":\"C2\",\"value\":null,\"formula\":null},{\"offset\":3,\"address\":\"D2\",\"value\":null,\"formula\":null},{\"offset\":4,\"address\":\"E2\",\"value\":null,\"formula\":null},{\"offset\":5,\"address\":\"F2\",\"value\":null,\"formula\":null},{\"offset\":6,\"address\":\"G2\",\"value\":null,\"formula\":null},{\"offset\":7,\"address\":\"H2\",\"value\":null,\"formula\":null},{\"offset\":8,\"address\":\"I2\",\"value\":null,\"formula\":null},{\"offset\":9,\"address\":\"J2\",\"value\":null,\"formula\":null},{\"offset\":10,\"address\":\"K2\",\"value\":null,\"formula\":null}],\"range\":\"A2:K2\",\"offset\":0,\"next_offset\":null,\"has_more\":false,\"total_cells\":11,\"version\":\"a195b538d1f334c7d7993bb614b90ec882c6204cf1fd4ccd39fb2169aa8472f2\"}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"windows\":[{\"id\":\"6160492\",\"title\":\"Common Tasks a4bb7c.xlsx - Excel\",\"process\":\"EXCEL\",\"minimized\":false,\"active\":false,\"window_ref\":\"ad3e9bece1574ccfb1e9d00544f073dc\"}],\"complete\":true,\"truncated\":false}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"write_range\",\"window_id\":\"6160492\",\"input_state\":\"applied\",\"native_calls\":1,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"sheet\":\"Data\",\"ok\":true,\"verified\":true,\"range\":\"A2:J2\",\"written_cells\":10,\"version\":\"e9e7eba381c4ce4491a2030725738ff617c36e95edcfdb5503ae617315ba1d06\",\"saved\":false,\"calculation_state\":0}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"windows\":[{\"id\":\"6160492\",\"title\":\"Common Tasks a4bb7c.xlsx - Excel\",\"process\":\"EXCEL\",\"minimized\":false,\"active\":false,\"window_ref\":\"ad3e9bece1574ccfb1e9d00544f073dc\"}],\"complete\":true,\"truncated\":false}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"write_range\",\"window_id\":\"6160492\",\"input_state\":\"applied\",\"native_calls\":1,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"sheet\":\"Data\",\"ok\":true,\"verified\":true,\"range\":\"K2\",\"written_cells\":1,\"version\":\"32719b74ed427328e6aa5cb9ffca6500e70551ec36f59852b48906fe792a8a7b\",\"saved\":false,\"calculation_state\":0}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"windows\":[{\"id\":\"6160492\",\"title\":\"Common Tasks a4bb7c.xlsx - Excel\",\"process\":\"EXCEL\",\"minimized\":false,\"active\":false,\"window_ref\":\"52c4060c64564ab1a207378685568fd3\"}],\"complete\":true,\"truncated\":false}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"save_workbook\",\"window_id\":\"6160492\",\"input_state\":\"applied\",\"native_calls\":1,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"ok\":true,\"full_name\":\"C:\\\\Users\\\\ADMIN\\\\AppData\\\\Local\\\\Temp\\\\pokemon-readiness-y1NuTN\\\\Common Tasks a4bb7c.xlsx\",\"saved\":true,\"verified\":true}"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"contract_version\":1,\"action\":\"read_range\",\"window_id\":\"6160492\",\"input_state\":\"not_sent\",\"native_calls\":1,\"workbook_name\":\"Common Tasks a4bb7c.xlsx\",\"sheet\":\"Data\",\"ok\":true,\"cells\":[{\"offset\":0,\"address\":\"A2\",\"value\":1,\"formula\":null},{\"offset\":1,\"address\":\"B2\",\"value\":2,\"formula\":null},{\"offset\":2,\"address\":\"C2\",\"value\":3,\"formula\":null},{\"offset\":3,\"address\":\"D2\",\"value\":4,\"formula\":null},{\"offset\":4,\"address\":\"E2\",\"value\":5,\"formula\":null},{\"offset\":5,\"address\":\"F2\",\"value\":6,\"formula\":null},{\"offset\":6,\"address\":\"G2\",\"value\":7,\"formula\":null},{\"offset\":7,\"address\":\"H2\",\"value\":8,\"formula\":null},{\"offset\":8,\"address\":\"I2\",\"value\":9,\"formula\":null},{\"offset\":9,\"address\":\"J2\",\"value\":10,\"formula\":null},{\"offset\":10,\"address\":\"K2\",\"value\":55,\"formula\":\"=SUM(A2:J2)\"}],\"range\":\"A2:K2\",\"offset\":0,\"next_offset\":null,\"has_more\":false,\"total_cells\":11,\"version\":\"7e3beccf68f5424992970c2146e0acc9e0d948756918ed45738b83234a31bf48\"}"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "local": []
+  },
+  "limitations": [
+    "One unblinded smoke sample per arm and task; current Codex client/cloud model uses full MCP tools, Talk/qwen3:4b uses its existing model-facing catalog. This does not isolate model quality or establish a speedup."
+  ]
+}

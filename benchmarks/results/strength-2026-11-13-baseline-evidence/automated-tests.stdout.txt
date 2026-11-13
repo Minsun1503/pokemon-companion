@@ -1,0 +1,77 @@
+
+> pokemon-computer-companion@0.2.1 test
+> node scripts/repos.cjs test && node --test scripts/chat.test.cjs scripts/pikachu-animation.test.cjs scripts/youtube-benchmark.test.mjs scripts/common-task-benchmark.test.mjs scripts/desktop-workflows.test.mjs scripts/workflow-controller.test.mjs scripts/local-launch.test.cjs
+
+
+> computer-use-mcp@1.8.0 test
+> vitest run
+
+
+ RUN  v4.1.12 C:/Users/ADMIN/Downloads/Pikachu/pokemon-companion/.publish/backend
+
+
+ Test Files  22 passed (22)
+      Tests  342 passed | 1 skipped (343)
+   Start at  18:01:37
+   Duration  8.04s (transform 1.22s, setup 0ms, import 10.83s, tests 11.57s, environment 4ms)
+
+✔ companion chat streams replies, scopes history, and recovers from provider failures (248.3417ms)
+✔ Talk follows the latest request instead of replaying an earlier unexecuted plan (52.444ms)
+✔ canonicalizes Edge loopback display addresses without accepting another origin (1.3756ms)
+✔ browser resource and stale event requests cannot erase independent action evidence (96.1696ms)
+✔ rejects invalid options and repeated strategies before desktop work (15.2417ms)
+✔ records failures, timeouts and blocked preparations without treating them as fast successes (1.0178ms)
+✔ small sample statistics use real order statistics (4.9146ms)
+✔ refuses incomplete, duplicate and unsupported controls before selecting a target (1.4672ms)
+✔ propagates explicit native failures and rejects screenshots in text-only cases (2.5559ms)
+✔ generated PDF has a text stream and byte-correct cross references (0.4722ms)
+✔ form preconditions precede every write, and every write has full readback (2.4896ms)
+✔ invalid or ambiguous form specs fail before a connection starts (6.9183ms)
+✔ sequential and queued requests reuse one connection and one learning status (3.3454ms)
+✔ learning uses task_id and skips oversized parameters without inventing feedback (1.2506ms)
+✔ partial failure remains recorded and sends no second windows batch or done (0.7264ms)
+✔ closed clients cannot reopen a connection (0.5093ms)
+✔ plain SDK error text is preserved and cannot become a parsing failure (0.6082ms)
+✔ optional scroll uses a uniquely discovered control and respects the batch bound (1.6195ms)
+✔ launch pairs backend, cwd, and UI despite unrelated cwd and stale UI override (198.9181ms)
+✔ an unbuilt checkout fails without starting another copy (161.8374ms)
+✔ generated configs use the paired launcher and explicit checkout (104.1881ms)
+✔ static idle keeps the pet still while real work continues to animate and travel (12.3181ms)
+✔ running yields to typing after arrival, GIFs finish their cycles, and short actions settle (6.1104ms)
+✔ long actions keep tapping; pause and reduced motion use still frames (9.4038ms)
+✔ other Pokémon keep their existing directional sprites (2.1371ms)
+✔ movement lock cancels travel, preserves work animations, and never queues old targets (11.6862ms)
+✔ manual dragging has priority, uses a still pose, and works with movement disabled (4.3254ms)
+✔ movement toggles while held preserve the still pose even during static idle (4.4095ms)
+✔ all companions show work gestures, settle after fast calls, and honor pause and reduced motion (89.1083ms)
+✔ Sanrio packs have distinct transparent directional and action frames with matching pixel dimensions (473.2069ms)
+✔ Sanrio running chooses the matching view rather than sliding a front-facing sprite (19.5115ms)
+✔ Pikachu assets contain transparent, distinct leg and paw poses at the intended speed (37.9397ms)
+✔ authorized full workflow automatically verifies and records after CI (22.9107ms)
+✔ uncertain delivered create reconciles on restart and is never replayed (2.7696ms)
+✔ uncertain undelivered create remains attention rather than retrying (2.9922ms)
+✔ uncertain delivered merge reconciles and verifies base on restart (1.7581ms)
+✔ unconfirmed merge is not replayed even when CI stays green (1.8338ms)
+✔ CI failure, missing evidence, unknown state, and conflicts stop before merge (53.0955ms)
+✔ changed repository, head, base, number, closed state or draft stops mutation (4.0804ms)
+✔ head changed during CI is rejected immediately before merge (0.6368ms)
+✔ read failure before dispatch can resume safely; authorization changes cannot (2.281ms)
+✔ pause, cancellation and deadline leave a resumable journal with no merge (35.1425ms)
+✔ base verification failure never records successful completion (0.8615ms)
+✔ independent readiness reads start concurrently and both settle before any write (0.8183ms)
+✔ authorization and pinned-target validation happen before acquisition (1.3421ms)
+✔ disk store excludes concurrent owners, rejects corruption, and preserves prior journal (30.2195ms)
+✔ GitHub adapter pins merge SHA, sends one mutation on HTTP error, and recognizes CI (1.5297ms)
+✔ overlapping read spans are unioned and initial CI scheduling gaps can recover (0.8103ms)
+✔ hard-crash journal preserves elapsed time when no final checkpoint exists (1.1841ms)
+✔ playback requires progress in the selected content, not merely a watch URL (1.6409ms)
+✔ ads, paused or ended media, and buffering are not verified playback (0.3758ms)
+✔ empty and small run summaries use observed samples without inventing a p95 (1.086ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 989.7399
