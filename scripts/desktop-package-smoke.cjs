@@ -65,15 +65,18 @@ async function main() {
     execFileSync(node, [path.join(appRoot, 'scripts/config.cjs'), '--output', config], {windowsHide: true});
     const generated = JSON.parse(fs.readFileSync(path.join(config, 'claude-desktop.json'))).mcpServers['pokemon-computer'];
     assert.equal(fs.realpathSync(generated.command), fs.realpathSync(node));
-    assert.equal(generated.args[0], path.join(appRoot, 'backend/dist/main.js'));
+    assert.equal(generated.args[0], path.join(appRoot, 'scripts/start-mcp.cjs'));
+    assert(fs.existsSync(generated.args[0]), 'The generated configuration references a missing packaged launcher');
+    assert.equal(generated.cwd, appRoot);
+    assert.equal(generated.env.POKEMON_FRONTEND_DIR, path.join(appRoot, 'frontend'));
     const sdk = path.join(appRoot, 'backend/node_modules/@modelcontextprotocol/sdk/dist/esm/client');
     const {Client} = await import(pathToFileURL(path.join(sdk, 'index.js')).href);
     const {StdioClientTransport} = await import(pathToFileURL(path.join(sdk, 'stdio.js')).href);
     const client = new Client({name: 'desktop-release-smoke', version});
     try {
-      await client.connect(new StdioClientTransport({command: node, args: generated.args, env: {...process.env, POKEMON_UI: 'off'}}));
+      await client.connect(new StdioClientTransport({command: node, args: generated.args, cwd: generated.cwd, env: {...process.env, ...generated.env, POKEMON_UI: 'off'}}));
       assert.equal(client.getServerVersion().version, version);
-      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'excel'] : []), 'learning']);
+      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'research', 'excel'] : []), 'learning']);
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError, 'The packaged MCP server failed its status check');
       for (const pet of ['hello-kitty', 'kuromi']) {

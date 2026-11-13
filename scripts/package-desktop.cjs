@@ -87,7 +87,9 @@ async function main() {
   json(path.join(appRoot, 'frontend/package.json'), {name: 'pokemon-companion', version, main: 'main.js'});
   fs.writeFileSync(path.join(appRoot, 'frontend/main.js'), "require('./build/main/companion/index.js');\n");
   json(path.join(appRoot, 'package.json'), {name: 'pokemon-computer-companion', version, private: true});
-  copy(path.join(root, 'scripts/config.cjs'), path.join(appRoot, 'scripts/config.cjs'));
+  for (const file of ['config.cjs', 'start-mcp.cjs']) {
+    copy(path.join(root, 'scripts', file), path.join(appRoot, 'scripts', file));
+  }
 
   const runtime = path.join(appRoot, 'runtime');
   fs.mkdirSync(runtime, {recursive: true});

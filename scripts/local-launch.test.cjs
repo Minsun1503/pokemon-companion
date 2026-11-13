@@ -27,7 +27,7 @@ test('launch pairs backend, cwd, and UI despite unrelated cwd and stale UI overr
     cwd: os.tmpdir(), env: {...process.env, POKEMON_FRONTEND_DIR: path.join(root, 'old-copy')}, encoding: 'utf8',
   });
   assert.equal(result.status, 0, result.stderr);
-  assert.deepEqual(JSON.parse(result.stdout), {cwd: root, frontend: path.join(root, 'frontend')});
+  assert.deepEqual(JSON.parse(result.stdout), {cwd: fs.realpathSync(root), frontend: path.join(root, 'frontend')});
   assert.match(result.stderr, /Pokémon MCP checkout:/);
 });
 
