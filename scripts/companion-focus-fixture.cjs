@@ -44,6 +44,7 @@ bridge.listen(0, '127.0.0.1', async () => {
   pet.webContents.debugger.attach('1.3');
   await pet.webContents.debugger.sendCommand('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'no-preference'}]});
   if (await pet.webContents.executeJavaScript('matchMedia("(prefers-reduced-motion: reduce)").matches')) throw new Error('Animation fixture requires motion enabled.');
+  await pet.webContents.executeJavaScript(`window.gestureTrace=[];for(const type of ['pointerdown','pointermove','pointerup','pointercancel','gotpointercapture','lostpointercapture'])document.addEventListener(type,event=>{gestureTrace.push({type,buttons:event.buttons,x:event.clientX,y:event.clientY});gestureTrace.splice(0,Math.max(0,gestureTrace.length-20))});window.pokemonAPI.onState(state=>gestureTrace.push({state:state.dragging,paused:state.state.paused}));void 0;`);
   pet.setTitle('Pokemon Focus Overlay');
   input = new BrowserWindow({...screen.getPrimaryDisplay().workArea, frame: false, title: 'Pokemon Focus Input', webPreferences: {contextIsolation: true, nodeIntegration: false}});
   await input.loadURL('data:text/html,' + encodeURIComponent('<!doctype html><title>Pokemon Focus Input</title><button id="test" aria-label="Background button" style="margin:50px;width:180px;height:60px">Background button</button><script>window.keys=0;window.clicks=0;document.addEventListener("keydown",e=>{if(e.key==="F8"){e.preventDefault();keys++}});document.getElementById("test").onclick=()=>clicks++;</script>'));
@@ -54,6 +55,23 @@ bridge.listen(0, '127.0.0.1', async () => {
   server = http.createServer(async (req, res) => {
     try {
       const url = new URL(req.url, 'http://127.0.0.1');
+      if (url.pathname === '/trace') {res.end(JSON.stringify({cursor:screen.getCursorScreenPoint(),trace:await pet.webContents.executeJavaScript('gestureTrace')}));return;}
+      if (url.pathname === '/pointer-point') {
+        const x = Number(url.searchParams.get('x')), y = Number(url.searchParams.get('y'));
+        const bounds = pet.getBounds();
+        if (![x, y].every(Number.isFinite)) throw new Error('Invalid owned pointer point.');
+        // The Node native mouse helper uses virtualized desktop coordinates.
+        res.end(JSON.stringify({x:Math.round(bounds.x+x),y:Math.round(bounds.y+y)}));return;
+      }
+      if (url.pathname === '/movement') {
+        await pet.webContents.executeJavaScript(`window.pokemonAPI.movement(${url.searchParams.get('allowed') === '1'})`);
+      }
+      if (url.pathname === '/resume') await pet.webContents.executeJavaScript('(async()=>{if((await window.pokemonAPI.load()).state.paused)await window.pokemonAPI.pause()})()');
+      if (url.pathname === '/preferences') {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(await fs.readFile(path.join(process.env.POKEMON_FOCUS_FIXTURE_DATA, 'companion-preferences.json'), 'utf8'));
+        return;
+      }
       if (url.pathname === '/action') {
         const selected = url.searchParams.get('pet');
         if (selected) {
@@ -104,7 +122,7 @@ bridge.listen(0, '127.0.0.1', async () => {
       }
       if (url.pathname === '/quit') {res.end('{}'); app.quit(); return;}
       const counts = await input.webContents.executeJavaScript('(() => {const r=document.getElementById("test").getBoundingClientRect();return {keys,clicks,point:{x:r.x+r.width/2,y:r.y+r.height/2}}})()');
-      const petState = await pet.webContents.executeJavaScript('({pet:document.body.dataset.pet,x:document.getElementById("pet-container").getBoundingClientRect().x,y:document.getElementById("pet-container").getBoundingClientRect().y,panel:!document.getElementById("team-panel").hidden,text:document.getElementById("chat-input").value,animation:document.getElementById("pet-container").dataset.animation,source:document.getElementById("pet-image").src,imageReady:document.getElementById("pet-image").complete&&document.getElementById("pet-image").naturalWidth>0,keyboard:getComputedStyle(document.getElementById("work-prop")).display!=="none",mouse:getComputedStyle(document.getElementById("mouse-prop")).display!=="none",scanning:getComputedStyle(document.getElementById("scan-prop")).display!=="none",badge:document.getElementById("state-badge").textContent})');
+      const petState = await pet.webContents.executeJavaScript('({pet:document.body.dataset.pet,x:document.getElementById("pet-container").getBoundingClientRect().x,y:document.getElementById("pet-container").getBoundingClientRect().y,dragging:document.getElementById("pet-container").dataset.dragging==="true",movementAllowed:document.getElementById("movement-toggle").checked,panel:!document.getElementById("team-panel").hidden,text:document.getElementById("chat-input").value,animation:document.getElementById("pet-container").dataset.animation,source:document.getElementById("pet-image").src,imageReady:document.getElementById("pet-image").complete&&document.getElementById("pet-image").naturalWidth>0,keyboard:getComputedStyle(document.getElementById("work-prop")).display!=="none",mouse:getComputedStyle(document.getElementById("mouse-prop")).display!=="none",scanning:getComputedStyle(document.getElementById("scan-prop")).display!=="none",badge:document.getElementById("state-badge").textContent})');
       const bounds = input.getContentBounds();
       const spriteStyle = await pet.webContents.executeJavaScript('({imageAnimation:getComputedStyle(document.getElementById("pet-image")).animationName,containerAnimation:getComputedStyle(document.getElementById("pet-container")).animationName})');
       const point = screen.dipToScreenPoint({x: Math.round(bounds.x + counts.point.x), y: Math.round(bounds.y + counts.point.y)});

@@ -88,6 +88,19 @@ export function registerIpc({
     return profileStore.write({ ...profile, nickname: sanitized })
   })
   ipcMain.handle('settings:load', () => settings)
+  ipcMain.handle('settings:movement', (event, allowed: unknown) => {
+    if (typeof allowed !== 'boolean' || !windowManager.getWindowForSender(event.sender)) return false
+    const previous = settings.pet.movementAllowed
+    settings.pet.movementAllowed = allowed
+    try {
+      fs.writeFileSync(settingsPath, `${JSON.stringify(settings, null, 2)}\n`)
+    } catch {
+      settings.pet.movementAllowed = previous
+      return false
+    }
+    windowManager.broadcast('settings:movement-changed', allowed)
+    return true
+  })
 
   ipcMain.on('chat:pending', (event, pending: boolean) => {
     windowManager.broadcastExcept('chat:pending-changed', { pending: Boolean(pending) }, event.sender)

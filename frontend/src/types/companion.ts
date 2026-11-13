@@ -21,5 +21,8 @@ export interface CompanionSnapshot {
   definition: PetDefinition
   active: boolean
   idleAnimation?: boolean
+  movementAllowed?: boolean
+  dragging?: boolean
+  position?: { x: number; y: number }
   target?: { x: number; y: number }
 }

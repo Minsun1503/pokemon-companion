@@ -43,6 +43,8 @@ interface PetAPI {
   }
   settings: {
     load(): Promise<Settings>
+    setMovement(allowed: boolean): Promise<boolean>
+    onMovementChanged(listener: (allowed: boolean) => void): () => void
   }
   chat: {
     setPending(pending: boolean): void

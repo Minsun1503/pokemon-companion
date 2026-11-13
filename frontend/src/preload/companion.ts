@@ -6,6 +6,14 @@ contextBridge.exposeInMainWorld('pokemonAPI', {
   list: () => ipcRenderer.invoke('companion:list'),
   select: (pet: string) => ipcRenderer.invoke('companion:select', pet),
   pause: () => ipcRenderer.invoke('companion:pause'),
+  movement: (allowed: boolean) => ipcRenderer.invoke('companion:movement', allowed),
+  dragStart: (offset: { x: number; y: number }) => ipcRenderer.send('companion:drag-start', offset),
+  dragStop: () => ipcRenderer.send('companion:drag-stop'),
+  onDragPosition: (listener: (position: { x: number; y: number }) => void) => {
+    const wrapped = (_event: Electron.IpcRendererEvent, position: { x: number; y: number }) => listener(position)
+    ipcRenderer.on('companion:drag-position', wrapped)
+    return () => ipcRenderer.removeListener('companion:drag-position', wrapped)
+  },
   feedback: (satisfaction: 'satisfied' | 'unsatisfied') => ipcRenderer.invoke('companion:feedback', satisfaction),
   quit: () => ipcRenderer.send('companion:quit'),
   panel: (open: boolean) => ipcRenderer.send('companion:panel', open),

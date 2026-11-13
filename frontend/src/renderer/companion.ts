@@ -11,6 +11,10 @@ declare global {
       list(): Promise<(PetSummary & { definition: PetDefinition })[]>
       select(pet: string): Promise<boolean>
       pause(): Promise<boolean>
+      movement(allowed: boolean): Promise<boolean>
+      dragStart(offset: { x: number; y: number }): void
+      dragStop(): void
+      onDragPosition(listener: (position: { x: number; y: number }) => void): () => void
       feedback(satisfaction: 'satisfied' | 'unsatisfied'): Promise<boolean>
       quit(): void
       panel(open: boolean): void
@@ -46,6 +50,10 @@ let previousMessage = ''
 let previousTarget = ''
 let visualActivity = ''
 let hoveringPet = false
+let grab: { pointerId: number; x: number; y: number; petX: number; petY: number; moved: boolean } | undefined
+let suppressClick = false
+let closeOnClick = false
+let previousPosition = ''
 let visualTimer: ReturnType<typeof setTimeout> | undefined
 const log: string[] = []
 const activityLabels: Record<string, string> = {
@@ -210,6 +218,9 @@ function apply(snapshot: CompanionSnapshot): void {
   const changedPet = current?.state.pet !== snapshot.state.pet
   current = snapshot
   const { state, definition } = snapshot
+  if (snapshot.dragging || grab) bubble.hide()
+  petContainer.dataset.dragging = String(Boolean(snapshot.dragging || grab))
+  element<HTMLInputElement>('movement-toggle').checked = snapshot.movementAllowed !== false
   if (pendingChats.has(chatPet) && chatPet === state.pet) {
     for (const entry of Array.from(element('chat-messages').querySelectorAll('.thinking')))
       entry.textContent = state.paused ? 'Computer control is paused.' : state.message || 'Thinking…'
@@ -293,6 +304,14 @@ function apply(snapshot: CompanionSnapshot): void {
     element('active-name').textContent = state.pet
     if (panelView === 'talk') void loadChat()
   }
+  motion?.setMovementAllowed(snapshot.movementAllowed !== false)
+  if (changedPet || snapshot.dragging !== previous?.dragging) motion?.setDragging(Boolean(snapshot.dragging))
+  const positionKey = JSON.stringify(snapshot.position)
+  if (snapshot.active && snapshot.position && (changedPet || positionKey !== previousPosition)) {
+    motion?.setPosition(snapshot.position.x, snapshot.position.y)
+  }
+  previousPosition = positionKey
+  if (grab && previous?.dragging && !snapshot.dragging) finishGrab()
   if (actionChanged) {
     const animation =
       !snapshot.active || !state.visible || ['paused', 'success', 'error'].includes(activity)
@@ -303,8 +322,8 @@ function apply(snapshot: CompanionSnapshot): void {
   const targetKey = JSON.stringify(snapshot.target)
   if (snapshot.active && snapshot.target && (targetKey !== previousTarget || changedPet)) {
     motion?.moveTo(snapshot.target.x, snapshot.target.y)
-    previousTarget = targetKey
   }
+  previousTarget = snapshot.active ? targetKey : ''
   updateActivityBadge()
   element('task-title').textContent = state.paused ? 'Taking a break' : state.task || activityLabels[activity]
   const message = state.paused ? 'Computer control paused. Resume when you’re ready.' : state.message
@@ -329,7 +348,7 @@ function apply(snapshot: CompanionSnapshot): void {
   }
   if (message && (message !== previousMessage || changedPet)) {
     previousMessage = message
-    if (snapshot.active && panel.hidden) {
+    if (snapshot.active && panel.hidden && !snapshot.dragging && !grab) {
       bubble.show(message, state.task ? 15000 : 6000)
       motion?.clampToViewport()
     }
@@ -346,6 +365,11 @@ function apply(snapshot: CompanionSnapshot): void {
 }
 
 window.pokemonAPI.onState(apply)
+window.pokemonAPI.onDragPosition((position) => {
+  if (!current?.active || (!current.dragging && !grab)) return
+  motion?.setPosition(position.x, position.y)
+  previousPosition = JSON.stringify(position)
+})
 async function bootstrap(): Promise<void> {
   apply(await window.pokemonAPI.load())
   const pets = await window.pokemonAPI.list()
@@ -372,8 +396,14 @@ async function bootstrap(): Promise<void> {
   )
   if (current) apply(current)
 }
-petContainer.addEventListener('click', () => {
-  if (!panel.hidden) {
+petContainer.addEventListener('click', (event) => {
+  const shouldClose = event.detail > 0 && closeOnClick
+  closeOnClick = false
+  if (suppressClick) {
+    suppressClick = false
+    return
+  }
+  if (shouldClose || !panel.hidden) {
     closePanel()
     return
   }
@@ -383,6 +413,51 @@ petContainer.addEventListener('click', () => {
   setView('actions')
   window.pokemonAPI.panel(true)
 })
+function finishGrab(): void {
+  if (!grab) return
+  const previousGrab = grab
+  grab = undefined
+  const position = motion?.position
+  suppressClick =
+    previousGrab.moved ||
+    Boolean(position && Math.hypot(position.x - previousGrab.petX, position.y - previousGrab.petY) >= 4)
+  if (petContainer.hasPointerCapture(previousGrab.pointerId)) petContainer.releasePointerCapture(previousGrab.pointerId)
+  motion?.setDragging(false)
+  petContainer.dataset.dragging = 'false'
+  window.pokemonAPI.dragStop()
+}
+petContainer.addEventListener('pointerdown', (event) => {
+  if (event.button !== 0 || !event.isPrimary || grab) return
+  suppressClick = false
+  closeOnClick = !panel.hidden
+  const bounds = petContainer.getBoundingClientRect()
+  grab = {
+    pointerId: event.pointerId,
+    x: event.clientX,
+    y: event.clientY,
+    petX: bounds.left,
+    petY: bounds.top,
+    moved: false,
+  }
+  closePanel()
+  bubble.hide()
+  motion?.setDragging(true)
+  petContainer.dataset.dragging = 'true'
+  petContainer.setPointerCapture(event.pointerId)
+  window.pokemonAPI.ignoreMouse(false)
+  window.pokemonAPI.dragStart({ x: event.clientX - bounds.left, y: event.clientY - bounds.top })
+  event.preventDefault()
+})
+petContainer.addEventListener('pointermove', (event) => {
+  if (!grab || event.pointerId !== grab.pointerId) return
+  if (Math.hypot(event.clientX - grab.x, event.clientY - grab.y) >= 4) grab.moved = true
+  if (event.buttons === 0) finishGrab()
+})
+petContainer.addEventListener('pointerup', (event) => {
+  if (event.pointerId === grab?.pointerId) finishGrab()
+})
+petContainer.addEventListener('pointercancel', finishGrab)
+petContainer.addEventListener('lostpointercapture', finishGrab)
 petContainer.addEventListener('mouseenter', () => {
   hoveringPet = true
   motion?.stopWalk()
@@ -416,6 +491,18 @@ document.addEventListener('keydown', (event) => {
 element('pause-button').addEventListener('click', () => {
   void window.pokemonAPI.pause()
 })
+element('movement-toggle').addEventListener('change', async () => {
+  const toggle = element<HTMLInputElement>('movement-toggle')
+  toggle.disabled = true
+  try {
+    const accepted = await window.pokemonAPI.movement(toggle.checked)
+    if (!accepted) toggle.checked = current?.movementAllowed !== false
+  } catch {
+    toggle.checked = current?.movementAllowed !== false
+  } finally {
+    toggle.disabled = false
+  }
+})
 for (const [id, satisfaction] of [
   ['feedback-good', 'satisfied'],
   ['feedback-bad', 'unsatisfied'],
@@ -433,6 +520,10 @@ for (const [id, satisfaction] of [
   })
 }
 document.addEventListener('mousemove', (event) => {
+  if (grab || current?.dragging) {
+    window.pokemonAPI.ignoreMouse(false)
+    return
+  }
   const inside = [petContainer, ...(!panel.hidden ? [panel] : [])].some((entry) => {
     const bounds = entry.getBoundingClientRect()
     return (
@@ -444,7 +535,9 @@ document.addEventListener('mousemove', (event) => {
   })
   window.pokemonAPI.ignoreMouse(!inside)
 })
-document.addEventListener('mouseleave', () => window.pokemonAPI.ignoreMouse(true))
+document.addEventListener('mouseleave', () => {
+  if (!grab && !current?.dragging) window.pokemonAPI.ignoreMouse(true)
+})
 window.addEventListener('resize', () => {
   motion?.clampToViewport()
   positionPanel()

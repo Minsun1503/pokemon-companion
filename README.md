@@ -144,6 +144,9 @@ The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visua
 ## Desktop controls
 
 - Left-click the Pokémon to open **Switch** and **Exit**.
+- Hold the left mouse button on the Pokémon, drag it to a new location, and release to drop it. It uses a still pose while held; a drag does not open the menu.
+- Toggle **Allow movement** in the action menu or tray to enable or stop roaming and following tool targets. Work animations still play in place, and you can always reposition it manually. The standalone pet has the same toggle in its chat panel.
+- The MCP companion remembers your movement preference and last dropped position after restarting. Dragging cancels its previous travel target. With movement enabled, new tool actions may move it again.
 - **Switch** opens all nine companions; selecting one changes the companion immediately.
 - **Talk** is deferred and disabled. Its implementation and existing saved conversations are retained for later.
 - **Exit** closes the companion and stops further computer actions.
@@ -152,7 +155,9 @@ The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visua
 - Use the tray’s **Summon at cursor** to reposition the Pokémon.
 - Quit the companion to stop further computer actions. Restart the MCP connection to restore it.
 
-The overlay stays above other windows and follows action targets with an offset. Clicks pass through during an individual computer action; the menu is available between actions. Opening it during a task pauses further computer control until you resume. Screenshots and coordinates use the computer backend’s image space. This retains the backend’s existing primary-display capture behavior; it does not add full multi-monitor capture.
+The overlay stays above other windows and follows action targets with an offset when movement is allowed. Clicks pass through during an individual computer action; the menu and dragging are available between actions. Opening it or grabbing the Pokémon during a task pauses further computer control until you resume. Screenshots and coordinates use the computer backend’s image space. This retains the backend’s existing primary-display capture behavior; it does not add full multi-monitor capture.
+
+`npm run test:companion-drag` exercises native mouse capture, drop behavior, movement toggling, repeated targets, and persistence in an owned Electron fixture. `node scripts/companion-focus-smoke.mjs` checks animation frames and native focus/click-through. Physical dragging between monitors remains untested.
 
 The companion does not start a chat worker or contact a model provider. Give computer-control tasks to your connected MCP client. The dormant Talk source and existing conversations remain available for future development.
 
