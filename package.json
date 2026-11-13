@@ -14,6 +14,7 @@
     "workflow:client": "node scripts/workflow-client.mjs",
     "test:workflow-client": "node --test scripts/workflow-controller.test.mjs",
     "benchmark:workflow-controller": "node scripts/workflow-controller-benchmark.mjs",
+    "benchmark:tool-guidance": "node scripts/tool-guidance-benchmark.mjs",
     "start": "node scripts/start-mcp.cjs",
     "test:local-launch": "node --test scripts/local-launch.test.cjs",
     "demo": "node scripts/demo.mjs",
