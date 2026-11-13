@@ -84,7 +84,7 @@ class IdentityFixture {
             }
             var state = new { clicks = clicks, text = field.Text, nested = nested.Text, name = button.AccessibleName, sequence = sequence,
                 window_id = form.Handle.ToInt64().ToString(), bounds = form.Bounds.ToString(), working_area = Screen.FromControl(form).WorkingArea.ToString(),
-                window_state = form.WindowState.ToString(), button_visible = button.Visible, nested_visible = nested.Visible };
+                window_state = form.WindowState.ToString(), button_visible = button.Visible, button_enabled = button.Enabled, nested_visible = nested.Visible };
             string path = Path.Combine(folder, "state.json");
             File.WriteAllText(path, new JavaScriptSerializer().Serialize(state));
         };

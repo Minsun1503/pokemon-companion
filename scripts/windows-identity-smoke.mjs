@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {execFileSync, spawn} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
-import {mkdtemp, readFile, realpath, rm, writeFile} from 'node:fs/promises';
+import {mkdtemp, readFile, realpath, rename, rm, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -55,15 +55,33 @@ async function nativeFixture() {
   execFileSync(resolve(process.env.SystemRoot, 'System32/WindowsPowerShell/v1.0/powershell.exe'), ['-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'RemoteSigned', '-File', script, resolve(root, 'scripts/identity-fixture.cs'), executable], {windowsHide: true, stdio: 'inherit'});
   const title = 'Identity Native ' + randomUUID().slice(0, 8);
   const running = launch(executable, [scratch, title]);
+  let stateReady = false;
   const state = async () => {
-    running.check();
-    try {return JSON.parse(await readFile(resolve(scratch, 'state.json'), 'utf8'));}
-    catch (error) {if (error.code === 'ENOENT' || error instanceof SyntaxError) return {}; throw error;}
+    const deadline = performance.now() + 2000;
+    for (;;) {
+      running.check();
+      try {
+        const value = JSON.parse(await readFile(resolve(scratch, 'state.json'), 'utf8'));
+        stateReady = true;
+        return value;
+      } catch (error) {
+        if (error.code === 'ENOENT' && !stateReady) return {};
+        // The fixture timer publishes state concurrently. Wait for complete
+        // JSON through partial writes/locks; never fabricate an empty state or
+        // replay a command. Persistently corrupt/unreadable state still fails.
+        if (!(error instanceof SyntaxError || ['ENOENT', 'EBUSY', 'EPERM', 'EACCES'].includes(error.code)) || performance.now() >= deadline) throw error;
+        await delay(10);
+      }
+    }
   };
   await waitFor(state, value => typeof value.clicks === 'number', 'Native identity fixture did not become ready.');
   return {kind: 'WinForms', title, child: running.child, state, async command(command) {
     const before = await waitFor(state, value => typeof value.sequence === 'number', 'Missing native state.');
-    await writeFile(resolve(scratch, 'command'), command);
+    // Publish only a complete command. The UI timer must never consume an
+    // empty/truncated file and acknowledge a command that was not applied.
+    const pending = resolve(scratch, 'command.pending');
+    await writeFile(pending, command);
+    await rename(pending, resolve(scratch, 'command'));
     return waitFor(state, value => value.sequence > before.sequence, 'Native fixture command did not finish.');
   }};
 }
@@ -163,7 +181,9 @@ try {
       await rejectsBeforeInput({action: 'invoke', ...reference(button)}, 'ACTION_NOT_SUPPORTED');
       assert.equal(await clickCount(fixture), 1, 'Disabled control dispatched an input.');
       await fixture.command('enable');
-      await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].actions?.includes('invoke'), 'Enabled button was not exposed.');
+      await waitFor(fixture.state, state => state.button_enabled === true, 'Fixture did not enable the button.');
+      // The compact UI projection emits enabled only when it is false.
+      await waitFor(() => inspect('Original item'), ui => ui.nodes.length === 1 && ui.nodes[0].enabled !== false && ui.nodes[0].actions?.includes('invoke'), 'Enabled button was not exposed.');
     }
     const fieldChanges = fixture.kind === 'WinForms' ? ['automation-id', 'description', 'role'] : ['automation-id', 'role'];
     for (const changed of fieldChanges) {
