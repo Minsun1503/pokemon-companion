@@ -9,3 +9,4 @@ release/
 config/codex.toml
 config/claude-desktop.json
 *.log
+workflow-jobs/
