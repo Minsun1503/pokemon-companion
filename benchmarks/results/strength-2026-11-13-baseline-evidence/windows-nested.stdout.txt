@@ -1,0 +1,13 @@
+atomic: first workflow 3234.1 ms
+batch: first workflow 3259.8 ms
+Verified 5/20 warm pairs
+Verified 10/20 warm pairs
+Verified 15/20 warm pairs
+Verified 20/20 warm pairs
+┌─────────┬───────┬───────────┬─────────┬───────────────────┐
+│ (index) │ calls │ median_ms │ p95_ms  │ result_text_chars │
+├─────────┼───────┼───────────┼─────────┼───────────────────┤
+│ atomic  │ 6     │ '526.8'   │ '555.4' │ 1536              │
+│ batch   │ 1     │ '535.1'   │ '576.3' │ 501               │
+└─────────┴───────┴───────────┴─────────┴───────────────────┘
+Saved verified benchmark: benchmarks\results\strength-2026-11-13-baseline-evidence\windows-nested.json

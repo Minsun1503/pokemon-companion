@@ -26,7 +26,9 @@ The repository's [shared instructions](../backend/src/learning/instructions.ts) 
 
 **Priority:** first performance experiment. Small implementation scope, with a required behavior comparison.
 
-**Implemented locally.** Shared guidance now measures 3,406 UTF-8 bytes, down 44.7% from 6,163. The observed eight-tool expansion decreases from 49,296 to 27,240 characters. Added a reproducible benchmark and an actual MCP initialization test with a 3,500-byte budget. Tool schemas/annotations are unchanged, static checks passed, and 394 tests passed with one skipped. This establishes text reduction and implementation regression coverage; a controlled model-selection/latency comparison remains outstanding. See [measurements and reproduction steps](tool-guidance.md).
+**Implemented locally.** The initial shortened guidance measured 3,406 UTF-8 bytes, down 44.7% from 6,163. The observed eight-tool expansion decreased from 49,296 to 27,240 characters. Added a reproducible benchmark and an actual MCP initialization test with a 3,500-byte budget. Tool schemas/annotations are unchanged, static checks passed, and 394 tests passed with one skipped. This establishes text reduction and implementation regression coverage; a controlled model-selection/latency comparison remains outstanding. See [measurements and reproduction steps](tool-guidance.md).
+
+The later [repository assessment](repository-strength.md) restored explicit wording required by a separate client-contract smoke test, now enforced in CI. Current guidance is 3,425 bytes (44.4% below baseline), and that contract check passes; the initial 3,406-byte measurement is retained as historical evidence.
 
 ## 2. Complete mixed-DPI and multi-monitor support
 

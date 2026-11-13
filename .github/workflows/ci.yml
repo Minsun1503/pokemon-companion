@@ -26,6 +26,7 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: npm test
+      - run: npm run test:learning:contract
       - run: npm run test:work-animation
       - run: npm run test:companion-drag
       - run: npm run test:windows:contract

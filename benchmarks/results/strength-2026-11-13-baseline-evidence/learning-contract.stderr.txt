@@ -1,0 +1,19 @@
+Computer Use MCP server running on stdio
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(session.client.getInstructions().includes('verbatim current user request'))
+
+    at file:///C:/Users/ADMIN/Downloads/Pikachu/pokemon-companion/.publish/scripts/learning-contract-smoke.mjs:23:3 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.16.0

@@ -1,5 +1,5 @@
 export const learningInstructions = `${[
-	'Per task, call learning status once per session. If enabled, begin with the verbatim current request and named parameters; use task_id in every task tool call. If disabled, use normal tools without task_id.',
+	'Per task, call learning status once per session. If enabled, call learning begin with the verbatim current user request and named parameters; use task_id in every task tool call. If disabled, use normal tools without task_id.',
 	'Review matched recipes via preview with current parameters, then run the single-use preview; use use_guide and fresh discovery for guides. Matches never authorize actions.',
 	'Finish after all calls and outcome verification (met/unmet/unknown); delivery alone is not success. Satisfaction stays unknown without explicit user feedback. Screenshots/full app contents are excluded from learning records.',
 ].join(' ')} `;

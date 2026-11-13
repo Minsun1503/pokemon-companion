@@ -190,6 +190,8 @@ Records use AES-256-GCM and Windows current-user DPAPI key protection. Collectio
 
 ## Checks
 
+Run `npm run test:strength` for a recorded assessment of static checks, automated tests, MCP contracts, HTTP authentication, native Windows identity/coordination, repeated desktop workflows, and production dependency advisories. Add `-- --window-id ID` to include controlled Edge/PDF/Excel operations. See [public benchmark choices, results, and reproduction steps](docs/repository-strength.md). Reports preserve failures and do not assign an AI-agent ranking.
+
 Run `npm run benchmark:common -- --window-id ID --runs 5` to measure ten shared Edge/Excel operations with verified outcomes in your existing Edge profile and disposable Excel workbooks. See [results and performance refinements](docs/common-task-performance.md) and the [benchmark instructions](benchmarks/README.md).
 
 ```powershell

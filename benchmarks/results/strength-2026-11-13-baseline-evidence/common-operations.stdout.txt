@@ -1,0 +1,121 @@
+warmup window_discovery baseline: 15.7 ms, 1 calls, verified
+warmup window_discovery optimized: 23.4 ms, 1 calls, verified
+window_discovery baseline: 13.4 ms, 1 calls, verified
+window_discovery optimized: 17.0 ms, 1 calls, verified
+window_discovery optimized: 14.5 ms, 1 calls, verified
+window_discovery baseline: 14.1 ms, 1 calls, verified
+window_discovery baseline: 14.4 ms, 1 calls, verified
+window_discovery optimized: 14.4 ms, 1 calls, verified
+window_discovery optimized: 13.9 ms, 1 calls, verified
+window_discovery baseline: 13.6 ms, 1 calls, verified
+window_discovery baseline: 14.2 ms, 1 calls, verified
+window_discovery optimized: 14.3 ms, 1 calls, verified
+warmup control_discovery baseline: 93.2 ms, 1 calls, verified
+warmup control_discovery optimized: 130.3 ms, 1 calls, verified
+control_discovery baseline: 92.5 ms, 1 calls, verified
+control_discovery optimized: 127.7 ms, 1 calls, verified
+control_discovery optimized: 150.4 ms, 1 calls, verified
+control_discovery baseline: 93.8 ms, 1 calls, verified
+control_discovery baseline: 89.8 ms, 1 calls, verified
+control_discovery optimized: 122.9 ms, 1 calls, verified
+control_discovery optimized: 123.0 ms, 1 calls, verified
+control_discovery baseline: 91.9 ms, 1 calls, verified
+control_discovery baseline: 91.2 ms, 1 calls, verified
+control_discovery optimized: 126.3 ms, 1 calls, verified
+warmup enter_text_verify baseline: 402.1 ms, 4 calls, verified
+warmup enter_text_verify optimized: 429.2 ms, 2 calls, verified
+enter_text_verify baseline: 394.3 ms, 4 calls, verified
+enter_text_verify optimized: 399.7 ms, 2 calls, verified
+enter_text_verify optimized: 418.7 ms, 2 calls, verified
+enter_text_verify baseline: 392.9 ms, 4 calls, verified
+enter_text_verify baseline: 399.3 ms, 4 calls, verified
+enter_text_verify optimized: 399.5 ms, 2 calls, verified
+enter_text_verify optimized: 378.5 ms, 2 calls, verified
+enter_text_verify baseline: 410.6 ms, 4 calls, verified
+enter_text_verify baseline: 413.8 ms, 4 calls, verified
+enter_text_verify optimized: 386.5 ms, 2 calls, verified
+warmup search_and_open baseline: 1606.9 ms, 10 calls, verified
+warmup search_and_open optimized: 1353.8 ms, 4 calls, verified
+search_and_open baseline: 1609.4 ms, 10 calls, verified
+search_and_open optimized: 1320.9 ms, 4 calls, verified
+search_and_open optimized: 1293.2 ms, 4 calls, verified
+search_and_open baseline: 1595.9 ms, 10 calls, verified
+search_and_open baseline: 1566.8 ms, 10 calls, verified
+search_and_open optimized: 1297.5 ms, 4 calls, verified
+search_and_open optimized: 1306.8 ms, 4 calls, verified
+search_and_open baseline: 1572.7 ms, 10 calls, verified
+search_and_open baseline: 1542.4 ms, 10 calls, verified
+search_and_open optimized: 1315.0 ms, 4 calls, verified
+warmup button_result baseline: 620.5 ms, 3 calls, verified
+warmup button_result optimized: 612.9 ms, 2 calls, verified
+button_result baseline: 614.5 ms, 3 calls, verified
+button_result optimized: 603.8 ms, 2 calls, verified
+button_result optimized: 587.2 ms, 2 calls, verified
+button_result baseline: 638.0 ms, 3 calls, verified
+button_result baseline: 629.7 ms, 3 calls, verified
+button_result optimized: 609.9 ms, 2 calls, verified
+button_result optimized: 677.4 ms, 2 calls, verified
+button_result baseline: 613.9 ms, 3 calls, verified
+button_result baseline: 614.8 ms, 3 calls, verified
+button_result optimized: 606.6 ms, 2 calls, verified
+warmup document_passages baseline: 548.5 ms, 2 calls, verified
+warmup document_passages optimized: 281.8 ms, 1 calls, verified
+document_passages baseline: 551.4 ms, 2 calls, verified
+document_passages optimized: 275.5 ms, 1 calls, verified
+document_passages optimized: 274.4 ms, 1 calls, verified
+document_passages baseline: 558.1 ms, 2 calls, verified
+document_passages baseline: 549.9 ms, 2 calls, verified
+document_passages optimized: 274.5 ms, 1 calls, verified
+document_passages optimized: 267.6 ms, 1 calls, verified
+document_passages baseline: 520.0 ms, 2 calls, verified
+document_passages baseline: 529.6 ms, 2 calls, verified
+document_passages optimized: 279.4 ms, 1 calls, verified
+warmup url_open baseline: 1000.4 ms, 8 calls, verified
+warmup url_open optimized: 1064.1 ms, 5 calls, verified
+url_open baseline: 1048.0 ms, 8 calls, verified
+url_open optimized: 1006.5 ms, 5 calls, verified
+url_open optimized: 1036.3 ms, 5 calls, verified
+url_open baseline: 1031.0 ms, 8 calls, verified
+url_open baseline: 1046.6 ms, 8 calls, verified
+url_open optimized: 1015.2 ms, 5 calls, verified
+url_open optimized: 1038.2 ms, 5 calls, verified
+url_open baseline: 1010.6 ms, 8 calls, verified
+url_open baseline: 1017.6 ms, 8 calls, verified
+url_open optimized: 1022.9 ms, 5 calls, verified
+warmup pdf_open_read baseline: 1359.2 ms, 10 calls, verified
+warmup pdf_open_read optimized: 1299.4 ms, 7 calls, verified
+pdf_open_read baseline: 1316.8 ms, 10 calls, verified
+pdf_open_read optimized: 1268.4 ms, 7 calls, verified
+pdf_open_read optimized: 1311.8 ms, 7 calls, verified
+pdf_open_read baseline: 1319.0 ms, 10 calls, verified
+pdf_open_read baseline: 1256.0 ms, 10 calls, verified
+pdf_open_read optimized: 1288.6 ms, 7 calls, verified
+pdf_open_read optimized: 1293.0 ms, 7 calls, verified
+pdf_open_read baseline: 1313.8 ms, 10 calls, verified
+pdf_open_read baseline: 1316.8 ms, 10 calls, verified
+pdf_open_read optimized: 1292.3 ms, 7 calls, verified
+warmup excel_read baseline: 523.8 ms, 10 calls, verified
+warmup excel_read optimized: 72.3 ms, 1 calls, verified
+excel_read baseline: 477.7 ms, 10 calls, verified
+excel_read optimized: 66.6 ms, 1 calls, verified
+excel_read optimized: 67.4 ms, 1 calls, verified
+excel_read baseline: 421.9 ms, 10 calls, verified
+excel_read baseline: 415.4 ms, 10 calls, verified
+excel_read optimized: 62.9 ms, 1 calls, verified
+excel_read optimized: 65.2 ms, 1 calls, verified
+excel_read baseline: 470.5 ms, 10 calls, verified
+excel_read baseline: 424.3 ms, 10 calls, verified
+excel_read optimized: 66.6 ms, 1 calls, verified
+warmup excel_write_calculate_save baseline: 1272.5 ms, 12 calls, verified
+warmup excel_write_calculate_save optimized: 729.9 ms, 3 calls, verified
+excel_write_calculate_save baseline: 1286.1 ms, 12 calls, verified
+excel_write_calculate_save optimized: 745.2 ms, 3 calls, verified
+excel_write_calculate_save optimized: 822.8 ms, 3 calls, verified
+excel_write_calculate_save baseline: 1264.3 ms, 12 calls, verified
+excel_write_calculate_save baseline: 1201.5 ms, 12 calls, verified
+excel_write_calculate_save optimized: 681.7 ms, 3 calls, verified
+excel_write_calculate_save optimized: 795.0 ms, 3 calls, verified
+excel_write_calculate_save baseline: 1158.3 ms, 12 calls, verified
+excel_write_calculate_save baseline: 1161.3 ms, 12 calls, verified
+excel_write_calculate_save optimized: 710.3 ms, 3 calls, verified
+Saved C:\Users\ADMIN\Downloads\Pikachu\pokemon-companion\.publish\benchmarks\results\strength-2026-11-13-baseline-evidence\common-operations.json

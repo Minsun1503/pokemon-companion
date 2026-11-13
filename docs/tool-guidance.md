@@ -18,6 +18,8 @@ The tool schemas and annotations have the same SHA-256 hash before and after: `0
 
 Machine-readable evidence: [baseline](../benchmarks/results/tool-guidance-baseline-2026-11-13.json) and [after](../benchmarks/results/tool-guidance-after-2026-11-13.json).
 
+The subsequent [repository assessment](repository-strength.md) exposed an exact-wording expectation in the separate client-instruction smoke check. Restoring explicit `call learning begin` and `verbatim current user request` brings current guidance to **3,425 bytes** (44.4% below baseline), still below the 3,500-byte cap. The contract check passes and is now included in CI. The earlier measurements above are retained; [the verified measurement](../benchmarks/results/tool-guidance-verified-2026-11-13.json) records this follow-up.
+
 ## Reproduce
 
 From the source checkout, install dependencies using the normal setup procedure, then run:
