@@ -1,7 +1,7 @@
 // Live, unmodified Ollama model smoke tests. No mocked model and no scripted tool choices.
 import {createRequire} from 'node:module';
 import {spawn} from 'node:child_process';
-import {mkdtemp,readFile,writeFile,rm,realpath} from 'node:fs/promises';
+import {mkdtemp,readFile,writeFile,rename,rm,realpath} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {tmpdir} from 'node:os';
 import {fileURLToPath} from 'node:url';
@@ -21,27 +21,44 @@ if(process.argv[3]==='--worker') {
   const {PetRegistry}=require('../frontend/build/main/services/pet-registry.js');
   const native=new CompanionAgentTools(resolve(root,'frontend'),profile,()=>false);
   const trace=[],requests=[];const baseFetch=globalThis.fetch;
+  const started=performance.now();let reply;
+  const checkpoint=async()=>{
+    const target=resolve(profile,'result.json'),temporary=target+'.tmp';
+    await writeFile(temporary,JSON.stringify({id,prompt:prepared.prompt,reply,elapsed_ms:performance.now()-started,trace,requests},null,2));
+    await rename(temporary,target);
+  };
   globalThis.fetch=async(url,options)=>{
-    const started=performance.now();const response=await baseFetch(url,options);
+    const requestStarted=performance.now();let response,request;
     if(String(url).endsWith('/api/chat')) {
-      const body=JSON.parse(options.body);const result=await response.clone().json();
-      requests.push({elapsed_ms:performance.now()-started,status:response.status,model:body.model,options:body.options,tool_names:body.tools.map(t=>t.function.name),prompt_eval_count:result.prompt_eval_count,prompt_eval_duration:result.prompt_eval_duration,eval_count:result.eval_count,eval_duration:result.eval_duration,load_duration:result.load_duration,total_duration:result.total_duration,message:result.message});
+      const body=JSON.parse(options.body);
+      request={status:'pending',model:body.model,options:body.options,tool_names:body.tools.map(t=>t.function.name)};
+      requests.push(request);await checkpoint();
+    }
+    try {response=await baseFetch(url,options);}
+    catch(error) {
+      if(request) {Object.assign(request,{elapsed_ms:performance.now()-requestStarted,status:'failed',error:error.message});await checkpoint();}
+      throw error;
+    }
+    if(request) {
+      const result=await response.clone().json();
+      Object.assign(request,{elapsed_ms:performance.now()-requestStarted,status:response.status,prompt_eval_count:result.prompt_eval_count,prompt_eval_duration:result.prompt_eval_duration,eval_count:result.eval_count,eval_duration:result.eval_duration,load_duration:result.load_duration,total_duration:result.total_duration,message:result.message});
+      await checkpoint();
     }
     return response;
   };
   const tools={forPet:pet=>{
     const bound=native.forPet(pet);
     return {...bound,call:async(name,args)=>{
-      const start=performance.now();let result;
-      try {result=await bound.call(name,args);trace.push({name,args,result,elapsed_ms:performance.now()-start});return result;}
-      catch(error){trace.push({name,args,error:error.message,elapsed_ms:performance.now()-start});throw error;}
+      const start=performance.now(),entry={name,args,status:'pending'};trace.push(entry);await checkpoint();
+      try {const result=await bound.call(name,args);Object.assign(entry,{status:'completed',result,elapsed_ms:performance.now()-start});await checkpoint();return result;}
+      catch(error){Object.assign(entry,{status:'failed',error:error.message,elapsed_ms:performance.now()-start});await checkpoint();throw error;}
     }};
   }};
   process.once('SIGTERM',()=>{native.close();process.exit(143);});
-  const started=performance.now();let reply;
+  await checkpoint();
   try {reply=await new CompanionChat(resolve(root,'frontend'),profile,new PetRegistry(resolve(root,'frontend/pets')),tools).reply('pikachu',prepared.prompt);}
   finally {native.close();}
-  await writeFile(resolve(profile,'result.json'),JSON.stringify({id,prompt:prepared.prompt,reply,elapsed_ms:performance.now()-started,trace,requests},null,2));
+  await checkpoint();
 } else {
   const version=await (await fetch(endpoint+'/api/version')).json();
   const tags=await (await fetch(endpoint+'/api/tags')).json();const tag=tags.models.find(row=>row.name===model);assert(tag,'Pull qwen3:4b before running this test.');
@@ -56,9 +73,15 @@ if(process.argv[3]==='--worker') {
       await writeFile(resolve(profile,'setting.json'),JSON.stringify(settings));
       const start=performance.now(),child=spawn(process.execPath,[fileURLToPath(import.meta.url),fixture,'--worker',id,profile],{windowsHide:true,stdio:['ignore','ignore','pipe']});
       let diagnostic='';child.stderr.on('data',data=>{diagnostic=(diagnostic+data).slice(-2000);});
-      const timer=setTimeout(()=>child.kill(),report.deadline_ms);
+      let deadlineExceeded=false;
+      const timer=setTimeout(()=>{deadlineExceeded=true;child.kill();},report.deadline_ms);
       const code=await new Promise((resolve,reject)=>{child.once('exit',resolve);child.once('error',reject);});clearTimeout(timer);
-      try {record=JSON.parse(await readFile(resolve(profile,'result.json'),'utf8'));}catch{record={id,status:code===null?'timeout':'failed',error:diagnostic||'Worker exited without a result',elapsed_ms:performance.now()-start};}
+      try {record=JSON.parse(await readFile(resolve(profile,'result.json'),'utf8'));}catch{record={id,error:diagnostic||'Worker exited without a result',elapsed_ms:performance.now()-start};}
+      record.worker_exit_code=code;
+      if(deadlineExceeded||code!==0) {
+        record.status=deadlineExceeded?'timeout':'failed';record.error=diagnostic||'Worker stopped before completing the task';
+        record.elapsed_ms=performance.now()-start;
+      }
       record.fixture=await get('/verify');
       const evidence=JSON.stringify(record.trace||[]),summary=record.reply?.content||'',observed=record.fixture.observation;
       const readFacts=evidence.includes('37 cases')&&evidence.includes('48.75 USD')&&summary.includes('37')&&summary.includes('48.75');
