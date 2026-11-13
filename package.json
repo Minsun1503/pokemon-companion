@@ -24,6 +24,7 @@
     "test:windows:identity": "node scripts/windows-identity-smoke.mjs",
     "test:windows:coordination": "node scripts/windows-coordination-smoke.mjs",
     "test:work-animation": "node scripts/work-animation-smoke.mjs",
+    "test:companion-drag": "node scripts/companion-drag-smoke.mjs",
     "test:course": "node scripts/course-smoke.mjs",
     "test:excel": "node scripts/excel-smoke.mjs",
     "benchmark:windows": "node scripts/windows-benchmark.mjs",

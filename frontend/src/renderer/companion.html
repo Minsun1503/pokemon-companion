@@ -10,7 +10,7 @@
   <div id="bubble" role="status" aria-live="polite"></div>
   <button id="pet-container" type="button" aria-label="Open Pokémon actions" aria-expanded="false" aria-controls="team-panel">
     <span class="pet-aura"></span>
-    <img id="pet-image" alt="Pikachu">
+    <img id="pet-image" alt="Pikachu" draggable="false">
     <span id="work-prop" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span id="mouse-prop" aria-hidden="true"></span>
     <span id="scan-prop" aria-hidden="true"></span>
@@ -24,6 +24,8 @@
       <button id="close-panel" class="round-button" type="button" aria-label="Close panel">×</button>
     </header>
     <div id="action-view">
+      <label class="movement-toggle"><input id="movement-toggle" type="checkbox"> Allow movement</label>
+      <p class="drag-hint">Grab and drag your partner to move it.</p>
       <div id="learning-feedback" hidden>
         <p>Did the last task meet your needs?</p>
         <button id="feedback-good" type="button">Yes</button>

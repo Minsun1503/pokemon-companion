@@ -28,7 +28,12 @@ export function getInitialPetPosition(
   const requestedSpawnX = Number(launchParams.get('spawnX'))
   const requestedSpawnY = Number(launchParams.get('spawnY'))
 
-  if (Number.isFinite(requestedSpawnX) && Number.isFinite(requestedSpawnY)) {
+  if (
+    launchParams.has('spawnX') &&
+    launchParams.has('spawnY') &&
+    Number.isFinite(requestedSpawnX) &&
+    Number.isFinite(requestedSpawnY)
+  ) {
     return {
       x: Math.max(SPAWN_MARGIN, Math.min(window.innerWidth - petWidth - SPAWN_MARGIN, requestedSpawnX - petWidth / 2)),
       y: Math.max(SPAWN_MARGIN, Math.min(window.innerHeight - petHeight - SPAWN_MARGIN, requestedSpawnY)),
@@ -59,6 +64,8 @@ export class PetMotionController {
   private jumpTick = 0
   private jumpCooldown = 0
   private target: { x: number; y: number } | null = null
+  private movementAllowed = true
+  private dragging = false
   private requestedAnimation: string | undefined
   private animationTime = 0
   private readonly reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')
@@ -100,6 +107,7 @@ export class PetMotionController {
   }
 
   moveTo(x: number, y: number): void {
+    if (!this.movementAllowed || this.dragging) return
     this.target = {
       x: Math.max(0, Math.min(window.innerWidth - this.width, x)),
       y: Math.max(this.getMinY(), Math.min(this.getMaxY(), y)),
@@ -108,6 +116,26 @@ export class PetMotionController {
 
   dispose(): void {
     clearInterval(this.timer)
+  }
+
+  setMovementAllowed(allowed: boolean): void {
+    if (this.movementAllowed === allowed) return
+    this.movementAllowed = allowed
+    if (!allowed) {
+      this.target = null
+      this.jumpTick = 0
+      this.stopWalk()
+      this.setFrame('idle', 'down', 0)
+    }
+  }
+
+  setDragging(dragging: boolean): void {
+    if (this.dragging === dragging) return
+    this.dragging = dragging
+    this.target = null
+    this.jumpTick = 0
+    this.stopWalk()
+    this.setFrame(dragging ? 'dragging' : 'idle', 'down', 0)
   }
 
   setDirectionDown(): void {
@@ -140,6 +168,10 @@ export class PetMotionController {
 
   private tick(): void {
     if (document.hidden) return
+    if (this.dragging) {
+      this.setFrame('dragging', 'down', 0)
+      return
+    }
     const activity = this.opts.getAnimation?.() ?? 'idle'
     if (
       this.opts.staticIdle?.() &&
@@ -157,11 +189,12 @@ export class PetMotionController {
       this.playAnimation(undefined, 0)
     }
     const reducedMotion = Boolean(this.reducedMotion?.matches)
-    if (reducedMotion && this.target) {
+    if (reducedMotion && this.movementAllowed && this.target) {
       this.setPosition(this.target.x, this.target.y)
       this.target = null
     }
-    const canWalk = animation !== 'paused' && !reducedMotion && (this.opts.canWalk() || this.target !== null)
+    const canWalk =
+      this.movementAllowed && animation !== 'paused' && !reducedMotion && (this.opts.canWalk() || this.target !== null)
     const previousX = this.x
     const previousY = this.y
 
@@ -242,9 +275,7 @@ export class PetMotionController {
   }
 
   private canOccupyPosition(x: number, y: number): boolean {
-    const centerX = x + this.width / 2
-    const centerY = y + this.height / 2
-    return centerX >= 0 && centerX <= window.innerWidth && y >= this.getMinY() && centerY <= window.innerHeight
+    return x >= 0 && x <= Math.max(0, window.innerWidth - this.width) && y >= this.getMinY() && y <= this.getMaxY()
   }
 
   private getMinY(): number {

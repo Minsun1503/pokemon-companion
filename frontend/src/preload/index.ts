@@ -46,6 +46,8 @@ contextBridge.exposeInMainWorld('petAPI', {
   },
   settings: {
     load: (): Promise<Settings> => ipcRenderer.invoke('settings:load'),
+    setMovement: (allowed: boolean): Promise<boolean> => ipcRenderer.invoke('settings:movement', allowed),
+    onMovementChanged: (listener: (allowed: boolean) => void) => subscribe('settings:movement-changed', listener),
   },
   chat: {
     setPending: (pending: boolean): void => {

@@ -18,7 +18,7 @@ body.pet-inactive #chat-window {
 #pet-container {
   position: fixed;
   bottom: 10px;
-  cursor: pointer;
+  cursor: grab;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,6 +32,21 @@ body.pet-inactive #chat-window {
   image-rendering: pixelated;
   transform-origin: center bottom;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+}
+#pet-container[data-animation="dragging"] {
+  cursor: grabbing;
+}
+.movement-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: #555;
+  flex-shrink: 0;
+}
+.movement-toggle input {
+  accent-color: var(--pet-accent);
 }
 #pet-image:hover {
   filter: drop-shadow(0 4px 14px var(--pet-accent-glow));

@@ -101,6 +101,47 @@ test('other Pokémon keep their existing directional sprites', () => {
   assert.match(image.src, /^data:image\/png/);
 });
 
+test('movement lock cancels travel, preserves work animations, and never queues old targets', () => {
+  for (const reduced of [false, true]) {
+    const f = fixture('pikachu', reduced);
+    f.motion.moveTo(500, 500);
+    f.motion.setMovementAllowed(false);
+    f.motion.playAnimation('typing', Infinity);
+    for (let n = 0; n < 60; n++) {f.motion.moveTo(900, 700); f.tick();}
+    assert.deepEqual({...f.motion.position}, {x: 20, y: 30});
+    assert.equal(f.container.dataset.animation, 'typing');
+    f.motion.setMovementAllowed(true); f.tick();
+    assert.deepEqual({...f.motion.position}, {x: 20, y: 30});
+  }
+});
+
+test('manual dragging has priority, uses a still pose, and works with movement disabled', () => {
+  const f = fixture('pikachu', false, true);
+  f.motion.playAnimation('typing', 1200);
+  f.motion.moveTo(500, 500);
+  f.motion.setMovementAllowed(false);
+  f.motion.setDragging(true);
+  f.motion.setPosition(300, 400);
+  for (let n = 0; n < 100; n++) {f.motion.moveTo(500, 500); f.tick();}
+  assert.deepEqual({...f.motion.position}, {x: 300, y: 400});
+  assert.equal(f.container.dataset.animation, 'dragging');
+  assert.ok(!f.image.src.endsWith('.gif'));
+  f.motion.setDragging(false); f.tick();
+  assert.equal(f.container.dataset.animation, 'typing');
+  assert.equal(f.motion.isPerformingAction, true);
+});
+
+test('movement toggles while held preserve the still pose even during static idle', () => {
+  const f = fixture('pikachu', false, true);
+  f.motion.setDragging(true);
+  f.motion.setMovementAllowed(false);
+  for (let n = 0; n < 60; n++) f.tick();
+  assert.equal(f.container.dataset.animation, 'dragging');
+  assert.ok(!f.image.src.endsWith('.gif'));
+  f.motion.setDragging(false); f.tick();
+  assert.equal(f.container.dataset.animation, 'idle');
+});
+
 test('all companions show work gestures, settle after fast calls, and honor pause and reduced motion', () => {
   for (const {id: pet} of registry.list()) {
     const {motion, container, tick, setActivity} = fixture(pet);

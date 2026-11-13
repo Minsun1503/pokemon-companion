@@ -3,6 +3,7 @@ import {spawn, execFileSync} from 'node:child_process';
 import {mkdtemp, realpath, rm} from 'node:fs/promises';
 import os from 'node:os';
 import {dirname, resolve} from 'node:path';
+import {createRequire} from 'node:module';
 import {setTimeout as delay} from 'node:timers/promises';
 import {connect} from './client.mjs';
 
@@ -14,6 +15,7 @@ delete env.ELECTRON_RUN_AS_NODE;
 const child = spawn(resolve(session.root, 'frontend/node_modules/electron/dist/electron.exe'), [resolve(session.root, 'scripts/companion-focus-fixture.cjs'), '--force-renderer-accessibility'], {env, windowsHide: true, stdio: ['ignore', 'pipe', 'inherit']});
 let url, originalCursor;
 const api = async args => JSON.parse((await session.call('windows', args)).content[0].text);
+const {mouse} = createRequire(import.meta.url)('../backend/node_modules/@nut-tree-fork/nut-js');
 const fixture = async path => {
   const response = await fetch(url + path, {signal: AbortSignal.timeout(5000)});
   const state = await response.json();
@@ -56,11 +58,21 @@ try {
   });
   const input = (await api({action: 'get_windows', query: 'Pokemon Focus Input'})).windows;
   assert.equal(input.length, 1);
+  if (!(await fixture('/state')).focused) {
+    assert.equal(hitWindow((await fixture('/state')).point), input[0].id);
+    await mouse.leftClick(); // Owned fixture gesture satisfies Windows' foreground restriction.
+    await delay(100);
+  }
   await api({action: 'batch', steps: [
     {action: 'get_ui', window_id: input[0].id, query: 'Background button', control_type: 'Button'},
     {action: 'focus', target_step: 0},
   ]});
-  const before = await fixture('/state');
+  let before;
+  for (let attempt = 0; attempt < 30; attempt++) {
+    before = await fixture('/state');
+    if (before.focused) break;
+    await delay(50);
+  }
   assert.equal(before.focused, true);
   for (let run = 0; run < 4; run += 1) {
     await fixture('/move?x=' + (run % 2 ? 900 : 600) + '&y=450');
@@ -72,8 +84,8 @@ try {
   }
   const after = await fixture('/state');
   assert.notEqual(after.x, before.x, 'The pet must actually move during the input checks.');
-  assert.equal(after.keys, 4);
-  assert.equal(after.clicks, 4);
+  assert.equal(after.keys - before.keys, 4);
+  assert.equal(after.clicks - before.clicks, 4);
   const covered = await fixture('/cover-bubble');
   assert.equal(hitWindow(covered.point), input[0].id, 'Decorative speech bubbles must pass clicks through to the app below.');
   assert.equal(after.petFocusable, false, 'Only the open Pokémon panel may accept keyboard focus.');
@@ -134,16 +146,15 @@ try {
   await api({action: 'batch', steps: [
     {action: 'get_ui', window_id: overlay[0].id, query: 'Open Pokémon actions', control_type: 'Button'},
     {action: 'expand', target_step: 0},
-    {action: 'wait_for', window_id: overlay[0].id, query: 'Talk to Pokémon', control_type: 'Button'},
-    {action: 'invoke', target_step: 2},
-    {action: 'wait_for', window_id: overlay[0].id, query: 'Message your Pokémon', control_type: 'Edit'},
-    {action: 'focus', target_step: 4},
+    {action: 'wait_for', window_id: overlay[0].id, query: 'Allow movement', control_type: 'CheckBox'},
+    {action: 'focus', target_step: 2},
   ]});
   assert.equal((await fixture('/state')).petFocusable, true);
-  assert.ok(!(await waitAnimation('paused')).source.endsWith('.gif'), 'Opening Talk during a task pauses the companion.');
-  await session.call('computer', {action: 'key', text: '7', window_id: overlay[0].id});
+  assert.ok(!(await waitAnimation('paused')).source.endsWith('.gif'), 'Opening actions during a task pauses the companion.');
+  const allowed = (await fixture('/state')).movementAllowed;
+  await session.call('computer', {action: 'key', text: 'space', window_id: overlay[0].id});
   await delay(100);
-  assert.equal((await fixture('/state')).text, '7', 'Opening Talk must still allow keyboard input.');
+  assert.equal((await fixture('/state')).movementAllowed, !allowed, 'The movement checkbox must accept keyboard input.');
   await api({action: 'batch', steps: [
     {action: 'get_ui', window_id: overlay[0].id, query: 'Close panel', control_type: 'Button'},
     {action: 'invoke', target_step: 0},
@@ -153,7 +164,7 @@ try {
   assert.equal(closed.panel, false);
   assert.equal(closed.petFocused, false);
   assert.equal(closed.petFocusable, false);
-  console.log('PASS: all nine companions showed checking, typing and clicking props and labels after fast calls; moving companions retained background focus, keyboard and button input; native hit-testing passed through the overlay; Pikachu GIFs animated; Talk accepted input and closing released focus. No desktop screenshots; animation frames were captured from the test renderer.');
+  console.log('PASS: all nine companions showed checking, typing and clicking props and labels after fast calls; moving companions retained background focus, keyboard and button input; native hit-testing passed through the overlay; Pikachu GIFs animated; movement checkbox accepted keyboard input and closing released focus. No desktop screenshots; animation frames were captured from the test renderer.');
 } finally {
   if (url) await fetch(url + '/quit').catch(() => {});
   child.kill();

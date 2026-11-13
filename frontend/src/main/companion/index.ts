@@ -1,4 +1,4 @@
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import net from 'node:net'
 import path from 'node:path'
 import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tray } from 'electron'
@@ -24,6 +24,90 @@ let paused = false
 let clipboardBackup: Electron.Data | undefined
 let pastedText: string | undefined
 let target: { x: number; y: number } | undefined
+let movementAllowed = true
+let idleAnimation = process.env.POKEMON_IDLE_ANIMATION === 'on'
+let placed: { displayId: number; x: number; y: number } | undefined
+let dragOwner: PetWindow | undefined
+let dragTimer: ReturnType<typeof setInterval> | undefined
+let dragOffset = { x: 0, y: 0 }
+const preferencesPath = path.join(app.getPath('userData'), 'companion-preferences.json')
+
+function savePreferences(): void {
+  mkdirSync(path.dirname(preferencesPath), { recursive: true })
+  const temporary = `${preferencesPath}.${process.pid}.tmp`
+  writeFileSync(temporary, `${JSON.stringify({ movementAllowed, idleAnimation, placed })}\n`)
+  renameSync(temporary, preferencesPath)
+}
+
+function updateMovementAllowed(allowed: boolean): boolean {
+  const previous = { movementAllowed, idleAnimation }
+  movementAllowed = allowed
+  idleAnimation = allowed
+  try {
+    savePreferences()
+  } catch (error) {
+    movementAllowed = previous.movementAllowed
+    idleAnimation = previous.idleAnimation
+    console.error(error)
+    return false
+  }
+  target = undefined
+  refresh()
+  return true
+}
+
+function stopDrag(): void {
+  if (!dragOwner) return
+  clearInterval(dragTimer)
+  dragTimer = undefined
+  dragOwner = undefined
+  for (const win of windows.values()) {
+    shapeCache.delete(win.id)
+    if (!win.isDestroyed()) win.setIgnoreMouseEvents(true, { forward: true })
+  }
+  try {
+    savePreferences()
+  } catch (error) {
+    console.error(error)
+  }
+  refresh()
+}
+
+function updateDragPosition(): void {
+  if (!dragOwner || dragOwner.isDestroyed() || capturing || !state.visible) {
+    stopDrag()
+    return
+  }
+  const cursor = screen.getCursorScreenPoint()
+  const display = screen.getDisplayNearestPoint(cursor)
+  const win = windows.get(display.id)
+  if (!win || win.isDestroyed()) return
+  const bounds = win.getBounds()
+  const previousPlaced = placed
+  placed = {
+    displayId: display.id,
+    x: Math.max(0, Math.min(bounds.width - 100, cursor.x - bounds.x - dragOffset.x)),
+    y: Math.max(0, Math.min(bounds.height - 118, cursor.y - bounds.y - dragOffset.y)),
+  }
+  const changedDisplay = activeDisplayId !== display.id
+  activeDisplayId = display.id
+  if (
+    !changedDisplay &&
+    previousPlaced?.displayId === placed.displayId &&
+    previousPlaced.x === placed.x &&
+    previousPlaced.y === placed.y
+  )
+    return
+  // Keep the captured source window alive across monitor handoff. The target
+  // paints freely but remains click-through until the source releases capture.
+  if (process.platform === 'win32' && shapeCache.get(win.id) !== 'drag') {
+    win.setShape([{ x: 0, y: 0, width: bounds.width, height: bounds.height }])
+    shapeCache.set(win.id, 'drag')
+  }
+  if (win !== dragOwner) win.setIgnoreMouseEvents(true, { forward: true })
+  if (changedDisplay) refresh()
+  else win.webContents.send('companion:drag-position', { x: placed.x, y: placed.y })
+}
 let state: CompanionState = {
   pet: 'pikachu',
   activity: 'idle',
@@ -43,7 +127,10 @@ function snapshot(displayId: number): CompanionSnapshot {
     state: { ...state, paused, activity: paused ? 'paused' : state.activity },
     definition: registry.load(state.pet),
     active: displayId === activeDisplayId,
-    idleAnimation: process.env.POKEMON_IDLE_ANIMATION === 'on',
+    idleAnimation,
+    movementAllowed,
+    dragging: Boolean(dragOwner),
+    position: placed?.displayId === displayId ? { x: placed.x, y: placed.y } : undefined,
     target,
   }
 }
@@ -51,7 +138,7 @@ function snapshot(displayId: number): CompanionSnapshot {
 function refresh(): void {
   for (const [id, win] of windows) {
     if (win.isDestroyed()) continue
-    if (capturing || !state.visible || id !== activeDisplayId) win.hide()
+    if (capturing || !state.visible || (id !== activeDisplayId && win !== dragOwner)) win.hide()
     else win.showInactive()
     if (!win.webContents.isLoadingMainFrame()) win.webContents.send('companion:state', snapshot(id))
     if (!paused && state.interactionLocked) {
@@ -100,13 +187,21 @@ function selectPet(pet: unknown): boolean {
 
 function updateTray(): void {
   if (!tray) return
-  const key = `${state.pet}:${paused}:${state.activity}`
+  const key = `${state.pet}:${paused}:${state.activity}:${movementAllowed}`
   if (key === trayKey) return
   trayKey = key
   tray.setToolTip(`Pokémon • ${state.pet} • ${paused ? 'Paused' : state.activity}`)
   tray.setContextMenu(
     Menu.buildFromTemplate([
       { label: paused ? 'Resume computer control' : 'Pause computer control', click: () => togglePause() },
+      {
+        label: 'Allow movement',
+        type: 'checkbox',
+        checked: movementAllowed,
+        click: (item) => {
+          if (!updateMovementAllowed(item.checked)) item.checked = movementAllowed
+        },
+      },
       {
         label: 'Choose Pokémon',
         submenu: registry.list().map((pet) => ({
@@ -122,7 +217,17 @@ function updateTray(): void {
           const cursor = screen.getCursorScreenPoint()
           const display = screen.getDisplayNearestPoint(cursor)
           activeDisplayId = display.id
-          target = { x: cursor.x - display.workArea.x + 30, y: cursor.y - display.workArea.y + 30 }
+          target = undefined
+          placed = {
+            displayId: display.id,
+            x: cursor.x - display.workArea.x - 50,
+            y: cursor.y - display.workArea.y - 59,
+          }
+          try {
+            savePreferences()
+          } catch (error) {
+            console.error(error)
+          }
           state.visible = true
           refresh()
         },
@@ -134,6 +239,7 @@ function updateTray(): void {
 }
 
 async function syncDisplays(): Promise<void> {
+  stopDrag()
   const displays = screen.getAllDisplays()
   for (const display of displays) {
     const existing = windows.get(display.id)
@@ -169,6 +275,7 @@ async function syncDisplays(): Promise<void> {
   }
   if (!windows.has(activeDisplayId)) {
     activeDisplayId = screen.getPrimaryDisplay().id
+    if (placed) placed.displayId = activeDisplayId
     target = undefined
   }
   refresh()
@@ -182,7 +289,19 @@ app
     if (!Number.isInteger(port) || port <= 0 || !token)
       throw new Error('Launch this companion through the Pokémon MCP server.')
     app.dock?.hide()
-    activeDisplayId = screen.getPrimaryDisplay().id
+    try {
+      const saved = JSON.parse(readFileSync(preferencesPath, 'utf8'))
+      if (typeof saved.movementAllowed === 'boolean') movementAllowed = saved.movementAllowed
+      if (typeof saved.idleAnimation === 'boolean') idleAnimation = saved.idleAnimation
+      if (saved.placed && [saved.placed.displayId, saved.placed.x, saved.placed.y].every(Number.isFinite))
+        placed = saved.placed
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') console.error(error)
+    }
+    activeDisplayId = screen.getAllDisplays().some((display) => display.id === placed?.displayId)
+      ? (placed?.displayId as number)
+      : screen.getPrimaryDisplay().id
+    if (placed) placed.displayId = activeDisplayId
     tray = new Tray(nativeImage.createFromPath(path.join(rootDir, 'assets/trayTemplate.png')))
     ipcMain.handle('companion:load', (event) =>
       snapshot([...windows].find(([, win]) => win.webContents === event.sender)?.[0] ?? activeDisplayId),
@@ -192,6 +311,45 @@ app
     )
     ipcMain.handle('companion:select', (_event, pet: unknown) => selectPet(pet))
     ipcMain.handle('companion:pause', () => togglePause())
+    ipcMain.handle('companion:movement', (event, allowed: unknown) => {
+      if (typeof allowed !== 'boolean' || ![...windows.values()].some((win) => win.webContents === event.sender))
+        return false
+      return updateMovementAllowed(allowed)
+    })
+    ipcMain.on('companion:drag-start', (event, offset: { x?: unknown; y?: unknown }) => {
+      const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
+      if (
+        !win ||
+        win.isDestroyed() ||
+        win.displayId !== activeDisplayId ||
+        capturing ||
+        !state.visible ||
+        typeof offset?.x !== 'number' ||
+        typeof offset.y !== 'number' ||
+        !Number.isFinite(offset.x) ||
+        !Number.isFinite(offset.y) ||
+        offset.x < 0 ||
+        offset.x > 100 ||
+        offset.y < 0 ||
+        offset.y > 118
+      )
+        return
+      stopDrag()
+      if (!paused && (state.task || state.interactionLocked)) togglePause()
+      dragOwner = win
+      dragOffset = { x: offset.x, y: offset.y }
+      target = undefined
+      win.setIgnoreMouseEvents(false)
+      const bounds = win.getBounds()
+      if (process.platform === 'win32') win.setShape([{ x: 0, y: 0, width: bounds.width, height: bounds.height }])
+      shapeCache.set(win.id, 'drag')
+      updateDragPosition()
+      refresh()
+      dragTimer = setInterval(updateDragPosition, 16)
+    })
+    ipcMain.on('companion:drag-stop', (event) => {
+      if (dragOwner?.webContents === event.sender) stopDrag()
+    })
     ipcMain.handle('companion:feedback', (event, satisfaction: unknown) => {
       const trusted = [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender)
       if (
@@ -226,6 +384,7 @@ app
     ipcMain.handle('companion:chat-send', () => ({ ok: false, error: 'Talk is currently disabled.' }))
     ipcMain.on('companion:ignore-mouse', (event, ignore: unknown) => {
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
+      if (dragOwner) return
       const busy = !paused && Boolean(state.interactionLocked)
       win?.setIgnoreMouseEvents(ignore !== false || busy, { forward: true })
     })
@@ -233,6 +392,7 @@ app
       if (process.platform !== 'win32' || !Array.isArray(regions) || regions.length > 3) return
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
       if (!win || win.isDestroyed()) return
+      if (dragOwner) return
       if (regions.length === 0 || win.displayId !== activeDisplayId) {
         win.setIgnoreMouseEvents(true, { forward: true })
         return
@@ -313,6 +473,7 @@ app
               if (command.kind === 'state') {
                 if (command.lock_only) {
                   state.interactionLocked = Boolean(command.state?.interactionLocked)
+                  if (!paused && state.interactionLocked) stopDrag()
                   for (const win of windows.values()) {
                     if (!win.isDestroyed() && !paused && state.interactionLocked)
                       win.setIgnoreMouseEvents(true, { forward: true })
@@ -328,6 +489,8 @@ app
                 const interactionLocked = state.interactionLocked
                 state = { ...command.state, paused, ...(command.cosmetic ? { interactionLocked } : {}) }
                 if (
+                  movementAllowed &&
+                  !dragOwner &&
                   Array.isArray(command.coordinate) &&
                   command.coordinate.length === 2 &&
                   command.coordinate.every(Number.isFinite)
@@ -359,6 +522,7 @@ app
                 } else throw new Error('Invalid paste command.')
               } else if (command.kind === 'capture') {
                 capturing = Boolean(command.hidden)
+                if (capturing) stopDrag()
                 refresh()
                 // Give the desktop compositor time to remove the overlay before the screenshot.
                 if (capturing) await new Promise((resolve) => setTimeout(resolve, 120))
@@ -386,6 +550,7 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  clearInterval(dragTimer)
   for (const pending of pendingFeedback.values()) {
     clearTimeout(pending.timer)
     pending.resolve(false)

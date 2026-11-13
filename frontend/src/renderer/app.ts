@@ -75,6 +75,28 @@ async function bootstrap(): Promise<void> {
     getMinY: () => bubbleController.getRequiredAnchorTop(),
     onPositionApplied: () => bubbleController.updatePosition(),
   })
+  let movementAllowed = settings.pet.movementAllowed !== false
+  const movementToggle = getElement('movement-toggle') as HTMLInputElement
+  movementToggle.checked = movementAllowed
+  petMotion.setMovementAllowed(movementAllowed)
+  window.petAPI.settings.onMovementChanged((allowed) => {
+    movementAllowed = allowed
+    movementToggle.checked = allowed
+    petMotion.setMovementAllowed(allowed)
+  })
+  movementToggle.addEventListener('change', async () => {
+    movementToggle.disabled = true
+    try {
+      if (await window.petAPI.settings.setMovement(movementToggle.checked)) {
+        movementAllowed = movementToggle.checked
+        petMotion.setMovementAllowed(movementAllowed)
+      } else movementToggle.checked = movementAllowed
+    } catch {
+      movementToggle.checked = movementAllowed
+    } finally {
+      movementToggle.disabled = false
+    }
+  })
   const showBubble = (text: string, duration?: number): void => {
     bubbleController.show(text, duration)
     petMotion.clampToViewport()
@@ -293,6 +315,7 @@ async function bootstrap(): Promise<void> {
     const stateY = typeof state.y === 'number' && Number.isFinite(state.y) ? state.y : currentPosition.y
     petMotion.setPosition(stateX, stateY)
     isDragging = Boolean(state.dragging)
+    petMotion.setDragging(isDragging)
     clickThreshold = !isDragging
     updateChatPos()
     if (!isDragging) {
@@ -329,6 +352,7 @@ async function bootstrap(): Promise<void> {
   })
 
   window.petAPI.pet.onDragStop(() => {
+    petMotion.setDragging(false)
     setMouseIgnore(true)
     if (!isPetActive) {
       return
@@ -401,6 +425,7 @@ async function bootstrap(): Promise<void> {
   })
 
   document.addEventListener('mouseup', (event) => {
+    petMotion.setDragging(false)
     if (!pendingPetDrag) {
       return
     }
@@ -416,10 +441,12 @@ async function bootstrap(): Promise<void> {
   })
 
   petContainer.addEventListener('mousedown', (event) => {
+    if (event.button !== 0) return
     clickThreshold = true
     const petRect = petContainer.getBoundingClientRect()
     petMotion.setDirectionDown()
     petMotion.stopWalk()
+    petMotion.setDragging(true)
     setMouseIgnore(false)
     const chatRect = chatOpen ? chatWindow.getBoundingClientRect() : null
     pendingPetDrag = {

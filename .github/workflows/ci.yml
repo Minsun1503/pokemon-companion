@@ -27,6 +27,7 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm run test:work-animation
+      - run: npm run test:companion-drag
       - run: npm run test:windows:contract
       - name: Check identity on three fresh WinForms and Electron fixtures
         run: |
