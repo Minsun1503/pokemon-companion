@@ -359,6 +359,80 @@ public static partial class PokemonWindowsAutomation {
         }
         return result;
     }
+    public static object FindTextRange(string snapshotId, int id, string query, int context, bool ignoreCase) {
+        var result = (Dictionary<string, object>)FindTextRanges(snapshotId, id, new string[] { query }, context, ignoreCase);
+        return ((List<object>)result["results"])[0];
+    }
+    public static object FindTextRanges(string snapshotId, int id, string[] queries, int context, bool ignoreCase) {
+        if (queries == null || queries.Length < 1 || queries.Length > 8 || context < 0 || context > 1000) throw Rejected("INVALID_ARGS", "Invalid research text range bounds.");
+        foreach (var query in queries) if (String.IsNullOrEmpty(query) || query.Length > 200) throw Rejected("INVALID_ARGS", "Invalid research query.");
+        var element = Target(snapshotId, id);
+        if (element.Current.IsPassword || element.Current.ControlType != ControlType.Document) throw Rejected("ACTION_NOT_SUPPORTED", "Research requires a non-password Document.");
+        var pattern = (TextPattern)element.GetCurrentPattern(TextPattern.Pattern);
+        var range = pattern.DocumentRange;
+        var results = new List<object>();
+        string fallback = null;
+        foreach (var query in queries) results.Add(SearchTextRange(range, query, context, ignoreCase, ref fallback));
+        return Obj("results", results, "all_queries_returned", true, "atomic_document_snapshot", false);
+    }
+    static object SearchTextRange(System.Windows.Automation.Text.TextPatternRange range, string query, int context, bool ignoreCase, ref string fallback) {
+        string text = "";
+        bool found = false, sourceTruncated = false;
+        string method = "native_range";
+        string fallbackReason = null;
+        try {
+            if (fallback != null) {
+                method = "bounded_full_text_fallback";
+                fallbackReason = "shared_full_text_fallback";
+            } else {
+            System.Windows.Automation.Text.TextPatternRange match;
+            using (Profile("text_range_find")) match = range.FindText(query, false, ignoreCase);
+            if (match != null) {
+                var comparison = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+                if (!String.Equals(match.GetText(query.Length + 1), query, comparison)) {
+                    fallbackReason = "inconsistent_match_range";
+                    throw new NotSupportedException("Provider returned an inconsistent match range.");
+                }
+                found = true;
+                using (Profile("text_range_extract")) {
+                    var excerpt = match.Clone();
+                    if (context > 0) {
+                        excerpt.MoveEndpointByUnit(System.Windows.Automation.Text.TextPatternRangeEndpoint.Start, System.Windows.Automation.Text.TextUnit.Character, -context);
+                        excerpt.MoveEndpointByUnit(System.Windows.Automation.Text.TextPatternRangeEndpoint.End, System.Windows.Automation.Text.TextUnit.Character, context);
+                    }
+                    text = excerpt.GetText(query.Length + 2 * context + 1) ?? "";
+                    if (text.IndexOf(query, comparison) < 0) {
+                        fallbackReason = "inconsistent_excerpt_range";
+                        throw new NotSupportedException("Provider excerpt omitted the matched phrase.");
+                    }
+                }
+            }
+            }
+        } catch (NotSupportedException) {
+            method = "bounded_full_text_fallback";
+            if (fallbackReason == null) fallbackReason = "unsupported_text_range";
+            found = false;
+            text = "";
+        }
+        if (method == "bounded_full_text_fallback") {
+            if (fallback == null) fallback = range.GetText(1000001) ?? "";
+            var full = fallback;
+            sourceTruncated = full.Length > 1000000;
+            if (sourceTruncated) full = full.Substring(0, 1000000);
+            int position = full.IndexOf(query, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            if (position >= 0) {
+                found = true;
+                int start = Math.Max(0, position - context), end = Math.Min(full.Length, position + query.Length + context);
+                text = full.Substring(start, end - start);
+            }
+        }
+        if (text.Length > 0 && Char.IsLowSurrogate(text[0])) text = text.Substring(1);
+        if (text.Length > 0 && Char.IsHighSurrogate(text[text.Length - 1])) text = text.Substring(0, text.Length - 1);
+        string digest;
+        using (var hash = SHA256.Create()) digest = BitConverter.ToString(hash.ComputeHash(Encoding.Unicode.GetBytes(text))).Replace("-", "").ToLowerInvariant();
+        return Obj("found", found, "text", text, "method", method, "fallback_reason", fallbackReason, "scope", "first_accessible_match", "source_truncated", sourceTruncated,
+            "excerpt_sha256", digest, "full_document_version", false);
+    }
     public static object Act(string snapshotId, int id, string action, string text, string direction) {
         using (Profile("act_inclusive")) {
             var element = Target(snapshotId, id);

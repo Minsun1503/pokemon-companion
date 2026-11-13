@@ -22,6 +22,9 @@ export type DesktopRequest = {
 	text_length?: number;
 	expected_version?: string | undefined;
 	required_text?: string | undefined;
+	context_chars?: number;
+	queries?: string[];
+	ignore_case?: boolean;
 	workbook_name?: string;
 	sheet?: string;
 	range?: string;

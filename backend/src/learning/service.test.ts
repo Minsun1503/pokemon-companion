@@ -98,6 +98,87 @@ describe('efficient local model', () => {
 });
 
 describe('local learning and secure reuse', () => {
+	it('distinguishes requested actions and explicit negation from text to enter', async () => {
+		const {learning} = await fixture();
+		const task = await learning.begin('Type the invoice field', parameters);
+		await learning.record(task.id, 'windows', {steps: plan}, success, 1);
+		await learning.finish(task.id, 'met', 'Observed');
+		await learning.feedback(task.id, 'satisfied', 'explicit_user_report');
+		const recipe = (await learning.suggest(task.query) as {recipe_id: string}[])[0]!;
+		for (const query of ['Read the invoice field', 'Delete the invoice field', 'Do not type the invoice field', 'Don\'t type the invoice field', 'Đừng nhập invoice field', 'Read the invoice field and type a note']) {
+			expect(await learning.suggest(query)).toEqual([]);
+			const current = await learning.begin(query, parameters);
+			await expect(learning.preview(current.id, recipe.recipe_id, parameters)).rejects.toThrow('match');
+		}
+
+		expect(await learning.suggest('Type the invoice field with text "do not type"')).toHaveLength(1);
+		expect(await learning.suggest('Nhập invoice field')).toHaveLength(1);
+	});
+	it('remembers a rejected phrasing after restart without suppressing successful phrasing, and corrects changed feedback', async () => {
+		const {learning, directory, key} = await fixture();
+		for (let index = 0; index < 3; index++) {
+			const task = await learning.begin('Type the invoice field', parameters);
+			await learning.record(task.id, 'windows', {steps: plan}, success, 1);
+			await learning.finish(task.id, 'met', 'Observed');
+			await learning.feedback(task.id, 'satisfied', 'explicit_user_report');
+		}
+
+		const competitor = plan.map((step) => step.action === 'get_ui' ? {...step, query: 'Inventory field'} : step);
+		const other = await learning.begin('Type the inventory field', parameters);
+		await learning.record(other.id, 'windows', {steps: competitor}, success, 1);
+		await learning.finish(other.id, 'met', 'Observed another field');
+		await learning.feedback(other.id, 'satisfied', 'explicit_user_report');
+
+		const query = 'Type the invoice field quickly';
+		const recipe = (await learning.suggest(query) as {recipe_id: string}[])[0]!;
+		const current = await learning.begin(query, parameters);
+		const preview = await learning.preview(current.id, recipe.recipe_id, parameters);
+		await learning.consume(current.id, preview.preview_id);
+		await learning.record(current.id, 'windows', {steps: plan}, success, 1);
+		await learning.finish(current.id, 'met', 'Task completed but user rejected its use here');
+		await learning.feedback(current.id, 'unsatisfied', 'explicit_user_report');
+		expect(await learning.suggest(query)).toEqual([]);
+		expect((await learning.suggest('Type the invoice field'))[0]).toMatchObject({recipe_id: recipe.recipe_id});
+		await learning.close();
+		const restored = new LocalLearning(directory, key);
+		opened.push(restored);
+		expect(await restored.suggest(query)).toEqual([]);
+		expect((await restored.suggest('Type the invoice field'))[0]).toMatchObject({recipe_id: recipe.recipe_id});
+		const before = (await restored.stats()).model.examples;
+		await restored.feedback(current.id, 'unsatisfied', 'explicit_user_report');
+		expect((await restored.stats()).model.examples).toBe(before);
+		await restored.feedback(current.id, 'satisfied', 'explicit_user_report');
+		expect((await restored.suggest(query))[0]).toMatchObject({recipe_id: recipe.recipe_id});
+	});
+	it('checks guide matching and invalidates an issued preview after new rejection feedback', async () => {
+		const {learning} = await fixture();
+		for (let index = 0; index < 3; index++) {
+			const task = await learning.begin('Type a note', parameters);
+			await learning.record(task.id, 'windows', {steps: plan}, success, 1);
+			await learning.finish(task.id, 'met', 'Observed');
+			await learning.feedback(task.id, 'satisfied', 'explicit_user_report');
+		}
+
+		const recipe = (await learning.suggest('Type a note') as {recipe_id: string}[])[0]!;
+		const pending = await learning.begin('Type a note', parameters);
+		const issued = await learning.preview(pending.id, recipe.recipe_id, parameters);
+		const rejected = await learning.begin('Type a note', parameters);
+		const next = await learning.preview(rejected.id, recipe.recipe_id, parameters);
+		await learning.consume(rejected.id, next.preview_id);
+		await learning.record(rejected.id, 'windows', {steps: plan}, success, 1);
+		await learning.finish(rejected.id, 'met', 'Observed');
+		await learning.feedback(rejected.id, 'unsatisfied', 'explicit_user_report');
+		await expect(learning.consume(pending.id, issued.preview_id)).rejects.toThrow('no longer');
+		const guide = await learning.begin('Read the inventory report', {});
+		await learning.record(guide.id, 'research', {action: 'find_text'}, jsonResult({ok: true}), 1);
+		await learning.finish(guide.id, 'met', 'Observed');
+		await learning.feedback(guide.id, 'satisfied', 'explicit_user_report');
+		const suggestion = (await learning.suggest(guide.query) as {recipe_id: string}[])[0]!;
+		for (const query of ['Do not read the inventory report', 'Delete the inventory report']) {
+			const task = await learning.begin(query, {});
+			await expect(learning.useGuide(task.id, suggestion.recipe_id)).rejects.toThrow('matches');
+		}
+	});
 	it('expires records and recipes while a long-lived service is open', async () => {
 		const {learning} = await fixture();
 		const now = Date.now();

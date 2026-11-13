@@ -40,6 +40,10 @@
       "description": "Windows course navigation, verified search, versioned lesson text pages, and completion-message checks."
     },
     {
+      "name": "research",
+      "description": "Retrieve verified text passages from an observed Windows document, including batched phrase lookup."
+    },
+    {
       "name": "excel",
       "description": "Native desktop Excel workbook inspection, range reads/writes, formulas, search, selection, and verified saving."
     },

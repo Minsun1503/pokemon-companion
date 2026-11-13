@@ -9,6 +9,9 @@ import {
 	features, predict, similarity, train, type LocalModel, type Vector,
 } from './model.js';
 import {LocalJournal, redact, type KeyProtector} from './privacy.js';
+import {
+	compatibleIntent, rejectedContext, requestIntent, type QueryAction,
+} from './reuse.js';
 
 export const parametersSchema = z.record(z.string().regex(/^[a-z][a-z0-9_]{0,31}$/), z.string().max(1000)).refine((value) => Object.keys(value).length <= 16);
 export type Parameters = z.infer<typeof parametersSchema>;
@@ -17,7 +20,7 @@ type Receipt = {tool: string; action: string; ok: boolean; duration_ms: number; 
 type Task = {id: string; at: number; query: string; parameters: Parameters; calls: Receipt[]; closed: boolean;
 	outcome: 'met' | 'unmet' | 'unknown'; satisfaction: Satisfaction; feedback_source?: string; summary?: string;
 	plan?: WindowsStep[]; recipe_id?: string; trained_label?: 0 | 1;};
-type Recipe = {id: string; at: number; kind: 'windows' | 'guide'; apis: string[]; steps: WindowsStep[]; parameters: string[]; vector: Vector; contexts: Vector[]; model: LocalModel; successes: number; failures: number};
+type Recipe = {id: string; at: number; kind: 'windows' | 'guide'; apis: string[]; steps: WindowsStep[]; parameters: string[]; vector: Vector; contexts: Vector[]; model: LocalModel; successes: number; failures: number; actions?: QueryAction[]; negative_contexts?: Vector[]};
 type ApiCount = {successes: number; failures: number};
 type State = {version: 1; enabled: boolean; retention_days: number; tasks: Record<string, Task>; recipes: Record<string, Recipe>; api_counts: Record<string, ApiCount>};
 type Event = {kind: 'begin'; task: Task} | {kind: 'call'; id: string; receipt: Receipt; plan?: WindowsStep[]; invalidate_plan?: boolean}
@@ -232,12 +235,24 @@ export class LocalLearning {
 		}
 
 		const start = performance.now();
+		const intent = requestIntent(query);
+		if (intent.negated) {
+			this.lastInferenceMs = performance.now() - start;
+			return [];
+		}
+
 		const vector = features(query);
 		const keys = Object.keys(vector);
-		const suggestions = Object.values(this.state.recipes)
-			.filter((recipe) => recipe.successes > recipe.failures)
+		const candidates = Object.values(this.state.recipes)
+			.filter((recipe) => recipe.successes > recipe.failures && compatibleIntent(intent, recipe))
 			.map((recipe) => ({recipe, match: Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys)))}))
 			.filter((item) => item.match >= 0.65)
+			.map((item) => ({...item, rejected: rejectedContext(item.recipe, vector, item.match, keys)}));
+		// Rejection of the closest workflow must not promote a worse match. A
+		// different, equally/better supported workflow may still be appropriate.
+		const rejectionFloor = Math.max(0, ...candidates.filter((item) => item.rejected).map((item) => item.match));
+		const suggestions = candidates
+			.filter((item) => !item.rejected && item.match >= rejectionFloor)
 			.map((item) => ({...item, prediction: predict(item.recipe.model, vector, keys)}))
 			.sort((a, b) => (b.match + (b.prediction * 0.2)) - (a.match + (a.prediction * 0.2))).slice(0, 3)
 			.map(({recipe, match, prediction}) => ({
@@ -254,8 +269,9 @@ export class LocalLearning {
 		const recipe = this.state.recipes[recipeId];
 		const vector = features(this.state.tasks[taskId]!.query);
 		const keys = Object.keys(vector);
+		const match = recipe ? Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys))) : 0;
 		if (!this.state.enabled || process.env.POKEMON_LEARNING === 'off' || recipe?.kind !== 'windows' || recipe.failures >= recipe.successes
-			|| Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys))) < 0.65) {
+			|| !compatibleIntent(requestIntent(this.state.tasks[taskId]!.query), recipe) || match < 0.65 || rejectedContext(recipe, vector, match, keys)) {
 			throw new Error('Recipe is missing, unreliable, or does not match this current request.');
 		}
 
@@ -305,6 +321,15 @@ export class LocalLearning {
 		}
 
 		this.previews.delete(previewId);
+		const recipe = this.state.recipes[preview.recipe_id];
+		const vector = features(this.state.tasks[taskId]!.query);
+		const keys = Object.keys(vector);
+		const match = recipe ? Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys))) : 0;
+		if (!recipe || recipe.successes <= recipe.failures || !compatibleIntent(requestIntent(this.state.tasks[taskId]!.query), recipe)
+			|| match < 0.65 || rejectedContext(recipe, vector, match, keys)) {
+			throw new Error('Preview no longer matches a reliable workflow. Preview the current plan again.');
+		}
+
 		await this.save({kind: 'use', id: taskId, recipe_id: preview.recipe_id});
 		return structuredClone(preview.steps);
 	}
@@ -314,8 +339,9 @@ export class LocalLearning {
 		const recipe = this.state.recipes[recipeId];
 		const vector = features(this.state.tasks[taskId]!.query);
 		const keys = Object.keys(vector);
+		const match = recipe ? Math.max(...(recipe.contexts ?? [recipe.vector]).map((context) => similarity(vector, context, keys))) : 0;
 		if (!this.state.enabled || process.env.POKEMON_LEARNING === 'off' || recipe?.kind !== 'guide' || recipe.successes <= recipe.failures
-			|| !(recipe.contexts ?? [recipe.vector]).some((context) => similarity(vector, context, keys) >= 0.65)) {
+			|| !compatibleIntent(requestIntent(this.state.tasks[taskId]!.query), recipe) || match < 0.65 || rejectedContext(recipe, vector, match, keys)) {
 			throw new Error('No reliable process guide matches this task.');
 		}
 
@@ -504,6 +530,13 @@ export class LocalLearning {
 		if (recipe) {
 			const context = features(task.query);
 			train(recipe.model, context, label);
+			if (positive) {
+				recipe.actions = [...new Set([...(recipe.actions ?? []), ...requestIntent(task.query).actions])];
+				recipe.negative_contexts &&= recipe.negative_contexts.filter((vector) => similarity(vector, context) <= 0.999);
+			} else if (!(recipe.negative_contexts ?? []).some((vector) => similarity(vector, context) > 0.999)) {
+				recipe.negative_contexts = [...(recipe.negative_contexts ?? []), context].slice(-8);
+			}
+
 			if (positive && !(recipe.contexts ?? [recipe.vector]).some((vector) => similarity(vector, context) > 0.999)) {
 				recipe.contexts = [...(recipe.contexts ?? [recipe.vector]), context].slice(-8);
 			}

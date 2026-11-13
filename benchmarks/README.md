@@ -1,5 +1,49 @@
 # Windows MCP benchmarks
 
+## Local workflow ranker
+
+After building, run `npm run benchmark:ranker -- --baseline PATH --output benchmarks/results/local-ranker.json`. PATH must contain the saved pre-change `backend/dist` with resolvable dependencies. This compares actual learning services against the same synthetic encrypted snapshot: 32 workflows, eight contexts each, 198 correctness cases, counterbalanced positive/rejected/mixed timing blocks, feedback correction and restart checks. It also verifies unchanged legacy snapshots and exact positive suggestion scores/order. Profiles and test ratings are disposable; no user learning data or native inputs are used.
+
+The [November 13 final report](results/local-ranker-final-2026-11-13.md) and [implementation details](../docs/local-ranker-improvements.md) explain the action hints, bounded negative contexts and competing-workflow fix. These are synthetic regression results and local service timings; general semantic interpretation and AI-client latency are not established.
+
+## Common operations behind app workflows
+
+```powershell
+npm run build
+npm run benchmark:common -- --window-id 12345 --runs 5 --output benchmarks/results/common-tasks.json
+```
+
+Choose an existing English Edge window using the ID from `windows get_windows`. The runner opens an owned test tab in that signed-in profile and serves controlled data on loopback. It also creates its own desktop Excel instance with two disposable workbooks; it verifies that the second workbook remains untouched. Excel edits are checked independently after reopening the saved workbook. Existing user workbooks are not benchmark targets.
+
+Ten cases cover window/control discovery, verified text entry, search and result opening, a button's resulting state, passage retrieval, URL navigation, actual PDF opening/reading, Excel range reads, and Excel writes/calculation/save. Each compares atomic calls or whole-page reads with batching, scoped lookup, passage lookup or rectangular Excel operations in the **same build**. Window discovery is a repeated reference measurement, not a different implementation.
+
+One warmup per case/strategy is excluded. Measured strategy order reverses each round. Default five runs gives an initial diagnostic comparison; use `--runs 20` for a larger sample. `--cases` and `--modes` accept comma-separated selections. Each timer begins at the first MCP request and ends after verification; setup, application startup, model inference and user-request intake are excluded. JSON includes action/verification times, MCP call counts, native timing spans, failures, build and harness hashes. The adjacent Markdown report shows median and observed p95; a five-sample p95 is the slowest recorded sample.
+
+An action is not automatically replayed after failure. Remaining rows for that case are recorded as blocked. Exit code 0 means all selected cases passed, 2 means an unsupported/blocked case, and 1 means failure. `complete` means all scheduled rows were recorded; check `all_passed` and each case's counts before claiming success. PDF text must be retrieved through the production native API, not read from the fixture response by the verifier. A viewer with inaccessible or ambiguous PDF controls is reported as blocked.
+
+The fixture rejects background resource paths so favicon requests cannot reset action evidence, and ignores events from old page tokens. Fresh discovery renews the same verified window token while it is in use; idle window proofs and all element snapshots retain their two-minute expiration. Control focus precedes guarded keyboard navigation, without redundant foreground activation of an already visible browser.
+
+This suite tests shared operations, not authenticated integrations with Zalo, Teams, Outlook, SharePoint, Drive, Dicreto or GS1. See the [workflow plan](workflow-suite-plan.md) for the separate live and actual AI-client measurements. Run `npm run test:common-benchmark` for fixture and reporting regression checks; these also run under `npm test`. Keep builds and tests separate from timed desktop runs.
+
+The [November 13 final run](results/common-tasks-final-2026-11-13.md) passed all 100 measured attempts, including actual PDF text retrieval and Excel save/reopen checks. [Findings and implementation](../docs/common-task-performance.md) explain the measured gains, slower scoped lookup, the PDF Text-control fallback, and preserved diagnostic failures.
+
+## Edge web search and information retrieval
+
+```powershell
+npm run build
+npm run benchmark:retrieval -- --window-id 12345 --runs 5 --modes page_scan,range_single,range_many --verify --output benchmarks/results/information-retrieval.json
+```
+
+Replace `12345` with the existing Edge window ID returned by `windows get_windows`. The benchmark reuses that window's profile and opens an additional tab. It requires one unambiguous Edge window unless `--window-id` is supplied. It creates no temporary browser profile and uses no CDP. The controlled tab is closed only after its unique document title and localhost address are verified; existing tabs remain available.
+
+The harness serves a loopback research corpus, uses actual MCP/native UIA to enter a query and click its result, then returns three source facts from the page. `page_scan` uses existing versioned pagination, `range_single` performs three separate phrase lookups, and `range_many` uses one batched lookup. The nominal 12k/48k articles have facts near the end. Server state independently verifies query/click counts; complete facts must appear in retrieved text. `--verify` adds native correctness checks outside measurement, covering missing and case-sensitive matches, duplicate query order, zero context, Unicode, response budgets, stale references, and non-Document rejection.
+
+`--runs` accepts 1–50 (default 5); `--modes` selects the compared strategies. Mode order rotates/reverses. Startup and tab preparation are excluded, while retrieval and the entire search/click/read workflow are measured separately. JSON checkpoints retain unsuccessful runs; completed reports include medians/p95, individual timings, response sizes, source links, and build/harness/corpus hashes. Controlled timings exclude internet search and AI inference.
+
+Append `--live` to also search Bing for a public Microsoft document, click its result, verify the source address and retrieve a quoted passage. The live tab remains open for inspection. External loading, search results and site challenges can fail the run; the harness preserves the failure and does not retry input or navigate directly to manufacture success. English Edge/site controls are required. This desktop benchmark is separate from CI.
+
+Recorded reports: [final comparison and correctness checks](results/information-retrieval-final-2026-11-13.md), [initial range comparison](results/information-retrieval-range-2026-11-13.md), and [final live Bing verification](results/information-retrieval-live-final-2026-11-13.md). See [research, implementation and limits](../docs/information-retrieval.md).
+
 ## Edge → YouTube → search → watch
 
 ```powershell

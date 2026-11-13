@@ -11,7 +11,7 @@ const {addClientMetadata}=createRequire(import.meta.url)('./client-package-metad
 let session;
 try {
   addClientMetadata(scratch,root,process.platform,JSON.parse(await readFile(resolve(root,'package.json'),'utf8')).version);
-  session=await connect({env:{...process.env,POKEMON_UI:'off',MCP_TRANSPORT:'stdio'}});
+  session=await connect({env:{...process.env,POKEMON_UI:'off',MCP_TRANSPORT:'stdio',POKEMON_LEARNING_DIR:resolve(scratch,'learning')}});
   const tools=(await session.client.listTools()).tools;
   const manifest=JSON.parse(await readFile(resolve(scratch,'manifest.json'),'utf8'));
   assert.deepEqual(manifest.tools.map(t=>t.name),tools.map(t=>t.name));
@@ -23,7 +23,7 @@ try {
   assert(session.client.getInstructions().includes('verbatim current user request'));
   const prompt=await session.client.getPrompt({name:'pokemon-work'});
   assert(prompt.messages[0].content.text.includes('learning begin'));
-  for(const file of ['service','model','privacy','instrument','instructions']) assert((await readFile(resolve(root,`backend/dist/learning/${file}.js`))).length>0);
+  for(const file of ['service','model','reuse','privacy','instrument','instructions']) assert((await readFile(resolve(root,`backend/dist/learning/${file}.js`))).length>0);
   console.log('PASS: built learning modules, package tool order, all attribution schemas and both client instructions are consistent.');
 }finally{
   if(session)await session.client.close();
