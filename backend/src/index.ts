@@ -6,6 +6,8 @@ import {serverVersion} from './version.js';
 import {desktopInstructions, learningInstructions, researchInstructions} from './learning/instructions.js';
 export {courseSchema, runCourse} from './windows/course.js';
 export type {CourseRequest} from './windows/course.js';
+export {researchSchema, runResearch} from './windows/research.js';
+export type {ResearchRequest} from './windows/research.js';
 export {excelSchema, runExcel} from './windows/excel.js';
 export type {ExcelRequest} from './windows/excel.js';
 

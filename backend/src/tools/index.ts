@@ -8,6 +8,7 @@ import {registerDesktop} from './desktop.js';
 import type {PokemonRuntime} from '../pokemon/runtime.js';
 import {instrument} from '../learning/instrument.js';
 import {registerLearning} from './learning.js';
+import {registerResearch} from './research.js';
 
 export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
 	const traced = instrument(server, runtime.learning);
@@ -16,6 +17,7 @@ export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
 	registerPokemon(traced, runtime);
 	registerWindows(traced, runtime);
 	registerCourse(traced, runtime);
+	registerResearch(traced, runtime);
 	registerExcel(traced, runtime);
 	registerLearning(server, runtime);
 }

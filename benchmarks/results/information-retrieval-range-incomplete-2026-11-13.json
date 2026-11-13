@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "complete": false,
+  "measured_at": "2026-11-13T04:46:04.992Z",
+  "runs_per_mode_case": 3,
+  "modes": [
+    "page_scan",
+    "range_single"
+  ],
+  "source_revision": "09784b1aea27e486c3e08ae08b62661cb96420a2",
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz",
+    "browser_profile": "existing Edge profile",
+    "companion": "enabled",
+    "transport": "stdio"
+  },
+  "sources": [
+    {
+      "query": "cross-process communication",
+      "fact": "The data can then be accessed without further cross-process communication.",
+      "url": "https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients"
+    },
+    {
+      "query": "readyState only concerns itself",
+      "fact": "The readyState only concerns itself with loading assets defined in the HTML",
+      "url": "https://www.selenium.dev/documentation/webdriver/waits/"
+    },
+    {
+      "query": "encompasses the string",
+      "fact": "returns a new text range that encompasses the string.",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-usingtextrangeobjects"
+    }
+  ],
+  "samples": [],
+  "timing": [
+    {
+      "tool": "pokemon",
+      "action": "task",
+      "total_ms": 321.54229999999984,
+      "breakdown_ms": {
+        "queue_wait": 0.13599999999996726,
+        "companion_before": 320.60439999999994,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.024200000000064392
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 3168.9195999999993,
+      "breakdown_ms": {
+        "queue_wait": 0.1973000000000411,
+        "companion_before": 0.7735999999995329,
+        "action": 40.258600000000115,
+        "companion_after": 0.7031999999999243,
+        "serialization": 0.03460000000018226,
+        "worker_round_trip": 3165.096700000001,
+        "post_processing": 0.020599999998921703,
+        "native_window_metadata_inclusive": 5.183300000000001,
+        "native_window_verify": 5.610200000000001,
+        "native_window_capture_inclusive": 15.6984,
+        "native_window_enumeration_inclusive": 31.8592
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_verify": 2,
+        "native_window_capture_inclusive": 2,
+        "native_window_enumeration_inclusive": 1
+      }
+    }
+  ],
+  "limits": [
+    "Controlled search corpus quotes researched public documentation, rendered in real Edge; controlled timings exclude internet search-engine latency.",
+    "Search and result clicks use actual repository MCP/native UIA. Server state independently checks the exact query and result click.",
+    "Retrieval ends only after all three source facts are returned. Page scanning stops at the same requested facts, not at arbitrary complete-page coverage.",
+    "MCP/companion startup and tab preparation are excluded. Retrieval and whole search/click/retrieve workflow are measured separately.",
+    "Mode order rotates and reverses across paired rounds. One warm browser and native worker are reused; no failed input is replayed.",
+    "Range excerpts concern accessible provider text; they are not complete page coverage or a full-document version. No AI inference is measured."
+  ],
+  "startup_ms": 1793.7833,
+  "error": "Choose an existing Edge window with --window-id; no new signed-out profile is created.\n\n2 !== 1\n",
+  "summary": {
+    "page_scan:Research article 12000": {
+      "verified": 0,
+      "retrieval": null,
+      "workflow": null,
+      "calls": []
+    },
+    "page_scan:Research article 48000": {
+      "verified": 0,
+      "retrieval": null,
+      "workflow": null,
+      "calls": []
+    },
+    "range_single:Research article 12000": {
+      "verified": 0,
+      "retrieval": null,
+      "workflow": null,
+      "calls": []
+    },
+    "range_single:Research article 48000": {
+      "verified": 0,
+      "retrieval": null,
+      "workflow": null,
+      "calls": []
+    }
+  }
+}

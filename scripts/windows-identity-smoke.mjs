@@ -114,6 +114,14 @@ try {
     const window_id = windows.windows[0].id;
     const window_ref = windows.windows[0].window_ref;
     assert.match(window_ref, /^[a-f0-9]{32}$/);
+    assert.equal(windows.windows[0].process, fixture.kind === 'WinForms' ? 'native' : 'electron', 'Discovery changed the executable process name.');
+    const byProcess = await worker.request({action: 'get_windows', query: windows.windows[0].process, max_elements: 100, max_chars: 16000});
+    assert.equal(byProcess.windows.find(window => window.id === window_id)?.window_ref, window_ref, 'Process filtering lost the returned window identity.');
+    const noMatch = await worker.request({action: 'get_windows', query: 'No window ' + randomUUID()});
+    assert.equal(noMatch.complete, true);
+    assert.deepEqual(noMatch.windows, [], 'An unmatched window escaped discovery filtering.');
+    const rediscovered = await worker.request({action: 'get_windows', query: fixture.title});
+    assert.equal(rediscovered.windows[0].window_ref, window_ref, 'Filtered discovery rebound a live identity token.');
     await rejectsBeforeInput({action: 'get_ui', window_id, window_ref: '0'.repeat(32)}, 'STALE_REF');
     if (fixture.kind === 'WinForms' && process.argv.includes('--benchmark')) {
       const output = process.argv[process.argv.indexOf('--benchmark') + 1];

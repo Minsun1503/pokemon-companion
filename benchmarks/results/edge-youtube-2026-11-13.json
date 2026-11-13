@@ -1,0 +1,3059 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "measured_at": "2026-11-13T04:19:11.673Z",
+  "query": "Big Buck Bunny Blender",
+  "requested_runs": 3,
+  "source_revision": "5147238c515f905f62f97bd55c795795c2a8a8fc",
+  "environment": {
+    "platform": "win32",
+    "node": "v24.16.0",
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz",
+    "transport": "stdio",
+    "companion": "on",
+    "edge": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "edge_version": "Edg/157.0.4341.46"
+  },
+  "method": {
+    "edge_launch": "Harness spawns a fresh isolated Edge process/profile per run; application startup is timed. MCP/companion startup is separate.",
+    "actions": "Repository MCP windows UI Automation for field entry and control invocation; foreground-guarded Enter submits the address bar.",
+    "verification": "Read-only CDP observes only the dedicated benchmark tab: exact query, selected watch ID, player video ID, no active ad, and at least one second of unpaused media progress.",
+    "timing": "Total starts before Edge spawn and ends at verified playback. Stage times include UIA discovery, actions, website/network/render waits and read-only verification. Cleanup and MCP startup are excluded.",
+    "repetitions": "Fresh browser/profile per run; OS, Edge installation and network caches are not reset. No failed action or workflow is automatically retried.",
+    "limitations": "Live YouTube, consent, sign-in challenges, ads, regional access, UI language and machine load affect results. No AI inference is measured. Small samples do not establish a stable p95."
+  },
+  "samples": [
+    {
+      "run": 1,
+      "verified": true,
+      "stage_ms": {
+        "open_edge": 1490.4216999999999,
+        "open_youtube": 2621.3432000000003,
+        "search": 4525.940600000002,
+        "click_video": 507.5777999999991,
+        "verify_playback": 2029.7528999999995
+      },
+      "calls": [
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_windows",
+            "query": "Pokemon YouTube Benchmark 2e3f8194",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 136.34770000000026,
+          "response_chars": 238
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+            "query": "Address and search bar",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 447.72950000000037,
+          "response_chars": 580
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "focus",
+            "snapshot": "58e085cd3d4743678718d076b882e6c0",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 125.39770000000044,
+          "response_chars": 124
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+            "query": "Address and search bar",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 65.24170000000049,
+          "response_chars": 580
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "focus",
+                "snapshot": "9a2819b0e03e4a09bfbe94420aa607db",
+                "element_id": 1
+              },
+              {
+                "action": "set_value",
+                "snapshot": "9a2819b0e03e4a09bfbe94420aa607db",
+                "element_id": 1,
+                "text": "https://www.youtube.com/?hl=en"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "1312046",
+                "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+                "query": "Address and search bar",
+                "control_type": "Edit",
+                "expect_value": "https://www.youtube.com/?hl=en"
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 288.64200000000073,
+          "response_chars": 569
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "computer",
+          "args": {
+            "action": "key",
+            "text": "Return",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0"
+          },
+          "elapsed_ms": 46.79019999999946,
+          "response_chars": 62
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+            "query": "YouTube",
+            "control_type": "Document",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 165.2543999999998,
+          "response_chars": 448
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "focus",
+            "snapshot": "d2633ad24c694484a7db3ec5eb8c9eee",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 166.80159999999887,
+          "response_chars": 46
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+            "query": "Search",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 139.5023999999994,
+          "response_chars": 1046
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "set_value",
+                "snapshot": "7b06340d9807483c86a7dd7b76fb092c",
+                "element_id": 2,
+                "text": "Big Buck Bunny Blender"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "1312046",
+                "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+                "query": "Search",
+                "control_type": "ComboBox",
+                "expect_value": "Big Buck Bunny Blender"
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 525.8385999999991,
+          "response_chars": 494
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+            "query": "Search",
+            "control_type": "Button",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 193.4380999999994,
+          "response_chars": 699
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "4e35d4cb1707443caaee11d756b289d6",
+            "element_id": 2,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 254.3659000000007,
+          "response_chars": 11
+        },
+        {
+          "stage": "click_video",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "1312046",
+            "window_ref": "fc90c646ce884395ba9857ca44afa3a0",
+            "query": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 185.81089999999858,
+          "response_chars": 612
+        },
+        {
+          "stage": "click_video",
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "f0f914ac94b8499094da098c98c35970",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 249.1301999999996,
+          "response_chars": 109
+        }
+      ],
+      "last_ui": {
+        "window": {
+          "id": "1312046",
+          "title": "Big Buck Bunny Blender - YouTube - Personal - Microsoft​ Edge",
+          "process": "msedge",
+          "minimized": false,
+          "window_ref": "fc90c646ce884395ba9857ca44afa3a0"
+        },
+        "snapshot": "f0f914ac94b8499094da098c98c35970",
+        "nodes": [
+          {
+            "id": 1,
+            "role": "Hyperlink",
+            "name": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film 10 minutes, 35 seconds",
+            "actions": [
+              "invoke",
+              "read_text",
+              "focus"
+            ],
+            "automation_id": "video-title",
+            "value": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUWQmlnIEJ1Y2sgQnVubnkgQmxlbmRlcg%3D%3D",
+            "targetable": true
+          }
+        ],
+        "matched": 1,
+        "truncated": false,
+        "complete": true,
+        "scanned": 217
+      },
+      "last_observation": {
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        "hostname": "www.youtube.com",
+        "pathname": "/watch",
+        "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+        "search_query": "Big Buck Bunny Blender",
+        "search_present": true,
+        "result_query": null,
+        "video_id": "aqz-KE-bpKQ",
+        "player_video_id": "aqz-KE-bpKQ",
+        "ad_showing": false,
+        "video": {
+          "paused": false,
+          "ended": false,
+          "current_time": 1.213769,
+          "ready_state": 4,
+          "duration": 634.601
+        },
+        "candidates": [],
+        "buttons": [
+          "Back",
+          "Guide",
+          "Skip navigation",
+          "Clear search query",
+          "Search",
+          "Report search predictions",
+          "Search",
+          "Search with your voice",
+          "Settings",
+          "Tap to unmute",
+          "Play",
+          "Show cards",
+          "Show cards",
+          "Close",
+          "More",
+          "Copy link",
+          "Playlist",
+          "like this video along with 110,393 other people",
+          "Dislike this video",
+          "Comments",
+          "Share",
+          "More actions",
+          "Cancel",
+          "Confirm",
+          "Cancel autoplay",
+          "Previous",
+          "Next",
+          "Close",
+          "Close",
+          "Pause (k)",
+          "Mute (m)",
+          "Live",
+          "•",
+          "•",
+          "Expand"
+        ],
+        "visible_text": "VN\nSkip navigation\nSign in\n0:01 / 10:34\nBig Buck Bunny 60fps 4K - Official Blender Foundation Short Film\nBlender\n1.26M subscribers\nSubscribe\n110K\n23M views  12y ago\nUHD High Frame rate version of the iconic short film by Blender, Big Buck Bunny. More info:  https://studio.blender.org/projects/b...\n\nLearn more about this UHD high frame-rate version at: http://bbb3d.renderfarming.net \nmore\n\n23:57\nThe Good Dinosaur -  Best Scenes\nHinl\n16M\n9y ago\nTHE DISRESPECT IS CRAZY 😭 #rabbids #shorts\n14M views\nTiddler Dives with a Dolphin! 🐬🐟 | Shorts\n100K views\nCan You 3D Print Morph? 👨🏻‍💻🟠 | Morph #shorts\n11K views\nTurbozaurs to the Rescue! Let's Build with a 3D Printer!\n24K views\n8:26\nThe Great Cotton Swab Battle 🐜 Minuscule Movie Clip 🎬🍿\nMinuscule\n7M\n7mo ago\n3:52:26\nAquarium 8K (ULTRA HD) 🐠 Beautiful Clownfish & Colorful Coral Reefs - Relaxing Music for Sleep #1\n8K Ocean Life\n97K\n3w ago\n10:35\nBig Buck Bunny (BBB)\nkids ideas\n219K\n4y ago\n8:47:29\nNew\nDoraemon - 9 Tiếng Cười Liên Tục | Trọn Bộ Tập Dài #4 | S12\nPOPS Kids\n250K\n1d ago\n7:23\nOverwatch Animated Short | \"The Last Bastion\"\nPlayOverwatch\n29M\n10y ago\n1:00:18\n[Monthly Best] Binge Watch NEW EPISODES👶 | 60 Minutes | SEALOOK Compilation\nSEALOOK Official\n4M\n2mo ago\n3:00:52\nForest 4K • Nature Relaxation Film • Peaceful Relaxing Music • 4k Video UltraHD\nRelaxation Film\nand Eterna Vista\n22M\n4y ago\n2:31\nCaminandes 3: Llamigos\nBlender\n1M\n10y ago\n33:06\nMasha and the Bear 2026 🍓🎉 Jam Day and more popular episodes 🍭🍫 Best episodes "
+      },
+      "selected_video": {
+        "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film",
+        "label": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film 10 minutes, 35 seconds",
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUWQmlnIEJ1Y2sgQnVubnkgQmxlbmRlcg%3D%3D",
+        "video_id": "aqz-KE-bpKQ",
+        "visible": true
+      },
+      "playback_evidence": {
+        "before": {
+          "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          "hostname": "www.youtube.com",
+          "pathname": "/watch",
+          "title": "YouTube",
+          "search_query": "Big Buck Bunny Blender",
+          "search_present": true,
+          "result_query": null,
+          "video_id": "aqz-KE-bpKQ",
+          "player_video_id": "aqz-KE-bpKQ",
+          "ad_showing": false,
+          "video": {
+            "paused": false,
+            "ended": false,
+            "current_time": 0,
+            "ready_state": 4,
+            "duration": 634.601
+          },
+          "candidates": [],
+          "buttons": [
+            "Back",
+            "Guide",
+            "Skip navigation",
+            "Clear search query",
+            "Search",
+            "Report search predictions",
+            "Search",
+            "Search with your voice",
+            "Settings",
+            "Tap to unmute",
+            "Play",
+            "Show cards",
+            "Show cards",
+            "Close",
+            "More",
+            "Copy link",
+            "Playlist",
+            "Cancel",
+            "Confirm",
+            "Cancel autoplay",
+            "Previous",
+            "Next",
+            "Close",
+            "Close",
+            "Pause (k)",
+            "Mute (m)",
+            "Live",
+            "•",
+            "•",
+            "Expand",
+            "Autoplay is on",
+            "Subtitles/closed captions unavailable",
+            "Settings",
+            "Theater mode (t)",
+            "Play on TV"
+          ],
+          "visible_text": "VN\nSkip navigation\nSign in\n0:00 / 10:34"
+        },
+        "after": {
+          "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          "hostname": "www.youtube.com",
+          "pathname": "/watch",
+          "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+          "search_query": "Big Buck Bunny Blender",
+          "search_present": true,
+          "result_query": null,
+          "video_id": "aqz-KE-bpKQ",
+          "player_video_id": "aqz-KE-bpKQ",
+          "ad_showing": false,
+          "video": {
+            "paused": false,
+            "ended": false,
+            "current_time": 1.213769,
+            "ready_state": 4,
+            "duration": 634.601
+          },
+          "candidates": [],
+          "buttons": [
+            "Back",
+            "Guide",
+            "Skip navigation",
+            "Clear search query",
+            "Search",
+            "Report search predictions",
+            "Search",
+            "Search with your voice",
+            "Settings",
+            "Tap to unmute",
+            "Play",
+            "Show cards",
+            "Show cards",
+            "Close",
+            "More",
+            "Copy link",
+            "Playlist",
+            "like this video along with 110,393 other people",
+            "Dislike this video",
+            "Comments",
+            "Share",
+            "More actions",
+            "Cancel",
+            "Confirm",
+            "Cancel autoplay",
+            "Previous",
+            "Next",
+            "Close",
+            "Close",
+            "Pause (k)",
+            "Mute (m)",
+            "Live",
+            "•",
+            "•",
+            "Expand"
+          ],
+          "visible_text": "VN\nSkip navigation\nSign in\n0:01 / 10:34\nBig Buck Bunny 60fps 4K - Official Blender Foundation Short Film\nBlender\n1.26M subscribers\nSubscribe\n110K\n23M views  12y ago\nUHD High Frame rate version of the iconic short film by Blender, Big Buck Bunny. More info:  https://studio.blender.org/projects/b...\n\nLearn more about this UHD high frame-rate version at: http://bbb3d.renderfarming.net \nmore\n\n23:57\nThe Good Dinosaur -  Best Scenes\nHinl\n16M\n9y ago\nTHE DISRESPECT IS CRAZY 😭 #rabbids #shorts\n14M views\nTiddler Dives with a Dolphin! 🐬🐟 | Shorts\n100K views\nCan You 3D Print Morph? 👨🏻‍💻🟠 | Morph #shorts\n11K views\nTurbozaurs to the Rescue! Let's Build with a 3D Printer!\n24K views\n8:26\nThe Great Cotton Swab Battle 🐜 Minuscule Movie Clip 🎬🍿\nMinuscule\n7M\n7mo ago\n3:52:26\nAquarium 8K (ULTRA HD) 🐠 Beautiful Clownfish & Colorful Coral Reefs - Relaxing Music for Sleep #1\n8K Ocean Life\n97K\n3w ago\n10:35\nBig Buck Bunny (BBB)\nkids ideas\n219K\n4y ago\n8:47:29\nNew\nDoraemon - 9 Tiếng Cười Liên Tục | Trọn Bộ Tập Dài #4 | S12\nPOPS Kids\n250K\n1d ago\n7:23\nOverwatch Animated Short | \"The Last Bastion\"\nPlayOverwatch\n29M\n10y ago\n1:00:18\n[Monthly Best] Binge Watch NEW EPISODES👶 | 60 Minutes | SEALOOK Compilation\nSEALOOK Official\n4M\n2mo ago\n3:00:52\nForest 4K • Nature Relaxation Film • Peaceful Relaxing Music • 4k Video UltraHD\nRelaxation Film\nand Eterna Vista\n22M\n4y ago\n2:31\nCaminandes 3: Llamigos\nBlender\n1M\n10y ago\n33:06\nMasha and the Bear 2026 🍓🎉 Jam Day and more popular episodes 🍭🍫 Best episodes "
+        }
+      },
+      "total_ms": 11175.421,
+      "mcp_calls": 14
+    },
+    {
+      "run": 2,
+      "verified": true,
+      "stage_ms": {
+        "open_edge": 1066.7723999999998,
+        "open_youtube": 2825.0694000000003,
+        "search": 1928.908800000001,
+        "click_video": 676.8868000000002,
+        "verify_playback": 1886.3829000000005
+      },
+      "calls": [
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_windows",
+            "query": "Pokemon YouTube Benchmark 8b4bcb47",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 111.40550000000076,
+          "response_chars": 238
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+            "query": "Address and search bar",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 219.56009999999878,
+          "response_chars": 580
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "focus",
+            "snapshot": "345b1075db64481984d7cde66ca4fcb0",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 178.88400000000183,
+          "response_chars": 124
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+            "query": "Address and search bar",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 71.35210000000006,
+          "response_chars": 580
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "focus",
+                "snapshot": "486547a9c21348c08655b1ccca98e797",
+                "element_id": 1
+              },
+              {
+                "action": "set_value",
+                "snapshot": "486547a9c21348c08655b1ccca98e797",
+                "element_id": 1,
+                "text": "https://www.youtube.com/?hl=en"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "2163864",
+                "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+                "query": "Address and search bar",
+                "control_type": "Edit",
+                "expect_value": "https://www.youtube.com/?hl=en"
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 258.254399999998,
+          "response_chars": 569
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "computer",
+          "args": {
+            "action": "key",
+            "text": "Return",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b"
+          },
+          "elapsed_ms": 54.67569999999978,
+          "response_chars": 62
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+            "query": "YouTube",
+            "control_type": "Document",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 125.11709999999948,
+          "response_chars": 448
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "focus",
+            "snapshot": "738459cc8ac94016af8142e4a68f4a90",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 123.81039999999848,
+          "response_chars": 46
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+            "query": "Search",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 124.73809999999867,
+          "response_chars": 1046
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "set_value",
+                "snapshot": "1b30a77f9f6e4248a2b5ba2c5935e133",
+                "element_id": 2,
+                "text": "Big Buck Bunny Blender"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "2163864",
+                "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+                "query": "Search",
+                "control_type": "ComboBox",
+                "expect_value": "Big Buck Bunny Blender"
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 456.6739000000016,
+          "response_chars": 494
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+            "query": "Search",
+            "control_type": "Button",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 134.45319999999992,
+          "response_chars": 699
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "e6dc0b4f0864455ebe64751a6d74c058",
+            "element_id": 2,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 161.04720000000088,
+          "response_chars": 11
+        },
+        {
+          "stage": "click_video",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "2163864",
+            "window_ref": "641f5a74e5134680869dd826bdf9f70b",
+            "query": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 285.29439999999886,
+          "response_chars": 612
+        },
+        {
+          "stage": "click_video",
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "be1291dbc1774e859df34e0223d076ab",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 284.70260000000053,
+          "response_chars": 109
+        }
+      ],
+      "last_ui": {
+        "window": {
+          "id": "2163864",
+          "title": "Big Buck Bunny Blender - YouTube - Personal - Microsoft​ Edge",
+          "process": "msedge",
+          "minimized": false,
+          "window_ref": "641f5a74e5134680869dd826bdf9f70b"
+        },
+        "snapshot": "be1291dbc1774e859df34e0223d076ab",
+        "nodes": [
+          {
+            "id": 1,
+            "role": "Hyperlink",
+            "name": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film 10 minutes, 35 seconds",
+            "actions": [
+              "invoke",
+              "read_text",
+              "focus"
+            ],
+            "automation_id": "video-title",
+            "value": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUWQmlnIEJ1Y2sgQnVubnkgQmxlbmRlcg%3D%3D",
+            "targetable": true
+          }
+        ],
+        "matched": 1,
+        "truncated": false,
+        "complete": true,
+        "scanned": 217
+      },
+      "last_observation": {
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        "hostname": "www.youtube.com",
+        "pathname": "/watch",
+        "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+        "search_query": "Big Buck Bunny Blender",
+        "search_present": true,
+        "result_query": null,
+        "video_id": "aqz-KE-bpKQ",
+        "player_video_id": "aqz-KE-bpKQ",
+        "ad_showing": false,
+        "video": {
+          "paused": false,
+          "ended": false,
+          "current_time": 1.087068,
+          "ready_state": 4,
+          "duration": 634.601
+        },
+        "candidates": [],
+        "buttons": [
+          "Back",
+          "Guide",
+          "Skip navigation",
+          "Clear search query",
+          "Search",
+          "Report search predictions",
+          "Search",
+          "Search with your voice",
+          "Settings",
+          "Tap to unmute",
+          "Play",
+          "Show cards",
+          "Show cards",
+          "Close",
+          "More",
+          "Copy link",
+          "Playlist",
+          "like this video along with 110,393 other people",
+          "Dislike this video",
+          "Comments",
+          "Share",
+          "More actions",
+          "Cancel",
+          "Confirm",
+          "Cancel autoplay",
+          "Previous",
+          "Next",
+          "Close",
+          "Close",
+          "Pause (k)",
+          "Mute (m)",
+          "Live",
+          "•",
+          "•",
+          "Expand"
+        ],
+        "visible_text": "VN\nSkip navigation\nSign in\n0:01 / 10:34\nBig Buck Bunny 60fps 4K - Official Blender Foundation Short Film\nBlender\n1.26M subscribers\nSubscribe\n110K\n23M views  12y ago\nUHD High Frame rate version of the iconic short film by Blender, Big Buck Bunny. More info:  https://studio.blender.org/projects/b...\n\nLearn more about this UHD high frame-rate version at: http://bbb3d.renderfarming.net \nmore\n\n23:57\nThe Good Dinosaur -  Best Scenes\nHinl\n16M\n9y ago\n11:46\nSNOW BEAR - A Hand-Drawn Animated Short Film (4K) by Aaron Blaise\nThe Art of Aaron Blaise\n10M\n11mo ago\nFundraiser\n29:57\nHow I Met My Bestie | #031 x Polar Bear Full Story | SEALOOK Official\nSEALOOK Official\n17M\n3mo ago\n7:23\nOverwatch Animated Short | \"The Last Bastion\"\nPlayOverwatch\n29M\n10y ago\n6:30\nOscar Çöllerde🦎 | Genç 🤩 | minika\nMinika\n25M\n4y ago\n6:32\nLittle Frog | The \"Crazy\" Fish Ride & The Naughtiest Day In The Swamp!\nNhatTiin17 Cartoon\n480K\n9d ago\n8:26\nThe Great Cotton Swab Battle 🐜 Minuscule Movie Clip 🎬🍿\nMinuscule\n7M\n7mo ago\n34:35\nLARVA | ENVOLTURA DE BURBUJAS | Dibujos animados para niños | WildBrain\nWildBrain Niños\n15M\n8y ago"
+      },
+      "selected_video": {
+        "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film",
+        "label": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film 10 minutes, 35 seconds",
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUWQmlnIEJ1Y2sgQnVubnkgQmxlbmRlcg%3D%3D",
+        "video_id": "aqz-KE-bpKQ",
+        "visible": true
+      },
+      "playback_evidence": {
+        "before": {
+          "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          "hostname": "www.youtube.com",
+          "pathname": "/watch",
+          "title": "YouTube",
+          "search_query": "Big Buck Bunny Blender",
+          "search_present": true,
+          "result_query": null,
+          "video_id": "aqz-KE-bpKQ",
+          "player_video_id": "aqz-KE-bpKQ",
+          "ad_showing": false,
+          "video": {
+            "paused": false,
+            "ended": false,
+            "current_time": 0,
+            "ready_state": 4,
+            "duration": 634.601
+          },
+          "candidates": [],
+          "buttons": [
+            "Back",
+            "Guide",
+            "Skip navigation",
+            "Clear search query",
+            "Search",
+            "Report search predictions",
+            "Search",
+            "Search with your voice",
+            "Settings",
+            "Tap to unmute",
+            "Play",
+            "Show cards",
+            "Show cards",
+            "Close",
+            "More",
+            "Copy link",
+            "Playlist",
+            "Cancel",
+            "Confirm",
+            "Cancel autoplay",
+            "Previous",
+            "Next",
+            "Close",
+            "Close",
+            "Pause (k)",
+            "Mute (m)",
+            "Live",
+            "•",
+            "•",
+            "Expand",
+            "Autoplay is on",
+            "Subtitles/closed captions unavailable",
+            "Settings",
+            "Theater mode (t)",
+            "Play on TV"
+          ],
+          "visible_text": "VN\nSkip navigation\nSign in\n0:00 / 10:34"
+        },
+        "after": {
+          "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          "hostname": "www.youtube.com",
+          "pathname": "/watch",
+          "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+          "search_query": "Big Buck Bunny Blender",
+          "search_present": true,
+          "result_query": null,
+          "video_id": "aqz-KE-bpKQ",
+          "player_video_id": "aqz-KE-bpKQ",
+          "ad_showing": false,
+          "video": {
+            "paused": false,
+            "ended": false,
+            "current_time": 1.087068,
+            "ready_state": 4,
+            "duration": 634.601
+          },
+          "candidates": [],
+          "buttons": [
+            "Back",
+            "Guide",
+            "Skip navigation",
+            "Clear search query",
+            "Search",
+            "Report search predictions",
+            "Search",
+            "Search with your voice",
+            "Settings",
+            "Tap to unmute",
+            "Play",
+            "Show cards",
+            "Show cards",
+            "Close",
+            "More",
+            "Copy link",
+            "Playlist",
+            "like this video along with 110,393 other people",
+            "Dislike this video",
+            "Comments",
+            "Share",
+            "More actions",
+            "Cancel",
+            "Confirm",
+            "Cancel autoplay",
+            "Previous",
+            "Next",
+            "Close",
+            "Close",
+            "Pause (k)",
+            "Mute (m)",
+            "Live",
+            "•",
+            "•",
+            "Expand"
+          ],
+          "visible_text": "VN\nSkip navigation\nSign in\n0:01 / 10:34\nBig Buck Bunny 60fps 4K - Official Blender Foundation Short Film\nBlender\n1.26M subscribers\nSubscribe\n110K\n23M views  12y ago\nUHD High Frame rate version of the iconic short film by Blender, Big Buck Bunny. More info:  https://studio.blender.org/projects/b...\n\nLearn more about this UHD high frame-rate version at: http://bbb3d.renderfarming.net \nmore\n\n23:57\nThe Good Dinosaur -  Best Scenes\nHinl\n16M\n9y ago\n11:46\nSNOW BEAR - A Hand-Drawn Animated Short Film (4K) by Aaron Blaise\nThe Art of Aaron Blaise\n10M\n11mo ago\nFundraiser\n29:57\nHow I Met My Bestie | #031 x Polar Bear Full Story | SEALOOK Official\nSEALOOK Official\n17M\n3mo ago\n7:23\nOverwatch Animated Short | \"The Last Bastion\"\nPlayOverwatch\n29M\n10y ago\n6:30\nOscar Çöllerde🦎 | Genç 🤩 | minika\nMinika\n25M\n4y ago\n6:32\nLittle Frog | The \"Crazy\" Fish Ride & The Naughtiest Day In The Swamp!\nNhatTiin17 Cartoon\n480K\n9d ago\n8:26\nThe Great Cotton Swab Battle 🐜 Minuscule Movie Clip 🎬🍿\nMinuscule\n7M\n7mo ago\n34:35\nLARVA | ENVOLTURA DE BURBUJAS | Dibujos animados para niños | WildBrain\nWildBrain Niños\n15M\n8y ago"
+        }
+      },
+      "total_ms": 8384.128,
+      "mcp_calls": 14
+    },
+    {
+      "run": 3,
+      "verified": true,
+      "stage_ms": {
+        "open_edge": 1182.8850999999995,
+        "open_youtube": 2387.5013,
+        "search": 2270.1865999999973,
+        "click_video": 736.8271000000022,
+        "verify_playback": 1604.1911
+      },
+      "calls": [
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_windows",
+            "query": "Pokemon YouTube Benchmark feeef3ef",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 27.090299999999843,
+          "response_chars": 48
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_windows",
+            "query": "Pokemon YouTube Benchmark feeef3ef",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 67.01370000000315,
+          "response_chars": 237
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453",
+            "query": "Address and search bar",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 93.38270000000193,
+          "response_chars": 579
+        },
+        {
+          "stage": "open_edge",
+          "tool": "windows",
+          "args": {
+            "action": "focus",
+            "snapshot": "8926a51ec58247c0b2e26a85e5e110ea",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 89.78120000000126,
+          "response_chars": 124
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453",
+            "query": "Address and search bar",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 64.6226999999999,
+          "response_chars": 579
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "focus",
+                "snapshot": "7bcdfe3aacee48c9b76a13253c3f7baa",
+                "element_id": 1
+              },
+              {
+                "action": "set_value",
+                "snapshot": "7bcdfe3aacee48c9b76a13253c3f7baa",
+                "element_id": 1,
+                "text": "https://www.youtube.com/?hl=en"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "786524",
+                "window_ref": "727ac07dfbf34113adf6c40301680453",
+                "query": "Address and search bar",
+                "control_type": "Edit",
+                "expect_value": "https://www.youtube.com/?hl=en"
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 275.1378000000004,
+          "response_chars": 568
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "computer",
+          "args": {
+            "action": "key",
+            "text": "Return",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453"
+          },
+          "elapsed_ms": 41.751100000001315,
+          "response_chars": 62
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453",
+            "query": "YouTube",
+            "control_type": "Document",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 128.35299999999916,
+          "response_chars": 447
+        },
+        {
+          "stage": "open_youtube",
+          "tool": "windows",
+          "args": {
+            "action": "focus",
+            "snapshot": "f58f52547ec34f3b810ead6d93bc0440",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 137.54739999999947,
+          "response_chars": 46
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453",
+            "query": "Search",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 112.76849999999831,
+          "response_chars": 1045
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "set_value",
+                "snapshot": "9f3bf242b41a40908f6e8d557018c718",
+                "element_id": 2,
+                "text": "Big Buck Bunny Blender"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "786524",
+                "window_ref": "727ac07dfbf34113adf6c40301680453",
+                "query": "Search",
+                "control_type": "ComboBox",
+                "expect_value": "Big Buck Bunny Blender"
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 653.0041999999994,
+          "response_chars": 493
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453",
+            "query": "Search",
+            "control_type": "Button",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 194.17729999999938,
+          "response_chars": 698
+        },
+        {
+          "stage": "search",
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "4cf8129d51cd47f385c753fe20635bcc",
+            "element_id": 2,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 371.7978000000003,
+          "response_chars": 11
+        },
+        {
+          "stage": "click_video",
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "786524",
+            "window_ref": "727ac07dfbf34113adf6c40301680453",
+            "query": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 252.28900000000067,
+          "response_chars": 611
+        },
+        {
+          "stage": "click_video",
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "f6e47f86849f4bc0acc8c3a52e2cccc0",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "elapsed_ms": 385.0454000000027,
+          "response_chars": 109
+        }
+      ],
+      "last_ui": {
+        "window": {
+          "id": "786524",
+          "title": "Big Buck Bunny Blender - YouTube - Personal - Microsoft​ Edge",
+          "process": "msedge",
+          "minimized": false,
+          "window_ref": "727ac07dfbf34113adf6c40301680453"
+        },
+        "snapshot": "f6e47f86849f4bc0acc8c3a52e2cccc0",
+        "nodes": [
+          {
+            "id": 1,
+            "role": "Hyperlink",
+            "name": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film 10 minutes, 35 seconds",
+            "actions": [
+              "invoke",
+              "read_text",
+              "focus"
+            ],
+            "automation_id": "video-title",
+            "value": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUWQmlnIEJ1Y2sgQnVubnkgQmxlbmRlcg%3D%3D",
+            "targetable": true
+          }
+        ],
+        "matched": 1,
+        "truncated": false,
+        "complete": true,
+        "scanned": 205
+      },
+      "last_observation": {
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+        "hostname": "www.youtube.com",
+        "pathname": "/watch",
+        "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+        "search_query": "Big Buck Bunny Blender",
+        "search_present": true,
+        "result_query": null,
+        "video_id": "aqz-KE-bpKQ",
+        "player_video_id": "aqz-KE-bpKQ",
+        "ad_showing": false,
+        "video": {
+          "paused": false,
+          "ended": false,
+          "current_time": 1.032137,
+          "ready_state": 4,
+          "duration": 634.601
+        },
+        "candidates": [],
+        "buttons": [
+          "Back",
+          "Guide",
+          "Skip navigation",
+          "Clear search query",
+          "Search",
+          "Report search predictions",
+          "Search",
+          "Search with your voice",
+          "Settings",
+          "Tap to unmute",
+          "Play",
+          "Show cards",
+          "Show cards",
+          "Close",
+          "More",
+          "Copy link",
+          "Playlist",
+          "like this video along with 110,393 other people",
+          "Dislike this video",
+          "Comments",
+          "Share",
+          "More actions",
+          "Cancel",
+          "Confirm",
+          "Cancel autoplay",
+          "Previous",
+          "Next",
+          "Close",
+          "Close",
+          "Pause (k)",
+          "Mute (m)",
+          "Live",
+          "•",
+          "•",
+          "Expand"
+        ],
+        "visible_text": "VN\nSkip navigation\nSign in\n0:00 / 10:34\nBig Buck Bunny 60fps 4K - Official Blender Foundation Short Film\nBlender\n1.26M subscribers\nSubscribe\n110K\n23M views  12y ago\nUHD High Frame rate version of the iconic short film by Blender, Big Buck Bunny. More info:  https://studio.blender.org/projects/b...\n\nLearn more about this UHD high frame-rate version at: http://bbb3d.renderfarming.net \nmore\n\n23:57\nThe Good Dinosaur -  Best Scenes\nHinl\n16M\n9y ago\n11:46\nSNOW BEAR - A Hand-Drawn Animated Short Film (4K) by Aaron Blaise\nThe Art of Aaron Blaise\n10M\n11mo ago\nFundraiser\n34:35\nLARVA | ENVOLTURA DE BURBUJAS | Dibujos animados para niños | WildBrain\nWildBrain Niños\n15M\n8y ago\n29:57\nHow I Met My Bestie | #031 x Polar Bear Full Story | SEALOOK Official\nSEALOOK Official\n17M\n3mo ago\n10:28\nCây Cầu Của Chúng Ta | Phim Hoạt Hình Hay Và Ý Nghĩa Mới Nhất 2026\nPhim Hoạt Hình Việt Nam\n285K\n7mo ago\n6:30\nOscar Çöllerde🦎 | Genç 🤩 | minika\nMinika\n25M\n4y ago\n8:26\nThe Great Cotton Swab Battle 🐜 Minuscule Movie Clip 🎬🍿\nMinuscule\n7M\n7mo ago\nTHE DISRESPECT IS CRAZY 😭 #rabbids #shorts\n14M views\nTiddler Dives with a Dolphin! 🐬🐟 | Shorts\n100K views\nWhat Happens When A Rabbid Discovers Fire? 🔥 🐰 #short\n79K views\nTurbozaurs to the Rescue! Let's Build with a 3D Printer!\n24K views"
+      },
+      "selected_video": {
+        "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film",
+        "label": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film 10 minutes, 35 seconds",
+        "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUWQmlnIEJ1Y2sgQnVubnkgQmxlbmRlcg%3D%3D",
+        "video_id": "aqz-KE-bpKQ",
+        "visible": true
+      },
+      "playback_evidence": {
+        "before": {
+          "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          "hostname": "www.youtube.com",
+          "pathname": "/watch",
+          "title": "YouTube",
+          "search_query": "Big Buck Bunny Blender",
+          "search_present": true,
+          "result_query": null,
+          "video_id": "aqz-KE-bpKQ",
+          "player_video_id": "aqz-KE-bpKQ",
+          "ad_showing": false,
+          "video": {
+            "paused": false,
+            "ended": false,
+            "current_time": 0.018313,
+            "ready_state": 4,
+            "duration": 634.601
+          },
+          "candidates": [],
+          "buttons": [
+            "Back",
+            "Guide",
+            "Skip navigation",
+            "Clear search query",
+            "Search",
+            "Report search predictions",
+            "Search",
+            "Search with your voice",
+            "Settings",
+            "Tap to unmute",
+            "Play",
+            "Show cards",
+            "Show cards",
+            "Close",
+            "More",
+            "Copy link",
+            "Playlist",
+            "Cancel",
+            "Confirm",
+            "Cancel autoplay",
+            "Previous",
+            "Next",
+            "Close",
+            "Close",
+            "Pause (k)",
+            "Mute (m)",
+            "Live",
+            "•",
+            "•",
+            "Expand",
+            "Autoplay is on",
+            "Subtitles/closed captions unavailable",
+            "Settings",
+            "Theater mode (t)",
+            "Play on TV"
+          ],
+          "visible_text": "VN\nSkip navigation\nSign in\n0:00 / 10:34"
+        },
+        "after": {
+          "url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+          "hostname": "www.youtube.com",
+          "pathname": "/watch",
+          "title": "Big Buck Bunny 60fps 4K - Official Blender Foundation Short Film - YouTube",
+          "search_query": "Big Buck Bunny Blender",
+          "search_present": true,
+          "result_query": null,
+          "video_id": "aqz-KE-bpKQ",
+          "player_video_id": "aqz-KE-bpKQ",
+          "ad_showing": false,
+          "video": {
+            "paused": false,
+            "ended": false,
+            "current_time": 1.032137,
+            "ready_state": 4,
+            "duration": 634.601
+          },
+          "candidates": [],
+          "buttons": [
+            "Back",
+            "Guide",
+            "Skip navigation",
+            "Clear search query",
+            "Search",
+            "Report search predictions",
+            "Search",
+            "Search with your voice",
+            "Settings",
+            "Tap to unmute",
+            "Play",
+            "Show cards",
+            "Show cards",
+            "Close",
+            "More",
+            "Copy link",
+            "Playlist",
+            "like this video along with 110,393 other people",
+            "Dislike this video",
+            "Comments",
+            "Share",
+            "More actions",
+            "Cancel",
+            "Confirm",
+            "Cancel autoplay",
+            "Previous",
+            "Next",
+            "Close",
+            "Close",
+            "Pause (k)",
+            "Mute (m)",
+            "Live",
+            "•",
+            "•",
+            "Expand"
+          ],
+          "visible_text": "VN\nSkip navigation\nSign in\n0:00 / 10:34\nBig Buck Bunny 60fps 4K - Official Blender Foundation Short Film\nBlender\n1.26M subscribers\nSubscribe\n110K\n23M views  12y ago\nUHD High Frame rate version of the iconic short film by Blender, Big Buck Bunny. More info:  https://studio.blender.org/projects/b...\n\nLearn more about this UHD high frame-rate version at: http://bbb3d.renderfarming.net \nmore\n\n23:57\nThe Good Dinosaur -  Best Scenes\nHinl\n16M\n9y ago\n11:46\nSNOW BEAR - A Hand-Drawn Animated Short Film (4K) by Aaron Blaise\nThe Art of Aaron Blaise\n10M\n11mo ago\nFundraiser\n34:35\nLARVA | ENVOLTURA DE BURBUJAS | Dibujos animados para niños | WildBrain\nWildBrain Niños\n15M\n8y ago\n29:57\nHow I Met My Bestie | #031 x Polar Bear Full Story | SEALOOK Official\nSEALOOK Official\n17M\n3mo ago\n10:28\nCây Cầu Của Chúng Ta | Phim Hoạt Hình Hay Và Ý Nghĩa Mới Nhất 2026\nPhim Hoạt Hình Việt Nam\n285K\n7mo ago\n6:30\nOscar Çöllerde🦎 | Genç 🤩 | minika\nMinika\n25M\n4y ago\n8:26\nThe Great Cotton Swab Battle 🐜 Minuscule Movie Clip 🎬🍿\nMinuscule\n7M\n7mo ago\nTHE DISRESPECT IS CRAZY 😭 #rabbids #shorts\n14M views\nTiddler Dives with a Dolphin! 🐬🐟 | Shorts\n100K views\nWhat Happens When A Rabbid Discovers Fire? 🔥 🐰 #short\n79K views\nTurbozaurs to the Rescue! Let's Build with a 3D Printer!\n24K views"
+        }
+      },
+      "total_ms": 8181.649000000001,
+      "mcp_calls": 15
+    }
+  ],
+  "timings": [
+    {
+      "tool": "pokemon",
+      "action": "task",
+      "total_ms": 307.15149999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.09930000000008476,
+        "companion_before": 306.4245000000001,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.02179999999998472
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 2327.9116000000004,
+      "breakdown_ms": {
+        "queue_wait": 0.31719999999995707,
+        "companion_before": 0.8786000000000058,
+        "action": 53.927599999999984,
+        "companion_after": 0.73700000000008,
+        "serialization": 0.07260000000019318,
+        "worker_round_trip": 2321.6630000000005,
+        "post_processing": 0.028699999999844295,
+        "native_window_metadata_inclusive": 4.7645,
+        "native_window_verify": 12.0901,
+        "native_window_capture_inclusive": 27.462899999999998,
+        "native_window_enumeration_inclusive": 40.3372
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 13,
+        "native_window_verify": 5,
+        "native_window_capture_inclusive": 5,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 26.83140000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.06090000000040163,
+        "companion_before": 0.9367000000002008,
+        "action": 19.616700000000492,
+        "companion_after": 2.9796000000005733,
+        "serialization": 0.04599999999936699,
+        "worker_round_trip": 22.33049999999912,
+        "post_processing": 0.04739999999947031,
+        "native_window_metadata_inclusive": 2.0218000000000003,
+        "native_window_verify": 5.1452,
+        "native_window_capture_inclusive": 8.6385,
+        "native_window_enumeration_inclusive": 12.1279
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 446.10260000000017,
+      "breakdown_ms": {
+        "queue_wait": 0.308100000000195,
+        "companion_before": 1.897399999999834,
+        "action": 436.97249999999985,
+        "companion_after": 0.40940000000045984,
+        "serialization": 0.05639999999948486,
+        "worker_round_trip": 442.79699999999957,
+        "post_processing": 0.0967000000000553,
+        "native_window_verify": 11.5772,
+        "native_navigation_cache_fetch": 75.68749999999999,
+        "native_identity_projection": 2.6464999999999996,
+        "native_visit_projection_inclusive": 9.361200000000004,
+        "native_discovery_value_read": 0.0046,
+        "native_tree_walk_inclusive": 88.8917,
+        "native_window_metadata_inclusive": 2.2982,
+        "native_discovery_inclusive": 363.4157,
+        "uia_tree_walk": 88.0073
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 52,
+        "native_visit_projection_inclusive": 52,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 123.29650000000038,
+      "breakdown_ms": {
+        "queue_wait": 0.07420000000001892,
+        "companion_before": 0.5599000000001979,
+        "action": 118.35640000000058,
+        "companion_after": 1.261899999999514,
+        "serialization": 0.021599999998215935,
+        "worker_round_trip": 120.96840000000066,
+        "post_processing": 0.01680000000033033,
+        "native_window_verify": 11.114400000000002,
+        "native_navigation_cache_fetch": 47.7729,
+        "native_identity_projection": 0.19669999999999996,
+        "native_visit_projection_inclusive": 0.42700000000000016,
+        "native_tree_walk_inclusive": 48.3928,
+        "native_identity_cache_fetch": 1.5316999999999998,
+        "native_ancestor_navigation": 12.983099999999999,
+        "native_element_verify_inclusive": 26.3597,
+        "native_identity_resolve_inclusive": 71.4899,
+        "native_pattern_action": 3.0009,
+        "native_pattern_dispatch_inclusive": 15.4743,
+        "native_post_action_value_read": 4.3557,
+        "native_act_inclusive": 93.0815
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 54,
+        "native_visit_projection_inclusive": 52,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 16,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 63.39810000000034,
+      "breakdown_ms": {
+        "queue_wait": 0.10019999999985885,
+        "companion_before": 0.5669000000007145,
+        "action": 58.96700000000055,
+        "companion_after": 1.1538999999993393,
+        "serialization": 0.08629999999811844,
+        "worker_round_trip": 60.975399999999354,
+        "post_processing": 0.06969999999910215,
+        "native_window_verify": 10.933399999999999,
+        "native_navigation_cache_fetch": 42.400600000000004,
+        "native_identity_projection": 0.09820000000000001,
+        "native_visit_projection_inclusive": 0.2556999999999999,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 42.8229,
+        "native_window_metadata_inclusive": 2.2534,
+        "native_discovery_inclusive": 53.4944,
+        "uia_tree_walk": 42.7939
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 52,
+        "native_visit_projection_inclusive": 52,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 286.85159999999996,
+      "breakdown_ms": {
+        "queue_wait": 0.04629999999997381,
+        "companion_before": 6.558499999999185,
+        "action": 273.88800000000083,
+        "companion_after": 2.664799999999559,
+        "serialization": 0.07579999999961728,
+        "worker_round_trip": 273.6157999999996,
+        "post_processing": 0.03700000000117143,
+        "native_window_verify": 39.9208,
+        "native_navigation_cache_fetch": 154.60629999999998,
+        "native_identity_projection": 0.5718000000000001,
+        "native_visit_projection_inclusive": 0.7878000000000002,
+        "native_tree_walk_inclusive": 156.3086,
+        "native_identity_cache_fetch": 2.1003999999999996,
+        "native_ancestor_navigation": 18.879599999999996,
+        "native_element_verify_inclusive": 39.6194,
+        "native_identity_resolve_inclusive": 131.8004,
+        "native_pattern_action": 20.389100000000003,
+        "native_pattern_dispatch_inclusive": 42.6896,
+        "native_post_action_value_read": 9.7196,
+        "native_act_inclusive": 184.92110000000002,
+        "native_discovery_value_read": 0.0006,
+        "native_window_metadata_inclusive": 2.4241,
+        "native_discovery_inclusive": 71.7119,
+        "uia_tree_walk": 59.0431
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 182,
+        "native_identity_projection": 183,
+        "native_visit_projection_inclusive": 179,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 42.83629999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.045600000000376895,
+        "companion_before": 0.5433999999995649,
+        "action": 37.449799999999414,
+        "companion_after": 1.3922999999995227,
+        "serialization": 0.029800000000250293,
+        "worker_round_trip": 12.500300000000607,
+        "post_processing": 0.01389999999992142,
+        "native_window_verify": 6.474600000000001,
+        "native_window_metadata_inclusive": 3.8082,
+        "foreground_guard": 10.162800000000061
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 163.11719999999968,
+      "breakdown_ms": {
+        "queue_wait": 0.05180000000018481,
+        "companion_before": 0.8234999999995125,
+        "action": 157.88460000000032,
+        "companion_after": 0.6032999999997628,
+        "serialization": 0.05380000000059226,
+        "worker_round_trip": 161.1942999999992,
+        "post_processing": 0.036800000000766886,
+        "native_window_verify": 21.416600000000003,
+        "native_navigation_cache_fetch": 118.45579999999998,
+        "native_identity_projection": 0.37799999999999995,
+        "native_visit_projection_inclusive": 0.7856,
+        "native_discovery_value_read": 0.0007,
+        "native_tree_walk_inclusive": 119.9069,
+        "native_window_metadata_inclusive": 4.3548,
+        "native_discovery_inclusive": 146.1387,
+        "uia_tree_walk": 119.8717
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 63,
+        "native_identity_projection": 62,
+        "native_visit_projection_inclusive": 62,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 165.67030000000068,
+      "breakdown_ms": {
+        "queue_wait": 0.08149999999932334,
+        "companion_before": 1.43329999999969,
+        "action": 152.53539999999975,
+        "companion_after": 7.581000000000131,
+        "serialization": 0.02580000000034488,
+        "worker_round_trip": 156.05029999999897,
+        "post_processing": 0.006999999999607098,
+        "native_window_verify": 21.907600000000002,
+        "native_navigation_cache_fetch": 88.21979999999999,
+        "native_identity_projection": 1.0954999999999995,
+        "native_visit_projection_inclusive": 1.1666999999999994,
+        "native_tree_walk_inclusive": 89.803,
+        "native_identity_cache_fetch": 1.1571,
+        "native_ancestor_navigation": 19.208299999999998,
+        "native_element_verify_inclusive": 39.580600000000004,
+        "native_identity_resolve_inclusive": 125.4219,
+        "native_pattern_action": 4.8896,
+        "native_pattern_dispatch_inclusive": 21.7032,
+        "native_post_action_value_read": 1.3127,
+        "native_act_inclusive": 148.8124
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 63,
+        "native_identity_projection": 64,
+        "native_visit_projection_inclusive": 62,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 22,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 138.0726999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.03960000000006403,
+        "companion_before": 0.9988000000003012,
+        "action": 132.0078999999996,
+        "companion_after": 0.564499999999498,
+        "serialization": 0.04839999999876454,
+        "worker_round_trip": 136.1249000000007,
+        "post_processing": 0.03800000000046566,
+        "native_window_verify": 16.099800000000002,
+        "native_navigation_cache_fetch": 94.0837,
+        "native_identity_projection": 0.3205000000000002,
+        "native_visit_projection_inclusive": 1.6823000000000004,
+        "native_discovery_value_read": 0.0021,
+        "native_tree_walk_inclusive": 96.2979,
+        "native_window_metadata_inclusive": 3.8687,
+        "native_discovery_inclusive": 110.5228,
+        "uia_tree_walk": 96.2778
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 78,
+        "native_identity_projection": 77,
+        "native_visit_projection_inclusive": 77,
+        "native_discovery_value_read": 2,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 523.3384999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.032599999999547435,
+        "companion_before": 5.350400000000263,
+        "action": 502.0774000000001,
+        "companion_after": 5.488299999999072,
+        "serialization": 0.23650000000270666,
+        "worker_round_trip": 510.4838000000018,
+        "post_processing": 0.09690000000045984,
+        "native_window_verify": 92.015,
+        "native_navigation_cache_fetch": 343.4141000000001,
+        "native_identity_projection": 1.0579000000000003,
+        "native_visit_projection_inclusive": 1.7561,
+        "native_tree_walk_inclusive": 346.5188,
+        "native_identity_cache_fetch": 1.0634000000000001,
+        "native_ancestor_navigation": 34.33109999999999,
+        "native_element_verify_inclusive": 60.6552,
+        "native_identity_resolve_inclusive": 185.1685,
+        "native_pattern_action": 1.0353,
+        "native_pattern_dispatch_inclusive": 32.2015,
+        "native_post_action_value_read": 0.4416,
+        "native_act_inclusive": 218.1767,
+        "native_discovery_value_read": 0.0007,
+        "native_window_metadata_inclusive": 16.1722,
+        "native_discovery_inclusive": 268.2731,
+        "uia_tree_walk": 213.0282
+      },
+      "counts": {
+        "native_window_verify": 8,
+        "native_navigation_cache_fetch": 227,
+        "native_identity_projection": 227,
+        "native_visit_projection_inclusive": 225,
+        "native_tree_walk_inclusive": 2,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 46,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 191.27030000000013,
+      "breakdown_ms": {
+        "queue_wait": 0.09050000000024738,
+        "companion_before": 0.9400000000005093,
+        "action": 183.09580000000096,
+        "companion_after": 0.9938000000001921,
+        "serialization": 0.05370000000220898,
+        "worker_round_trip": 188.7448999999997,
+        "post_processing": 0.10900000000037835,
+        "native_window_verify": 43.9463,
+        "native_navigation_cache_fetch": 131.7028,
+        "native_identity_projection": 0.4125999999999999,
+        "native_visit_projection_inclusive": 0.9098999999999998,
+        "native_tree_walk_inclusive": 133.1279,
+        "native_window_metadata_inclusive": 9.6863,
+        "native_discovery_inclusive": 166.5956,
+        "uia_tree_walk": 133.1082
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 118,
+        "native_identity_projection": 117,
+        "native_visit_projection_inclusive": 117,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 251.2567999999992,
+      "breakdown_ms": {
+        "queue_wait": 0.040600000000267755,
+        "companion_before": 1.1162999999996828,
+        "action": 247.30359999999928,
+        "companion_after": 0.46270000000004075,
+        "serialization": 0.023999999999432475,
+        "worker_round_trip": 249.1884000000009,
+        "post_processing": 0.016099999998914427,
+        "native_window_verify": 38.4056,
+        "native_navigation_cache_fetch": 145.35129999999992,
+        "native_identity_projection": 0.4937000000000004,
+        "native_visit_projection_inclusive": 0.6445000000000003,
+        "native_tree_walk_inclusive": 146.7022,
+        "native_identity_cache_fetch": 6.4642,
+        "native_ancestor_navigation": 36.458100000000016,
+        "native_element_verify_inclusive": 72.0273,
+        "native_identity_resolve_inclusive": 212.3432,
+        "native_pattern_action": 1.1194,
+        "native_pattern_dispatch_inclusive": 32.7494,
+        "native_post_action_value_read": 0.3391,
+        "native_act_inclusive": 245.7961
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 118,
+        "native_identity_projection": 119,
+        "native_visit_projection_inclusive": 117,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 42,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 183.86379999999917,
+      "breakdown_ms": {
+        "queue_wait": 0.07829999999921711,
+        "companion_before": 0.8111000000008062,
+        "action": 179.92239999999947,
+        "companion_after": 0.46860000000015134,
+        "serialization": 0.038199999999051215,
+        "worker_round_trip": 182.15049999999792,
+        "post_processing": 0.036700000002383604,
+        "native_window_verify": 36.4441,
+        "native_navigation_cache_fetch": 136.45170000000005,
+        "native_identity_projection": 1.0772000000000008,
+        "native_visit_projection_inclusive": 1.7627999999999997,
+        "native_discovery_value_read": 0.0007,
+        "native_tree_walk_inclusive": 138.9036,
+        "native_window_metadata_inclusive": 5.9745,
+        "native_discovery_inclusive": 166.3214,
+        "uia_tree_walk": 138.8795
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 183,
+        "native_identity_projection": 182,
+        "native_visit_projection_inclusive": 182,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 248.1735000000008,
+      "breakdown_ms": {
+        "queue_wait": 0.024299999999129795,
+        "companion_before": 3.6194999999988795,
+        "action": 242.32910000000084,
+        "companion_after": 0.37219999999979336,
+        "serialization": 0.017600000001039007,
+        "worker_round_trip": 243.918700000002,
+        "post_processing": 0.007600000000820728,
+        "native_window_verify": 22.6436,
+        "native_navigation_cache_fetch": 146.51630000000014,
+        "native_identity_projection": 0.5403000000000001,
+        "native_visit_projection_inclusive": 0.7079000000000002,
+        "native_tree_walk_inclusive": 148.1127,
+        "native_identity_cache_fetch": 1.0989,
+        "native_ancestor_navigation": 40.9149,
+        "native_element_verify_inclusive": 78.4211,
+        "native_identity_resolve_inclusive": 205.6383,
+        "native_pattern_action": 0.639,
+        "native_pattern_dispatch_inclusive": 34.5651,
+        "native_post_action_value_read": 0.3887,
+        "native_act_inclusive": 240.9443
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 181,
+        "native_identity_projection": 182,
+        "native_visit_projection_inclusive": 180,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 54,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 32.72119999999995,
+      "breakdown_ms": {
+        "queue_wait": 0.052700000000186265,
+        "companion_before": 2.346300000001065,
+        "action": 14.699600000001737,
+        "companion_after": 10.472900000000664,
+        "serialization": 0.036100000001169974,
+        "worker_round_trip": 19.53849999999875,
+        "post_processing": 0.024699999999938882,
+        "native_window_metadata_inclusive": 0.8406000000000002,
+        "native_window_verify": 3.3743,
+        "native_window_capture_inclusive": 12.1389,
+        "native_window_enumeration_inclusive": 13.2062
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 216.29140000000007,
+      "breakdown_ms": {
+        "queue_wait": 0.04019999999945867,
+        "companion_before": 0.732399999998961,
+        "action": 212.01100000000042,
+        "companion_after": 0.7561999999998079,
+        "serialization": 0.1775000000016007,
+        "worker_round_trip": 213.96040000000175,
+        "post_processing": 0.2848000000012689,
+        "native_window_verify": 16.2973,
+        "native_navigation_cache_fetch": 167.9929,
+        "native_identity_projection": 0.15899999999999997,
+        "native_visit_projection_inclusive": 0.4570000000000001,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 168.7129,
+        "native_window_metadata_inclusive": 5.4853,
+        "native_discovery_inclusive": 202.6293,
+        "uia_tree_walk": 168.6912
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 52,
+        "native_visit_projection_inclusive": 52,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 177.72240000000056,
+      "breakdown_ms": {
+        "queue_wait": 0.029699999999138527,
+        "companion_before": 1.0969000000004598,
+        "action": 173.07660000000033,
+        "companion_after": 1.0692000000017288,
+        "serialization": 0.02299999999922875,
+        "worker_round_trip": 175.3091000000004,
+        "post_processing": 0.006500000003143214,
+        "native_window_verify": 33.9401,
+        "native_navigation_cache_fetch": 106.43860000000001,
+        "native_identity_projection": 0.2505,
+        "native_visit_projection_inclusive": 0.28760000000000013,
+        "native_tree_walk_inclusive": 107.0273,
+        "native_identity_cache_fetch": 3.3744,
+        "native_ancestor_navigation": 11.213000000000001,
+        "native_element_verify_inclusive": 47.2114,
+        "native_identity_resolve_inclusive": 133.6676,
+        "native_pattern_action": 2.5944,
+        "native_pattern_dispatch_inclusive": 33.2463,
+        "native_post_action_value_read": 2.0796,
+        "native_act_inclusive": 169.3532
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 54,
+        "native_visit_projection_inclusive": 52,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 16,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 69.95469999999841,
+      "breakdown_ms": {
+        "queue_wait": 0.03299999999944703,
+        "companion_before": 0.97269999999844,
+        "action": 66.31919999999809,
+        "companion_after": 0.4183999999986554,
+        "serialization": 0.03779999999824213,
+        "worker_round_trip": 68.30100000000311,
+        "post_processing": 0.03139999999984866,
+        "native_window_verify": 14.8983,
+        "native_navigation_cache_fetch": 46.11449999999997,
+        "native_identity_projection": 0.12089999999999997,
+        "native_visit_projection_inclusive": 0.31999999999999995,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 46.6426,
+        "native_window_metadata_inclusive": 3.3909,
+        "native_discovery_inclusive": 61.4521,
+        "uia_tree_walk": 46.6158
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 52,
+        "native_visit_projection_inclusive": 52,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 256.7328000000016,
+      "breakdown_ms": {
+        "queue_wait": 0.12199999999938882,
+        "companion_before": 7.555800000005547,
+        "action": 243.8256999999976,
+        "companion_after": 1.9720000000015716,
+        "serialization": 0.10619999999835272,
+        "worker_round_trip": 245.81240000000616,
+        "post_processing": 0.0338000000010652,
+        "native_window_verify": 34.9864,
+        "native_navigation_cache_fetch": 138.4491,
+        "native_identity_projection": 0.4554000000000002,
+        "native_visit_projection_inclusive": 0.7555999999999999,
+        "native_tree_walk_inclusive": 139.8673,
+        "native_identity_cache_fetch": 1.9715,
+        "native_ancestor_navigation": 20.002399999999998,
+        "native_element_verify_inclusive": 38.9014,
+        "native_identity_resolve_inclusive": 120.58099999999999,
+        "native_pattern_action": 18.025000000000002,
+        "native_pattern_dispatch_inclusive": 38.067,
+        "native_post_action_value_read": 8.262,
+        "native_act_inclusive": 167.6172,
+        "native_discovery_value_read": 0.0009,
+        "native_window_metadata_inclusive": 2.2869,
+        "native_discovery_inclusive": 68.2531,
+        "uia_tree_walk": 56.007600000000004
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 182,
+        "native_identity_projection": 183,
+        "native_visit_projection_inclusive": 179,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 51.8211999999985,
+      "breakdown_ms": {
+        "queue_wait": 0.03280000000086147,
+        "companion_before": 1.5826000000015483,
+        "action": 46.82970000000205,
+        "companion_after": 0.5547000000005937,
+        "serialization": 0.0286999999989348,
+        "worker_round_trip": 9.850099999999657,
+        "post_processing": 0.007900000000518048,
+        "native_window_verify": 5.4678,
+        "native_window_metadata_inclusive": 2.5617,
+        "foreground_guard": 7.269799999998213
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 122.96619999999893,
+      "breakdown_ms": {
+        "queue_wait": 0.10239999999976135,
+        "companion_before": 0.7036999999945692,
+        "action": 113.25179999999818,
+        "companion_after": 0.42070000000239816,
+        "serialization": 0.03559999999561114,
+        "worker_round_trip": 121.31780000000072,
+        "post_processing": 0.03870000000461005,
+        "native_window_verify": 16.747700000000002,
+        "native_navigation_cache_fetch": 83.36900000000004,
+        "native_identity_projection": 0.19989999999999994,
+        "native_visit_projection_inclusive": 0.5192000000000001,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 84.2689,
+        "native_window_metadata_inclusive": 2.5625,
+        "native_discovery_inclusive": 105.3803,
+        "uia_tree_walk": 84.2365
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 63,
+        "native_identity_projection": 62,
+        "native_visit_projection_inclusive": 62,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 120.86709999999948,
+      "breakdown_ms": {
+        "queue_wait": 0.031899999998131534,
+        "companion_before": 1.2695000000021537,
+        "action": 116.02579999999944,
+        "companion_after": 0.4150999999983469,
+        "serialization": 0.01939999999740394,
+        "worker_round_trip": 118.82489999999962,
+        "post_processing": 0.009400000002642628,
+        "native_window_verify": 11.087900000000001,
+        "native_navigation_cache_fetch": 63.5745,
+        "native_identity_projection": 0.1577999999999999,
+        "native_visit_projection_inclusive": 0.199,
+        "native_tree_walk_inclusive": 64.0392,
+        "native_identity_cache_fetch": 0.9838,
+        "native_ancestor_navigation": 20.852499999999996,
+        "native_element_verify_inclusive": 31.4224,
+        "native_identity_resolve_inclusive": 87.2755,
+        "native_pattern_action": 4.6531,
+        "native_pattern_dispatch_inclusive": 20.6336,
+        "native_post_action_value_read": 6.3432,
+        "native_act_inclusive": 114.5917
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 67,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 22,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 123.2335000000021,
+      "breakdown_ms": {
+        "queue_wait": 0.036400000000867294,
+        "companion_before": 5.520199999999022,
+        "action": 112.99170000000231,
+        "companion_after": 0.4425999999984924,
+        "serialization": 0.0503000000026077,
+        "worker_round_trip": 116.97829999999885,
+        "post_processing": 0.0352999999995518,
+        "native_window_verify": 23.856,
+        "native_navigation_cache_fetch": 76.11260000000004,
+        "native_identity_projection": 0.3184,
+        "native_visit_projection_inclusive": 0.7061999999999998,
+        "native_discovery_value_read": 0.0012000000000000001,
+        "native_tree_walk_inclusive": 77.1908,
+        "native_window_metadata_inclusive": 2.8489,
+        "native_discovery_inclusive": 105.4813,
+        "uia_tree_walk": 77.15870000000001
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 78,
+        "native_identity_projection": 77,
+        "native_visit_projection_inclusive": 77,
+        "native_discovery_value_read": 2,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 455.14670000000115,
+      "breakdown_ms": {
+        "queue_wait": 0.04989999999816064,
+        "companion_before": 4.245299999995041,
+        "action": 447.3041999999987,
+        "companion_after": 1.0407999999988533,
+        "serialization": 0.08539999999629799,
+        "worker_round_trip": 448.6825999999928,
+        "post_processing": 0.06369999999878928,
+        "native_window_verify": 51.4041,
+        "native_navigation_cache_fetch": 321.94960000000003,
+        "native_identity_projection": 1.1869,
+        "native_visit_projection_inclusive": 2.801800000000001,
+        "native_tree_walk_inclusive": 326.4447,
+        "native_identity_cache_fetch": 1.571,
+        "native_ancestor_navigation": 40.90739999999999,
+        "native_element_verify_inclusive": 64.5385,
+        "native_identity_resolve_inclusive": 104.8396,
+        "native_pattern_action": 0.9749,
+        "native_pattern_dispatch_inclusive": 42.128,
+        "native_post_action_value_read": 0.366,
+        "native_act_inclusive": 147.9424,
+        "native_discovery_value_read": 0.0010999999999999998,
+        "native_window_metadata_inclusive": 10.4467,
+        "native_discovery_inclusive": 288.27430000000004,
+        "uia_tree_walk": 254.99420000000003
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 311,
+        "native_identity_projection": 310,
+        "native_visit_projection_inclusive": 308,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 46,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_discovery_value_read": 2,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 133.53310000000056,
+      "breakdown_ms": {
+        "queue_wait": 0.030399999999644933,
+        "companion_before": 0.6152000000001863,
+        "action": 130.76410000000033,
+        "companion_after": 0.4304999999985739,
+        "serialization": 0.03719999999884749,
+        "worker_round_trip": 132.2000999999982,
+        "post_processing": 0.08929999999963911,
+        "native_window_verify": 32.6148,
+        "native_navigation_cache_fetch": 87.11109999999998,
+        "native_identity_projection": 0.27440000000000014,
+        "native_visit_projection_inclusive": 0.6789999999999999,
+        "native_tree_walk_inclusive": 88.1697,
+        "native_window_metadata_inclusive": 4.8519,
+        "native_discovery_inclusive": 106.7583,
+        "uia_tree_walk": 88.14880000000001
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 117,
+        "native_identity_projection": 116,
+        "native_visit_projection_inclusive": 116,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 160.08929999999964,
+      "breakdown_ms": {
+        "queue_wait": 0.025200000000040745,
+        "companion_before": 3.6758000000008906,
+        "action": 154.12950000000274,
+        "companion_after": 0.4157999999988533,
+        "serialization": 0.018899999995483086,
+        "worker_round_trip": 155.72070000000167,
+        "post_processing": 0.008200000000215368,
+        "native_window_verify": 26.9748,
+        "native_navigation_cache_fetch": 83.25049999999999,
+        "native_identity_projection": 0.28479999999999994,
+        "native_visit_projection_inclusive": 0.3610999999999999,
+        "native_tree_walk_inclusive": 84.0577,
+        "native_identity_cache_fetch": 1.1654,
+        "native_ancestor_navigation": 27.209799999999998,
+        "native_element_verify_inclusive": 49.1654,
+        "native_identity_resolve_inclusive": 126.612,
+        "native_pattern_action": 0.5785,
+        "native_pattern_dispatch_inclusive": 25.5483,
+        "native_post_action_value_read": 0.166,
+        "native_act_inclusive": 152.7011
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 118,
+        "native_identity_projection": 119,
+        "native_visit_projection_inclusive": 117,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 42,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 277.90590000000157,
+      "breakdown_ms": {
+        "queue_wait": 0.04389999999693828,
+        "companion_before": 0.8670000000020082,
+        "action": 271.6820000000007,
+        "companion_after": 0.5342999999993481,
+        "serialization": 0.04770000000280561,
+        "worker_round_trip": 276.18079999999827,
+        "post_processing": 0.03119999999398715,
+        "native_window_verify": 38.6222,
+        "native_navigation_cache_fetch": 225.93439999999995,
+        "native_identity_projection": 0.6461999999999998,
+        "native_visit_projection_inclusive": 1.6124999999999996,
+        "native_discovery_value_read": 0.0007,
+        "native_tree_walk_inclusive": 228.5468,
+        "native_window_metadata_inclusive": 8.7275,
+        "native_discovery_inclusive": 257.7274,
+        "uia_tree_walk": 228.5207
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 183,
+        "native_identity_projection": 182,
+        "native_visit_projection_inclusive": 182,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 282.9314000000013,
+      "breakdown_ms": {
+        "queue_wait": 0.04290000000037253,
+        "companion_before": 0.660200000005716,
+        "action": 278.6163000000015,
+        "companion_after": 0.4367999999994936,
+        "serialization": 0.026099999999132706,
+        "worker_round_trip": 281.58480000000054,
+        "post_processing": 0.005600000000413274,
+        "native_window_verify": 30.797900000000002,
+        "native_navigation_cache_fetch": 155.9356,
+        "native_identity_projection": 0.48870000000000047,
+        "native_visit_projection_inclusive": 0.6200999999999999,
+        "native_tree_walk_inclusive": 157.2774,
+        "native_identity_cache_fetch": 3.2241999999999997,
+        "native_ancestor_navigation": 45.278499999999994,
+        "native_element_verify_inclusive": 93.00450000000001,
+        "native_identity_resolve_inclusive": 231.1336,
+        "native_pattern_action": 4.3926,
+        "native_pattern_dispatch_inclusive": 43.7179,
+        "native_post_action_value_read": 1.1507,
+        "native_act_inclusive": 276.3714
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 181,
+        "native_identity_projection": 182,
+        "native_visit_projection_inclusive": 180,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 54,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 16.467399999997724,
+      "breakdown_ms": {
+        "queue_wait": 0.030000000002473826,
+        "companion_before": 5.583099999999831,
+        "action": 5.700400000001537,
+        "companion_after": 3.0878000000011525,
+        "serialization": 0.03020000000105938,
+        "worker_round_trip": 7.472000000001572,
+        "post_processing": 0.023799999995389953,
+        "native_window_metadata_inclusive": 1.1103,
+        "native_window_enumeration_inclusive": 1.3237
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 27.90730000000258,
+      "breakdown_ms": {
+        "queue_wait": 0.027699999998731073,
+        "companion_before": 4.202900000000227,
+        "action": 14.489300000001094,
+        "companion_after": 1.9939000000013039,
+        "serialization": 0.033900000005814945,
+        "worker_round_trip": 21.06670000000304,
+        "post_processing": 0.020600000003469177,
+        "native_window_metadata_inclusive": 1.0252999999999999,
+        "native_window_verify": 5.7708,
+        "native_window_capture_inclusive": 11.8118,
+        "native_window_enumeration_inclusive": 13.0392
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 92.40989999999874,
+      "breakdown_ms": {
+        "queue_wait": 0.059900000000197906,
+        "companion_before": 0.7638000000006286,
+        "action": 89.38829999999871,
+        "companion_after": 0.42850000000180444,
+        "serialization": 0.037500000005820766,
+        "worker_round_trip": 90.94599999999627,
+        "post_processing": 0.02779999999984284,
+        "native_window_verify": 22.125799999999998,
+        "native_navigation_cache_fetch": 60.402699999999996,
+        "native_identity_projection": 0.1463,
+        "native_visit_projection_inclusive": 0.369,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 61.0546,
+        "native_window_metadata_inclusive": 5.939,
+        "native_discovery_inclusive": 84.6948,
+        "uia_tree_walk": 60.9987
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 52,
+        "native_visit_projection_inclusive": 52,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 88.41669999999795,
+      "breakdown_ms": {
+        "queue_wait": 0.0478000000002794,
+        "companion_before": 1.4507999999987078,
+        "action": 82.66979999999967,
+        "companion_after": 1.0640000000021246,
+        "serialization": 0.024200000003474997,
+        "worker_round_trip": 85.61130000000048,
+        "post_processing": 0.008299999997689156,
+        "native_window_verify": 9.673599999999999,
+        "native_navigation_cache_fetch": 43.73470000000001,
+        "native_identity_projection": 0.17729999999999999,
+        "native_visit_projection_inclusive": 0.20029999999999998,
+        "native_tree_walk_inclusive": 44.1281,
+        "native_identity_cache_fetch": 1.4322,
+        "native_ancestor_navigation": 12.6465,
+        "native_element_verify_inclusive": 22.5063,
+        "native_identity_resolve_inclusive": 59.5823,
+        "native_pattern_action": 2.1071,
+        "native_pattern_dispatch_inclusive": 16.0251,
+        "native_post_action_value_read": 2.3854,
+        "native_act_inclusive": 78.3186
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 54,
+        "native_visit_projection_inclusive": 52,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 16,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 63.624299999999494,
+      "breakdown_ms": {
+        "queue_wait": 0.0385999999998603,
+        "companion_before": 1.1086000000032072,
+        "action": 57.254400000001624,
+        "companion_after": 2.2311999999983527,
+        "serialization": 0.08919999999488937,
+        "worker_round_trip": 59.85939999999755,
+        "post_processing": 0.0731999999989057,
+        "native_window_verify": 9.8219,
+        "native_navigation_cache_fetch": 42.23960000000001,
+        "native_identity_projection": 0.09400000000000004,
+        "native_visit_projection_inclusive": 0.23689999999999997,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 42.6246,
+        "native_window_metadata_inclusive": 2.0571,
+        "native_discovery_inclusive": 52.8756,
+        "uia_tree_walk": 42.6032
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 53,
+        "native_identity_projection": 52,
+        "native_visit_projection_inclusive": 52,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 273.9103000000032,
+      "breakdown_ms": {
+        "queue_wait": 0.03629999999975553,
+        "companion_before": 7.619900000001508,
+        "action": 260.75610000000233,
+        "companion_after": 3.008299999997689,
+        "serialization": 0.06220000000030268,
+        "worker_round_trip": 262.15200000000186,
+        "post_processing": 0.029099999996105907,
+        "native_window_verify": 35.465900000000005,
+        "native_navigation_cache_fetch": 151.38949999999997,
+        "native_identity_projection": 0.5642,
+        "native_visit_projection_inclusive": 0.8310999999999998,
+        "native_tree_walk_inclusive": 152.922,
+        "native_identity_cache_fetch": 2.1799999999999997,
+        "native_ancestor_navigation": 21.2753,
+        "native_element_verify_inclusive": 44.0912,
+        "native_identity_resolve_inclusive": 127.36619999999999,
+        "native_pattern_action": 18.3636,
+        "native_pattern_dispatch_inclusive": 39.481899999999996,
+        "native_post_action_value_read": 9.3317,
+        "native_act_inclusive": 176.8727,
+        "native_discovery_value_read": 0.0006,
+        "native_window_metadata_inclusive": 3.4057,
+        "native_discovery_inclusive": 75.6918,
+        "uia_tree_walk": 63.597300000000004
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 182,
+        "native_identity_projection": 183,
+        "native_visit_projection_inclusive": 179,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 40.5041999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.026399999998830026,
+        "companion_before": 2.980599999998958,
+        "action": 34.6278999999995,
+        "companion_after": 0.5805000000000291,
+        "serialization": 0.04740000000310829,
+        "worker_round_trip": 11.280399999996007,
+        "post_processing": 0.008299999994051177,
+        "native_window_verify": 7.7028,
+        "native_window_metadata_inclusive": 2.7272,
+        "foreground_guard": 9.327299999997194
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 124.17199999999866,
+      "breakdown_ms": {
+        "queue_wait": 0.14060000000245054,
+        "companion_before": 0.7502999999996973,
+        "action": 118.29399999999805,
+        "companion_after": 1.6952999999994063,
+        "serialization": 0.051200000001699664,
+        "worker_round_trip": 121.29830000000584,
+        "post_processing": 0.029499999996914994,
+        "native_window_verify": 17.9131,
+        "native_navigation_cache_fetch": 92.95520000000006,
+        "native_identity_projection": 0.27479999999999993,
+        "native_visit_projection_inclusive": 1.3225000000000002,
+        "native_discovery_value_read": 0.001,
+        "native_tree_walk_inclusive": 94.7544,
+        "native_window_metadata_inclusive": 4.0817,
+        "native_discovery_inclusive": 109.3965,
+        "uia_tree_walk": 94.7288
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 63,
+        "native_identity_projection": 62,
+        "native_visit_projection_inclusive": 62,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 136.4422999999988,
+      "breakdown_ms": {
+        "queue_wait": 0.043300000001181616,
+        "companion_before": 0.671200000004319,
+        "action": 131.96459999999934,
+        "companion_after": 0.408899999998539,
+        "serialization": 0.01840000000083819,
+        "worker_round_trip": 135.10180000000037,
+        "post_processing": 0.011399999999412103,
+        "native_window_verify": 11.525099999999998,
+        "native_navigation_cache_fetch": 80.35829999999999,
+        "native_identity_projection": 0.2009,
+        "native_visit_projection_inclusive": 0.2421,
+        "native_tree_walk_inclusive": 80.8585,
+        "native_identity_cache_fetch": 1.3814,
+        "native_ancestor_navigation": 21.6625,
+        "native_element_verify_inclusive": 34.564,
+        "native_identity_resolve_inclusive": 105.0092,
+        "native_pattern_action": 7.0312,
+        "native_pattern_dispatch_inclusive": 24.373,
+        "native_post_action_value_read": 0.9589,
+        "native_act_inclusive": 130.6799
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 67,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 22,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 111.79219999999987,
+      "breakdown_ms": {
+        "queue_wait": 0.03689999999915017,
+        "companion_before": 0.9187000000019907,
+        "action": 106.8755999999994,
+        "companion_after": 1.1172000000005937,
+        "serialization": 0.06409999999596039,
+        "worker_round_trip": 109.43669999999838,
+        "post_processing": 0.05220000000190339,
+        "native_window_verify": 17.650399999999998,
+        "native_navigation_cache_fetch": 78.43010000000002,
+        "native_identity_projection": 0.3185,
+        "native_visit_projection_inclusive": 0.6673,
+        "native_discovery_value_read": 0.0013,
+        "native_tree_walk_inclusive": 79.4456,
+        "native_window_metadata_inclusive": 2.4134,
+        "native_discovery_inclusive": 97.6464,
+        "uia_tree_walk": 79.3901
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 78,
+        "native_identity_projection": 77,
+        "native_visit_projection_inclusive": 77,
+        "native_discovery_value_read": 2,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 652.0827000000027,
+      "breakdown_ms": {
+        "queue_wait": 0.02419999999983702,
+        "companion_before": 6.113199999999779,
+        "action": 641.9909000000007,
+        "companion_after": 1.1064000000005763,
+        "serialization": 0.09100000001126318,
+        "worker_round_trip": 643.9984999999979,
+        "post_processing": 0.06540000000313739,
+        "native_window_verify": 100.5052,
+        "native_navigation_cache_fetch": 461.105,
+        "native_identity_projection": 1.7361999999999993,
+        "native_visit_projection_inclusive": 3.3376,
+        "native_tree_walk_inclusive": 467.0714,
+        "native_identity_cache_fetch": 1.4028,
+        "native_ancestor_navigation": 41.30479999999999,
+        "native_element_verify_inclusive": 62.125099999999996,
+        "native_identity_resolve_inclusive": 218.1753,
+        "native_pattern_action": 1.1777,
+        "native_pattern_dispatch_inclusive": 29.2579,
+        "native_post_action_value_read": 0.4531,
+        "native_act_inclusive": 248.2328,
+        "native_discovery_value_read": 0.0012000000000000001,
+        "native_window_metadata_inclusive": 25.280700000000003,
+        "native_discovery_inclusive": 371.0078,
+        "uia_tree_walk": 301.55420000000004
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 342,
+        "native_identity_projection": 341,
+        "native_visit_projection_inclusive": 339,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 46,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1,
+        "native_discovery_value_read": 2,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 191.48239999999714,
+      "breakdown_ms": {
+        "queue_wait": 0.03440000000045984,
+        "companion_before": 0.672099999996135,
+        "action": 185.71349999999802,
+        "companion_after": 0.9052999999985332,
+        "serialization": 0.6563000000023749,
+        "worker_round_trip": 188.65639999999985,
+        "post_processing": 0.9477999999944586,
+        "native_window_verify": 32.626,
+        "native_navigation_cache_fetch": 134.39919999999995,
+        "native_identity_projection": 0.5297000000000005,
+        "native_visit_projection_inclusive": 1.0518,
+        "native_tree_walk_inclusive": 136.0073,
+        "native_window_metadata_inclusive": 8.8948,
+        "native_discovery_inclusive": 173.222,
+        "uia_tree_walk": 135.97650000000002
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 117,
+        "native_identity_projection": 116,
+        "native_visit_projection_inclusive": 116,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 368.0702999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.03130000000237487,
+        "companion_before": 5.983599999999569,
+        "action": 352.58110000000306,
+        "companion_after": 1.6189000000013039,
+        "serialization": 0.030699999995704275,
+        "worker_round_trip": 359.1912999999986,
+        "post_processing": 0.007399999998597195,
+        "native_window_verify": 35.3428,
+        "native_navigation_cache_fetch": 194.0225,
+        "native_identity_projection": 0.3693000000000002,
+        "native_visit_projection_inclusive": 0.5501000000000004,
+        "native_tree_walk_inclusive": 195.1947,
+        "native_identity_cache_fetch": 5.2666,
+        "native_ancestor_navigation": 87.28739999999996,
+        "native_element_verify_inclusive": 133.4367,
+        "native_identity_resolve_inclusive": 298.7119,
+        "native_pattern_action": 1.7021,
+        "native_pattern_dispatch_inclusive": 50.4223,
+        "native_post_action_value_read": 0.2232,
+        "native_act_inclusive": 349.7207
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 117,
+        "native_identity_projection": 118,
+        "native_visit_projection_inclusive": 116,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 42,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 250.51949999999852,
+      "breakdown_ms": {
+        "queue_wait": 0.03180000000065775,
+        "companion_before": 0.8305999999975029,
+        "action": 246.93800000000192,
+        "companion_after": 0.40790000000197324,
+        "serialization": 0.0359000000062224,
+        "worker_round_trip": 249.04409999999916,
+        "post_processing": 0.0239000000001397,
+        "native_window_verify": 38.213899999999995,
+        "native_navigation_cache_fetch": 202.49540000000007,
+        "native_identity_projection": 0.5472000000000002,
+        "native_visit_projection_inclusive": 1.3173,
+        "native_discovery_value_read": 0.0008,
+        "native_tree_walk_inclusive": 204.6268,
+        "native_window_metadata_inclusive": 5.3979,
+        "native_discovery_inclusive": 231.3874,
+        "uia_tree_walk": 204.59810000000002
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 178,
+        "native_identity_projection": 177,
+        "native_visit_projection_inclusive": 177,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 383.9102000000021,
+      "breakdown_ms": {
+        "queue_wait": 0.03719999999884749,
+        "companion_before": 2.824800000002142,
+        "action": 376.9543999999987,
+        "companion_after": 0.5456000000012864,
+        "serialization": 0.0202999999964959,
+        "worker_round_trip": 380.2531999999992,
+        "post_processing": 0.006799999999202555,
+        "native_window_verify": 36.0505,
+        "native_navigation_cache_fetch": 169.57499999999987,
+        "native_identity_projection": 0.5769000000000001,
+        "native_visit_projection_inclusive": 0.7296000000000006,
+        "native_tree_walk_inclusive": 171.1412,
+        "native_identity_cache_fetch": 1.8371,
+        "native_ancestor_navigation": 116.02269999999997,
+        "native_element_verify_inclusive": 172.0892,
+        "native_identity_resolve_inclusive": 241.2801,
+        "native_pattern_action": 1.5673,
+        "native_pattern_dispatch_inclusive": 122.8391,
+        "native_post_action_value_read": 10.0953,
+        "native_act_inclusive": 374.5703
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 176,
+        "native_identity_projection": 177,
+        "native_visit_projection_inclusive": 175,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 54,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "pokemon",
+      "action": "done",
+      "total_ms": 7.635000000002037,
+      "breakdown_ms": {
+        "queue_wait": 0.0319999999992433,
+        "companion_before": 7.534800000001269,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.006499999995867256
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 16.92389999999432,
+      "breakdown_ms": {
+        "queue_wait": 0.023000000001047738,
+        "companion_before": 0.5498999999981606,
+        "action": 13.615600000004633,
+        "companion_after": 0.7836999999999534,
+        "serialization": 0.01909999999043066,
+        "worker_round_trip": 15.341900000006717,
+        "post_processing": 0.009600000012142118,
+        "native_window_verify": 8.7761
+      },
+      "counts": {
+        "native_window_verify": 3
+      }
+    }
+  ],
+  "mcp_companion_start_ms": 1523.9183,
+  "built_sha256": {
+    "main.js": "857b6c46b4cfe492b5f7d34d6749711f97bbd48024ec8b0db0813403b7a78482",
+    "pokemon/runtime.js": "b418cd5b2fdaff1a17c01b8f3f1bd8ca595952561fe63f6bfbb094e612ddab57",
+    "tools/computer.js": "0b71901d0f2303ec579af9f0345356be7c6275aa3a7b7be97fb8a86a35d176eb",
+    "tools/windows.js": "2245ba2f0a23420deaeed099eb6103eb0bb5fa5a8631d3a4181d0e73ce3f55f9",
+    "windows/automation.js": "5752df8ac8bc54a4521c2f0236b531d7fc4404b9fa189b210f89f50a2aa40f3d",
+    "windows/uia-worker.dll": "a62ea3fc36fbbf21f4e80246b58719007dbcc65b558735571f475fb8ca7bd89c"
+  },
+  "benchmark_sha256": {
+    "scripts/youtube-benchmark.mjs": "87782a919bb55f98760f0940bd44c44983094b15132ad8ae25778b0cc071d28d",
+    "scripts/youtube-benchmark-lib.mjs": "b3fabe52484ccf6ec2ebfa36d5190095bfc2ea71ed6ebd7a45acd9c9ceb89a14",
+    "scripts/client.mjs": "d247d13415650cde4e14d2e58fa2e8c8a74604ff3b3eb4bbee6d616b6fc94319"
+  },
+  "summary": {
+    "verified_runs": 3,
+    "failed_runs": 0,
+    "total": {
+      "samples": 3,
+      "min_ms": 8181.649000000001,
+      "median_ms": 8384.128,
+      "p95_ms": 11175.421,
+      "max_ms": 11175.421
+    },
+    "stages": {
+      "open_edge": {
+        "samples": 3,
+        "min_ms": 1066.7723999999998,
+        "median_ms": 1182.8850999999995,
+        "p95_ms": 1490.4216999999999,
+        "max_ms": 1490.4216999999999
+      },
+      "open_youtube": {
+        "samples": 3,
+        "min_ms": 2387.5013,
+        "median_ms": 2621.3432000000003,
+        "p95_ms": 2825.0694000000003,
+        "max_ms": 2825.0694000000003
+      },
+      "search": {
+        "samples": 3,
+        "min_ms": 1928.908800000001,
+        "median_ms": 2270.1865999999973,
+        "p95_ms": 4525.940600000002,
+        "max_ms": 4525.940600000002
+      },
+      "click_video": {
+        "samples": 3,
+        "min_ms": 507.5777999999991,
+        "median_ms": 676.8868000000002,
+        "p95_ms": 736.8271000000022,
+        "max_ms": 736.8271000000022
+      },
+      "verify_playback": {
+        "samples": 3,
+        "min_ms": 1604.1911,
+        "median_ms": 1886.3829000000005,
+        "p95_ms": 2029.7528999999995,
+        "max_ms": 2029.7528999999995
+      }
+    }
+  }
+}

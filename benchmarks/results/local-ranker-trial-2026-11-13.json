@@ -1,0 +1,4551 @@
+{
+  "complete": true,
+  "measured_at": "2026-11-13T06:08:05.959Z",
+  "environment": {
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz",
+    "node": "v24.16.0"
+  },
+  "hashes": {
+    "before": {
+      "model.js": "3470811b47c4d8b5b4649de517e1d78ac512f98c2fb682800e891dc14a901573",
+      "service.js": "974aab8557284b68fcf7a28ffffdb06c368d144cf4fcfd30f4e1ce7134dc1374"
+    },
+    "after": {
+      "model.js": "3470811b47c4d8b5b4649de517e1d78ac512f98c2fb682800e891dc14a901573",
+      "service.js": "3244e1139919daf3b598b936706c6effa88a177cf103f54b49a64bdd3fa81017",
+      "reuse.js": "b853cfbb262e2cc65a6ff4e0b516648a7fd166d4b7b77b549ba97f8242be8029"
+    }
+  },
+  "harness_sha256": "104434a2ed5db6f1bba3c03f024fce00195b14095cf31d9f2617206b8ed85fa0",
+  "fixture": {
+    "recipes": 32,
+    "contexts_each": 8,
+    "case_count": 198,
+    "state_sha256": "409ed6264db9cbaf2b6f0a0c7d763e041b5a934354b74dac06218d5269b07151"
+  },
+  "quality": {
+    "before": {
+      "supported": {
+        "correct": 64,
+        "total": 64
+      },
+      "vietnamese_alias": {
+        "correct": 32,
+        "total": 32
+      },
+      "negation_english": {
+        "correct": 0,
+        "total": 24
+      },
+      "negation_vietnamese": {
+        "correct": 0,
+        "total": 16
+      },
+      "different_action": {
+        "correct": 0,
+        "total": 32
+      },
+      "incomplete_multi_action": {
+        "correct": 0,
+        "total": 8
+      },
+      "quoted_text": {
+        "correct": 8,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      },
+      "unlearned_semantics": {
+        "correct": 0,
+        "total": 8
+      }
+    },
+    "after": {
+      "supported": {
+        "correct": 64,
+        "total": 64
+      },
+      "vietnamese_alias": {
+        "correct": 32,
+        "total": 32
+      },
+      "negation_english": {
+        "correct": 24,
+        "total": 24
+      },
+      "negation_vietnamese": {
+        "correct": 16,
+        "total": 16
+      },
+      "different_action": {
+        "correct": 32,
+        "total": 32
+      },
+      "incomplete_multi_action": {
+        "correct": 8,
+        "total": 8
+      },
+      "quoted_text": {
+        "correct": 8,
+        "total": 8
+      },
+      "unrelated": {
+        "correct": 6,
+        "total": 6
+      },
+      "unlearned_semantics": {
+        "correct": 0,
+        "total": 8
+      }
+    }
+  },
+  "evaluation": [
+    {
+      "group": "supported",
+      "query": "Fill the invoice field now",
+      "expected": "invoice",
+      "before": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "invoice",
+          "message",
+          "service"
+        ]
+      },
+      "after": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "invoice",
+          "message",
+          "service"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type invoice information please",
+      "expected": "invoice",
+      "before": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập invoice field",
+      "expected": "invoice",
+      "before": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the shipping field now",
+      "expected": "shipping",
+      "before": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "shipping",
+          "meeting"
+        ]
+      },
+      "after": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "shipping",
+          "meeting"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type shipping information please",
+      "expected": "shipping",
+      "before": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập shipping field",
+      "expected": "shipping",
+      "before": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the customer field now",
+      "expected": "customer",
+      "before": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "customer",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "customer",
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type customer information please",
+      "expected": "customer",
+      "before": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập customer field",
+      "expected": "customer",
+      "before": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the inventory field now",
+      "expected": "inventory",
+      "before": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "inventory",
+          "report",
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "inventory",
+          "report",
+          "invoice"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type inventory information please",
+      "expected": "inventory",
+      "before": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập inventory field",
+      "expected": "inventory",
+      "before": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the payment field now",
+      "expected": "payment",
+      "before": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "payment",
+          "document",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "payment",
+          "document",
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type payment information please",
+      "expected": "payment",
+      "before": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập payment field",
+      "expected": "payment",
+      "before": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the budget field now",
+      "expected": "budget",
+      "before": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "budget",
+          "ticket",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "budget",
+          "ticket",
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type budget information please",
+      "expected": "budget",
+      "before": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập budget field",
+      "expected": "budget",
+      "before": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the report field now",
+      "expected": "report",
+      "before": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "report",
+          "inventory",
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "report",
+          "inventory",
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type report information please",
+      "expected": "report",
+      "before": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập report field",
+      "expected": "report",
+      "before": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the appointment field now",
+      "expected": "appointment",
+      "before": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "appointment",
+          "payment",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "appointment",
+          "payment",
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type appointment information please",
+      "expected": "appointment",
+      "before": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập appointment field",
+      "expected": "appointment",
+      "before": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the meeting field now",
+      "expected": "meeting",
+      "before": {
+        "actual": "meeting",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "meeting",
+          "shipping",
+          "message"
+        ]
+      },
+      "after": {
+        "actual": "meeting",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "meeting",
+          "shipping",
+          "message"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type meeting information please",
+      "expected": "meeting",
+      "before": {
+        "actual": "meeting",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "meeting"
+        ]
+      },
+      "after": {
+        "actual": "meeting",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "meeting"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập meeting field",
+      "expected": "meeting",
+      "before": {
+        "actual": "meeting",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "meeting"
+        ]
+      },
+      "after": {
+        "actual": "meeting",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "meeting"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the travel field now",
+      "expected": "travel",
+      "before": {
+        "actual": "travel",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "travel",
+          "order",
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "travel",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "travel",
+          "order",
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type travel information please",
+      "expected": "travel",
+      "before": {
+        "actual": "travel",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "travel"
+        ]
+      },
+      "after": {
+        "actual": "travel",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "travel"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập travel field",
+      "expected": "travel",
+      "before": {
+        "actual": "travel",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "travel"
+        ]
+      },
+      "after": {
+        "actual": "travel",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "travel"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the recipe field now",
+      "expected": "recipe",
+      "before": {
+        "actual": "recipe",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "recipe",
+          "report",
+          "request"
+        ]
+      },
+      "after": {
+        "actual": "recipe",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "recipe",
+          "report",
+          "request"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type recipe information please",
+      "expected": "recipe",
+      "before": {
+        "actual": "recipe",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "recipe",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập recipe field",
+      "expected": "recipe",
+      "before": {
+        "actual": "recipe",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "recipe",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the address field now",
+      "expected": "address",
+      "before": {
+        "actual": "address",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "address",
+          "message",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "address",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "address",
+          "message",
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type address information please",
+      "expected": "address",
+      "before": {
+        "actual": "address",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "address"
+        ]
+      },
+      "after": {
+        "actual": "address",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "address"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập address field",
+      "expected": "address",
+      "before": {
+        "actual": "address",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "address"
+        ]
+      },
+      "after": {
+        "actual": "address",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "address"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the calendar field now",
+      "expected": "calendar",
+      "before": {
+        "actual": "calendar",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "calendar",
+          "report"
+        ]
+      },
+      "after": {
+        "actual": "calendar",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "calendar",
+          "report"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type calendar information please",
+      "expected": "calendar",
+      "before": {
+        "actual": "calendar",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "calendar"
+        ]
+      },
+      "after": {
+        "actual": "calendar",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "calendar"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập calendar field",
+      "expected": "calendar",
+      "before": {
+        "actual": "calendar",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "calendar"
+        ]
+      },
+      "after": {
+        "actual": "calendar",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "calendar"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the project field now",
+      "expected": "project",
+      "before": {
+        "actual": "project",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "project",
+          "service",
+          "contact"
+        ]
+      },
+      "after": {
+        "actual": "project",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "project",
+          "service",
+          "contact"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type project information please",
+      "expected": "project",
+      "before": {
+        "actual": "project",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "project"
+        ]
+      },
+      "after": {
+        "actual": "project",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "project"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập project field",
+      "expected": "project",
+      "before": {
+        "actual": "project",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "project"
+        ]
+      },
+      "after": {
+        "actual": "project",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "project"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the reminder field now",
+      "expected": "reminder",
+      "before": {
+        "actual": "reminder",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "reminder",
+          "order",
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "reminder",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "reminder",
+          "order",
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type reminder information please",
+      "expected": "reminder",
+      "before": {
+        "actual": "reminder",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reminder"
+        ]
+      },
+      "after": {
+        "actual": "reminder",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reminder"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập reminder field",
+      "expected": "reminder",
+      "before": {
+        "actual": "reminder",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reminder"
+        ]
+      },
+      "after": {
+        "actual": "reminder",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reminder"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the contact field now",
+      "expected": "contact",
+      "before": {
+        "actual": "contact",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "contact",
+          "project",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "contact",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "contact",
+          "project",
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type contact information please",
+      "expected": "contact",
+      "before": {
+        "actual": "contact",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "contact"
+        ]
+      },
+      "after": {
+        "actual": "contact",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "contact"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập contact field",
+      "expected": "contact",
+      "before": {
+        "actual": "contact",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "contact"
+        ]
+      },
+      "after": {
+        "actual": "contact",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "contact"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the account field now",
+      "expected": "account",
+      "before": {
+        "actual": "account",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "account",
+          "payment",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "account",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "account",
+          "payment",
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type account information please",
+      "expected": "account",
+      "before": {
+        "actual": "account",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "account"
+        ]
+      },
+      "after": {
+        "actual": "account",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "account"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập account field",
+      "expected": "account",
+      "before": {
+        "actual": "account",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "account"
+        ]
+      },
+      "after": {
+        "actual": "account",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "account"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the ticket field now",
+      "expected": "ticket",
+      "before": {
+        "actual": "ticket",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "ticket",
+          "budget",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "ticket",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "ticket",
+          "budget",
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type ticket information please",
+      "expected": "ticket",
+      "before": {
+        "actual": "ticket",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "ticket"
+        ]
+      },
+      "after": {
+        "actual": "ticket",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "ticket"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập ticket field",
+      "expected": "ticket",
+      "before": {
+        "actual": "ticket",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "ticket"
+        ]
+      },
+      "after": {
+        "actual": "ticket",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "ticket"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the reference field now",
+      "expected": "reference",
+      "before": {
+        "actual": "reference",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "reference",
+          "message",
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "reference",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "reference",
+          "message",
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type reference information please",
+      "expected": "reference",
+      "before": {
+        "actual": "reference",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reference"
+        ]
+      },
+      "after": {
+        "actual": "reference",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reference"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập reference field",
+      "expected": "reference",
+      "before": {
+        "actual": "reference",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reference"
+        ]
+      },
+      "after": {
+        "actual": "reference",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reference"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the description field now",
+      "expected": "description",
+      "before": {
+        "actual": "description",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "description",
+          "document"
+        ]
+      },
+      "after": {
+        "actual": "description",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "description",
+          "document"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type description information please",
+      "expected": "description",
+      "before": {
+        "actual": "description",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "description"
+        ]
+      },
+      "after": {
+        "actual": "description",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "description"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập description field",
+      "expected": "description",
+      "before": {
+        "actual": "description",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "description"
+        ]
+      },
+      "after": {
+        "actual": "description",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "description"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the comment field now",
+      "expected": "comment",
+      "before": {
+        "actual": "comment",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "comment",
+          "payment",
+          "document"
+        ]
+      },
+      "after": {
+        "actual": "comment",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "comment",
+          "payment",
+          "document"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type comment information please",
+      "expected": "comment",
+      "before": {
+        "actual": "comment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "comment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập comment field",
+      "expected": "comment",
+      "before": {
+        "actual": "comment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "comment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the message field now",
+      "expected": "message",
+      "before": {
+        "actual": "message",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "message",
+          "service",
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": "message",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "message",
+          "service",
+          "invoice"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type message information please",
+      "expected": "message",
+      "before": {
+        "actual": "message",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "message"
+        ]
+      },
+      "after": {
+        "actual": "message",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "message"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập message field",
+      "expected": "message",
+      "before": {
+        "actual": "message",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "message"
+        ]
+      },
+      "after": {
+        "actual": "message",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "message"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the schedule field now",
+      "expected": "schedule",
+      "before": {
+        "actual": "schedule",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "schedule"
+        ]
+      },
+      "after": {
+        "actual": "schedule",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "schedule"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type schedule information please",
+      "expected": "schedule",
+      "before": {
+        "actual": "schedule",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "schedule"
+        ]
+      },
+      "after": {
+        "actual": "schedule",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "schedule"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập schedule field",
+      "expected": "schedule",
+      "before": {
+        "actual": "schedule",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "schedule"
+        ]
+      },
+      "after": {
+        "actual": "schedule",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "schedule"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the purchase field now",
+      "expected": "purchase",
+      "before": {
+        "actual": "purchase",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "purchase"
+        ]
+      },
+      "after": {
+        "actual": "purchase",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "purchase"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type purchase information please",
+      "expected": "purchase",
+      "before": {
+        "actual": "purchase",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "purchase"
+        ]
+      },
+      "after": {
+        "actual": "purchase",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "purchase"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập purchase field",
+      "expected": "purchase",
+      "before": {
+        "actual": "purchase",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "purchase"
+        ]
+      },
+      "after": {
+        "actual": "purchase",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "purchase"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the request field now",
+      "expected": "request",
+      "before": {
+        "actual": "request",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "request",
+          "recipe",
+          "report"
+        ]
+      },
+      "after": {
+        "actual": "request",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "request",
+          "recipe",
+          "report"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type request information please",
+      "expected": "request",
+      "before": {
+        "actual": "request",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "request"
+        ]
+      },
+      "after": {
+        "actual": "request",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "request"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập request field",
+      "expected": "request",
+      "before": {
+        "actual": "request",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "request"
+        ]
+      },
+      "after": {
+        "actual": "request",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "request"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the supplier field now",
+      "expected": "supplier",
+      "before": {
+        "actual": "supplier",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "supplier",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "supplier",
+        "correct": true,
+        "suggested": 2,
+        "ranked_topics": [
+          "supplier",
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type supplier information please",
+      "expected": "supplier",
+      "before": {
+        "actual": "supplier",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "supplier"
+        ]
+      },
+      "after": {
+        "actual": "supplier",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "supplier"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập supplier field",
+      "expected": "supplier",
+      "before": {
+        "actual": "supplier",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "supplier"
+        ]
+      },
+      "after": {
+        "actual": "supplier",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "supplier"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the employee field now",
+      "expected": "employee",
+      "before": {
+        "actual": "employee",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "employee"
+        ]
+      },
+      "after": {
+        "actual": "employee",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "employee"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type employee information please",
+      "expected": "employee",
+      "before": {
+        "actual": "employee",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "employee"
+        ]
+      },
+      "after": {
+        "actual": "employee",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "employee"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập employee field",
+      "expected": "employee",
+      "before": {
+        "actual": "employee",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "employee"
+        ]
+      },
+      "after": {
+        "actual": "employee",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "employee"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the service field now",
+      "expected": "service",
+      "before": {
+        "actual": "service",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "service",
+          "project",
+          "message"
+        ]
+      },
+      "after": {
+        "actual": "service",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "service",
+          "project",
+          "message"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type service information please",
+      "expected": "service",
+      "before": {
+        "actual": "service",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "service"
+        ]
+      },
+      "after": {
+        "actual": "service",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "service"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập service field",
+      "expected": "service",
+      "before": {
+        "actual": "service",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "service"
+        ]
+      },
+      "after": {
+        "actual": "service",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "service"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the document field now",
+      "expected": "document",
+      "before": {
+        "actual": "document",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "document",
+          "payment",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": "document",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "document",
+          "payment",
+          "comment"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type document information please",
+      "expected": "document",
+      "before": {
+        "actual": "document",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "document"
+        ]
+      },
+      "after": {
+        "actual": "document",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "document"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập document field",
+      "expected": "document",
+      "before": {
+        "actual": "document",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "document"
+        ]
+      },
+      "after": {
+        "actual": "document",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "document"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the order field now",
+      "expected": "order",
+      "before": {
+        "actual": "order",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "order",
+          "reminder",
+          "recipe"
+        ]
+      },
+      "after": {
+        "actual": "order",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "order",
+          "reminder",
+          "recipe"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type order information please",
+      "expected": "order",
+      "before": {
+        "actual": "order",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "order",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập order field",
+      "expected": "order",
+      "before": {
+        "actual": "order",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "order"
+        ]
+      },
+      "after": {
+        "actual": "order",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "order"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the delivery field now",
+      "expected": "delivery",
+      "before": {
+        "actual": "delivery",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "delivery"
+        ]
+      },
+      "after": {
+        "actual": "delivery",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "delivery"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type delivery information please",
+      "expected": "delivery",
+      "before": {
+        "actual": "delivery",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "delivery"
+        ]
+      },
+      "after": {
+        "actual": "delivery",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "delivery"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập delivery field",
+      "expected": "delivery",
+      "before": {
+        "actual": "delivery",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "delivery"
+        ]
+      },
+      "after": {
+        "actual": "delivery",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "delivery"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Fill the reservation field now",
+      "expected": "reservation",
+      "before": {
+        "actual": "reservation",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "reservation",
+          "document",
+          "service"
+        ]
+      },
+      "after": {
+        "actual": "reservation",
+        "correct": true,
+        "suggested": 3,
+        "ranked_topics": [
+          "reservation",
+          "document",
+          "service"
+        ]
+      }
+    },
+    {
+      "group": "supported",
+      "query": "Type reservation information please",
+      "expected": "reservation",
+      "before": {
+        "actual": "reservation",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reservation"
+        ]
+      },
+      "after": {
+        "actual": "reservation",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reservation"
+        ]
+      }
+    },
+    {
+      "group": "vietnamese_alias",
+      "query": "Nhập reservation field",
+      "expected": "reservation",
+      "before": {
+        "actual": "reservation",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reservation"
+        ]
+      },
+      "after": {
+        "actual": "reservation",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "reservation"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "invoice",
+          "message",
+          "service"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the invoice field",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the invoice field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "invoice",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the invoice field with text \"do not type\"",
+      "expected": "invoice",
+      "before": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      },
+      "after": {
+        "actual": "invoice",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "invoice"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "shipping",
+          "meeting",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the shipping field",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the shipping field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "shipping",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the shipping field with text \"do not type\"",
+      "expected": "shipping",
+      "before": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      },
+      "after": {
+        "actual": "shipping",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "shipping"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 2,
+        "ranked_topics": [
+          "customer",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the customer field",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the customer field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "customer",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the customer field with text \"do not type\"",
+      "expected": "customer",
+      "before": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      },
+      "after": {
+        "actual": "customer",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "customer"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "inventory",
+          "report",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the inventory field",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the inventory field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "inventory",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the inventory field with text \"do not type\"",
+      "expected": "inventory",
+      "before": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      },
+      "after": {
+        "actual": "inventory",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "inventory"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 2,
+        "ranked_topics": [
+          "payment",
+          "document"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 2,
+        "ranked_topics": [
+          "payment",
+          "document"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "payment",
+          "document",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the payment field",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the payment field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "payment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the payment field with text \"do not type\"",
+      "expected": "payment",
+      "before": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      },
+      "after": {
+        "actual": "payment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "payment"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "budget",
+          "order",
+          "ticket"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the budget field",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the budget field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "budget",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the budget field with text \"do not type\"",
+      "expected": "budget",
+      "before": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      },
+      "after": {
+        "actual": "budget",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "budget"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "report",
+          "inventory",
+          "order"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the report field",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the report field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "report",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the report field with text \"do not type\"",
+      "expected": "report",
+      "before": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      },
+      "after": {
+        "actual": "report",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "report"
+        ]
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Do not type the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Don't type the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_english",
+      "query": "Never type the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 3,
+        "ranked_topics": [
+          "appointment",
+          "payment",
+          "comment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Đừng nhập appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "negation_vietnamese",
+      "query": "Không nhập appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Read the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Delete the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Send the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "different_action",
+      "query": "Open the appointment field",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "incomplete_multi_action",
+      "query": "Read the appointment field and type a note",
+      "expected": null,
+      "before": {
+        "actual": "appointment",
+        "correct": false,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "quoted_text",
+      "query": "Type the appointment field with text \"do not type\"",
+      "expected": "appointment",
+      "before": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      },
+      "after": {
+        "actual": "appointment",
+        "correct": true,
+        "suggested": 1,
+        "ranked_topics": [
+          "appointment"
+        ]
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Paint a watercolor landscape",
+      "expected": null,
+      "before": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Play chess against me",
+      "expected": null,
+      "before": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "What is the capital of France?",
+      "expected": null,
+      "before": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Explain quantum physics",
+      "expected": null,
+      "before": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Sing a lullaby",
+      "expected": null,
+      "before": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unrelated",
+      "query": "Solve this algebra equation",
+      "expected": null,
+      "before": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": true,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Change where the parcel goes",
+      "expected": "shipping",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Enter the client's name",
+      "expected": "customer",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Set how much money we can spend",
+      "expected": "budget",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Book a visit with the doctor",
+      "expected": "appointment",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Update the stock count",
+      "expected": "inventory",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Enter the street and house number",
+      "expected": "address",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Add a notification for later",
+      "expected": "reminder",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    },
+    {
+      "group": "unlearned_semantics",
+      "query": "Book a table for dinner",
+      "expected": "reservation",
+      "before": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      },
+      "after": {
+        "actual": null,
+        "correct": false,
+        "suggested": 0,
+        "ranked_topics": []
+      }
+    }
+  ],
+  "latency": {
+    "positive": {
+      "before": {
+        "samples": 10,
+        "median_ms": 0.6259825000000001,
+        "p95_ms": 0.6516460000000006,
+        "cpu_ms": 611,
+        "raw_blocks": [
+          {
+            "ms_per_lookup": 0.6210980000000018,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6516460000000006,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6424240000000009,
+            "cpu_ms": 79,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6331319999999959,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6270650000000023,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6258349999999973,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6084650000000056,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6114909999999963,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6261300000000029,
+            "cpu_ms": 78,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6236760000000049,
+            "cpu_ms": 63,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "samples": 10,
+        "median_ms": 0.6367769999999973,
+        "p95_ms": 0.6578179999999975,
+        "cpu_ms": 577,
+        "raw_blocks": [
+          {
+            "ms_per_lookup": 0.6349420000000009,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6578179999999975,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6410480000000007,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6311329999999998,
+            "cpu_ms": 31,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6280590000000029,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6395010000000002,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6283140000000003,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6290769999999974,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6386119999999937,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.6386349999999947,
+            "cpu_ms": 47,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    "rejected": {
+      "before": {
+        "samples": 10,
+        "median_ms": 0.4863254999999981,
+        "p95_ms": 0.5530459999999948,
+        "cpu_ms": 484,
+        "raw_blocks": [
+          {
+            "ms_per_lookup": 0.5087899999999991,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.4904420000000027,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.4764640000000054,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.48571699999999507,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.48531299999999644,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.47774200000000744,
+            "cpu_ms": 46,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5530459999999948,
+            "cpu_ms": 32,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.4778980000000047,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.4869340000000011,
+            "cpu_ms": 46,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.496884,
+            "cpu_ms": 47,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "samples": 10,
+        "median_ms": 0.02630649999999605,
+        "p95_ms": 0.027563999999993028,
+        "cpu_ms": 32,
+        "raw_blocks": [
+          {
+            "ms_per_lookup": 0.02636199999999917,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.026348000000007234,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.027563999999993028,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.026141999999999825,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.025520999999998822,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.026049000000002705,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.026401999999998225,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.0248279999999977,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.026343999999999142,
+            "cpu_ms": 0,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.026268999999992958,
+            "cpu_ms": 16,
+            "operations": 100
+          }
+        ]
+      }
+    },
+    "mixed": {
+      "before": {
+        "samples": 10,
+        "median_ms": 0.5373844999999983,
+        "p95_ms": 0.5448039999999946,
+        "cpu_ms": 532,
+        "raw_blocks": [
+          {
+            "ms_per_lookup": 0.5422500000000037,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.527583999999997,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5435009999999966,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5236830000000009,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5410649999999987,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5319340000000011,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.533768,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5293399999999928,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5448039999999946,
+            "cpu_ms": 62,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5410009999999965,
+            "cpu_ms": 47,
+            "operations": 100
+          }
+        ]
+      },
+      "after": {
+        "samples": 10,
+        "median_ms": 0.35456149999999526,
+        "p95_ms": 0.5297600000000057,
+        "cpu_ms": 312,
+        "raw_blocks": [
+          {
+            "ms_per_lookup": 0.5297600000000057,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.17592999999999848,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5159090000000015,
+            "cpu_ms": 16,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.18081100000000333,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5100990000000002,
+            "cpu_ms": 47,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.19158800000000156,
+            "cpu_ms": 15,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.4974259999999958,
+            "cpu_ms": 46,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.20794600000000174,
+            "cpu_ms": 32,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.5282740000000012,
+            "cpu_ms": 63,
+            "operations": 100
+          },
+          {
+            "ms_per_lookup": 0.21169699999999467,
+            "cpu_ms": 15,
+            "operations": 100
+          }
+        ]
+      }
+    }
+  },
+  "feedback": {
+    "before": {
+      "rejected_query_suggested_again": true,
+      "rejected_query_suggested_after_restart": true,
+      "successful_still_available": true,
+      "corrected_available": true,
+      "state_bytes": 343455
+    },
+    "after": {
+      "rejected_query_suggested_again": false,
+      "rejected_query_suggested_after_restart": false,
+      "successful_still_available": true,
+      "corrected_available": true,
+      "state_bytes": 343497
+    }
+  },
+  "compatibility": {
+    "legacy_snapshot_unchanged": true,
+    "positive_scores_and_order_unchanged": true,
+    "feature_extraction_and_sgd_unchanged": true
+  },
+  "limits": [
+    "Synthetic regression corpus expanded from the previous known failure cases; not a blind representative user evaluation or threshold tuning experiment.",
+    "English/Vietnamese action and negation vocabularies are conservative lexical hints, not general multilingual understanding. Unlearned semantic paraphrases remain unsupported.",
+    "Latency reports ten counterbalanced block averages per arm, 100 lookups/block; p95 is across averages, not individual-request tail latency.",
+    "Disposable encrypted profiles and synthetic test ratings only; the user learning profile is not read or modified. Test keys bypass DPAPI.",
+    "No GPU, pretrained embedding runtime, cloud inference or UI execution is measured. Existing current-intent review and fresh-target checks remain necessary."
+  ]
+}

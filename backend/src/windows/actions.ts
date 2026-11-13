@@ -24,5 +24,5 @@ export function isReadOnlyNativeAction(action: string): boolean {
 		return !windowsActionCatalog[action as WindowsAction].mutates;
 	}
 
-	return ['status', 'acquire_control', 'release_control', 'wait_baseline', 'foreground', 'input_method', 'read_text_page', 'excel_inspect_workbook', 'excel_read_range', 'excel_find_cells', 'learning_encrypt_key', 'learning_decrypt_key'].includes(action);
+	return ['status', 'acquire_control', 'release_control', 'wait_baseline', 'foreground', 'input_method', 'read_text_page', 'find_text_range', 'find_text_ranges', 'excel_inspect_workbook', 'excel_read_range', 'excel_find_cells', 'learning_encrypt_key', 'learning_decrypt_key'].includes(action);
 }

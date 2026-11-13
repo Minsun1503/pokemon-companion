@@ -55,6 +55,8 @@ Discovery results report `complete` and `truncated`. Windows errors include `err
 
 See the [agent-desktop comparison and improvement roadmap](docs/agent-desktop-comparison.md) for the architecture review and implemented reliability changes.
 
+For Windows browser information retrieval, `research find_text` returns one matching passage and `find_many` retrieves up to eight phrases after one document discovery and identity check. It reuses the selected browser session. Use `course read_lesson` for versioned whole-page reading. See [retrieval research, benchmarks and evidence limits](docs/information-retrieval.md).
+
 Use `get_windows` to choose a `window_id`, then `get_ui` to inspect that window. Narrow `query` or `control_type` (such as `Button`, `Edit`, or `TabItem`) to return only relevant controls. Results default to 60 elements and 6,000 characters; lower `max_elements`/`max_chars` when possible. `truncated` indicates that you should narrow the query or increase the budget. For actions, pass the returned `snapshot` and `element_id`:
 
 Preserve discovery's `window_ref` with `window_id` on later reads and activation. Batch window references propagate it automatically. `get_ui` with `view:"skeleton"` lists named containers without field-value previews. Select a targetable container and supply its `root_snapshot` and `root_element_id` to read its subtree. Partial or ambiguous root identities cannot be used for actions.
@@ -178,6 +180,8 @@ Known Windows workflows can compile into parameterized batches. Every replay pre
 Records use AES-256-GCM and Windows current-user DPAPI key protection. Collection is local, bounded and defaults to 30-day retention. `learning configure` changes collection and retention, `forget` removes records/model state, and `export` provides versioned JSON chunks within `max_chars`. See [capabilities, privacy and measured limits](docs/local-learning.md) and [verification scope](docs/local-learning-plan.md).
 
 ## Checks
+
+Run `npm run benchmark:common -- --window-id ID --runs 5` to measure ten shared Edge/Excel operations with verified outcomes in your existing Edge profile and disposable Excel workbooks. See [results and performance refinements](docs/common-task-performance.md) and the [benchmark instructions](benchmarks/README.md).
 
 ```powershell
 npm run build

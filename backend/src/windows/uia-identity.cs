@@ -27,7 +27,13 @@ public static partial class PokemonWindowsAutomation {
         foreach (var key in expired) windowProofs.Remove(key);
         foreach (var entry in windowProofs) {
             if (entry.Value.Handle != handle) continue;
-            try { VerifyWindow(entry.Value); return entry.Key; } catch { }
+            try {
+                VerifyWindow(entry.Value);
+                // Fresh discovery renews the same proven window, without rebinding its token.
+                // Element snapshots retain their separate fixed two-minute expiration.
+                entry.Value.Created = DateTime.UtcNow;
+                return entry.Key;
+            } catch { }
         }
         var proof = CaptureWindow(handle);
         if (proof == null) return null;

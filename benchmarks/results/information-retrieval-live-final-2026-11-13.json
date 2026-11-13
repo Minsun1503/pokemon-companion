@@ -1,0 +1,1980 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "measured_at": "2026-11-13T05:06:16.020Z",
+  "runs_per_mode_case": 1,
+  "modes": [
+    "range_many"
+  ],
+  "source_revision": "09784b1aea27e486c3e08ae08b62661cb96420a2",
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz",
+    "browser_profile": "existing Edge profile",
+    "companion": "enabled",
+    "transport": "stdio"
+  },
+  "sources": [
+    {
+      "query": "cross-process communication",
+      "fact": "The data can then be accessed without further cross-process communication.",
+      "url": "https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients"
+    },
+    {
+      "query": "readyState only concerns itself",
+      "fact": "The readyState only concerns itself with loading assets defined in the HTML",
+      "url": "https://www.selenium.dev/documentation/webdriver/waits/"
+    },
+    {
+      "query": "encompasses the string",
+      "fact": "returns a new text range that encompasses the string.",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-usingtextrangeobjects"
+    }
+  ],
+  "samples": [
+    {
+      "round": 0,
+      "mode": "range_many",
+      "case": "Research article 12000",
+      "verified": true,
+      "calls": [
+        {
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "query": "Research search",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 434,
+          "elapsed_ms": 71.52650000000085
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "set_value",
+                "snapshot": "61f26d703c1c4f0786647c91cca01cd0",
+                "element_id": 1,
+                "text": "automation research 12000"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "394084",
+                "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+                "query": "Research search",
+                "control_type": "Edit",
+                "expect_value": "automation research 12000"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "394084",
+                "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+                "query": "Find research",
+                "control_type": "Button"
+              },
+              {
+                "action": "invoke",
+                "target_step": 2
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 72,
+          "elapsed_ms": 343.85170000000016
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "query": "Research article 12000",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 314,
+          "elapsed_ms": 67.63779999999952
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "query": "Research article 12000",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 489,
+          "elapsed_ms": 87.52999999999975
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "92575ae0d28646588eed3f10da76c8e5",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 68,
+          "elapsed_ms": 120.1871999999994
+        },
+        {
+          "tool": "research",
+          "args": {
+            "action": "find_many",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "document_name": "Information Retrieval 208ba60d",
+            "timeout_ms": 15000,
+            "max_chars": 16000,
+            "queries": [
+              "cross-process communication",
+              "readyState only concerns itself",
+              "encompasses the string"
+            ],
+            "context_chars": 300
+          },
+          "phase": "retrieve",
+          "response_chars": 2776,
+          "elapsed_ms": 279.7685999999994
+        }
+      ],
+      "result": {
+        "contract_version": 1,
+        "ok": true,
+        "action": "find_many",
+        "document_name": "Information Retrieval 208ba60d",
+        "requested_queries": 3,
+        "input_state": "not_sent",
+        "native_calls": 2,
+        "results": [
+          {
+            "found": true,
+            "text": "und paragraph 49. Supporting technical material without the requested evidence. Background paragraph 49. Supporting technical material without the requested evidence. Background paragraph 49. Supporting technical material without the requested evidence.\nThe data can then be accessed without further cross-process communication.\nSource: https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients\nThe readyState only concerns itself with loading assets defined in the HTML\nSource: https://www.selenium.dev/documentation/webdriver/waits/\nreturns a new text range that encompasses the string",
+            "method": "bounded_full_text_fallback",
+            "fallback_reason": "inconsistent_match_range",
+            "scope": "first_accessible_match",
+            "source_truncated": false,
+            "excerpt_sha256": "40f666d5ba992f33083f85fb5fd68089ef8843d0f2c0ad79a073c21147e851f2",
+            "full_document_version": false
+          },
+          {
+            "found": true,
+            "text": "out the requested evidence. Background paragraph 49. Supporting technical material without the requested evidence.\nThe data can then be accessed without further cross-process communication.\nSource: https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients\nThe readyState only concerns itself with loading assets defined in the HTML\nSource: https://www.selenium.dev/documentation/webdriver/waits/\nreturns a new text range that encompasses the string.\nSource: https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-usingtextrangeobjects\nUnicode retrieval 🐱 end.",
+            "method": "bounded_full_text_fallback",
+            "fallback_reason": "shared_full_text_fallback",
+            "scope": "first_accessible_match",
+            "source_truncated": false,
+            "excerpt_sha256": "36921a709dbf99a52ff6f242212c35cbf71f6a91517304c5020d5a20e2946ed0",
+            "full_document_version": false
+          },
+          {
+            "found": true,
+            "text": "-process communication.\nSource: https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients\nThe readyState only concerns itself with loading assets defined in the HTML\nSource: https://www.selenium.dev/documentation/webdriver/waits/\nreturns a new text range that encompasses the string.\nSource: https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-usingtextrangeobjects\nUnicode retrieval 🐱 end.",
+            "method": "bounded_full_text_fallback",
+            "fallback_reason": "shared_full_text_fallback",
+            "scope": "first_accessible_match",
+            "source_truncated": false,
+            "excerpt_sha256": "7f6c3af9a09290a9d6c65f7789ade4059b3ba56db1f53d8bd5e67acc5ca3ddc5",
+            "full_document_version": false
+          }
+        ],
+        "all_queries_returned": true,
+        "atomic_document_snapshot": false
+      },
+      "retrieval_ms": 280.1765999999998,
+      "workflow_ms": 1081.6322,
+      "retrieval_mcp_calls": 1,
+      "returned_chars": 2776
+    },
+    {
+      "round": 0,
+      "mode": "range_many",
+      "case": "Research article 48000",
+      "verified": true,
+      "calls": [
+        {
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "query": "Research search",
+            "control_type": "Edit",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 460,
+          "elapsed_ms": 117.89129999999932
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "steps": [
+              {
+                "action": "set_value",
+                "snapshot": "1883acc8dd40463ab3c6b27a278b8e4a",
+                "element_id": 1,
+                "text": "automation research 48000"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "394084",
+                "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+                "query": "Research search",
+                "control_type": "Edit",
+                "expect_value": "automation research 48000"
+              },
+              {
+                "action": "get_ui",
+                "window_id": "394084",
+                "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+                "query": "Find research",
+                "control_type": "Button"
+              },
+              {
+                "action": "invoke",
+                "target_step": 2
+              }
+            ],
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 72,
+          "elapsed_ms": 436.3692000000001
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "query": "Research article 48000",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 314,
+          "elapsed_ms": 82.15070000000014
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "action": "get_ui",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "query": "Research article 48000",
+            "control_type": "Hyperlink",
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 489,
+          "elapsed_ms": 77.5012999999999
+        },
+        {
+          "tool": "windows",
+          "args": {
+            "action": "invoke",
+            "snapshot": "567096c9cb064e528df35c8632991ef0",
+            "element_id": 1,
+            "max_depth": 30,
+            "max_chars": 16000
+          },
+          "phase": "search",
+          "response_chars": 68,
+          "elapsed_ms": 126.35979999999927
+        },
+        {
+          "tool": "research",
+          "args": {
+            "action": "find_many",
+            "window_id": "394084",
+            "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+            "document_name": "Information Retrieval 208ba60d",
+            "timeout_ms": 15000,
+            "max_chars": 16000,
+            "queries": [
+              "cross-process communication",
+              "readyState only concerns itself",
+              "encompasses the string"
+            ],
+            "context_chars": 300
+          },
+          "phase": "retrieve",
+          "response_chars": 2776,
+          "elapsed_ms": 271.7501000000002
+        }
+      ],
+      "result": {
+        "contract_version": 1,
+        "ok": true,
+        "action": "find_many",
+        "document_name": "Information Retrieval 208ba60d",
+        "requested_queries": 3,
+        "input_state": "not_sent",
+        "native_calls": 2,
+        "results": [
+          {
+            "found": true,
+            "text": " paragraph 199. Supporting technical material without the requested evidence. Background paragraph 199. Supporting technical material without the requested evidence. Background paragraph 199. Supporting technical material without the requested evidence.\nThe data can then be accessed without further cross-process communication.\nSource: https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients\nThe readyState only concerns itself with loading assets defined in the HTML\nSource: https://www.selenium.dev/documentation/webdriver/waits/\nreturns a new text range that encompasses the string",
+            "method": "bounded_full_text_fallback",
+            "fallback_reason": "inconsistent_match_range",
+            "scope": "first_accessible_match",
+            "source_truncated": false,
+            "excerpt_sha256": "441df944fadd2a1ec30621ff9f3dbb380954b961f96fa5efc4aafa5f78f1ea18",
+            "full_document_version": false
+          },
+          {
+            "found": true,
+            "text": "ut the requested evidence. Background paragraph 199. Supporting technical material without the requested evidence.\nThe data can then be accessed without further cross-process communication.\nSource: https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients\nThe readyState only concerns itself with loading assets defined in the HTML\nSource: https://www.selenium.dev/documentation/webdriver/waits/\nreturns a new text range that encompasses the string.\nSource: https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-usingtextrangeobjects\nUnicode retrieval 🐱 end.",
+            "method": "bounded_full_text_fallback",
+            "fallback_reason": "shared_full_text_fallback",
+            "scope": "first_accessible_match",
+            "source_truncated": false,
+            "excerpt_sha256": "998af5fb284e9d4261a9ec617f4a76e3a06f9b854cbcaf32aceeafc5cb885d17",
+            "full_document_version": false
+          },
+          {
+            "found": true,
+            "text": "-process communication.\nSource: https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients\nThe readyState only concerns itself with loading assets defined in the HTML\nSource: https://www.selenium.dev/documentation/webdriver/waits/\nreturns a new text range that encompasses the string.\nSource: https://learn.microsoft.com/en-us/windows/win32/winauto/uiauto-usingtextrangeobjects\nUnicode retrieval 🐱 end.",
+            "method": "bounded_full_text_fallback",
+            "fallback_reason": "shared_full_text_fallback",
+            "scope": "first_accessible_match",
+            "source_truncated": false,
+            "excerpt_sha256": "7f6c3af9a09290a9d6c65f7789ade4059b3ba56db1f53d8bd5e67acc5ca3ddc5",
+            "full_document_version": false
+          }
+        ],
+        "all_queries_returned": true,
+        "atomic_document_snapshot": false
+      },
+      "retrieval_ms": 271.8041000000003,
+      "workflow_ms": 1224.2403000000004,
+      "retrieval_mcp_calls": 1,
+      "returned_chars": 2776
+    }
+  ],
+  "timing": [
+    {
+      "tool": "pokemon",
+      "action": "task",
+      "total_ms": 297.83889999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.09920000000010987,
+        "companion_before": 297.10480000000007,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.021700000000009823
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 2188.0287,
+      "breakdown_ms": {
+        "queue_wait": 0.1793999999999869,
+        "companion_before": 0.6493000000000393,
+        "action": 35.13830000000007,
+        "companion_after": 0.8234999999999673,
+        "serialization": 0.02980000000002292,
+        "worker_round_trip": 2184.501,
+        "post_processing": 0.020799999999780994,
+        "native_window_metadata_inclusive": 4.320900000000001,
+        "native_window_verify": 4.8588,
+        "native_window_capture_inclusive": 13.7547,
+        "native_window_enumeration_inclusive": 25.3239
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_verify": 2,
+        "native_window_capture_inclusive": 2,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 348.2269000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.048800000000028376,
+        "companion_before": 0.8144000000002052,
+        "action": 340.94489999999996,
+        "companion_after": 0.856499999999869,
+        "serialization": 0.0615999999995438,
+        "worker_round_trip": 345.7390999999998,
+        "post_processing": 0.23420000000032815,
+        "native_window_verify": 8.7195,
+        "native_navigation_cache_fetch": 107.09020000000001,
+        "native_identity_projection": 2.4753,
+        "native_visit_projection_inclusive": 6.7335,
+        "native_tree_walk_inclusive": 118.4128,
+        "native_window_metadata_inclusive": 1.8503,
+        "native_discovery_inclusive": 289.8421,
+        "uia_tree_walk": 117.63650000000001
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 74,
+        "native_identity_projection": 73,
+        "native_visit_projection_inclusive": 73,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 201.66910000000007,
+      "breakdown_ms": {
+        "queue_wait": 0.052000000000134605,
+        "companion_before": 0.5874999999996362,
+        "action": 187.06340000000046,
+        "companion_after": 10.488999999999578,
+        "serialization": 0.019599999999172724,
+        "worker_round_trip": 190.15059999999994,
+        "post_processing": 0.011099999999714782,
+        "native_window_verify": 8.123999999999999,
+        "native_navigation_cache_fetch": 89.21199999999999,
+        "native_identity_projection": 0.15039999999999998,
+        "native_visit_projection_inclusive": 0.39220000000000016,
+        "native_tree_walk_inclusive": 89.8365,
+        "native_identity_cache_fetch": 1.2132,
+        "native_ancestor_navigation": 12.331600000000002,
+        "native_element_verify_inclusive": 23.0723,
+        "native_identity_resolve_inclusive": 111.901,
+        "native_pattern_action": 26.3389,
+        "native_pattern_dispatch_inclusive": 37.5589,
+        "native_post_action_value_read": 17.4123,
+        "native_act_inclusive": 168.5369
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 74,
+        "native_identity_projection": 75,
+        "native_visit_projection_inclusive": 73,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 12,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 165.35080000000016,
+      "breakdown_ms": {
+        "queue_wait": 0.2539999999999054,
+        "companion_before": 2.3500999999996566,
+        "action": 153.2438000000002,
+        "companion_after": 0.4030000000002474,
+        "serialization": 0.04579999999987194,
+        "worker_round_trip": 161.78870000000006,
+        "post_processing": 0.04320000000006985,
+        "native_window_verify": 15.1396,
+        "native_navigation_cache_fetch": 130.3884,
+        "native_identity_projection": 0.24120000000000008,
+        "native_visit_projection_inclusive": 1.1782999999999988,
+        "native_discovery_value_read": 0.0032,
+        "native_tree_walk_inclusive": 132.1142,
+        "native_window_metadata_inclusive": 2.0963,
+        "native_discovery_inclusive": 145.666,
+        "uia_tree_walk": 132.062
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 115,
+        "native_identity_projection": 114,
+        "native_visit_projection_inclusive": 114,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 429.8825999999999,
+      "breakdown_ms": {
+        "queue_wait": 0.06069999999999709,
+        "companion_before": 10.130400000000009,
+        "action": 405.2546999999995,
+        "companion_after": 2.043499999999767,
+        "serialization": 0.09909999999945285,
+        "worker_round_trip": 412.14620000000104,
+        "post_processing": 0.07339999999931024,
+        "native_window_verify": 32.7714,
+        "native_navigation_cache_fetch": 287.15190000000007,
+        "native_identity_projection": 0.8567000000000005,
+        "native_visit_projection_inclusive": 1.4793999999999996,
+        "native_tree_walk_inclusive": 290.1637,
+        "native_identity_cache_fetch": 2.165,
+        "native_ancestor_navigation": 22.5709,
+        "native_element_verify_inclusive": 41.088899999999995,
+        "native_identity_resolve_inclusive": 206.62040000000002,
+        "native_pattern_action": 18.897499999999997,
+        "native_pattern_dispatch_inclusive": 39.3173,
+        "native_post_action_value_read": 7.059200000000001,
+        "native_act_inclusive": 253.96159999999998,
+        "native_discovery_value_read": 0.0005,
+        "native_window_metadata_inclusive": 4.7975,
+        "native_discovery_inclusive": 134.9077,
+        "uia_tree_walk": 120.1778
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 371,
+        "native_identity_projection": 372,
+        "native_visit_projection_inclusive": 368,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 55.74609999999939,
+      "breakdown_ms": {
+        "queue_wait": 0.05320000000028813,
+        "companion_before": 1.0954000000001543,
+        "action": 49.637800000000425,
+        "companion_after": 0.9584999999997308,
+        "serialization": 0.02550000000064756,
+        "worker_round_trip": 13.811799999999494,
+        "post_processing": 0.011000000000422006,
+        "native_window_verify": 7.163,
+        "native_window_metadata_inclusive": 2.6079,
+        "foreground_guard": 10.844500000000153
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 188.60710000000017,
+      "breakdown_ms": {
+        "queue_wait": 0.03600000000005821,
+        "companion_before": 1.8524000000006708,
+        "action": 183.52919999999995,
+        "companion_after": 0.5695000000005166,
+        "serialization": 0.047999999999774445,
+        "worker_round_trip": 185.78449999999975,
+        "post_processing": 0.03390000000035798,
+        "native_window_verify": 15.8917,
+        "native_navigation_cache_fetch": 83.64800000000001,
+        "native_identity_projection": 0.20179999999999998,
+        "native_visit_projection_inclusive": 0.5298999999999998,
+        "native_discovery_value_read": 0.0007,
+        "native_tree_walk_inclusive": 84.5459,
+        "native_window_metadata_inclusive": 3.5951,
+        "native_discovery_inclusive": 174.7013,
+        "uia_tree_walk": 84.5027
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 67,
+        "native_identity_projection": 66,
+        "native_visit_projection_inclusive": 66,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "focus",
+      "total_ms": 109.09010000000035,
+      "breakdown_ms": {
+        "queue_wait": 0.049500000000080036,
+        "companion_before": 1.6591000000007625,
+        "action": 103.57650000000012,
+        "companion_after": 0.5255000000006476,
+        "serialization": 0.02260000000023865,
+        "worker_round_trip": 106.46300000000065,
+        "post_processing": 0.008200000001124863,
+        "native_window_verify": 11.3287,
+        "native_navigation_cache_fetch": 50.79370000000002,
+        "native_identity_projection": 0.1562,
+        "native_visit_projection_inclusive": 0.21879999999999997,
+        "native_tree_walk_inclusive": 51.2081,
+        "native_identity_cache_fetch": 1.17,
+        "native_ancestor_navigation": 18.1394,
+        "native_element_verify_inclusive": 29.542099999999998,
+        "native_identity_resolve_inclusive": 74.6325,
+        "native_pattern_action": 6.5909,
+        "native_pattern_dispatch_inclusive": 21.6719,
+        "native_post_action_value_read": 2.8036,
+        "native_act_inclusive": 99.5597
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 67,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 22,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 70.07229999999981,
+      "breakdown_ms": {
+        "queue_wait": 0.049699999999575084,
+        "companion_before": 0.84309999999914,
+        "action": 66.57839999999942,
+        "companion_after": 0.46299999999973807,
+        "serialization": 0.037699999999858846,
+        "worker_round_trip": 68.39539999999943,
+        "post_processing": 0.028800000000046566,
+        "native_window_verify": 12.033800000000001,
+        "native_navigation_cache_fetch": 50.8461,
+        "native_identity_projection": 0.14690000000000006,
+        "native_visit_projection_inclusive": 0.35939999999999983,
+        "native_discovery_value_read": 0.0005,
+        "native_tree_walk_inclusive": 51.444,
+        "native_window_metadata_inclusive": 1.9699,
+        "native_discovery_inclusive": 60.9654,
+        "uia_tree_walk": 51.4275
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 65,
+        "native_visit_projection_inclusive": 65,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 341.96929999999975,
+      "breakdown_ms": {
+        "queue_wait": 0.035600000000158616,
+        "companion_before": 14.19629999999961,
+        "action": 321.77430000000004,
+        "companion_after": 2.284499999998843,
+        "serialization": 0.07430000000022119,
+        "worker_round_trip": 323.96269999999913,
+        "post_processing": 0.11749999999938154,
+        "native_window_verify": 36.6141,
+        "native_navigation_cache_fetch": 210.5367,
+        "native_identity_projection": 0.5308999999999999,
+        "native_visit_projection_inclusive": 0.9600000000000002,
+        "native_tree_walk_inclusive": 212.3354,
+        "native_identity_cache_fetch": 2.1928,
+        "native_ancestor_navigation": 35.559799999999996,
+        "native_element_verify_inclusive": 61.5959,
+        "native_identity_resolve_inclusive": 152.52870000000001,
+        "native_pattern_action": 1.8292000000000002,
+        "native_pattern_dispatch_inclusive": 31.698700000000002,
+        "native_post_action_value_read": 0.6504,
+        "native_act_inclusive": 185.708,
+        "native_discovery_value_read": 0.0005,
+        "native_window_metadata_inclusive": 3.5774999999999997,
+        "native_discovery_inclusive": 124.24430000000001,
+        "uia_tree_walk": 106.54860000000001
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_navigation_cache_fetch": 264,
+        "native_identity_projection": 264,
+        "native_visit_projection_inclusive": 260,
+        "native_tree_walk_inclusive": 4,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 54,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 66.23509999999987,
+      "breakdown_ms": {
+        "queue_wait": 0.02809999999954016,
+        "companion_before": 0.4476999999997133,
+        "action": 63.84480000000076,
+        "companion_after": 0.4295000000001892,
+        "serialization": 0.028699999999844295,
+        "worker_round_trip": 65.1340999999984,
+        "post_processing": 0.02380000000084692,
+        "native_window_verify": 10.793899999999999,
+        "native_navigation_cache_fetch": 49.38869999999999,
+        "native_identity_projection": 0.15260000000000007,
+        "native_visit_projection_inclusive": 0.3413,
+        "native_tree_walk_inclusive": 49.917,
+        "native_window_metadata_inclusive": 1.7812,
+        "native_discovery_inclusive": 59.5973,
+        "uia_tree_walk": 49.9013
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 65,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 85.7496000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.07440000000042346,
+        "companion_before": 1.3743999999996959,
+        "action": 80.70209999999952,
+        "companion_after": 0.49140000000079453,
+        "serialization": 0.06440000000111468,
+        "worker_round_trip": 83.42389999999978,
+        "post_processing": 0.031199999999444117,
+        "native_window_verify": 14.2971,
+        "native_navigation_cache_fetch": 58.7531,
+        "native_identity_projection": 0.11010000000000002,
+        "native_visit_projection_inclusive": 0.27660000000000007,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 59.2247,
+        "native_window_metadata_inclusive": 1.7919,
+        "native_discovery_inclusive": 73.478,
+        "uia_tree_walk": 59.1892
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 65,
+        "native_visit_projection_inclusive": 65,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 119.1252999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.028299999999944703,
+        "companion_before": 1.8037999999996828,
+        "action": 114.64000000000033,
+        "companion_after": 0.44280000000071595,
+        "serialization": 0.01600000000144064,
+        "worker_round_trip": 116.62129999999979,
+        "post_processing": 0.006199999999807915,
+        "native_window_verify": 10.957,
+        "native_navigation_cache_fetch": 57.7057,
+        "native_identity_projection": 0.15520000000000003,
+        "native_visit_projection_inclusive": 0.18540000000000004,
+        "native_tree_walk_inclusive": 58.0931,
+        "native_identity_cache_fetch": 1.3584,
+        "native_ancestor_navigation": 19.1366,
+        "native_element_verify_inclusive": 35.1864,
+        "native_identity_resolve_inclusive": 84.1721,
+        "native_pattern_action": 0.7088,
+        "native_pattern_dispatch_inclusive": 17.4505,
+        "native_post_action_value_read": 11.3394,
+        "native_act_inclusive": 113.3527
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 67,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 28,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "research",
+      "action": "find_many",
+      "total_ms": 275.5831999999991,
+      "breakdown_ms": {
+        "queue_wait": 0.11710000000039145,
+        "companion_before": 6.757799999999406,
+        "action": 256.8165999999992,
+        "companion_after": 0.8651000000008935,
+        "serialization": 0.14030000000184373,
+        "worker_round_trip": 265.46769999999924,
+        "post_processing": 0.03739999999925203,
+        "native_window_verify": 18.0868,
+        "native_navigation_cache_fetch": 169.4395,
+        "native_identity_projection": 0.3011999999999999,
+        "native_visit_projection_inclusive": 0.5530000000000002,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 170.49599999999998,
+        "native_window_metadata_inclusive": 1.7823,
+        "native_discovery_inclusive": 96.4347,
+        "uia_tree_walk": 84.9517,
+        "native_identity_cache_fetch": 0.5317,
+        "native_ancestor_navigation": 7.8112,
+        "native_element_verify_inclusive": 12.9478,
+        "native_identity_resolve_inclusive": 105.127,
+        "native_text_range_find": 5.0991
+      },
+      "counts": {
+        "native_window_verify": 7,
+        "native_navigation_cache_fetch": 152,
+        "native_identity_projection": 151,
+        "native_visit_projection_inclusive": 150,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 2,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1,
+        "native_identity_cache_fetch": 1,
+        "native_ancestor_navigation": 11,
+        "native_element_verify_inclusive": 1,
+        "native_identity_resolve_inclusive": 1,
+        "native_text_range_find": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 116.54140000000007,
+      "breakdown_ms": {
+        "queue_wait": 0.03610000000026048,
+        "companion_before": 0.9269000000003871,
+        "action": 110.80079999999998,
+        "companion_after": 1.8447999999998501,
+        "serialization": 0.06189999999878637,
+        "worker_round_trip": 113.25960000000032,
+        "post_processing": 0.18609999999989668,
+        "native_window_verify": 11.5098,
+        "native_navigation_cache_fetch": 89.30489999999999,
+        "native_identity_projection": 0.2280000000000001,
+        "native_visit_projection_inclusive": 0.493,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 90.1115,
+        "native_window_metadata_inclusive": 2.1639,
+        "native_discovery_inclusive": 104.7151,
+        "uia_tree_walk": 90.0788
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 76,
+        "native_identity_projection": 75,
+        "native_visit_projection_inclusive": 75,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 434.96840000000066,
+      "breakdown_ms": {
+        "queue_wait": 0.028500000000349246,
+        "companion_before": 13.903799999999137,
+        "action": 411.79699999999866,
+        "companion_after": 5.27139999999963,
+        "serialization": 0.08839999999963766,
+        "worker_round_trip": 413.90799999999945,
+        "post_processing": 0.07369999999991705,
+        "native_window_verify": 41.8676,
+        "native_navigation_cache_fetch": 281.87480000000005,
+        "native_identity_projection": 0.7847000000000002,
+        "native_visit_projection_inclusive": 1.3294000000000001,
+        "native_tree_walk_inclusive": 284.2023,
+        "native_identity_cache_fetch": 2.28,
+        "native_ancestor_navigation": 44.7114,
+        "native_element_verify_inclusive": 70.6824,
+        "native_identity_resolve_inclusive": 190.7363,
+        "native_pattern_action": 2.0968999999999998,
+        "native_pattern_dispatch_inclusive": 37.819900000000004,
+        "native_post_action_value_read": 3.4103,
+        "native_act_inclusive": 232.9782,
+        "native_discovery_value_read": 0.0008,
+        "native_window_metadata_inclusive": 4.0596,
+        "native_discovery_inclusive": 164.58960000000002,
+        "uia_tree_walk": 145.2015
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_navigation_cache_fetch": 304,
+        "native_identity_projection": 304,
+        "native_visit_projection_inclusive": 300,
+        "native_tree_walk_inclusive": 4,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 54,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 81.20290000000023,
+      "breakdown_ms": {
+        "queue_wait": 0.023500000000240107,
+        "companion_before": 2.4656999999997424,
+        "action": 76.40539999999964,
+        "companion_after": 0.4269000000003871,
+        "serialization": 0.026800000001458102,
+        "worker_round_trip": 78.09729999999945,
+        "post_processing": 0.018399999999928696,
+        "native_window_verify": 11.179400000000001,
+        "native_navigation_cache_fetch": 60.6895,
+        "native_identity_projection": 0.15180000000000005,
+        "native_visit_projection_inclusive": 0.37370000000000003,
+        "native_tree_walk_inclusive": 61.3808,
+        "native_window_metadata_inclusive": 2.9824,
+        "native_discovery_inclusive": 72.2916,
+        "uia_tree_walk": 61.333400000000005
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 65,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 76.30230000000029,
+      "breakdown_ms": {
+        "queue_wait": 0.06279999999969732,
+        "companion_before": 0.5641999999998006,
+        "action": 73.28889999999956,
+        "companion_after": 0.4466000000002168,
+        "serialization": 0.03600000000005821,
+        "worker_round_trip": 75.0560000000005,
+        "post_processing": 0.023799999999937427,
+        "native_window_verify": 9.6455,
+        "native_navigation_cache_fetch": 60.013799999999996,
+        "native_identity_projection": 0.1481,
+        "native_visit_projection_inclusive": 0.3356,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 60.5756,
+        "native_window_metadata_inclusive": 1.8956,
+        "native_discovery_inclusive": 69.6959,
+        "uia_tree_walk": 60.5589
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 65,
+        "native_visit_projection_inclusive": 65,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 124.70510000000013,
+      "breakdown_ms": {
+        "queue_wait": 0.024600000000646105,
+        "companion_before": 1.9718000000002576,
+        "action": 116.7521999999999,
+        "companion_after": 0.7023999999992157,
+        "serialization": 0.02230000000236032,
+        "worker_round_trip": 119.12149999999838,
+        "post_processing": 0.01190000000042346,
+        "native_window_verify": 12.1966,
+        "native_navigation_cache_fetch": 58.55350000000001,
+        "native_identity_projection": 0.14390000000000006,
+        "native_visit_projection_inclusive": 0.1763,
+        "native_tree_walk_inclusive": 59.0451,
+        "native_identity_cache_fetch": 1.629,
+        "native_ancestor_navigation": 18.8324,
+        "native_element_verify_inclusive": 34.6857,
+        "native_identity_resolve_inclusive": 85.1166,
+        "native_pattern_action": 0.9915,
+        "native_pattern_dispatch_inclusive": 18.2042,
+        "native_post_action_value_read": 11.646,
+        "native_act_inclusive": 115.4979
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 66,
+        "native_identity_projection": 67,
+        "native_visit_projection_inclusive": 65,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 28,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "research",
+      "action": "find_many",
+      "total_ms": 269.8739999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.04250000000047294,
+        "companion_before": 5.05659999999898,
+        "action": 260.7475999999997,
+        "companion_after": 0.8426999999992404,
+        "serialization": 0.08019999999942229,
+        "worker_round_trip": 263.3663999999999,
+        "post_processing": 0.030700000000251748,
+        "native_window_verify": 19.9743,
+        "native_navigation_cache_fetch": 197.45530000000008,
+        "native_identity_projection": 0.28769999999999996,
+        "native_visit_projection_inclusive": 0.5337000000000001,
+        "native_discovery_value_read": 0.0009,
+        "native_tree_walk_inclusive": 198.442,
+        "native_window_metadata_inclusive": 1.8046,
+        "native_discovery_inclusive": 127.2333,
+        "uia_tree_walk": 114.82820000000001,
+        "native_identity_cache_fetch": 0.5898,
+        "native_ancestor_navigation": 7.606,
+        "native_element_verify_inclusive": 12.8965,
+        "native_identity_resolve_inclusive": 103.5785,
+        "native_text_range_find": 11.638
+      },
+      "counts": {
+        "native_window_verify": 7,
+        "native_navigation_cache_fetch": 152,
+        "native_identity_projection": 151,
+        "native_visit_projection_inclusive": 150,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 2,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1,
+        "native_identity_cache_fetch": 1,
+        "native_ancestor_navigation": 11,
+        "native_element_verify_inclusive": 1,
+        "native_identity_resolve_inclusive": 1,
+        "native_text_range_find": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 99.49189999999999,
+      "breakdown_ms": {
+        "queue_wait": 0.024500000000443833,
+        "companion_before": 0.506800000000112,
+        "action": 97.03870000000006,
+        "companion_after": 0.4125999999996566,
+        "serialization": 0.03049999999893771,
+        "worker_round_trip": 98.39599999999973,
+        "post_processing": 0.022800000000643195,
+        "native_window_verify": 10.264299999999999,
+        "native_navigation_cache_fetch": 82.85060000000001,
+        "native_identity_projection": 0.14640000000000006,
+        "native_visit_projection_inclusive": 0.40049999999999997,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 83.5638,
+        "native_window_metadata_inclusive": 1.7788,
+        "native_discovery_inclusive": 92.4614,
+        "uia_tree_walk": 83.5488
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 76,
+        "native_identity_projection": 75,
+        "native_visit_projection_inclusive": 75,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 433.6871000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.021200000000135333,
+        "companion_before": 11.189899999999398,
+        "action": 417.9897000000001,
+        "companion_after": 2.3510999999998603,
+        "serialization": 0.0632999999979802,
+        "worker_round_trip": 418.9346999999998,
+        "post_processing": 0.031100000001060835,
+        "native_window_verify": 31.057399999999998,
+        "native_navigation_cache_fetch": 293.16849999999994,
+        "native_identity_projection": 0.6687000000000001,
+        "native_visit_projection_inclusive": 1.1080999999999994,
+        "native_tree_walk_inclusive": 295.3873,
+        "native_identity_cache_fetch": 2.0429000000000004,
+        "native_ancestor_navigation": 23.640299999999996,
+        "native_element_verify_inclusive": 41.775499999999994,
+        "native_identity_resolve_inclusive": 210.68759999999997,
+        "native_pattern_action": 22.0444,
+        "native_pattern_dispatch_inclusive": 41.643299999999996,
+        "native_post_action_value_read": 20.4651,
+        "native_act_inclusive": 273.5561,
+        "native_discovery_value_read": 0.0005,
+        "native_window_metadata_inclusive": 2.2176,
+        "native_discovery_inclusive": 134.2299,
+        "uia_tree_walk": 123.92
+      },
+      "counts": {
+        "native_window_verify": 12,
+        "native_navigation_cache_fetch": 250,
+        "native_identity_projection": 251,
+        "native_visit_projection_inclusive": 247,
+        "native_tree_walk_inclusive": 3,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2,
+        "native_discovery_value_read": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 42.25489999999991,
+      "breakdown_ms": {
+        "queue_wait": 0.026700000000346336,
+        "companion_before": 2.92279999999937,
+        "action": 35.21190000000024,
+        "companion_after": 0.9666000000006534,
+        "serialization": 0.03999999999996362,
+        "worker_round_trip": 11.274200000001656,
+        "post_processing": 0.00830000000041764,
+        "native_window_verify": 6.333600000000001,
+        "native_window_metadata_inclusive": 3.1796,
+        "foreground_guard": 8.404900000000453
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 151.58839999999964,
+      "breakdown_ms": {
+        "queue_wait": 0.04160000000047148,
+        "companion_before": 3.4153000000005704,
+        "action": 145.11229999999978,
+        "companion_after": 0.4047999999984313,
+        "serialization": 0.03410000000076252,
+        "worker_round_trip": 147.52800000000207,
+        "post_processing": 0.020500000001447916,
+        "native_window_verify": 12.4753,
+        "native_navigation_cache_fetch": 104.53149999999998,
+        "native_identity_projection": 0.1789,
+        "native_visit_projection_inclusive": 0.47050000000000003,
+        "native_tree_walk_inclusive": 105.3176,
+        "native_window_metadata_inclusive": 1.7995,
+        "native_discovery_inclusive": 138.3616,
+        "uia_tree_walk": 105.30000000000001
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 76,
+        "native_identity_projection": 75,
+        "native_visit_projection_inclusive": 75,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 105.46509999999944,
+      "breakdown_ms": {
+        "queue_wait": 0.07629999999880965,
+        "companion_before": 1.16150000000016,
+        "action": 99.40970000000016,
+        "companion_after": 0.8790000000008149,
+        "serialization": 0.04199999999946158,
+        "worker_round_trip": 103.08239999999932,
+        "post_processing": 0.023700000001554145,
+        "native_window_verify": 10.5706,
+        "native_navigation_cache_fetch": 72.40580000000001,
+        "native_identity_projection": 0.15340000000000004,
+        "native_visit_projection_inclusive": 0.33999999999999997,
+        "native_tree_walk_inclusive": 72.9738,
+        "native_window_metadata_inclusive": 1.7739,
+        "native_discovery_inclusive": 84.1583,
+        "uia_tree_walk": 72.9363
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 73,
+        "native_identity_projection": 72,
+        "native_visit_projection_inclusive": 72,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 155.61709999999948,
+      "breakdown_ms": {
+        "queue_wait": 0.028899999999339343,
+        "companion_before": 2.6062999999994645,
+        "action": 145.4483999999993,
+        "companion_after": 0.7692999999999302,
+        "serialization": 0.07359999999971478,
+        "worker_round_trip": 151.86349999999766,
+        "post_processing": 0.04610000000138825,
+        "native_window_verify": 13.070100000000002,
+        "native_navigation_cache_fetch": 122.60730000000004,
+        "native_identity_projection": 0.3722000000000001,
+        "native_visit_projection_inclusive": 0.8840000000000003,
+        "native_discovery_value_read": 0.0017,
+        "native_tree_walk_inclusive": 124.1641,
+        "native_window_metadata_inclusive": 2.2982,
+        "native_discovery_inclusive": 135.3567,
+        "uia_tree_walk": 124.14240000000001
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 130,
+        "native_identity_projection": 129,
+        "native_visit_projection_inclusive": 129,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 268.95230000000083,
+      "breakdown_ms": {
+        "queue_wait": 0.03830000000016298,
+        "companion_before": 1.0387999999984459,
+        "action": 260.0099000000009,
+        "companion_after": 3.7404999999998836,
+        "serialization": 0.029699999999138527,
+        "worker_round_trip": 263.8832000000002,
+        "post_processing": 0.0064999999976862455,
+        "native_window_verify": 9.5597,
+        "native_navigation_cache_fetch": 124.72889999999988,
+        "native_identity_projection": 0.43060000000000015,
+        "native_visit_projection_inclusive": 0.5595000000000003,
+        "native_tree_walk_inclusive": 125.8792,
+        "native_identity_cache_fetch": 2.2875,
+        "native_ancestor_navigation": 26.938299999999998,
+        "native_element_verify_inclusive": 43.4069,
+        "native_identity_resolve_inclusive": 153.26,
+        "native_pattern_action": 9.401,
+        "native_pattern_dispatch_inclusive": 32.3016,
+        "native_post_action_value_read": 70.6297,
+        "native_act_inclusive": 256.5096
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 131,
+        "native_identity_projection": 132,
+        "native_visit_projection_inclusive": 130,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 36,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 84.35210000000006,
+      "breakdown_ms": {
+        "queue_wait": 0.03590000000076543,
+        "companion_before": 0.6658000000006723,
+        "action": 81.33690000000024,
+        "companion_after": 0.4305000000003929,
+        "serialization": 0.02990000000136206,
+        "worker_round_trip": 83.02730000000156,
+        "post_processing": 0.020999999997002305,
+        "native_window_verify": 19.9078,
+        "native_navigation_cache_fetch": 57.66589999999999,
+        "native_identity_projection": 0.12879999999999997,
+        "native_visit_projection_inclusive": 0.2947,
+        "native_tree_walk_inclusive": 58.1358,
+        "native_window_metadata_inclusive": 5.7701,
+        "native_discovery_inclusive": 72.0784,
+        "uia_tree_walk": 58.1176
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 59,
+        "native_identity_projection": 58,
+        "native_visit_projection_inclusive": 58,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 107.0565000000006,
+      "breakdown_ms": {
+        "queue_wait": 0.09089999999923748,
+        "companion_before": 1.440099999999802,
+        "action": 101.15799999999945,
+        "companion_after": 0.40309999999954016,
+        "serialization": 0.06060000000070431,
+        "worker_round_trip": 104.82369999999901,
+        "post_processing": 0.0220999999983178,
+        "native_window_verify": 16.7991,
+        "native_navigation_cache_fetch": 76.06329999999997,
+        "native_identity_projection": 0.13999999999999999,
+        "native_visit_projection_inclusive": 0.3246,
+        "native_tree_walk_inclusive": 76.6618,
+        "native_window_metadata_inclusive": 2.094,
+        "native_discovery_inclusive": 94.3538,
+        "uia_tree_walk": 76.6131
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 59,
+        "native_identity_projection": 58,
+        "native_visit_projection_inclusive": 58,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 91.52859999999964,
+      "breakdown_ms": {
+        "queue_wait": 0.037299999999959255,
+        "companion_before": 4.592100000001665,
+        "action": 83.48599999999897,
+        "companion_after": 0.5673000000006141,
+        "serialization": 0.035200000002078013,
+        "worker_round_trip": 86.10500000000138,
+        "post_processing": 0.022499999999126885,
+        "native_window_verify": 11.2562,
+        "native_navigation_cache_fetch": 66.42879999999998,
+        "native_identity_projection": 0.24549999999999983,
+        "native_visit_projection_inclusive": 0.5399000000000002,
+        "native_tree_walk_inclusive": 67.6401,
+        "native_window_metadata_inclusive": 2.6137,
+        "native_discovery_inclusive": 79.2088,
+        "uia_tree_walk": 67.6178
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 59,
+        "native_identity_projection": 58,
+        "native_visit_projection_inclusive": 58,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 79.04420000000027,
+      "breakdown_ms": {
+        "queue_wait": 0.0316000000002532,
+        "companion_before": 1.7210000000013679,
+        "action": 74.2505999999994,
+        "companion_after": 0.4569999999985157,
+        "serialization": 0.035199999998440035,
+        "worker_round_trip": 76.5630999999994,
+        "post_processing": 0.057800000000497676,
+        "native_window_verify": 17.2742,
+        "native_navigation_cache_fetch": 52.8836,
+        "native_identity_projection": 0.1318,
+        "native_visit_projection_inclusive": 0.2996000000000001,
+        "native_tree_walk_inclusive": 53.3766,
+        "native_window_metadata_inclusive": 2.2928,
+        "native_discovery_inclusive": 68.9203,
+        "uia_tree_walk": 53.359500000000004
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 59,
+        "native_identity_projection": 58,
+        "native_visit_projection_inclusive": 58,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 98.47129999999925,
+      "breakdown_ms": {
+        "queue_wait": 0.024999999999636202,
+        "companion_before": 0.49140000000079453,
+        "action": 94.65699999999924,
+        "companion_after": 0.868399999999383,
+        "serialization": 0.033099999998739804,
+        "worker_round_trip": 96.89260000000286,
+        "post_processing": 0.023400000000037835,
+        "native_window_verify": 16.2409,
+        "native_navigation_cache_fetch": 74.74249999999998,
+        "native_identity_projection": 0.17309999999999992,
+        "native_visit_projection_inclusive": 0.4564,
+        "native_tree_walk_inclusive": 75.4745,
+        "native_window_metadata_inclusive": 3.2145,
+        "native_discovery_inclusive": 89.1394,
+        "uia_tree_walk": 75.4547
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 59,
+        "native_identity_projection": 58,
+        "native_visit_projection_inclusive": 58,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 136.73379999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.044799999999668216,
+        "companion_before": 0.5649000000012165,
+        "action": 133.7435999999998,
+        "companion_after": 0.37950000000091677,
+        "serialization": 0.03900000000066939,
+        "worker_round_trip": 135.54919999999947,
+        "post_processing": 0.02199999999902502,
+        "native_window_verify": 12.5033,
+        "native_navigation_cache_fetch": 117.23770000000006,
+        "native_identity_projection": 0.22340000000000007,
+        "native_visit_projection_inclusive": 0.5657000000000001,
+        "native_discovery_value_read": 0.0008,
+        "native_tree_walk_inclusive": 118.1464,
+        "native_window_metadata_inclusive": 1.8688,
+        "native_discovery_inclusive": 126.5477,
+        "uia_tree_walk": 118.1169
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 97,
+        "native_identity_projection": 96,
+        "native_visit_projection_inclusive": 96,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 132.6882999999998,
+      "breakdown_ms": {
+        "queue_wait": 0.023699999999735155,
+        "companion_before": 2.561700000000201,
+        "action": 127.53250000000116,
+        "companion_after": 0.628499999998894,
+        "serialization": 0.15250000000014552,
+        "worker_round_trip": 129.03629999999976,
+        "post_processing": 0.057800000000497676,
+        "native_window_verify": 11.9922,
+        "native_navigation_cache_fetch": 109.57489999999994,
+        "native_identity_projection": 0.26670000000000016,
+        "native_visit_projection_inclusive": 0.6317,
+        "native_discovery_value_read": 0.0009,
+        "native_tree_walk_inclusive": 110.5464,
+        "native_window_metadata_inclusive": 2.3482,
+        "native_discovery_inclusive": 123.0833,
+        "uia_tree_walk": 110.5276
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 105,
+        "native_identity_projection": 104,
+        "native_visit_projection_inclusive": 104,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "research",
+      "action": "find_many",
+      "total_ms": 259.2330000000002,
+      "breakdown_ms": {
+        "queue_wait": 0.024099999998725252,
+        "companion_before": 6.138200000001234,
+        "action": 249.35580000000118,
+        "companion_after": 0.8243000000002212,
+        "serialization": 0.04499999999825377,
+        "worker_round_trip": 251.7404000000006,
+        "post_processing": 0.02500000000145519,
+        "native_window_verify": 16.1884,
+        "native_navigation_cache_fetch": 196.45390000000006,
+        "native_identity_projection": 0.4054,
+        "native_visit_projection_inclusive": 0.7492000000000003,
+        "native_discovery_value_read": 0.0006,
+        "native_tree_walk_inclusive": 197.81119999999999,
+        "native_window_metadata_inclusive": 2.033,
+        "native_discovery_inclusive": 110.6765,
+        "uia_tree_walk": 100.604,
+        "native_identity_cache_fetch": 0.6385,
+        "native_ancestor_navigation": 8.2252,
+        "native_element_verify_inclusive": 13.3387,
+        "native_identity_resolve_inclusive": 118.9081,
+        "native_text_range_find": 7.2214
+      },
+      "counts": {
+        "native_window_verify": 7,
+        "native_navigation_cache_fetch": 210,
+        "native_identity_projection": 209,
+        "native_visit_projection_inclusive": 208,
+        "native_discovery_value_read": 1,
+        "native_tree_walk_inclusive": 2,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1,
+        "native_identity_cache_fetch": 1,
+        "native_ancestor_navigation": 11,
+        "native_element_verify_inclusive": 1,
+        "native_identity_resolve_inclusive": 1,
+        "native_text_range_find": 1
+      }
+    },
+    {
+      "tool": "pokemon",
+      "action": "done",
+      "total_ms": 5.666400000000067,
+      "breakdown_ms": {
+        "queue_wait": 0.02900000000045111,
+        "companion_before": 5.496999999999389,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.006599999998798012
+      },
+      "counts": {}
+    }
+  ],
+  "limits": [
+    "Controlled search corpus quotes researched public documentation, rendered in real Edge; controlled timings exclude internet search-engine latency.",
+    "Search and result clicks use actual repository MCP/native UIA. Server state independently checks the exact query and result click.",
+    "Retrieval ends only after all three source facts are returned. Page scanning stops at the same requested facts, not at arbitrary complete-page coverage.",
+    "MCP/companion startup and tab preparation are excluded. Retrieval and whole search/click/retrieve workflow are measured separately.",
+    "Mode order rotates and reverses across paired rounds. One warm browser and native worker are reused; no failed input is replayed.",
+    "Range excerpts concern accessible provider text; they are not complete page coverage or a full-document version. No AI inference is measured."
+  ],
+  "startup_ms": 1518.8876,
+  "artifact_sha256": {
+    "tools/course.js": "54c02e1658a8849d3bcb96d4b74ae3a7a27bdf8dcb4c8a558c06f8d4b44b5ccb",
+    "tools/research.js": "975608e2c2b433622dafdf2d94ef26c00acb3424c2cdaec96dd54c6dbcb7315a",
+    "windows/research.js": "3e736d7a7f698f696f848435f3b5cc9c82dce62b3479c55e7f0b3923c9f91efd",
+    "windows/actions.js": "56efff615045812345f94d895dba1d1a59205b9f524e38a8d489eddd4d877a19",
+    "learning/instructions.js": "667aa48e25fa6ec88fa26447ea9782e2961f74645ff674e207eb7a99d9cf689c",
+    "windows/uia-worker.dll": "04ea279ef3964a7c15c9c1799c3be34fc6c55926640c5b42157e9c9bac81c295",
+    "pokemon/runtime.js": "b418cd5b2fdaff1a17c01b8f3f1bd8ca595952561fe63f6bfbb094e612ddab57"
+  },
+  "harness_sha256": "988f4b89af740bac222b5c8e80603076179d8a6de00a93f472be30101caed4cf",
+  "corpus_sha256": "2f84225f973369608172b6703582c813c074cd1157134f0b0111b392d6f757b6",
+  "live": {
+    "mode": "live_bing",
+    "calls": [
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Address and search bar",
+          "control_type": "Edit",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 529,
+        "elapsed_ms": 100.34509999999955
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "steps": [
+            {
+              "action": "focus",
+              "snapshot": "22ae0ed0e78a414a8b28b9ba6e9410a2",
+              "element_id": 1
+            },
+            {
+              "action": "set_value",
+              "snapshot": "22ae0ed0e78a414a8b28b9ba6e9410a2",
+              "element_id": 1,
+              "text": "https://www.bing.com/search?q=site%3Alearn.microsoft.com%20%22Caching%20in%20UI%20Automation%20Clients%22"
+            },
+            {
+              "action": "get_ui",
+              "window_id": "394084",
+              "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+              "query": "Address and search bar",
+              "control_type": "Edit",
+              "expect_value": "https://www.bing.com/search?q=site%3Alearn.microsoft.com%20%22Caching%20in%20UI%20Automation%20Clients%22"
+            }
+          ],
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 656,
+        "elapsed_ms": 434.895199999999
+      },
+      {
+        "tool": "computer",
+        "args": {
+          "action": "key",
+          "text": "Return",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282"
+        },
+        "phase": "search",
+        "response_chars": 62,
+        "elapsed_ms": 43.639499999999316
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation",
+          "control_type": "Hyperlink",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 315,
+        "elapsed_ms": 152.76779999999962
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation",
+          "control_type": "Hyperlink",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 314,
+        "elapsed_ms": 106.80899999999929
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation",
+          "control_type": "Hyperlink",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 608,
+        "elapsed_ms": 156.92250000000058
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "invoke",
+          "snapshot": "dc5cb783dff34a8ea5e04c6c364b2ea6",
+          "element_id": 1,
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 119,
+        "elapsed_ms": 270.0437000000002
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation Clients",
+          "control_type": "Document",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 292,
+        "elapsed_ms": 85.54509999999937
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation Clients",
+          "control_type": "Document",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 292,
+        "elapsed_ms": 108.98539999999957
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation Clients",
+          "control_type": "Document",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 292,
+        "elapsed_ms": 95.40519999999924
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation Clients",
+          "control_type": "Document",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 351,
+        "elapsed_ms": 80.12299999999959
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation Clients",
+          "control_type": "Document",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 351,
+        "elapsed_ms": 99.65999999999985
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Caching in UI Automation Clients",
+          "control_type": "Document",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 652,
+        "elapsed_ms": 138.13739999999962
+      },
+      {
+        "tool": "windows",
+        "args": {
+          "action": "get_ui",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "query": "Address and search bar",
+          "control_type": "Edit",
+          "max_depth": 30,
+          "max_chars": 16000
+        },
+        "phase": "search",
+        "response_chars": 624,
+        "elapsed_ms": 133.5640999999996
+      },
+      {
+        "tool": "research",
+        "args": {
+          "action": "find_many",
+          "window_id": "394084",
+          "window_ref": "df3466b0756f46d6bba7149d7bfbe282",
+          "document_name": "Caching in UI Automation Clients - .NET Framework | Microsoft Learn",
+          "timeout_ms": 15000,
+          "max_chars": 16000,
+          "queries": [
+            "cross-process communication"
+          ],
+          "context_chars": 300
+        },
+        "phase": "retrieve",
+        "response_chars": 1185,
+        "elapsed_ms": 262.3176000000003
+      }
+    ],
+    "verified": true,
+    "search_url": "https://www.bing.com/search?q=site%3Alearn.microsoft.com%20%22Caching%20in%20UI%20Automation%20Clients%22",
+    "result": {
+      "contract_version": 1,
+      "ok": true,
+      "action": "find_many",
+      "document_name": "Caching in UI Automation Clients - .NET Framework | Microsoft Learn",
+      "requested_queries": 1,
+      "input_state": "not_sent",
+      "native_calls": 2,
+      "results": [
+        {
+          "found": true,
+          "text": "indows.Automation namespace. For the latest information about UI Automation, see Windows Automation API: UI Automation.\nThis topic introduces caching of UI Automation properties and control patterns.\nIn UI Automation, caching means pre-fetching of data. The data can then be accessed without further cross-process communication. Caching is typically used by UI Automation client applications to retrieve properties and control patterns in bulk. Information is then retrieved from the cache as needed. The application updates the cache periodically, usually in response to events signifying that something in the user interface ",
+          "method": "bounded_full_text_fallback",
+          "fallback_reason": "inconsistent_match_range",
+          "scope": "first_accessible_match",
+          "source_truncated": false,
+          "excerpt_sha256": "83483db8b98196f6e3a519962f26d7d23a4dbdb0e659320fbca1b253788be5a8",
+          "full_document_version": false
+        }
+      ],
+      "all_queries_returned": true,
+      "atomic_document_snapshot": false
+    },
+    "retrieval_ms": 262.3644999999997,
+    "workflow_ms": 3010.7380000000003,
+    "source_url": "https://learn.microsoft.com/en-us/dotnet/framework/ui-automation/caching-in-ui-automation-clients"
+  },
+  "summary": {
+    "range_many:Research article 12000": {
+      "verified": 1,
+      "retrieval": {
+        "samples": 1,
+        "min_ms": 280.1765999999998,
+        "median_ms": 280.1765999999998,
+        "p95_ms": 280.1765999999998,
+        "max_ms": 280.1765999999998
+      },
+      "workflow": {
+        "samples": 1,
+        "min_ms": 1081.6322,
+        "median_ms": 1081.6322,
+        "p95_ms": 1081.6322,
+        "max_ms": 1081.6322
+      },
+      "calls": [
+        1
+      ]
+    },
+    "range_many:Research article 48000": {
+      "verified": 1,
+      "retrieval": {
+        "samples": 1,
+        "min_ms": 271.8041000000003,
+        "median_ms": 271.8041000000003,
+        "p95_ms": 271.8041000000003,
+        "max_ms": 271.8041000000003
+      },
+      "workflow": {
+        "samples": 1,
+        "min_ms": 1224.2403000000004,
+        "median_ms": 1224.2403000000004,
+        "p95_ms": 1224.2403000000004,
+        "max_ms": 1224.2403000000004
+      },
+      "calls": [
+        1
+      ]
+    }
+  }
+}

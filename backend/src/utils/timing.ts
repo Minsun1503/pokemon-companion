@@ -30,6 +30,8 @@ const nativePhases = new Set([
 	'pattern_dispatch_inclusive',
 	'pattern_action',
 	'post_action_value_read',
+	'text_range_find',
+	'text_range_extract',
 ]);
 
 /** Consume internal diagnostics in the requesting async context, never in the shared stdout callback. */

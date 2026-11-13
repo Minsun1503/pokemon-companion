@@ -38,6 +38,8 @@ while ($null -ne ($line = [Console]::ReadLine())) {
             'input_method' { $result = [PokemonWindowsAutomation]::InputMethod() }
             'foreground' { $result = [PokemonWindowsAutomation]::Foreground() }
             'read_text_page' { $result = [PokemonWindowsAutomation]::TextPage($uiaArgs.snapshot, $uiaArgs.element_id, $uiaArgs.text_offset, $uiaArgs.text_length, $uiaArgs.expected_version, $uiaArgs.required_text) }
+            'find_text_range' { $result = [PokemonWindowsAutomation]::FindTextRange($uiaArgs.snapshot, $uiaArgs.element_id, $uiaArgs.text, $uiaArgs.context_chars, $uiaArgs.ignore_case) }
+            'find_text_ranges' { $result = [PokemonWindowsAutomation]::FindTextRanges($uiaArgs.snapshot, $uiaArgs.element_id, [string[]]$uiaArgs.queries, $uiaArgs.context_chars, $uiaArgs.ignore_case) }
             { $_ -like 'excel_*' } { $result = [PokemonExcelAutomation]::Execute(($uiaArgs | ConvertTo-Json -Depth 12 -Compress)) }
             default { $result = [PokemonWindowsAutomation]::Act($uiaArgs.snapshot, $uiaArgs.element_id, $uiaArgs.action, $uiaArgs.text, $uiaArgs.direction) }
         }

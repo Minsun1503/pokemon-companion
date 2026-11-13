@@ -1,0 +1,3139 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "measured_at": "2026-11-13T05:28:25.953Z",
+  "options": {
+    "runs": 1,
+    "modes": [
+      "baseline",
+      "optimized"
+    ],
+    "cases": [
+      "window_discovery",
+      "control_discovery",
+      "enter_text_verify",
+      "search_and_open",
+      "button_result",
+      "document_passages",
+      "url_open",
+      "pdf_open_read",
+      "excel_read",
+      "excel_write_calculate_save"
+    ],
+    "output": "benchmarks/results/common-tasks-trial-2026-11-13.json",
+    "timeout": 15000,
+    "windowId": "394084"
+  },
+  "source_revision": "09784b1aea27e486c3e08ae08b62661cb96420a2",
+  "environment": {
+    "node": "v24.16.0",
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz",
+    "platform": "win32",
+    "transport": "stdio",
+    "companion": "on",
+    "profile": "existing Edge profile"
+  },
+  "samples": [
+    {
+      "case": "window_discovery",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "timed_out",
+      "started": false,
+      "calls": [],
+      "error": "wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-b679dd. After an interrupted wait, call get_ui again for fresh snapshots.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "window_discovery",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-b679dd. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "window_discovery",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-b679dd. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "window_discovery",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-b679dd. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "control_discovery",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "timed_out",
+      "started": false,
+      "calls": [],
+      "error": "wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-48cab0. After an interrupted wait, call get_ui again for fresh snapshots.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "control_discovery",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-48cab0. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "control_discovery",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-48cab0. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "control_discovery",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-48cab0. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "enter_text_verify",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "timed_out",
+      "started": false,
+      "calls": [],
+      "error": "wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-79f9e2. After an interrupted wait, call get_ui again for fresh snapshots.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "enter_text_verify",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-79f9e2. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "enter_text_verify",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-79f9e2. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "enter_text_verify",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-79f9e2. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay."
+    },
+    {
+      "case": "search_and_open",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "failed",
+      "started": false,
+      "calls": [],
+      "error": "Unknown, expired or mismatched window identity. Call get_windows again.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "search_and_open",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "search_and_open",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "search_and_open",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "button_result",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "failed",
+      "started": false,
+      "calls": [],
+      "error": "Unknown, expired or mismatched window identity. Call get_windows again.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "button_result",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "button_result",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "button_result",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "document_passages",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "failed",
+      "started": false,
+      "calls": [],
+      "error": "Unknown, expired or mismatched window identity. Call get_windows again.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "document_passages",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "document_passages",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "document_passages",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "url_open",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "failed",
+      "started": false,
+      "calls": [],
+      "error": "Unknown, expired or mismatched window identity. Call get_windows again.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "url_open",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "url_open",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "url_open",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "pdf_open_read",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "failed",
+      "started": false,
+      "calls": [],
+      "error": "Unknown, expired or mismatched window identity. Call get_windows again.",
+      "stopped_phase": "preparation"
+    },
+    {
+      "case": "pdf_open_read",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "pdf_open_read",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "pdf_open_read",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "blocked",
+      "started": false,
+      "calls": [],
+      "reason": "Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay."
+    },
+    {
+      "case": "excel_read",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 65749.9545,
+          "response_chars": 393,
+          "elapsed_ms": 106.79339999999502
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 65856.7743,
+          "response_chars": 393,
+          "elapsed_ms": 33.750499999994645
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 65890.5432,
+          "response_chars": 393,
+          "elapsed_ms": 35.89979999999923
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 65926.4561,
+          "response_chars": 393,
+          "elapsed_ms": 32.79869999999937
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 65959.269,
+          "response_chars": 393,
+          "elapsed_ms": 34.422099999996135
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 65993.7141,
+          "response_chars": 393,
+          "elapsed_ms": 35.82830000000831
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66029.5581,
+          "response_chars": 393,
+          "elapsed_ms": 34.55710000000545
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66064.1302,
+          "response_chars": 393,
+          "elapsed_ms": 41.91109999999753
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66106.0555,
+          "response_chars": 393,
+          "elapsed_ms": 36.50100000000384
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66142.5705,
+          "response_chars": 394,
+          "elapsed_ms": 35.50489999999991
+        }
+      ],
+      "start": 65749.9545,
+      "action_ms": 429.082699999999,
+      "evidence": {
+        "ten_correct_cells": true
+      },
+      "verification_ms": 29.96600000000035,
+      "elapsed_ms": 459.0591999999888
+    },
+    {
+      "case": "excel_read",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66265.1628,
+          "response_chars": 875,
+          "elapsed_ms": 38.99739999999292
+        }
+      ],
+      "start": 66265.1628,
+      "action_ms": 39.13969999999972,
+      "evidence": {
+        "ten_correct_cells": true
+      },
+      "verification_ms": 23.74069999999483,
+      "elapsed_ms": 62.88189999999304
+    },
+    {
+      "case": "excel_read",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66382.5586,
+          "response_chars": 393,
+          "elapsed_ms": 36.179999999993015
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66418.7524,
+          "response_chars": 393,
+          "elapsed_ms": 36.07009999999718
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66454.8497,
+          "response_chars": 393,
+          "elapsed_ms": 40.26810000000114
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66495.1338,
+          "response_chars": 393,
+          "elapsed_ms": 40.733399999997346
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66535.8876,
+          "response_chars": 393,
+          "elapsed_ms": 53.24210000000312
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66589.1492,
+          "response_chars": 393,
+          "elapsed_ms": 44.67269999999553
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66633.8543,
+          "response_chars": 393,
+          "elapsed_ms": 42.31710000000021
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66676.1938,
+          "response_chars": 393,
+          "elapsed_ms": 38.91580000000249
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66715.1283,
+          "response_chars": 393,
+          "elapsed_ms": 33.56910000000789
+        },
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66748.7123,
+          "response_chars": 394,
+          "elapsed_ms": 31.158800000004703
+        }
+      ],
+      "start": 66382.5586,
+      "action_ms": 397.34479999999166,
+      "evidence": {
+        "ten_correct_cells": true
+      },
+      "verification_ms": 22.898199999995995,
+      "elapsed_ms": 420.2442999999912
+    },
+    {
+      "case": "excel_read",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "read_range",
+          "phase": "action",
+          "started_ms": 66884.4861,
+          "response_chars": 875,
+          "elapsed_ms": 36.224400000006426
+        }
+      ],
+      "start": 66884.4861,
+      "action_ms": 36.28549999999814,
+      "evidence": {
+        "ten_correct_cells": true
+      },
+      "verification_ms": 32.65589999999793,
+      "elapsed_ms": 68.9429999999993
+    },
+    {
+      "case": "excel_write_calculate_save",
+      "mode": "baseline",
+      "round": -1,
+      "warmup": true,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67004.5036,
+          "response_chars": 337,
+          "elapsed_ms": 71.67859999999928
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67076.2051,
+          "response_chars": 337,
+          "elapsed_ms": 50.15779999998631
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67126.4041,
+          "response_chars": 337,
+          "elapsed_ms": 57.67969999999332
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67184.1097,
+          "response_chars": 337,
+          "elapsed_ms": 50.20260000000417
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67234.4163,
+          "response_chars": 337,
+          "elapsed_ms": 48.148199999995995
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67282.5921,
+          "response_chars": 337,
+          "elapsed_ms": 42.974500000011176
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67325.5962,
+          "response_chars": 337,
+          "elapsed_ms": 40.253899999996065
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67365.868,
+          "response_chars": 337,
+          "elapsed_ms": 34.780100000003586
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67400.6677,
+          "response_chars": 337,
+          "elapsed_ms": 35.043599999989965
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67435.7307,
+          "response_chars": 337,
+          "elapsed_ms": 36.72849999999744
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 67472.493,
+          "response_chars": 337,
+          "elapsed_ms": 40.38409999999567
+        },
+        {
+          "tool": "excel",
+          "action": "save_workbook",
+          "phase": "action",
+          "started_ms": 67512.9035,
+          "response_chars": 303,
+          "elapsed_ms": 74.42200000000594
+        }
+      ],
+      "start": 67004.5036,
+      "action_ms": 582.828600000008,
+      "evidence": {
+        "saved_and_reopened": true,
+        "calculated": 55
+      },
+      "verification_ms": 651.9038999999902,
+      "elapsed_ms": 1234.7341000000015
+    },
+    {
+      "case": "excel_write_calculate_save",
+      "mode": "optimized",
+      "round": -1,
+      "warmup": true,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 68313.5845,
+          "response_chars": 342,
+          "elapsed_ms": 52.80019999999786
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 68366.4038,
+          "response_chars": 338,
+          "elapsed_ms": 46.83520000000135
+        },
+        {
+          "tool": "excel",
+          "action": "save_workbook",
+          "phase": "action",
+          "started_ms": 68413.2583,
+          "response_chars": 304,
+          "elapsed_ms": 83.64749999999185
+        }
+      ],
+      "start": 68313.5845,
+      "action_ms": 183.335699999996,
+      "evidence": {
+        "saved_and_reopened": true,
+        "calculated": 55
+      },
+      "verification_ms": 481.94250000000466,
+      "elapsed_ms": 665.2796999999991
+    },
+    {
+      "case": "excel_write_calculate_save",
+      "mode": "baseline",
+      "round": 0,
+      "warmup": false,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69114.6084,
+          "response_chars": 338,
+          "elapsed_ms": 54.469899999996414
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69169.116,
+          "response_chars": 338,
+          "elapsed_ms": 38.22490000000107
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69207.3602,
+          "response_chars": 338,
+          "elapsed_ms": 73.57100000001083
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69280.9572,
+          "response_chars": 338,
+          "elapsed_ms": 57.15569999998843
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69338.1736,
+          "response_chars": 338,
+          "elapsed_ms": 59.98649999999907
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69398.1798,
+          "response_chars": 338,
+          "elapsed_ms": 49.03540000000794
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69447.2367,
+          "response_chars": 338,
+          "elapsed_ms": 39.117900000012014
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69486.3739,
+          "response_chars": 338,
+          "elapsed_ms": 38.74329999998736
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69525.1364,
+          "response_chars": 338,
+          "elapsed_ms": 42.8637000000017
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69568.0214,
+          "response_chars": 338,
+          "elapsed_ms": 65.83629999999539
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 69633.8918,
+          "response_chars": 338,
+          "elapsed_ms": 55.32480000000214
+        },
+        {
+          "tool": "excel",
+          "action": "save_workbook",
+          "phase": "action",
+          "started_ms": 69689.2554,
+          "response_chars": 304,
+          "elapsed_ms": 87.4655000000057
+        }
+      ],
+      "start": 69114.6084,
+      "action_ms": 662.1429999999964,
+      "evidence": {
+        "saved_and_reopened": true,
+        "calculated": 55
+      },
+      "verification_ms": 498.3150000000023,
+      "elapsed_ms": 1160.4594999999972
+    },
+    {
+      "case": "excel_write_calculate_save",
+      "mode": "optimized",
+      "round": 0,
+      "warmup": false,
+      "status": "passed",
+      "started": true,
+      "calls": [
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 70405.3941,
+          "response_chars": 343,
+          "elapsed_ms": 49.75830000000133
+        },
+        {
+          "tool": "excel",
+          "action": "write_range",
+          "phase": "action",
+          "started_ms": 70455.1818,
+          "response_chars": 338,
+          "elapsed_ms": 40.809499999988475
+        },
+        {
+          "tool": "excel",
+          "action": "save_workbook",
+          "phase": "action",
+          "started_ms": 70496.0286,
+          "response_chars": 303,
+          "elapsed_ms": 77.97819999999774
+        }
+      ],
+      "start": 70405.3941,
+      "action_ms": 168.62139999998908,
+      "evidence": {
+        "saved_and_reopened": true,
+        "calculated": 55
+      },
+      "verification_ms": 506.99000000000524,
+      "elapsed_ms": 675.6308999999892
+    }
+  ],
+  "timing": [
+    {
+      "tool": "pokemon",
+      "action": "task",
+      "total_ms": 296.57269999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.1066000000000713,
+        "companion_before": 295.8252,
+        "action": 0,
+        "companion_after": 0,
+        "serialization": 0.020899999999983265
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 2382.6728000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.18399999999996908,
+        "companion_before": 0.8380999999999403,
+        "action": 37.16010000000006,
+        "companion_after": 0.637000000000171,
+        "serialization": 0.028399999999692227,
+        "worker_round_trip": 2379.0329000000006,
+        "post_processing": 0.02129999999942811,
+        "native_window_metadata_inclusive": 6.400000000000002,
+        "native_window_verify": 5.2044,
+        "native_window_capture_inclusive": 13.6891,
+        "native_window_enumeration_inclusive": 28.7294
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 14,
+        "native_window_verify": 2,
+        "native_window_capture_inclusive": 2,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 325.93110000000024,
+      "breakdown_ms": {
+        "queue_wait": 0.05900000000019645,
+        "companion_before": 0.6754000000000815,
+        "action": 320.6704,
+        "companion_after": 0.526199999999335,
+        "serialization": 0.0376999999994041,
+        "worker_round_trip": 324.1772000000001,
+        "post_processing": 0.15139999999973952,
+        "native_window_verify": 8.6926,
+        "native_navigation_cache_fetch": 100.73460000000001,
+        "native_identity_projection": 3.0245000000000037,
+        "native_visit_projection_inclusive": 6.902499999999996,
+        "native_tree_walk_inclusive": 111.3079,
+        "native_window_metadata_inclusive": 1.7872,
+        "native_discovery_inclusive": 286.5517,
+        "uia_tree_walk": 110.5201
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 113,
+        "native_identity_projection": 112,
+        "native_visit_projection_inclusive": 112,
+        "native_tree_walk_inclusive": 1,
+        "native_window_metadata_inclusive": 1,
+        "native_discovery_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "invoke",
+      "total_ms": 299.6895999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.05349999999998545,
+        "companion_before": 0.9459999999999127,
+        "action": 280.3161,
+        "companion_after": 0.9056000000000495,
+        "serialization": 0.02510000000074797,
+        "worker_round_trip": 297.3114999999998,
+        "post_processing": 0.01739999999972497,
+        "native_window_verify": 7.6103000000000005,
+        "native_navigation_cache_fetch": 80.47309999999997,
+        "native_identity_projection": 0.20050000000000004,
+        "native_visit_projection_inclusive": 0.3835000000000004,
+        "native_tree_walk_inclusive": 81.2043,
+        "native_identity_cache_fetch": 1.1684999999999999,
+        "native_ancestor_navigation": 13.959,
+        "native_element_verify_inclusive": 24.477600000000002,
+        "native_identity_resolve_inclusive": 102.3542,
+        "native_pattern_action": 55.3811,
+        "native_pattern_dispatch_inclusive": 68.4239,
+        "native_post_action_value_read": 35.3571,
+        "native_act_inclusive": 207.9521
+      },
+      "counts": {
+        "native_window_verify": 4,
+        "native_navigation_cache_fetch": 113,
+        "native_identity_projection": 114,
+        "native_visit_projection_inclusive": 112,
+        "native_tree_walk_inclusive": 1,
+        "native_identity_cache_fetch": 2,
+        "native_ancestor_navigation": 12,
+        "native_element_verify_inclusive": 2,
+        "native_identity_resolve_inclusive": 1,
+        "native_pattern_action": 1,
+        "native_pattern_dispatch_inclusive": 1,
+        "native_post_action_value_read": 1,
+        "native_act_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 16.670200000000477,
+      "breakdown_ms": {
+        "queue_wait": 0.10649999999986903,
+        "companion_before": 0.5920999999998457,
+        "action": 12.026700000000346,
+        "companion_after": 0.5840000000007421,
+        "serialization": 0.020600000001650187,
+        "worker_round_trip": 14.955500000000029,
+        "post_processing": 0.014600000000427826,
+        "native_window_verify": 8.0083
+      },
+      "counts": {
+        "native_window_verify": 3
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 687.7353000000003,
+      "breakdown_ms": {
+        "queue_wait": 0.06770000000142318,
+        "companion_before": 13.422499999996944,
+        "action": 665.8096000000005,
+        "companion_after": 4.454599999999118,
+        "serialization": 0.11700000000018917,
+        "worker_round_trip": 663.3109000000022,
+        "post_processing": 0.15530000000035216,
+        "native_window_verify": 44.558800000000005,
+        "native_navigation_cache_fetch": 511.71900000000005,
+        "native_identity_projection": 1.7176999999999998,
+        "native_visit_projection_inclusive": 3.9073,
+        "native_discovery_value_read": 0.0066,
+        "native_tree_walk_inclusive": 519.1155,
+        "native_window_metadata_inclusive": 4.333600000000001,
+        "native_discovery_inclusive": 297.36069999999995,
+        "uia_tree_walk": 276.0068,
+        "native_identity_cache_fetch": 2.1328000000000005,
+        "native_ancestor_navigation": 28.6817,
+        "native_element_verify_inclusive": 49.7322,
+        "native_identity_resolve_inclusive": 283.54999999999995,
+        "native_pattern_action": 20.8173,
+        "native_pattern_dispatch_inclusive": 47.2194,
+        "native_post_action_value_read": 8.4397,
+        "native_act_inclusive": 340.1847
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_navigation_cache_fetch": 775,
+        "native_identity_projection": 775,
+        "native_visit_projection_inclusive": 771,
+        "native_discovery_value_read": 2,
+        "native_tree_walk_inclusive": 4,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 54.771200000002864,
+      "breakdown_ms": {
+        "queue_wait": 0.0459999999984575,
+        "companion_before": 0.40820000000167056,
+        "action": 50.60449999999764,
+        "companion_after": 0.5776999999980035,
+        "serialization": 0.021800000002258457,
+        "worker_round_trip": 11.836599999998725,
+        "post_processing": 0.013500000000931323,
+        "native_window_verify": 6.0567,
+        "native_window_metadata_inclusive": 3.9485,
+        "foreground_guard": 9.603500000001077
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "wait_for",
+      "total_ms": 15006.613000000001,
+      "breakdown_ms": {
+        "queue_wait": 0.03779999999824213,
+        "companion_before": 0.8054000000011001,
+        "action": 15001.773999999998,
+        "companion_after": 0.5652000000009139,
+        "serialization": 2.7448000000149477,
+        "worker_round_trip": 6168.581600000009,
+        "post_processing": 1.4311000000088825,
+        "native_window_verify": 1005.8683999999998,
+        "native_navigation_cache_fetch": 4560.342200000001,
+        "native_identity_projection": 8.513900000000003,
+        "native_visit_projection_inclusive": 20.4024,
+        "native_tree_walk_inclusive": 4596.098800000001,
+        "native_window_metadata_inclusive": 169.15930000000006,
+        "native_discovery_inclusive": 5607.8906,
+        "uia_tree_walk": 4593.325200000001
+      },
+      "counts": {
+        "native_window_verify": 332,
+        "native_navigation_cache_fetch": 4400,
+        "native_identity_projection": 4317,
+        "native_visit_projection_inclusive": 4317,
+        "native_tree_walk_inclusive": 83,
+        "native_window_metadata_inclusive": 83,
+        "native_discovery_inclusive": 83
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 17.748100000000704,
+      "breakdown_ms": {
+        "queue_wait": 0.04130000000077416,
+        "companion_before": 0.8665999999975611,
+        "action": 12.843000000000757,
+        "companion_after": 0.8918000000012398,
+        "serialization": 0.035200000002078013,
+        "worker_round_trip": 15.570499999997992,
+        "post_processing": 0.01179999999658321,
+        "native_window_verify": 10.184
+      },
+      "counts": {
+        "native_window_verify": 3
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 366.59509999999864,
+      "breakdown_ms": {
+        "queue_wait": 0.040600000000267755,
+        "companion_before": 12.031100000007427,
+        "action": 345.54149999999936,
+        "companion_after": 3.1406999999999243,
+        "serialization": 0.0819000000046799,
+        "worker_round_trip": 349.9903000000013,
+        "post_processing": 0.05720000000656,
+        "native_window_verify": 38.047399999999996,
+        "native_navigation_cache_fetch": 207.84900000000002,
+        "native_identity_projection": 0.4624,
+        "native_visit_projection_inclusive": 0.8431,
+        "native_discovery_value_read": 0.001,
+        "native_tree_walk_inclusive": 209.4581,
+        "native_window_metadata_inclusive": 4.9505,
+        "native_discovery_inclusive": 133.05790000000002,
+        "uia_tree_walk": 109.8234,
+        "native_identity_cache_fetch": 2.2612,
+        "native_ancestor_navigation": 22.6512,
+        "native_element_verify_inclusive": 42.3207,
+        "native_identity_resolve_inclusive": 135.466,
+        "native_pattern_action": 19.3488,
+        "native_pattern_dispatch_inclusive": 41.0552,
+        "native_post_action_value_read": 22.648699999999998,
+        "native_act_inclusive": 200.0999
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_navigation_cache_fetch": 234,
+        "native_identity_projection": 234,
+        "native_visit_projection_inclusive": 230,
+        "native_discovery_value_read": 2,
+        "native_tree_walk_inclusive": 4,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 38.68670000000202,
+      "breakdown_ms": {
+        "queue_wait": 0.024099999998725252,
+        "companion_before": 0.4900999999990745,
+        "action": 35.25409999999829,
+        "companion_after": 1.0008000000016182,
+        "serialization": 0.0220999999983178,
+        "worker_round_trip": 8.224700000002485,
+        "post_processing": 0.007999999997991836,
+        "native_window_verify": 5.1337,
+        "native_window_metadata_inclusive": 2.9766,
+        "foreground_guard": 6.543399999998655
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "wait_for",
+      "total_ms": 15006.0609,
+      "breakdown_ms": {
+        "queue_wait": 0.09950000000026193,
+        "companion_before": 0.6422000000020489,
+        "action": 15001.671300000002,
+        "companion_after": 0.519800000001851,
+        "serialization": 2.6024999999244756,
+        "worker_round_trip": 6185.913000000004,
+        "post_processing": 1.369799999960378,
+        "native_window_verify": 996.5043000000003,
+        "native_navigation_cache_fetch": 4596.243499999999,
+        "native_identity_projection": 11.229099999999997,
+        "native_visit_projection_inclusive": 23.318699999999993,
+        "native_tree_walk_inclusive": 4634.965699999999,
+        "native_window_metadata_inclusive": 163.63859999999997,
+        "native_discovery_inclusive": 5628.2874,
+        "uia_tree_walk": 4632.188700000001
+      },
+      "counts": {
+        "native_window_verify": 328,
+        "native_navigation_cache_fetch": 4347,
+        "native_identity_projection": 4265,
+        "native_visit_projection_inclusive": 4265,
+        "native_tree_walk_inclusive": 82,
+        "native_window_metadata_inclusive": 82,
+        "native_discovery_inclusive": 82
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 13.517100000004575,
+      "breakdown_ms": {
+        "queue_wait": 0.05559999999968568,
+        "companion_before": 1.2701999999990221,
+        "action": 9.175599999995029,
+        "companion_after": 0.43399999999383,
+        "serialization": 0.038500000002386514,
+        "worker_round_trip": 11.575299999996787,
+        "post_processing": 0.006300000000919681,
+        "native_window_verify": 7.7698
+      },
+      "counts": {
+        "native_window_verify": 3
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "batch",
+      "total_ms": 367.809500000003,
+      "breakdown_ms": {
+        "queue_wait": 0.06280000000697328,
+        "companion_before": 15.169700000005832,
+        "action": 344.53229999999894,
+        "companion_after": 4.4715999999971245,
+        "serialization": 0.1309999999939464,
+        "worker_round_trip": 346.2108999999982,
+        "post_processing": 0.09840000001713634,
+        "native_window_verify": 40.0223,
+        "native_navigation_cache_fetch": 214.97180000000003,
+        "native_identity_projection": 0.4225,
+        "native_visit_projection_inclusive": 0.8049999999999999,
+        "native_discovery_value_read": 0.0012000000000000001,
+        "native_tree_walk_inclusive": 216.4728,
+        "native_window_metadata_inclusive": 3.7974,
+        "native_discovery_inclusive": 138.88060000000002,
+        "uia_tree_walk": 119.8998,
+        "native_identity_cache_fetch": 2.3574,
+        "native_ancestor_navigation": 23.4996,
+        "native_element_verify_inclusive": 45.6897,
+        "native_identity_resolve_inclusive": 133.6871,
+        "native_pattern_action": 20.301299999999998,
+        "native_pattern_dispatch_inclusive": 44.391999999999996,
+        "native_post_action_value_read": 9.9055,
+        "native_act_inclusive": 188.97629999999998
+      },
+      "counts": {
+        "native_window_verify": 16,
+        "native_navigation_cache_fetch": 234,
+        "native_identity_projection": 234,
+        "native_visit_projection_inclusive": 230,
+        "native_discovery_value_read": 2,
+        "native_tree_walk_inclusive": 4,
+        "native_window_metadata_inclusive": 2,
+        "native_discovery_inclusive": 2,
+        "native_identity_cache_fetch": 4,
+        "native_ancestor_navigation": 32,
+        "native_element_verify_inclusive": 4,
+        "native_identity_resolve_inclusive": 2,
+        "native_pattern_action": 2,
+        "native_pattern_dispatch_inclusive": 2,
+        "native_post_action_value_read": 2,
+        "native_act_inclusive": 2
+      }
+    },
+    {
+      "tool": "computer",
+      "action": "key",
+      "total_ms": 45.06399999999849,
+      "breakdown_ms": {
+        "queue_wait": 0.024000000004889444,
+        "companion_before": 2.594600000003993,
+        "action": 39.88549999999668,
+        "companion_after": 0.5521000000007916,
+        "serialization": 0.01750000000174623,
+        "worker_round_trip": 7.447499999994761,
+        "post_processing": 0.00429999999323627,
+        "native_window_verify": 4.4879,
+        "native_window_metadata_inclusive": 2.3674,
+        "foreground_guard": 5.602699999995821
+      },
+      "counts": {
+        "native_window_verify": 2,
+        "native_window_metadata_inclusive": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "wait_for",
+      "total_ms": 15016.6227,
+      "breakdown_ms": {
+        "queue_wait": 0.0341000000044005,
+        "companion_before": 1.5160000000032596,
+        "action": 15011.703399999999,
+        "companion_after": 1.0498000000006869,
+        "serialization": 2.321299999988696,
+        "worker_round_trip": 6101.008999999984,
+        "post_processing": 1.3501999999716645,
+        "native_window_verify": 971.0135,
+        "native_navigation_cache_fetch": 4526.725,
+        "native_identity_projection": 8.879100000000003,
+        "native_visit_projection_inclusive": 20.9185,
+        "native_tree_walk_inclusive": 4562.8179,
+        "native_window_metadata_inclusive": 176.81659999999997,
+        "native_discovery_inclusive": 5537.8975,
+        "uia_tree_walk": 4560.2476000000015
+      },
+      "counts": {
+        "native_window_verify": 332,
+        "native_navigation_cache_fetch": 4400,
+        "native_identity_projection": 4317,
+        "native_visit_projection_inclusive": 4317,
+        "native_tree_walk_inclusive": 83,
+        "native_window_metadata_inclusive": 83,
+        "native_discovery_inclusive": 83
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 2504.8346999999994,
+      "breakdown_ms": {
+        "queue_wait": 0.0797999999995227,
+        "companion_before": 0.6509999999980209,
+        "action": 78.74459999999817,
+        "companion_after": 0.4845000000059372,
+        "serialization": 0.03820000000996515,
+        "worker_round_trip": 2503.205900000001,
+        "post_processing": 0.022700000001350418
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 11.138800000000629,
+      "breakdown_ms": {
+        "queue_wait": 0.01959999999962747,
+        "companion_before": 0.5630999999993946,
+        "action": 1.1065999999991618,
+        "companion_after": 6.620000000002619,
+        "serialization": 0.025500000003376044,
+        "worker_round_trip": 3.6388999999981024,
+        "post_processing": 0.0031999999991967343
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 8.03070000000298,
+      "breakdown_ms": {
+        "queue_wait": 0.03570000000036089,
+        "companion_before": 0.7592999999978929,
+        "action": 1.1451999999990221,
+        "companion_after": 3.6105999999999767,
+        "serialization": 0.01999999998952262,
+        "worker_round_trip": 3.4089999999996508,
+        "post_processing": 0.0029000000067753717
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 7.935000000004948,
+      "breakdown_ms": {
+        "queue_wait": 0.023699999997916166,
+        "companion_before": 0.5564000000013039,
+        "action": 1.0328000000008615,
+        "companion_after": 4.2744000000020606,
+        "serialization": 0.038499999995110556,
+        "worker_round_trip": 2.888200000001234,
+        "post_processing": 0.0028000000020256266
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "activate",
+      "total_ms": 10.092400000001362,
+      "breakdown_ms": {
+        "queue_wait": 0.018900000002759043,
+        "companion_before": 0.5923999999940861,
+        "action": 1.1207999999969616,
+        "companion_after": 5.398199999995995,
+        "serialization": 0.02419999999256106,
+        "worker_round_trip": 3.8853000000017346,
+        "post_processing": 0.0038000000058673322
+      },
+      "counts": {}
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 40.13379999999597,
+      "breakdown_ms": {
+        "queue_wait": 0.019100000004982576,
+        "companion_before": 0.697199999995064,
+        "action": 35.49510000000009,
+        "companion_after": 0.5729000000064843,
+        "serialization": 0.0211999999883119,
+        "worker_round_trip": 38.54339999999502,
+        "post_processing": 0.022400000001653098,
+        "native_window_metadata_inclusive": 5.0128,
+        "native_window_verify": 2.8328,
+        "native_window_capture_inclusive": 7.8954,
+        "native_window_enumeration_inclusive": 23.2315
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 83.18710000000283,
+      "breakdown_ms": {
+        "queue_wait": 0.03730000000359723,
+        "companion_before": 0.6080000000074506,
+        "action": 79.32160000000295,
+        "companion_after": 0.40639999999984866,
+        "serialization": 0.028299999998125713,
+        "worker_round_trip": 81.0969999999943,
+        "post_processing": 0.007600000004458707,
+        "native_window_verify": 2.5428
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 102.83389999999781,
+      "breakdown_ms": {
+        "queue_wait": 0.023999999997613486,
+        "companion_before": 0.5331999999980326,
+        "action": 99.80819999999949,
+        "companion_after": 0.40490000000136206,
+        "serialization": 0.022500000006402843,
+        "worker_round_trip": 101.34549999999581,
+        "post_processing": 0.006900000000314321,
+        "native_window_verify": 3.951
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 32.02400000000489,
+      "breakdown_ms": {
+        "queue_wait": 0.07489999999961583,
+        "companion_before": 0.6027999999932945,
+        "action": 28.076099999998405,
+        "companion_after": 0.39979999999923166,
+        "serialization": 0.02680000000691507,
+        "worker_round_trip": 30.51469999999972,
+        "post_processing": 0.004699999997683335,
+        "native_window_verify": 2.4313
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 34.263200000001234,
+      "breakdown_ms": {
+        "queue_wait": 0.040000000000873115,
+        "companion_before": 1.6058000000048196,
+        "action": 27.737999999997555,
+        "companion_after": 0.4688000000023749,
+        "serialization": 0.029700000006414484,
+        "worker_round_trip": 31.6820000000007,
+        "post_processing": 0.008099999999103602,
+        "native_window_verify": 2.3378
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 31.131399999998393,
+      "breakdown_ms": {
+        "queue_wait": 0.023999999997613486,
+        "companion_before": 1.953300000001036,
+        "action": 25.46190000000206,
+        "companion_after": 0.516299999995681,
+        "serialization": 0.026000000005296897,
+        "worker_round_trip": 28.108900000006543,
+        "post_processing": 0.009400000002642628,
+        "native_window_verify": 2.3252
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 32.648699999997916,
+      "breakdown_ms": {
+        "queue_wait": 0.06850000000122236,
+        "companion_before": 1.4522000000069966,
+        "action": 26.71679999999469,
+        "companion_after": 0.6064999999944121,
+        "serialization": 0.026200000000244472,
+        "worker_round_trip": 30.10850000000937,
+        "post_processing": 0.006500000003143214,
+        "native_window_verify": 2.4584
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 34.63060000000405,
+      "breakdown_ms": {
+        "queue_wait": 0.028200000000651926,
+        "companion_before": 1.412899999995716,
+        "action": 29.38409999999567,
+        "companion_after": 0.6072999999960302,
+        "serialization": 0.04069999998318963,
+        "worker_round_trip": 32.26839999999356,
+        "post_processing": 0.004900000007182825,
+        "native_window_verify": 2.4665
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 33.6446999999971,
+      "breakdown_ms": {
+        "queue_wait": 0.01959999999962747,
+        "companion_before": 1.311200000003737,
+        "action": 29.6559999999954,
+        "companion_after": 0.46820000000298023,
+        "serialization": 0.02809999999590218,
+        "worker_round_trip": 31.52130000001489,
+        "post_processing": 0.006000000001222361,
+        "native_window_verify": 2.4066
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 40.87699999999313,
+      "breakdown_ms": {
+        "queue_wait": 0.024900000003981404,
+        "companion_before": 1.4248999999981606,
+        "action": 36.6707000000024,
+        "companion_after": 0.4883000000118045,
+        "serialization": 0.020999999993364327,
+        "worker_round_trip": 38.62919999999576,
+        "post_processing": 0.006800000017392449,
+        "native_window_verify": 2.6073
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 35.44400000000314,
+      "breakdown_ms": {
+        "queue_wait": 0.038499999995110556,
+        "companion_before": 1.6466000000073109,
+        "action": 29.616900000008172,
+        "companion_after": 0.5858000000007451,
+        "serialization": 0.02519999998912681,
+        "worker_round_trip": 32.672500000015134,
+        "post_processing": 0.010600000008707866,
+        "native_window_verify": 2.7363
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 34.412000000011176,
+      "breakdown_ms": {
+        "queue_wait": 0.07550000000628643,
+        "companion_before": 2.0961000000097556,
+        "action": 27.54079999998794,
+        "companion_after": 0.5655000000115251,
+        "serialization": 0.02800000000570435,
+        "worker_round_trip": 31.29800000000978,
+        "post_processing": 0.005300000004353933,
+        "native_window_verify": 2.2424
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 7.541100000002189,
+      "breakdown_ms": {
+        "queue_wait": 0.020699999993667006,
+        "companion_before": 0.552800000004936,
+        "action": 4.936799999995856,
+        "companion_after": 0.4125999999960186,
+        "serialization": 0.016699999978300184,
+        "worker_round_trip": 6.427700000000186,
+        "post_processing": 0.014000000010128133,
+        "native_window_metadata_inclusive": 1.1809999999999996,
+        "native_window_verify": 2.4037,
+        "native_window_enumeration_inclusive": 3.8531
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 42.46089999999094,
+      "breakdown_ms": {
+        "queue_wait": 0.018299999996088445,
+        "companion_before": 3.7787999999854947,
+        "action": 35.57579999999143,
+        "companion_after": 0.5304999999934807,
+        "serialization": 0.029099999999743886,
+        "worker_round_trip": 37.147200000006706,
+        "post_processing": 0.005999999993946403,
+        "native_window_verify": 2.6067
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 37.95010000000184,
+      "breakdown_ms": {
+        "queue_wait": 0.019199999995180406,
+        "companion_before": 1.7119000000093365,
+        "action": 34.29320000000007,
+        "companion_after": 0.3558999999950174,
+        "serialization": 0.027099999992060475,
+        "worker_round_trip": 35.62860000001092,
+        "post_processing": 0.0048999999853549525,
+        "native_window_verify": 2.2639
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 7.762600000001839,
+      "breakdown_ms": {
+        "queue_wait": 0.01879999999073334,
+        "companion_before": 0.5270000000018626,
+        "action": 5.188900000008289,
+        "companion_after": 0.38910000000032596,
+        "serialization": 0.01610000002256129,
+        "worker_round_trip": 6.715099999986705,
+        "post_processing": 0.012699999992037192,
+        "native_window_metadata_inclusive": 1.3051,
+        "native_window_verify": 2.5715,
+        "native_window_enumeration_inclusive": 4.1264
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 42.38220000000729,
+      "breakdown_ms": {
+        "queue_wait": 0.02079999999841675,
+        "companion_before": 2.46040000001085,
+        "action": 36.94289999999455,
+        "companion_after": 0.4602000000013504,
+        "serialization": 0.025399999984074384,
+        "worker_round_trip": 39.199199999988195,
+        "post_processing": 0.0058000000135507435,
+        "native_window_verify": 2.7955
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 35.340299999996205,
+      "breakdown_ms": {
+        "queue_wait": 0.019499999994877726,
+        "companion_before": 1.8105000000068685,
+        "action": 31.098299999997835,
+        "companion_after": 0.3506000000052154,
+        "serialization": 0.022099999972851947,
+        "worker_round_trip": 32.9375999999902,
+        "post_processing": 0.006299999993643723,
+        "native_window_verify": 2.529
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 35.24619999999413,
+      "breakdown_ms": {
+        "queue_wait": 0.01879999999073334,
+        "companion_before": 2.100400000010268,
+        "action": 31.133300000001327,
+        "companion_after": 0.3433999999979278,
+        "serialization": 0.020900000017718412,
+        "worker_round_trip": 32.59259999997448,
+        "post_processing": 0.004500000010011718,
+        "native_window_verify": 4.0749
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 39.16599999999744,
+      "breakdown_ms": {
+        "queue_wait": 0.019400000004679896,
+        "companion_before": 2.6534999999857973,
+        "action": 33.05569999999716,
+        "companion_after": 0.7296000000060303,
+        "serialization": 0.023800000024493784,
+        "worker_round_trip": 35.47379999999248,
+        "post_processing": 0.0058000000135507435,
+        "native_window_verify": 4.6105
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 39.89329999999609,
+      "breakdown_ms": {
+        "queue_wait": 0.0268999999971129,
+        "companion_before": 1.4481999999989057,
+        "action": 36.04120000000694,
+        "companion_after": 0.4334999999991851,
+        "serialization": 0.020000000004074536,
+        "worker_round_trip": 37.77640000001702,
+        "post_processing": 0.005899999989196658,
+        "native_window_verify": 2.3363
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 51.92990000000282,
+      "breakdown_ms": {
+        "queue_wait": 0.03190000000176951,
+        "companion_before": 1.9551999999966938,
+        "action": 46.83690000000934,
+        "companion_after": 0.6157999999995809,
+        "serialization": 0.02569999999832362,
+        "worker_round_trip": 49.07020000000193,
+        "post_processing": 0.006100000013248064,
+        "native_window_verify": 6.2011
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 43.55409999999392,
+      "breakdown_ms": {
+        "queue_wait": 0.020900000003166497,
+        "companion_before": 2.4479000000137603,
+        "action": 38.23089999999502,
+        "companion_after": 0.4775000000081491,
+        "serialization": 0.024099999995087273,
+        "worker_round_trip": 40.31669999999576,
+        "post_processing": 0.007199999992735684,
+        "native_window_verify": 2.437
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 41.16830000000482,
+      "breakdown_ms": {
+        "queue_wait": 0.023699999990640208,
+        "companion_before": 1.7722999999969034,
+        "action": 35.972200000003795,
+        "companion_after": 0.6628999999957159,
+        "serialization": 0.02410000000963919,
+        "worker_round_trip": 38.42720000000554,
+        "post_processing": 0.006699999998090789,
+        "native_window_verify": 2.7609
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 37.70140000000538,
+      "breakdown_ms": {
+        "queue_wait": 0.0253999999986263,
+        "companion_before": 1.3756000000139466,
+        "action": 32.244200000001,
+        "companion_after": 0.5742999999929452,
+        "serialization": 0.024199999985285103,
+        "worker_round_trip": 35.34769999998389,
+        "post_processing": 0.02509999999892898,
+        "native_window_verify": 2.4274
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 32.623200000001816,
+      "breakdown_ms": {
+        "queue_wait": 0.02410000000963919,
+        "companion_before": 1.5625999999901978,
+        "action": 28.52740000000631,
+        "companion_after": 0.3779999999969732,
+        "serialization": 0.023299999986193143,
+        "worker_round_trip": 30.434900000007474,
+        "post_processing": 0.006600000007892959,
+        "native_window_verify": 2.7765
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 30.319499999997788,
+      "breakdown_ms": {
+        "queue_wait": 0.023199999995995313,
+        "companion_before": 1.4240000000136206,
+        "action": 26.256399999998393,
+        "companion_after": 0.42339999999967404,
+        "serialization": 0.020399999993969686,
+        "worker_round_trip": 28.211100000000442,
+        "post_processing": 0.005599999989499338,
+        "native_window_verify": 2.421
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 14.578099999998813,
+      "breakdown_ms": {
+        "queue_wait": 0.02010000000882428,
+        "companion_before": 0.7082000000082189,
+        "action": 8.267300000006799,
+        "companion_after": 0.43510000000242144,
+        "serialization": 0.01780000000144355,
+        "worker_round_trip": 13.2440999999817,
+        "post_processing": 0.011699999988195486,
+        "native_window_metadata_inclusive": 1.1417000000000002,
+        "native_window_verify": 5.2573,
+        "native_window_enumeration_inclusive": 6.8641
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 62.6593000000139,
+      "breakdown_ms": {
+        "queue_wait": 0.022599999996600673,
+        "companion_before": 1.8766999999934342,
+        "action": 58.07119999999122,
+        "companion_after": 0.43910000000323635,
+        "serialization": 0.032100000011269,
+        "worker_round_trip": 60.106400000004214,
+        "post_processing": 0.006200000017997809,
+        "native_window_verify": 9.5011
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "read_range",
+      "total_ms": 35.21899999999732,
+      "breakdown_ms": {
+        "queue_wait": 0.02049999999871943,
+        "companion_before": 2.0231999999959953,
+        "action": 30.64680000000226,
+        "companion_after": 0.49769999999261927,
+        "serialization": 0.034399999989545904,
+        "worker_round_trip": 32.40979999999399,
+        "post_processing": 0.0060000000084983185,
+        "native_window_verify": 2.6208
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 10.629799999995157,
+      "breakdown_ms": {
+        "queue_wait": 0.020099999994272366,
+        "companion_before": 0.9023999999917578,
+        "action": 7.4931999999971595,
+        "companion_after": 0.4193000000086613,
+        "serialization": 0.036000000007334165,
+        "worker_round_trip": 9.131600000007893,
+        "post_processing": 0.014700000014272518,
+        "native_window_metadata_inclusive": 1.1399,
+        "native_window_verify": 4.6597,
+        "native_window_enumeration_inclusive": 6.1856
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 36.26600000000326,
+      "breakdown_ms": {
+        "queue_wait": 0.03969999999389984,
+        "companion_before": 2.1799000000028173,
+        "action": 31.736000000004424,
+        "companion_after": 0.3887999999860767,
+        "serialization": 0.02509999999892898,
+        "worker_round_trip": 33.47129999999015,
+        "post_processing": 0.005300000004353933,
+        "native_window_verify": 3.415
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 69.16280000000552,
+      "breakdown_ms": {
+        "queue_wait": 0.030899999997927807,
+        "companion_before": 0.9220000000059372,
+        "action": 65.06720000000496,
+        "companion_after": 0.47990000000572763,
+        "serialization": 0.036700000026030466,
+        "worker_round_trip": 67.34360000000743,
+        "post_processing": 0.027600000001257285,
+        "native_window_verify": 3.5255
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 48.82510000000184,
+      "breakdown_ms": {
+        "queue_wait": 0.023300000000745058,
+        "companion_before": 0.8006999999925029,
+        "action": 45.174499999993714,
+        "companion_after": 0.42190000000118744,
+        "serialization": 0.043700000023818575,
+        "worker_round_trip": 47.323099999994156,
+        "post_processing": 0.005300000004353933,
+        "native_window_verify": 4.7138
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 56.374500000005355,
+      "breakdown_ms": {
+        "queue_wait": 0.0458000000071479,
+        "companion_before": 1.5518999999912921,
+        "action": 52.125499999994645,
+        "companion_after": 0.4600999999966007,
+        "serialization": 0.03389999999490101,
+        "worker_round_trip": 54.037699999986216,
+        "post_processing": 0.005000000019208528,
+        "native_window_verify": 8.6645
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 48.418799999999464,
+      "breakdown_ms": {
+        "queue_wait": 0.026100000002770685,
+        "companion_before": 0.5313000000169268,
+        "action": 44.97060000000056,
+        "companion_after": 0.5377000000007683,
+        "serialization": 0.023699999990640208,
+        "worker_round_trip": 47.068499999993946,
+        "post_processing": 0.005099999994854443,
+        "native_window_verify": 2.5691
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 46.6877999999997,
+      "breakdown_ms": {
+        "queue_wait": 0.02680000000691507,
+        "companion_before": 0.4584000000031665,
+        "action": 41.97370000000228,
+        "companion_after": 1.082300000009127,
+        "serialization": 0.03850000002421439,
+        "worker_round_trip": 44.76209999999264,
+        "post_processing": 0.007399999987683259,
+        "native_window_verify": 3.2124
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 40.998300000006566,
+      "breakdown_ms": {
+        "queue_wait": 0.0582999999896856,
+        "companion_before": 0.6328999999968801,
+        "action": 36.52580000000307,
+        "companion_after": 0.4822999999887543,
+        "serialization": 0.027300000001559965,
+        "worker_round_trip": 39.48419999999169,
+        "post_processing": 0.006400000012945384,
+        "native_window_verify": 3.0661
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 39.0112999999983,
+      "breakdown_ms": {
+        "queue_wait": 0.04200000000128057,
+        "companion_before": 0.661999999996624,
+        "action": 35.740499999999884,
+        "companion_after": 0.35169999999925494,
+        "serialization": 0.02459999998973217,
+        "worker_round_trip": 37.755999999979394,
+        "post_processing": 0.004999999975552782,
+        "native_window_verify": 6.8066
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 33.95219999999972,
+      "breakdown_ms": {
+        "queue_wait": 0.034800000008544885,
+        "companion_before": 0.49120000000402797,
+        "action": 31.471000000005006,
+        "companion_after": 0.38530000000901055,
+        "serialization": 0.018800000005285256,
+        "worker_round_trip": 32.8637000000017,
+        "post_processing": 0.005399999994551763,
+        "native_window_verify": 2.3934
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 34.25350000000617,
+      "breakdown_ms": {
+        "queue_wait": 0.019100000004982576,
+        "companion_before": 0.587599999998929,
+        "action": 31.91120000000228,
+        "companion_after": 0.34020000000600703,
+        "serialization": 0.01900000000023283,
+        "worker_round_trip": 33.14340000001539,
+        "post_processing": 0.003799999991315417,
+        "native_window_verify": 2.4512
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 35.92970000000787,
+      "breakdown_ms": {
+        "queue_wait": 0.01660000000265427,
+        "companion_before": 0.4566000000049826,
+        "action": 33.712999999988824,
+        "companion_after": 0.3699999999953434,
+        "serialization": 0.0181999999913387,
+        "worker_round_trip": 34.92459999999846,
+        "post_processing": 0.0044999999954598024,
+        "native_window_verify": 3.1354
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 39.31720000000496,
+      "breakdown_ms": {
+        "queue_wait": 0.01750000000174623,
+        "companion_before": 0.9077000000106636,
+        "action": 36.38310000000638,
+        "companion_after": 0.4763000000093598,
+        "serialization": 0.03809999999066349,
+        "worker_round_trip": 37.712899999998626,
+        "post_processing": 0.0046999999904073775,
+        "native_window_verify": 3.6688
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "save_workbook",
+      "total_ms": 72.80459999998857,
+      "breakdown_ms": {
+        "queue_wait": 0.01929999999993015,
+        "companion_before": 0.5433999999950174,
+        "action": 70.06050000000687,
+        "companion_after": 0.390400000003865,
+        "serialization": 0.01819999996223487,
+        "worker_round_trip": 71.6354999999894,
+        "post_processing": 0.007299999982933514,
+        "native_window_verify": 2.458
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 20.56930000000284,
+      "breakdown_ms": {
+        "queue_wait": 0.024900000003981404,
+        "companion_before": 0.9835000000020955,
+        "action": 15.342800000013085,
+        "companion_after": 0.490300000004936,
+        "serialization": 0.033000000010360964,
+        "worker_round_trip": 18.824900000006892,
+        "post_processing": 0.01780000000144355,
+        "native_window_metadata_inclusive": 1.1865000000000003,
+        "native_window_verify": 5.2141,
+        "native_window_capture_inclusive": 11.0552,
+        "native_window_enumeration_inclusive": 12.9349
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 46.46950000000652,
+      "breakdown_ms": {
+        "queue_wait": 0.0239000000001397,
+        "companion_before": 2.30549999998766,
+        "action": 39.00099999998929,
+        "companion_after": 1.9064000000071246,
+        "serialization": 0.030499999993480742,
+        "worker_round_trip": 41.930300000007264,
+        "post_processing": 0.007499999977881089,
+        "native_window_verify": 2.9575
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 51.77060000000347,
+      "breakdown_ms": {
+        "queue_wait": 0.01989999999932479,
+        "companion_before": 1.6450999999942724,
+        "action": 46.83719999999448,
+        "companion_after": 0.8730999999970663,
+        "serialization": 0.02949999997508712,
+        "worker_round_trip": 48.95050000002084,
+        "post_processing": 0.007299999997485429,
+        "native_window_verify": 2.7433
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 44.897100000001956,
+      "breakdown_ms": {
+        "queue_wait": 0.02719999999681022,
+        "companion_before": 0.5979000000079395,
+        "action": 39.67949999999837,
+        "companion_after": 0.9992000000056578,
+        "serialization": 0.029300000009243377,
+        "worker_round_trip": 43.00729999998293,
+        "post_processing": 0.005499999999301508,
+        "native_window_verify": 2.8924
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "save_workbook",
+      "total_ms": 81.50590000000375,
+      "breakdown_ms": {
+        "queue_wait": 0.0776999999943655,
+        "companion_before": 0.5213999999978114,
+        "action": 76.6643999999942,
+        "companion_after": 0.5072999999974854,
+        "serialization": 0.03149999996821862,
+        "worker_round_trip": 80.09290000000328,
+        "post_processing": 0.007399999987683259,
+        "native_window_verify": 2.4582
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 23.47609999999986,
+      "breakdown_ms": {
+        "queue_wait": 0.023799999995389953,
+        "companion_before": 2.701099999991129,
+        "action": 16.503700000001118,
+        "companion_after": 0.4747999999963213,
+        "serialization": 0.04689999998663552,
+        "worker_round_trip": 20.016199999998207,
+        "post_processing": 0.018900000010035,
+        "native_window_metadata_inclusive": 3.3915,
+        "native_window_verify": 2.1623,
+        "native_window_capture_inclusive": 9.8034,
+        "native_window_enumeration_inclusive": 13.8098
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 107.07259999999951,
+      "breakdown_ms": {
+        "queue_wait": 0.017000000007101335,
+        "companion_before": 5.340700000000652,
+        "action": 99.33209999999963,
+        "companion_after": 0.3835000000108266,
+        "serialization": 0.02770000000600703,
+        "worker_round_trip": 101.12639999999374,
+        "post_processing": 0.021999999997206032,
+        "native_window_verify": 3.1785
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 53.419999999998254,
+      "breakdown_ms": {
+        "queue_wait": 0.019400000004679896,
+        "companion_before": 5.170800000007148,
+        "action": 45.97599999999511,
+        "companion_after": 0.4061000000074273,
+        "serialization": 0.0291000000142958,
+        "worker_round_trip": 47.54859999999462,
+        "post_processing": 0.005200000014156103,
+        "native_window_verify": 4.8869
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 37.340299999996205,
+      "breakdown_ms": {
+        "queue_wait": 0.01710000001185108,
+        "companion_before": 0.5668000000005122,
+        "action": 34.63719999999739,
+        "companion_after": 0.44389999999839347,
+        "serialization": 0.01879999999073334,
+        "worker_round_trip": 36.13999999999942,
+        "post_processing": 0.004799999995157123,
+        "native_window_verify": 2.4226
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 72.46950000000652,
+      "breakdown_ms": {
+        "queue_wait": 0.01650000001245644,
+        "companion_before": 0.9983000000211177,
+        "action": 68.86359999999695,
+        "companion_after": 0.6180999999924097,
+        "serialization": 0.02590000003692694,
+        "worker_round_trip": 70.56949999999779,
+        "post_processing": 0.03209999999671709,
+        "native_window_verify": 3.7079
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 55.06569999999192,
+      "breakdown_ms": {
+        "queue_wait": 0.02479999999923166,
+        "companion_before": 0.972700000012992,
+        "action": 48.50720000000729,
+        "companion_after": 0.710399999996298,
+        "serialization": 0.06329999999434222,
+        "worker_round_trip": 52.95339999999851,
+        "post_processing": 0.011500000007799827,
+        "native_window_verify": 4.9896
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 58.60000000000582,
+      "breakdown_ms": {
+        "queue_wait": 0.07429999999294523,
+        "companion_before": 0.5397999999840977,
+        "action": 54.38110000001325,
+        "companion_after": 0.4870999999984633,
+        "serialization": 0.029300000009243377,
+        "worker_round_trip": 57.197999999989406,
+        "post_processing": 0.005300000004353933,
+        "native_window_verify": 8.5991
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 48.05359999999928,
+      "breakdown_ms": {
+        "queue_wait": 0.03440000000409782,
+        "companion_before": 0.5349000000132946,
+        "action": 44.860799999994924,
+        "companion_after": 0.5466000000014901,
+        "serialization": 0.02089999998861458,
+        "worker_round_trip": 46.750199999980396,
+        "post_processing": 0.005799999998998828,
+        "native_window_verify": 2.9342
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 37.586899999994785,
+      "breakdown_ms": {
+        "queue_wait": 0.10099999999511056,
+        "companion_before": 0.5356000000028871,
+        "action": 33.58879999999772,
+        "companion_after": 0.42290000000502914,
+        "serialization": 0.030400000003282912,
+        "worker_round_trip": 36.24870000001101,
+        "post_processing": 0.004799999995157123,
+        "native_window_verify": 4.8171
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 37.93610000000626,
+      "breakdown_ms": {
+        "queue_wait": 0.01959999999962747,
+        "companion_before": 0.8913999999931548,
+        "action": 33.53429999999935,
+        "companion_after": 0.3791999999957625,
+        "serialization": 0.019100000004982576,
+        "worker_round_trip": 36.41969999999856,
+        "post_processing": 0.0066999999835388735,
+        "native_window_verify": 2.5956
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 41.66349999999511,
+      "breakdown_ms": {
+        "queue_wait": 0.01810000000114087,
+        "companion_before": 0.9884999999922002,
+        "action": 38.18059999999241,
+        "companion_after": 0.47570000000996515,
+        "serialization": 0.030299999998533167,
+        "worker_round_trip": 39.868900000001304,
+        "post_processing": 0.031000000002677552,
+        "native_window_verify": 2.9045
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 64.20880000000761,
+      "breakdown_ms": {
+        "queue_wait": 0.02519999998912681,
+        "companion_before": 0.7854000000224914,
+        "action": 59.654799999989336,
+        "companion_after": 0.44629999999597203,
+        "serialization": 0.02390000002924353,
+        "worker_round_trip": 62.661899999991874,
+        "post_processing": 0.010800000003655441,
+        "native_window_verify": 3.4303
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 54.17470000000321,
+      "breakdown_ms": {
+        "queue_wait": 0.022599999996600673,
+        "companion_before": 0.5992999999871245,
+        "action": 51.16489999998885,
+        "companion_after": 0.378999999986263,
+        "serialization": 0.046200000011594966,
+        "worker_round_trip": 52.950399999986985,
+        "post_processing": 0.004600000000209548,
+        "native_window_verify": 3.8209
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "save_workbook",
+      "total_ms": 86.47349999999278,
+      "breakdown_ms": {
+        "queue_wait": 0.027699999991455115,
+        "companion_before": 0.8628000000026077,
+        "action": 82.95879999999306,
+        "companion_after": 0.41120000000228174,
+        "serialization": 0.022100000001955777,
+        "worker_round_trip": 84.9369999999908,
+        "post_processing": 0.005500000013853423,
+        "native_window_verify": 8.5073
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_windows",
+      "total_ms": 23.24189999999362,
+      "breakdown_ms": {
+        "queue_wait": 0.034200000009150244,
+        "companion_before": 0.7161999999952968,
+        "action": 18.36130000000412,
+        "companion_after": 1.3617000000085682,
+        "serialization": 0.0371000000013737,
+        "worker_round_trip": 20.86020000001008,
+        "post_processing": 0.029800000003888272,
+        "native_window_metadata_inclusive": 2.4438,
+        "native_window_verify": 9.4816,
+        "native_window_capture_inclusive": 13.8871,
+        "native_window_enumeration_inclusive": 16.7753
+      },
+      "counts": {
+        "native_window_metadata_inclusive": 16,
+        "native_window_verify": 1,
+        "native_window_capture_inclusive": 1,
+        "native_window_enumeration_inclusive": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "inspect_workbook",
+      "total_ms": 101.30469999999332,
+      "breakdown_ms": {
+        "queue_wait": 0.01849999999103602,
+        "companion_before": 2.989800000010291,
+        "action": 95.97179999999935,
+        "companion_after": 0.4152999999932945,
+        "serialization": 0.04920000000856817,
+        "worker_round_trip": 97.6762000000017,
+        "post_processing": 0.0048999999853549525,
+        "native_window_verify": 3.7719
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 48.63690000001225,
+      "breakdown_ms": {
+        "queue_wait": 0.01849999999103602,
+        "companion_before": 2.4906000000191852,
+        "action": 42.826699999990524,
+        "companion_after": 0.9363000000012107,
+        "serialization": 0.02609999998821877,
+        "worker_round_trip": 44.77469999999448,
+        "post_processing": 0.006300000008195639,
+        "native_window_verify": 3.8839
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "write_range",
+      "total_ms": 39.681400000001304,
+      "breakdown_ms": {
+        "queue_wait": 0.017099999997299165,
+        "companion_before": 0.7569999999977881,
+        "action": 35.74860000000626,
+        "companion_after": 0.39600000000791624,
+        "serialization": 0.01900000000023283,
+        "worker_round_trip": 38.21940000000177,
+        "post_processing": 0.008900000000721775,
+        "native_window_verify": 4.5955
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "excel",
+      "action": "save_workbook",
+      "total_ms": 76.95760000000882,
+      "breakdown_ms": {
+        "queue_wait": 0.022299999996903352,
+        "companion_before": 0.5882000000128755,
+        "action": 73.80569999999716,
+        "companion_after": 0.3889000000053784,
+        "serialization": 0.035299999988637865,
+        "worker_round_trip": 75.7492999999813,
+        "post_processing": 0.005399999994551763,
+        "native_window_verify": 5.135
+      },
+      "counts": {
+        "native_window_verify": 1
+      }
+    },
+    {
+      "tool": "windows",
+      "action": "get_ui",
+      "total_ms": 23.419800000003306,
+      "breakdown_ms": {
+        "queue_wait": 0.023499999995692633,
+        "companion_before": 3.025199999989127,
+        "action": 7.127800000002026,
+        "companion_after": 8.894899999999325,
+        "serialization": 0.036900000006426126,
+        "worker_round_trip": 10.998500000001513,
+        "post_processing": 0.010799999989103526
+      },
+      "counts": {}
+    }
+  ],
+  "notes": [
+    "window_discovery: Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-b679dd. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay.",
+    "control_discovery: Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-48cab0. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay.",
+    "enter_text_verify: Earlier timed_out: wait_for timed out after 15000 ms waiting for Common Tasks 1ac80202-79f9e2. After an interrupted wait, call get_ui again for fresh snapshots.; no action replay.",
+    "search_and_open: Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay.",
+    "button_result: Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay.",
+    "document_passages: Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay.",
+    "url_open: Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay.",
+    "pdf_open_read: Earlier failed: Unknown, expired or mismatched window identity. Call get_windows again.; no action replay.",
+    "Benchmark tab left open: Unknown, expired or mismatched window identity. Call get_windows again."
+  ],
+  "strategies": {
+    "window_discovery": "Same process discovery, reference measurement.",
+    "control_discovery": "Whole-window lookup vs fresh observed Document subtree; root setup excluded.",
+    "enter_text_verify": "Three atomic calls vs one three-step Windows batch.",
+    "search_and_open": "Atomic field/button calls and client polling vs batch and native wait_for.",
+    "button_result": "Atomic discovery/invoke vs one batch, then independently verified outcome.",
+    "document_passages": "Versioned full-text pagination vs one find_many call.",
+    "url_open": "Atomic address focus/value/check vs batched address actions; both verify the loaded Document.",
+    "pdf_open_read": "Actual Edge PDF load and accessible text retrieval; no fake HTML PDF.",
+    "excel_read": "Ten single-cell reads vs one rectangular range read.",
+    "excel_write_calculate_save": "Ten single-cell writes vs one bulk write; both calculate, save and independently reopen."
+  },
+  "limits": [
+    "This is an execution benchmark of shared operations in real Edge and desktop Excel with owned synthetic data, not a test of Zalo, Teams, Outlook, SharePoint, Drive, Dicreto or GS1 integrations.",
+    "Timers start at the first MCP request and end after outcome verification. Model inference, user-request intake, startup/tab preparation and per-case fixture setup are excluded.",
+    "One warmup per case/strategy is excluded. Order reverses across paired rounds. App/OS/network caches are not reset; PDF cases use new URLs.",
+    "Opening an actual PDF is insufficient: its seeded text must be retrieved through MCP. Unsupported accessibility is reported as blocked.",
+    "Full workflow elapsed includes independent server or Excel verification. Action and verification durations are also reported separately. Native spans overlap and are not added to totals.",
+    "A failed scenario is not replayed. Remaining scheduled rows are recorded as blocked. Failures/timeouts are preserved alongside successful distributions.",
+    "Small-sample p95 is the slowest observed sample. These timings do not predict arbitrary cloud loading or AI-client latency."
+  ],
+  "mcp_startup_ms": 1491.0973999999999,
+  "excel_fixture_startup_ms": 8498.9569,
+  "artifact_sha256": {
+    "windows/uia-worker.dll": "04ea279ef3964a7c15c9c1799c3be34fc6c55926640c5b42157e9c9bac81c295",
+    "windows/research.js": "3e736d7a7f698f696f848435f3b5cc9c82dce62b3479c55e7f0b3923c9f91efd",
+    "windows/excel.js": "43cf84870d474cc4d2a307c90e08203d0137d6188995f4a1eec00fad674c1256",
+    "windows/batch.js": "d6622761e47c3565ceb2a67c66625c9547d2119f44ffbb2b0a9a4855cf85e1df",
+    "tools/excel.js": "83fc9a7a552ea68d8b2302e07d1105bda5b4a3800071089dc9309320cea646fa",
+    "learning/instructions.js": "667aa48e25fa6ec88fa26447ea9782e2961f74645ff674e207eb7a99d9cf689c"
+  },
+  "harness_sha256": "ebd99ee52cb7df7f9c17175eca1e11066e0648dfcea05d0406c3ace2bca6f253",
+  "summary": {
+    "window_discovery:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "window_discovery:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "control_discovery:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "control_discovery:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "enter_text_verify:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "enter_text_verify:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "search_and_open:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "search_and_open:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "button_result:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "button_result:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "document_passages:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "document_passages:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "url_open:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "url_open:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "pdf_open_read:baseline": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "pdf_open_read:optimized": {
+      "scheduled": 1,
+      "attempted": 0,
+      "passed": 0,
+      "failed": 0,
+      "blocked": 1,
+      "timed_out": 0,
+      "elapsed": null,
+      "action": null,
+      "verification": null,
+      "calls": [],
+      "response_chars": []
+    },
+    "excel_read:baseline": {
+      "scheduled": 1,
+      "attempted": 1,
+      "passed": 1,
+      "failed": 0,
+      "blocked": 0,
+      "timed_out": 0,
+      "elapsed": {
+        "samples": 1,
+        "median_ms": 420.2442999999912,
+        "p95_ms": 420.2442999999912,
+        "min_ms": 420.2442999999912,
+        "max_ms": 420.2442999999912
+      },
+      "action": {
+        "samples": 1,
+        "median_ms": 397.34479999999166,
+        "p95_ms": 397.34479999999166,
+        "min_ms": 397.34479999999166,
+        "max_ms": 397.34479999999166
+      },
+      "verification": {
+        "samples": 1,
+        "median_ms": 22.898199999995995,
+        "p95_ms": 22.898199999995995,
+        "min_ms": 22.898199999995995,
+        "max_ms": 22.898199999995995
+      },
+      "calls": [
+        10
+      ],
+      "response_chars": [
+        3931
+      ]
+    },
+    "excel_read:optimized": {
+      "scheduled": 1,
+      "attempted": 1,
+      "passed": 1,
+      "failed": 0,
+      "blocked": 0,
+      "timed_out": 0,
+      "elapsed": {
+        "samples": 1,
+        "median_ms": 68.9429999999993,
+        "p95_ms": 68.9429999999993,
+        "min_ms": 68.9429999999993,
+        "max_ms": 68.9429999999993
+      },
+      "action": {
+        "samples": 1,
+        "median_ms": 36.28549999999814,
+        "p95_ms": 36.28549999999814,
+        "min_ms": 36.28549999999814,
+        "max_ms": 36.28549999999814
+      },
+      "verification": {
+        "samples": 1,
+        "median_ms": 32.65589999999793,
+        "p95_ms": 32.65589999999793,
+        "min_ms": 32.65589999999793,
+        "max_ms": 32.65589999999793
+      },
+      "calls": [
+        1
+      ],
+      "response_chars": [
+        875
+      ]
+    },
+    "excel_write_calculate_save:baseline": {
+      "scheduled": 1,
+      "attempted": 1,
+      "passed": 1,
+      "failed": 0,
+      "blocked": 0,
+      "timed_out": 0,
+      "elapsed": {
+        "samples": 1,
+        "median_ms": 1160.4594999999972,
+        "p95_ms": 1160.4594999999972,
+        "min_ms": 1160.4594999999972,
+        "max_ms": 1160.4594999999972
+      },
+      "action": {
+        "samples": 1,
+        "median_ms": 662.1429999999964,
+        "p95_ms": 662.1429999999964,
+        "min_ms": 662.1429999999964,
+        "max_ms": 662.1429999999964
+      },
+      "verification": {
+        "samples": 1,
+        "median_ms": 498.3150000000023,
+        "p95_ms": 498.3150000000023,
+        "min_ms": 498.3150000000023,
+        "max_ms": 498.3150000000023
+      },
+      "calls": [
+        12
+      ],
+      "response_chars": [
+        4022
+      ]
+    },
+    "excel_write_calculate_save:optimized": {
+      "scheduled": 1,
+      "attempted": 1,
+      "passed": 1,
+      "failed": 0,
+      "blocked": 0,
+      "timed_out": 0,
+      "elapsed": {
+        "samples": 1,
+        "median_ms": 675.6308999999892,
+        "p95_ms": 675.6308999999892,
+        "min_ms": 675.6308999999892,
+        "max_ms": 675.6308999999892
+      },
+      "action": {
+        "samples": 1,
+        "median_ms": 168.62139999998908,
+        "p95_ms": 168.62139999998908,
+        "min_ms": 168.62139999998908,
+        "max_ms": 168.62139999998908
+      },
+      "verification": {
+        "samples": 1,
+        "median_ms": 506.99000000000524,
+        "p95_ms": 506.99000000000524,
+        "min_ms": 506.99000000000524,
+        "max_ms": 506.99000000000524
+      },
+      "calls": [
+        3
+      ],
+      "response_chars": [
+        984
+      ]
+    }
+  },
+  "all_passed": false
+}
