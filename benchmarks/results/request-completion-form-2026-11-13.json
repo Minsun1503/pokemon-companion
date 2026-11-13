@@ -1,0 +1,697 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "measured_at": "2026-11-13T07:02:13.339Z",
+  "source_revision": "87d6fc117d66235b5f2be007ea0458127c7fb6ec",
+  "source_dirty": true,
+  "source_hashes": {
+    "client": "4244f1e3143c8e6936f5defff89d60085d388370cb5ce91ba0c6ee2fec3fbe60",
+    "cli": "33b24ad3571a90facfeee8f8bb76bac712896117f9612b4965e329b1f928e58a",
+    "server": "eadd27f08b9dd98381b72a5c3cb119e39031ae2e4bba73feaa62182128fc9651"
+  },
+  "environment": {
+    "node": "v24.16.0",
+    "os": "win32",
+    "cpu": "Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz",
+    "transport": "stdio",
+    "surface": "Actual GitHub PR comparison form in existing signed-in Edge profile",
+    "learning": "Disposable profiles; no feedback ratings"
+  },
+  "strategy": "One exclusive 14-step Windows batch: fresh window discovery, URL check, observed native document scroll twice, all field prechecks, then one write and full live exact readback per field. Same MCP connection for scheduled requests.",
+  "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+  "limits": [
+    "Small live sample: one cold and two warm measurements in the final sequence, plus a later cold update of the review description. No p95 or population speedup inferred.",
+    "The fields already contained reviewed values at the start of the final sequence. First and second samples changed description text; the third repeated the final values. URL/page preparation, content composition and external-agent inference are excluded.",
+    "Comparison with the earlier 455-second task uses different boundaries and conditions. It is contextual evidence, not a controlled before/after latency ratio.",
+    "Successful readback verifies accessible form values; no PR submission or save was invoked. Other cloud apps, arbitrary forms and macOS/Linux are untested.",
+    "Diagnostic failures remain below. verified=true with an error is an incomplete client run, not a successful completion."
+  ],
+  "validation": {
+    "backend_tests_passed": 341,
+    "backend_tests_skipped": 1,
+    "script_tests_passed": 29,
+    "build": "passed",
+    "lint_typecheck": "passed",
+    "native_window_contract": "passed",
+    "winforms_electron_identity": "passed",
+    "built_learning_mcp_contract": "passed"
+  },
+  "reference": {
+    "first_recorded_timer_to_verified_ms": 455097,
+    "recorded_mcp_calls_ms": 7668.909999999998,
+    "measurement_boundary": "First recorded task timer to full independent MCP readback; includes preparation, import failures, asynchronous field update, agent/tool gaps and context compaction. This is not measured from the user message."
+  },
+  "samples": [
+    {
+      "schema_version": 1,
+      "kind": "fill_form",
+      "request_received_at": "2026-11-13T06:58:26.694Z",
+      "verified": true,
+      "connection_reused": false,
+      "queue_ms": 1.1673000000000116,
+      "calls": [
+        {
+          "tool": "learning",
+          "action": "status",
+          "started_ms": 1084.7302,
+          "client_gap_ms": null,
+          "ok": true,
+          "elapsed_ms": 2437.8307999999997
+        },
+        {
+          "tool": "learning",
+          "action": "begin",
+          "started_ms": 3522.6171000000004,
+          "client_gap_ms": 0.05610000000024229,
+          "ok": true,
+          "elapsed_ms": 10.48090000000002
+        },
+        {
+          "tool": "pokemon",
+          "action": "task",
+          "started_ms": 3533.1058000000003,
+          "client_gap_ms": 0.007799999999861029,
+          "ok": true,
+          "elapsed_ms": 10.177299999999832
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "started_ms": 3543.2982,
+          "client_gap_ms": 0.015100000000074942,
+          "ok": true,
+          "elapsed_ms": 2162.4048000000003
+        },
+        {
+          "tool": "pokemon",
+          "action": "done",
+          "started_ms": 5705.731,
+          "client_gap_ms": 0.027999999999337888,
+          "ok": true,
+          "elapsed_ms": 8.393100000000231
+        },
+        {
+          "tool": "learning",
+          "action": "finish",
+          "started_ms": 5714.1344,
+          "client_gap_ms": 0.010299999999915599,
+          "ok": true,
+          "elapsed_ms": 8.445099999999911
+        }
+      ],
+      "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+      "connection_ms": 1083.0515,
+      "first_tool_started_ms": 1084.7302,
+      "verified_at": "2026-11-13T06:58:32.400Z",
+      "request_to_verified_ms": 5705.7252,
+      "field_count": 2,
+      "completed_steps": 14,
+      "completed_at": "2026-11-13T06:58:32.416Z",
+      "request_to_finished_ms": 5722.6137,
+      "tool_call_ms": 4637.732
+    },
+    {
+      "schema_version": 1,
+      "kind": "fill_form",
+      "request_received_at": "2026-11-13T06:58:32.417Z",
+      "verified": true,
+      "connection_reused": true,
+      "queue_ms": 0.018399999999928696,
+      "calls": [
+        {
+          "tool": "learning",
+          "action": "begin",
+          "started_ms": 0.10509999999976571,
+          "client_gap_ms": null,
+          "ok": true,
+          "elapsed_ms": 19.594700000000557
+        },
+        {
+          "tool": "pokemon",
+          "action": "task",
+          "started_ms": 19.70719999999983,
+          "client_gap_ms": 0.00739999999950669,
+          "ok": true,
+          "elapsed_ms": 8.188600000000406
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "started_ms": 27.901600000000144,
+          "client_gap_ms": 0.005799999999908323,
+          "ok": true,
+          "elapsed_ms": 1799.2588999999998
+        },
+        {
+          "tool": "pokemon",
+          "action": "done",
+          "started_ms": 1827.1990999999998,
+          "client_gap_ms": 0.0385999999998603,
+          "ok": true,
+          "elapsed_ms": 10.342800000000352
+        },
+        {
+          "tool": "learning",
+          "action": "finish",
+          "started_ms": 1837.5484999999999,
+          "client_gap_ms": 0.0065999999997075065,
+          "ok": true,
+          "elapsed_ms": 5.085399999999936
+        }
+      ],
+      "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+      "connection_ms": 0,
+      "first_tool_started_ms": 0.10509999999976571,
+      "verified_at": "2026-11-13T06:58:34.244Z",
+      "request_to_verified_ms": 1827.1819999999998,
+      "field_count": 2,
+      "completed_steps": 14,
+      "completed_at": "2026-11-13T06:58:34.259Z",
+      "request_to_finished_ms": 1842.6482999999998,
+      "tool_call_ms": 1842.470400000001
+    },
+    {
+      "schema_version": 1,
+      "kind": "fill_form",
+      "request_received_at": "2026-11-13T06:58:34.260Z",
+      "verified": true,
+      "connection_reused": true,
+      "queue_ms": 0.012700000000222644,
+      "calls": [
+        {
+          "tool": "learning",
+          "action": "begin",
+          "started_ms": 0.08169999999972788,
+          "client_gap_ms": null,
+          "ok": true,
+          "elapsed_ms": 7.504300000000512
+        },
+        {
+          "tool": "pokemon",
+          "action": "task",
+          "started_ms": 7.59270000000015,
+          "client_gap_ms": 0.006699999999909778,
+          "ok": true,
+          "elapsed_ms": 8.04950000000008
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "started_ms": 15.66319999999996,
+          "client_gap_ms": 0.02099999999973079,
+          "ok": true,
+          "elapsed_ms": 1799.9367000000002
+        },
+        {
+          "tool": "pokemon",
+          "action": "done",
+          "started_ms": 1815.6452,
+          "client_gap_ms": 0.04529999999977008,
+          "ok": true,
+          "elapsed_ms": 8.37119999999959
+        },
+        {
+          "tool": "learning",
+          "action": "finish",
+          "started_ms": 1824.0320999999994,
+          "client_gap_ms": 0.01569999999992433,
+          "ok": true,
+          "elapsed_ms": 7.576500000001033
+        }
+      ],
+      "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+      "connection_ms": 0,
+      "first_tool_started_ms": 0.08169999999972788,
+      "verified_at": "2026-11-13T06:58:36.075Z",
+      "request_to_verified_ms": 1815.6354999999994,
+      "field_count": 2,
+      "completed_steps": 14,
+      "completed_at": "2026-11-13T06:58:36.091Z",
+      "request_to_finished_ms": 1831.6236999999992,
+      "tool_call_ms": 1831.4382000000014
+    }
+  ],
+  "review_description_update": {
+    "schema_version": 1,
+    "kind": "fill_form",
+    "request_received_at": "2026-11-13T07:00:22.469Z",
+    "verified": true,
+    "connection_reused": false,
+    "queue_ms": 1.2545000000000073,
+    "calls": [
+      {
+        "tool": "learning",
+        "action": "status",
+        "started_ms": 1167.7471,
+        "client_gap_ms": null,
+        "ok": true,
+        "elapsed_ms": 2430.5612
+      },
+      {
+        "tool": "learning",
+        "action": "begin",
+        "started_ms": 3598.3518,
+        "client_gap_ms": 0.04349999999976717,
+        "ok": true,
+        "elapsed_ms": 10.586099999999988
+      },
+      {
+        "tool": "pokemon",
+        "action": "task",
+        "started_ms": 3608.9454,
+        "client_gap_ms": 0.007500000000163709,
+        "ok": true,
+        "elapsed_ms": 10.093899999999849
+      },
+      {
+        "tool": "windows",
+        "action": "batch",
+        "started_ms": 3619.0525,
+        "client_gap_ms": 0.01319999999986976,
+        "ok": true,
+        "elapsed_ms": 2207.8155000000006
+      },
+      {
+        "tool": "pokemon",
+        "action": "done",
+        "started_ms": 5826.8963,
+        "client_gap_ms": 0.028299999999944703,
+        "ok": true,
+        "elapsed_ms": 9.610099999999875
+      },
+      {
+        "tool": "learning",
+        "action": "finish",
+        "started_ms": 5836.5174,
+        "client_gap_ms": 0.01099999999951251,
+        "ok": true,
+        "elapsed_ms": 8.022100000000137
+      }
+    ],
+    "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+    "connection_ms": 1165.8763,
+    "first_tool_started_ms": 1167.7471,
+    "verified_at": "2026-11-13T07:00:28.296Z",
+    "request_to_verified_ms": 5826.891,
+    "field_count": 2,
+    "completed_steps": 14,
+    "completed_at": "2026-11-13T07:00:28.314Z",
+    "request_to_finished_ms": 5844.5562,
+    "tool_call_ms": 4676.688900000001
+  },
+  "final_description_sha256": "0cb1e93915aef37a02d8ab95e3e257e09342d989a75d45a8f644a2c8bdde08e7",
+  "diagnostics": [
+    {
+      "stage": "Earlier comparison form no longer open; no field writes",
+      "reports": [
+        {
+          "schema_version": 1,
+          "kind": "fill_form",
+          "request_received_at": "2026-11-13T06:45:04.442Z",
+          "verified": false,
+          "connection_reused": false,
+          "queue_ms": 1.1841999999999757,
+          "calls": [
+            {
+              "tool": "learning",
+              "action": "status",
+              "started_ms": 1133.6261,
+              "client_gap_ms": null,
+              "ok": true,
+              "elapsed_ms": 3035.7315
+            },
+            {
+              "tool": "learning",
+              "action": "begin",
+              "started_ms": 4169.400000000001,
+              "client_gap_ms": 0.042400000000270666,
+              "ok": true,
+              "elapsed_ms": 11.495299999999588
+            },
+            {
+              "tool": "pokemon",
+              "action": "task",
+              "started_ms": 4180.9031,
+              "client_gap_ms": 0.0078000000003157766,
+              "ok": true,
+              "elapsed_ms": 10.386499999999614
+            },
+            {
+              "tool": "windows",
+              "action": "batch",
+              "started_ms": 4191.2998,
+              "client_gap_ms": 0.010199999999713327,
+              "ok": false,
+              "elapsed_ms": 64.34030000000075
+            },
+            {
+              "tool": "learning",
+              "action": "finish",
+              "started_ms": 4255.6677,
+              "client_gap_ms": 0.027599999999438296,
+              "ok": true,
+              "elapsed_ms": 9.359000000000378
+            }
+          ],
+          "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+          "connection_ms": 1131.9379,
+          "first_tool_started_ms": 1133.6261,
+          "error": "Step 0 must contain exactly one untruncated window; narrow the query or increase its budget.",
+          "failure": {
+            "completed": 1,
+            "stopped_step": 1,
+            "retry_scope": "stopped_step",
+            "error_details": {
+              "code": "ELEMENT_NOT_FOUND",
+              "disposition": {
+                "delivery": "not_delivered",
+                "retry": "safe"
+              }
+            }
+          },
+          "completed_at": "2026-11-13T06:45:08.707Z",
+          "request_to_finished_ms": 4265.0674,
+          "tool_call_ms": 3131.3126
+        },
+        {
+          "schema_version": 1,
+          "kind": "fill_form",
+          "request_received_at": "2026-11-13T06:45:08.707Z",
+          "verified": false,
+          "connection_reused": true,
+          "queue_ms": 0.01449999999931606,
+          "calls": [
+            {
+              "tool": "learning",
+              "action": "begin",
+              "started_ms": 0.12439999999969586,
+              "client_gap_ms": null,
+              "ok": true,
+              "elapsed_ms": 6.954200000000128
+            },
+            {
+              "tool": "pokemon",
+              "action": "task",
+              "started_ms": 7.08429999999953,
+              "client_gap_ms": 0.005699999999706051,
+              "ok": true,
+              "elapsed_ms": 10.896899999999732
+            },
+            {
+              "tool": "windows",
+              "action": "batch",
+              "started_ms": 17.98569999999927,
+              "client_gap_ms": 0.004500000000007276,
+              "ok": false,
+              "elapsed_ms": 18.54370000000017
+            },
+            {
+              "tool": "learning",
+              "action": "finish",
+              "started_ms": 36.54599999999937,
+              "client_gap_ms": 0.016599999999925785,
+              "ok": true,
+              "elapsed_ms": 6.177099999999882
+            }
+          ],
+          "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+          "connection_ms": 0,
+          "first_tool_started_ms": 0.12439999999969586,
+          "error": "Step 0 must contain exactly one untruncated window; narrow the query or increase its budget.",
+          "failure": {
+            "completed": 1,
+            "stopped_step": 1,
+            "retry_scope": "stopped_step",
+            "error_details": {
+              "code": "ELEMENT_NOT_FOUND",
+              "disposition": {
+                "delivery": "not_delivered",
+                "retry": "safe"
+              }
+            }
+          },
+          "completed_at": "2026-11-13T06:45:08.750Z",
+          "request_to_finished_ms": 42.738899999999376,
+          "tool_call_ms": 42.571899999999914
+        },
+        {
+          "schema_version": 1,
+          "kind": "fill_form",
+          "request_received_at": "2026-11-13T06:45:08.750Z",
+          "verified": false,
+          "connection_reused": true,
+          "queue_ms": 0.011400000000321597,
+          "calls": [
+            {
+              "tool": "learning",
+              "action": "begin",
+              "started_ms": 0.11410000000068976,
+              "client_gap_ms": null,
+              "ok": true,
+              "elapsed_ms": 8.876199999999699
+            },
+            {
+              "tool": "pokemon",
+              "action": "task",
+              "started_ms": 8.996900000000096,
+              "client_gap_ms": 0.0065999999997075065,
+              "ok": true,
+              "elapsed_ms": 8.297500000000582
+            },
+            {
+              "tool": "windows",
+              "action": "batch",
+              "started_ms": 17.30160000000069,
+              "client_gap_ms": 0.0072000000000116415,
+              "ok": false,
+              "elapsed_ms": 24.80619999999999
+            },
+            {
+              "tool": "learning",
+              "action": "finish",
+              "started_ms": 42.12950000000001,
+              "client_gap_ms": 0.0216999999993277,
+              "ok": true,
+              "elapsed_ms": 6.046100000000479
+            }
+          ],
+          "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+          "connection_ms": 0,
+          "first_tool_started_ms": 0.11410000000068976,
+          "error": "Step 0 must contain exactly one untruncated window; narrow the query or increase its budget.",
+          "failure": {
+            "completed": 1,
+            "stopped_step": 1,
+            "retry_scope": "stopped_step",
+            "error_details": {
+              "code": "ELEMENT_NOT_FOUND",
+              "disposition": {
+                "delivery": "not_delivered",
+                "retry": "safe"
+              }
+            }
+          },
+          "completed_at": "2026-11-13T06:45:08.798Z",
+          "request_to_finished_ms": 48.19210000000021,
+          "tool_call_ms": 48.02600000000075
+        }
+      ]
+    },
+    {
+      "stage": "Live development run before completion-order and scroll fixes",
+      "reports": [
+        {
+          "schema_version": 1,
+          "kind": "fill_form",
+          "request_received_at": "2026-11-13T06:55:23.321Z",
+          "verified": true,
+          "connection_reused": false,
+          "queue_ms": 1.1322999999999865,
+          "calls": [
+            {
+              "tool": "learning",
+              "action": "status",
+              "started_ms": 1108.4338,
+              "client_gap_ms": null,
+              "ok": true,
+              "elapsed_ms": 2428.1693999999998
+            },
+            {
+              "tool": "learning",
+              "action": "begin",
+              "started_ms": 3536.6428,
+              "client_gap_ms": 0.03960000000006403,
+              "ok": true,
+              "elapsed_ms": 10.064300000000003
+            },
+            {
+              "tool": "pokemon",
+              "action": "task",
+              "started_ms": 3546.7147,
+              "client_gap_ms": 0.007599999999911233,
+              "ok": true,
+              "elapsed_ms": 10.40059999999994
+            },
+            {
+              "tool": "windows",
+              "action": "batch",
+              "started_ms": 3557.1266,
+              "client_gap_ms": 0.011300000000119326,
+              "ok": true,
+              "elapsed_ms": 1946.2621999999997
+            },
+            {
+              "tool": "learning",
+              "action": "finish",
+              "started_ms": 5503.4201,
+              "client_gap_ms": 0.03130000000055588,
+              "ok": true,
+              "elapsed_ms": 5.949099999999817
+            },
+            {
+              "tool": "pokemon",
+              "action": "done",
+              "started_ms": 5509.3739,
+              "client_gap_ms": 0.0046999999995023245,
+              "ok": false,
+              "elapsed_ms": 1.3450000000002547
+            }
+          ],
+          "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+          "connection_ms": 1106.7884999999999,
+          "first_tool_started_ms": 1108.4338,
+          "verified_at": "2026-11-13T06:55:28.825Z",
+          "request_to_verified_ms": 5503.4103,
+          "field_count": 2,
+          "completed_steps": 11,
+          "error": "Unexpected token 'L', \"Learning t\"... is not valid JSON",
+          "completed_at": "2026-11-13T06:55:28.832Z",
+          "request_to_finished_ms": 5510.7577,
+          "tool_call_ms": 4402.190599999999
+        },
+        {
+          "schema_version": 1,
+          "kind": "fill_form",
+          "request_received_at": "2026-11-13T06:55:28.832Z",
+          "verified": true,
+          "connection_reused": true,
+          "queue_ms": 0.03269999999974971,
+          "calls": [
+            {
+              "tool": "learning",
+              "action": "begin",
+              "started_ms": 0.24389999999948486,
+              "client_gap_ms": null,
+              "ok": true,
+              "elapsed_ms": 7.2794999999996435
+            },
+            {
+              "tool": "pokemon",
+              "action": "task",
+              "started_ms": 7.533699999999953,
+              "client_gap_ms": 0.010300000000825094,
+              "ok": true,
+              "elapsed_ms": 5.79149999999936
+            },
+            {
+              "tool": "windows",
+              "action": "batch",
+              "started_ms": 13.330699999999524,
+              "client_gap_ms": 0.005500000000211003,
+              "ok": true,
+              "elapsed_ms": 1557.5254000000004
+            },
+            {
+              "tool": "learning",
+              "action": "finish",
+              "started_ms": 1570.9061999999994,
+              "client_gap_ms": 0.050099999999474676,
+              "ok": true,
+              "elapsed_ms": 5.659900000000562
+            },
+            {
+              "tool": "pokemon",
+              "action": "done",
+              "started_ms": 1576.5710999999992,
+              "client_gap_ms": 0.004999999999199645,
+              "ok": false,
+              "elapsed_ms": 0.7737000000006446
+            }
+          ],
+          "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+          "connection_ms": 0,
+          "first_tool_started_ms": 0.24389999999948486,
+          "verified_at": "2026-11-13T06:55:30.403Z",
+          "request_to_verified_ms": 1570.8741,
+          "field_count": 2,
+          "completed_steps": 11,
+          "error": "Unexpected token 'L', \"Learning t\"... is not valid JSON",
+          "completed_at": "2026-11-13T06:55:30.410Z",
+          "request_to_finished_ms": 1577.3615999999993,
+          "tool_call_ms": 1577.0300000000007
+        },
+        {
+          "schema_version": 1,
+          "kind": "fill_form",
+          "request_received_at": "2026-11-13T06:55:30.410Z",
+          "verified": false,
+          "connection_reused": true,
+          "queue_ms": 0.010900000000219734,
+          "calls": [
+            {
+              "tool": "learning",
+              "action": "begin",
+              "started_ms": 0.06869999999980791,
+              "client_gap_ms": null,
+              "ok": true,
+              "elapsed_ms": 7.554399999999987
+            },
+            {
+              "tool": "pokemon",
+              "action": "task",
+              "started_ms": 7.650300000000243,
+              "client_gap_ms": 0.0272000000004482,
+              "ok": true,
+              "elapsed_ms": 7.436399999999594
+            },
+            {
+              "tool": "windows",
+              "action": "batch",
+              "started_ms": 15.092399999999543,
+              "client_gap_ms": 0.005699999999706051,
+              "ok": false,
+              "elapsed_ms": 330.34910000000036
+            },
+            {
+              "tool": "learning",
+              "action": "finish",
+              "started_ms": 345.4928,
+              "client_gap_ms": 0.051300000000082946,
+              "ok": true,
+              "elapsed_ms": 6.419399999999769
+            }
+          ],
+          "boundary": "Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.",
+          "connection_ms": 0,
+          "first_tool_started_ms": 0.06869999999980791,
+          "error": "Step 3 must contain exactly one untruncated control; narrow the query or increase its budget.",
+          "failure": {
+            "completed": 4,
+            "stopped_step": 4,
+            "retry_scope": "stopped_step",
+            "error_details": {
+              "code": "ELEMENT_NOT_FOUND",
+              "disposition": {
+                "delivery": "not_delivered",
+                "retry": "safe"
+              }
+            }
+          },
+          "completed_at": "2026-11-13T06:55:30.762Z",
+          "request_to_finished_ms": 351.9447,
+          "tool_call_ms": 351.7592999999997
+        }
+      ]
+    }
+  ]
+}
