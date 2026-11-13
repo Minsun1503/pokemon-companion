@@ -5,15 +5,19 @@ import {DesktopClient, formPlan} from './desktop-workflows.mjs';
 const request = {kind: 'fill_form', query: 'Fill the form', window_query: 'Unique form', url: 'https://example.org/form',
   fields: [{query: 'Title', text: 'New title'}, {query: 'Description', text: 'Long description\n'.repeat(100)}]};
 const response = data => ({content: [{type: 'text', text: JSON.stringify(data)}]});
-function fixture({enabled = false, fail = false} = {}) {
+function fixture({enabled = false, fail = false, plainError = false} = {}) {
   const calls = [], connections = [], closes = [];
+  let taskClosed = false;
   const client = new DesktopClient({connect: async () => {
     connections.push(1);
     return {client: {async callTool({name, arguments: args}) {
       calls.push({name, args});
       if (args.action === 'status') return response({enabled});
-      if (args.action === 'begin') return response({task_id: 'verified-task-id'});
+      if (args.action === 'begin') {taskClosed = false; return response({task_id: 'verified-task-id'});}
+      if (args.task_id && taskClosed) return {isError: true, content: [{type: 'text', text: 'Learning task is closed.'}]};
+      if (args.action === 'finish') taskClosed = true;
       if (name === 'windows') {
+        if (plainError) return {isError: true, content: [{type: 'text', text: 'Native control lease lost.'}]};
         if (fail) return {...response({ok: false, completed: 8, stopped_step: 8, retry_scope: 'stopped_step', error_details: {code: 'TIMEOUT'}}), isError: true};
         return response({ok: true, completed: args.steps.length, result: {text: request.fields.at(-1).text, verified: true}});
       }
@@ -65,6 +69,7 @@ test('learning uses task_id and skips oversized parameters without inventing fee
   assert.deepEqual(begin.args.parameters, {field_0: 'New title'});
   assert.equal(f.calls.find(call => call.name === 'windows').args.task_id, 'verified-task-id');
   assert.equal(f.calls.find(call => call.args.action === 'finish').args.outcome, 'met');
+  assert(f.calls.findIndex(call => call.args.action === 'done') < f.calls.findIndex(call => call.args.action === 'finish'));
   assert(!f.calls.some(call => call.args.action === 'feedback'));
   await f.client.close();
 });
@@ -85,4 +90,22 @@ test('closed clients cannot reopen a connection', async () => {
   await f.client.close();
   assert.equal((await f.client.fillForm(request)).verified, false);
   assert.equal(f.connections.length, 0);
+});
+
+test('plain SDK error text is preserved and cannot become a parsing failure', async () => {
+  const f = fixture({plainError: true});
+  const report = await f.client.fillForm(request);
+  assert.equal(report.verified, false);
+  assert.equal(report.error, 'Native control lease lost.');
+  await f.client.close();
+});
+
+test('optional scroll uses a uniquely discovered control and respects the batch bound', () => {
+  const plan = formPlan({...request, scroll: {query: 'RootWebArea', direction: 'up', count: 2}});
+  const scrolls = plan.filter(step => step.action === 'scroll');
+  assert.equal(scrolls.length, 2);
+  assert.equal(plan[scrolls[0].target_step].query, 'RootWebArea');
+  assert(plan.findIndex(step => step.action === 'scroll') < plan.findIndex(step => step.action === 'set_value'));
+  assert.throws(() => formPlan({...request, scroll: {query: 'RootWebArea', direction: 'up', count: 4}}));
+  assert.throws(() => formPlan({...request, fields: [...request.fields, {query: 'Third', text: ''}], scroll: {query: 'RootWebArea', direction: 'up', count: 2}}), /batch limit/);
 });

@@ -23,6 +23,15 @@ export function formPlan(request) {
     steps.push({action: 'get_ui', window_step: 0, query: boundedString(request.url_query ?? 'Address and search bar', 'url_query', 200, false), control_type: 'Edit', max_depth: 30});
     steps.push({action: 'read_text', target_step: 1, expect_text: request.url, timeout_ms: 1_000, max_chars: 16000});
   }
+  if (request.scroll !== undefined) {
+    boundedString(request.scroll.query, 'scroll.query', 200, false);
+    assert(['up', 'down'].includes(request.scroll.direction), 'scroll.direction must be up or down.');
+    const count = request.scroll.count ?? 1;
+    assert(Number.isInteger(count) && count >= 1 && count <= 3, 'scroll.count must be 1–3.');
+    const target = steps.length;
+    steps.push({action: 'get_ui', window_step: 0, query: request.scroll.query, max_depth: 30, max_chars: 8000});
+    for (let index = 0; index < count; index++) steps.push({action: 'scroll', target_step: target, direction: request.scroll.direction});
+  }
   const queries = new Set();
   const targets = [];
   for (const field of request.fields) {
@@ -33,8 +42,8 @@ export function formPlan(request) {
     queries.add(field.query.toLowerCase());
     const target = steps.length;
     targets.push(target);
-    steps.push({action: 'get_ui', window_step: 0, query: field.query, control_type: 'Edit', max_depth: 30, max_chars: 8000});
-    // Check every field before the first write, so an overwrite conflict sends no input.
+    steps.push({action: 'wait_for', window_step: 0, query: field.query, control_type: 'Edit', timeout_ms: timeout, max_depth: 30, max_chars: 8000});
+    // Check every field before the first write, so an overwrite conflict sends no field input.
     steps.push({action: 'read_text', target_step: target, expect_text: field.expected_before ?? '', timeout_ms: 1000, max_chars: 16000});
   }
   for (const [index, field] of request.fields.entries()) {
@@ -65,6 +74,7 @@ export class DesktopClient {
       connection_reused: Boolean(this.session), queue_ms: performance.now() - received, calls: [],
       boundary: 'Structured request accepted by DesktopClient to verified full field readback. Includes validation, cold MCP connection/native startup, learning setup and readback polling. Excludes agent inference, request generation and Node/module startup. No form submission.'};
     let taskId;
+    let finishAttempted = false;
     let previousFinished;
     const call = async (name, args) => {
       const start = performance.now();
@@ -74,7 +84,10 @@ export class DesktopClient {
       report.calls.push(timing);
       try {
         const result = await this.session.client.callTool({name, arguments: {...args, ...(taskId && name !== 'learning' ? {task_id: taskId} : {})}}, undefined, {timeout: 120000});
-        const data = JSON.parse(result.content.filter(item => item.type === 'text').map(item => item.text).join('\n'));
+        const body = result.content.filter(item => item.type === 'text').map(item => item.text).join('\n');
+        let data;
+        try {data = JSON.parse(body);}
+        catch {throw new Error(result.isError ? body : 'MCP returned an unexpected non-JSON response.');}
         if (result.isError || data.ok === false) {
           const error = new Error(data.error ?? 'MCP operation failed.');
           error.details = data;
@@ -115,16 +128,19 @@ export class DesktopClient {
       report.request_to_verified_ms = performance.now() - received;
       report.field_count = request.fields.length;
       report.completed_steps = result.completed;
-      if (taskId) await call('learning', {action: 'finish', task_id: taskId, outcome: 'met', summary: 'Every field fully read back and matched. Form not submitted. User satisfaction unknown.'});
       await call('pokemon', {action: 'done', message: 'Form fields verified; form remains unsubmitted'});
+      if (taskId) {
+        finishAttempted = true;
+        await call('learning', {action: 'finish', task_id: taskId, outcome: 'met', summary: 'Every field fully read back and matched. Form not submitted. User satisfaction unknown.'});
+      }
     } catch (error) {
       report.error = error.message;
       if (error.details) {
         const {completed, stopped_step, retry_scope, error_details} = error.details;
         report.failure = {completed, stopped_step, retry_scope, error_details};
       }
-      if (taskId && !report.verified) {
-        try {await call('learning', {action: 'finish', task_id: taskId, outcome: 'unmet', summary: 'Form workflow stopped. Earlier inputs, if any, were not replayed. User satisfaction unknown.'});}
+      if (taskId && !finishAttempted) {
+        try {await call('learning', {action: 'finish', task_id: taskId, outcome: report.verified ? 'met' : 'unmet', summary: 'Form workflow stopped. Earlier inputs, if any, were not replayed. User satisfaction unknown.'});}
         catch (finishError) {report.finish_error = finishError.message;}
       }
     }
