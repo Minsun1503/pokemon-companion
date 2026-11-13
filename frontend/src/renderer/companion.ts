@@ -101,7 +101,6 @@ function positionPanel(): void {
 }
 
 function setView(view: PanelView): void {
-  if (view === 'talk') view = 'actions'
   panelView = view
   panel.dataset.view = view
   for (const name of ['actions', 'switch', 'talk'] as const) {
@@ -468,6 +467,10 @@ petContainer.addEventListener('mouseleave', () => {
 element('close-panel').addEventListener('click', closePanel)
 element('back-panel').addEventListener('click', () => setView('actions'))
 element('action-switch').addEventListener('click', () => setView('switch'))
+element('action-talk').addEventListener('click', () => {
+  setView('talk')
+  void loadChat()
+})
 element('action-exit').addEventListener('click', () => window.pokemonAPI.quit())
 element('chat-form').addEventListener('submit', (event) => {
   event.preventDefault()

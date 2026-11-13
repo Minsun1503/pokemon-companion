@@ -85,3 +85,25 @@ test('completion evidence is fresh, scoped to the current turn and pet, and resp
   assert.deepEqual(await f.tools.call('windows', {action: 'invoke'}, 'pikachu'), {paused: true});
   assert.equal(f.calls.length, previous);
 });
+
+test('Excel tool catalog exports input ranges while native validation still rejects unsafe calls', async () => {
+  const f = await fixture();
+  f.tools.begin('pikachu', 'Read Excel cells and save a workbook');
+  const catalog = f.tools.list('pikachu');
+  const excel = catalog.find(tool => tool.function.name === 'excel');
+  assert.ok(excel, 'Excel must be advertised for workbook tasks.');
+  assert.doesNotThrow(() => JSON.stringify(catalog));
+  const read = excel.function.parameters.oneOf.find(branch => branch.properties.action.const === 'read_range');
+  assert.equal(read.properties.range.type, 'string');
+  assert.ok(read.required.includes('workbook_name'));
+  const base = {window_id: f.window.id, workbook_name: 'Disposable.xlsx', sheet: 'Data'};
+  for (const args of [
+    {...base, action: 'read_range', range: 'A0'},
+    {...base, action: 'read_range', range: 'A1:A1001'},
+    {...base, action: 'read_range', range: 'A1', offset: 1},
+    {...base, action: 'write_range', range: 'A1:B1', data: [[1]]},
+    {...base, action: 'write_range', range: 'A1', data: [[1]], require_empty: false},
+    {...base, action: 'write_range', range: 'A1', data: [['text']], mode: 'formulas'},
+  ]) await assert.rejects(f.tools.call('excel', args, 'pikachu'));
+  assert.equal(f.calls.length, 0, 'Rejected calls must never reach the native worker.');
+});
