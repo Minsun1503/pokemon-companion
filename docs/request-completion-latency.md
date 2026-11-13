@@ -40,6 +40,8 @@ If long text scrolls earlier fields out of view, supply an optional `scroll` obj
 
 ## Timing boundaries
 
+For already authorized PR creation through merge, the [resumable source controller](workflow-controller.md) now removes routine model handoffs and polling from that path. It records the verified result automatically and reconciles uncertain delivery without mutation replay. Its owned-fixture comparison and actual GitHub workflow trace must remain separate from natural-language intake latency.
+
 `request_to_verified_ms` begins when `DesktopClient.fillForm` accepts the structured request. It includes validation, queueing, a cold MCP connection/native-worker startup, learning setup and verification polling. `request_to_finished_ms` additionally includes learning finish and Pokémon completion. Warm samples reuse the first sample's connection and session capability check. First-tool timing can refer to learning setup, not the first mutating input. Per-call client gaps include JavaScript orchestration and transport; they are not pure model inference.
 
 This boundary excludes Node/module startup, generating or reading the request file, tab preparation, and the external agent's reasoning/content composition. It does **not** replace a natural-language-request benchmark. Compare cold and warm samples separately, retain failures, and use an outer agent/client timer for request intake through verified outcome. Do not compare these samples directly with the earlier 455-second task as an isolated backend speedup.
