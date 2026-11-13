@@ -1,12 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const args = [path.join(root, 'backend/dist/main.js')];
+const args = [path.join(root, 'scripts/start-mcp.cjs')];
+const env = {MCP_TRANSPORT: 'stdio', POKEMON_FRONTEND_DIR: path.join(root, 'frontend')};
 const outputIndex = process.argv.indexOf('--output');
 if (outputIndex >= 0 && !process.argv[outputIndex + 1]) throw new Error('Provide a directory after --output.');
 const directory = outputIndex >= 0 ? path.resolve(process.argv[outputIndex + 1]) : path.join(root, 'config');
 fs.mkdirSync(directory, {recursive: true});
-fs.writeFileSync(path.join(directory, 'claude-desktop.json'), JSON.stringify({mcpServers: {'pokemon-computer': {command: process.execPath, args}}}, null, 2) + '\n');
+fs.writeFileSync(path.join(directory, 'claude-desktop.json'), JSON.stringify({mcpServers: {'pokemon-computer': {command: process.execPath, args, cwd: root, env}}}, null, 2) + '\n');
 const tomlQuote = (value) => JSON.stringify(value.replace(/\\/g, '/'));
-fs.writeFileSync(path.join(directory, 'codex.toml'), `[mcp_servers.pokemon_computer]\ncommand = ${tomlQuote(process.execPath)}\nargs = [${tomlQuote(args[0])}]\nstartup_timeout_sec = 30\ntool_timeout_sec = 60\n`);
+fs.writeFileSync(path.join(directory, 'codex.toml'), `[mcp_servers.pokemon_computer]\ncommand = ${tomlQuote(process.execPath)}\nargs = [${tomlQuote(args[0])}]\ncwd = ${tomlQuote(root)}\nstartup_timeout_sec = 30\ntool_timeout_sec = 60\n\n[mcp_servers.pokemon_computer.env]\nMCP_TRANSPORT = "stdio"\nPOKEMON_FRONTEND_DIR = ${tomlQuote(env.POKEMON_FRONTEND_DIR)}\n`);
 console.log(`Created ${directory}/claude-desktop.json and codex.toml for this app location.`);
