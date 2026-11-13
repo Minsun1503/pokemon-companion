@@ -17,6 +17,7 @@ export type DesktopRequest = {
 	text?: string | undefined;
 	direction?: string | undefined;
 	expect_value?: string | undefined;
+	expect_text?: string | undefined;
 	timeout_ms?: number | undefined;
 	text_offset?: number;
 	text_length?: number;

@@ -28,6 +28,7 @@ export const windowsFields = {
 	text: z.string().max(8000).optional(),
 	direction: z.enum(['up', 'down', 'left', 'right']).optional(),
 	expect_value: z.string().max(160).optional().describe('For wait_for (or batch get_ui): require a control with this exact value.'),
+	expect_text: z.string().max(8000).optional().describe('Windows read_text: poll the same live, identity-checked control until its full, unclipped text exactly matches. Useful after set_value for long fields. Never repeats input.'),
 	timeout_ms: z.number().int().min(1).max(15000).optional().describe('wait_for/launch timeout; default 5000 ms, max 15000.'),
 };
 
@@ -61,6 +62,10 @@ export function validateWindowsRequest(args: WindowsRequest, platform: NodeJS.Pl
 	}
 
 	if (['darwin', 'linux'].includes(platform)) {
+		if (args.expect_text !== undefined) {
+			throw rejectedAction('ACTION_NOT_SUPPORTED', 'Live expect_text verification currently requires Windows; the bridge may return saved text.');
+		}
+
 		if (args.action === 'select' || (args.action === 'launch' && ((args.text ?? '').startsWith('-') || /[\\/:]/.test(args.text ?? '')))) {
 			throw rejectedAction('ACTION_NOT_SUPPORTED', 'macOS/Linux bridge does not support select or URL/path launch.');
 		}
@@ -88,6 +93,10 @@ export function validateWindowsRequest(args: WindowsRequest, platform: NodeJS.Pl
 
 	if (args.wait_condition !== undefined && args.action !== 'wait_for') {
 		throw rejectedAction('INVALID_ARGS', 'wait_condition is supported only by wait_for.');
+	}
+
+	if (args.expect_text !== undefined && (args.action !== 'read_text' || args.expect_value !== undefined)) {
+		throw rejectedAction('INVALID_ARGS', 'expect_text is supported only by read_text and cannot be combined with expect_value.');
 	}
 
 	if (args.wait_condition === 'absent' && (!args.snapshot || !args.element_id || args.expect_value !== undefined)) {
@@ -312,6 +321,10 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 
 /** Poll read-only discovery; launch happens once and input is never replayed. */
 export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRequest, signal?: AbortSignal): Promise<Record<string, unknown>> {
+	if (args.action === 'read_text' && args.expect_text !== undefined) {
+		return waitForText(runtime, args, signal);
+	}
+
 	if (!['wait_for', 'launch'].includes(args.action)) {
 		if (signal?.aborted || runtime.companion.state.paused) {
 			throw rejectedAction(signal?.aborted ? 'CANCELLED' : 'PAUSED', 'Computer action cancelled or paused before execution.');
@@ -435,5 +448,44 @@ export async function runWindowsRequest(runtime: PokemonRuntime, args: WindowsRe
 
 		// eslint-disable-next-line no-await-in-loop
 		await delay(Math.min(100, Math.max(1, deadline - performance.now())), undefined, {signal}).catch(cancelled);
+	}
+}
+
+/** Re-read a live field with its original proof; UI updates never trigger another input. */
+async function waitForText(runtime: PokemonRuntime, args: WindowsRequest, signal?: AbortSignal): Promise<Record<string, unknown>> {
+	const {expect_text: expected, timeout_ms: timeout = 5000, ...request} = args;
+	const deadline = performance.now() + timeout;
+	let attempts = 0;
+	const check = () => {
+		if (signal?.aborted || runtime.companion.state.paused) {
+			throw rejectedAction(signal?.aborted ? 'CANCELLED' : 'PAUSED', 'Text verification cancelled or paused; input was not replayed.');
+		}
+
+		if (performance.now() >= deadline) {
+			throw rejectedAction('TIMEOUT', `read_text timed out after ${timeout} ms waiting for exact text; input was not replayed. Inspect the field before continuing.`);
+		}
+	};
+
+	for (;;) {
+		check();
+		// eslint-disable-next-line no-await-in-loop
+		const result = await runtime.windows.request(request, {
+			signal, timeoutMs: Math.max(1, deadline - performance.now()), paused: () => runtime.companion.state.paused,
+			timeoutError: 'Live text verification timed out; input was not replayed.',
+		});
+		attempts += 1;
+		check();
+		if (result.truncated || result.value_clipped) {
+			throw rejectedAction('INCOMPLETE_SNAPSHOT', 'Full text verification was clipped; increase max_chars before a read-only retry.');
+		}
+
+		if (result.text === expected) {
+			return {...result, verified: true, attempts};
+		}
+
+		// eslint-disable-next-line no-await-in-loop
+		await delay(Math.min(100, Math.max(1, deadline - performance.now())), undefined, {signal}).catch(() => {
+			throw rejectedAction('CANCELLED', 'Text verification cancelled; input was not replayed.');
+		});
 	}
 }

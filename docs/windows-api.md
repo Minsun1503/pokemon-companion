@@ -47,6 +47,16 @@ Absence requires `snapshot` and `element_id` from an earlier complete whole-wind
 
 An absence wait uses explicit prior references; it does not use a batch `target_step`. Refresh expired observations before continuing. All ordinary native Windows actions now receive cancellation and pause monitoring, as do the second reads used for batch value verification. Closing a worker during input leaves delivery uncertain and invalidates its snapshots; inputs are never replayed.
 
+## Exact full-text waits
+
+On Windows, `read_text` accepts `expect_text` (0–8,000 characters). It polls fresh text with the original snapshot/element proof until the entire, unclipped text matches, or `timeout_ms` expires (default 5,000, maximum 15,000 ms). Each read revalidates the target. Pauses, cancellation, stale identity and insufficient response budgets stop the wait. This supports delayed form updates without another agent turn or another write. Plain `read_text` remains a single read. macOS/Linux reject `expect_text` because the bridge may return saved text.
+
+```json
+{"steps":[{"action":"get_windows","query":"Unique form"},{"action":"get_ui","window_step":0,"query":"Description","control_type":"Edit"},{"action":"set_value","target_step":1,"text":"Complete description\nwith multiple lines."},{"action":"read_text","target_step":1,"expect_text":"Complete description\nwith multiple lines.","timeout_ms":5000,"max_chars":16000}],"max_chars":16000}
+```
+
+Success adds `verified:true` and `attempts` to the full text result. A timeout's safe retry applies to the stopped read only. Earlier writes remain applied. Clipped text cannot satisfy the check, even if its visible prefix matches. Verification observes the accessible field, not a save or submission.
+
 ## Backend readiness
 
 `desktop` with `action:"status"` reports `contract_version:1`, OS, Node runtime, pause state, supported native actions/surfaces, and a probe of the actual native worker protocol. It works while paused without starting the pet. Queue time and native probing share a five-second budget; an expired or cancelled queued probe never runs later. Raw startup diagnostics are replaced with bounded guidance and an error code. A successful probe confirms the worker is responsive, not permission to control an elevated app or secure desktop. Primary-display capture/input and Windows-only native controls are reported as limits.

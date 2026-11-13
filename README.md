@@ -47,6 +47,8 @@ Try: **“Use Pikachu to help me with my computer. Announce the task, inspect th
 
 ## Tools
 
+For long form fields, Windows `read_text` now supports a bounded exact `expect_text` check in the same batch as `set_value`. Source clients can reuse one connection and a predefined form template with `npm run desktop:client`. See [request-to-completion improvements and timing boundaries](docs/request-completion-latency.md).
+
 `desktop` with `{"action":"status"}` checks backend readiness, supported native actions, platform limits, and pause state. It sends no input, works while paused, and is bounded to five seconds including queue time. Readiness does not establish permission to control every app.
 
 On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests. Discovery values come from each fresh per-node cache; actions still revalidate targets and verify field changes with live reads.
