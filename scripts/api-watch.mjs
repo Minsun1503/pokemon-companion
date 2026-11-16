@@ -29,7 +29,8 @@ async function status() {
 }
 try {
   session = await connect({root, args: [resolve(root, 'scripts/start-mcp.cjs')], env: {...process.env,
-    POKEMON_API_DIR: resolve(profile, 'api-catalog'), POKEMON_LEARNING_DIR: resolve(profile, 'learning')}});
+    POKEMON_API_DIR: resolve(profile, 'api-catalog'), POKEMON_LEARNING_DIR: resolve(profile, 'learning'),
+    POKEMON_USER_DATA_DIR: resolve(profile, 'companion'), POKEMON_APPROVAL_WAIT: 'on'}});
   const learning = await call('learning', {action: 'status'});
   if (learning.enabled) {
     taskId = (await call('learning', {action: 'begin', query: option('--task-query') || 'Watch my web demonstration once and update captured APIs when I click something new.',

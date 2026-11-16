@@ -73,7 +73,7 @@ export class PokemonRuntime {
 		}
 
 		try {
-			decision = await this.companion.approve?.(intent);
+			decision = await this.companion.approve?.(process.env.POKEMON_APPROVAL_WAIT === 'on' ? {...intent, wait_for_decision: true} : intent);
 		} catch {
 			throw approvalRequired(intent.action_id);
 		}

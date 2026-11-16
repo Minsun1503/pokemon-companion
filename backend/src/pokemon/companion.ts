@@ -79,7 +79,7 @@ export class DesktopCompanion implements Companion {
 			const timer = setTimeout(() => {
 				this.approvals.delete(id);
 				resolveApproval({authorized: false, action_id: intent.action_id});
-			}, 20000);
+			}, intent.wait_for_decision ? 55000 : 20000);
 			this.approvals.set(id, {resolve: resolveApproval, timer});
 			if (!this.socket || this.socket.destroyed) {
 				clearTimeout(timer);

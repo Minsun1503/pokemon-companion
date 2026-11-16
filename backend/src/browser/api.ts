@@ -57,7 +57,7 @@ export class SessionApi {
 				throw rejectedAction('SESSION_CHANGED', 'Page moved to another origin before watching.');
 			}
 
-			return approvalIntent('api', 'watch_start', endpoint(prefix), prefix, '', {profile, origin: scope.origin}, {profile, prefix});
+			return {...approvalIntent('api', 'watch_start', endpoint(prefix), prefix, '', {profile, origin: scope.origin}, {profile, prefix}), wait_for_decision: true};
 		};
 
 		await this.host.authorize(await refresh(), refresh);

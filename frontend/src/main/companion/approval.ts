@@ -6,12 +6,13 @@ import { type ApprovalRequest, ScopedGrants } from './grants'
 
 // biome-ignore lint/suspicious/noControlCharactersInRegex: Approval display deliberately rejects invisible controls.
 const unsafeDisplay = /[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff]/
+type PendingApproval = { window: BrowserWindow; request: ApprovalRequest; resolve?: (authorized: boolean) => void }
 
 export class CompanionApprovals {
   private readonly grants: ScopedGrants
   private readonly anchor: BrowserWindow
   private readonly protectionReady: Promise<void>
-  private readonly windows = new Map<string, { window: BrowserWindow; request: ApprovalRequest }>()
+  private readonly windows = new Map<string, PendingApproval>()
   constructor(
     private readonly root: string,
     directory: string,
@@ -82,12 +83,17 @@ export class CompanionApprovals {
       request.input_length < 0
     )
       throw new Error('Invalid approval identity.')
+    if (request.wait_for_decision !== undefined && typeof request.wait_for_decision !== 'boolean')
+      throw new Error('Invalid approval wait mode.')
     if (this.grants.consume(request)) {
       if (request.reconciliation) this.revokeScope(request.scope_hash, true)
       return { authorized: true, action_id: request.action_id }
     }
     const existing = this.windows.get(request.digest)
-    if (existing) return { authorized: false, action_id: existing.request.action_id }
+    if (existing)
+      return request.wait_for_decision
+        ? this.waitForDecision(existing)
+        : { authorized: false, action_id: existing.request.action_id }
     if (this.windows.size >= 3) return { authorized: false, action_id: request.action_id }
     const window = new BrowserWindow({
       width: 680,
@@ -106,8 +112,10 @@ export class CompanionApprovals {
     window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
     window.webContents.on('will-navigate', (event) => event.preventDefault())
     window.webContents.on('will-redirect', (event) => event.preventDefault())
-    this.windows.set(request.digest, { window, request })
+    const entry: PendingApproval = { window, request }
+    this.windows.set(request.digest, entry)
     window.on('closed', () => {
+      entry.resolve?.(false)
       if (this.windows.get(request.digest)?.window === window) this.windows.delete(request.digest)
     })
     try {
@@ -121,7 +129,7 @@ export class CompanionApprovals {
       window.destroy()
       throw error
     }
-    return { authorized: false, action_id: request.action_id }
+    return request.wait_for_decision ? this.waitForDecision(entry) : { authorized: false, action_id: request.action_id }
   }
 
   close(): void {
@@ -134,6 +142,8 @@ export class CompanionApprovals {
     const entry = this.windows.get(digest)
     if (!entry || (choice === true && (!entry.request.scope_allowed || entry.request.reconciliation))) return false
     if (choice !== 'deny') this.grants.issue(entry.request, choice === true)
+    // Consume only a real human-issued grant while this original request is still waiting.
+    if (entry.resolve) entry.resolve(choice !== 'deny' && this.grants.consume(entry.request))
     this.windows.delete(digest)
     entry.window.close()
     return true
@@ -146,5 +156,15 @@ export class CompanionApprovals {
         entry.window.close()
       }
     }
+  }
+  private waitForDecision(entry: PendingApproval): Promise<{ authorized: boolean; action_id: string }> {
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => entry.resolve?.(false), 45000)
+      entry.resolve = (authorized) => {
+        clearTimeout(timer)
+        delete entry.resolve
+        resolve({ authorized, action_id: entry.request.action_id })
+      }
+    })
   }
 }

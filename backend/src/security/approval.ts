@@ -4,7 +4,7 @@ import {DesktopError} from '../utils/errors.js';
 export type ApprovalIntent = {
 	action_id: string; digest: string; scope_hash: string; tool: string; operation: string;
 	target: string; origin: string; path: string; input_hash: string; state_hash: string; input_preview: string;
-	target_length: number; input_length: number; conversation: string; scope_allowed: boolean; reconciliation?: boolean;
+	target_length: number; input_length: number; conversation: string; scope_allowed: boolean; reconciliation?: boolean; wait_for_decision?: boolean;
 };
 export function hashState(value: unknown) {
 	return createHash('sha256').update(JSON.stringify(value)).digest('hex');

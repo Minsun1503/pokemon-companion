@@ -17,6 +17,7 @@ export type ApprovalRequest = {
   conversation: string
   scope_allowed: boolean
   reconciliation?: boolean
+  wait_for_decision?: boolean
 }
 type Grant = {
   id: string

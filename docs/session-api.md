@@ -14,7 +14,7 @@ node scripts/start-mcp.cjs --check
 npm run api:watch -- --url https://outlook.live.com/mail/
 ```
 
-The console starts its own MCP process with `scripts/start-mcp.cjs` and a separate persistent browser profile. Existing shared MCP/browser processes are left running. Normal companion authorization remains enforced; a trusted host's existing explicit authorization configuration is preserved. The console cannot execute saved requests.
+The console starts its own MCP process with `scripts/start-mcp.cjs`, a separate persistent browser profile and a separate companion data directory. Existing shared MCP/browser processes are left running. Normal companion authorization remains enforced; a trusted host's existing explicit authorization configuration is preserved. Capture startup waits up to 45 seconds for a human dialog decision within the original request. The console also enables that wait for its navigation requests with `POKEMON_APPROVAL_WAIT=on`. If the wait expires, capture stays off; check the page and start again after approving. Approval windows are excluded from automation and require a manual click. The console cannot execute saved requests.
 
 1. Sign in yourself in the opened browser, including any password or OTP.
 2. Type `watch` in the console after login. If multiple HTTP(S) tabs exist, type `tabs`, then `watch <page_id>` to select one. An optional final URL prefix narrows capture to a path on that tab's origin.
