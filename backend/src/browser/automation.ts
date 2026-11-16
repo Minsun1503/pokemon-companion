@@ -1,4 +1,4 @@
-import {randomUUID} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {join, resolve} from 'node:path';
 import {homedir} from 'node:os';
 import {
@@ -260,6 +260,18 @@ export class BrowserAutomation {
 		}
 
 		throw rejectedAction('STALE_REF', 'Page session was disconnected.');
+	}
+
+	async sessionIdentity(pageId: string) {
+		await this.validatePage(pageId);
+		const page = this.page(pageId);
+		const session = [...this.sessions.values()].find((candidate) => candidate.context === page.context());
+		const identity = session?.profile ?? session?.endpoint;
+		if (!identity) {
+			throw rejectedAction('SESSION_UNAVAILABLE', 'Browser session identity is unavailable.');
+		}
+
+		return createHash('sha256').update(identity).digest('hex');
 	}
 
 	async navigate(pageId: string, url: string, catalogOrigin = false) {

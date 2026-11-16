@@ -194,6 +194,7 @@ describe.each([
 				'windows',
 				...(process.platform === 'win32' ? ['course', 'research'] : []),
 				'browser',
+				'api',
 				...(process.platform === 'win32' ? ['app_inspect'] : []),
 				'app',
 				'assistant',

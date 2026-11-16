@@ -35,7 +35,7 @@ try {
     PATH: `${process.env.SystemRoot}/System32;${process.env.SystemRoot}`}});
   client = connected.client;
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'research', 'browser', 'app_inspect', 'app', 'assistant', 'excel', 'learning']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'research', 'browser', 'api', 'app_inspect', 'app', 'assistant', 'excel', 'learning']);
   assert.equal(tools.tools.find(tool => tool.name === 'windows').inputSchema.properties.action.default, 'batch');
   assert.deepEqual(manifest.tools.map(tool => tool.name).sort(), tools.tools.map(tool => tool.name).sort(), 'Bundle metadata omitted a live tool.');
   for (const file of ['backend/package.json', 'frontend/package.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json', 'plugin.json']) {

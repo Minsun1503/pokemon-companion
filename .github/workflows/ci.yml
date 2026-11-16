@@ -26,6 +26,7 @@ jobs:
       - run: npm run check
       - run: npm run build
       - run: npm test
+      - run: npm run test:api-session
       - run: npm run test:browser:bundle
       - run: npm run test:agent:smoke
       - run: npm run test:talk:ui

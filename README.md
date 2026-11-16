@@ -49,6 +49,8 @@ Try: **“Use Pikachu to help me with my computer. Announce the task, inspect th
 
 ## Tools
 
+To learn a web API from your own clicks, **`api`** watches demonstrations, saves encrypted request templates, and refreshes the catalog when you repeat an action or click something new. Reuse is explicit and bound to the current browser session. Run `npm run api:watch` for a capture-only browser console; see [the demonstration and replay guide](docs/session-api.md).
+
 For long form fields, Windows `read_text` now supports a bounded exact `expect_text` check in the same batch as `set_value`. Source clients can reuse one connection and a predefined form template with `npm run desktop:client`. See [request-to-completion improvements and timing boundaries](docs/request-completion-latency.md).
 
 For an already authorized PR workflow, `npm run workflow:client` runs create, CI wait, pinned-head merge, verification and recording without another model turn between stages. Its durable journal reconciles uncertain delivery without replaying mutations. See the [source runner, guards and timing boundaries](docs/workflow-controller.md).

@@ -13,6 +13,7 @@ import {registerBrowser} from './browser.js';
 import {registerAppInspect} from './app-inspect.js';
 import {registerApp} from './app.js';
 import {registerAssistant} from './assistant.js';
+import {registerApi} from './api.js';
 
 export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
 	const traced = instrument(server, runtime.learning);
@@ -23,6 +24,7 @@ export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
 	registerCourse(traced, runtime);
 	registerResearch(traced, runtime);
 	registerBrowser(traced, runtime);
+	registerApi(traced, runtime);
 	registerAppInspect(traced, runtime);
 	registerApp(traced, runtime);
 	registerAssistant(traced, runtime);

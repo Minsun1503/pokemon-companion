@@ -44,6 +44,8 @@
     "test:browser:smoke": "node scripts/browser-smoke.mjs",
     "test:app-adapter": "node scripts/app-adapter-smoke.mjs",
     "test:api-capture": ".venv-api/Scripts/python.exe scripts/api-capture-smoke.py",
+    "api:watch": "node scripts/api-watch.mjs",
+    "test:api-session": "node scripts/api-session-smoke.mjs",
     "benchmark:retrieval": "node scripts/information-retrieval-benchmark.mjs",
     "benchmark:common": "node scripts/common-task-benchmark.mjs",
     "test:common-benchmark": "node --test scripts/common-task-benchmark.test.mjs",

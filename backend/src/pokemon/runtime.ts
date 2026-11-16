@@ -10,6 +10,7 @@ import {BrowserAutomation} from '../browser/automation.js';
 import {ConnectionStore} from '../apps/connections.js';
 import {approvalRequired, type ApprovalIntent} from '../security/approval.js';
 import {DesktopAssistant} from '../desktop/assistant.js';
+import {SessionApi} from '../browser/api.js';
 
 const labels: Record<string, string> = {
 	key: 'Using a keyboard shortcut', type: 'Typing', mouse_move: 'Moving to the target',
@@ -27,6 +28,11 @@ const labels: Record<string, string> = {
 export class PokemonRuntime {
 	readonly assistant = new DesktopAssistant(this);
 	readonly browser = new BrowserAutomation(async (intent, refresh) => this.authorize(intent, refresh), async (scope) => this.companion.revokeScope?.(scope), async (intent) => (await this.companion.approve?.({...intent, reconciliation: true}))?.authorized === true);
+	readonly api = new SessionApi({
+		browser: this.browser, authorize: async (intent, refresh) => this.authorize(intent, refresh),
+		paused: () => this.companion.state.paused, reconcile: async (intent) => (await this.companion.approve?.(intent))?.authorized === true,
+	});
+
 	readonly connections = new ConnectionStore();
 	private queue: Promise<unknown> = Promise.resolve();
 	private gestureSequence = 0;
@@ -84,6 +90,7 @@ export class PokemonRuntime {
 
 	async close(): Promise<void> {
 		await this.assistant.close();
+		await this.api.close();
 		await this.browser.close();
 		this.windows.close();
 		await this.companion.close();

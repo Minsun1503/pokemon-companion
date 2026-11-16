@@ -78,7 +78,7 @@ async function main() {
       await client.connect(new StdioClientTransport({command: node, args: generated.args, cwd: generated.cwd, env: {...process.env, ...generated.env, POKEMON_UI: 'off',
         PLAYWRIGHT_BROWSERS_PATH: path.join(scratch, 'empty-browser-cache'), POKEMON_WEB_PROFILE: path.join(scratch, 'app-browser-profile')}}));
       assert.equal(client.getServerVersion().version, version);
-      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'research'] : []), 'browser', ...(platform === 'win32' ? ['app_inspect'] : []), 'app', 'assistant', ...(platform === 'win32' ? ['excel'] : []), 'learning']);
+      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'research'] : []), 'browser', 'api', ...(platform === 'win32' ? ['app_inspect'] : []), 'app', 'assistant', ...(platform === 'win32' ? ['excel'] : []), 'learning']);
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError, 'The packaged MCP server failed its status check');
       await verifyBrowserBundle(client, appRoot, scratch);
