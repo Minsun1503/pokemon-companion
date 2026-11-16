@@ -47,7 +47,9 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 
 	it('leaves text that fits its response budget unchanged', async () => {
 		const input = {text: 'chữ 🐱\n"\\', source: 'native'};
-		expect(await readUI(input, {action: 'read_text', max_chars: 1000})).toEqual(input);
+		const result = await readUI(input, {action: 'read_text', max_chars: 1000});
+		expect(result).toMatchObject(input);
+		expect(result.provenance).toMatchObject({trust: 'untrusted', channel: 'Win32/UIA', origin: 'desktop windows'});
 	});
 
 	it.each([false, true])('consumes internal profiles while preserving success/failure and public budgets: failure=%s', async (failure) => {
@@ -60,7 +62,7 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 		const automation = new WindowsAutomation();
 		try {
 			const pending = timedCall('windows', 'get_ui', async () => automation.request({action: 'get_ui', window_id: '123', max_chars: 1000}));
-			const checked = failure ? expect(pending).rejects.toThrow('original native rejection') : expect(pending).resolves.toEqual({nodes: []});
+			const checked = failure ? expect(pending).rejects.toThrow('original native rejection') : expect(pending).resolves.toMatchObject({nodes: [], provenance: {trust: 'untrusted', origin: 'window:123'}});
 			worker.stdout.write(`${JSON.stringify({id: 1, ...(failure ? {error: 'original native rejection', error_details: {code: 'STALE_REF', disposition: {delivery: 'not_delivered', retry: 'safe'}}} : {result: {nodes: []}}), profile: {phase_ms: {tree_walk_inclusive: 42, secret: 1}, counts: {tree_walk_inclusive: 1}}})}\n`);
 			await checked;
 			const log = JSON.parse(String(write.mock.calls[0][0]).slice('[pokemon-timing] '.length));
@@ -89,7 +91,7 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 			expect(worker.stdin.read().toString().trim().split('\n')).toHaveLength(1);
 			const fresh = automation.request({action: 'get_ui', window_id: '123'});
 			worker.stdout.write(`${JSON.stringify({id: 2, result: {nodes: []}})}\n`);
-			expect(await fresh).toEqual({nodes: []});
+			expect(await fresh).toMatchObject({nodes: [], provenance: {trust: 'untrusted'}});
 		} finally {
 			automation.close();
 		}
@@ -108,7 +110,7 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 				const pending = automation.request({action: 'get_windows'});
 				worker.stdout.write(`${JSON.stringify({id, result: {windows: []}})}\n`);
 				// eslint-disable-next-line no-await-in-loop
-				expect(await pending).toEqual({windows: []});
+				expect(await pending).toMatchObject({windows: [], provenance: {trust: 'untrusted'}});
 			}
 
 			expect(spawn).toHaveBeenCalledTimes(1);
@@ -174,10 +176,17 @@ describe.runIf(process.platform === 'win32')('Windows UI inspection', () => {
 	});
 
 	it('keeps hinted responses within max_chars', async () => {
-		const result = await readUI({nodes: captions, truncated: false, window: {title: 'x'.repeat(800)}});
+		const windowRef = 'a'.repeat(32);
+		const result = await readUI({nodes: captions, truncated: false, window: {id: '123', window_ref: windowRef, title: 'x'.repeat(800)}});
 		expect(result.hint).toBeDefined();
 		expect(JSON.stringify(result).length).toBeLessThanOrEqual(1000);
 		expect(result.truncated).toBe(true);
+		expect(result.window).toMatchObject({id: '123', window_ref: windowRef, title_truncated: true});
+		expect(result.provenance).toMatchObject({trust: 'untrusted', origin: 'window:123'});
+	});
+
+	it('rejects a budget that cannot retain identity and provenance', async () => {
+		await expect(readUI({nodes: []}, {action: 'get_ui', window_id: '123', max_chars: 50})).rejects.toMatchObject({details: {code: 'INVALID_ARGS'}});
 	});
 
 	it('bounds a large tree while preserving its node prefix', async () => {

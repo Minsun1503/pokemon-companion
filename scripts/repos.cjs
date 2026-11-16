@@ -13,4 +13,8 @@ for (const repo of ['frontend', 'backend']) {
     const install = spawnSync(process.execPath, [path.join(root, 'scripts/ensure-electron.cjs')], {cwd: root, stdio: 'inherit'});
     if (install.status !== 0) process.exit(install.status || 1);
   }
+  if (['install', 'ci'].includes(requested[0]) && repo === 'backend') {
+    const install = spawnSync(process.execPath, [path.join(root, 'scripts/ensure-browser.cjs')], {cwd: root, stdio: 'inherit', windowsHide: true});
+    if (install.status !== 0) process.exit(install.status || 1);
+  }
 }

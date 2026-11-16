@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-15T06:03:46.843Z",
+  "telegram": "connected",
+  "desktopRelay": {
+    "enabled": true,
+    "conversation": "hey, use pokemon mcp then go to edge and ask claude, tell y…",
+    "approval": "scoped_grant"
+  },
+  "inspection": {
+    "target": "ChatGPT desktop",
+    "conversation": "hey, use pokemon mcp then go to edge and ask claude, tell y…",
+    "channel_used": "uia",
+    "busy": true,
+    "composer": "Work with Codex",
+    "ready": true
+  },
+  "verification": "Live service and native destination inspection; answer delivery tested with an MCP/Telegram fixture. Awaiting owner live question."
+}

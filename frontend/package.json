@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build": "npm run generate:icons && tsc -p tsconfig.main.json && tsc -p tsconfig.renderer.json && npm run build:copy",
-    "build:copy": "node -e \"const fs=require('fs'); fs.mkdirSync('build/renderer',{recursive:true}); ['index.html','styles.css','companion.html','companion.css'].forEach(f=>fs.copyFileSync('src/renderer/'+f,'build/renderer/'+f))\"",
+    "build:copy": "node -e \"const fs=require('fs'); fs.mkdirSync('build/renderer',{recursive:true}); ['index.html','styles.css','companion.html','companion.css','approval.html'].forEach(f=>fs.copyFileSync('src/renderer/'+f,'build/renderer/'+f))\"",
     "check": "biome check . && tsc -p tsconfig.json",
     "format": "biome format --write .",
     "lint": "biome lint .",

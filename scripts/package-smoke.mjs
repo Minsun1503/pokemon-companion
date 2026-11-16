@@ -4,9 +4,10 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {connect} from './client.mjs';
+import bundle from './verify-browser-bundle.cjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const release = path.join(root, 'release');
+const release = process.env.POKEMON_RELEASE_DIR ? path.resolve(process.env.POKEMON_RELEASE_DIR) : path.join(root, 'release');
 const archive = path.join(release, 'pokemon-companion-win32-x64.mcpb');
 assert(fs.existsSync(archive), 'Run npm run package:windows first.');
 const relocated = fs.mkdtempSync(path.join(release, '.verify-package-'));
@@ -29,10 +30,12 @@ try {
   };
   scan(relocated);
   const connected = await connect({root: relocated, command, env: {...process.env,
-    APPDATA: path.join(relocated, '.test-appdata'), LOCALAPPDATA: path.join(relocated, '.test-localappdata'), POKEMON_USER_DATA_DIR: path.join(relocated, '.test-userdata')}});
+    APPDATA: path.join(relocated, '.test-appdata'), LOCALAPPDATA: path.join(relocated, '.test-localappdata'), POKEMON_USER_DATA_DIR: path.join(relocated, '.test-userdata'),
+    PLAYWRIGHT_BROWSERS_PATH: path.join(relocated, 'empty-browser-cache'), POKEMON_WEB_PROFILE: path.join(relocated, 'app-browser-profile'),
+    PATH: `${process.env.SystemRoot}/System32;${process.env.SystemRoot}`}});
   client = connected.client;
   const tools = await client.listTools();
-  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'excel', 'learning']);
+  assert.deepEqual(tools.tools.map((tool) => tool.name), ['desktop', 'computer', 'pokemon', 'windows', 'course', 'research', 'browser', 'app_inspect', 'app', 'assistant', 'excel', 'learning']);
   assert.equal(tools.tools.find(tool => tool.name === 'windows').inputSchema.properties.action.default, 'batch');
   assert.deepEqual(manifest.tools.map(tool => tool.name).sort(), tools.tools.map(tool => tool.name).sort(), 'Bundle metadata omitted a live tool.');
   for (const file of ['backend/package.json', 'frontend/package.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json', 'plugin.json']) {
@@ -42,6 +45,7 @@ try {
   assert(guide.startsWith('Package version: ' + manifest.version + '\nResponse contract version: 1\n'));
   assert(guide.includes('stopped_step') && guide.includes('window_ref') && guide.includes('user pause'));
   assert.equal(client.getServerVersion().version, manifest.version, 'MCP handshake version differs from bundle.');
+  await bundle.verifyBrowserBundle(client, relocated, relocated);
   const status = await connected.call('desktop', {action: 'status'});
   assert.equal(status.structuredContent.native.ready, true, 'Bundled native worker is not ready.');
   assert.equal(status.structuredContent.contract_version, 1);

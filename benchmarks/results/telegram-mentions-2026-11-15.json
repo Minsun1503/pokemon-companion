@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-15",
+  "bot": "pokemon_remote_151126_bot",
+  "trigger": "Hi @pokemon_remote_151126_bot",
+  "originalFailure": "Group admission accepted slash commands only; ordinary addressed text was discarded. A fresh mention also produced no reply under the existing Telegram privacy setting.",
+  "changes": [
+    "Accept exact username mentions and replies to bot messages from the allowed user in the designated group.",
+    "Report connection and provider setup state for greetings without calling a model.",
+    "Keep private approval decisions private and ignore unaddressed conversation and commands for other bots.",
+    "Stop the gateway gracefully when its Windows service owner disappears.",
+    "Disable this bot's Telegram group privacy and re-add the same bot to the original group."
+  ],
+  "botFatherConfirmedPrivacy": "DISABLED",
+  "groupMembershipRestored": true,
+  "liveMentionReplyObserved": "Hi! I’m connected to your Pokémon gateway.",
+  "liveReplyReportedProviderKeyMissing": true,
+  "nativeTasksExecuted": false,
+  "harnessTests": 18,
+  "launcherTests": 4,
+  "launcherOwnerShutdownVerifiedLive": true,
+  "build": "passed"
+}

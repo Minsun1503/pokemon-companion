@@ -2,9 +2,9 @@ param([switch]$CompileOnly)
 $ErrorActionPreference = 'Stop'
 [Console]::InputEncoding = [System.Text.UTF8Encoding]::new($false)
 [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
-Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, WindowsBase, System.Web.Extensions, System.Security
-$uiaReferences = @([System.Windows.Automation.AutomationElement].Assembly.Location, [System.Windows.Automation.AutomationPattern].Assembly.Location, [System.Windows.Rect].Assembly.Location, [System.Web.Script.Serialization.JavaScriptSerializer].Assembly.Location, [System.Security.Cryptography.ProtectedData].Assembly.Location) | Select-Object -Unique
-$uiaSources = @('uia-worker.cs', 'uia-identity.cs', 'uia-observation.cs', 'uia-profile.cs', 'uia-coordination.cs', 'excel-worker.cs') | ForEach-Object { Join-Path $PSScriptRoot $_ }
+Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, WindowsBase, System.Web.Extensions, System.Security, System.Drawing
+$uiaReferences = @([System.Windows.Automation.AutomationElement].Assembly.Location, [System.Windows.Automation.AutomationPattern].Assembly.Location, [System.Windows.Rect].Assembly.Location, [System.Web.Script.Serialization.JavaScriptSerializer].Assembly.Location, [System.Security.Cryptography.ProtectedData].Assembly.Location, [System.Drawing.Bitmap].Assembly.Location) | Select-Object -Unique
+$uiaSources = @('uia-worker.cs', 'uia-identity.cs', 'uia-observation.cs', 'uia-profile.cs', 'uia-coordination.cs', 'excel-worker.cs', 'app-probe.cs', 'window-capture.cs', 'approval-guard.cs') | ForEach-Object { Join-Path $PSScriptRoot $_ }
 $assemblyPath = Join-Path $PSScriptRoot 'uia-worker.dll'
 if ($CompileOnly) {
     if (Test-Path -LiteralPath $assemblyPath) { Remove-Item -LiteralPath $assemblyPath }
@@ -30,7 +30,15 @@ while ($null -ne ($line = [Console]::ReadLine())) {
             'status' { $result = [PokemonWindowsAutomation]::Status() }
             'learning_encrypt_key' { $result = [PokemonWindowsAutomation]::LearningKey($uiaArgs.text, $false) }
             'learning_decrypt_key' { $result = [PokemonWindowsAutomation]::LearningKey($uiaArgs.text, $true) }
+            'protect_companion' { $result = [PokemonWindowsAutomation]::ProtectCompanion($uiaArgs.text) }
+            'guard_physical' { $result = [PokemonWindowsAutomation]::GuardPhysical() }
+            'trusted_window_status' { $result = [PokemonWindowsAutomation]::TrustedWindowStatus() }
             'get_windows' { $result = [PokemonWindowsAutomation]::Windows($uiaArgs.query) }
+            'cdp_ports' { $result = [PokemonWindowsAutomation]::CdpPorts($uiaArgs.window_id) }
+            'app_identity' { $result = [PokemonWindowsAutomation]::AppIdentity($uiaArgs.window_id) }
+            'endpoint_owner' { $result = [PokemonWindowsAutomation]::EndpointOwner($uiaArgs.window_id, $uiaArgs.text) }
+            'capture_window' { $result = [PokemonWindowsAutomation]::CaptureWindow($uiaArgs.window_id) }
+            'win32_text' { $result = [PokemonWindowsAutomation]::Win32Text($uiaArgs.window_id, $uiaArgs.query, $uiaArgs.max_chars) }
             'get_ui' { $result = [PokemonWindowsAutomation]::UI($uiaArgs.window_id, $uiaArgs.query, $uiaArgs.control_type, $uiaArgs.max_elements, $uiaArgs.max_depth, $uiaArgs.view, $uiaArgs.root_snapshot, $uiaArgs.root_element_id, $uiaArgs.window_ref) }
             'wait_baseline' { $result = [PokemonWindowsAutomation]::WaitBaseline($uiaArgs.window_id, $uiaArgs.snapshot, $uiaArgs.element_id, $uiaArgs.query, $uiaArgs.control_type) }
             'activate' { $result = [PokemonWindowsAutomation]::Activate($uiaArgs.window_id, $uiaArgs.window_ref) }

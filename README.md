@@ -1,12 +1,12 @@
 # Pokémon Computer Companion
 
-An AI controls your computer through MCP while an animated Pokémon appears to do the work on your desktop. Claude, Codex, or another MCP client is the brain. The local computer-use backend performs the actions, and the Electron companion shows movement, typing, thinking, speech, and celebrations.
+An AI controls your computer through MCP while an animated Pokémon appears to do the work on your desktop. Claude, Codex, or another MCP client can drive the tools. Pokémon Agent also provides its own API model loop and Telegram gateway. The local backend performs the actions, and the Electron companion shows movement, typing, thinking, speech, and celebrations.
 
 All seven Pokémon from the pet repository are included: **Pikachu, Riolu, Lucario, Clodsire, Bulbasaur, Charmander, and Squirtle**, alongside **Hello Kitty and Kuromi** in matching pixel-art style. Pikachu is the default. Change among all nine companions from the team panel, the tray menu, or the `pokemon` tool (`hello-kitty` and `kuromi`).
 
 ## Easy installation
 
-For **Claude Desktop on Windows or macOS**, download the matching **`.mcpb` extension** from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest), open it in Claude, confirm **Install**, and enable Pokémon Companion. Claude launches the companion and uses its tools from your chat. Node, Electron, native desktop helpers, and all seven Pokémon are included. No terminal commands, additional software, GitHub login, model API key, or manual MCP settings are required. macOS still requires its normal Accessibility and Screen Recording permissions. See [installation steps](INSTALL.md).
+For **Claude Desktop on Windows or macOS**, download the matching **`.mcpb` extension** from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest), open it in Claude, confirm **Install**, and enable Pokémon Companion. Claude launches the companion and uses its tools from your chat. Node, Electron, Chromium, native desktop helpers, and all seven Pokémon are included. No terminal commands, additional software, GitHub login, model API key, or manual MCP settings are required. macOS still requires its normal Accessibility and Screen Recording permissions. See [installation steps](INSTALL.md).
 
 The **ChatGPT desktop plugin ZIPs** contain the complete local MCP server and its runtimes, with native plugin manifests. Public installation from ChatGPT's Plugins directory requires **OpenAI local-MCP partner approval and plugin review**. That approval has not been obtained; these files are prepared for submission, and opening a ZIP in ChatGPT does not install them. See [OpenAI's desktop-only distribution requirements](https://developers.openai.com/plugins/deploy/desktop-only).
 
@@ -32,6 +32,8 @@ The demo opens the companion and shows working, thinking, and completion animati
 
 ## Connect Claude or Codex
 
+Pokémon also has its own model/tool harness with Telegram control, direct DeepSeek/Claude/OpenAI APIs and custom API routes. Run `npm run agent -- setup` from the active checkout to open its setup page. See [Pokémon Agent setup, commands and verification](docs/pokemon-agent.md).
+
 ```powershell
 npm run config
 ```
@@ -53,7 +55,9 @@ For an already authorized PR workflow, `npm run workflow:client` runs create, CI
 
 `desktop` with `{"action":"status"}` checks backend readiness, supported native actions, platform limits, and pause state. It sends no input, works while paused, and is bounded to five seconds including queue time. Readiness does not establish permission to control every app.
 
-On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests. Discovery values come from each fresh per-node cache; actions still revalidate targets and verify field changes with live reads.
+For Teams, WhatsApp, Zalo or configured applications, **`app read`** prefers the web version through Playwright, then falls back to desktop CDP/API, Win32, UIA and window capture. Working desktop connections persist across MCP sessions and are rediscovered after failure or a detected executable update. **`browser`** provides DOM reading and actions with bundled Chromium and persistent browser profiles; **`app_inspect`** reads an observed desktop window. See [setup, adapter recovery, API interception and the verified YouTube comparison](docs/browser-dom.md).
+
+For native desktop controls, **`windows`** uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests. Discovery values come from each fresh per-node cache; actions still revalidate targets and verify field changes with live reads.
 
 Discovery results report `complete` and `truncated`. Windows errors include `error_details` with an error code and delivery/retry evidence; retry a failed operation only when its evidence permits it. In a partial batch, this applies only to the stopped step, and earlier steps remain applied. See the [Windows discovery and error contract](docs/windows-api.md).
 

@@ -6,6 +6,10 @@ import {measure, recordTiming} from '../utils/timing.js';
 import {rejectedAction} from '../utils/errors.js';
 import type {DesktopAdapter} from '../desktop/adapter.js';
 import {LocalLearning} from '../learning/service.js';
+import {BrowserAutomation} from '../browser/automation.js';
+import {ConnectionStore} from '../apps/connections.js';
+import {approvalRequired, type ApprovalIntent} from '../security/approval.js';
+import {DesktopAssistant} from '../desktop/assistant.js';
 
 const labels: Record<string, string> = {
 	key: 'Using a keyboard shortcut', type: 'Typing', mouse_move: 'Moving to the target',
@@ -21,6 +25,9 @@ const labels: Record<string, string> = {
 };
 
 export class PokemonRuntime {
+	readonly assistant = new DesktopAssistant(this);
+	readonly browser = new BrowserAutomation(async (intent, refresh) => this.authorize(intent, refresh), async (scope) => this.companion.revokeScope?.(scope), async (intent) => (await this.companion.approve?.({...intent, reconciliation: true}))?.authorized === true);
+	readonly connections = new ConnectionStore();
 	private queue: Promise<unknown> = Promise.resolve();
 	private gestureSequence = 0;
 	constructor(readonly companion: Companion = new DesktopCompanion(), readonly windows: DesktopAdapter = new WindowsAutomation(), readonly learning = new LocalLearning(undefined, undefined, async (input, decrypt) => {
@@ -31,6 +38,16 @@ export class PokemonRuntime {
 
 		return Buffer.from(result.key, 'base64');
 	})) {
+		companion.onProtectWindow = async (windowId, processId, approval) => {
+			const result = await windows.request({action: 'protect_companion', text: JSON.stringify({window_id: windowId, process_id: processId, approval: approval ? 1 : 2})}).catch((error: unknown) => {
+				console.error('Approval protection failed:', error instanceof Error ? error.message : 'Unknown error');
+				throw error;
+			});
+			if (result.protected !== true) {
+				throw new Error('Native companion protection failed.');
+			}
+		};
+
 		companion.onLearningFeedback = async (id, satisfaction) => {
 			await learning.feedback(id, satisfaction, 'user_ui');
 			if (companion.state.learningTaskId === id) {
@@ -39,7 +56,35 @@ export class PokemonRuntime {
 		};
 	}
 
+	async authorize(intent: ApprovalIntent, refresh: () => Promise<ApprovalIntent>) {
+		if (process.env.POKEMON_AUTHORIZATION === 'host-client') {
+			return;
+		}
+
+		let decision;
+		if ((await refresh()).digest !== intent.digest) {
+			throw rejectedAction('APPROVAL_STATE_CHANGED', 'The target or input changed before approval consumption. Read the target again. No input was sent.');
+		}
+
+		try {
+			decision = await this.companion.approve?.(intent);
+		} catch {
+			throw approvalRequired(intent.action_id);
+		}
+
+		if (!decision?.authorized) {
+			throw approvalRequired(decision?.action_id ?? intent.action_id);
+		}
+
+		const current = await refresh();
+		if (current.digest !== intent.digest) {
+			throw rejectedAction('APPROVAL_STATE_CHANGED', 'The target or input changed after approval. Read it again and obtain approval for the new action. No input was sent.');
+		}
+	}
+
 	async close(): Promise<void> {
+		await this.assistant.close();
+		await this.browser.close();
 		this.windows.close();
 		await this.companion.close();
 		await this.learning.close();

@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-15",
+  "bot": "pokemon_remote_151126_bot",
+  "groupCreated": true,
+  "ownerAllowlistCount": 1,
+  "groupAllowlistCount": 1,
+  "botTokenStoredEncrypted": true,
+  "privateStartSent": true,
+  "pairingVerifiedByTelegramApi": true,
+  "liveGroupStatusReplyObserved": true,
+  "gateway": "running",
+  "windowsAutostart": "registered and running",
+  "restartOnFailure": {"attempts": 3, "intervalMinutes": 1, "configuredOnly": true},
+  "systemSleepPrevention": "requested every 30 seconds by the service wrapper",
+  "nativeControlRequiresUnlockedDesktop": true,
+  "provider": "awaiting owner credentials; owner explicitly deferred entry",
+  "liveModelTaskExecuted": false,
+  "build": "passed",
+  "lint": "passed",
+  "harnessAndBrowserTestsPassed": 18,
+  "portableLauncherTestsPassed": 3,
+  "limitations": [
+    "Live model-to-desktop execution remains unverified until a valid provider key is supplied.",
+    "An inherited Claude credential previously returned HTTP 401; a separate credential name is used for the remote route.",
+    "Autostart was started through Task Scheduler; a Windows reboot and crash recovery were not tested.",
+    "The host MCP process still uses its older contenteditable verification code; each Telegram draft was read back before dispatch. The independent gateway uses the rebuilt adapter."
+  ]
+}

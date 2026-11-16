@@ -8,7 +8,10 @@
     "setup:ci": "node scripts/repos.cjs ci",
     "build": "node scripts/repos.cjs run build",
     "check": "node scripts/repos.cjs check",
-    "test": "node scripts/repos.cjs test && node --test scripts/chat.test.cjs scripts/agent.test.cjs scripts/chat-ipc.test.cjs scripts/talk-tools.test.cjs scripts/pikachu-animation.test.cjs scripts/youtube-benchmark.test.mjs scripts/common-task-benchmark.test.mjs scripts/desktop-workflows.test.mjs scripts/workflow-controller.test.mjs scripts/local-launch.test.cjs scripts/strength-suite.test.mjs",
+    "test": "node scripts/repos.cjs test && node --test scripts/chat.test.cjs scripts/agent.test.cjs scripts/chat-ipc.test.cjs scripts/talk-tools.test.cjs scripts/pikachu-animation.test.cjs scripts/youtube-benchmark.test.mjs scripts/common-task-benchmark.test.mjs scripts/desktop-workflows.test.mjs scripts/workflow-controller.test.mjs scripts/local-launch.test.cjs scripts/strength-suite.test.mjs scripts/approval.test.cjs scripts/harness-launcher.test.cjs",
+    "test:approval": "node --test scripts/approval.test.cjs",
+    "test:approval:live": "node scripts/approval-guard-smoke.mjs && node scripts/approval-companion-smoke.mjs",
+    "test:approval:e2e": "node scripts/approval-e2e-smoke.mjs",
     "test:talk": "node --test scripts/chat.test.cjs scripts/agent.test.cjs scripts/chat-ipc.test.cjs scripts/talk-tools.test.cjs",
     "test:talk:ui": "node scripts/companion-talk-smoke.mjs",
     "desktop:client": "node scripts/desktop-client.mjs",
@@ -23,6 +26,9 @@
     "demo": "node scripts/demo.mjs",
     "smoke": "node scripts/smoke.mjs",
     "config": "node scripts/config.cjs",
+    "agent": "node scripts/harness.cjs",
+    "test:agent": "npm --prefix backend test -- --run src/harness && node --test scripts/harness-launcher.test.cjs",
+    "test:agent:smoke": "node scripts/harness-smoke.mjs",
     "test:input": "node scripts/input-smoke.mjs",
     "test:windows": "node scripts/windows-smoke.mjs && node scripts/windows-fast-path-smoke.mjs && node scripts/keyboard-guard-smoke.mjs && node scripts/companion-focus-smoke.mjs",
     "test:windows:contract": "node scripts/windows-contract-smoke.mjs",
@@ -34,6 +40,10 @@
     "test:excel": "node scripts/excel-smoke.mjs",
     "benchmark:windows": "node scripts/windows-benchmark.mjs",
     "benchmark:youtube": "node scripts/youtube-benchmark.mjs",
+    "benchmark:browser-windows": "node scripts/browser-windows-benchmark.mjs",
+    "test:browser:smoke": "node scripts/browser-smoke.mjs",
+    "test:app-adapter": "node scripts/app-adapter-smoke.mjs",
+    "test:api-capture": ".venv-api/Scripts/python.exe scripts/api-capture-smoke.py",
     "benchmark:retrieval": "node scripts/information-retrieval-benchmark.mjs",
     "benchmark:common": "node scripts/common-task-benchmark.mjs",
     "test:common-benchmark": "node --test scripts/common-task-benchmark.test.mjs",
@@ -51,6 +61,8 @@
     "test:client-package": "node scripts/client-package-smoke.cjs",
     "test:package": "node scripts/package-smoke.mjs",
     "test:installers": "node scripts/installer-smoke.cjs",
-    "test:marketplace": "node scripts/marketplace-smoke.mjs"
+    "test:marketplace": "node scripts/marketplace-smoke.mjs",
+    "browser:install": "node scripts/ensure-browser.cjs",
+    "test:browser:bundle": "node scripts/browser-bundle-smoke.mjs"
   }
 }

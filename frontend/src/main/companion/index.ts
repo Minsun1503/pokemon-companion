@@ -6,6 +6,7 @@ import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
 import { CompanionAgentTools } from './agent'
+import { CompanionApprovals } from './approval'
 import { CompanionChat } from './chat'
 import { registerCompanionChat } from './chat-ipc'
 
@@ -26,6 +27,12 @@ let refreshQueued = false
 let paused = false
 let chatTools: CompanionAgentTools | undefined
 let clipboardBackup: Electron.Data | undefined
+let approvals: CompanionApprovals | undefined
+const protectionWaits = new Map<
+  number,
+  { resolve: (protectedWindow: boolean) => void; timer: ReturnType<typeof setTimeout> }
+>()
+let protectionSequence = 0
 let pastedText: string | undefined
 let target: { x: number; y: number } | undefined
 let movementAllowed = true
@@ -291,7 +298,8 @@ app
   .then(async () => {
     const port = Number(process.env.POKEMON_BRIDGE_PORT)
     const token = process.env.POKEMON_BRIDGE_TOKEN
-    if (!Number.isInteger(port) || port <= 0 || !token)
+    const pipe = process.env.POKEMON_BRIDGE_PIPE
+    if ((!pipe && (!Number.isInteger(port) || port <= 0)) || !token)
       throw new Error('Launch this companion through the Pokémon MCP server.')
     app.dock?.hide()
     try {
@@ -453,7 +461,7 @@ app
     screen.on('display-added', sync)
     screen.on('display-removed', sync)
     screen.on('display-metrics-changed', sync)
-    socket = net.connect({ host: '127.0.0.1', port })
+    socket = pipe ? net.connect(pipe) : net.connect({ host: '127.0.0.1', port })
     socket.setEncoding('utf8')
     socket.on('connect', () => send({ kind: 'hello', token }))
     socket.on('close', () => app.quit())
@@ -473,6 +481,16 @@ app
         const newline = buffer.indexOf('\n')
         const line = buffer.slice(0, newline)
         buffer = buffer.slice(newline + 1)
+        const urgent = JSON.parse(line)
+        if (urgent.kind === 'protection_result') {
+          const pending = protectionWaits.get(urgent.id)
+          if (pending) {
+            clearTimeout(pending.timer)
+            protectionWaits.delete(urgent.id)
+            pending.resolve(urgent.protected === true)
+          }
+          continue
+        }
         queue = queue
           .then(async () => {
             const command = JSON.parse(line)
@@ -484,6 +502,32 @@ app
                   pendingFeedback.delete(command.id)
                   pending.resolve(command.recorded === true)
                 }
+                return
+              }
+              if (command.kind === 'approval_check') {
+                approvals ??= new CompanionApprovals(rootDir, app.getPath('userData'), async (window, approval) => {
+                  const handle = window.getNativeWindowHandle()
+                  const windowId = (
+                    handle.length === 8 ? handle.readBigUInt64LE() : BigInt(handle.readUInt32LE())
+                  ).toString()
+                  const id = ++protectionSequence
+                  const protectedWindow = await new Promise<boolean>((resolve) => {
+                    const timer = setTimeout(() => {
+                      protectionWaits.delete(id)
+                      resolve(false)
+                    }, 15000)
+                    protectionWaits.set(id, { resolve, timer })
+                    send({ kind: 'protect_window', id, window_id: windowId, process_id: process.pid, approval })
+                  })
+                  if (!protectedWindow) throw new Error('Native approval-window protection is unavailable.')
+                })
+                const result = await approvals.check(command.request)
+                send({ kind: 'approval_result', id: command.id, ...result })
+                return
+              }
+              if (command.kind === 'approval_revoke') {
+                approvals?.revokeScope(command.scope)
+                send({ kind: 'ack', id: command.id })
                 return
               }
               if (command.kind === 'state') {
@@ -549,6 +593,16 @@ app
               } else throw new Error('Unknown companion command.')
               send({ kind: 'ack', id: command.id })
             } catch (error) {
+              if (command.kind === 'approval_check') {
+                console.error('Approval UI unavailable:', error instanceof Error ? error.message : 'Unknown error')
+                send({
+                  kind: 'approval_result',
+                  id: command.id,
+                  authorized: false,
+                  action_id: command.request?.action_id,
+                })
+                return
+              }
               send({ kind: 'ack', id: command.id, error: String(error) })
             }
           })
@@ -566,6 +620,7 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  approvals?.close()
   chatTools?.close()
   clearInterval(dragTimer)
   for (const pending of pendingFeedback.values()) {

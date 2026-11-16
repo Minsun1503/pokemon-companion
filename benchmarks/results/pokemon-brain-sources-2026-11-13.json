@@ -1,0 +1,456 @@
+{
+  "recorded_at_utc": "2026-11-13 11:47:26 UTC",
+  "research_date": "2026-11-13",
+  "learning_task_id": "f043299e-2278-4948-b308-6cdf8d338f1a",
+  "source_revision": "3ff5bfb3ef29f13d62ec030764ded6feae548c18",
+  "scope": "Source-reading metadata for research/design comparison. No live model inference or new agent implementation.",
+  "sources": [
+    {
+      "url": "https://developers.openai.com/api/docs/guides/latency-optimization",
+      "readings": [
+        {
+          "tool": "pokemon.course",
+          "document_name": "Latency optimization | OpenAI API",
+          "action": "read_lesson",
+          "version": "d35043fc2d9d368031f33ff09fcfe95fa1b0aca4ca8a47671438aa22fd072ea3",
+          "offset": 0,
+          "next_offset": 12000,
+          "total_characters": 15642,
+          "source_truncated": false
+        }
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/research/building-effective-agents",
+      "readings": [
+        {
+          "tool": "pokemon.research",
+          "document_name": "Building effective AI agents \\ Anthropic",
+          "action": "find_many",
+          "all_queries_returned": true,
+          "atomic_document_snapshot": false,
+          "excerpt_metadata": [
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "9779da2f28e935998ab0681f9929ae97cba1be090a7bfc217db1d53b00ea4cc0",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "8d210b1c4afac6a4abf762913077458cbb321a9516c43f4cea335ee45ffe016b",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "197f32bdde495dc3840cee8482847eaebd086e4f669851c27d6a3bae60b716df",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "d101220b62191f24fd4ebf937de20fa9082c27926b1bba0bb30e81a73359e322",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "e0492e85be0b2ad4fccc1d45979cfc853490f9adfe95e11ac98efe197ab47302",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "9b356de3f8fd05b3c865bc6b66ab869f27990439b4f8a8df7e53ea90769fc30c",
+              "full_document_version": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://docs.ollama.com/capabilities/tool-calling",
+      "readings": [
+        {
+          "tool": "pokemon.research",
+          "document_name": "Tool calling - Ollama",
+          "action": "find_many",
+          "all_queries_returned": true,
+          "atomic_document_snapshot": false,
+          "excerpt_metadata": [
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "91e057f6f41273bf077eec880fba94100e8637d9233a80ab29d1d2b8afcb64f6",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "6696c75bd4bfd66701d767bc2c8314ff39fc4370c0445b8da92325f1c193e5fd",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "12dbf23414f42d5fe67eaecffdb9a76df71f3d421e72312f68d48d17b4e3f5df",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "762d0c2dd650b2edea1bf5a5132a86154ae7a49ba13c1c842871409de5966635",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "8daa2728f6fe77fff28cbe5823669ce6e85fe2c1700aab5296d8198e06d8e5de",
+              "full_document_version": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://docs.ollama.com/api/chat",
+      "readings": [
+        {
+          "tool": "pokemon.research",
+          "document_name": "Generate a chat message - Ollama",
+          "action": "find_many",
+          "all_queries_returned": true,
+          "atomic_document_snapshot": false,
+          "excerpt_metadata": [
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "e20e6d8ba7a89d2520b1607dc84d203b5b1b95941a3299910ee27a15d6dd1f93",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "0fbba5eed5e9c50f34e3d6d96f7682b1080bb52328f6df3c6660ca66e8093ee9",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "9a1e8aee1cb9035a39173ae200d0f36da5baabb945f643b01b70e0f2489170db",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "f485d6d23df93871ad87fb31660e6114ef9a739df20dac054de000459b06dfe2",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "753024adb8399e96a24b3cb4fe7bc17469154b9ccbff92c5b6ce9176ffad8230",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "4811a3a875f1a0d120d9355d3b7a4e21e9906c442e6a825fd8b327e8a8866f70",
+              "full_document_version": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://docs.ollama.com/gpu",
+      "readings": [
+        {
+          "tool": "pokemon.research",
+          "document_name": "Hardware support - Ollama",
+          "action": "find_many",
+          "all_queries_returned": true,
+          "atomic_document_snapshot": false,
+          "excerpt_metadata": [
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "5a227d093190beddc038ffae5d15c65f826a9c69000c1a23fd378138639f5047",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "ad9c11983d7e80e78662015cc443b51d9d893b0346da3319180850416b369dc1",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "8c0a9e6ac84f378d37eb508a2bb747982af8410ec0712e5fbdffe4d0aa4c04c9",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "44850342538d9b4aa84a9b7107b1d1d203aa538ad4d3c286952a794322a3865f",
+              "full_document_version": false
+            },
+            {
+              "found": false,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "full_document_version": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/simular-ai/Agent-S",
+      "readings": [
+        {
+          "tool": "pokemon.research",
+          "document_name": "simular-ai/Agent-S: Agent S: the state-of-the-art open source computer use agents",
+          "action": "find_many",
+          "all_queries_returned": true,
+          "atomic_document_snapshot": false,
+          "excerpt_metadata": [
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "b5bea7cdf335698c94fce5b993fdcb4f8a70f95a5b7b2c00cc5fa42c94bb307e",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "f7ae5fc17e22aa09a5ff26f40551c00b81fc45921eba9004f209e36082d1f4be",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "9b1fa1c85f62b4569bdde304dfceef714aa8673fa7b864556ab196ddf6e99ba9",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "59e9be562da1b778e5248fe67bbf35abecc5bd9bac35adfc9ef8f5ec8cef5ce1",
+              "full_document_version": false
+            },
+            {
+              "found": false,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "f2347ce4efa27594c92029a7b9c52718a7b6fe55036ead8656027f8160cfde5e",
+              "full_document_version": false
+            },
+            {
+              "found": false,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "full_document_version": false
+            }
+          ]
+        },
+        {
+          "tool": "pokemon.course",
+          "document_name": "simular-ai/Agent-S: Agent S: the state-of-the-art open source computer use agents",
+          "action": "read_lesson",
+          "version": "aca5f98b1178b42f525dbefaf6ff7f9eeb9900a650d7b0db554bd41b533b5e23",
+          "offset": 0,
+          "next_offset": null,
+          "total_characters": 6432,
+          "source_truncated": false
+        }
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/function-calling?api-mode=responses",
+      "readings": [
+        {
+          "tool": "pokemon.research",
+          "document_name": "Function calling | OpenAI API",
+          "action": "find_many",
+          "all_queries_returned": true,
+          "atomic_document_snapshot": false,
+          "excerpt_metadata": [
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "97013861cbbe60f3432f626bfd7db83daa3adc96ae70bcec614336be5bf3d54d",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "27a5b0bbe53fb011abb464e007c9532ca6f7123d080e426d293695b0db5ab12b",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "1556edb5685dfbe0d42f9756721257dbac9ebba4ac3af01568673de189d1d628",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "7ad419cab165e016b02af77195c2418263da2895d9d8dc0e64dd950d008aa8a8",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "8e4fa0219a16aed365f142269fb340eb7ac260efa2896b6ee635583c57887fca",
+              "full_document_version": false
+            },
+            {
+              "found": true,
+              "method": "bounded_full_text_fallback",
+              "source_truncated": false,
+              "excerpt_sha256": "4439c453d797bab6faee9e3edd5cf2461b4077a79d0dfd90b52ece0ba71c05b8",
+              "full_document_version": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/bytedance/UI-TARS-desktop",
+      "readings": [
+        {
+          "tool": "pokemon.course",
+          "document_name": "bytedance/UI-TARS-desktop: The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra",
+          "action": "read_lesson",
+          "version": "c9f8511b614e792b461737c0b67fe70723f8629c3ce07a7559a55b7424305df2",
+          "offset": 0,
+          "next_offset": null,
+          "total_characters": 9630,
+          "source_truncated": false
+        }
+      ]
+    },
+    {
+      "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "readings": [
+        {
+          "tool": "pokemon.course",
+          "document_name": "Persistence - Docs by LangChain",
+          "action": "read_lesson",
+          "version": "1be2d9bf2a6eab36509ba612d2d0ae9c1c8de0dbb9a4f3599ea2f43504095e15",
+          "offset": 0,
+          "next_offset": null,
+          "total_characters": 4431,
+          "source_truncated": false
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/xlang-ai/OSWorld-V2",
+      "readings": [
+        {
+          "tool": "pokemon.course",
+          "document_name": "xlang-ai/OSWorld-V2: OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks",
+          "action": "read_lesson",
+          "version": "982b23f2b0e81a292bbadebf86adbb0744388af63873334867e7d095f09a9f39",
+          "offset": 0,
+          "next_offset": 12000,
+          "total_characters": 19530,
+          "source_truncated": false
+        },
+        {
+          "tool": "pokemon.course",
+          "document_name": "xlang-ai/OSWorld-V2: OSWorld 2.0: Benchmarking Computer Use Agents on Long-Horizon Real-World Tasks",
+          "action": "read_lesson",
+          "version": "982b23f2b0e81a292bbadebf86adbb0744388af63873334867e7d095f09a9f39",
+          "offset": 12000,
+          "next_offset": null,
+          "total_characters": 19530,
+          "source_truncated": false
+        }
+      ]
+    },
+    {
+      "url": "https://docs.langchain.com/oss/python/langgraph/workflows-agents",
+      "readings": [
+        {
+          "tool": "pokemon browser native text",
+          "coverage": "Relevant workflows/agents sections read earlier in this goal; no cached version in this metadata file."
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/abs/2610.28601",
+      "readings": [
+        {
+          "tool": "pokemon browser native text",
+          "coverage": "Abstract read earlier in this goal."
+        }
+      ]
+    },
+    {
+      "url": "https://arxiv.org/html/2610.28601v1",
+      "readings": [
+        {
+          "tool": "pokemon.windows",
+          "coverage": "Observed Document identity; discovery incomplete at 2500 scanned nodes. No native full-page coverage claim."
+        },
+        {
+          "tool": "PowerShell Invoke-WebRequest plus text extraction",
+          "coverage": "Read-only HTTPS retrieval with normal certificate verification. Methods sections 3–4, results sections 5–6 and repeated-validation section 7.3 inspected.",
+          "limits": "Only relevant extracted text was displayed; full paper not exported to report. Initial Python urllib retrieval failed local certificate validation."
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Version hashes describe accessible provider text, not publisher revisions or the entire underlying site.",
+    "Excerpt search is sequential and not an atomic full-document snapshot.",
+    "Source pages and repository maintenance/release status can change after this date.",
+    "Primary-source benchmark claims are reported claims; they have not been reproduced here."
+  ]
+}

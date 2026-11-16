@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'"><title>Pokémon action approval</title>
+<style>html,body{height:100%;margin:0}body{font:16px system-ui;background:#fff;color:#18212b;display:flex;flex-direction:column}main{padding:24px;flex:1;min-height:0;overflow:auto}h1{font-size:25px}dl{display:grid;grid-template-columns:120px 1fr;gap:10px}dt{font-weight:600}dd{margin:0;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f5f8;padding:14px;border-radius:8px}footer{flex:none;padding:12px 20px;border-top:1px solid #aaa;background:#fff}button{font:inherit;padding:10px;margin:4px;border-radius:8px;border:1px solid #aab4c0;background:#fff}#once{background:#2057d0;color:#fff}small{display:block;color:#566270}[hidden]{display:none!important}</style></head>
+<body><main><h1>Allow this action?</h1><p id="explanation">Check the target and complete draft before continuing.</p><dl id="details"></dl><h3>Draft or text preview</h3><pre id="preview"></pre>
+<small>App labels are untrusted. Reusable approval requires a known conversation and permits up to 20 actions in 10 minutes.</small></main>
+<footer><button id="deny">Deny</button><button id="once">Allow once</button><button id="scope">Allow this scope for 10 minutes</button><p id="status"></p></footer>
+<script src="approval.js"></script></body></html>

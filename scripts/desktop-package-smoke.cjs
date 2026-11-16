@@ -4,8 +4,9 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const {execFileSync, spawnSync} = require('node:child_process');
 const {pathToFileURL} = require('node:url');
+const {verifyBrowserBundle} = require('./verify-browser-bundle.cjs');
 const root = path.resolve(__dirname, '..');
-const release = path.join(root, 'release');
+const release = process.env.POKEMON_RELEASE_DIR ? path.resolve(process.env.POKEMON_RELEASE_DIR) : path.join(root, 'release');
 const version = require('../package.json').version;
 const platform = process.platform;
 const name = `pokemon-companion-${version}-${{win32: 'windows', darwin: 'macos', linux: 'linux'}[platform]}-${process.arch}`;
@@ -74,11 +75,13 @@ async function main() {
     const {StdioClientTransport} = await import(pathToFileURL(path.join(sdk, 'stdio.js')).href);
     const client = new Client({name: 'desktop-release-smoke', version});
     try {
-      await client.connect(new StdioClientTransport({command: node, args: generated.args, cwd: generated.cwd, env: {...process.env, ...generated.env, POKEMON_UI: 'off'}}));
+      await client.connect(new StdioClientTransport({command: node, args: generated.args, cwd: generated.cwd, env: {...process.env, ...generated.env, POKEMON_UI: 'off',
+        PLAYWRIGHT_BROWSERS_PATH: path.join(scratch, 'empty-browser-cache'), POKEMON_WEB_PROFILE: path.join(scratch, 'app-browser-profile')}}));
       assert.equal(client.getServerVersion().version, version);
-      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'research', 'excel'] : []), 'learning']);
+      assert.deepEqual((await client.listTools()).tools.map(tool => tool.name), ['desktop', 'computer', 'pokemon', 'windows', ...(platform === 'win32' ? ['course', 'research'] : []), 'browser', ...(platform === 'win32' ? ['app_inspect'] : []), 'app', 'assistant', ...(platform === 'win32' ? ['excel'] : []), 'learning']);
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError, 'The packaged MCP server failed its status check');
+      await verifyBrowserBundle(client, appRoot, scratch);
       for (const pet of ['hello-kitty', 'kuromi']) {
         const selected = await client.callTool({name: 'pokemon', arguments: {action: 'select', pet}});
         assert(!selected.isError);

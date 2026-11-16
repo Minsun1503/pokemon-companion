@@ -1,0 +1,894 @@
+{
+  "schema_version": 1,
+  "access_date": "2026-11-13",
+  "resumed_from_thread": "01a1d446-bb02-7a22-bf1e-cabd628c8456",
+  "scope": "Decision research report only; no model training, source changes, deployment or live model benchmark",
+  "public_source_fetches": [
+    {
+      "key": "q8",
+      "url": "https://huggingface.co/Qwen/Qwen3-8B/raw/main/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "0f36caaff9c2516411a7738db384606263ba653c1e63e61d72f511606164d5a6",
+      "characters": 16660,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Number of Parameters": [
+          " following features: - Type: Causal Language Models - Training Stage: Pretraining & Post-training - Number of Parameters: 8.2B - Number of Paramaters (Non-Embedding): 6.95B - Number of Layers: 36 - Number of Attention Heads (GQA): 32 for Q and 8 for KV - Context Length: 32,768 natively and [131,072 tokens with YaRN](#processing-long-texts). For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). ## Quic"
+        ],
+        "license:": [
+          "--- library_name: transformers license: apache-2.0 license_link: https://huggingface.co/Qwen/Qwen3-8B/blob/main/LICENSE pipeline_tag: text-generation base_model: - Qwen/Qwen3-8B-Base --- # Qwen3-8B ## Qwen3 Highlights Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Built upon extensive training, Qwen3 delivers groundbreaking advancements in reasoning, instruction-following, agent capabilities, and multilingual support, with the follow"
+        ],
+        "Context Length": [
+          "Embedding): 6.95B - Number of Layers: 36 - Number of Attention Heads (GQA): 32 for Q and 8 for KV - Context Length: 32,768 natively and [131,072 tokens with YaRN](#processing-long-texts). For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). ## Quickstart The code of Qwen3 has been in the latest Hugging Face `transformers` and we advise you to use the latest version of `transformers`. With `tran",
+          ".run(messages=messages): pass print(responses) ``` ## Processing Long Texts Qwen3 natively supports context lengths of up to 32,768 tokens. For conversations where the total length (including both input and output) significantly exceeds this limit, we recommend using RoPE scaling techniques to handle long texts effectively. We have validated the model's performance on context lengths of up to 131,072 tokens using the [YaRN](https://arxiv.org/abs/2309.00071) method. YaRN is currently supported by several inference frameworks, e.g., `transformers` and `llama.cpp` for local use, `vllm` and `sglang` for deploym"
+        ]
+      }
+    },
+    {
+      "key": "q14",
+      "url": "https://huggingface.co/Qwen/Qwen3-14B/raw/main/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "7ef503e68996a4e32007fedc7d8e198846e9b1f36620d38a79b89934100b1250",
+      "characters": 16670,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Number of Parameters": [
+          " following features: - Type: Causal Language Models - Training Stage: Pretraining & Post-training - Number of Parameters: 14.8B - Number of Paramaters (Non-Embedding): 13.2B - Number of Layers: 40 - Number of Attention Heads (GQA): 40 for Q and 8 for KV - Context Length: 32,768 natively and [131,072 tokens with YaRN](#processing-long-texts). For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). ## Qui"
+        ],
+        "license:": [
+          "--- library_name: transformers license: apache-2.0 license_link: https://huggingface.co/Qwen/Qwen3-14B/blob/main/LICENSE pipeline_tag: text-generation base_model: - Qwen/Qwen3-14B-Base --- # Qwen3-14B ## Qwen3 Highlights Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Built upon extensive training, Qwen3 delivers groundbreaking advancements in reasoning, instruction-following, agent capabilities, and multilingual support, with the fol"
+        ],
+        "Context Length": [
+          "Embedding): 13.2B - Number of Layers: 40 - Number of Attention Heads (GQA): 40 for Q and 8 for KV - Context Length: 32,768 natively and [131,072 tokens with YaRN](#processing-long-texts). For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). ## Quickstart The code of Qwen3 has been in the latest Hugging Face `transformers` and we advise you to use the latest version of `transformers`. With `tran",
+          ".run(messages=messages): pass print(responses) ``` ## Processing Long Texts Qwen3 natively supports context lengths of up to 32,768 tokens. For conversations where the total length (including both input and output) significantly exceeds this limit, we recommend using RoPE scaling techniques to handle long texts effectively. We have validated the model's performance on context lengths of up to 131,072 tokens using the [YaRN](https://arxiv.org/abs/2309.00071) method. YaRN is currently supported by several inference frameworks, e.g., `transformers` and `llama.cpp` for local use, `vllm` and `sglang` for deploym"
+        ]
+      }
+    },
+    {
+      "key": "q17",
+      "url": "https://huggingface.co/Qwen/Qwen3-1.7B/raw/main/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "257e52c419dac2258852643f18af6c974f21f8c6c1b6f371b6cca6201cf29091",
+      "characters": 13963,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Number of Parameters": [
+          " following features: - Type: Causal Language Models - Training Stage: Pretraining & Post-training - Number of Parameters: 1.7B - Number of Paramaters (Non-Embedding): 1.4B - Number of Layers: 28 - Number of Attention Heads (GQA): 16 for Q and 8 for KV - Context Length: 32,768 For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). > [!TIP] > If you encounter significant endless repetitions, please refer"
+        ],
+        "license:": [
+          "--- library_name: transformers license: apache-2.0 license_link: https://huggingface.co/Qwen/Qwen3-1.7B/blob/main/LICENSE pipeline_tag: text-generation base_model: - Qwen/Qwen3-1.7B-Base --- # Qwen3-1.7B ## Qwen3 Highlights Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Built upon extensive training, Qwen3 delivers groundbreaking advancements in reasoning, instruction-following, agent capabilities, and multilingual support, with the "
+        ],
+        "Context Length": [
+          "-Embedding): 1.4B - Number of Layers: 28 - Number of Attention Heads (GQA): 16 for Q and 8 for KV - Context Length: 32,768 For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). > [!TIP] > If you encounter significant endless repetitions, please refer to the [Best Practices](#best-practices) section for optimal sampling parameters, and set the ``presence_penalty`` to 1.5. ## Quickstart The code o"
+        ]
+      }
+    },
+    {
+      "key": "q4",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B/raw/main/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "71add1cd091c309b1cb1a6b943f2476eb2b004124b3bd1d32dcd0b24cc1abc47",
+      "characters": 16857,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Number of Parameters": [
+          " following features: - Type: Causal Language Models - Training Stage: Pretraining & Post-training - Number of Parameters: 4.0B - Number of Paramaters (Non-Embedding): 3.6B - Number of Layers: 36 - Number of Attention Heads (GQA): 32 for Q and 8 for KV - Context Length: 32,768 natively and [131,072 tokens with YaRN](#processing-long-texts). For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). > [!TIP]"
+        ],
+        "license:": [
+          "--- library_name: transformers license: apache-2.0 license_link: https://huggingface.co/Qwen/Qwen3-4B/blob/main/LICENSE pipeline_tag: text-generation base_model: - Qwen/Qwen3-4B-Base --- # Qwen3-4B ## Qwen3 Highlights Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Built upon extensive training, Qwen3 delivers groundbreaking advancements in reasoning, instruction-following, agent capabilities, and multilingual support, with the follow"
+        ],
+        "Context Length": [
+          "-Embedding): 3.6B - Number of Layers: 36 - Number of Attention Heads (GQA): 32 for Q and 8 for KV - Context Length: 32,768 natively and [131,072 tokens with YaRN](#processing-long-texts). For more details, including benchmark evaluation, hardware requirements, and inference performance, please refer to our [blog](https://qwenlm.github.io/blog/qwen3/), [GitHub](https://github.com/QwenLM/Qwen3), and [Documentation](https://qwen.readthedocs.io/en/latest/). > [!TIP] > If you encounter significant endless repetitions, please refer to the [Best Practices](#best-practices) section for optimal sampling parameters, ",
+          ".run(messages=messages): pass print(responses) ``` ## Processing Long Texts Qwen3 natively supports context lengths of up to 32,768 tokens. For conversations where the total length (including both input and output) significantly exceeds this limit, we recommend using RoPE scaling techniques to handle long texts effectively. We have validated the model's performance on context lengths of up to 131,072 tokens using the [YaRN](https://arxiv.org/abs/2309.00071) method. YaRN is currently supported by several inference frameworks, e.g., `transformers` and `llama.cpp` for local use, `vllm` and `sglang` for deploym"
+        ]
+      }
+    },
+    {
+      "key": "bitnet",
+      "url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T-bf16/raw/main/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "a11bf9a3ca3c96cc342918a26b87909e9fd902b3db257c010623b4b0ff695481",
+      "characters": 8926,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "license:": [
+          "--- license: mit license_link: https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/blob/main/LICENSE language: - en pipeline_tag: text-generation tags: - chat - bitnet - text-generation - large-language-model library_name: transformers --- # BitNet b1.58 2B4T - Scaling Native 1-bit LLM This repository contains the weights for **BitNet b1.58 2B4T**, the first open-source, native 1-bit Large Language Model (LLM) at the 2-billion parameter scale, developed by Microsoft Research. Trained on a corpus of 4 trilli"
+        ],
+        "Context Length": [
+          ", not post-training quantized.** * **Parameters:** ~2 Billion * **Training Tokens:** 4 Trillion * **Context Length:** Maximum sequence length of **4096 tokens**. * *Recommendation:* For optimal performance on tasks requiring very long contexts (beyond the pre-training length or for specialized long-reasoning tasks), we recommend performing intermediate long-sequence adaptation/training before the final fine-tuning stage. * **Training Stages:** 1. **Pre-training:** Large-scale training on public text/code and synthetic math data using a two-stage learning rate and weight decay schedule. 2. **Supervised Fine-"
+        ],
+        "4096": [
+          ":** ~2 Billion * **Training Tokens:** 4 Trillion * **Context Length:** Maximum sequence length of **4096 tokens**. * *Recommendation:* For optimal performance on tasks requiring very long contexts (beyond the pre-training length or for specialized long-reasoning tasks), we recommend performing intermediate long-sequence adaptation/training before the final fine-tuning stage. * **Training Stages:** 1. **Pre-training:** Large-scale training on public text/code and synthetic math data using a two-stage learning rate and weight decay schedule. 2. **Supervised Fine-tuning (SFT):** Fine-tuned on instruc"
+        ]
+      }
+    },
+    {
+      "key": "apache",
+      "url": "https://huggingface.co/Qwen/Qwen3-8B/raw/main/LICENSE",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "characters": 11343,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {},
+      "full_license_text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2024 Alibaba Cloud\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License."
+    },
+    {
+      "key": "mit",
+      "url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/raw/main/LICENSE",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2",
+      "characters": 1073,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {},
+      "full_license_text": "MIT License\n\nCopyright (c) Microsoft Corporation.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE\n"
+    },
+    {
+      "key": "paper",
+      "url": "https://arxiv.org/html/2505.09388v1",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "cf5c79d6f4795f74228ebbc7c8be8872bf1fdb03c5a7c856a89cde915691f0d7",
+      "characters": 985548,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Number of Parameters": [
+          "e variety of tasks and domains. We release both dense and Mixture-of-Experts (MoE) models, with the number of parameters ranging from 0.6 billion to 235 billion, to meet the needs of different downstream applications. Notably, the flagship model, Qwen3-235B-A22B, is an MoE model with a total of 235 billion parameters and 22 billion activated ones per token. This design ensures both high performance and efficient inference. Qwen3 introduces several key advancements to enhance its functionality and usability. First, it integrates two distinct operating modes, thinking mode and non-thinking mode, into a single model",
+          ". (1) Compared with the recently open-source model Llama-4-Maverick-Base, which has about twice the number of parameters, Qwen3-235B-A22B-Base still performs better on most benchmarks. (2) Compared with the previously state-of-the-art open-source model DeepSeek-V3-Base, Qwen3-235B-A22B-Base outperforms DeepSeek-V3-Base on 14 out of 15 evaluation benchmarks with only about 1/3 the total number of parameters and 2/3 activated parameters, demonstrating the powerful and cost-effectiveness of our models. (3) Compared with our previous MoE Qwen2.5-Plus of similar size, Qwen3-235B-A22B-Base significantly outperforms it "
+        ],
+        "license:": [
+          " A.1 Additional Evaluation Results A.1.1 Long-Context Ability A.1.2 Multilingual Ability References License: arXiv.org perpetual non-exclusive license arXiv:2505.09388v1 [cs.CL] 14 May 2025 Qwen3 Technical Report Qwen Team Abstract In this work, we present Qwen3, the latest version of the Qwen model family. Qwen3 comprises a series of large language models (LLMs) designed to advance performance, efficiency, and multilingual capabilities. The Qwen3 series includes models of both dense and Mixture-of-Expert (MoE) architectures, with parameter scales ranging from 0.6 to 235 billion. A key innovation in Q"
+        ],
+        "BFCL v3": [
+          " ( AIME, 2025 ) , 70.7 on LiveCodeBench v5 ( Jain et al., 2024 ) , 2,056 on CodeForces, and 70.8 on BFCL v3 ( Yan et al., 2024 ) . In addition, other models in the Qwen3 series also show strong performance relative to their size. Furthermore, we observe that increasing the thinking budget for thinking tokens leads to a consistent improvement in the model’s performance across various tasks. In the following sections, we describe the design of the model architecture, provide details on its training procedures, present the experimental results of pre-trained and post-trained models, and finally, conclud",
+          "l score. • Agent & Coding : To test the model’s proficiency in coding and agent-based tasks, we use BFCL v3 ( Yan et al., 2024 ) , LiveCodeBench (v5, 2024.10-2025.02) ( Jain et al., 2024 ) , and Codeforces Ratings from CodeElo ( Quan et al., 2025 ) . For BFCL, all Qwen3 models are evaluated using the FC format, and yarn was used to deploy the models to a context length of 64k for Multi-Turn evaluation. Some baselines are derived from the BFCL leaderboard, taking the higher scores between FC and Prompt formats. For models not reported on the leaderboard, the Prompt formats are evaluated. For LiveCodeB"
+        ],
+        "Context Length": [
+          "ing. Finally, in the third stage, the model is trained on long-context data to increase its maximum context length from 4,096 to 32,768 tokens. To better align foundation models with human preferences and downstream applications, we employ a multi-stage post-training approach that empowers both thinking (reasoning) and non-thinking modes. In the first two stages, we focus on developing strong reasoning abilities through long chain-of-thought (CoT) cold-start finetuning and reinforcement learning focusing on mathematics and coding tasks. In the final two stages, we combine data with and without reasoning pat",
+          ",669. Table 1: Model architecture of Qwen3 dense models. Models Layers Heads (Q / KV) Tie Embedding Context Length Qwen3-0.6B 28 16 / 8 Yes 32K Qwen3-1.7B 28 16 / 8 Yes 32K Qwen3-4B 36 32 / 8 Yes 128K Qwen3-8B 36 32 / 8 No 128K Qwen3-14B 40 40 / 8 No 128K Qwen3-32B 64 64 / 8 No 128K Table 2: Model architecture of Qwen3 MoE models. Models Layers Heads (Q / KV) # Experts (Total / Activated) Context Length Qwen3-30B-A3B 48 32 / 4 128 / 8 128K Qwen3-235B-A22B 94 64 / 4 128 / 8 128K 3 Pre-training In this section, we describe the construction of our pretraining data, the details of our pretraining approach, and "
+        ],
+        "experimental": [
+          "ersions of our models across a comprehensive set of benchmarks spanning multiple tasks and domains. Experimental results show that our base pre-trained models achieve state-of-the-art performance. The post-trained models, whether in thinking or non-thinking mode, perform competitively against leading proprietary models and large mixture-of-experts (MoE) models such as o1, o3-mini, and DeepSeek-V3. Notably, our models excel in coding, mathematics, and agent-related tasks. For example, the flagship model Qwen3-235B-A22B achieves 85.7 on AIME’24 and 81.5 on AIME’25 ( AIME, 2025 ) , 70.7 on LiveCodeBench v5 (",
+          "cribe the design of the model architecture, provide details on its training procedures, present the experimental results of pre-trained and post-trained models, and finally, conclude this technical report by summarizing the key findings and outlining potential directions for future research. 2 Architecture The Qwen3 series includes 6 dense models, namely Qwen3-0.6B, Qwen3-1.7B, Qwen3-4B, Qwen3-8B, Qwen3-14B, and Qwen3-32B, and 2 MoE models, Qwen3-30B-A3B and Qwen3-235B-A22B. The flagship model, Qwen3-235B-A22B, has a total of 235B parameters with 22B activated ones. Below, we elaborate on the architecture"
+        ]
+      }
+    },
+    {
+      "key": "sft",
+      "url": "https://huggingface.co/docs/trl/v1.17.1/en/sft_trainer",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "8d13bd7477c5709afbcaa1db0b91a1cff7565373bb2ee75f3088292ad3e7ee8f",
+      "characters": 324133,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "assistant_only_loss": [
+          "n assistant messages only To train on assistant messages only, use a conversational dataset and set assistant_only_loss=True in the SFTConfig . This setting ensures that loss is computed only on the assistant responses, ignoring user or system messages. Copied training_args = SFTConfig(assistant_only_loss= True ) This functionality requires the chat template to include {% generation %} and {% endgeneration %} keywords. For known model families (e.g. Qwen3), TRL automatically patches the template when assistant_only_loss=True . See Chat Templates for the full list of bundled training templates. For other models, ",
+          "only on the assistant responses, ignoring user or system messages. Copied training_args = SFTConfig(assistant_only_loss= True ) This functionality requires the chat template to include {% generation %} and {% endgeneration %} keywords. For known model families (e.g. Qwen3), TRL automatically patches the template when assistant_only_loss=True . See Chat Templates for the full list of bundled training templates. For other models, check that your chat template includes these keywords. See HuggingFaceTB/SmolLM3-3B for an example. With a vision dataset , assistant-only loss requires transformers>=5.18.0 and a convers"
+        ],
+        "Tool Calling with SFT": [
+          "? Answer in one word.' }, { 'role' : 'assistant' , 'content' : 'The capital of France is Paris.' }] Tool Calling with SFT The SFTTrainer fully supports fine-tuning models with tool calling capabilities. In this case, each dataset example should include: The conversation messages, including any tool calls ( tool_calls ) and tool responses ( tool role messages) The list of available tools in the tools column, typically provided as JSON schemas For details on the expected dataset structure, see the Dataset Format — Tool Calling section. Training Vision Language Models SFTTrainer fully supports training Vision-Languag",
+          "rain adapters with PEFT Rapid Experimentation for SFT Train with Unsloth Instruction tuning example Tool Calling with SFT Training Vision Language Models SFT Trainer SFT Config"
+        ],
+        "experimental": [
+          "et API Utilities Chat Template Utilities Data Utilities Script Utilities Callbacks Reward Functions Experimental Join the Hugging Face community and get access to the augmented documentation experience Collaborate on models, datasets and Spaces Faster examples with accelerated inference Switch between documentation themes Sign Up to get started Copy page SFT Trainer Overview TRL supports the Supervised Fine-Tuning (SFT) Trainer for training language models. SFTTrainer doesn’t natively support diffusion models like DiffusionGemma, but it can be easily extended to do so, see the block-diffusion SFT example "
+        ]
+      }
+    },
+    {
+      "key": "gkd",
+      "url": "https://huggingface.co/docs/trl/main/en/gkd_trainer",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "7f1e75fe6b9614e16c8da26c8ed3b5c41280d0f9c23e12ece69781465b7794c2",
+      "characters": 226297,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "assistant_only_loss": [
+          "t | str | None = 'auto' eval_packing : bool | None = None completion_only_loss : bool | None = None assistant_only_loss : bool = False loss_type : str = 'nll' activation_offloading : bool = False pad_token : str | None = None temperature : float = 0.9 lmbda : float = 0.5 beta : float = 0.5 max_new_tokens : int = 128 teacher_model_name_or_path : str | None = None teacher_model_init_kwargs : dict[str, typing.Any] | str | None = None disable_dropout : bool = True seq_kd : bool = False ) Parameters temperature ( float , optional , defaults to 0.9 ) — Temperature for sampling. The higher the temperature, the more ran"
+        ],
+        "experimental": [
+          "et API Utilities Chat Template Utilities Data Utilities Script Utilities Callbacks Reward Functions Experimental Experimental Overview A2PO Async Distillation BEMA for Reference Model CPO GKD GMPO GOLD IW-OPD MergeModelCallback Online DPO ORPO SDFT SDPO You are viewing main version, which requires installation from source . If you'd like regular pip install, checkout the latest stable version ( v1.17.1 ). Join the Hugging Face community and get access to the augmented documentation experience Collaborate on models, datasets and Spaces Faster examples with accelerated inference Switch between documentation",
+          "ies Chat Template Utilities Data Utilities Script Utilities Callbacks Reward Functions Experimental Experimental Overview A2PO Async Distillation BEMA for Reference Model CPO GKD GMPO GOLD IW-OPD MergeModelCallback Online DPO ORPO SDFT SDPO You are viewing main version, which requires installation from source . If you'd like regular pip install, checkout the latest stable version ( v1.17.1 ). Join the Hugging Face community and get access to the augmented documentation experience Collaborate on models, datasets and Spaces Faster examples with accelerated inference Switch between documentation themes Sign "
+        ]
+      }
+    },
+    {
+      "key": "dpo",
+      "url": "https://huggingface.co/docs/trl/v1.17.1/en/dpo_trainer",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "c4bbfcbd2f303e59e8e81efed3822b7d1bd324abf27bbdee5244f841aed30120",
+      "characters": 340989,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "experimental": [
+          "et API Utilities Chat Template Utilities Data Utilities Script Utilities Callbacks Reward Functions Experimental Join the Hugging Face community and get access to the augmented documentation experience Collaborate on models, datasets and Spaces Faster examples with accelerated inference Switch between documentation themes Sign Up to get started Copy page DPO Trainer Overview TRL supports the Direct Preference Optimization (DPO) Trainer for training language models, as described in the paper Direct Preference Optimization: Your Language Model is Secretly a Reward Model by Rafael Rafailov , Archit Sharma, E"
+        ]
+      }
+    },
+    {
+      "key": "qlora",
+      "url": "https://huggingface.co/docs/transformers/en/quantization/bitsandbytes",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "cb4dea592985f9bb7e6e2bbb24c71a11c33575b5601c22a0bdfd7902848f5ec3",
+      "characters": 308685,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "NF4": [
+          "GTX 10X0 series, P100) or newer GPUs * LLM.int8() NVIDIA Turing (RTX 20X0 series, T4) or newer GPUs NF4/FP4 quantization NVIDIA Pascal (GTX 10X0 series, P100) or newer GPUs * Intel GPUs (XPU) This backend is supported on Linux x86-64 and Windows x86-64 platforms. Intel Gaudi (HPU) This backend is supported on Linux x86-64 for Gaudi2 and Gaudi3. CPU This backend is supported on Linux x86-64, Linux aarch64, and Windows x86-64 platforms. Quantization Examples Quantize a model by passing a BitsAndBytesConfig to from_pretrained() . This works for any model in any modality, as long as it supports Accel",
+          "pecific features of 4-bit quantization, such as changing the compute data type, the Normal Float 4 (NF4) data type, and nested quantization. Compute data type Change the data type from float32 (the default value) to bf16 in BitsAndBytesConfig to speedup computation. Copied import torch from transformers import BitsAndBytesConfig quantization_config = BitsAndBytesConfig(load_in_4bit= True , bnb_4bit_compute_dtype=torch.bfloat16) Normal Float 4 (NF4) NF4 is a 4-bit data type from the QLoRA paper, adapted for weights initialized from a normal distribution. You should use NF4 for training 4-bit base "
+        ],
+        "Pascal": [
+          " Linux aarch64, and Windows platforms. Feature Minimum Hardware Requirement 8-bit optimizers NVIDIA Pascal (GTX 10X0 series, P100) or newer GPUs * LLM.int8() NVIDIA Turing (RTX 20X0 series, T4) or newer GPUs NF4/FP4 quantization NVIDIA Pascal (GTX 10X0 series, P100) or newer GPUs * Intel GPUs (XPU) This backend is supported on Linux x86-64 and Windows x86-64 platforms. Intel Gaudi (HPU) This backend is supported on Linux x86-64 for Gaudi2 and Gaudi3. CPU This backend is supported on Linux x86-64, Linux aarch64, and Windows x86-64 platforms. Quantization Examples Quantize a model by passing a BitsAnd",
+          "wer GPUs * LLM.int8() NVIDIA Turing (RTX 20X0 series, T4) or newer GPUs NF4/FP4 quantization NVIDIA Pascal (GTX 10X0 series, P100) or newer GPUs * Intel GPUs (XPU) This backend is supported on Linux x86-64 and Windows x86-64 platforms. Intel Gaudi (HPU) This backend is supported on Linux x86-64 for Gaudi2 and Gaudi3. CPU This backend is supported on Linux x86-64, Linux aarch64, and Windows x86-64 platforms. Quantization Examples Quantize a model by passing a BitsAndBytesConfig to from_pretrained() . This works for any model in any modality, as long as it supports Accelerate and contains torch.nn.Lin"
+        ],
+        "Turing": [
+          "equirement 8-bit optimizers NVIDIA Pascal (GTX 10X0 series, P100) or newer GPUs * LLM.int8() NVIDIA Turing (RTX 20X0 series, T4) or newer GPUs NF4/FP4 quantization NVIDIA Pascal (GTX 10X0 series, P100) or newer GPUs * Intel GPUs (XPU) This backend is supported on Linux x86-64 and Windows x86-64 platforms. Intel Gaudi (HPU) This backend is supported on Linux x86-64 for Gaudi2 and Gaudi3. CPU This backend is supported on Linux x86-64, Linux aarch64, and Windows x86-64 platforms. Quantization Examples Quantize a model by passing a BitsAndBytesConfig to from_pretrained() . This works for any model in an"
+        ]
+      }
+    },
+    {
+      "key": "merge",
+      "url": "https://huggingface.co/docs/peft/en/developer_guides/lora",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "0fc50568f29495f351344ee1ad371262e821f8753017e38fdcec852a3faf86f2",
+      "characters": 573890,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Number of Parameters": [
+          "hod that decomposes a large matrix into two smaller low-rank matrices. This drastically reduces the number of parameters that need to be fine-tuned. The abstract from the paper is: An important paradigm of natural language processing consists of large-scale pre-training on general domain data and adaptation to particular tasks or domains. As we pre-train larger models, full fine-tuning, which retrains all model parameters, becomes less feasible. Using GPT-3 175B as an example — deploying independent instances of fine-tuned models, each with 175B parameters, is prohibitively expensive. We propose Low-Rank Adaptati",
+          "decomposition. These new matrices can be trained to adapt to the new data while keeping the overall number of parameters low. The original weight matrix remains frozen and doesn’t receive any further updates. To produce the final results, the original and extra adapted weights are combined. You could also merge the adapter weights with the base model to eliminate inference latency. This approach has a number of advantages: LoRA makes finetuning more efficient by drastically reducing the number of trainable parameters. The original pretrained weights are kept frozen, which means you can have multiple lightweight a"
+        ],
+        "NF4": [
+          "h # Quantisation config bnb_config = BitsAndBytesConfig( load_in_4bit= True , bnb_4bit_quant_type= \"nf4\" , bnb_4bit_compute_dtype=torch.bfloat16, bnb_4bit_use_double_quant= False , ) # Loading the model base_model = AutoModelForCausalLM.from_pretrained( \"microsoft/Phi-3-mini-4k-instruct\" , dtype=torch.bfloat16, device_map= \"auto\" , quantization_config=bnb_config, ) # Now call create_arrow_model() as we explained before. API LoraConfig class peft. LoraConfig < source > ( task_type : Optional[Union[str, TaskType]] = None peft_type : Optional[Union[str, PeftType]] = None auto_mapping : Optional[dict"
+        ],
+        "merge_and_unload": [
+          "ence time. The recommendation is thus to merge the weights ( model.merge_adapter() or model = model.merge_and_unload() ). This removes the PEFT overhead. A more detailed investigation of this issue can be found on this pull request on MoE optimization . Caveats At the moment, this argument allows to target 2-dim or 3-dim nn.Parameter s. It is assumed that in the case of a 3-dim parameter, the 0th dimension is the expert dimension. Multiple LoRA adapters (added via model.add_adapter or model.load_adapter ) that use target_parameters are supported, but all of them must target the same set of parameters. MoE exp",
+          "erence due to separately loading the base model and the LoRA adapter. To eliminate latency, use the merge_and_unload() function to merge the adapter weights with the base model. This allows you to use the newly merged model as a standalone model. The merge_and_unload() function doesn’t keep the adapter weights in memory. Below is a diagram that explains the intuition of LoRA adapter merging: We show in the snippets below how to run that using PEFT. Copied from transformers import AutoModelForCausalLM from peft import PeftModel base_model = AutoModelForCausalLM.from_pretrained( \"mistralai/Mistral-7B-v0.1\" ) pe"
+        ]
+      }
+    },
+    {
+      "key": "import",
+      "url": "https://docs.ollama.com/import",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "5436b63d800c76918596e0968ddae15d34356f464f1476fd66a5d1df8433c00c",
+      "characters": 161350,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Context Length": [
+          "key Models Usage Cloud model lifecycle Cloud FAQ More information CLI Reference Modelfile Reference Context length Linux macOS Windows Docker Importing a Model Local FAQ Hardware support Troubleshooting Sign in Download Guide Integrations API Reference Ollama home page Search... ⌘ K Sign in Download Download Search... Navigation More information Importing a Model Guide Integrations API Reference More information Importing a Model Copy page Copy page Copy page Copy page Table of Contents Importing a Safetensors model Importing a GGUF model Sharing models on ollama.com Importing a model from Safetensors weigh",
+          "title\":\"CLI Reference\",\"href\":\"/cli\"},{\"title\":\"Modelfile Reference\",\"href\":\"/modelfile\"},{\"title\":\"Context length\",\"href\":\"/context-length\"},{\"title\":\"Linux\",\"href\":\"/linux\"},{\"title\":\"macOS\",\"href\":\"/macos\"},{\"title\":\"Windows\",\"href\":\"/windows\"},{\"title\":null,\"description\":null,\"href\":\"/docker\"},{\"title\":\"Importing a Model\",\"href\":\"/import\"},{\"title\":\"Local FAQ\",\"sidebarTitle\":\"Local FAQ\",\"description\":\"Frequently asked questions about installing, configuring, and running Ollama locally.\",\"href\":\"/faq\"},{\"title\":\"Hardware support\",\"href\":\"/gpu\"},{\"title\":\"Troubleshooting\",\"href\":\"/troubleshooting\"}]}]},{\""
+        ],
+        "does not quantize": [
+          " : ollama create my-model Lastly, test the model: ollama run my-model Importing a GGUF model Ollama does not quantize GGUF models during import. Prepare and quantize them first with a GGUF tool such as llama.cpp’s llama-quantize . To import a single-file GGUF model, create a Modelfile containing: FROM /path/to/file.gguf For a split GGUF model, keep the original split filenames and use a wildcard that matches every shard. FROM /path/to/model-*.gguf Once you have created your Modelfile , use the ollama create command to build the model. ollama create my-model Sharing your model on ollama.com You can share any mo",
+          "rting-a-gguf-model`,children:`Importing a GGUF model`}),`\\n`,_jsxs(_components.p,{children:[`Ollama does not quantize GGUF models during import. Prepare and quantize them first with a GGUF tool such as llama.cpp’s `,_jsx(_components.a,{href:`https://github.com/ggml-org/llama.cpp/tree/master/tools/quantize`,children:_jsx(_components.code,{children:`llama-quantize`})}),`.`]}),`\\n`,_jsxs(_components.p,{children:[`To import a single-file GGUF model, create a `,_jsx(_components.code,{children:`Modelfile`}),` containing:`]}),`\\n`,_jsx(CodeBlock,{filename:``,numberOfLines:`1`,language:`docker`,children:_jsx(_componen"
+        ]
+      }
+    },
+    {
+      "key": "qwenconvert",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/conversion/qwen.py",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "2f62b62fb1527c7693a8e178ca39fae6f04578dd089fb609725e1fce99b5c0cf",
+      "characters": 55776,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {}
+    },
+    {
+      "key": "qat",
+      "url": "https://pytorch.org/blog/quantization-aware-training/",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "67d801f251fc1e0b378c0a8a11b3034a01c792f65ecc06dfeeea36fb8b8ffc2a",
+      "characters": 213498,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "experimental": [
+          "in replacement for the PTQ model and reuse all the backend delegation logic and underlying kernels. Experimental Results All experiments in this blog post are performed using the torchtune QAT integration described above. We use 6-8 A100 GPUs with 80 GBs each to fine-tune Llama2-7B and Llama3-8B on the C4 dataset (en subset) for 5000 steps. For all experiments, we use batch size = 2, learning rate = 2e-5, max sequence length = 4096 for Llama2 and 8192 for Llama3, Fully Sharded Data Parallel (FSDP) as our distribution strategy, and activation checkpointing to reduce memory footprint. For 8da4w experiments,"
+        ],
+        "1000 steps": [
+          "troducing quantization noise to the fine-tuning process. We disable fake quantization for the first 1000 steps for all our experiments. We evaluate our quantized models using the lm-evaluation-harness integration in torchtune. We report evaluation results from a variety of tasks commonly used to evaluate LLMs, including hellaswag, a commonsense sentence completion task, wikitext, a next token/byte prediction task, and a few question-answering tasks such as arc, openbookqa, and piqa. For wikitext, perplexity refers to the inverse of how well the model can predict the next word or byte (lower is better), "
+        ],
+        "6 A100": [
+          "T fine-tuning overhead for int8 per token dynamic activations + int4 grouped per channel weights on 6 A100 GPUs (each with 80GB memory). Looking Ahead In this blog, we presented a QAT flow for LLMs through torchao , integrated this flow with the fine-tuning APIs in torchtune , and demonstrated its potential to recover most of the quantization degradation compared to PTQ and match non-quantized performance on certain tasks. There are many directions for future explorations: Hyperparameter tuning. It is likely that extensive hyperparameter tuning can further improve the results of finetuning and QAT. "
+        ],
+        "4096": [
+          "4WeightQATQuantizer # Smaller version of llama3 to fit in a single GPU model = llama3( vocab_size = 4096, num_layers = 16, num_heads = 16, num_kv_heads = 4, embed_dim = 2048, max_seq_len = 2048, ).cuda() # Quantizer for int8 dynamic per token activations + # int4 grouped per channel weights, only for linear layers qat_quantizer = Int8DynActInt4WeightQATQuantizer() # Insert \"fake quantize\" operations into linear layers. # These operations simulate quantization numerics during # training without performing any dtype casting model = qat_quantizer.prepare(model) # Standard training loop optimizer = to",
+          "_decay = 1e-5) loss_fn = torch.nn.CrossEntropyLoss() for i in range(10): example = torch.randint(0, 4096, (2, 16)).cuda() target = torch.randn((2, 16, 4096)).cuda() output = model(example) loss = loss_fn(output, target) loss.backward() optimizer.step() optimizer.zero_grad() # Convert fake quantize to actual quantize operations # The quantized model has the exact same structure as the # quantized model produced in the corresponding PTQ flow # through `Int8DynActInt4WeightQuantizer` model = qat_quantizer.convert(model) # inference or generate Fine-tuning with torchtune We also integrated this QAT fl"
+        ]
+      }
+    },
+    {
+      "key": "bitgpu",
+      "url": "https://raw.githubusercontent.com/microsoft/BitNet/main/gpu/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "ced215156888c5cf38d687b72a9a4cf1e20779f98e306ab094429473a08c4e2b",
+      "characters": 4112,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {}
+    },
+    {
+      "key": "tunnel",
+      "url": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/trycloudflare/",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "be60188d5bf45aeed1af0803625b6bca4c7dc354d7b77b3a6c728811f7bfcbc4",
+      "characters": 114975,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "200 in-flight": [
+          "process stops. Limitations Quick Tunnels have no uptime guarantee. Each Quick Tunnel supports up to 200 in-flight requests. Additional requests return a 429 response. Quick Tunnels do not support Server-Sent Events (SSE). Email authentication requires an interactive browser session. It does not support non-interactive clients. The hostname changes each time you create a Quick Tunnel. For stable hostnames and production traffic, create a Cloudflare Tunnel . Previous Overview Next Overview Was this helpful? Yes No Edit page Report issue On this page Overview Prerequisites Create a Quick Tunnel Restrict acces"
+        ],
+        "Server-Sent Events": [
+          " to 200 in-flight requests. Additional requests return a 429 response. Quick Tunnels do not support Server-Sent Events (SSE). Email authentication requires an interactive browser session. It does not support non-interactive clients. The hostname changes each time you create a Quick Tunnel. For stable hostnames and production traffic, create a Cloudflare Tunnel . Previous Overview Next Overview Was this helpful? Yes No Edit page Report issue On this page Overview Prerequisites Create a Quick Tunnel Restrict access by email Repeat the flag Use a comma-separated list Allow an email domain Limitations Edit page Rep"
+        ],
+        "no uptime guarantee": [
+          "a new Quick Tunnel. Access ends for everyone when the process stops. Limitations Quick Tunnels have no uptime guarantee. Each Quick Tunnel supports up to 200 in-flight requests. Additional requests return a 429 response. Quick Tunnels do not support Server-Sent Events (SSE). Email authentication requires an interactive browser session. It does not support non-interactive clients. The hostname changes each time you create a Quick Tunnel. For stable hostnames and production traffic, create a Cloudflare Tunnel . Previous Overview Next Overview Was this helpful? Yes No Edit page Report issue On this page Overview Pr"
+        ]
+      }
+    },
+    {
+      "key": "ollama8",
+      "url": "https://ollama.com/library/qwen3:8b",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "10174bef80c8ab1582b8acd2cb1a1423ae02313d5dfee1b8d3b578cdf2ed5e60",
+      "characters": 74561,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {}
+    },
+    {
+      "key": "ollama14",
+      "url": "https://ollama.com/library/qwen3:14b",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "f7283a367599745fb34069251dd75a5fde0f327643db268c8842fb7afa7ed0a8",
+      "characters": 74575,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {}
+    },
+    {
+      "key": "ollama17",
+      "url": "https://ollama.com/library/qwen3:1.7b",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "7c71524dce529b8bf4b43f81c7db7f425bf5a40fecef33cb9d913405fdc47f5b",
+      "characters": 74589,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {}
+    },
+    {
+      "key": "ollama4",
+      "url": "https://ollama.com/library/qwen3:4b",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "77b04c5bf96cc24840d04dce98fc675a45db45e6dc192c3fda359517a918c226",
+      "characters": 74561,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {}
+    },
+    {
+      "key": "flash",
+      "url": "https://raw.githubusercontent.com/Dao-AILab/flash-attention/main/README.md",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "0dbaba56da1c8372d460956e2609bfb89acf8f3aadd65d132b1697d221069619",
+      "characters": 25266,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "experimental": [
+          "ebtext and GPT3 on The Pile. ## Triton implementation of FlashAttention Phil Tillet (OpenAI) has an experimental implementation of FlashAttention in Triton: https://github.com/openai/triton/blob/master/python/tutorials/06-fused-attention.py As Triton is a higher-level language than CUDA, it might be easier to understand and experiment with. The notations in the Triton implementation are also closer to what's used in our paper. We also have an experimental implementation in Triton that support attention bias (e.g. ALiBi): https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/flash_attn_triton.p",
+          "notations in the Triton implementation are also closer to what's used in our paper. We also have an experimental implementation in Triton that support attention bias (e.g. ALiBi): https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/flash_attn_triton.py ## Tests We test that FlashAttention produces the same output and gradient as a reference implementation, up to some numerical tolerance. In particular, we check that the maximum numerical error of FlashAttention is at most twice the numerical error of a baseline implementation in Pytorch (for different head dimensions, input dtype, sequence l"
+        ],
+        "Turing": [
+          "CUDA currently supports: 1. Ampere, Ada, or Hopper GPUs (e.g., A100, RTX 3090, RTX 4090, H100). For Turing GPUs (T4, RTX 2080), see the separate [flash-attention-turing](https://github.com/ssiu/flash-attention-turing) repo, which supports a core subset of FlashAttention features on Turing. 2. Datatype fp16 and bf16 (bf16 requires Ampere, Ada, or Hopper GPUs). 3. All head dimensions up to 256. ~~Head dim > 192 backward requires A100/A800 or H100/H800~~. Head dim 256 backward now works on consumer GPUs (if there's no dropout) as of flash-attn 2.5.5. ### AMD ROCm Support ROCm version has two backends. ",
+          " A100, RTX 3090, RTX 4090, H100). For Turing GPUs (T4, RTX 2080), see the separate [flash-attention-turing](https://github.com/ssiu/flash-attention-turing) repo, which supports a core subset of FlashAttention features on Turing. 2. Datatype fp16 and bf16 (bf16 requires Ampere, Ada, or Hopper GPUs). 3. All head dimensions up to 256. ~~Head dim > 192 backward requires A100/A800 or H100/H800~~. Head dim 256 backward now works on consumer GPUs (if there's no dropout) as of flash-attn 2.5.5. ### AMD ROCm Support ROCm version has two backends. There is [composable_kernel](https://github.com/ROCm/composabl"
+        ]
+      }
+    },
+    {
+      "key": "t4",
+      "url": "https://www.nvidia.com/en-us/data-center/tesla-t4/",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "5b1c39a567ccfad352e4956ae8799861e8a2b898dda3214ebbec41dfd52928d7",
+      "characters": 374940,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "Turing": [
+          "ing training and inference, machine learning, data analytics, and graphics. Based on the new NVIDIA Turing ™ architecture and packaged in an energy-efficient 70-watt, small PCIe form factor, T4 is optimized for mainstream computing environments and features multi-precision Turing Tensor Cores and new RT Cores. Combined with accelerated containerized software stacks from NGC, T4 delivers revolutionary performance at scale. Download T4 Tensor Core Datasheet Download T4 Product Brief Register to Download Inference Technical Overview Download Inference Infographic Download Turing GPU Architecture Virtua",
+          "CIe form factor, T4 is optimized for mainstream computing environments and features multi-precision Turing Tensor Cores and new RT Cores. Combined with accelerated containerized software stacks from NGC, T4 delivers revolutionary performance at scale. Download T4 Tensor Core Datasheet Download T4 Product Brief Register to Download Inference Technical Overview Download Inference Infographic Download Turing GPU Architecture Virtual Compute-Intensive Server Workloads NVIDIA Virtual Compute Server (vCS) provides the ability to virtualize GPUs and accelerate compute-intensive server workloads, including "
+        ],
+        "16 GB": [
+          "NT8 Precision 130 INT8 TOPS INT4 Precision 260 INT4 TOPS Interconnect Gen3 x16 PCIe Memory Capacity 16 GB GDDR6 Bandwidth 320+ GB/s Power 70 watts NVIDIA AI Inference Platform Explore the World's Most Advanced Inference Platform. Learn More Products Data Center GPUs NVIDIA DGX Platform NVIDIA HGX Platform Networking Products Virtual GPUs Technologies NVIDIA Blackwell Architecture NVIDIA Hopper Architecture MGX Confidential Computing Multi-Instance GPU NVLink-C2C NVLink/NVSwitch Tensor Cores Resources Accelerated Apps Catalog Blackwell Resources Center Data Center GPUs Data Center GPU Line Card Data"
+        ]
+      }
+    },
+    {
+      "key": "bitconfig",
+      "url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/main/config.json",
+      "access_date": "2026-11-13",
+      "status": 200,
+      "sha256": "2b43e80788972e6d53967b01ac3609d7df23cf0aabb0c866e51be694a59c1149",
+      "characters": 844,
+      "excerpt_authority": "Fetched source text, not independently reproduced model performance.",
+      "excerpts": {
+        "4096": [
+          "idden_size\": 2560, \"initializer_range\": 0.02, \"intermediate_size\": 6912, \"max_position_embeddings\": 4096, \"model_type\": \"bitnet\", \"rms_norm_eps\": 1e-05, \"num_attention_heads\": 20, \"num_hidden_layers\": 30, \"num_key_value_heads\": 5, \"rope_theta\": 500000.0, \"tie_word_embeddings\": true, \"torch_dtype\": \"bfloat16\", \"use_cache\": true, \"vocab_size\": 128256, \"quantization_config\": { \"quant_method\": \"bitnet\", \"linear_class\": \"autobitlinear\", \"quantization_mode\": \"offline\" } }"
+        ]
+      }
+    }
+  ],
+  "model_revisions_and_tokenizers": [
+    {
+      "model": "Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "license": "apache-2.0",
+      "access_date": "2026-11-13",
+      "tokenizer_url": "https://huggingface.co/Qwen/Qwen3-8B/resolve/b968826d9c46dd6066d109eabc6255188de91218/tokenizer.json",
+      "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "model": "Qwen3-14B",
+      "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+      "license": "apache-2.0",
+      "access_date": "2026-11-13",
+      "tokenizer_url": "https://huggingface.co/Qwen/Qwen3-14B/resolve/40c069824f4251a91eefaf281ebe4c544efd3e18/tokenizer.json",
+      "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "model": "Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "license": "apache-2.0",
+      "access_date": "2026-11-13",
+      "tokenizer_url": "https://huggingface.co/Qwen/Qwen3-1.7B/resolve/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e/tokenizer.json",
+      "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+      "model": "Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "license": "apache-2.0",
+      "access_date": "2026-11-13",
+      "tokenizer_url": "https://huggingface.co/Qwen/Qwen3-4B/resolve/1cfa9a7208912126459214e8b04321603b3df60c/tokenizer.json",
+      "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    }
+  ],
+  "native_public_readings": {
+    "access_date": "2026-11-13",
+    "server": "pokemon_computer",
+    "notebooks": {
+      "url": "https://www.kaggle.com/docs/notebooks",
+      "complete_within_native_bound": true,
+      "version": "c8c53e43594d5ba8e393b3f1d41f271d51d720575b4b782d8cc086ffb0274680",
+      "total_characters": 36369,
+      "pages": [
+        {
+          "contract_version": 1,
+          "ok": true,
+          "action": "read_lesson",
+          "window_id": "918388",
+          "document_name": "Getting Started on Kaggle | Kaggle",
+          "input_state": "not_sent",
+          "native_calls": 2,
+          "text": "menu\nSkip to\ncontent\nCreate\n￼\nHome\n￼\nCompetitions\n￼\nBenchmarks\n￼\nArenas\n￼\nGame Arena\n￼\nData Hub\n￼\nMore\n￼\n￼\nLogin\nSign Up\n￼\nHow to Use Kaggle\nCurrent Page\nNotebooks\nNotebooks\nExplore and run machine learning code with Kaggle Notebooks, a cloud computational environment that enables reproducible and collaborative analysis\nCopy as Markdown\n￼\nTypes of Notebooks\nThere are multiple different types of Notebooks on Kaggle.\nNotebooks\nThe most common type is Jupyter notebooks (usually just “notebooks”). Jupyter notebooks consist of a sequence of cells, where each cell is formatted in either Markdown (for writing text) or in a programming language of your choice (for writing code). To start a notebook, click on Create > New Notebook. This will open the Notebooks editing interface.\nNotebooks may be written in either R or Python. The language can be changed under the File > Language menu.\nScripts\nIt's also possible to create a script. Scripts are files that execute everything as code sequentially. To start a script, create a new notebook, and then change the type to Script under File > Editor Type.\nAlso under the File menu, you can select what type of script you would like to execute. You may write scripts in R or in Python.\nYou can also execute selected lines of code by highlighting the code in the editor interface and clicking the “Run” button or hitting shift-enter. Any results will be printed to the console.\nRMarkdown Scripts\nRMarkdown scripts are a special type of script that executes not just R code, but RMarkdown code. This is a combination of R code and Markdown editing syntax that is prefered by many R authors in our community.\nThe RMarkdown editor is the same one used for basic R or Python scripts, except that it uses the special RMarkdown syntax. To start editing an RMarkdown script, create a new notebook, change the file type to \"Script\" under File > Editor Type and then change the language under File > Language\n￼\nSearching for Notebooks\nIn addition to being an interactive editing platform, you can find and use code that others in the community have shared public. Kagglers working with data across both the Datasets and Competitions platforms are constantly building cool things. Exploring and reading other Kagglers’ code is a great way to both learn new techniques and stay involved in the community.\nThere’s no better place than Kaggle Notebooks to discover such a huge repository of public, open-sourced, and reproducible code for data science and machine learning.\nThe latest and greatest from Notebooks is surfaced on Kaggle in several different places.\nSite Search\nYou can use the site search in the top bar of the website while on any page to look for not only Notebooks but Datasets, Competitions, Users, and more across Kaggle. Start typing a search query to get quick results and hit \"Enter\" to see a full page of results that you can drill down into. From the full page search results, you can filter just to \"Notebooks\" and add even more filter criteria using the filter options on the left hand side of the page.\nHomepage\nWhen you’re logged into your Kaggle account, the Kaggle homepage provides a live newsfeed of what people are doing on the platform. While Discussion forum posts and new Datasets make up some of the contents of the home page, most of it is dedicated to hot new Notebooks activity. By browsing down the page you can check out all the latest updates from your fellow Kagglers.\nYou can tweak your newsfeed to your liking by following other Kagglers. To follow someone, go to their profile page and click on “Follow User”. Content posted and upvotes made by users you have followed will show up more prominently.\nThe same is true of other users who choose to follow you. Post high-quality notebooks and datasets and you will soon find other users following along with what you are doing!\nNotebook Listing\nA more structured way of accessing Notebooks is the Notebook listing, accessible from the “Notebooks” tab in the main menu bar.\nThe Notebook listing is sorted by “Hotness” by default. “Hotness” is what it sounds like: a way of measuring the interestingness of Notebooks on the platform. Notebooks which score highly in Hotness, and thus appear highly in this list, are usually either recently written Notebooks that are scoring highly in things like upvotes and views, or “all-time” greats that have been consistently popular on the platform for a long time.\nOther methods of sorting are by\n• Most Votes: Surfaces the most popular notebooks of all time\n• Most Comments: Returns the most discussed notebooks of all time\n• Recently Created: A real-time stream of new Notebooks\n• Recently Run: A real-time stream of activity\n• Relevance: Sorts the results based on their relevance to the query\nOther filtering options, available from the navigation bar, are Categories (Datasets or Competitions?), Outputs, Languages (R or Python?), and Types (Script or Notebook?).\nYou can also use the Notebook listing to sort through your own Notebooks (“Your Work”), find Notebooks that others have shared with you (\"Shared With You\"), or to look at Notebooks you have previously upvoted (“Favorites”).\nFinally, a Notebooks-specific search bar is available here. This is often the fastest way to find a specific Notebook that you are looking for.\nDatasets and Competitions\nData on Kaggle is available through either Datasets or our Competitions. Both prominently feature the best community-created Notebooks on the “Notebooks” tab. Browsing Notebooks on Datasets and Competitions provides a way to quickly get acquainted with a specific dataset. You can fork any existing public Notebook to make a copy of the code and start experimenting with changes.\nThe Iris Species dataset and the Titanic competition are two classic examples of Datasets and Competitions, respectively, hosting great Notebooks on their content.\nTags and Tag Pages\nTags are the most advanced of the searching options available in the Notebook listing page. Tags are added by Notebook owners to indicate the topic of the Notebook, techniques you can use (e.g., “classification”), or the type of the data itself (e.g., “text data”). You can navigate to tag pages to browse more content sharing a tag either by clicking on a tag on a Notebook, or by searching by tag using the tag-specific search syntax: tag:[TAG NAME].\nSearching by tags allow you to search for Notebooks by topical area or technique. For example, if you are interested in learning new techniques for tackling classification problems you might try a search with the tag “classification” (tag:classification); if you are interested in an analysis of police records maybe a search with “crime” (tag:crime) would do the trick.\nAlternatively, you can achieve the same thing by visiting the related tag pages. For example, the crime and classification tags live at https://www.kaggle.com/tags/crimeand https://www.kaggle.com/tags/classification, respectively.\nTag pages include a section listing the most popular pages with the given tag, making them a great way of searching for Notebooks by content.\n￼\nUsing the Notebook Editor\nKaggle Notebooks may be created and edited via the Notebook editor. On larger screens, the Notebook editor consists of three parts:\n• An editing window\n• A console\n• A settings window\nThe Notebook editor allows you to write and execute both traditional Scripts (for code-only files ideal for batch execution or Rmarkdown scripts) and Notebooks (for interactive code and markdown editor ideal for narrative analyses, visualizations, and sharing work).\nThe main difference between Scripts and Notebooks is the editing pane and how you experience editing and executing code.\nEditing\nWhether you use Scripts or Notebooks might depend on your choice of language and what your use case is. R users tend to prefer the Scripts, while Python users prefer the Notebooks. For more on why that is, refer to the “Types of Notebooks” section. Scripts are also favored for making competition submissions where the code is the focus, whereas Notebooks are popular for sharing EDAs (exploratory data analysis), tutorials, and other share-worthy insights.\nBoth editing interfaces are organized around the concept of “Versions”. This is a collection consisting of a Notebook version, the output it generates, and the associated metadata about the environment.\nIn the Script editor, the code you write is executed all at once, whenever you generate a new version. For finer-grained control, it’s also possible to specifically execute only a single line or selection of lines of code.\nNotebooks are built on Jupyter notebooks. Notebooks consist of individual cells, each of which may be a Markdown (text) cell or a code cell. Code can be run (and the resulting variables saved) by running individual code cells, and cells can be added or deleted from the notebook at any time.\nConsole\nThe console tab provides an alternative interface to the same Python or R container running in the Notebook. Commands you input into the console will not change the content of your version. However, any variables you create in the console will persist throughout the session (unless you delete them). Additionally, any code that you execute in the editor will also execute in the console pane.\nSettings\nIn the expanded editor, the Settings pane takes up the right side of the screen. In the compact editor (where you hide the settings pane), it is folded into tabs above the Editor tab. In either case the Settings pane contains the following main tabs:\n• Input: add and remove data sources attached to the Notebook. See more info in the Adding Data Sources section below.\n• Output: view output files created by the Notebook.\n• Table of contents: see and navigate the headings of the Notebook.\n• Session options: configure how the Notebook will run, including language, internet, acccelerator, and docker image settings. See more info in the The Notebook Environment section below.\n• Scheduling options: a notebook may be configured to run automatically. See more info in the Scheduling Notebooks section below.\nOther sections may also be available, depending on the Notebook's configurations.\n￼\nAdding Data Sources\nOne of the advantages to using Notebooks as your data science workbench is that you can easily add data sources from thousands of publicly available data sources or even upload your own. You can also use output files from another Notebook as a data source. You can add multiple data sources to your Notebook’s environment, allowing you to join them together and produce new insights.\nModels\nKaggle Models contain many of the latest models from leading researchers and the Kaggle community.\nThere are two ways of loading a Model in a Notebook. The first is to navigate to a chosen model's detail page, click on the \"Code\" button, and select \"New Notebook\". When the Notebook Editor loads, you will be able to select a framework and variation, and then the model will be attached automatically.\nAlternatively, you may wish to add models after creating your Notebook. To do that, navigate to the “Input” pane in a Notebook editor and click the “Add Input” button. From here, you can search and add any models you have access to.\nNote that some models require you to accept licenses, which you'll have to do before you can add them to your Notebook.\nDatasets\nKaggle Datasets provides a rich variety of interesting datasets for any kind of data science project.\nSimilar to models, there are two ways of loading a Dataset in a Notebook. The first is to navigate to a chosen dataset’s detail page, click on the \"Code\" button, and select \"Create a notebook\" at the bottom. This will launch a new Notebook session with the dataset in question spun up and ready to go.\nAlternatively, you may wish to add datasets after creating your Notebook. To do that, navigate to the “Input” pane in a Notebook editor and click the “Add Input” button. From here, you can search and add any datasets you have access to.\nCompeti",
+          "offset": 0,
+          "next_offset": 12000,
+          "has_more": true,
+          "total_characters": 36369,
+          "source_truncated": false,
+          "version": "c8c53e43594d5ba8e393b3f1d41f271d51d720575b4b782d8cc086ffb0274680"
+        },
+        {
+          "contract_version": 1,
+          "ok": true,
+          "action": "read_lesson",
+          "window_id": "918388",
+          "document_name": "Getting Started on Kaggle | Kaggle",
+          "input_state": "not_sent",
+          "native_calls": 2,
+          "text": "tions\nYou can also add Competition data sources to your Notebook environment using the same steps as above.\nThe main difference is that you need to accept the rules for any Competition data sources you add to your Notebook. Whether you start a new Notebook from the “Notebooks” tab of a Competition or add a Competition data source from an existing Notebook editor, you’ll be prompted to read and accept the rules first.\nYou can mix Competitions and Datasets data sources in the same Notebook, but please be sure to abide by the rules of the specific Competition with respect to using external data sources. If you don’t, you risk consequences for rule-breaking in the Competition.\nNotebooks\nUp to 20 GBs of output from a Notebook may be saved to disk in /kaggle/working. This data is saved automatically and you can then reuse that data in any future Notebook: just navigate to the “Input” pane in a Notebook editor, click on “Add Input”, and search for any Notebook with output files, just as with Models, Datasets, and Competitions.\nBy chaining Notebooks as data sources in this way, it’s possible to build pipelines and generate more and better content than you could in a single notebook alone.\n“Minimal LSTM + NB-SVM baseline ensemble”, written by Jeremy Howard, is one example of a great Notebook using this feature. Click on the “Input” tab to view the data sources he uses.\n￼\nCollaborating on Notebooks\nNotebooks collaboration is a powerful feature. It allows multiple users to co-own and edit a Notebook. For example, you can work with Competition teammates to iterate on a model or collaborate with classmates on a data science project.\nInviting Collaborators\nFrom your Notebook editor or viewer, public or private, you may navigate to the 'Share' or 'Sharing' button in the Notebook’s menu to expose, among other settings, the Collaborators options. There, use the search box to find and add other users as Notebook collaborators.\nIf your Notebook is private, you may choose between giving Collaborators either viewing privileges (“Can view”) or editing privileges (“Can edit”). If your Notebook is public, Collaborators can only be added with editing privileges (“Can edit”), as anyone can view it already.\nWhen you add a collaborator, they will receive a notification via email.\n“Creating, Reading & Writing Data”, a Notebook from the Advanced Pandas Kaggle Learn track, is one example of great collaborative Notebook.\nCollaborating on Datasets\nUsing Notebooks is a powerful way to work with your collaborators on Datasets, too.\nDatasets created on Kaggle also have privacy settings, and these settings are distinct from the sharing settings on your Notebook meaning each can be shared with a different group of users. That is, your Notebook collaborators won’t automatically have the same access to any private Datasets as you unless they are explicitly invited to collaborate on the Dataset. Anyone has access to Datasets shared publicly.\nTo learn more about how to use Datasets collaboratively, read more here.\n￼\nThe Notebook Environment\nNotebooks is more than just a code editor. It’s a versioned computational environment designed to make it easy to reproduce data science work. In the Notebooks IDE, you have access to an interactive session running in a Docker container with pre-installed packages, the ability to mount versioned data sources, customizable compute resources like GPUs, and more.\nNotebook Versions and Containers\nWhen you create a Notebook version using 'Save & Run All', you execute the Notebook from top to bottom in a separate session from your interactive session. Once it finishes, you will have generated a new Notebook version. A Notebook version is a snapshot of your work including your compiled code, log files, output files, data sources, and more. The latest Notebook version of your Notebook is what is shown to users in the Notebook viewer.\nEvery Notebook version you create is associated with a specific Docker image version as well. Docker is a containerization technology which provides an isolated environment in which to do your work. Docker specifies the contents of this environment including installed Python and R packages using what is known as an image.\nBy default for new notebooks, this will be the latest version of the default Python or R images that we maintain at Kaggle. The contents of this image is publicly available on GitHub. You may view it at https://github.com/Kaggle/docker-rstats for the R container, or https://github.com/Kaggle/docker-python for the Python container.\nDockerfiles and Notebook Versions\nEven if you are using one of the default Kaggle containers, the number, names, and versions of the packages that you’re using are still a moving target as our team continually updates them to ensure the latest and greatest packages are available. We update the images about every two weeks, mainly to upgrade to the latest versions of the packages we provide but also occasionally to add or remove certain packages. You can subscribe to notifications when we release a new Docker image on GitHub.\nIt is also possible to pin a specific Docker image for use in a Notebook if there are multiple custom images available. This can be done by accessing the “Settings” pane in the Notebook editor. Under the \"Session options\" section, look for the selection for \"Environment\". This will enable you to select the original environment that the Notebook was created with or the latest environment. Using the original environment helps ensure that the Notebook is reproducible, while using the latest environment ensures that the Notebook receives the latest package updates.\nIn order to ensure that Notebooks remain reproducible, we publicly share the Docker image that the Notebook version was created in. You find a link to this by visiting the \"Logs\" tab in the Notebook Viewer and looking under the \"Environment\" header.\nModifying the Default Environment\nYou can request a modification to the default environment by submitting a pull request or an issue to the R or Python container on GitHub. This is also a good way to let us know if something in our image is broken, which we try to prevent but can happen occasionally.\nIf you think a package would be beneficial to the majority of Kaggle users, feel free to let us know in our GitHub container repos. Be sure to explain why you think a package would be useful to a majority of Kaggle users. Note that we add packages selectively to avoid increasing the size of our image drastically. Also note that even if approved, it may take several days before the image is updated on the website.\nOn the other hand, if you need to install a particular dependency for just one notebook, read on below.\nModifying a Notebook-specific Environment\nIt is also possible to modify the Docker container associated with the current Notebook image.\nUsing a standard package installer\nIn the Notebook Editor, make sure \"Internet\" is enabled in the Settings pane (it will be by default if it's a new notebook).\nFor Python, you can run arbitrary shell commands by prepending ! to a code cell. For instance, to install a new package using pip, run !pip install my-new-package. You can also upgrade or downgrade an existing package by running !pip install my-existing-package==X.Y.Z.\nTo install packages from GitHub in R, load the devtools package by running library(devtools). Then, you can run commands such as install_github(\"some_user/some_package\") to install a new package from GitHub.\nUsing Dependency Manager for package installation\nConfigure your notebooks to perform offline pip installs using the Dependency Manager editor. Configured notebooks are then able to be submitted to internet disabled competitions.\nIn the Dependency Manager editor, enter pip install commands like pip install my-new-package. You can also upgrade existing packages by adding pip install -U my-existing-package. You may also use pip to install packages from github using pip install git+https://github.com/author/package.git.\nDuring every notebook commit, a Dependency Installation Notebook will be shared with you and automatically attached to your notebook. This notebook contains python wheels and an installation script that is executed before the start of your notebook to install your packages.\nIf the Dependency Installation Notebook fails to download packages, the notebook will contain logs that can be used for debugging.\nNote: Notebooks still need to have internet disabled to be submitted into select competitions.\nAdding a free GPU\nYou can add a single NVIDIA Tesla P100 to your Notebook for free. GPU environments have lower CPU and main memory, but are a great way to achieve significant speed-ups for certain types of work like training neural networks on image data. One of the major benefits to using Notebooks as opposed to a local machine or your own VM is that the Notebook environment is already pre-configured with GPU-ready software and packages which can be time consuming and frustrating to set-up. Free GPU availability is limited: in busy times, you might be placed in a queue.\nTo add a GPU, navigate to the “Settings” pane from the Notebook editor and click the “Accelerator\" > GPU option. Your session will restart which may take a few moments to several minutes if you don’t need to wait in a queue to access a GPU-enabled machine.\nTo learn more about getting the most out of using a GPU in Notebooks, check out this tutorial Notebook by Dan Becker.\nAdding a free TPU\nYou can add a TPU v3-8 to your Notebook for free. TPUs are hardware accelerators specialized in deep learning tasks. They are supported in Tensorflow 2.1 both through the Keras high-level API and, at a lower level, in models using a custom training loop. Free TPU availability is limited: in busy times, you might be placed in a queue. To learn more about getting the most out of using a TPU in Notebooks, check out this in depth guide.\nTo add a TPU, navigate to the “Settings” pane from the Notebook editor and click the “Accelerator\" > TPU v3-8 option. Your session will restart which may take a few moments to several minutes if you don’t need to wait in a queue to access a TPU-enabled machine.\n￼\nConnecting Kaggle Notebooks to Google Cloud Services\nSome of these services incur charges to attached GCP accounts. Please review pricing for each of the following products before you begin to use them in your notebook.\nKaggle currently has integrations with the Google Cloud Storage, BigQuery, and AutoML products. To enable these integrations, click on the “Add-ons” menu in the notebook editor and select “Google Cloud Services”. Once on the “Google Cloud Services” page you will need to attach your account to your notebook and you will need to select which of the integrations you want to enable. After enabling these integrations, you will be provided with a code snippet that can be copied and pasted into your notebook.\nEach line of this code snippet corresponds to a different Google Cloud Services Integration where PROJECT_ID should be an existing Google Cloud Project. Per AutoML docs (linked below), AutoML currently requires that the location (COMPUTE_REGION) must be `us-central1` for your GCS Bucket.\nFor more information on how to use these services, please refer to Google Cloud Documentation or any of the specific product documentation.\nBigQuery\n• BQ Documentation, BQML Documentation\nGoogle BigQuery is a fully managed, petabyte scale, low cost analytics data warehouse. There is no management required for users—instead, users can focus solely on analyzing data through queries and BigQuery ML to find meaningful insights in a pay-as-you-go billing model.\nGoogle BigQuery can be accessed using Kaggle’s free-tier account to query public data but requires a billing-enabled GCP account to query any data that isn’t publicly released by BigQuery. You should carefully review the prices of BigQuery before trying the integration in Kaggle Notebooks, as it can be easy to incur charges.\n#",
+          "offset": 12000,
+          "next_offset": 24000,
+          "has_more": true,
+          "total_characters": 36369,
+          "source_truncated": false,
+          "version": "c8c53e43594d5ba8e393b3f1d41f271d51d720575b4b782d8cc086ffb0274680"
+        },
+        {
+          "contract_version": 1,
+          "ok": true,
+          "action": "read_lesson",
+          "window_id": "918388",
+          "document_name": "Getting Started on Kaggle | Kaggle",
+          "input_state": "not_sent",
+          "native_calls": 2,
+          "text": " Set your own project id here\nPROJECT_ID = 'your-google-cloud-project'\nfrom google.cloud import bigquery\nbigquery_client = bigquery.Client(project=PROJECT_ID)\nFor a more in-depth walkthrough of using the integration, please refer to the following notebooks:\n• BigQuery in Kaggle Notebooks\n• BigQuery Machine Learning Tutorial\nGoogle Cloud Storage (GCS)\n• GCS Documentation\nGoogle Cloud Storage allows for storage and retrieval of data at any time across the globe. Users are able to use the storage space for any type of data and only pay for used storage space (per GB per month).\nGoogle Cloud Storage is a paid service and requires a billing-enabled GCP account. You should carefully review the prices of GCS before trying the integration in Kaggle Notebooks, as it can be easy to incur charges.\n# Set your own project id here\nPROJECT_ID = 'your-google-cloud-project'\nfrom google.cloud import storage\nstorage_client = storage.Client(project=PROJECT_ID)\nFor a more in-depth walkthrough of using the integration, please refer to the following notebooks:\n• Moving Data to/from GCS\nAutoML\n• AutoML Documentation\nGoogle AutoML is a suite of products that enables users to train custom machine learning models for tasks on structured data, vision and language. It is currently in Beta, so you may encounter usability frictions or known issues. We welcome all feedback from the community. User feedback will help us improve documentation and be shared directly with the AutoML team to help improve the product.\nGoogle AutoML is a paid service and requires a billing-enabled GCP account. You should carefully review the prices of AutoML before trying the integration in Kaggle Notebooks, as it can be easy to incur charges. You can see the pricing for each of the offerings in beta here:\n• AutoML Tables Pricing\n• AutoML Vision Pricing\n• AutoML Natural Language Pricing\n# Set your own project id and compute region here\nPROJECT_ID = 'your-google-cloud-project'\nCOMPUTE_REGION = 'us-central1' # must be `us-central1` to use AutoML (see docs)\nfrom google.cloud import automl_v1beta1 as automl\nautoml_client = automl.AutoMlClient()\nproject_location = automl_client.location_path(PROJECT_ID, COMPUTE_REGION)\nFor a more in-depth walkthrough of using the integration, please refer to the following notebooks:\n• AutoML Tables Tutorial\nGoogle Cloud AI Notebooks\nIf you run into compute constraints while using notebooks on Kaggle, you can consider upgrading to Google Cloud AI Notebooks. These notebooks run under your project in Google Cloud, and can be configured to use your choice of virtual machine, accelerators and run without limits\nTo export your notebook to Google Cloud, you can go to the File menu and select \"Upgrade to Google Cloud AI Notebooks\" from within the Notebooks Editor. You can also upgrade a notebook from the Viewer by clicking on the three-dot menu on the top right.\nFor a more detailed description of how to export your Kaggle Notebooks to Google Cloud AI Notebooks, check out the announcement post here:\n• [Feature Launch] Upgrade to Notebooks on Google Cloud for more compute!\n￼\nScheduling Notebooks\nNotebooks can be set to re-run automatically based different criteria:\n• Time-based (Frequency): set the notebook to run daily, weekly, or monthly.\n• Dataset update: have the notebook run whenever the datasets it uses change. This will happen at most once per day, even if the data changes multiple times.\nA Notebook can be scheduled in either the Editor or the Viewer. In the Notebook Editor, under the right-hand Settings menu, find the section called \"Schedule a notebook to run\". In that section, there are options for each of the configurations described above. The same options are also available in the Settings tab of the Notebook Viewer.\nNote that there are limits to the number of notebooks you can have scheduled. See the Active Events pane for a listing of all your scheduled notebooks.\n￼\n[EXPERIMENTAL] Kaggle Jupyter Server\nNotebook workloads are executed on a backing Kaggle Jupyter Server, sometimes referred to as a Session.\nKaggle Jupyter Servers are highly optimized for accessing Kaggle resources - like large Datasets, Models, and Competition data - on Kaggle’s backing hardware. While Kaggle Notebooks are the primary way to execute workloads on Kaggle, users can also connect to a Kaggle Jupyter Server from a variety of notebook editors like Colab or VS Code. By connecting Colab or VS Code to the a Kaggle Jupyter Server, users can take advantage of these optimizations within those environments.\nWe are continually working on deeper integrations with external notebook environments. We welcome your feedback and suggestions to help us improve. If you have any comments or need assistance, please create a post in the Kaggle Product Feedback forum.\nOpen a Notebook in Colab and automatically connect to a Kaggle Jupyter Server\nWithin the Kaggle notebook editor, the Run > Kaggle Jupyter Server menu item opens a side panel titled Kaggle Jupyter Server.\n￼\nThis panel includes an \"Open in Colab\" button. The \"Open in Colab\" button is enabled only when a Kaggle Jupyter Server session is active; users need to start a Kaggle session before the button becomes clickable. Clicking the \"Open in Colab\" button initiates the following: the current Kaggle notebook (.ipynb file) is copied to a new tab in Colab, and is automatically configured to connect the new Colab notebook to the user's running Kaggle Jupyter Server session.\nNote: When opening and connecting Colab notebooks in a new tab, the notebook file (.ipynb) is copied, not synchronized. Modifications made in Colab will not be reflected in the original Kaggle notebook, and vice versa. Only the backend Jupyter Server and its execution environment are shared between Kaggle and Colab.\nIMPORTANT: The notebook in your newly opened Colab tab will not save automatically. To avoid losing your work, be sure to backup your Colab notebook - for example, using Colab’s File > Save a copy in Drive menu option.\nIf your Kaggle Jupyter Server shuts down - for example, due to inactivity - then your connected Colab editor will silently disconnect from that backing session. The next section will show how to reconnect those disconnected sessions to a new Kaggle Jupyter Server.\nReconnect an existing Colab notebook to your Kaggle Jupyter Server\nThe Kaggle Jupyter Server panel provides a \"Manually Connect\" section. This section displays a \"Colab Compatible URL\" that users can copy to their clipboard. To reconnect an existing Colab notebook to Kaggle:\n1. begin by starting a Kaggle Jupyter Server session,\n2. copy the \"Colab Compatible URL\" from the Kaggle Jupyter Server panel,\n3. in the Colab notebook navigate to Reconnect > Connect to a local runtime,\n￼\n4. paste the copied URL into the provided text field, and click the \"Connect\" button.\n￼\nThis process connects the Colab notebook to the Kaggle Jupyter Server. Click here to learn more about Colab’s local runtimes feature.\nNote: Users can use these same steps to connect any existing Colab notebook to Kaggle Jupyter Server, even if that Colab notebook was never opened from Kaggle.\nConnect from VS Code or Jupyter /tree\nThe \"Manually Connect\" section also provides a \"VS Code Compatible URL.\" Users can utilize this URL to connect a VS Code-powered .ipynb editor to the Kaggle backend. See VSCode's documentation Connect to Jupyter Server for more info.\nUsers can also paste the \"Colab Compatible URL\" into their browser's address bar to access the Jupyter Server's /tree interface directly.\n￼\nTechnical Specifications\nKaggle Notebooks run in a remote computational environment. We provide the hardware—you need only worry about the code.\nAt time of writing, each Notebook editing session is provided with the following resources:\n• 12 hours execution time for CPU and GPU notebook sessions and 9 hours for TPU notebook sessions\n• 20 Gigabytes of auto-saved disk space (/kaggle/working)\n• Additional scratchpad disk space (outside /kaggle/working) that will not be saved outside of the current session\nCPU Specifications\n• 4 CPU cores\n• 30 Gigabytes of RAM\nP100 GPU Specifications\n• 1 Nvidia Tesla P100 GPU\n• 4 CPU cores\n• 29 Gigabytes of RAM\nT4 x2 GPU Specifications\n• 2 Nvidia Tesla T4 GPUs\n• 4 CPU cores\n• 29 Gigabytes of RAM\nTPU 1VM Specifications\n• 96 CPU cores\n• 330 Gigabytes of RAM\nNOTE: CPU Platforms (ex. Intel Skylake, Broadwell, AMD) may be variable during regular notebook runs, however submissions runs (for code competitions or when submissions are rerun in bulk) are always run on Intel Skylake CPUs.\nCPU Specifications\nWhile editing a Notebook, you are provided with 20 minutes of idle time for your interactive session. If the code is not modified or executed in that time the current interactive session will end. If this happens, you will need to click the Edit button again to continue editing. If you want to run a computation that takes longer, you can Save a Version of your Notebook from top to bottom by selecting the \"Save & Run All\" option in the \"Save Version\" menu (see below).\nOnce you are satisfied with the contents of the Notebook you can click \"Save Version\" to save your changes. From there you will have two options for creating a new version:\n• Quick Save skips the top-to-bottom notebook execution and just takes a snapshot of your notebook exactly as it’s displayed in the editor. This is a great option for taking a bunch of versions while you’re still actively experimenting. Quick Save is a brand new way of saving work on Kaggle.\n• Save & Run All creates a new session with a completely clean state and runs your notebook from top to bottom. This is perfect for major milestones or when you want to share your work, as it gives you (and anyone else who reads your notebook) the confidence that your notebook can be run reproducibly. In order to save successfully, the entire Notebook must execute within 12 hours (9 hours for TPU notebooks). Save & Run All is identical to the “Commit” behavior you may have used previously on Kaggle.\n[EXPERIMENTAL] Increase GPU compute with Colab Pro\nWe're introducing an experimental feature that gives you access to additional GPU hours on Kaggle if you are a Colab Pro customer. This is a limited time promotion and we expect it to modify and graduate to a sustainable, long term pay to scale feature on Kaggle.\nHow it works\n• You may link your Colab Account in the Notebook editor via the `File` menu and clicking the `Link to Colab` option. User who have linked their account previously are automatically enrolled into this promotion.\n• Colab Pro and Pro+ users will get 15 and 30 hours of extra GPU hours per weekrespectively on Kaggle. To claim this benefit, you will verify your Colab subscription by linking your Kaggle account with an active Colab Pro account.\n• These extra GPU hours don't consume your Colab compute units.\n• You'll be using the same Kaggle hardware you're accustomed to (CPUs, T4s, P100s, TPUv3-8).\n• Once the account is verified to have an active Colab subscription, you will be granted additional GPU hours and you can see them in quotas in your Kaggle account settings.\n• You may unlink your Colab Account via the settings page at any time.\nLegal Terms\n• Kaggle reserves the right to end or suspend the Promotion at any time, with or without notice, at its sole discretion. The end date of the Promotion may not be publicly announced and can occur without prior warning.\n• Kaggle reserves the right to modify the amount of extra GPU hours offered or the terms of the Promotion at any time without prior notice.\n• Kaggle shall not be liable for any loss or inconvenience resulting from the termination or modification of the Promotion.\n• This Promotion is limited to one linked Kaggle account for each Colab Pro subscriber.\n• If a Kaggle user cancels their Colab Pro account, Kaggle may terminate the extra GPU hours for their linked Kaggle account.\n• The extra GPU hours are non-transferable and cannot be exchanged for cash or any other good",
+          "offset": 24000,
+          "next_offset": 36000,
+          "has_more": true,
+          "total_characters": 36369,
+          "source_truncated": false,
+          "version": "c8c53e43594d5ba8e393b3f1d41f271d51d720575b4b782d8cc086ffb0274680"
+        },
+        {
+          "contract_version": 1,
+          "ok": true,
+          "action": "read_lesson",
+          "window_id": "918388",
+          "document_name": "Getting Started on Kaggle | Kaggle",
+          "input_state": "not_sent",
+          "native_calls": 2,
+          "text": "s or services.\n• The use of Kaggle's GPU resources is subject to Kaggle's Terms of Use and other applicable policies. Abuse or misuse of GPU resources may result in the suspension or termination of your Kaggle account.\n• Kaggle reserves the right to disqualify any user who violates these Terms or engages in fraudulent or abusive activity related to the Promotion.\n￼\n￼",
+          "offset": 36000,
+          "next_offset": null,
+          "has_more": false,
+          "total_characters": 36369,
+          "source_truncated": false,
+          "version": "c8c53e43594d5ba8e393b3f1d41f271d51d720575b4b782d8cc086ffb0274680"
+        }
+      ]
+    },
+    "gpu_quota": {
+      "url": "https://www.kaggle.com/docs/efficient-gpu-usage",
+      "tool": "course.read_lesson",
+      "version": "53158e71a5146cd8eea71f122f3f787293305f88bbffc20fb52cccb8225f002f",
+      "complete": true,
+      "total_characters": 2453,
+      "quota_quote": "You can use up to a quota limit per week of GPU. The quota resets weekly and is 30 hours or sometimes higher depending on demand and resources",
+      "unverified": [
+        "Account-specific remaining quota",
+        "T4 x2 quota multiplier",
+        "TPU weekly quota",
+        "Current accelerator availability"
+      ]
+    },
+    "learning_status": {
+      "status": "unavailable",
+      "reason": "Another running MCP server owns this learning profile. Use that server or a separate POKEMON_LEARNING_DIR.",
+      "notes": "Read-only native research tools worked. No learning profile was reconfigured and no server was restarted."
+    }
+  },
+  "vendor_benchmark_extraction": {
+    "url": "https://arxiv.org/html/2505.09388v1",
+    "mode": "non-thinking",
+    "benchmark": "BFCL v3",
+    "Qwen3-14B": {
+      "table": 16,
+      "score": 61.5
+    },
+    "Qwen3-8B": {
+      "table": 18,
+      "score": 60.2
+    },
+    "Qwen3-4B": {
+      "table": 18,
+      "score": 57.6
+    },
+    "Qwen3-1.7B": {
+      "table": 20,
+      "score": 52.2
+    },
+    "authority": "Vendor report, not measurements of quantized artifacts or Pokemon task success"
+  },
+  "local_source_hashes": {
+    "frontend/src/main/companion/agent.ts": {
+      "sha256": "ebfa0345d034f8418c6d472babe0396fc67f5c1481a841ca87fb69325e65be14"
+    },
+    "frontend/src/main/companion/index.ts": {
+      "sha256": "09926ca7298953361ff0ea11950e4513a124fb6c63efe49032d8853b02731de5",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "backend/src/talk/tools.ts": {
+      "sha256": "a08d5112c729710478e1ceb14402e2052991dc0a00532e9b36a99b5f9e957226",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "benchmarks/results/pokemon-brain-catalog-2026-11-13.json": {
+      "sha256": "e4440e34e0502a5c993b7015978ef6e1ccca181223a31a0a29b5e77ec4557640"
+    },
+    "frontend/src/main/companion/chat.ts": {
+      "sha256": "d37a7c83c08946cf9c0a2bece10739e3542cc5c0992db29db71f0b6370225a21",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "frontend/src/renderer/companion.html": {
+      "sha256": "7506c0c7cca0ffb405b3d027b34e1e0a64141887d424b185bb7f9e241fc2ebfa",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "scripts/common-task-fixture.mjs": {
+      "sha256": "b9b807a9f91a9aa7e3acc0058bd1c03c6918f591bfed8e4311a9c91ce04fd74e",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "scripts/common-task-excel-fixture.cs": {
+      "sha256": "fde9b47f56ec06722b8f55164e6fe291d3825e86fffc61a12d2de4744728cc66",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "scripts/excel-smoke-fixture.cs": {
+      "sha256": "d3a8941f6d6e3d165d64d9f1d55582a8f9f94494d1eadf3c4c93d7dd13a0d56b",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "scripts/common-task-benchmark-lib.mjs": {
+      "sha256": "f1e6006bc79f8191a8306d316916e0b0801f7c8c4489aa238310dfbe9c726791",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "scripts/agent.test.cjs": {
+      "sha256": "64fb0c98aec8522783ef935471b5aee03c03dd11c5fbb19e818a6af29b48f491",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    },
+    "scripts/talk-tools.test.cjs": {
+      "sha256": "c7bec0e360fe44d64225c0b8c327d0605727d8b5590eeb662d864756f4a5f38f",
+      "inspection_date": "2026-11-13",
+      "authority": "Existing source inspected read-only for preparation estimate; not newly implemented."
+    }
+  },
+  "budget": {
+    "status": "ESTIMATED; no live inference/training measurements",
+    "assumptions": {
+      "task_decisions": 6,
+      "output_tokens_per_decision": 96,
+      "average_input_tokens": 4096,
+      "generation_attempts": 100,
+      "retained_training_trajectories": 60,
+      "epochs": 2,
+      "holdout_tasks": 60,
+      "arms": 4,
+      "prefill_tokens_per_second": {
+        "teacher": 1500,
+        "baseline": 2000,
+        "student": 2500
+      },
+      "decode_tokens_per_second": {
+        "teacher": 15,
+        "baseline": 25,
+        "student": 30
+      },
+      "training_processed_tokens_per_second": 180,
+      "kaggle_arms": 3,
+      "holdout_attempts": 240
+    },
+    "processed_training_tokens": 2949120,
+    "hours": {
+      "generation": 2.5217777777777775,
+      "training": 4.551111111111111,
+      "evaluation": 3.4857066666666667,
+      "setup_export": 1,
+      "contingency": 1.5,
+      "total": 13.058595555555556,
+      "conditional_double_charge_total": 26.11719111111111,
+      "total_scope": "Kaggle allocated hours for three local-model arms and distillation stages; pre-spike engineering, operator work, cloud fees excluded"
+    },
+    "sensitivity_80_training_tps": {
+      "training_hours": 10.24,
+      "total_hours": 18.747484444444446
+    },
+    "bitnet_probe_3M_tokens_hours": [
+      4.62962962962963,
+      10.416666666666666
+    ],
+    "qat_probe_3M_tokens_hours": [
+      5.555555555555555,
+      16.666666666666668
+    ],
+    "scratch_pretraining_4T_at_1000_tps_hours": 1111111.111111111,
+    "full_fp16_logits_8192x151936_GB": 2.489319424,
+    "cached_full_fp16_logits_all_training_positions_GB": 896.15499264,
+    "cloud_control": {
+      "status": "ESTIMATED, no cloud timing/usage measurement",
+      "holdout_tasks": 60,
+      "assumed_decisions_per_task": 6,
+      "model_client_round_seconds": [
+        5,
+        15
+      ],
+      "native_reset_seconds_per_task": [
+        15,
+        30
+      ],
+      "wall_hours": [
+        0.75,
+        2.0
+      ],
+      "gpu_hours_when_kaggle_stopped": 0,
+      "pricing": "UNVERIFIED; measure actual client/provider usage; no cloud outputs used for training",
+      "round_observability": "If client does not expose inference rounds/tokens, label N/A; counts here are budgeting assumptions only"
+    },
+    "double_charged_quota_hours_if_gpu_left_on_for_cloud": [
+      27.61719111111111,
+      30.11719111111111
+    ]
+  },
+  "document_revision": 2,
+  "updated_date": "2026-11-13",
+  "revision_note": "Added current cloud client as external MCP control, separate model/system comparisons, cloud replacement gate and pre-Day-1 engineering effort. Research-plan edit only.",
+  "pre_spike_engineering_estimate": {
+    "status": "ESTIMATED; no implementation work or measured labor",
+    "unit": "engineer hours including AI-generated-code review, integration and debugging",
+    "items": [
+      {
+        "task": "Excel schema prerequisite",
+        "low_hours": 4,
+        "high_hours": 8
+      },
+      {
+        "task": "Enable Talk prerequisite",
+        "low_hours": 6,
+        "high_hours": 12
+      },
+      {
+        "task": "Web fixture extension",
+        "low_hours": 6,
+        "high_hours": 10
+      },
+      {
+        "task": "Excel fixture extension",
+        "low_hours": 8,
+        "high_hours": 14
+      },
+      {
+        "task": "Teams desktop fixture",
+        "low_hours": 10,
+        "high_hours": 18
+      },
+      {
+        "task": "Four-arm harness",
+        "low_hours": 10,
+        "high_hours": 18
+      },
+      {
+        "task": "Readiness verification",
+        "low_hours": 6,
+        "high_hours": 10
+      }
+    ],
+    "fixtures_harness_verification_hours": [
+      40,
+      70
+    ],
+    "excel_talk_prerequisites_hours": [
+      10,
+      20
+    ],
+    "subtotal_hours": [
+      50,
+      90
+    ],
+    "contingency_fraction": 0.25,
+    "total_unrounded_hours": [
+      62.5,
+      112.5
+    ],
+    "total_rounded_hours": [
+      63,
+      113
+    ],
+    "focused_hours_per_working_day": 6,
+    "estimated_working_days": [
+      11,
+      19
+    ],
+    "assumptions": [
+      "Reuse existing common-task web and native Excel COM fixtures and agent/bridge tests",
+      "Licensed Windows Excel and Teams already available",
+      "Owned authorized Teams test tenant/accounts; fixture messages only",
+      "Account provisioning and manual login waits excluded",
+      "Simulator-only results do not establish desktop Teams success"
+    ],
+    "day_1_gate": [
+      "Excel input JSON schema serializes and validation/write/save regression tests pass",
+      "Talk UI/IPC/history and existing Ollama tool loop enabled; pause/handoff/errors/worker cleanup pass",
+      "Resettable web, multi-file Excel and owned Teams fixtures with independent verifiers ready",
+      "Four-arm orchestration, logs, task split manifest and deadline handling ready",
+      "Ten disposable readiness smoke tasks and failure-path integration checks pass"
+    ],
+    "cloud_provider_adapter_required": false,
+    "dependencies": "Complete Excel/Talk prerequisites, integrate fixtures/harness, pass readiness, then begin the seven-day spike."
+  },
+  "evaluation_plan": {
+    "holdout_tasks": 60,
+    "task_families": 3,
+    "tasks_per_family": 20,
+    "attempts_per_arm": 60,
+    "total_attempts": 240,
+    "arms": [
+      {
+        "id": "A",
+        "role": "current cloud control",
+        "route": "Existing external cloud client -> Pokemon native MCP",
+        "configuration": "Freeze current provider/model/version/settings plus prompt/tool catalog hashes during preflight; exact identity UNVERIFIED",
+        "preserve_existing_client_settings": true
+      },
+      {
+        "id": "B",
+        "role": "untouched local baseline",
+        "model": "qwen3:4b",
+        "route": "Existing Ollama Talk loop"
+      },
+      {
+        "id": "C",
+        "role": "distilled student",
+        "model": "Pinned HF Qwen3-1.7B -> merged GGUF Q4_K_M",
+        "route": "Existing Ollama Talk loop"
+      },
+      {
+        "id": "D",
+        "role": "teacher",
+        "model": "Primary Qwen3-8B, or separately qualified fallback Qwen3-14B",
+        "route": "Existing Ollama Talk loop"
+      }
+    ],
+    "system_comparison": [
+      "A",
+      "C"
+    ],
+    "controlled_model_comparison": [
+      "B",
+      "C",
+      "D"
+    ],
+    "common_conditions": [
+      "Same task intent and permitted native action families",
+      "Same backend guards, owned fixtures, fresh resets and independent verifiers",
+      "Task-admission timing, including actual client/approval/network gaps",
+      "240-second deadlines",
+      "No answer keys/verifier source; non-MCP shortcuts are protocol violations",
+      "Randomized arm order, sealed holdout, cloud traces excluded from training"
+    ],
+    "ollama_only_conditions": {
+      "same_prompt_and_catalog": true,
+      "thinking": false,
+      "serving_context": 16384,
+      "maximum_rounds": 32
+    },
+    "cloud_observability": "Report observable denominators; hidden inference rounds/tokens N/A. Different schemas/prompts/host behavior mean A-C is not an isolated model comparison.",
+    "metrics": [
+      "independent verified success counts",
+      "schema-valid tool calls with observed denominator",
+      "correct-tool selection against acceptable actions",
+      "model rounds when observable",
+      "median and p95 round and end-to-end latency",
+      "native/wait/verification time",
+      "cold/warm state",
+      "failed/timed-out/blocked outcomes",
+      "cloud billable usage if available"
+    ],
+    "student_vs_local_gate": {
+      "minimum_successes": 54,
+      "maximum_success_deficit_overall_or_per_family": 1,
+      "call_validity_minimum": 0.99,
+      "correct_tool_minimum": 0.95,
+      "maximum_unsafe_wrong_target_duplicate_or_false_completion_events": 0,
+      "median_round_latency_maximum_ratio": 0.8,
+      "median_outcome_latency_maximum_ratio": 0.7,
+      "p95_outcome_latency_maximum_ratio": 1.05,
+      "median_rounds_not_higher": true
+    },
+    "additional_cloud_replacement_gate": {
+      "maximum_success_deficit_overall_or_per_family": 1,
+      "median_outcome_latency_maximum_ratio": 0.8,
+      "p95_outcome_latency_maximum_ratio": 1.05,
+      "note": "Passing local baseline alone does not justify cloud replacement; require both gates."
+    },
+    "failed_attempt_latency_seconds": 240,
+    "limitations": "60 tasks / one attempt per arm is a pilot; report paired task uncertainty, not broad reliability."
+  }
+}

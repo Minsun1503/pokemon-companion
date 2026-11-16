@@ -5,9 +5,11 @@ const {execFileSync} = require('node:child_process');
 const {addClientMetadata} = require('./client-package-metadata.cjs');
 const {bundleAgentDesktop} = require('./bundle-agent-desktop.cjs');
 const {packageClientBundles} = require('./package-client-bundles.cjs');
+const {ensureBrowser} = require('./ensure-browser.cjs');
+const {addAgentLauncher} = require('./package-agent.cjs');
 
 const root = path.resolve(__dirname, '..');
-const release = path.join(root, 'release');
+const release = process.env.POKEMON_RELEASE_DIR ? path.resolve(process.env.POKEMON_RELEASE_DIR) : path.join(root, 'release');
 const version = require('../package.json').version;
 const nodeVersion = 'v24.16.0';
 const platform = process.platform;
@@ -69,6 +71,7 @@ async function main() {
   json(path.join(appRoot, 'backend/package-lock.json'), backendLock);
   copy(path.join(root, 'backend/dist'), path.join(appRoot, 'backend/dist'));
   npm(['ci', '--omit=dev', '--no-audit', '--no-fund'], path.join(appRoot, 'backend'));
+  const browser = ensureBrowser(path.join(appRoot, 'backend'), path.join(root, 'backend'));
   for (const dir of ['build', 'pets', 'assets']) copy(path.join(root, 'frontend', dir), path.join(appRoot, 'frontend', dir));
   // Ship only repository defaults. Never copy a developer profile, keys, chat history or tunnel address.
   copy(path.join(root, 'frontend/config/setting.json'), path.join(appRoot, 'frontend/config/setting.json'));
@@ -90,6 +93,7 @@ async function main() {
   for (const file of ['config.cjs', 'start-mcp.cjs']) {
     copy(path.join(root, 'scripts', file), path.join(appRoot, 'scripts', file));
   }
+  addAgentLauncher(stage, appRoot, platform);
 
   const runtime = path.join(appRoot, 'runtime');
   fs.mkdirSync(runtime, {recursive: true});
@@ -158,10 +162,10 @@ async function main() {
     }
   }
   for (const file of ['LICENSE', 'THIRD_PARTY.md']) copy(path.join(root, file), path.join(stage, file));
-  fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokemon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included. Electron, Node and dependencies retain their own licenses.\n');
+  fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokemon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included. Electron, Chromium, Node and dependencies retain their own licenses.\n');
   fs.writeFileSync(path.join(stage, 'README.txt'), readme());
   addClientMetadata(stage, appRoot, platform, version);
-  json(path.join(stage, 'build-info.json'), {version, platform, arch, nodeVersion, chatEnabled: false, builtAt: new Date().toISOString(), sourceCommit: process.env.GITHUB_SHA || execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim()});
+  json(path.join(stage, 'build-info.json'), {version, platform, arch, nodeVersion, browser, chatEnabled: false, builtAt: new Date().toISOString(), sourceCommit: process.env.GITHUB_SHA || execFileSync('git', ['rev-parse', 'HEAD'], {cwd: root, encoding: 'utf8'}).trim()});
   fs.renameSync(stage, output);
   const zip = output + '.zip';
   if (platform === 'win32') {

@@ -1,0 +1,508 @@
+{
+  "at": "2026-11-14T16:50:20.967Z",
+  "phases": [
+    {
+      "name": "web first; hidden sign-in UI does not block a ready page",
+      "duration_ms": 3689.0105,
+      "result": {
+        "surface": "web",
+        "method": "playwright",
+        "session_id": "f091e396-3941-4d77-b11c-bbb08bc10540"
+      }
+    },
+    {
+      "name": "closing a web context permits a fresh application session",
+      "duration_ms": 992.4144999999999,
+      "result": {
+        "method": "playwright"
+      }
+    },
+    {
+      "name": "signed-out web falls back to automatic CDP discovery",
+      "duration_ms": 275.27319999999963,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [
+          {
+            "url": "http://127.0.0.1:59748/login",
+            "available": false,
+            "reason": "Web application is logged out, redirected to sign-in, or unavailable.",
+            "duration_ms": 77.84829999999965
+          }
+        ],
+        "method": "cdp",
+        "attempts": [
+          {
+            "method": "cdp",
+            "available": true,
+            "duration_ms": 159.21700000000055
+          }
+        ],
+        "data": {
+          "page_id": "cf6f9a27-1935-457a-84bf-55ab5966bf9a",
+          "url": "http://127.0.0.1:59750/desktop",
+          "title": "Pokemon adapter fixture 5e085356",
+          "nodes": [
+            {
+              "ref": "5caa3922-baba-46d0-b8b9-6207884567e4",
+              "name": "Messages",
+              "name_clipped": false,
+              "tag": "input",
+              "role": "textbox",
+              "id": "messages",
+              "value": "Desktop content",
+              "disabled": false
+            },
+            {
+              "ref": "416115a3-c279-4cbe-b508-27ae6b5fdfa7",
+              "name": "Refresh",
+              "name_clipped": false,
+              "tag": "button",
+              "role": "button",
+              "id": "",
+              "disabled": false
+            }
+          ],
+          "matched": 2,
+          "truncated": false,
+          "text": {
+            "text": "Desktop adapter fixture\nMessagesRefresh",
+            "truncated": false
+          },
+          "session_id": "24f4df55-8ceb-4826-bac4-90e9ecefe949"
+        },
+        "cache_hit": false,
+        "rediscovered": false
+      }
+    },
+    {
+      "name": "new MCP process reuses persisted CDP metadata",
+      "duration_ms": 5844.390300000001,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [
+          {
+            "url": "http://127.0.0.1:59748/login",
+            "available": false,
+            "reason": "Web application is logged out, redirected to sign-in, or unavailable.",
+            "duration_ms": 766.7619999999997
+          }
+        ],
+        "method": "cdp",
+        "attempts": [
+          {
+            "method": "cdp",
+            "available": true,
+            "duration_ms": 165.39779999999973
+          }
+        ],
+        "data": {
+          "page_id": "00e53072-7c8c-4c19-8856-130914b4d158",
+          "url": "http://127.0.0.1:59750/desktop",
+          "title": "Pokemon adapter fixture 5e085356",
+          "nodes": [
+            {
+              "ref": "4e673646-40ff-4c41-a422-e909c07ab0a8",
+              "name": "Messages",
+              "name_clipped": false,
+              "tag": "input",
+              "role": "textbox",
+              "id": "messages",
+              "value": "Desktop content",
+              "disabled": false
+            },
+            {
+              "ref": "c299fd18-bcfc-4dc9-905c-ab210073d52c",
+              "name": "Refresh",
+              "name_clipped": false,
+              "tag": "button",
+              "role": "button",
+              "id": "",
+              "disabled": false
+            }
+          ],
+          "matched": 2,
+          "truncated": false,
+          "text": {
+            "text": "Desktop adapter fixture\nMessagesRefresh",
+            "truncated": false
+          },
+          "session_id": "59021223-2b26-47ee-a787-c03ed1d632f0"
+        },
+        "cache_hit": true,
+        "rediscovered": false
+      }
+    },
+    {
+      "name": "CDP port changes; cached endpoint is rejected and rediscovered",
+      "duration_ms": 1012.0807999999997,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [
+          {
+            "url": "http://127.0.0.1:59748/login",
+            "available": false,
+            "reason": "Web application is logged out, redirected to sign-in, or unavailable.",
+            "duration_ms": 41.00390000000061
+          }
+        ],
+        "method": "cdp",
+        "attempts": [
+          {
+            "method": "cdp",
+            "available": true,
+            "duration_ms": 211.51199999999972
+          }
+        ],
+        "data": {
+          "page_id": "7d0edc03-3dec-4d3c-8621-20ff838ef2d1",
+          "url": "http://127.0.0.1:62400/desktop",
+          "title": "Pokemon adapter fixture 5e085356",
+          "nodes": [
+            {
+              "ref": "b3986b14-a8af-4a42-a8c0-1e8e3d80095f",
+              "name": "Messages",
+              "name_clipped": false,
+              "tag": "input",
+              "role": "textbox",
+              "id": "messages",
+              "value": "Desktop content",
+              "disabled": false
+            },
+            {
+              "ref": "c30fde26-93b9-4e78-94ca-58c7b52c192f",
+              "name": "Refresh",
+              "name_clipped": false,
+              "tag": "button",
+              "role": "button",
+              "id": "",
+              "disabled": false
+            }
+          ],
+          "matched": 2,
+          "truncated": false,
+          "text": {
+            "text": "Desktop adapter fixture\nMessagesRefresh",
+            "truncated": false
+          },
+          "session_id": "f0d9e74d-9554-4dab-945c-e2d59ba695ea"
+        },
+        "cache_hit": false,
+        "rediscovered": true
+      }
+    },
+    {
+      "name": "local API detected when desktop CDP is unavailable",
+      "duration_ms": 135.48450000000048,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [],
+        "method": "api",
+        "attempts": [
+          {
+            "method": "api",
+            "available": true,
+            "duration_ms": 82.65760000000046
+          }
+        ],
+        "data": {
+          "url": "http://127.0.0.1:61430/v1/messages",
+          "operation_id": "readMessages",
+          "status": 200,
+          "text": "{\"messages\":[\"hello\"]}",
+          "truncated": false
+        },
+        "cache_hit": false,
+        "rediscovered": false
+      }
+    },
+    {
+      "name": "API route reused across MCP sessions",
+      "duration_ms": 6112.181699999999,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [],
+        "method": "api",
+        "attempts": [
+          {
+            "method": "api",
+            "available": true,
+            "duration_ms": 76.34259999999995
+          }
+        ],
+        "data": {
+          "url": "http://127.0.0.1:61430/v1/messages",
+          "operation_id": "readMessages",
+          "status": 200,
+          "text": "{\"messages\":[\"hello\"]}",
+          "truncated": false
+        },
+        "cache_hit": true,
+        "rediscovered": false
+      }
+    },
+    {
+      "name": "API update: old path fails, current schema and path are rediscovered",
+      "duration_ms": 81.20170000000144,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [],
+        "method": "api",
+        "attempts": [
+          {
+            "method": "api",
+            "available": false,
+            "reason": "API read returned HTTP 404.",
+            "duration_ms": 24.998499999999694
+          },
+          {
+            "method": "api",
+            "available": true,
+            "duration_ms": 28.21640000000025
+          }
+        ],
+        "data": {
+          "url": "http://127.0.0.1:61430/v2/messages",
+          "operation_id": "readMessages",
+          "status": 200,
+          "text": "{\"items\":[\"updated\"]}",
+          "truncated": false
+        },
+        "cache_hit": false,
+        "rediscovered": true
+      }
+    },
+    {
+      "name": "a removed operation yields the refreshed API catalog",
+      "duration_ms": 185.97859999999855,
+      "result": {
+        "app_id": "lifecycle",
+        "surface": "desktop",
+        "web_attempts": [],
+        "method": "api",
+        "attempts": [
+          {
+            "method": "api",
+            "available": false,
+            "reason": "The saved API operation is no longer available. Rediscover the API.",
+            "duration_ms": 19.538100000000668
+          },
+          {
+            "method": "api",
+            "available": true,
+            "duration_ms": 21.328700000000026
+          }
+        ],
+        "data": {
+          "endpoint": "http://127.0.0.1:61430",
+          "operations": [
+            {
+              "id": "readMessages",
+              "path": "/v2/messages"
+            }
+          ],
+          "selection_required": true,
+          "requested_operation_unavailable": "missingOperation"
+        },
+        "cache_hit": false,
+        "rediscovered": true
+      }
+    },
+    {
+      "name": "no CDP/API or HWND text; UIA reads the desktop field",
+      "duration_ms": 1316.1358,
+      "result": {
+        "app_id": "native-fixture",
+        "surface": "desktop",
+        "web_attempts": [
+          {
+            "url": "http://127.0.0.1:59748/login",
+            "available": false,
+            "reason": "Web application is logged out, redirected to sign-in, or unavailable.",
+            "duration_ms": 796.5253000000002
+          }
+        ],
+        "method": "uia",
+        "attempts": [
+          {
+            "method": "cdp",
+            "available": false,
+            "reason": "No selected-application listener exposed usable CDP content.",
+            "duration_ms": 31.6912999999995
+          },
+          {
+            "method": "api",
+            "available": false,
+            "reason": "No local API schema or scoped decrypted API capture is available.",
+            "duration_ms": 7.645900000000438
+          },
+          {
+            "method": "win32",
+            "available": false,
+            "reason": "No matching HWND child text is exposed through Win32.",
+            "duration_ms": 20.774900000000343
+          },
+          {
+            "method": "uia",
+            "available": true,
+            "duration_ms": 428.9862000000003
+          }
+        ],
+        "data": {
+          "window": {
+            "id": "1115432",
+            "title": "Pokemon adapter fixture 5e085356",
+            "process": "electron",
+            "process_id": 13448,
+            "minimized": false,
+            "window_ref": "c4b6ff3663134795aeda2620a827efb9"
+          },
+          "snapshot": "3f856f34f82a42838bf14449fa536d0f",
+          "nodes": [
+            {
+              "id": 1,
+              "role": "Text",
+              "name": "Messages",
+              "actions": [
+                "read_text"
+              ],
+              "targetable": true
+            },
+            {
+              "id": 2,
+              "role": "Edit",
+              "name": "Messages",
+              "actions": [
+                "set_value",
+                "read_text",
+                "focus"
+              ],
+              "automation_id": "messages",
+              "value": "Desktop content",
+              "targetable": true
+            }
+          ],
+          "matched": 2,
+          "truncated": false,
+          "complete": true,
+          "scanned": 20
+        },
+        "cache_hit": false,
+        "rediscovered": false
+      }
+    },
+    {
+      "name": "all semantic routes unavailable; selected-window capture returned",
+      "duration_ms": 471.2986000000019,
+      "result": {
+        "app_id": "visual-fixture",
+        "surface": "desktop",
+        "web_attempts": [
+          {
+            "url": "http://127.0.0.1:59748/login",
+            "available": false,
+            "reason": "Web application is logged out, redirected to sign-in, or unavailable.",
+            "duration_ms": 89.4425999999994
+          }
+        ],
+        "method": "screen_capture",
+        "attempts": [
+          {
+            "method": "cdp",
+            "available": false,
+            "reason": "No selected-application listener exposed usable CDP content.",
+            "duration_ms": 29.112499999999272
+          },
+          {
+            "method": "api",
+            "available": false,
+            "reason": "No local API schema or scoped decrypted API capture is available.",
+            "duration_ms": 7.2401000000008935
+          },
+          {
+            "method": "win32",
+            "available": false,
+            "reason": "No matching HWND child text is exposed through Win32.",
+            "duration_ms": 14.7541999999994
+          },
+          {
+            "method": "uia",
+            "available": false,
+            "reason": "UIA exposed no matching controls.",
+            "duration_ms": 65.58619999999974
+          },
+          {
+            "method": "screen_capture",
+            "available": true,
+            "duration_ms": 219.64409999999953
+          }
+        ],
+        "data": {
+          "mime_type": "image/png",
+          "image_width": 1125,
+          "image_height": 813,
+          "screen_left": 397,
+          "screen_top": 103,
+          "screen_width": 1125,
+          "screen_height": 813,
+          "scope": "selected_visible_window",
+          "verification_required": true
+        },
+        "cache_hit": false,
+        "rediscovered": false
+      }
+    },
+    {
+      "name": "high-entropy screenshot uses bounded MIME-correct JPEG",
+      "duration_ms": 580.2488999999987,
+      "result": {
+        "mime_type": "image/jpeg",
+        "bytes": 359376,
+        "width": 1125,
+        "height": 813
+      }
+    }
+  ],
+  "cache": {
+    "version": 1,
+    "entries": {
+      "1a88591c9e7ce4fcb95f4bf75e7ed180a903c6eebddc2fd8ae82bf5748f03e19": {
+        "identity": {
+          "image_path": "C:\\Users\\ADMIN\\Downloads\\Pikachu\\pokemon-companion\\.publish\\frontend\\node_modules\\electron\\dist\\electron.exe",
+          "process_id": 13448,
+          "process_started": "639302718352694545",
+          "version": "42.3.3"
+        },
+        "updated_at": 1794675042330,
+        "cdp": {
+          "endpoint": "http://127.0.0.1:62399",
+          "page_url": "http://127.0.0.1:62400/desktop"
+        },
+        "api": {
+          "endpoint": "http://127.0.0.1:61430",
+          "spec_path": "/openapi.json",
+          "fingerprint": "22d15049ded36369b23fad51e07d3cbbe245d5fd1a870d86de74a5b519916ffc",
+          "operations": [
+            {
+              "id": "readMessages",
+              "path": "/v2/messages",
+              "response_schema": {
+                "type": "object",
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "verified": true
+}

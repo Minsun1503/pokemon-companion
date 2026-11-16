@@ -16,7 +16,7 @@ export function redact(text: string): string {
 		.replace(/(https?:\/\/)[^\s/@:]+:[^\s/@]+@/gi, '$1[REDACTED]@');
 }
 
-function protect(input: Buffer, decrypt: boolean): Buffer {
+export function protectCurrentUser(input: Buffer, decrypt: boolean): Buffer {
 	const operation = decrypt ? 'Unprotect' : 'Protect';
 	const script = `Add-Type -AssemblyName System.Security; $b=[Convert]::FromBase64String([Console]::ReadLine()); [Console]::Write([Convert]::ToBase64String([Security.Cryptography.ProtectedData]::${operation}($b,$null,[Security.Cryptography.DataProtectionScope]::CurrentUser)))`;
 	return Buffer.from(execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', script], {
@@ -91,10 +91,10 @@ export class LocalJournal {
 				}
 
 				if (saved) {
-					this.key = process.platform === 'win32' ? await (this.keyProtector?.(saved, true) ?? protect(saved, true)) : saved;
+					this.key = process.platform === 'win32' ? await (this.keyProtector?.(saved, true) ?? protectCurrentUser(saved, true)) : saved;
 				} else {
 					this.key = randomBytes(32);
-					const protectedKey = process.platform === 'win32' ? await (this.keyProtector?.(this.key, false) ?? protect(this.key, false)) : this.key;
+					const protectedKey = process.platform === 'win32' ? await (this.keyProtector?.(this.key, false) ?? protectCurrentUser(this.key, false)) : this.key;
 					await writeFile(this.keyFile, protectedKey, {flag: 'wx', mode: 0o600});
 				}
 			}

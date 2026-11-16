@@ -4,8 +4,9 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const {execFileSync} = require('node:child_process');
 const {pathToFileURL} = require('node:url');
+const {verifyBrowserBundle} = require('./verify-browser-bundle.cjs');
 const root = path.resolve(__dirname, '..');
-const release = path.join(root, 'release');
+const release = process.env.POKEMON_RELEASE_DIR ? path.resolve(process.env.POKEMON_RELEASE_DIR) : path.join(root, 'release');
 const version = require('../package.json').version;
 const platform = process.platform;
 const label = {win32: 'windows', darwin: 'macos', linux: 'linux'}[platform];
@@ -70,6 +71,7 @@ async function main() {
     const client = new Client({name: 'native-client-package-check', version});
     const profile = path.join(scratch, '.test-profile');
     const launchEnv = {...process.env, ...env, POKEMON_USER_DATA_DIR: profile,
+      PLAYWRIGHT_BROWSERS_PATH: path.join(scratch, 'empty-browser-cache'), POKEMON_WEB_PROFILE: path.join(scratch, 'app-browser-profile'),
       PATH: platform === 'win32' ? `${process.env.SystemRoot}/System32;${process.env.SystemRoot}` : '/usr/bin:/bin:/usr/sbin:/sbin'};
     delete launchEnv.POKEMON_UI;
     delete launchEnv.ELECTRON_RUN_AS_NODE;
@@ -89,6 +91,7 @@ async function main() {
       assert(fs.existsSync(profile), 'The manifest launch did not open the actual companion');
       const result = await client.callTool({name: 'pokemon', arguments: {action: 'status'}});
       assert(!result.isError);
+      await verifyBrowserBundle(client, appRoot, scratch);
       if (platform === 'win32') {
         const status = await client.callTool({name: 'desktop', arguments: {action: 'status'}});
         assert(!status.isError);

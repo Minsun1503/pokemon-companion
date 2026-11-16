@@ -1,7 +1,9 @@
 const fs = require('node:fs');
+const {addAgentLauncher} = require('./package-agent.cjs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const {execFileSync} = require('node:child_process');
+const {ensureBrowser} = require('./ensure-browser.cjs');
 const root = path.resolve(__dirname, '..');
 const release = path.join(root, 'release');
 const prepared = path.join(release, 'pokemon-companion-win32-x64');
@@ -42,12 +44,14 @@ async function main() {
   console.log('Copying the app and its runtimes...');
   copy(path.join(root, 'backend/dist'), path.join(output, 'backend/dist'));
   copy(path.join(prepared, 'backend/node_modules'), path.join(output, 'backend/node_modules'));
+  ensureBrowser(path.join(output, 'backend'), path.join(root, 'backend'));
   copy(path.join(root, 'backend/package.json'), path.join(output, 'backend/package.json'));
   copy(path.join(prepared, 'runtime'), path.join(output, 'runtime'));
   for (const directory of ['build', 'pets', 'assets']) copy(path.join(root, 'frontend', directory), path.join(output, 'frontend', directory));
   copy(path.join(root, 'frontend/node_modules/electron/dist'), path.join(output, 'frontend/node_modules/electron/dist'));
   json(path.join(output, 'frontend/package.json'), {name: 'pokemon-companion-test', version: require('../package.json').version, main: 'main.js'});
   fs.writeFileSync(path.join(output, 'frontend/main.js'), "require('./build/main/companion/index.js');\n");
+  addAgentLauncher(output, output, process.platform);
   fs.mkdirSync(path.join(output, 'frontend/config'), {recursive: true});
   const settings = JSON.parse(fs.readFileSync(path.join(root, 'frontend/config/setting.json'), 'utf8'));
   const activeSettingsFile = process.env.POKEMON_BUILD_SETTINGS || path.join(process.env.APPDATA, 'pokemon-mcp/setting.json');

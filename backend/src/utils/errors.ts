@@ -4,6 +4,7 @@ import {isReadOnlyNativeAction} from '../windows/actions.js';
 
 export type ErrorDetails = {
 	code: string;
+	action_id?: string;
 	disposition: {
 		delivery: 'not_delivered' | 'delivered' | 'delivery_uncertain' | 'unknown';
 		retry: 'safe' | 'unsafe' | 'unknown';
