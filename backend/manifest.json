@@ -18,11 +18,16 @@
     "entry_point": "dist/main.js",
     "mcp_config": {
       "command": "node",
-      "args": ["${__dirname}/dist/main.js"]
+      "args": [
+        "${__dirname}/dist/main.js"
+      ]
     }
   },
   "tools": [
-    {"name": "desktop", "description": "Native backend readiness, capabilities and pause status."},
+    {
+      "name": "desktop",
+      "description": "Native backend readiness, capabilities and pause status."
+    },
     {
       "name": "computer",
       "description": "Use a computer to complete tasks while an animated Pokémon shows the work. This tool can take screenshots, click, type, scroll, and more."
@@ -44,14 +49,41 @@
       "description": "Retrieve verified text passages from an observed Windows document, including batched phrase lookup."
     },
     {
+      "name": "browser",
+      "description": "Read and operate the DOM using bundled Chromium or a local CDP connection."
+    },
+    {
+      "name": "api",
+      "description": "Watch demonstrations and explicitly reuse encrypted browser-session API requests."
+    },
+    {
+      "name": "app_inspect",
+      "description": "Inspect desktop apps through CDP, API, Win32, UIA and capture."
+    },
+    {
+      "name": "app",
+      "description": "Read web apps with Playwright before desktop fallback."
+    },
+    {
+      "name": "assistant",
+      "description": "Inspect or relay an authorized question to a configured ChatGPT desktop conversation."
+    },
+    {
       "name": "excel",
       "description": "Native desktop Excel workbook inspection, range reads/writes, formulas, search, selection, and verified saving."
     },
-    {"name": "learning", "description": "Encrypted local task records, explicit user feedback and CPU-only workflow learning with fresh target discovery."}
+    {
+      "name": "learning",
+      "description": "Encrypted local task records, explicit user feedback and CPU-only workflow learning with fresh target discovery."
+    }
   ],
   "compatibility": {
     "claude_desktop": ">=0.10.0",
-    "platforms": ["darwin", "win32", "linux"],
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
     "runtimes": {
       "node": ">=16.0.0"
     }
