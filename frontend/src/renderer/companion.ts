@@ -22,6 +22,7 @@ declare global {
       onDragPosition(listener: (position: { x: number; y: number }) => void): () => void
       feedback(satisfaction: 'satisfied' | 'unsatisfied'): Promise<boolean>
       quit(): void
+      openMovies(): void
       panel(open: boolean): void
       chat: {
         history(pet: string): Promise<ChatMessage[]>
@@ -481,6 +482,7 @@ element('close-panel').addEventListener('click', closePanel)
 element('back-panel').addEventListener('click', () => setView('actions'))
 element('action-switch').addEventListener('click', () => setView('switch'))
 element('action-record').addEventListener('click', () => setView('record'))
+element('action-movies').addEventListener('click', () => window.pokemonAPI.openMovies())
 element('action-talk').addEventListener('click', () => {
   setView('talk')
   void loadChat()

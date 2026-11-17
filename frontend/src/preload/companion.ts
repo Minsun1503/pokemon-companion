@@ -20,6 +20,7 @@ contextBridge.exposeInMainWorld('pokemonAPI', {
   },
   feedback: (satisfaction: 'satisfied' | 'unsatisfied') => ipcRenderer.invoke('companion:feedback', satisfaction),
   quit: () => ipcRenderer.send('companion:quit'),
+  openMovies: () => ipcRenderer.send('movies:open'),
   panel: (open: boolean) => ipcRenderer.send('companion:panel', open),
   chat: {
     history: (pet: string) => ipcRenderer.invoke('companion:chat-history', pet),

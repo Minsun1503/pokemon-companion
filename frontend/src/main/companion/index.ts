@@ -1,7 +1,9 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import net from 'node:net'
 import path from 'node:path'
-import { app, clipboard, dialog, globalShortcut, ipcMain, Menu, nativeImage, screen, shell, Tray } from 'electron'
+import { app, BrowserWindow, clipboard, dialog, globalShortcut, ipcMain, Menu, nativeImage, screen, shell, Tray } from 'electron'
+import express from 'express'
+import { createServer, type Server } from 'node:http'
 import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
@@ -10,6 +12,7 @@ import { CompanionApprovals } from './approval'
 import { CompanionChat } from './chat'
 import { registerCompanionChat } from './chat-ipc'
 import { CompanionRecordingBridge } from './recording-ipc'
+import { createApiRouter } from '../../renderer/movies/server/apiRouter'
 
 app.setName('pokemon-mcp')
 if (process.env.POKEMON_USER_DATA_DIR) {
@@ -20,6 +23,10 @@ if (process.env.POKEMON_USER_DATA_DIR) {
 const rootDir = path.resolve(__dirname, '../../..')
 const registry = new PetRegistry(path.join(rootDir, 'pets'))
 const windows = new Map<number, PetWindow>()
+const movieWindows = new Set<BrowserWindow>()
+let movieLibraryWindow: BrowserWindow | undefined
+let movieServer: Server | undefined
+let moviePort = 0
 let activeDisplayId: number
 let tray: Tray
 let socket: net.Socket
@@ -138,6 +145,48 @@ let feedbackSequence = 0
 const pendingFeedback = new Map<number, { resolve: (saved: boolean) => void; timer: ReturnType<typeof setTimeout> }>()
 const shapeCache = new Map<number, string>()
 let trayKey = ''
+
+function openMovieWindow(): void {
+  if (movieLibraryWindow && !movieLibraryWindow.isDestroyed()) {
+    if (movieLibraryWindow.isMinimized()) movieLibraryWindow.restore()
+    movieLibraryWindow.show()
+    movieLibraryWindow.focus()
+    return
+  }
+  const window = new BrowserWindow({
+    width: 1180,
+    height: 820,
+    minWidth: 560,
+    minHeight: 400,
+    frame: false,
+    backgroundColor: '#0d0f14',
+    title: 'Felix and chill',
+    alwaysOnTop: true,
+    resizable: true,
+    webPreferences: {
+      preload: path.join(rootDir, 'build/preload/movie-window.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+      sandbox: true,
+      webSecurity: true,
+    },
+  })
+  movieWindows.add(window)
+  movieLibraryWindow = window
+  window.once('closed', () => {
+    movieWindows.delete(window)
+    if (movieLibraryWindow === window) movieLibraryWindow = undefined
+  })
+  window.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https://')) void shell.openExternal(url)
+    return { action: 'deny' }
+  })
+  window.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false))
+  window.webContents.on('will-navigate', (event, url) => {
+    if (!url.startsWith('file://')) event.preventDefault()
+  })
+  void window.loadFile(path.join(rootDir, 'build/renderer/movies/index.html'), { query: { apiPort: String(moviePort) } })
+}
 
 function snapshot(displayId: number): CompanionSnapshot {
   return {
@@ -308,6 +357,81 @@ app
     if ((!pipe && (!Number.isInteger(port) || port <= 0)) || !token)
       throw new Error('Launch this companion through the Pokémon MCP server.')
     app.dock?.hide()
+    const apiRouter = createApiRouter()
+    const movieJsonCache = new Map<string, { expiresAt: number; payload: unknown }>()
+    const movieApi = express()
+    movieApi.use((request, response, next) => {
+      // The movie renderer is loaded from file://, so Chromium sends Origin: null.
+      // The API is loopback-only and uses no cookies or credentials; allow these
+      // read-only requests without enabling credentialed cross-origin access.
+      response.setHeader('Access-Control-Allow-Origin', '*')
+      response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+      response.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type')
+      if (request.method === 'OPTIONS') {
+        response.status(204).end()
+        return
+      }
+      if (request.method !== 'GET') {
+        response.status(405).end()
+        return
+      }
+      if (request.path.startsWith('/api/') && !request.path.startsWith('/api/poster')) {
+        const key = request.originalUrl
+        const cached = movieJsonCache.get(key)
+        if (cached && cached.expiresAt > Date.now()) {
+          response.setHeader('X-Movie-Cache', 'HIT')
+          response.json(cached.payload)
+          return
+        }
+        const sendJson = response.json.bind(response)
+        response.json = ((payload: unknown) => {
+          if (response.statusCode >= 200 && response.statusCode < 300) {
+            movieJsonCache.set(key, { expiresAt: Date.now() + 5 * 60_000, payload })
+            if (movieJsonCache.size > 300) {
+              const oldest = movieJsonCache.keys().next().value
+              if (oldest) movieJsonCache.delete(oldest)
+            }
+          }
+          return sendJson(payload)
+        }) as typeof response.json
+      }
+      next()
+    })
+    movieApi.use('/api', apiRouter)
+    movieApi.use((_request, response) => response.status(404).end())
+    movieServer = createServer(movieApi)
+    await new Promise<void>((resolve, reject) => {
+      movieServer?.once('error', reject)
+      movieServer?.listen(0, '127.0.0.1', () => {
+        const address = movieServer?.address()
+        if (!address || typeof address === 'string') return reject(new Error('Movie API listener failed to start.'))
+        moviePort = address.port
+        resolve()
+      })
+    })
+    ipcMain.on('movies:open', (event) => {
+      const trusted = [...windows.values(), ...movieWindows].some(
+        (win) => !win.isDestroyed() && win.webContents === event.sender,
+      )
+      if (!trusted) return
+      openMovieWindow()
+    })
+    ipcMain.on('movies:hide-library', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      if (win) win.hide()
+    })
+    ipcMain.on('movies:minimize', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      win?.minimize()
+    })
+    ipcMain.on('movies:close', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      win?.close()
+    })
+    ipcMain.on('movies:toggle-top', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      if (win) win.setAlwaysOnTop(!win.isAlwaysOnTop())
+    })
     try {
       const saved = JSON.parse(readFileSync(preferencesPath, 'utf8'))
       if (typeof saved.movementAllowed === 'boolean') movementAllowed = saved.movementAllowed
@@ -661,6 +785,8 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  movieServer?.close()
+  for (const window of movieWindows) if (!window.isDestroyed()) window.close()
   recorder.close()
   approvals?.close()
   chatTools?.close()

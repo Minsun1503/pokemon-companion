@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build": "npm run generate:icons && tsc -p tsconfig.main.json && tsc -p tsconfig.renderer.json && npm run build:copy",
-    "build:copy": "node -e \"const fs=require('fs'); fs.mkdirSync('build/renderer',{recursive:true}); ['index.html','styles.css','companion.html','companion.css','approval.html'].forEach(f=>fs.copyFileSync('src/renderer/'+f,'build/renderer/'+f))\"",
+    "build:copy": "node -e \"const fs=require('fs'); fs.mkdirSync('build/renderer',{recursive:true}); ['index.html','styles.css','companion.html','companion.css','approval.html','movies/index.html'].forEach(f=>{const dest='build/renderer/'+f; fs.mkdirSync(require('path').dirname(dest),{recursive:true}); fs.copyFileSync('src/renderer/'+f,dest)})\"",
     "check": "biome check . && tsc -p tsconfig.json",
     "format": "biome format --write .",
     "lint": "biome lint .",
@@ -52,15 +52,17 @@
     }
   },
   "license": "MIT",
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "express": "^4.22.3"
+  },
   "devDependencies": {
     "@biomejs/biome": "^2.5.0",
+    "@types/express": "^4.17.25",
     "@types/node": "^22.0.0",
     "electron": "^42.3.3",
     "electron-builder": "^26.0.0",
     "sharp": "^0.35.0",
     "typescript": "^5.8.3"
-  },
-  "dependencies": {
-    "electron-updater": "^6.8.9"
   }
 }
