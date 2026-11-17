@@ -132,10 +132,15 @@ try {
   await page.locator('#baseUrl').fill(`${base}/v1`);
   await page.locator('#model').fill('custom-model');
   await page.locator('#key').fill('private-ui-fixture');
+  const routeSaved = page.waitForResponse(response => response.url().includes('/api/config') && response.ok());
   await page.locator('#saveRoute').click();
+  await routeSaved;
   await page.waitForFunction(() => document.querySelector('#route').value === 'my-proxy');
+  const defaultSaved = page.waitForResponse(response => response.url().includes('/api/config') && response.ok());
   await page.locator('#makeDefault').click();
+  await defaultSaved;
   await page.locator('#notice').filter({hasText: 'Saved.'}).waitFor();
+  await setup.settled();
   await page.reload();
   await page.waitForFunction(() => document.querySelector('#route').value === 'my-proxy');
   await page.locator('#notice').filter({hasText: 'Telegram: fixture'}).waitFor();
