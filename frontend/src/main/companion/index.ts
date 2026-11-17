@@ -1,9 +1,22 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
+import { createServer, type Server } from 'node:http'
 import net from 'node:net'
 import path from 'node:path'
-import { app, BrowserWindow, clipboard, dialog, globalShortcut, ipcMain, Menu, nativeImage, screen, shell, Tray } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  clipboard,
+  dialog,
+  globalShortcut,
+  ipcMain,
+  Menu,
+  nativeImage,
+  screen,
+  shell,
+  Tray,
+} from 'electron'
 import express from 'express'
-import { createServer, type Server } from 'node:http'
+import { createApiRouter } from '../../renderer/movies/server/apiRouter'
 import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
@@ -12,7 +25,6 @@ import { CompanionApprovals } from './approval'
 import { CompanionChat } from './chat'
 import { registerCompanionChat } from './chat-ipc'
 import { CompanionRecordingBridge } from './recording-ipc'
-import { createApiRouter } from '../../renderer/movies/server/apiRouter'
 
 app.setName('pokemon-mcp')
 if (process.env.POKEMON_USER_DATA_DIR) {
@@ -185,7 +197,9 @@ function openMovieWindow(): void {
   window.webContents.on('will-navigate', (event, url) => {
     if (!url.startsWith('file://')) event.preventDefault()
   })
-  void window.loadFile(path.join(rootDir, 'build/renderer/movies/index.html'), { query: { apiPort: String(moviePort) } })
+  void window.loadFile(path.join(rootDir, 'build/renderer/movies/index.html'), {
+    query: { apiPort: String(moviePort) },
+  })
 }
 
 function snapshot(displayId: number): CompanionSnapshot {

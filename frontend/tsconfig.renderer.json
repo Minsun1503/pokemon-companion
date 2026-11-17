@@ -9,6 +9,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-    "include": ["src/renderer/**/*", "src/types/**/*"],
-    "exclude": ["src/renderer/movies/App.tsx", "src/renderer/movies/main.tsx"]
+  "include": ["src/renderer/**/*", "src/types/**/*"],
+  "exclude": ["src/renderer/movies/App.tsx", "src/renderer/movies/main.tsx"]
 }
