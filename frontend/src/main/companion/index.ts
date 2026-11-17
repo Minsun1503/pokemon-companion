@@ -1,10 +1,30 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
+import { createServer, type Server } from 'node:http'
 import net from 'node:net'
 import path from 'node:path'
-import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tray } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  clipboard,
+  dialog,
+  globalShortcut,
+  ipcMain,
+  Menu,
+  nativeImage,
+  screen,
+  shell,
+  Tray,
+} from 'electron'
+import express from 'express'
+import { createApiRouter } from '../../renderer/movies/server/apiRouter'
 import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
+import { CompanionAgentTools } from './agent'
+import { CompanionApprovals } from './approval'
+import { CompanionChat } from './chat'
+import { registerCompanionChat } from './chat-ipc'
+import { CompanionRecordingBridge } from './recording-ipc'
 
 app.setName('pokemon-mcp')
 if (process.env.POKEMON_USER_DATA_DIR) {
@@ -15,13 +35,29 @@ if (process.env.POKEMON_USER_DATA_DIR) {
 const rootDir = path.resolve(__dirname, '../../..')
 const registry = new PetRegistry(path.join(rootDir, 'pets'))
 const windows = new Map<number, PetWindow>()
+const movieWindows = new Set<BrowserWindow>()
+let movieLibraryWindow: BrowserWindow | undefined
+let movieServer: Server | undefined
+let moviePort = 0
 let activeDisplayId: number
 let tray: Tray
 let socket: net.Socket
+const recorder = new CompanionRecordingBridge((value) => {
+  if (!socket || socket.destroyed) return false
+  send(value)
+  return true
+})
 let capturing = false
 let refreshQueued = false
 let paused = false
+let chatTools: CompanionAgentTools | undefined
 let clipboardBackup: Electron.Data | undefined
+let approvals: CompanionApprovals | undefined
+const protectionWaits = new Map<
+  number,
+  { resolve: (protectedWindow: boolean) => void; timer: ReturnType<typeof setTimeout> }
+>()
+let protectionSequence = 0
 let pastedText: string | undefined
 let target: { x: number; y: number } | undefined
 let movementAllowed = true
@@ -122,6 +158,50 @@ const pendingFeedback = new Map<number, { resolve: (saved: boolean) => void; tim
 const shapeCache = new Map<number, string>()
 let trayKey = ''
 
+function openMovieWindow(): void {
+  if (movieLibraryWindow && !movieLibraryWindow.isDestroyed()) {
+    if (movieLibraryWindow.isMinimized()) movieLibraryWindow.restore()
+    movieLibraryWindow.show()
+    movieLibraryWindow.focus()
+    return
+  }
+  const window = new BrowserWindow({
+    width: 1180,
+    height: 820,
+    minWidth: 560,
+    minHeight: 400,
+    frame: false,
+    backgroundColor: '#0d0f14',
+    title: 'Felix and chill',
+    alwaysOnTop: true,
+    resizable: true,
+    webPreferences: {
+      preload: path.join(rootDir, 'build/preload/movie-window.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+      sandbox: true,
+      webSecurity: true,
+    },
+  })
+  movieWindows.add(window)
+  movieLibraryWindow = window
+  window.once('closed', () => {
+    movieWindows.delete(window)
+    if (movieLibraryWindow === window) movieLibraryWindow = undefined
+  })
+  window.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https://')) void shell.openExternal(url)
+    return { action: 'deny' }
+  })
+  window.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false))
+  window.webContents.on('will-navigate', (event, url) => {
+    if (!url.startsWith('file://')) event.preventDefault()
+  })
+  void window.loadFile(path.join(rootDir, 'build/renderer/movies/index.html'), {
+    query: { apiPort: String(moviePort) },
+  })
+}
+
 function snapshot(displayId: number): CompanionSnapshot {
   return {
     state: { ...state, paused, activity: paused ? 'paused' : state.activity },
@@ -173,6 +253,7 @@ function togglePause(): boolean {
     state.message = 'Ready to continue!'
   }
   send({ kind: 'pause', paused })
+  chatTools?.syncPause()
   refresh()
   return paused
 }
@@ -286,9 +367,85 @@ app
   .then(async () => {
     const port = Number(process.env.POKEMON_BRIDGE_PORT)
     const token = process.env.POKEMON_BRIDGE_TOKEN
-    if (!Number.isInteger(port) || port <= 0 || !token)
+    const pipe = process.env.POKEMON_BRIDGE_PIPE
+    if ((!pipe && (!Number.isInteger(port) || port <= 0)) || !token)
       throw new Error('Launch this companion through the Pokémon MCP server.')
     app.dock?.hide()
+    const apiRouter = createApiRouter()
+    const movieJsonCache = new Map<string, { expiresAt: number; payload: unknown }>()
+    const movieApi = express()
+    movieApi.use((request, response, next) => {
+      // The movie renderer is loaded from file://, so Chromium sends Origin: null.
+      // The API is loopback-only and uses no cookies or credentials; allow these
+      // read-only requests without enabling credentialed cross-origin access.
+      response.setHeader('Access-Control-Allow-Origin', '*')
+      response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+      response.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type')
+      if (request.method === 'OPTIONS') {
+        response.status(204).end()
+        return
+      }
+      if (request.method !== 'GET') {
+        response.status(405).end()
+        return
+      }
+      if (request.path.startsWith('/api/') && !request.path.startsWith('/api/poster')) {
+        const key = request.originalUrl
+        const cached = movieJsonCache.get(key)
+        if (cached && cached.expiresAt > Date.now()) {
+          response.setHeader('X-Movie-Cache', 'HIT')
+          response.json(cached.payload)
+          return
+        }
+        const sendJson = response.json.bind(response)
+        response.json = ((payload: unknown) => {
+          if (response.statusCode >= 200 && response.statusCode < 300) {
+            movieJsonCache.set(key, { expiresAt: Date.now() + 5 * 60_000, payload })
+            if (movieJsonCache.size > 300) {
+              const oldest = movieJsonCache.keys().next().value
+              if (oldest) movieJsonCache.delete(oldest)
+            }
+          }
+          return sendJson(payload)
+        }) as typeof response.json
+      }
+      next()
+    })
+    movieApi.use('/api', apiRouter)
+    movieApi.use((_request, response) => response.status(404).end())
+    movieServer = createServer(movieApi)
+    await new Promise<void>((resolve, reject) => {
+      movieServer?.once('error', reject)
+      movieServer?.listen(0, '127.0.0.1', () => {
+        const address = movieServer?.address()
+        if (!address || typeof address === 'string') return reject(new Error('Movie API listener failed to start.'))
+        moviePort = address.port
+        resolve()
+      })
+    })
+    ipcMain.on('movies:open', (event) => {
+      const trusted = [...windows.values(), ...movieWindows].some(
+        (win) => !win.isDestroyed() && win.webContents === event.sender,
+      )
+      if (!trusted) return
+      openMovieWindow()
+    })
+    ipcMain.on('movies:hide-library', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      if (win) win.hide()
+    })
+    ipcMain.on('movies:minimize', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      win?.minimize()
+    })
+    ipcMain.on('movies:close', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      win?.close()
+    })
+    ipcMain.on('movies:toggle-top', (event) => {
+      const win = [...movieWindows].find((entry) => !entry.isDestroyed() && entry.webContents === event.sender)
+      if (win) win.setAlwaysOnTop(!win.isAlwaysOnTop())
+    })
     try {
       const saved = JSON.parse(readFileSync(preferencesPath, 'utf8'))
       if (typeof saved.movementAllowed === 'boolean') movementAllowed = saved.movementAllowed
@@ -370,6 +527,34 @@ app
         send({ kind: 'learning_feedback', id, task_id: state.learningTaskId, satisfaction })
       })
     })
+    ipcMain.handle('companion:recording', (event, input: unknown) =>
+      recorder.request(
+        [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender),
+        input,
+      ),
+    )
+    ipcMain.handle('companion:recording-export', async (event) => {
+      const trusted = [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender)
+      const reply = await recorder.request(trusted, { action: 'export' })
+      if (!reply.ok || !reply.result.text) return reply
+      const chosen = await dialog.showSaveDialog({
+        title: 'Save Pokémon API trace',
+        defaultPath: 'pokemon-recording.json',
+        filters: [{ name: 'JSON trace', extensions: ['json'] }],
+      })
+      if (!chosen.canceled && chosen.filePath) writeFileSync(chosen.filePath, reply.result.text, { mode: 0o600 })
+      return { ok: true, result: { text: chosen.canceled ? 'Export canceled.' : 'Trace saved.' } }
+    })
+    ipcMain.handle('companion:recording-certificate', async (event) => {
+      const trusted = [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender)
+      const reply = await recorder.request(trusted, { action: 'certificate' })
+      if (!reply.ok) return reply
+      if (!reply.result.desktop?.certificate_exists) return { ok: false, error: 'Recorder certificate is unavailable.' }
+      const error = await shell.openPath(reply.result.desktop.certificate)
+      return error
+        ? { ok: false, error }
+        : { ok: true, result: { text: 'Certificate opened. Review the trust settings yourself.' } }
+    })
     ipcMain.on('companion:quit', () => app.quit())
     ipcMain.on('companion:panel', (event, open: unknown) => {
       if (open === true && !paused && (state.task || state.interactionLocked)) togglePause()
@@ -379,9 +564,20 @@ app
       win.setFocusable(open === true)
       if (open === true) win.focus()
     })
-    // Talk is deferred. Preserve its implementation and saved conversations without starting its worker.
-    ipcMain.handle('companion:chat-history', () => [])
-    ipcMain.handle('companion:chat-send', () => ({ ok: false, error: 'Talk is currently disabled.' }))
+    // The native worker remains lazy: opening Talk/history does not start it or contact a model.
+    chatTools = new CompanionAgentTools(
+      rootDir,
+      app.getPath('userData'),
+      () => paused,
+      (patch) => {
+        if (patch.pet && patch.pet !== state.pet) return
+        state = { ...state, ...patch, paused }
+        scheduleRefresh()
+      },
+    )
+    registerCompanionChat(ipcMain, new CompanionChat(rootDir, app.getPath('userData'), registry, chatTools), (sender) =>
+      [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === sender),
+    )
     ipcMain.on('companion:ignore-mouse', (event, ignore: unknown) => {
       const win = [...windows.values()].find((entry) => entry.webContents === event.sender)
       if (dragOwner) return
@@ -437,7 +633,7 @@ app
     screen.on('display-added', sync)
     screen.on('display-removed', sync)
     screen.on('display-metrics-changed', sync)
-    socket = net.connect({ host: '127.0.0.1', port })
+    socket = pipe ? net.connect(pipe) : net.connect({ host: '127.0.0.1', port })
     socket.setEncoding('utf8')
     socket.on('connect', () => send({ kind: 'hello', token }))
     socket.on('close', () => app.quit())
@@ -457,6 +653,23 @@ app
         const newline = buffer.indexOf('\n')
         const line = buffer.slice(0, newline)
         buffer = buffer.slice(newline + 1)
+        const urgent = JSON.parse(line)
+        if (urgent.kind === 'recording_result') {
+          recorder.finish(
+            urgent.id,
+            urgent.ok === true ? { ok: true, result: urgent.result } : { ok: false, error: String(urgent.error) },
+          )
+          continue
+        }
+        if (urgent.kind === 'protection_result') {
+          const pending = protectionWaits.get(urgent.id)
+          if (pending) {
+            clearTimeout(pending.timer)
+            protectionWaits.delete(urgent.id)
+            pending.resolve(urgent.protected === true)
+          }
+          continue
+        }
         queue = queue
           .then(async () => {
             const command = JSON.parse(line)
@@ -468,6 +681,32 @@ app
                   pendingFeedback.delete(command.id)
                   pending.resolve(command.recorded === true)
                 }
+                return
+              }
+              if (command.kind === 'approval_check') {
+                approvals ??= new CompanionApprovals(rootDir, app.getPath('userData'), async (window, approval) => {
+                  const handle = window.getNativeWindowHandle()
+                  const windowId = (
+                    handle.length === 8 ? handle.readBigUInt64LE() : BigInt(handle.readUInt32LE())
+                  ).toString()
+                  const id = ++protectionSequence
+                  const protectedWindow = await new Promise<boolean>((resolve) => {
+                    const timer = setTimeout(() => {
+                      protectionWaits.delete(id)
+                      resolve(false)
+                    }, 15000)
+                    protectionWaits.set(id, { resolve, timer })
+                    send({ kind: 'protect_window', id, window_id: windowId, process_id: process.pid, approval })
+                  })
+                  if (!protectedWindow) throw new Error('Native approval-window protection is unavailable.')
+                })
+                const result = await approvals.check(command.request)
+                send({ kind: 'approval_result', id: command.id, ...result })
+                return
+              }
+              if (command.kind === 'approval_revoke') {
+                approvals?.revokeScope(command.scope)
+                send({ kind: 'ack', id: command.id })
                 return
               }
               if (command.kind === 'state') {
@@ -533,6 +772,16 @@ app
               } else throw new Error('Unknown companion command.')
               send({ kind: 'ack', id: command.id })
             } catch (error) {
+              if (command.kind === 'approval_check') {
+                console.error('Approval UI unavailable:', error instanceof Error ? error.message : 'Unknown error')
+                send({
+                  kind: 'approval_result',
+                  id: command.id,
+                  authorized: false,
+                  action_id: command.request?.action_id,
+                })
+                return
+              }
               send({ kind: 'ack', id: command.id, error: String(error) })
             }
           })
@@ -550,6 +799,11 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  movieServer?.close()
+  for (const window of movieWindows) if (!window.isDestroyed()) window.close()
+  recorder.close()
+  approvals?.close()
+  chatTools?.close()
   clearInterval(dragTimer)
   for (const pending of pendingFeedback.values()) {
     clearTimeout(pending.timer)

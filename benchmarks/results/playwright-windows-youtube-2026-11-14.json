@@ -1,0 +1,1169 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-14T16:03:06.019Z",
+  "query": "Rick Astley Never Gonna Give You Up",
+  "environment": {
+    "platform": "win32",
+    "node": "v24.16.0"
+  },
+  "methodology": "Alternating method order; a new visible Edge profile per sample. Both methods use browser.launch for identical startup. Interaction begins on about:blank. Playwright uses only browser MCP DOM refs; Windows uses Win32 window discovery, UIA fields and guarded Return. Completion requires a matching results URL, the exact search value and named video results. No playback. Startup, interaction, MCP calls and DOM/controls extraction reported separately. Local MCP calls include tool overhead but exclude LLM reasoning latency.",
+  "samples": [
+    {
+      "run": 1,
+      "method": "playwright",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 650.3701999999994,
+        "navigate_and_identify": 3156.757700000001,
+        "fill_and_submit": 468.5562999999984,
+        "verify_and_read_results": 1801.5287000000008
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 650.0868
+        },
+        {
+          "tool": "browser",
+          "action": "navigate",
+          "duration_ms": 1534.0016999999998
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 1264.2492000000002
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 242.3096000000005
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 109.11059999999998
+        },
+        {
+          "tool": "browser",
+          "action": "fill",
+          "duration_ms": 54.13900000000103
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 196.41300000000047
+        },
+        {
+          "tool": "browser",
+          "action": "click",
+          "duration_ms": 108.33149999999841
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 247.1706000000013
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 218.26959999999963
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 1115.9421999999995
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 498.28969999999936
+        }
+      ],
+      "interaction_ms": 5427.4301000000005,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "InsurAAAnce & Rick Astley Never Gonna Give You Up 1 minute, 5 seconds",
+        "Rick Astley – Never Gonna Give You Up 1987 vs 2022 ✨ 35 Years Later  #rickastley #80smusic",
+        "Rick Astley - Never Gonna Give You Up (Edit / Lyrics) #80smusic #GiveYouUp"
+      ],
+      "total_ms": 6077.8003
+    },
+    {
+      "run": 1,
+      "method": "windows",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 789.3065999999999,
+        "navigate_and_identify": 4447.355800000001,
+        "fill_and_submit": 650.0626999999986,
+        "verify_and_read_results": 3055.254799999999
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 789.1863000000012
+        },
+        {
+          "tool": "windows",
+          "action": "get_windows",
+          "duration_ms": 52.2604999999985
+        },
+        {
+          "tool": "windows",
+          "action": "activate",
+          "duration_ms": 44.999299999999494
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 459.0679999999993
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 363.1296999999995
+        },
+        {
+          "tool": "computer",
+          "action": "key",
+          "duration_ms": 47.21529999999984
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 97.49039999999877
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 82.83389999999963
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 138.71670000000086
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 95.62910000000011
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 98.75530000000072
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 99.98780000000079
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 89.74439999999959
+        },
+        {
+          "tool": "windows",
+          "action": "focus",
+          "duration_ms": 114.89049999999952
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.16899999999987
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 81.2471000000005
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.17289999999957
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 78.67000000000007
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 93.71689999999944
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 77.4885000000013
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 87.79230000000098
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 118.17759999999907
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 109.60619999999835
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 101.64880000000267
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 118.59759999999733
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 98.57949999999983
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 313.57510000000184
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 92.39839999999822
+        },
+        {
+          "tool": "windows",
+          "action": "invoke",
+          "duration_ms": 144.98309999999765
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 152.82610000000204
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 157.8205999999991
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 145.66089999999895
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 122.8663000000015
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 114.71770000000106
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 128.41769999999815
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 122.46219999999812
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 109.75009999999747
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 131.91649999999936
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 199.82619999999952
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 183.068299999999
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 222.72209999999905
+        },
+        {
+          "tool": "windows",
+          "action": "read_text",
+          "duration_ms": 201.90170000000217
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 481.3542000000016
+        }
+      ],
+      "window": {
+        "window_id": "263560",
+        "window_ref": "7508b5041c3848d58fc4c35525212e8e"
+      },
+      "interaction_ms": 8250.721500000001,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "InsurAAAnce & Rick Astley Never Gonna Give You Up 1 minute, 5 seconds"
+      ],
+      "total_ms": 9040.028100000001
+    },
+    {
+      "run": 2,
+      "method": "windows",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 660.2078999999976,
+        "navigate_and_identify": 10189.2065,
+        "fill_and_submit": 789.4128999999957,
+        "verify_and_read_results": 2596.3583
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 660.0964999999997
+        },
+        {
+          "tool": "windows",
+          "action": "get_windows",
+          "duration_ms": 27.134099999999307
+        },
+        {
+          "tool": "windows",
+          "action": "activate",
+          "duration_ms": 32.461999999999534
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 131.28750000000218
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 325.9459999999999
+        },
+        {
+          "tool": "computer",
+          "action": "key",
+          "duration_ms": 56.14930000000095
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 97.76910000000134
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 84.7657999999974
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 163.83889999999883
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 95.93500000000131
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 88.12750000000233
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 94.64870000000155
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 102.24570000000313
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 92.52980000000025
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 89.55340000000069
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 116.07040000000052
+        },
+        {
+          "tool": "windows",
+          "action": "focus",
+          "duration_ms": 105.54200000000128
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 84.16519999999946
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 100.06160000000091
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 98.5721999999987
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 82.84300000000076
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 91.4435999999987
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 82.99209999999948
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 80.80299999999988
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 80.58169999999882
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 81.91339999999764
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 87.10299999999916
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.97379999999976
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 85.65380000000005
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.86490000000049
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.59089999999924
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 84.6121000000021
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 85.77790000000095
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 81.81550000000061
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 80.26440000000002
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 75.66999999999825
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 86.64160000000265
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 78.28220000000147
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 86.22790000000168
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 80.15550000000076
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 87.83339999999953
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.13100000000122
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.19740000000093
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 84.22799999999916
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 75.90690000000177
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 72.27750000000015
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.73670000000129
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 75.58940000000075
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.05870000000141
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.54880000000048
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 80.64099999999962
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 72.26239999999962
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 82.71829999999682
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.4519999999975
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 150.8022000000019
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 116.8826999999983
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 95.8817999999992
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 103.90529999999853
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 342.56180000000313
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 117.56390000000101
+        },
+        {
+          "tool": "windows",
+          "action": "invoke",
+          "duration_ms": 225.1550999999963
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 175.60510000000068
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 103.36959999999817
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 139.87690000000293
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 185.68329999999696
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 183.30669999999373
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 215.46549999999843
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 167.3228999999992
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 254.64470000000438
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 198.68500000000495
+        },
+        {
+          "tool": "windows",
+          "action": "read_text",
+          "duration_ms": 230.89270000000397
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 438.3018000000011
+        }
+      ],
+      "window": {
+        "window_id": "2753834",
+        "window_ref": "e651b6a1147a4bc88a71d2891ddafbd5"
+      },
+      "interaction_ms": 13634.661500000002,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "InsurAAAnce & Rick Astley Never Gonna Give You Up 1 minute, 5 seconds"
+      ],
+      "total_ms": 14294.8694
+    },
+    {
+      "run": 2,
+      "method": "playwright",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 685.1843000000008,
+        "navigate_and_identify": 3768.7125000000015,
+        "fill_and_submit": 542.7103999999963,
+        "verify_and_read_results": 1772.2170000000042
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 685.0601000000024
+        },
+        {
+          "tool": "browser",
+          "action": "navigate",
+          "duration_ms": 3168.5126999999993
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 600.1025000000009
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 217.04040000000532
+        },
+        {
+          "tool": "browser",
+          "action": "fill",
+          "duration_ms": 91.21680000000197
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 91.38099999999395
+        },
+        {
+          "tool": "browser",
+          "action": "click",
+          "duration_ms": 142.88409999999567
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 103.33660000000236
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 73.5196000000069
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 127.19360000000597
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 125.99229999999807
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 890.8560999999972
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 414.4068000000043
+        }
+      ],
+      "interaction_ms": 6083.661999999997,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "InsurAAAnce & Rick Astley Never Gonna Give You Up 1 minute, 5 seconds",
+        "Rick Astley – Never Gonna Give You Up 1987 vs 2022 ✨ 35 Years Later  #rickastley #80smusic",
+        "Rick Astley - Never Gonna Give You Up (Edit / Lyrics) #80smusic #GiveYouUp"
+      ],
+      "total_ms": 6768.846299999997
+    },
+    {
+      "run": 3,
+      "method": "playwright",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 572.7891999999993,
+        "navigate_and_identify": 4163.401399999995,
+        "fill_and_submit": 584.2070000000022,
+        "verify_and_read_results": 2159.686999999998
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 572.6897000000026
+        },
+        {
+          "tool": "browser",
+          "action": "navigate",
+          "duration_ms": 3852.0134000000035
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 311.29299999999785
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 248.53669999999693
+        },
+        {
+          "tool": "browser",
+          "action": "fill",
+          "duration_ms": 138.2569999999978
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 76.16879999999946
+        },
+        {
+          "tool": "browser",
+          "action": "click",
+          "duration_ms": 120.95029999999679
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 130.55980000000272
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 124.13370000000577
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 131.69780000000173
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 208.20820000000094
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 1076.8799999999974
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 391.41589999999997
+        }
+      ],
+      "interaction_ms": 6907.310599999997,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "Never Gonna Give You Up (2022 Remaster) 3 minutes, 34 seconds",
+        "Rick Astley – Never Gonna Give You Up 1987 vs 2022 ✨ 35 Years Later  #rickastley #80smusic",
+        "Rick Astley - Never Gonna Give You Up (Edit / Lyrics) #80smusic #GiveYouUp"
+      ],
+      "total_ms": 7480.099799999996
+    },
+    {
+      "run": 3,
+      "method": "windows",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 623.5578000000023,
+        "navigate_and_identify": 4079.965599999996,
+        "fill_and_submit": 731.9254999999976,
+        "verify_and_read_results": 3185.788799999995
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 623.4508999999962
+        },
+        {
+          "tool": "windows",
+          "action": "get_windows",
+          "duration_ms": 48.04639999999927
+        },
+        {
+          "tool": "windows",
+          "action": "activate",
+          "duration_ms": 27.641799999997602
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 124.16519999999582
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 340.8130000000019
+        },
+        {
+          "tool": "computer",
+          "action": "key",
+          "duration_ms": 51.65140000000247
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 100.33480000000418
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 91.87450000000536
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 155.51400000000285
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 109.37320000000182
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 84.26920000000246
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 95.7239000000045
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 89.98150000000169
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 108.60360000000219
+        },
+        {
+          "tool": "windows",
+          "action": "focus",
+          "duration_ms": 117.61409999999887
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.26370000000315
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 91.51480000000447
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 78.38490000000456
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.41970000000583
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 76.74440000000322
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 84.39860000000044
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 81.3943999999974
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 108.3585000000021
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 87.2419000000009
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.10540000000037
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 110.00880000000325
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 288.03600000000006
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 93.75910000000295
+        },
+        {
+          "tool": "windows",
+          "action": "invoke",
+          "duration_ms": 239.9533999999985
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 182.23270000000048
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 90.84619999999995
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 132.8790999999983
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 90.04159999999683
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 128.668700000002
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 133.75339999999414
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 145.2172999999966
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 119.52209999999468
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 111.5002999999997
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 132.7358000000022
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 145.37779999999475
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 209.14890000000014
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 189.90359999999782
+        },
+        {
+          "tool": "windows",
+          "action": "read_text",
+          "duration_ms": 182.55589999999938
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 419.2016000000003
+        },
+        {
+          "tool": "pokemon",
+          "action": "done",
+          "duration_ms": 8.792200000003504
+        },
+        {
+          "tool": "learning",
+          "action": "finish",
+          "duration_ms": 7.01929999999993
+        }
+      ],
+      "window": {
+        "window_id": "460158",
+        "window_ref": "f336a7924f3744bc98cb48653bf564f2"
+      },
+      "interaction_ms": 8073.462800000001,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "Never Gonna Give You Up (2022 Remaster) 3 minutes, 34 seconds"
+      ],
+      "total_ms": 8697.020600000003
+    }
+  ],
+  "mcp_start_ms": 1692.3556999999998,
+  "summary": {
+    "playwright": {
+      "verified": 3,
+      "attempted": 3,
+      "median_interaction_ms": 6083.661999999997,
+      "median_total_ms": 6768.846299999997,
+      "median_shared_startup_ms": 650.3701999999994,
+      "median_tool_calls": 11
+    },
+    "windows": {
+      "verified": 3,
+      "attempted": 3,
+      "median_interaction_ms": 8250.721500000001,
+      "median_total_ms": 9040.028100000001,
+      "median_shared_startup_ms": 660.2078999999976,
+      "median_tool_calls": 42
+    }
+  },
+  "built_sha256": {
+    "browser/automation.js": "d33dacae147848e398d54fa51f9e7573b6387977655caae31ae18ce8f459fb36",
+    "tools/browser.js": "122b6685b6839adcbcbcd0a28074191b26ea9deb0a6477deb78b5b82443f8ac3",
+    "windows/uia-worker.dll": "7296ffe8d47501588c0495995f60a0b21a02bbbd5696304012adafa0ce210bd2"
+  }
+}

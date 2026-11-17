@@ -1,0 +1,13 @@
+atomic: first workflow 3083.5 ms
+batch: first workflow 2944.4 ms
+Verified 5/20 warm pairs
+Verified 10/20 warm pairs
+Verified 15/20 warm pairs
+Verified 20/20 warm pairs
+┌─────────┬───────┬───────────┬─────────┬───────────────────┐
+│ (index) │ calls │ median_ms │ p95_ms  │ result_text_chars │
+├─────────┼───────┼───────────┼─────────┼───────────────────┤
+│ atomic  │ 6     │ '346.1'   │ '363.3' │ 1536              │
+│ batch   │ 1     │ '335.1'   │ '366.8' │ 501               │
+└─────────┴───────┴───────────┴─────────┴───────────────────┘
+Saved verified benchmark: benchmarks\results\strength-2026-11-13-baseline-evidence\windows-plain.json

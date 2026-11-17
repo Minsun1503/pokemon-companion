@@ -9,6 +9,11 @@ import type {PokemonRuntime} from '../pokemon/runtime.js';
 import {instrument} from '../learning/instrument.js';
 import {registerLearning} from './learning.js';
 import {registerResearch} from './research.js';
+import {registerBrowser} from './browser.js';
+import {registerAppInspect} from './app-inspect.js';
+import {registerApp} from './app.js';
+import {registerAssistant} from './assistant.js';
+import {registerApi} from './api.js';
 
 export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
 	const traced = instrument(server, runtime.learning);
@@ -18,6 +23,11 @@ export function registerAll(server: McpServer, runtime: PokemonRuntime): void {
 	registerWindows(traced, runtime);
 	registerCourse(traced, runtime);
 	registerResearch(traced, runtime);
+	registerBrowser(traced, runtime);
+	registerApi(traced, runtime);
+	registerAppInspect(traced, runtime);
+	registerApp(traced, runtime);
+	registerAssistant(traced, runtime);
 	registerExcel(traced, runtime);
 	registerLearning(server, runtime);
 }

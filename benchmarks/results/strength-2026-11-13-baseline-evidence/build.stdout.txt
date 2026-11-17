@@ -1,0 +1,20 @@
+
+> pokemon-computer-companion@0.2.1 build
+> node scripts/repos.cjs run build
+
+
+> pokemon-pet@0.0.2-5 build
+> npm run generate:icons && tsc -p tsconfig.main.json && tsc -p tsconfig.renderer.json && npm run build:copy
+
+
+> pokemon-pet@0.0.2-5 generate:icons
+> node scripts/generate-icons.js
+
+
+> pokemon-pet@0.0.2-5 build:copy
+> node -e "const fs=require('fs'); fs.mkdirSync('build/renderer',{recursive:true}); ['index.html','styles.css','companion.html','companion.css'].forEach(f=>fs.copyFileSync('src/renderer/'+f,'build/renderer/'+f))"
+
+
+> computer-use-mcp@1.8.0 build
+> tsc --project tsconfig.build.json && node scripts/copy-native.mjs
+

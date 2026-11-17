@@ -1,12 +1,12 @@
 # Pokémon Computer Companion
 
-An AI controls your computer through MCP while an animated Pokémon appears to do the work on your desktop. Claude, Codex, or another MCP client is the brain. The local computer-use backend performs the actions, and the Electron companion shows movement, typing, thinking, speech, and celebrations.
+An AI controls your computer through MCP while an animated Pokémon appears to do the work on your desktop. Claude, Codex, or another MCP client can drive the tools. Pokémon Agent also provides its own API model loop and Telegram gateway. The local backend performs the actions, and the Electron companion shows movement, typing, thinking, speech, and celebrations.
 
 All seven Pokémon from the pet repository are included: **Pikachu, Riolu, Lucario, Clodsire, Bulbasaur, Charmander, and Squirtle**, alongside **Hello Kitty and Kuromi** in matching pixel-art style. Pikachu is the default. Change among all nine companions from the team panel, the tray menu, or the `pokemon` tool (`hello-kitty` and `kuromi`).
 
 ## Easy installation
 
-For **Claude Desktop on Windows or macOS**, download the matching **`.mcpb` extension** from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest), open it in Claude, confirm **Install**, and enable Pokémon Companion. Claude launches the companion and uses its tools from your chat. Node, Electron, native desktop helpers, and all seven Pokémon are included. No terminal commands, additional software, GitHub login, model API key, or manual MCP settings are required. macOS still requires its normal Accessibility and Screen Recording permissions. See [installation steps](INSTALL.md).
+For **Claude Desktop on Windows or macOS**, download the matching **`.mcpb` extension** from [Releases](https://github.com/Minsun1503/pokemon-companion/releases/latest), open it in Claude, confirm **Install**, and enable Pokémon Companion. Claude launches the companion and uses its tools from your chat. Node, Electron, Chromium, native desktop helpers, and all seven Pokémon are included. No terminal commands, additional software, GitHub login, model API key, or manual MCP settings are required. macOS still requires its normal Accessibility and Screen Recording permissions. See [installation steps](INSTALL.md).
 
 The **ChatGPT desktop plugin ZIPs** contain the complete local MCP server and its runtimes, with native plugin manifests. Public installation from ChatGPT's Plugins directory requires **OpenAI local-MCP partner approval and plugin review**. That approval has not been obtained; these files are prepared for submission, and opening a ZIP in ChatGPT does not install them. See [OpenAI's desktop-only distribution requirements](https://developers.openai.com/plugins/deploy/desktop-only).
 
@@ -32,6 +32,8 @@ The demo opens the companion and shows working, thinking, and completion animati
 
 ## Connect Claude or Codex
 
+Pokémon also has its own model/tool harness with Telegram control, direct DeepSeek/Claude/OpenAI APIs and custom API routes. Run `npm run agent -- setup` from the active checkout to open its setup page. See [Pokémon Agent setup, commands and verification](docs/pokemon-agent.md).
+
 ```powershell
 npm run config
 ```
@@ -41,11 +43,13 @@ This generates configuration using the actual Node executable and checkout paths
 - `config/claude-desktop.json`: merge its `mcpServers` entry into your Claude Desktop MCP configuration, then restart Claude Desktop.
 - `config/codex.toml`: add its server table to your Codex `config.toml`, then reconnect the MCP server. See [official Codex MCP configuration](https://developers.openai.com/codex/mcp/).
 
-Use a local MCP client on the same computer as the companion. A cloud-only client cannot manipulate this desktop without a local connection. Computer control uses the connected AI client's model. Talk is deferred and disabled in the companion.
+Use a local MCP connection on the same computer as the companion. Computer control uses the connected AI client's model, or the configured Ollama model when you give a task through the companion's Talk panel.
 
 Try: **“Use Pikachu to help me with my computer. Announce the task, inspect the screen, perform the actions, and tell me when you’ve verified the result.”**
 
 ## Tools
+
+To learn a web API from your own clicks, **`api`** watches demonstrations, saves encrypted request templates, and refreshes the catalog when you repeat an action or click something new. Reuse is explicit and bound to the current browser session. Run `npm run api:watch` for a capture-only browser console; see [the demonstration and replay guide](docs/session-api.md).
 
 For long form fields, Windows `read_text` now supports a bounded exact `expect_text` check in the same batch as `set_value`. Source clients can reuse one connection and a predefined form template with `npm run desktop:client`. See [request-to-completion improvements and timing boundaries](docs/request-completion-latency.md).
 
@@ -53,7 +57,9 @@ For an already authorized PR workflow, `npm run workflow:client` runs create, CI
 
 `desktop` with `{"action":"status"}` checks backend readiness, supported native actions, platform limits, and pause state. It sends no input, works while paused, and is bounded to five seconds including queue time. Readiness does not establish permission to control every app.
 
-On Windows, **`windows` is the preferred tool**. It uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests. Discovery values come from each fresh per-node cache; actions still revalidate targets and verify field changes with live reads.
+For Teams, WhatsApp, Zalo or configured applications, **`app read`** prefers the web version through Playwright, then falls back to desktop CDP/API, Win32, UIA and window capture. Working desktop connections persist across MCP sessions and are rediscovered after failure or a detected executable update. **`browser`** provides DOM reading and actions with bundled Chromium and persistent browser profiles; **`app_inspect`** reads an observed desktop window. See [setup, adapter recovery, API interception and the verified YouTube comparison](docs/browser-dom.md).
+
+For native desktop controls, **`windows`** uses Win32 to list/activate windows and Windows UI Automation to read named controls and invoke their supported actions. Its results are compact text, with no screenshot images. The worker starts once and is reused for later requests. Discovery values come from each fresh per-node cache; actions still revalidate targets and verify field changes with live reads.
 
 Discovery results report `complete` and `truncated`. Windows errors include `error_details` with an error code and delivery/retry evidence; retry a failed operation only when its evidence permits it. In a partial batch, this applies only to the stopped step, and earlier steps remain applied. See the [Windows discovery and error contract](docs/windows-api.md).
 
@@ -148,7 +154,7 @@ The [verified benchmark report](benchmarks/results/windows-main-2026-11-09-visua
 - Toggle **Allow movement** in the action menu or tray to enable or stop roaming and following tool targets. Work animations still play in place, and you can always reposition it manually. The standalone pet has the same toggle in its chat panel.
 - The MCP companion remembers your movement preference and last dropped position after restarting. Dragging cancels its previous travel target. With movement enabled, new tool actions may move it again.
 - **Switch** opens all nine companions; selecting one changes the companion immediately.
-- **Talk** is deferred and disabled. Its implementation and existing saved conversations are retained for later.
+- **Talk** opens a separate conversation for the selected companion. With Ollama configured, it can also perform desktop tasks using the native MCP tools. Other configured providers support conversation only.
 - **Exit** closes the companion and stops further computer actions.
 - Click the Pokémon again, use the Close button, or press Escape to close the menu. Escape returns from Switch to the action menu first.
 - Use **Ctrl+Shift+P** or the tray menu to pause/resume computer control. The AI cannot resume a user pause. A pause prevents the next input action; an input already being executed may finish.
@@ -159,7 +165,11 @@ The overlay stays above other windows and follows action targets with an offset 
 
 `npm run test:companion-drag` exercises native mouse capture, drop behavior, movement toggling, repeated targets, and persistence in an owned Electron fixture. `node scripts/companion-focus-smoke.mjs` checks animation frames and native focus/click-through. Physical dragging between monitors remains untested.
 
-The companion does not start a chat worker or contact a model provider. Give computer-control tasks to your connected MCP client. The dormant Talk source and existing conversations remain available for future development.
+Opening Talk or its saved history does not start the worker or contact a model. Sending a message starts the configured provider; Ollama tasks use a lazy native worker that closes with the companion. Saved conversations remain separate from the connected MCP client's conversation.
+
+For local Talk, install [Ollama for Windows](https://docs.ollama.com/windows), start it, and pull the model named in `frontend/config/setting.json` (default `qwen3:8b`). A per-user `setting.json` in `%APPDATA%/pokemon-mcp` overrides this configuration. For the readiness smoke test, set `ai.provider` to `ollama`, `ai.ollama.baseUrl` to `http://localhost:11434`, and `ai.ollama.model` to `qwen3:4b`, then run `ollama pull qwen3:4b`. Model downloads require several GB of storage; CPU inference can be slow. No model runs until you send a message.
+
+`npm run test:talk` checks the agent and tool contracts. `npm run test:talk:ui` checks the actual Electron main/preload/renderer, native input, history isolation, pause rejection and worker cleanup with a disposable model fixture. These checks do not measure live-model task success or speed.
 
 ## Configuration
 
@@ -189,6 +199,8 @@ Known Windows workflows can compile into parameterized batches. Every replay pre
 Records use AES-256-GCM and Windows current-user DPAPI key protection. Collection is local, bounded and defaults to 30-day retention. `learning configure` changes collection and retention, `forget` removes records/model state, and `export` provides versioned JSON chunks within `max_chars`. See [capabilities, privacy and measured limits](docs/local-learning.md) and [verification scope](docs/local-learning-plan.md).
 
 ## Checks
+
+Run `npm run test:strength` for a recorded assessment of static checks, automated tests, MCP contracts, HTTP authentication, native Windows identity/coordination, repeated desktop workflows, and production dependency advisories. Add `-- --window-id ID` to include controlled Edge/PDF/Excel operations. See [public benchmark choices, results, and reproduction steps](docs/repository-strength.md). Reports preserve failures and do not assign an AI-agent ranking.
 
 Run `npm run benchmark:common -- --window-id ID --runs 5` to measure ten shared Edge/Excel operations with verified outcomes in your existing Edge profile and disposable Excel workbooks. See [results and performance refinements](docs/common-task-performance.md) and the [benchmark instructions](benchmarks/README.md).
 

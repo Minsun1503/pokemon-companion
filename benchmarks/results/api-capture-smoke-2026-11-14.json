@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "transport": "HTTP through app-specific loopback proxy",
+  "system_proxy_changed": false,
+  "trust_store_changed": false,
+  "capture": {
+    "process_id": 6352,
+    "captured_at": 1794710300031,
+    "provenance": "operator-asserted, not process-attributed",
+    "events": [
+      {
+        "at": 1794710300031,
+        "url": "http://127.0.0.1:53653/api",
+        "status": 200,
+        "body": "{\"message\":\"API interception works\"}"
+      }
+    ]
+  }
+}

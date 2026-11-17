@@ -158,7 +158,7 @@ const actionDescription = `The action to perform. The available actions are:
 * scroll: Scroll the screen in a specified direction. Requires coordinate (moves there first) and text parameter with direction: "up", "down", "left", or "right". Optionally append ":N" to scroll N pixels (default 300), e.g. "down:500".
 * get_screenshot: Take a screenshot of the screen.`;
 
-const toolDescription = 'Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool in default batch mode for known UI Automation inspection, control invocation, field values, and result verification steps. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses. Shortcuts: use windows focus/invoke/set_value and batch first. Use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only when no control is exposed or no UIA pattern fits; on Windows pass window_id for the foreground guard and verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation.';
+const toolDescription = 'Native desktop input is host-authorized only; companion browser/API consent does not gate native mutations. Desktop mouse/keyboard control and screenshot fallback. On Windows FIRST use the windows tool in default batch mode for known UI Automation inspection, control invocation, field values, and result verification steps. If its API lacks a control/pattern, prefer keyboard shortcuts; use screenshots only for visual-only or unsupported content. For coordinate clicks, inspect a fresh screenshot and use the returned image dimensions, not physical display pixels. A red crosshair marks the cursor; click control centers and verify results. On macOS an initial click may only focus a window. This is a desktop GUI interface, not a terminal. Pokémon animations update automatically. Respect user pauses. Shortcuts: use windows focus/invoke/set_value and batch first. Use a known direct shortcut (ctrl+l address bar, ctrl+1..8 indexed tab, ctrl+9 last tab, escape dismiss, ctrl+, settings where supported) only when no control is exposed or no UIA pattern fits; on Windows pass window_id for the foreground guard and verify the result immediately. Never use tab/ctrl+tab/alt+tab as blind navigation.';
 
 const coordinateSchema = z
 	.array(z.number())
@@ -194,6 +194,10 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 				}
 
 				inputState = 'unknown';
+				if (process.platform === 'win32') {
+					await runtime.windows.request({action: 'guard_physical'});
+				}
+
 				const result = await run();
 				completedInputs += 1;
 				return result;
@@ -477,6 +481,10 @@ export function registerComputer(server: McpServer, runtime: PokemonRuntime): vo
 						}
 
 						case 'get_screenshot': {
+							if (process.platform === 'win32') {
+								await runtime.windows.request({action: 'guard_physical'});
+							}
+
 							// Get cursor position in logical coordinates
 							const cursorPos = await mouse.getPosition();
 

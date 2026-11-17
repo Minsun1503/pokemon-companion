@@ -1,0 +1,15 @@
+{
+  "at": "2026-11-15T03:02:47.554Z",
+  "fixture_only": true,
+  "protected_paths": [
+    "UIA",
+    "Win32",
+    "app_identity",
+    "CDP discovery",
+    "selected-window capture",
+    "activate",
+    "old element ref",
+    "physical input / full-screen capture"
+  ],
+  "result": "pass"
+}

@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-14T16:01:24.727Z",
+  "query": "Rick Astley Never Gonna Give You Up",
+  "environment": {
+    "platform": "win32",
+    "node": "v24.16.0"
+  },
+  "methodology": "Alternating method order; a new visible Edge profile per sample. Both methods use browser.launch for identical startup. Interaction begins on about:blank. Playwright uses only browser MCP DOM refs; Windows uses Win32 window discovery, UIA fields and guarded Return. Completion requires a matching results URL, the exact search value and named video results. No playback. Startup, interaction, MCP calls and DOM/controls extraction reported separately. Local MCP calls include tool overhead but exclude LLM reasoning latency.",
+  "samples": [
+    {
+      "run": 1,
+      "method": "playwright",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 672.5428999999995,
+        "navigate_and_identify": 2820.2309000000005,
+        "fill_and_submit": 520.935300000001,
+        "verify_and_read_results": 2222.7171
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 671.982
+        },
+        {
+          "tool": "browser",
+          "action": "navigate",
+          "duration_ms": 2257.8383999999996
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 561.4090999999999
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 189.9896000000008
+        },
+        {
+          "tool": "browser",
+          "action": "fill",
+          "duration_ms": 58.29600000000028
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 122.19779999999992
+        },
+        {
+          "tool": "browser",
+          "action": "click",
+          "duration_ms": 149.88810000000012
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 172.35510000000068
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 126.47240000000056
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 940.7074000000011
+        },
+        {
+          "tool": "browser",
+          "action": "snapshot",
+          "duration_ms": 663.0447999999997
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 475.0434000000005
+        }
+      ],
+      "interaction_ms": 5564.208999999999,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "InsurAAAnce & Rick Astley Never Gonna Give You Up 1 minute, 5 seconds",
+        "Rick Astley – Never Gonna Give You Up 1987 vs 2022 ✨ 35 Years Later  #rickastley #80smusic",
+        "Rick Astley - Never Gonna Give You Up (Edit / Lyrics) #80smusic #GiveYouUp"
+      ],
+      "total_ms": 6236.751899999998
+    },
+    {
+      "run": 1,
+      "method": "windows",
+      "verified": true,
+      "stage_ms": {
+        "shared_browser_startup": 571.3818999999985,
+        "navigate_and_identify": 4541.635700000001,
+        "fill_and_submit": 699.9416000000019,
+        "verify_and_read_results": 3576.021499999999
+      },
+      "calls": [
+        {
+          "tool": "browser",
+          "action": "launch",
+          "duration_ms": 571.2742999999991
+        },
+        {
+          "tool": "windows",
+          "action": "get_windows",
+          "duration_ms": 110.13890000000174
+        },
+        {
+          "tool": "windows",
+          "action": "activate",
+          "duration_ms": 82.97509999999966
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 371.66100000000006
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 351.8927999999996
+        },
+        {
+          "tool": "computer",
+          "action": "key",
+          "duration_ms": 61.0565000000006
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 106.89980000000105
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 85.07160000000113
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.85480000000098
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 140.8184999999994
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 88.03130000000056
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 110.38990000000013
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.99649999999929
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 76.8156999999992
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 83.42100000000028
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 82.57380000000012
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 92.39869999999974
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 69.93459999999868
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 78.96119999999974
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 76.41920000000027
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 79.16669999999976
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 89.08989999999903
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 129.4989999999998
+        },
+        {
+          "tool": "windows",
+          "action": "focus",
+          "duration_ms": 146.0477000000028
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 106.97999999999956
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 106.58210000000327
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 119.60390000000189
+        },
+        {
+          "tool": "windows",
+          "action": "batch",
+          "duration_ms": 352.0880999999972
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 93.4327000000012
+        },
+        {
+          "tool": "windows",
+          "action": "invoke",
+          "duration_ms": 134.4310000000005
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 139.56559999999808
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 107.58139999999912
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 137.60150000000067
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 102.23479999999836
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 112.15129999999772
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 108.82300000000032
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 127.81390000000101
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 96.7648999999983
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 105.88460000000123
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 111.5064999999995
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 118.8237999999983
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 112.2589999999982
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 128.5011999999988
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 242.64270000000033
+        },
+        {
+          "tool": "windows",
+          "action": "get_ui",
+          "duration_ms": 227.53350000000137
+        },
+        {
+          "tool": "windows",
+          "action": "read_text",
+          "duration_ms": 181.62130000000252
+        },
+        {
+          "tool": "browser",
+          "action": "close",
+          "duration_ms": 445.78009999999995
+        },
+        {
+          "tool": "pokemon",
+          "action": "done",
+          "duration_ms": 9.985400000001391
+        },
+        {
+          "tool": "learning",
+          "action": "finish",
+          "duration_ms": 6.159800000001269
+        }
+      ],
+      "window": {
+        "window_id": "917666",
+        "window_ref": "712434baad254bc0b1bac2fa484c8658"
+      },
+      "interaction_ms": 9011.2046,
+      "result_names": [
+        "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) 3 minutes, 34 seconds",
+        "Never Gonna Give You Up | Rick Astley Rocks New Year's Eve - BBC 3 minutes, 54 seconds",
+        "InsurAAAnce & Rick Astley Never Gonna Give You Up 1 minute, 5 seconds"
+      ],
+      "total_ms": 9582.586499999998
+    }
+  ],
+  "mcp_start_ms": 1702.5733,
+  "summary": {
+    "playwright": {
+      "verified": 1,
+      "attempted": 1,
+      "median_interaction_ms": 5564.208999999999,
+      "median_total_ms": 6236.751899999998,
+      "median_shared_startup_ms": 672.5428999999995,
+      "median_tool_calls": 10
+    },
+    "windows": {
+      "verified": 1,
+      "attempted": 1,
+      "median_interaction_ms": 9011.2046,
+      "median_total_ms": 9582.586499999998,
+      "median_shared_startup_ms": 571.3818999999985,
+      "median_tool_calls": 45
+    }
+  },
+  "built_sha256": {
+    "browser/automation.js": "d33dacae147848e398d54fa51f9e7573b6387977655caae31ae18ce8f459fb36",
+    "tools/browser.js": "122b6685b6839adcbcbcd0a28074191b26ea9deb0a6477deb78b5b82443f8ac3",
+    "windows/uia-worker.dll": "1b57a8603918c6f69d24222dbfde40219fd91711f05649a051f6b5f37b8a62c9"
+  }
+}

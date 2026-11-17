@@ -1,0 +1,13 @@
+{
+  "transport": "InMemoryTransport",
+  "tools": 8,
+  "instructionCharacters": 3406,
+  "instructionUtf8Bytes": 3406,
+  "toolCatalogUtf8Bytes": 29337,
+  "contractSha256": "0623c3be0ca96d843c767ac46b261ca29583f957a7f7fe25930e98d6d6ce802e",
+  "clientExpandedInstructionsCharacters": 27240,
+  "limits": [
+    "Character/byte counts, not tokenizer counts or model latency.",
+    "Client-expanded size mirrors the observed eight-tool client; other clients may expose instructions differently."
+  ]
+}

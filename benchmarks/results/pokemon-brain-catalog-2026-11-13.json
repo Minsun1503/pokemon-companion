@@ -1,0 +1,85 @@
+{
+  "measured_at": "2026-11-13T11:24:27.990Z",
+  "source_revision": "3ff5bfb3ef29f13d62ec030764ded6feae548c18",
+  "scope": "Read-only initialization of the built TalkTools catalog; no model invocation or desktop input.",
+  "agent_instructions_characters": 4287,
+  "agent_instructions_utf8_bytes": 4288,
+  "cases": [
+    {
+      "request": "Look up public documentation in Edge",
+      "status": "catalog_generated",
+      "tools": [
+        "desktop",
+        "windows",
+        "computer",
+        "human_handoff",
+        "task_done"
+      ],
+      "catalog_utf8_bytes": 5505,
+      "windows_actions": [
+        "get_windows",
+        "get_ui",
+        "activate",
+        "invoke",
+        "set_value",
+        "select",
+        "toggle",
+        "expand",
+        "collapse",
+        "scroll",
+        "focus",
+        "read_text",
+        "wait_for",
+        "launch"
+      ],
+      "windows_has_steps": false
+    },
+    {
+      "request": "Read ten Excel cells and save a workbook",
+      "status": "catalog_error",
+      "message": "Transforms cannot be represented in JSON Schema"
+    },
+    {
+      "request": "Read a course lesson",
+      "status": "catalog_generated",
+      "tools": [
+        "desktop",
+        "windows",
+        "computer",
+        "course",
+        "human_handoff",
+        "task_done"
+      ],
+      "catalog_utf8_bytes": 11635,
+      "windows_actions": [
+        "get_windows",
+        "get_ui",
+        "activate",
+        "invoke",
+        "set_value",
+        "select",
+        "toggle",
+        "expand",
+        "collapse",
+        "scroll",
+        "focus",
+        "read_text",
+        "wait_for",
+        "launch"
+      ],
+      "windows_has_steps": false
+    }
+  ],
+  "hashes": {
+    "frontend/src/main/companion/agent.ts": "ebfa0345d034f8418c6d472babe0396fc67f5c1481a841ca87fb69325e65be14",
+    "frontend/src/main/companion/chat.ts": "d37a7c83c08946cf9c0a2bece10739e3542cc5c0992db29db71f0b6370225a21",
+    "backend/src/talk/tools.ts": "a08d5112c729710478e1ceb14402e2052991dc0a00532e9b36a99b5f9e957226",
+    "backend/dist/talk/tools.js": "087cb77add347b912943dd1e308fa7c5c53295c721ae3cec4858c2479cf11880",
+    "frontend/build/main/companion/agent.js": "2a6272555a1b10701bb888452afcc06675f22bda7dd628abe09b7346ca2c9c75"
+  },
+  "limits": [
+    "Catalog generation and schema exposure only, not inference speed, task success, or a model benchmark.",
+    "Runtime receives an inert companion stub; tool handlers are never called.",
+    "Source and compiled-file hashes identify the inspected checkout."
+  ]
+}

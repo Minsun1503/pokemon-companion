@@ -10,6 +10,7 @@ import {
 } from '../utils/errors.js';
 
 import type {DesktopAdapter, DesktopRequest as WindowsRequest, DesktopRequestOptions as RequestOptions} from '../desktop/adapter.js';
+import {untrusted} from '../utils/untrusted.js';
 export type {DesktopRequest as WindowsRequest} from '../desktop/adapter.js';
 export type {DesktopRequestOptions as RequestOptions} from '../desktop/adapter.js';
 
@@ -175,6 +176,10 @@ export class WindowsAutomation implements DesktopAdapter {
 
 	private postProcess(result: Record<string, unknown>, args: WindowsRequest): Record<string, unknown> {
 		const postProcessing = performance.now();
+		if (['get_windows', 'get_ui', 'read_text', 'read_text_page', 'find_text_range', 'find_text_ranges', 'win32_text'].includes(args.action)) {
+			result.provenance = untrusted(args.window_id ? `window:${args.window_id}` : 'desktop windows', 'Win32/UIA');
+		}
+
 		const maxChars = args.max_chars ?? 6000;
 		const entries = Array.isArray(result.nodes) ? result.nodes : Array.isArray(result.windows) ? result.windows : undefined;
 		if (args.action === 'get_ui' && (result.window as Record<string, unknown> | undefined)?.minimized === true) {
@@ -222,6 +227,37 @@ export class WindowsAutomation implements DesktopAdapter {
 
 				result.text = text.slice(0, low);
 			}
+		}
+
+		// Titles are display metadata; retain the HWND/ref and provenance when the metadata itself exceeds the budget.
+		const window = result.window as Record<string, unknown> | undefined;
+		if (serialize(result).length > maxChars && typeof window?.title === 'string') {
+			const {title} = window;
+			result.truncated = true;
+			result.complete = false;
+			window.title_truncated = true;
+			window.title = '';
+			const overhead = serialize(result).length;
+			let low = 0;
+			let high = title.length;
+			while (low < high) {
+				const middle = Math.ceil((low + high) / 2);
+				if (overhead + serialize(title.slice(0, middle)).length - 2 <= maxChars) {
+					low = middle;
+				} else {
+					high = middle - 1;
+				}
+			}
+
+			if (/[\uD800-\uDBFF]/.test(title[low - 1] ?? '') && /[\uDC00-\uDFFF]/.test(title[low] ?? '')) {
+				low -= 1;
+			}
+
+			window.title = title.slice(0, low);
+		}
+
+		if (serialize(result).length > maxChars) {
+			throw rejectedAction('INVALID_ARGS', 'max_chars is too small for the response identity and provenance. Increase the response budget.');
 		}
 
 		recordTiming('post_processing', performance.now() - postProcessing);

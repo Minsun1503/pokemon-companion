@@ -12,7 +12,7 @@ const scratch = await mkdtemp(resolve(tmpdir(), 'pokemon-contract-'));
 const executable = resolve(scratch, 'fixture.exe');
 const source = resolve(scratch, 'fixture.cs');
 const script = resolve(scratch, 'compile.ps1');
-const prefix = 'PC-' + randomUUID().slice(0, 8);
+const prefix = 'PC' + randomUUID().slice(0, 3);
 const worker = new WindowsAutomation();
 let child;
 
@@ -30,15 +30,18 @@ async function stopFixture() {
 try {
   await writeFile(source, `using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Windows.Forms;
 class QuietForm : Form {
     protected override bool ShowWithoutActivation { get { return true; } }
 }
 class Fixture {
     [STAThread] static void Main(string[] args) {
+        var forms = new List<QuietForm>();
         for (int i = 0; i < Int32.Parse(args[0]); i++) {
             var form = new QuietForm { Text = args[1] + "-" + i, ShowInTaskbar = false, StartPosition = FormStartPosition.Manual, Left = -30000, Top = -30000, Width = 100, Height = 100 };
             form.Show();
+            forms.Add(form);
         }
         File.WriteAllText(args[2], "ready");
         Application.Run();
@@ -60,8 +63,18 @@ class Fixture {
       assert(performance.now() < deadline, 'Owned fixture did not become ready.');
       await delay(50);
     }
-    const result = await worker.request({action: 'get_windows', query: prefix, max_elements: 250, max_chars: 16000});
-    assert.equal(result.windows.length, 100);
+    let result;
+    const discoveryDeadline = performance.now() + 10000;
+    do {
+      result = await worker.request({action: 'get_windows', query: prefix, max_elements: 250, max_chars: 16000});
+      if (result.windows.length === 100 && result.complete === (count === 100)) break;
+      await delay(50);
+    } while (performance.now() < discoveryDeadline);
+    assert.equal(
+      result.windows.length,
+      100,
+      `Expected ${count} visible fixture windows, got ${result.windows.length}: ${JSON.stringify(result.windows.map(window => window.title))}`,
+    );
     assert.equal(result.complete, count === 100);
     assert.equal(result.truncated, count > 100);
     const offscreen = result.windows.at(-1);

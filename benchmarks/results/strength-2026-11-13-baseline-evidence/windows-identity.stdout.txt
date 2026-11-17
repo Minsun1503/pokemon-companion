@@ -1,0 +1,4 @@
+Checking WinForms identity fixture.
+PASS: WinForms verifies minimized discovery, restore, false-absence/input rejection, dense rooted discovery, subtree editing, pinned absence, and independent name/ID/role/description rejection.
+Checking Electron identity fixture.
+PASS: Electron verifies minimized discovery, restore, false-absence/input rejection, dense rooted discovery, subtree editing, pinned absence, and independent name/ID/role rejection.

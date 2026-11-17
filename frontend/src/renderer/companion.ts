@@ -1,13 +1,18 @@
 import type { ChatMessage } from '../types/chat.js'
 import type { CompanionChatReply, CompanionSnapshot } from '../types/companion.js'
 import type { PetDefinition, PetSummary } from '../types/pet.js'
+import type { RecordingReply, RecordingRequest } from '../types/recording.js'
 import { BubbleController } from './controllers/bubble-controller.js'
 import { PetMotionController } from './controllers/pet-motion-controller.js'
+import { RecordingController } from './controllers/recording-controller.js'
 
 declare global {
   interface Window {
     pokemonAPI: {
       load(): Promise<CompanionSnapshot>
+      recording(request: RecordingRequest): Promise<RecordingReply>
+      recordingExport(): Promise<RecordingReply>
+      recordingCertificate(): Promise<RecordingReply>
       list(): Promise<(PetSummary & { definition: PetDefinition })[]>
       select(pet: string): Promise<boolean>
       pause(): Promise<boolean>
@@ -17,6 +22,7 @@ declare global {
       onDragPosition(listener: (position: { x: number; y: number }) => void): () => void
       feedback(satisfaction: 'satisfied' | 'unsatisfied'): Promise<boolean>
       quit(): void
+      openMovies(): void
       panel(open: boolean): void
       chat: {
         history(pet: string): Promise<ChatMessage[]>
@@ -38,7 +44,7 @@ const petContainer = element('pet-container')
 const petImage = element<HTMLImageElement>('pet-image')
 const panel = element('team-panel')
 const bubble = new BubbleController({ bubble: element('bubble'), anchor: petContainer })
-type PanelView = 'actions' | 'switch' | 'talk'
+type PanelView = 'actions' | 'switch' | 'talk' | 'record'
 let panelView: PanelView = 'actions'
 let chatPet = ''
 let chatRevision = 0
@@ -72,13 +78,16 @@ const gestureLabels: Record<string, string> = {
   walk: 'Moving',
 }
 const ACTION_FINISH_MS = 1200
+const recording = new RecordingController(window.pokemonAPI, positionPanel, updateActivityBadge)
 
 function updateActivityBadge(): void {
   const gesture = petContainer.dataset.animation ?? ''
   const label =
-    motion?.isPerformingAction && !['paused', 'success', 'error'].includes(visualActivity)
-      ? (gestureLabels[gesture] ?? activityLabels[visualActivity])
-      : activityLabels[visualActivity]
+    petContainer.dataset.recording === 'true' && visualActivity !== 'paused'
+      ? 'Recording'
+      : motion?.isPerformingAction && !['paused', 'success', 'error'].includes(visualActivity)
+        ? (gestureLabels[gesture] ?? activityLabels[visualActivity])
+        : activityLabels[visualActivity]
   const badge = element('state-badge')
   if (badge.textContent !== label) badge.textContent = label ?? 'Ready'
 }
@@ -90,31 +99,38 @@ function positionPanel(): void {
   const height = panel.offsetHeight
   const left = rect.left + rect.width / 2 - width / 2
   const above = rect.top - height - 12
-  const top =
-    above >= 12
-      ? above
-      : rect.bottom + height + 12 <= window.innerHeight
-        ? rect.bottom + 12
-        : window.innerHeight - height - 12
-  panel.style.left = `${Math.max(12, Math.min(window.innerWidth - width - 12, left))}px`
-  panel.style.top = `${Math.max(12, top)}px`
+  const below = rect.bottom + height + 12 <= window.innerHeight ? rect.bottom + 12 : undefined
+  if (above >= 12 || below !== undefined) {
+    panel.style.left = `${Math.max(12, Math.min(window.innerWidth - width - 12, left))}px`
+    panel.style.top = `${above >= 12 ? above : below}px`
+    return
+  }
+
+  const right = rect.right + 12
+  const leftSide = rect.left - width - 12
+  panel.style.left = `${right + width <= window.innerWidth - 12 ? right : Math.max(12, leftSide)}px`
+  panel.style.top = `${Math.max(12, Math.min(window.innerHeight - height - 12, rect.top + (rect.height - height) / 2))}px`
 }
 
 function setView(view: PanelView): void {
-  if (view === 'talk') view = 'actions'
   panelView = view
   panel.dataset.view = view
-  for (const name of ['actions', 'switch', 'talk'] as const) {
+  for (const name of ['actions', 'switch', 'talk', 'record'] as const) {
     element(name === 'actions' ? 'action-view' : `${name}-view`).hidden = name !== view
   }
   element('back-panel').hidden = view === 'actions'
-  element('panel-caption').textContent = { actions: 'YOUR PARTNER', switch: 'CHOOSE YOUR PARTNER', talk: 'LET’S TALK' }[
-    view
-  ]
+  element('panel-caption').textContent = {
+    actions: 'YOUR PARTNER',
+    switch: 'CHOOSE YOUR PARTNER',
+    talk: 'LET’S TALK',
+    record: 'API RECORDER',
+  }[view]
+  recording.show(view === 'record' && !panel.hidden)
   positionPanel()
 }
 
 function closePanel(): void {
+  recording.show(false)
   panel.hidden = true
   petContainer.setAttribute('aria-expanded', 'false')
   window.pokemonAPI.panel(false)
@@ -468,6 +484,12 @@ petContainer.addEventListener('mouseleave', () => {
 element('close-panel').addEventListener('click', closePanel)
 element('back-panel').addEventListener('click', () => setView('actions'))
 element('action-switch').addEventListener('click', () => setView('switch'))
+element('action-record').addEventListener('click', () => setView('record'))
+element('action-movies').addEventListener('click', () => window.pokemonAPI.openMovies())
+element('action-talk').addEventListener('click', () => {
+  setView('talk')
+  void loadChat()
+})
 element('action-exit').addEventListener('click', () => window.pokemonAPI.quit())
 element('chat-form').addEventListener('submit', (event) => {
   event.preventDefault()

@@ -1,0 +1,129 @@
+{
+  "at": "2026-11-15T02:38:28.960Z",
+  "fixture_only": true,
+  "runs": 20,
+  "accepted_sends": 20,
+  "duplicate_sends": 0,
+  "rows": [
+    {
+      "run": 1,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 2,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 3,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 4,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 5,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 6,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 7,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 8,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 9,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 10,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 11,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 12,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 13,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 14,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 15,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 16,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 17,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 18,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 19,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    },
+    {
+      "run": 20,
+      "outcome": "unknown",
+      "replay": "blocked",
+      "readback_send_count": 1
+    }
+  ]
+}

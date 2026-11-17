@@ -74,18 +74,30 @@ try {
   const restored = await waitFor(state => !state.movementAllowed && near(state.x, dropped.x) && near(state.y, dropped.y));
   await gesture('down', restored.x + 50, restored.y + 59);
   await gesture('up', restored.x + 50, restored.y + 59);
-  assert.equal((await waitFor(state => state.panel)).panel, true, 'A normal click must still open actions.');
+  const openedPanel = await waitFor(state => state.panel);
+  const petClick = {x: restored.x + 50, y: restored.y + 59};
+  const bounds = openedPanel.panelBounds;
+  assert(
+    petClick.x < bounds.x || petClick.x > bounds.x + bounds.width || petClick.y < bounds.y || petClick.y > bounds.y + bounds.height,
+    `Actions panel must leave the pet click target uncovered: ${JSON.stringify({petClick, bounds})}`,
+  );
   await gesture('down', restored.x + 50, restored.y + 59);
   await gesture('up', restored.x + 50, restored.y + 59);
   await waitFor(state => !state.panel);
-  await fixture('/movement?allowed=1'); await fixture('/resume');
+  await fixture('/movement?allowed=1');
+  await waitFor(state => state.movementAllowed && state.movementToggle);
+  await fixture('/resume');
+  await waitFor(state => !state.paused);
   await fixture('/action?name=set_value&busy=1&x=600&y=350');
   const arrived = await waitFor(state => near(state.x, 636) && near(state.y, 374) && state.animation === 'typing');
   await fixture('/movement?allowed=0');
   await gesture('down', arrived.x + 50, arrived.y + 59);
   await gesture('move', 200, 300); await gesture('up', 200, 300);
   await waitFor(state => !state.dragging && near(state.x, 150));
-  await fixture('/movement?allowed=1'); await fixture('/resume');
+  await fixture('/movement?allowed=1');
+  await waitFor(state => state.movementAllowed && state.movementToggle);
+  await fixture('/resume');
+  await waitFor(state => !state.paused);
   await fixture('/action?name=set_value&busy=1&x=600&y=350');
   await waitFor(state => near(state.x, 636) && near(state.y, 374) && state.animation === 'typing');
   console.log('PASS: native mouse input captures and drags the Electron pet while movement is off, work animates in place, drop suppresses click, and placement/permission survive restart. Normal clicks open and close actions; movement resumes toward repeated targets after repositioning. Physical multi-monitor handoff is not covered.');

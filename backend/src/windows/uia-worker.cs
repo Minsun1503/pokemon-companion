@@ -84,6 +84,7 @@ public static partial class PokemonWindowsAutomation {
     static IntPtr Handle(string id) {
         long value;
         if (!Int64.TryParse(id, out value) || !IsWindow(new IntPtr(value))) throw Rejected("WINDOW_NOT_FOUND", "Window no longer exists. Call get_windows again.");
+        GuardTrustedWindow(new IntPtr(value));
         return new IntPtr(value);
     }
     static string ProcessName(uint pid) {
@@ -109,7 +110,7 @@ public static partial class PokemonWindowsAutomation {
             uint pid;
             GetWindowThreadProcessId(handle, out pid);
             string process = ProcessName(pid);
-            var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process, "minimized", IsIconic(handle));
+            var result = Obj("id", handle.ToInt64().ToString(), "title", Clip(title.ToString(), 200), "process", process, "process_id", pid, "minimized", IsIconic(handle));
             if (remember) {
                 string token = RememberWindow(handle);
                 if (token != null) result["window_ref"] = token;
@@ -123,6 +124,7 @@ public static partial class PokemonWindowsAutomation {
             bool truncated = false;
             EnumWindows(delegate(IntPtr handle, IntPtr unused) {
                 if (!IsWindowVisible(handle)) return true;
+                if (ProtectedProcess(handle)) return true;
                 // Discovery filters need metadata, but only returned windows need
                 // process-start identity proofs and snapshot-token maintenance.
                 var info = WindowInfo(handle, false);
@@ -260,8 +262,7 @@ public static partial class PokemonWindowsAutomation {
             throw new Exception("launch requires an http/https URL or executable name/path, without shell commands or arguments.");
         Uri url;
         if (Uri.TryCreate(target, UriKind.Absolute, out url) && (url.Scheme == "http" || url.Scheme == "https")) {
-            Process.Start(new ProcessStartInfo(url.AbsoluteUri) { UseShellExecute = true });
-            return Obj("started", url.AbsoluteUri);
+            throw Rejected("INVALID_ARGS", "Native launch cannot open URLs. Use the browser navigation approval policy.");
         }
         RejectScriptHost(target);
         string executable = null;
@@ -304,6 +305,11 @@ public static partial class PokemonWindowsAutomation {
         }
         if (executable == null) throw new Exception("Executable not found in PATH or the Start Menu. Supply its full .exe path; shell commands and arguments are not supported.");
         RejectScriptHost(executable);
+        bool allowed = Environment.GetEnvironmentVariable("POKEMON_AUTHORIZATION") == "host-client";
+        foreach (string approved in (Environment.GetEnvironmentVariable("POKEMON_LAUNCH_ALLOWLIST") ?? "").Split(';')) {
+            if (!String.IsNullOrWhiteSpace(approved) && Path.IsPathRooted(approved) && Path.GetFullPath(approved).Equals(executable, StringComparison.OrdinalIgnoreCase)) allowed = true;
+        }
+        if (!allowed) throw Rejected("APPROVAL_REQUIRED", "Native executable launch requires a trusted resolved-path allowlist or explicit host authorization. Resolved path: " + executable);
         Process.Start(new ProcessStartInfo(executable) { UseShellExecute = true });
         return Obj("started", executable, "query", Path.GetFileNameWithoutExtension(executable));
     }
@@ -321,6 +327,7 @@ public static partial class PokemonWindowsAutomation {
             (DateTime.UtcNow - snapshot.Created).TotalSeconds > 120 || !snapshot.Identities.TryGetValue(id, out identity)) {
             throw Rejected("STALE_REF", "Unknown or expired element. Call get_ui again; do not reuse an old element id with a new snapshot.");
         }
+        GuardTrustedWindow(snapshot.Window);
         return ResolveIdentity(snapshot, identity);
     }
     public static object TextPage(string snapshotId, int id, int offset, int count, string expectedVersion, string requiredText) {

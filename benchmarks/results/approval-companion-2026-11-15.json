@@ -1,0 +1,15 @@
+{
+  "at": "2026-11-15T03:39:52.323Z",
+  "fixture_only": true,
+  "bridge": "Windows named pipe; private capability; default process DACL",
+  "companion_key": "Electron safeStorage / Windows DPAPI",
+  "without_human_approval": "no execution",
+  "dialog_visible_and_native_protected": true,
+  "protection": {
+    "protected_windows": 2,
+    "approval_windows": 1,
+    "visible_approvals": 1
+  },
+  "startup_wait_after_response_ms": 0,
+  "result": "pass"
+}

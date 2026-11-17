@@ -4,6 +4,7 @@ import {existsSync} from 'node:fs';
 import {createServer, type Server, type Socket} from 'node:net';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import type {ApprovalIntent} from '../security/approval.js';
 
 export const pokemonIds = ['pikachu', 'riolu', 'lucario', 'clodsire', 'bulbasaur', 'charmander', 'squirtle', 'hello-kitty', 'kuromi'] as const;
 export type PokemonId = typeof pokemonIds[number];
@@ -23,6 +24,11 @@ export type PokemonState = {
 };
 
 export type Companion = {
+	onRecording?: (request: unknown) => Promise<unknown>;
+	onPauseChanged?: (paused: boolean) => void;
+	onProtectWindow?: (windowId: string, processId: number, approval?: boolean) => Promise<void>;
+	approve?: (intent: ApprovalIntent) => Promise<{authorized: boolean; action_id: string}>;
+	revokeScope?: (scope: string) => Promise<void>;
 	onLearningFeedback?: (id: string, satisfaction: 'satisfied' | 'unsatisfied') => Promise<void>;
 	state: PokemonState;
 	start: () => Promise<void>;
@@ -35,6 +41,9 @@ export type Companion = {
 
 /** One local, authenticated companion per MCP process. stdout stays exclusively MCP. */
 export class DesktopCompanion implements Companion {
+	onRecording?: (request: unknown) => Promise<unknown>;
+	onPauseChanged?: (paused: boolean) => void;
+	onProtectWindow?: (windowId: string, processId: number, approval?: boolean) => Promise<void>;
 	onLearningFeedback?: (id: string, satisfaction: 'satisfied' | 'unsatisfied') => Promise<void>;
 	state: PokemonState = {
 		pet: pokemonIds.includes(process.env.POKEMON_PET as PokemonId) ? process.env.POKEMON_PET as PokemonId : 'pikachu',
@@ -42,6 +51,7 @@ export class DesktopCompanion implements Companion {
 	};
 
 	private server?: Server;
+	private readonly approvals = new Map<number, {resolve: (value: {authorized: boolean; action_id: string}) => void; timer: ReturnType<typeof setTimeout>}>();
 	private socket?: Socket;
 	private child?: ChildProcess;
 	private starting: Promise<void> | undefined;
@@ -56,6 +66,39 @@ export class DesktopCompanion implements Companion {
 	private animationCoordinate: number[] | undefined;
 
 	constructor(private readonly onDisconnect?: () => void) {}
+
+	async approve(intent: ApprovalIntent) {
+		if (Buffer.byteLength(JSON.stringify(intent)) > 32768) {
+			throw new Error('Approval request exceeds the channel limit.');
+		}
+
+		if (this.headless || process.platform !== 'win32') {
+			return {authorized: false, action_id: intent.action_id};
+		}
+
+		await this.start();
+		this.sequence += 1;
+		const id = this.sequence;
+		return new Promise<{authorized: boolean; action_id: string}>((resolveApproval) => {
+			const timer = setTimeout(() => {
+				this.approvals.delete(id);
+				resolveApproval({authorized: false, action_id: intent.action_id});
+			}, intent.wait_for_decision ? 55000 : 20000);
+			this.approvals.set(id, {resolve: resolveApproval, timer});
+			if (!this.socket || this.socket.destroyed) {
+				clearTimeout(timer);
+				this.approvals.delete(id);
+				resolveApproval({authorized: false, action_id: intent.action_id});
+				return;
+			}
+
+			this.socket.write(`${JSON.stringify({kind: 'approval_check', id, request: intent})}\n`);
+		});
+	}
+
+	async revokeScope(scope: string) {
+		await this.send('approval_revoke', {scope});
+	}
 
 	async start(): Promise<void> {
 		if (this.closed) {
@@ -227,11 +270,35 @@ export class DesktopCompanion implements Companion {
 								this.socket = socket;
 								clearTimeout(timeout);
 								ready();
+							} else if (message.kind === 'approval_result' && typeof message.id === 'number') {
+								const pending = this.approvals.get(message.id);
+								if (pending) {
+									clearTimeout(pending.timer);
+									this.approvals.delete(message.id);
+									pending.resolve({authorized: message.authorized === true, action_id: String(message.action_id)});
+								}
+							} else if (message.kind === 'protect_window' && message.process_id === this.child?.pid && typeof message.window_id === 'string') {
+								void this.onProtectWindow?.(message.window_id, message.process_id, message.approval === true).then(() => socket.write(`${JSON.stringify({kind: 'protection_result', id: message.id, protected: true})}\n`)).catch(() => socket.write(`${JSON.stringify({kind: 'protection_result', id: message.id, protected: false})}\n`));
 							} else if (message.kind === 'ack' && typeof message.id === 'number') {
 								this.acknowledge(message.id, message.error);
 							} else if (message.kind === 'pause' && typeof message.paused === 'boolean') {
 								this.state.paused = message.paused;
 								this.state.activity = message.paused ? 'paused' : 'idle';
+								this.onPauseChanged?.(message.paused);
+							} else if (message.kind === 'recording_request' && Number.isSafeInteger(message.id) && this.onRecording) {
+								void this.onRecording(message.request).then((result) => {
+									if (!socket.destroyed) {
+										socket.write(`${JSON.stringify({
+											kind: 'recording_result', id: message.id, ok: true, result,
+										})}\n`);
+									}
+								}).catch((error: unknown) => {
+									if (!socket.destroyed) {
+										socket.write(`${JSON.stringify({
+											kind: 'recording_result', id: message.id, ok: false, error: error instanceof Error ? error.message.slice(0, 400) : 'Recording failed.',
+										})}\n`);
+									}
+								});
 							} else if (message.kind === 'select' && pokemonIds.includes(message.pet)) {
 								this.state.pet = message.pet;
 							} else if (message.kind === 'learning_feedback' && message.task_id === this.state.learningTaskId
@@ -265,26 +332,36 @@ export class DesktopCompanion implements Companion {
 					}
 
 					this.state.paused = true;
+					this.onPauseChanged?.(true);
 					for (const pending of this.pending.values()) {
 						clearTimeout(pending.timer);
 						pending.reject(new Error('Pokémon desktop disconnected.'));
 					}
 
 					this.pending.clear();
+					for (const [id, pending] of this.approvals) {
+						clearTimeout(pending.timer);
+						pending.resolve({authorized: false, action_id: String(id)});
+					}
+
+					this.approvals.clear();
 					if (!this.closed) {
 						this.onDisconnect?.();
 					}
 				});
 			});
 			this.server.on('error', fail);
-			this.server.listen(0, '127.0.0.1', () => {
+			const pipe = process.platform === 'win32' ? `\\\\.\\pipe\\pokemon-companion-${randomBytes(16).toString('hex')}` : undefined;
+			const spawnCompanion = () => {
 				const address = this.server!.address();
-				if (!address || typeof address === 'string') {
+				if (!address) {
 					fail(new Error('Could not open companion bridge.'));
 					return;
 				}
 
-				const env: NodeJS.ProcessEnv = {...process.env, POKEMON_BRIDGE_PORT: String(address.port), POKEMON_BRIDGE_TOKEN: token};
+				const env: NodeJS.ProcessEnv = {
+					...process.env, POKEMON_BRIDGE_PORT: typeof address === 'string' ? '' : String(address.port), POKEMON_BRIDGE_PIPE: pipe, POKEMON_BRIDGE_TOKEN: token,
+				};
 				delete env.ELECTRON_RUN_AS_NODE;
 				const args = [root, '--mcp-companion'];
 				if (process.platform === 'linux') {
@@ -302,7 +379,13 @@ export class DesktopCompanion implements Companion {
 						fail(new Error('Pokémon desktop exited before connecting.'));
 					}
 				});
-			});
+			};
+
+			if (pipe) {
+				this.server.listen({path: pipe, readableAll: false, writableAll: false}, spawnCompanion);
+			} else {
+				this.server.listen(0, '127.0.0.1', spawnCompanion);
+			}
 		});
 		await this.send('state', {state: this.state});
 	}

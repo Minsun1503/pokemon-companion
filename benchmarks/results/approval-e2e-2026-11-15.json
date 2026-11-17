@@ -1,0 +1,185 @@
+{
+  "at": "2026-11-15T03:34:25.463Z",
+  "fixture_only": true,
+  "real_pipe": true,
+  "test_hook_in_production": false,
+  "zero_unauthorized_egress": true,
+  "native_launch_refused": true,
+  "native_status": "host-authorized-only",
+  "once_consumed": true,
+  "scope_uses": 20,
+  "expiry_checked": true,
+  "threads_same_path_isolated": true,
+  "three_changed_fills": true,
+  "incoming_message_preserves_once": true,
+  "unknown_scope_button_hidden": true,
+  "large_label_channel_alive": true,
+  "complete_draft_visible": true,
+  "footer_buttons_visible": true,
+  "oversize_input_refused": true,
+  "perturbed_unknown_runs": 20,
+  "duplicate_sends": 0,
+  "rows": [
+    {
+      "run": 1,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 2,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 3,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 4,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 5,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 6,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 7,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 8,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 9,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 10,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 11,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 12,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 13,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 14,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 15,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 16,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 17,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 18,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 19,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    },
+    {
+      "run": 20,
+      "unknown": true,
+      "perturbed_replay": "blocked",
+      "alternate_method_replay": "blocked",
+      "reconciled": true,
+      "readback_sends": 1
+    }
+  ],
+  "result": "pass"
+}

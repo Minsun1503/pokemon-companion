@@ -15,6 +15,7 @@ export async function desktopStatus(runtime: PokemonRuntime, signal?: AbortSigna
 		platform: process.platform,
 		node_version: process.versions.node,
 		paused: runtime.companion.state.paused,
+		authorization: {browser_api: process.env.POKEMON_AUTHORIZATION === 'host-client' ? 'host-authorized' : 'companion-enforced', native_desktop: 'host-authorized-only', native_launch: 'resolved-path-allowlist-or-explicit-host'},
 		native: {supported: process.platform === 'win32', ready: false, actions: process.platform === 'win32' ? windowsActions : []},
 		permissions: 'not_checked_per_target',
 		surfaces: process.platform === 'win32' ? ['application_windows'] : [],

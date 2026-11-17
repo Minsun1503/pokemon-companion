@@ -36,8 +36,14 @@
         <button id="action-switch" class="action-button" type="button" aria-label="Switch Pokémon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h15m-4-4 4 4-4 4M20 17H5m4-4-4 4 4 4"/></svg><span>Switch</span>
         </button>
-        <button id="action-talk" class="action-button" type="button" aria-label="Talk to Pokémon" hidden disabled>
+        <button id="action-talk" class="action-button" type="button" aria-label="Talk to Pokémon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8H4l1.8-4A8 8 0 1 1 20 11Z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg><span>Talk</span>
+        </button>
+        <button id="action-record" class="action-button" type="button" aria-label="Record API calls">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/></svg><span id="record-menu-label">Record</span>
+        </button>
+        <button id="action-movies" class="action-button" type="button" aria-label="Open movie library">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4M7 9h10M7 15h10"/></svg><span>Phim</span>
         </button>
         <button id="action-exit" class="action-button exit-action" type="button" aria-label="Exit application">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8M6.3 5.7a8 8 0 1 0 11.4 0"/></svg><span>Exit</span>
@@ -51,6 +57,24 @@
     <div class="activity-label"><h2>Recent activity</h2><span id="action-count">0 actions</span></div>
     <ol id="activity-log"><li>Waiting for your first task.</li></ol>
     <footer><button id="pause-button" type="button">Pause control</button><span>Ctrl + Shift + P</span></footer>
+    </div>
+    <div id="record-view" hidden>
+      <p class="record-intro">Record a demonstration, then inspect the requests behind it.</p>
+      <label for="record-mode">Capture mode</label>
+      <select id="record-mode"><option value="browser">Browser tab</option><option value="desktop">Desktop app</option></select>
+      <label for="record-target">Target</label>
+      <select id="record-target" aria-label="Recording target"></select>
+      <div class="record-row"><button id="record-refresh" type="button">Refresh targets</button><button id="record-browser" type="button">Open browser</button></div>
+      <p id="record-setup"></p>
+      <button id="record-certificate" type="button" hidden>Prepare HTTPS certificate</button>
+      <label for="record-label">Action / next step</label>
+      <input id="record-label" maxlength="120" placeholder="e.g. Search for a video">
+      <div class="record-row"><button id="record-toggle" type="button">● Record</button><button id="record-mark" type="button" disabled>Mark step</button><button id="record-resume" type="button" hidden>Resume control</button></div>
+      <p id="record-status" role="status" aria-live="polite">Choose a target to begin.</p>
+      <ol id="record-entries" aria-label="Captured API calls"></ol>
+      <p class="record-hint">Browser clicks and marked steps provide timing evidence. Background requests may appear too.</p>
+      <button id="record-export" type="button">Save readable trace…</button>
+      <pre id="record-preview" hidden></pre>
     </div>
     <div id="talk-view" hidden>
       <div id="chat-messages" role="log" aria-label="Conversation" aria-live="polite"></div>

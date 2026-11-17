@@ -1,6 +1,6 @@
 # Install Pokémon Companion
 
-Client packages include Node, Electron, all seven Pokémon, and native computer-control tools. Users need their AI desktop client and normal OS permissions. No additional developer tools, model API key, GitHub login, or manual MCP configuration are required.
+Client packages include Node, Electron, Chromium, all seven Pokémon, and native computer-control tools. Users need their AI desktop client and normal OS permissions. No additional developer tools, model API key, GitHub login, or manual MCP configuration are required.
 
 ## Claude Desktop on Windows or macOS
 
@@ -12,7 +12,7 @@ Claude starts the Pokémon automatically when its tools are used. Its tool confi
 
 ## ChatGPT Desktop
 
-The `*-plugin-*.zip` downloads contain a native desktop-only plugin manifest, bundled stdio MCP server, Node, Electron, and platform desktop helpers. They are prepared for the local-MCP submission flow.
+The `*-plugin-*.zip` downloads contain a native desktop-only plugin manifest, bundled stdio MCP server, Node, Electron, Chromium, and platform desktop helpers. They are prepared for the local-MCP submission flow.
 
 **Public one-click installation in ChatGPT is pending OpenAI approval.** OpenAI requires the submitting organization to be an approved local-MCP partner and reviews the plugin before publishing it in the Plugins directory. After approval, users install from that directory and use it in a local desktop conversation. Opening or uploading the ZIP in an ordinary ChatGPT conversation does not install a plugin. This project has not obtained that approval or verified installation in ChatGPT.
 
@@ -34,7 +34,11 @@ Left-click the Pokémon for **Switch** and **Exit**. Switch offers Pikachu, Riol
 
 The included `AGENT_GUIDE.md` describes native discovery, verification, recovery, and pause handling. Windows desktop Excel operations require Excel to be installed, just as controlling any other app requires that app.
 
+The bundled Chromium browser exposes the DOM through Playwright automatically. Sign in to a site once when required; its dedicated profile retains the session. Web browsing needs no separate Edge/Chrome installation or CDP setup.
+
 ## Build and verify releases from source
+
+To use Pokémon's own API agent from Telegram, newly built standalone portable packages include **Start Pokemon Agent.cmd** (Windows) or **Start Pokemon Agent.command** (macOS/Linux). These open local setup using the bundled runtimes. Configure provider API keys, model IDs, a Telegram bot token and allowed user IDs once. Source users can run `npm run agent -- setup` in the active checkout. See [Pokémon Agent](docs/pokemon-agent.md).
 
 For developers with Node 22.12+ and npm on each target OS:
 

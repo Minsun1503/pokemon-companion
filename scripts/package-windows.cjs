@@ -3,10 +3,12 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const {spawnSync} = require('node:child_process');
 const {addClientMetadata} = require('./client-package-metadata.cjs');
+const {ensureBrowser} = require('./ensure-browser.cjs');
+const {addAgentLauncher} = require('./package-agent.cjs');
 const root = path.resolve(__dirname, '..');
 const version = require('../package.json').version;
 const npmCli = process.env.npm_execpath;
-const release = path.join(root, 'release');
+const release = process.env.POKEMON_RELEASE_DIR ? path.resolve(process.env.POKEMON_RELEASE_DIR) : path.join(root, 'release');
 const name = 'pokemon-companion-win32-x64';
 const output = path.join(release, name);
 
@@ -41,13 +43,16 @@ async function main() {
   backendLock.packages[''].version = version;
   json(path.join(stage, 'backend/package-lock.json'), backendLock);
   copy(path.join(root, 'backend/dist'), path.join(stage, 'backend/dist'));
+  for (const file of ['record-desktop.py', 'prepare-recording-certificate.py']) copy(path.join(root, 'scripts', file), path.join(stage, 'scripts', file));
   run(['ci', '--omit=dev', '--no-audit', '--no-fund'], path.join(stage, 'backend'));
+  ensureBrowser(path.join(stage, 'backend'), path.join(root, 'backend'));
   for (const directory of ['build', 'pets', 'assets']) copy(path.join(root, 'frontend', directory), path.join(stage, 'frontend', directory));
   copy(path.join(root, 'frontend/config/setting.json'), path.join(stage, 'frontend/config/setting.json'));
   copy(path.join(root, 'frontend/LICENSE'), path.join(stage, 'frontend/LICENSE'));
   copy(path.join(root, 'frontend/node_modules/electron/dist'), path.join(stage, 'frontend/node_modules/electron/dist'));
   json(path.join(stage, 'frontend/package.json'), {name: 'pokemon-companion-ui', version, main: 'main.js'});
   fs.writeFileSync(path.join(stage, 'frontend/main.js'), "require('./build/main/companion/index.js');\n");
+  addAgentLauncher(stage, stage, process.platform);
   copy(path.join(root, 'frontend/assets/icon.png'), path.join(stage, 'icon.png'));
   // Use a verified upstream Node distribution, not the developer's local executable.
   const nodeVersion = 'v24.16.0';
@@ -85,7 +90,7 @@ async function main() {
   copy(path.join(root, 'INSTALL.md'), path.join(stage, 'README.md'));
   fs.writeFileSync(path.join(stage, 'AGENT_GUIDE.md'), `Package version: ${version}\nResponse contract version: 1\n\n` + fs.readFileSync(path.join(root, 'packaging/agent-guide.md'), 'utf8'));
   for (const file of ['THIRD_PARTY.md', 'LICENSE']) copy(path.join(root, file), path.join(stage, file));
-  fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokémon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included in their folders. Electron and Node licenses are included with their runtimes. Dependencies retain their own licenses.\n');
+  fs.writeFileSync(path.join(stage, 'NOTICE.txt'), 'Unofficial Pokémon fan project. Assets belong to Nintendo / Creatures Inc. / GAME FREAK. Original frontend and backend MIT licenses are included in their folders. Electron, Chromium and Node licenses are included with their runtimes. Dependencies retain their own licenses.\n');
   addClientMetadata(stage, stage, 'win32', version);
   fs.renameSync(stage, output);
   run(['exec', '--yes', '--package=@anthropic-ai/mcpb@2.1.2', '--', 'mcpb', 'validate', path.join(output, 'manifest.json')], root);
