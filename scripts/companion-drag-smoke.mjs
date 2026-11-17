@@ -74,7 +74,13 @@ try {
   const restored = await waitFor(state => !state.movementAllowed && near(state.x, dropped.x) && near(state.y, dropped.y));
   await gesture('down', restored.x + 50, restored.y + 59);
   await gesture('up', restored.x + 50, restored.y + 59);
-  assert.equal((await waitFor(state => state.panel)).panel, true, 'A normal click must still open actions.');
+  const openedPanel = await waitFor(state => state.panel);
+  const petClick = {x: restored.x + 50, y: restored.y + 59};
+  const bounds = openedPanel.panelBounds;
+  assert(
+    petClick.x < bounds.x || petClick.x > bounds.x + bounds.width || petClick.y < bounds.y || petClick.y > bounds.y + bounds.height,
+    `Actions panel must leave the pet click target uncovered: ${JSON.stringify({petClick, bounds})}`,
+  );
   await gesture('down', restored.x + 50, restored.y + 59);
   await gesture('up', restored.x + 50, restored.y + 59);
   await waitFor(state => !state.panel);

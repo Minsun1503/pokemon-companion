@@ -99,14 +99,17 @@ function positionPanel(): void {
   const height = panel.offsetHeight
   const left = rect.left + rect.width / 2 - width / 2
   const above = rect.top - height - 12
-  const top =
-    above >= 12
-      ? above
-      : rect.bottom + height + 12 <= window.innerHeight
-        ? rect.bottom + 12
-        : window.innerHeight - height - 12
-  panel.style.left = `${Math.max(12, Math.min(window.innerWidth - width - 12, left))}px`
-  panel.style.top = `${Math.max(12, top)}px`
+  const below = rect.bottom + height + 12 <= window.innerHeight ? rect.bottom + 12 : undefined
+  if (above >= 12 || below !== undefined) {
+    panel.style.left = `${Math.max(12, Math.min(window.innerWidth - width - 12, left))}px`
+    panel.style.top = `${above >= 12 ? above : below}px`
+    return
+  }
+
+  const right = rect.right + 12
+  const leftSide = rect.left - width - 12
+  panel.style.left = `${right + width <= window.innerWidth - 12 ? right : Math.max(12, leftSide)}px`
+  panel.style.top = `${Math.max(12, Math.min(window.innerHeight - height - 12, rect.top + (rect.height - height) / 2))}px`
 }
 
 function setView(view: PanelView): void {
