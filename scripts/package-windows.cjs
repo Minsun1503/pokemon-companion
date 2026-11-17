@@ -43,6 +43,7 @@ async function main() {
   backendLock.packages[''].version = version;
   json(path.join(stage, 'backend/package-lock.json'), backendLock);
   copy(path.join(root, 'backend/dist'), path.join(stage, 'backend/dist'));
+  for (const file of ['record-desktop.py', 'prepare-recording-certificate.py']) copy(path.join(root, 'scripts', file), path.join(stage, 'scripts', file));
   run(['ci', '--omit=dev', '--no-audit', '--no-fund'], path.join(stage, 'backend'));
   ensureBrowser(path.join(stage, 'backend'), path.join(root, 'backend'));
   for (const directory of ['build', 'pets', 'assets']) copy(path.join(root, 'frontend', directory), path.join(stage, 'frontend', directory));

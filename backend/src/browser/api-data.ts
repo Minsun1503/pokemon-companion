@@ -198,7 +198,7 @@ export function applyParameters(row: CapturedOperation, query: Record<string, st
 }
 
 /** Keep whole JSON output within the caller's budget, including catalog metadata. */
-export function boundedCatalog<T>(base: Record<string, unknown>, rows: T[], clicks: unknown[], maxChars: number, offset = 0) {
+export function boundedCatalog<T, B extends Record<string, unknown>>(base: B, rows: T[], clicks: unknown[], maxChars: number, offset = 0) {
 	const result = {
 		...base, operations: [] as T[], clicks: [] as unknown[], total_operations: rows.length, omitted_operations: rows.length,
 		offset, next_offset: null as number | null, truncated: rows.length > 0 || clicks.length > 0,

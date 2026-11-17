@@ -1,7 +1,7 @@
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import net from 'node:net'
 import path from 'node:path'
-import { app, clipboard, globalShortcut, ipcMain, Menu, nativeImage, screen, Tray } from 'electron'
+import { app, clipboard, dialog, globalShortcut, ipcMain, Menu, nativeImage, screen, shell, Tray } from 'electron'
 import type { CompanionSnapshot, CompanionState } from '../../types/companion'
 import { PetRegistry } from '../services/pet-registry'
 import { createPetWindow, type PetWindow } from '../window/pet-window'
@@ -9,6 +9,7 @@ import { CompanionAgentTools } from './agent'
 import { CompanionApprovals } from './approval'
 import { CompanionChat } from './chat'
 import { registerCompanionChat } from './chat-ipc'
+import { CompanionRecordingBridge } from './recording-ipc'
 
 app.setName('pokemon-mcp')
 if (process.env.POKEMON_USER_DATA_DIR) {
@@ -22,6 +23,11 @@ const windows = new Map<number, PetWindow>()
 let activeDisplayId: number
 let tray: Tray
 let socket: net.Socket
+const recorder = new CompanionRecordingBridge((value) => {
+  if (!socket || socket.destroyed) return false
+  send(value)
+  return true
+})
 let capturing = false
 let refreshQueued = false
 let paused = false
@@ -383,6 +389,34 @@ app
         send({ kind: 'learning_feedback', id, task_id: state.learningTaskId, satisfaction })
       })
     })
+    ipcMain.handle('companion:recording', (event, input: unknown) =>
+      recorder.request(
+        [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender),
+        input,
+      ),
+    )
+    ipcMain.handle('companion:recording-export', async (event) => {
+      const trusted = [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender)
+      const reply = await recorder.request(trusted, { action: 'export' })
+      if (!reply.ok || !reply.result.text) return reply
+      const chosen = await dialog.showSaveDialog({
+        title: 'Save Pokémon API trace',
+        defaultPath: 'pokemon-recording.json',
+        filters: [{ name: 'JSON trace', extensions: ['json'] }],
+      })
+      if (!chosen.canceled && chosen.filePath) writeFileSync(chosen.filePath, reply.result.text, { mode: 0o600 })
+      return { ok: true, result: { text: chosen.canceled ? 'Export canceled.' : 'Trace saved.' } }
+    })
+    ipcMain.handle('companion:recording-certificate', async (event) => {
+      const trusted = [...windows.values()].some((win) => !win.isDestroyed() && win.webContents === event.sender)
+      const reply = await recorder.request(trusted, { action: 'certificate' })
+      if (!reply.ok) return reply
+      if (!reply.result.desktop?.certificate_exists) return { ok: false, error: 'Recorder certificate is unavailable.' }
+      const error = await shell.openPath(reply.result.desktop.certificate)
+      return error
+        ? { ok: false, error }
+        : { ok: true, result: { text: 'Certificate opened. Review the trust settings yourself.' } }
+    })
     ipcMain.on('companion:quit', () => app.quit())
     ipcMain.on('companion:panel', (event, open: unknown) => {
       if (open === true && !paused && (state.task || state.interactionLocked)) togglePause()
@@ -482,6 +516,13 @@ app
         const line = buffer.slice(0, newline)
         buffer = buffer.slice(newline + 1)
         const urgent = JSON.parse(line)
+        if (urgent.kind === 'recording_result') {
+          recorder.finish(
+            urgent.id,
+            urgent.ok === true ? { ok: true, result: urgent.result } : { ok: false, error: String(urgent.error) },
+          )
+          continue
+        }
         if (urgent.kind === 'protection_result') {
           const pending = protectionWaits.get(urgent.id)
           if (pending) {
@@ -620,6 +661,7 @@ app
 
 app.on('window-all-closed', () => app.quit())
 app.on('will-quit', () => {
+  recorder.close()
   approvals?.close()
   chatTools?.close()
   clearInterval(dragTimer)

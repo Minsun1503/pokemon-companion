@@ -47,7 +47,7 @@ public static partial class PokemonWindowsAutomation {
         } finally { CloseHandle(owner); }
         string started; using (var process = Process.GetProcessById((int)pid)) started = process.StartTime.ToUniversalTime().Ticks.ToString();
         string version = ""; try { version = FileVersionInfo.GetVersionInfo(path).FileVersion ?? ""; } catch { }
-        return Obj("process_id", pid, "process_started", started, "image_path", path, "version", version);
+        return Obj("process_id", pid, "process_started", started, "image_path", path, "version", version, "process_family", new List<uint>(ProcessFamily(pid)));
     }
     [DllImport("iphlpapi.dll")] static extern uint GetExtendedTcpTable(IntPtr table, ref int size, bool order, int family, int tableClass, uint reserved);
     [DllImport("user32.dll")] static extern bool EnumChildWindows(IntPtr parent, EnumProc callback, IntPtr data);

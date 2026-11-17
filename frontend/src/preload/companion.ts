@@ -1,8 +1,12 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import type { CompanionSnapshot } from '../types/companion'
+import type { RecordingRequest } from '../types/recording'
 
 contextBridge.exposeInMainWorld('pokemonAPI', {
   load: () => ipcRenderer.invoke('companion:load'),
+  recording: (request: RecordingRequest) => ipcRenderer.invoke('companion:recording', request),
+  recordingExport: () => ipcRenderer.invoke('companion:recording-export'),
+  recordingCertificate: () => ipcRenderer.invoke('companion:recording-certificate'),
   list: () => ipcRenderer.invoke('companion:list'),
   select: (pet: string) => ipcRenderer.invoke('companion:select', pet),
   pause: () => ipcRenderer.invoke('companion:pause'),

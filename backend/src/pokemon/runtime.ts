@@ -11,6 +11,7 @@ import {ConnectionStore} from '../apps/connections.js';
 import {approvalRequired, type ApprovalIntent} from '../security/approval.js';
 import {DesktopAssistant} from '../desktop/assistant.js';
 import {SessionApi} from '../browser/api.js';
+import {RecordingService} from '../recording/service.js';
 
 const labels: Record<string, string> = {
 	key: 'Using a keyboard shortcut', type: 'Typing', mouse_move: 'Moving to the target',
@@ -34,6 +35,7 @@ export class PokemonRuntime {
 	});
 
 	readonly connections = new ConnectionStore();
+	readonly recording = new RecordingService(this);
 	private queue: Promise<unknown> = Promise.resolve();
 	private gestureSequence = 0;
 	constructor(readonly companion: Companion = new DesktopCompanion(), readonly windows: DesktopAdapter = new WindowsAutomation(), readonly learning = new LocalLearning(undefined, undefined, async (input, decrypt) => {
@@ -44,6 +46,11 @@ export class PokemonRuntime {
 
 		return Buffer.from(result.key, 'base64');
 	})) {
+		companion.onRecording = async (request) => this.recording.request(request);
+		companion.onPauseChanged = (paused) => {
+			this.recording.pause(paused);
+		};
+
 		companion.onProtectWindow = async (windowId, processId, approval) => {
 			const result = await windows.request({action: 'protect_companion', text: JSON.stringify({window_id: windowId, process_id: processId, approval: approval ? 1 : 2})}).catch((error: unknown) => {
 				console.error('Approval protection failed:', error instanceof Error ? error.message : 'Unknown error');
@@ -90,6 +97,7 @@ export class PokemonRuntime {
 
 	async close(): Promise<void> {
 		await this.assistant.close();
+		await this.recording.close();
 		await this.api.close();
 		await this.browser.close();
 		this.windows.close();

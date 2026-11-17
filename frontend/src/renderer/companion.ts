@@ -1,13 +1,18 @@
 import type { ChatMessage } from '../types/chat.js'
 import type { CompanionChatReply, CompanionSnapshot } from '../types/companion.js'
 import type { PetDefinition, PetSummary } from '../types/pet.js'
+import type { RecordingReply, RecordingRequest } from '../types/recording.js'
 import { BubbleController } from './controllers/bubble-controller.js'
 import { PetMotionController } from './controllers/pet-motion-controller.js'
+import { RecordingController } from './controllers/recording-controller.js'
 
 declare global {
   interface Window {
     pokemonAPI: {
       load(): Promise<CompanionSnapshot>
+      recording(request: RecordingRequest): Promise<RecordingReply>
+      recordingExport(): Promise<RecordingReply>
+      recordingCertificate(): Promise<RecordingReply>
       list(): Promise<(PetSummary & { definition: PetDefinition })[]>
       select(pet: string): Promise<boolean>
       pause(): Promise<boolean>
@@ -38,7 +43,7 @@ const petContainer = element('pet-container')
 const petImage = element<HTMLImageElement>('pet-image')
 const panel = element('team-panel')
 const bubble = new BubbleController({ bubble: element('bubble'), anchor: petContainer })
-type PanelView = 'actions' | 'switch' | 'talk'
+type PanelView = 'actions' | 'switch' | 'talk' | 'record'
 let panelView: PanelView = 'actions'
 let chatPet = ''
 let chatRevision = 0
@@ -72,13 +77,16 @@ const gestureLabels: Record<string, string> = {
   walk: 'Moving',
 }
 const ACTION_FINISH_MS = 1200
+const recording = new RecordingController(window.pokemonAPI, positionPanel, updateActivityBadge)
 
 function updateActivityBadge(): void {
   const gesture = petContainer.dataset.animation ?? ''
   const label =
-    motion?.isPerformingAction && !['paused', 'success', 'error'].includes(visualActivity)
-      ? (gestureLabels[gesture] ?? activityLabels[visualActivity])
-      : activityLabels[visualActivity]
+    petContainer.dataset.recording === 'true' && visualActivity !== 'paused'
+      ? 'Recording'
+      : motion?.isPerformingAction && !['paused', 'success', 'error'].includes(visualActivity)
+        ? (gestureLabels[gesture] ?? activityLabels[visualActivity])
+        : activityLabels[visualActivity]
   const badge = element('state-badge')
   if (badge.textContent !== label) badge.textContent = label ?? 'Ready'
 }
@@ -103,17 +111,22 @@ function positionPanel(): void {
 function setView(view: PanelView): void {
   panelView = view
   panel.dataset.view = view
-  for (const name of ['actions', 'switch', 'talk'] as const) {
+  for (const name of ['actions', 'switch', 'talk', 'record'] as const) {
     element(name === 'actions' ? 'action-view' : `${name}-view`).hidden = name !== view
   }
   element('back-panel').hidden = view === 'actions'
-  element('panel-caption').textContent = { actions: 'YOUR PARTNER', switch: 'CHOOSE YOUR PARTNER', talk: 'LET’S TALK' }[
-    view
-  ]
+  element('panel-caption').textContent = {
+    actions: 'YOUR PARTNER',
+    switch: 'CHOOSE YOUR PARTNER',
+    talk: 'LET’S TALK',
+    record: 'API RECORDER',
+  }[view]
+  recording.show(view === 'record' && !panel.hidden)
   positionPanel()
 }
 
 function closePanel(): void {
+  recording.show(false)
   panel.hidden = true
   petContainer.setAttribute('aria-expanded', 'false')
   window.pokemonAPI.panel(false)
@@ -467,6 +480,7 @@ petContainer.addEventListener('mouseleave', () => {
 element('close-panel').addEventListener('click', closePanel)
 element('back-panel').addEventListener('click', () => setView('actions'))
 element('action-switch').addEventListener('click', () => setView('switch'))
+element('action-record').addEventListener('click', () => setView('record'))
 element('action-talk').addEventListener('click', () => {
   setView('talk')
   void loadChat()

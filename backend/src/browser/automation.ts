@@ -155,6 +155,10 @@ export class BrowserAutomation {
 		return {session_id: this.webSession!, page_id: pageId, page};
 	}
 
+	allPages() {
+		return [...this.sessions.values()].flatMap((session) => session.context.pages().filter((page) => !page.isClosed()).map((page) => ({page_id: this.remember(page), url: page.url()})));
+	}
+
 	tabs(sessionId: string) {
 		const session = this.sessions.get(sessionId);
 		if (!session) {

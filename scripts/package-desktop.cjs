@@ -90,7 +90,7 @@ async function main() {
   json(path.join(appRoot, 'frontend/package.json'), {name: 'pokemon-companion', version, main: 'main.js'});
   fs.writeFileSync(path.join(appRoot, 'frontend/main.js'), "require('./build/main/companion/index.js');\n");
   json(path.join(appRoot, 'package.json'), {name: 'pokemon-computer-companion', version, private: true});
-  for (const file of ['config.cjs', 'start-mcp.cjs']) {
+  for (const file of ['config.cjs', 'start-mcp.cjs', 'record-desktop.py', 'prepare-recording-certificate.py']) {
     copy(path.join(root, 'scripts', file), path.join(appRoot, 'scripts', file));
   }
   addAgentLauncher(stage, appRoot, platform);

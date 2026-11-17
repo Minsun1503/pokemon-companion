@@ -558,6 +558,94 @@ footer span {
   background: var(--accent, #f3c83c);
   animation: work-light 0.6s ease-in-out infinite alternate;
 }
+#team-panel[data-view="record"] {
+  width: 390px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+}
+#record-view {
+  padding: 0 18px 18px;
+}
+#record-view label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 12px 0 5px;
+}
+#record-view :is(select, input) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ffffff30;
+  border-radius: 8px;
+  background: #30342e;
+  color: #eeeae1;
+}
+#record-view button {
+  padding: 7px 10px;
+  border: 1px solid #ffffff30;
+  border-radius: 8px;
+  background: #30342e;
+  color: #eeeae1;
+  cursor: pointer;
+}
+#record-view button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.record-row {
+  display: flex;
+  gap: 7px;
+  margin-top: 8px;
+}
+#record-view #record-toggle {
+  background: #a4352b;
+  color: #fff;
+}
+#record-status {
+  font-size: 12px;
+  font-weight: 600;
+}
+#record-setup,
+.record-hint,
+.record-intro {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #b9c0b4;
+}
+#record-entries {
+  padding-left: 20px;
+  max-height: 170px;
+  overflow-y: auto;
+  font-size: 11px;
+}
+#record-entries li {
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+#record-entries small {
+  display: block;
+  margin: 4px 0;
+}
+#record-preview {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 10px;
+  max-height: 180px;
+  overflow: auto;
+}
+#pet-container[data-recording="true"] #state-badge {
+  border-color: #ed665b;
+}
+#pet-container[data-recording="true"] #state-badge::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #ed665b;
+}
 body[data-activity="working"] .pet-aura,
 body[data-activity="thinking"] .pet-aura {
   animation: aura-pulse 1s ease-in-out infinite alternate;

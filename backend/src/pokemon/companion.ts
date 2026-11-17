@@ -24,6 +24,8 @@ export type PokemonState = {
 };
 
 export type Companion = {
+	onRecording?: (request: unknown) => Promise<unknown>;
+	onPauseChanged?: (paused: boolean) => void;
 	onProtectWindow?: (windowId: string, processId: number, approval?: boolean) => Promise<void>;
 	approve?: (intent: ApprovalIntent) => Promise<{authorized: boolean; action_id: string}>;
 	revokeScope?: (scope: string) => Promise<void>;
@@ -39,6 +41,8 @@ export type Companion = {
 
 /** One local, authenticated companion per MCP process. stdout stays exclusively MCP. */
 export class DesktopCompanion implements Companion {
+	onRecording?: (request: unknown) => Promise<unknown>;
+	onPauseChanged?: (paused: boolean) => void;
 	onProtectWindow?: (windowId: string, processId: number, approval?: boolean) => Promise<void>;
 	onLearningFeedback?: (id: string, satisfaction: 'satisfied' | 'unsatisfied') => Promise<void>;
 	state: PokemonState = {
@@ -280,6 +284,21 @@ export class DesktopCompanion implements Companion {
 							} else if (message.kind === 'pause' && typeof message.paused === 'boolean') {
 								this.state.paused = message.paused;
 								this.state.activity = message.paused ? 'paused' : 'idle';
+								this.onPauseChanged?.(message.paused);
+							} else if (message.kind === 'recording_request' && Number.isSafeInteger(message.id) && this.onRecording) {
+								void this.onRecording(message.request).then((result) => {
+									if (!socket.destroyed) {
+										socket.write(`${JSON.stringify({
+											kind: 'recording_result', id: message.id, ok: true, result,
+										})}\n`);
+									}
+								}).catch((error: unknown) => {
+									if (!socket.destroyed) {
+										socket.write(`${JSON.stringify({
+											kind: 'recording_result', id: message.id, ok: false, error: error instanceof Error ? error.message.slice(0, 400) : 'Recording failed.',
+										})}\n`);
+									}
+								});
 							} else if (message.kind === 'select' && pokemonIds.includes(message.pet)) {
 								this.state.pet = message.pet;
 							} else if (message.kind === 'learning_feedback' && message.task_id === this.state.learningTaskId
@@ -313,6 +332,7 @@ export class DesktopCompanion implements Companion {
 					}
 
 					this.state.paused = true;
+					this.onPauseChanged?.(true);
 					for (const pending of this.pending.values()) {
 						clearTimeout(pending.timer);
 						pending.reject(new Error('Pokémon desktop disconnected.'));
