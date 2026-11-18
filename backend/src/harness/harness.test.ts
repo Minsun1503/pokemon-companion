@@ -143,7 +143,9 @@ describe('Pokémon harness trust, routing and durable admission', () => {
 			turns += 1;
 			return {content: 'fixture reply', calls: []};
 		});
-		const telegram = new TelegramGateway(engine, 'fixture-token', new Set(['1']));
+		await store.register('bot', '1', '-1001');
+		const telegram = new TelegramGateway(engine, 'fixture-token', new Set(['1']), undefined, new Set(['-1001']));
+		telegram.api = async () => true;
 		telegram.send = async () => {/* Discard fixture replies. */};
 		const update = {update_id: 1, message: {text: 'inspect the desktop', from: {id: 2}, chat: {id: 2, type: 'private'}}};
 		await telegram.handle(update, 'bot');

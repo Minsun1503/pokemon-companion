@@ -154,7 +154,9 @@ describe('Telegram → MCP → native desktop → Telegram relay', () => {
 				models += 1;
 				throw new Error('No API calls permitted');
 			});
+			await store.register('42', '1', '-10');
 			const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-10']));
+			gateway.api = async () => true;
 			const received: string[] = [];
 			gateway.send = async (_chat, text) => {
 				received.push(text);
@@ -164,13 +166,15 @@ describe('Telegram → MCP → native desktop → Telegram relay', () => {
 			await gateway.handle({...update, message: {...update.message, from: {id: 2}}}, '42', 'fixture_bot');
 			await gateway.handle({...update, message: {...update.message, chat: {id: -11, type: 'group'}}}, '42', 'fixture_bot');
 			expect(native.invokes).toBe(0);
-			await gateway.handle(update, '42', 'fixture_bot');
-			await gateway.handle(update, '42', 'fixture_bot');
+			const privateUpdate = {...update, message: {...update.message, chat: {id: 1, type: 'private'}}};
+			await gateway.handle(privateUpdate, '42', 'fixture_bot');
+			await gateway.handle(privateUpdate, '42', 'fixture_bot');
 			expect(models).toBe(0);
 			expect(native.question).toBe('Exact test question');
 			expect(native.invokes).toBe(1);
 			expect(native.fills).toBe(1);
 			expect(received.at(-1)).toBe(native.newReply);
+			expect(received).toHaveLength(1);
 			expect(received.join('\n')).not.toContain('A stale answer');
 		} finally {
 			await client.close();

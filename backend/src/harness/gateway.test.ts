@@ -1,4 +1,4 @@
-import {it, expect} from 'vitest';
+import {it, expect, vi} from 'vitest';
 import {mkdtemp, rm, readFile} from 'node:fs/promises';
 import {join, resolve, relative} from 'node:path';
 import {tmpdir} from 'node:os';
@@ -7,7 +7,9 @@ import {LocalJournal} from '../learning/privacy.js';
 import {HarnessStore} from './store.js';
 import {HarnessEngine} from './engine.js';
 import {GatewayApprovals} from './approvals.js';
-import {defaultConfig} from './config.js';
+import {
+	defaultConfig, deepSeekConfig, loadConfig, validateDeepSeekConfig,
+} from './config.js';
 import {setupApp} from './setup-server.js';
 import {TelegramGateway} from './telegram.js';
 
@@ -28,6 +30,53 @@ async function fixture(run: (store: HarnessStore, home: string) => Promise<void>
 	}
 }
 
+it('enforces one DeepSeek credential and rejects provider/fallback/relay changes before saving', async () => fixture(async (store, home) => {
+	const config = await loadConfig(home, true);
+	expect(config).toEqual(deepSeekConfig());
+	expect(Object.keys(config.routes)).toEqual(['deepseek']);
+	for (const changed of [
+		{...config, routes: {...config.routes, claude: defaultConfig.routes.claude!}},
+		{...config, fallbacks: ['deepseek']},
+		{...config, desktopRelay: {enabled: true, conversation: 'other', approval: 'per_message' as const}},
+		{...config, routes: {deepseek: {...config.routes.deepseek!, baseUrl: 'https://example.com'}}},
+	]) {
+		expect(() => {
+			validateDeepSeekConfig(changed);
+		}).toThrow('one DeepSeek');
+	}
+
+	const {app, token} = setupApp({
+		home, config, store, deepSeekOnly: true, busy: () => false, telegramStatus: () => 'off', async changed() {/* Fixture only. */},
+	});
+	const server = app.listen(0, '127.0.0.1');
+	await new Promise<void>((resolve) => {
+		server.once('listening', resolve);
+	});
+	const address = server.address();
+	if (!address || typeof address === 'string') {
+		throw Error('Missing fixture port');
+	}
+
+	try {
+		const endpoint = `http://127.0.0.1:${address.port}/api`;
+		const headers = {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'};
+		const rejected = await fetch(`${endpoint}/config`, {method: 'POST', headers, body: JSON.stringify({config, secrets: {OPENAI_API_KEY: 'fixture-not-real'}})});
+		expect(rejected.status).toBe(400);
+		expect(store.secret('OPENAI_API_KEY')).toBe('');
+		const allowed = await fetch(`${endpoint}/config`, {method: 'POST', headers, body: JSON.stringify({config, secrets: {DEEPSEEK_API_KEY: 'fixture-not-real'}})});
+		expect(allowed.ok).toBe(true);
+		expect(store.secret('DEEPSEEK_API_KEY')).toBe('fixture-not-real');
+		const status = await (await fetch(`${endpoint}/status`, {headers})).json() as {deepSeekOnly: boolean};
+		expect(status.deepSeekOnly).toBe(true);
+	} finally {
+		await new Promise<void>((resolve) => {
+			server.close(() => {
+				resolve();
+			});
+		});
+	}
+}));
+
 it('reports deferred provider setup without calling a model', async () => fixture(async (store) => {
 	let modelCalls = 0;
 	const config = structuredClone(defaultConfig);
@@ -43,6 +92,32 @@ it('reports deferred provider setup without calling a model', async () => fixtur
 		replies.push(reply);
 	});
 	expect(replies.join('\n')).toContain('waiting for a provider key and model');
+	expect(modelCalls).toBe(0);
+}));
+
+it('privately discovers group IDs for an allowlisted owner without authorizing the group or running a model', async () => fixture(async (store) => {
+	let modelCalls = 0;
+	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(), {
+		list: async () => [], call: async () => ({content: []}),
+	}, async () => {
+		modelCalls += 1;
+		return {content: 'unused', calls: []};
+	});
+	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
+	const sent: {chat: number; text: string}[] = [];
+	gateway.send = async (chat, text) => {
+		sent.push({chat, text});
+	};
+
+	const message = {text: '/whereami@fixture_bot', from: {id: 1}, chat: {id: -1009, type: 'supergroup'}};
+	await gateway.handle({update_id: 1, message: {...message, from: {id: 2}}}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 2, message: {...message, text: '/whereami@other_bot'}}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 3, message}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 3, message}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 4, message: {...message, text: '/task@fixture_bot Control this computer'}}, '77', 'fixture_bot');
+	expect(sent).toHaveLength(1);
+	expect(sent[0]?.chat).toBe(1);
+	expect(sent[0]?.text).toContain('Group ID: -1009');
 	expect(modelCalls).toBe(0);
 }));
 
@@ -139,108 +214,219 @@ it('serializes desktop tasks across owners and cancels a queued owner without ru
 	expect(engine.busy).toBe(false);
 }));
 
-it('admits commands only from a listed sender in the designated group and ignores conversation and other bots', async () => fixture(async (store) => {
-	const tasks: string[] = [];
-	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(), {list: async () => [], call: async () => ({content: []})}, async (_route, _key, messages) => {
-		tasks.push(messages.at(-1)!.content);
-		return {content: 'fixture result', calls: []};
+it('uses groups only for registration and accepts plain private messages in an isolated session', async () => fixture(async (store) => {
+	const requests: string[] = [];
+	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(), {list: async () => [], call: async () => ({content: []})}, async (_r, _k, messages) => {
+		requests.push(messages.at(-1)!.content);
+		return {content: 'Private result', calls: []};
 	});
 	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
-	gateway.send = async () => {/* No external fixture messages. */};
-	const group = {text: '/task@fixture_bot inspect the desktop', from: {id: 1}, chat: {id: -1001, type: 'supergroup'}};
-	await gateway.handle({update_id: 1, message: {...group, from: {id: 2}}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 2, message: {...group, chat: {id: -1002, type: 'supergroup'}}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 3, message: {...group, text: 'ordinary group conversation'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 4, message: {...group, text: '/task@other_bot inspect the desktop'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 5, message: {...group, sender_chat: {id: -1001}}}, '77', 'fixture_bot');
-	expect(tasks).toEqual([]);
-	await gateway.handle({update_id: 6, message: group}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 6, message: group}, '77', 'fixture_bot');
-	expect(tasks).toEqual(['inspect the desktop']);
-}));
-
-it('routes exact mentions and replies while preserving group admission and private approval boundaries', async () => fixture(async (store) => {
-	const tasks: string[] = [];
-	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(), {list: async () => [], call: async () => ({content: []})}, async (_route, _key, messages) => {
-		tasks.push(messages.at(-1)!.content);
-		return {content: 'fixture result', calls: []};
-	});
-	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
-	gateway.send = async () => {/* No external fixture messages. */};
-	const group = {text: '@fixture_bot inspect the desktop', from: {id: 1}, chat: {id: -1001, type: 'supergroup'}};
-	await gateway.handle({update_id: 1, message: {...group, from: {id: 2}}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 2, message: {...group, chat: {id: -1002, type: 'supergroup'}}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 3, message: {...group, text: 'inspect @fixture_bot_extra'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 4, message: {...group, text: 'email@fixture_bot'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 5, message: {...group, text: '@fixture_bot /allow secret'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 6, message: {...group, text: '@fixture_bot /task@other_bot inspect'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 7, message: {...group, text: 'inspect', reply_to_message: {from: {id: 88, is_bot: true}}}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 8, message: {...group, sender_chat: {id: -1001}}}, '77', 'fixture_bot');
-	expect(tasks).toEqual([]);
-	await gateway.handle({update_id: 9, message: {...group, text: 'inspect the desktop @FIXTURE_BOT'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 10, message: {...group, text: 'read the window', reply_to_message: {from: {id: 77, is_bot: true}}}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 11, message: {...group, text: '@fixture_bot /task inspect once'}}, '77', 'fixture_bot');
-	await gateway.handle({update_id: 11, message: {...group, text: '@fixture_bot /task inspect once'}}, '77', 'fixture_bot');
-	expect(tasks).toEqual(['inspect the desktop', 'read the window', 'inspect once']);
-}));
-
-it('answers an addressed greeting without a provider key and explains what remains to configure', async () => fixture(async (store) => {
-	let modelCalls = 0;
-	const config = structuredClone(defaultConfig);
-	config.routes.deepseek!.keyEnv = 'POKEMON_GREETING_TEST_KEY';
-	const engine = new HarnessEngine(config, store, new GatewayApprovals(), {list: async () => [], call: async () => ({content: []})}, async () => {
-		modelCalls += 1;
-		return {content: 'unused', calls: []};
-	});
-	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
-	const output: string[] = [];
+	const sent: {chat: number; text: string}[] = [];
 	gateway.send = async (chat, text) => {
-		expect(chat).toBe(-1001);
-		output.push(text);
+		sent.push({chat, text});
 	};
 
-	await gateway.handle({update_id: 1, message: {text: 'Hi @fixture_bot', from: {id: 1}, chat: {id: -1001, type: 'supergroup'}}}, '77', 'fixture_bot');
-	expect(output.join('\n')).toContain('Hi! I’m connected');
-	expect(output.join('\n')).toContain('waiting for a provider key and model');
-	expect(modelCalls).toBe(0);
+	gateway.api = async () => true;
+	const group = {from: {id: 1}, chat: {id: -1001, type: 'group'}, text: '@fixture_bot register'};
+	await gateway.handle({update_id: 1, message: {...group, chat: {id: 1, type: 'private'}, text: 'Do work before registration'}}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 2, message: {...group, text: 'ordinary conversation'}}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 3, message: {...group, from: {id: 2}}}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 4, message: {...group, chat: {id: -1002, type: 'group'}}}, '77', 'fixture_bot');
+	expect(store.registration('77', '1')).toBeUndefined();
+	await gateway.handle({update_id: 5, message: group}, '77', 'fixture_bot');
+	const {session} = (store.registration('77', '1')!);
+	await gateway.handle({update_id: 6, message: {...group, text: '@fixture_bot execute dangerous work in group'}}, '77', 'fixture_bot');
+	expect(store.registration('77', '1')!.session).toBe(session);
+	expect(requests).toEqual([]);
+	await gateway.handle({update_id: 7, message: {...group, chat: {id: 1, type: 'private'}, text: 'Read the desktop'}}, '77', 'fixture_bot');
+	await gateway.handle({update_id: 7, message: {...group, chat: {id: 1, type: 'private'}, text: 'Read the desktop'}}, '77', 'fixture_bot');
+	expect(requests).toEqual(['Read the desktop']);
+	expect(sent.filter((item) => item.text === 'Private result').map((item) => item.chat)).toEqual([1]);
+	expect(sent.map((item) => item.text).join(' ')).not.toContain('accepted');
+	expect(sent.map((item) => item.text).join(' ')).not.toContain('Task ');
+	expect(store.tasks('telegram:77:1:-1001')).toHaveLength(0);
 }));
 
-it('delivers group-task approval codes privately and accepts the owning user private decision once', async () => fixture(async (store) => {
+it('keeps registration across restart, handles a blocked DM with a start link, and revokes removed groups', async () => fixture(async (store, home) => {
+	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(), {list: async () => [], call: async () => ({content: []})});
+	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
+	const sent: string[] = [];
+	gateway.send = async (chat, text) => {
+		if (chat === 1) {
+			throw Error('DM blocked');
+		}
+
+		sent.push(text);
+	};
+
+	const message = {text: '@fixture_bot register', from: {id: 1}, chat: {id: -1001, type: 'group'}};
+	await gateway.handle({update_id: 1, message}, '77', 'fixture_bot');
+	expect(sent.join(' ')).toContain('https://t.me/fixture_bot?start=session');
+	expect(sent.join(' ')).toContain('Bắt đầu');
+	const registration = store.registration('77', '1');
+	await store.close();
+	const reopened = new HarnessStore(new LocalJournal(join(home, 'store'), Buffer.alloc(32, 9)));
+	try {
+		await reopened.open();
+		expect(reopened.registration('77', '1')).toEqual(registration);
+		const fresh = new TelegramGateway(new HarnessEngine(structuredClone(defaultConfig), reopened, new GatewayApprovals(), {list: async () => [], call: async () => ({content: []})}), 'fixture', new Set(['1']));
+		const output: string[] = [];
+		fresh.send = async (_chat, text) => {
+			output.push(text);
+		};
+
+		await fresh.handle({update_id: 2, message: {...message, chat: {id: 1, type: 'private'}, text: 'Do work'}}, '77', 'fixture_bot');
+		expect(output.join(' ')).toContain('nhóm đăng ký');
+	} finally {
+		await reopened.close();
+	}
+}));
+
+it('approves in the private session with owner/chat/message-bound buttons and no approval data in the model', async () => fixture(async (store) => {
 	const output: {chat: number; text: string}[] = [];
 	const histories: string[] = [];
 	let dispatches = 0;
-	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(), {
+	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(5000), {
 		list: async () => [{name: 'windows', inputSchema: {type: 'object'}}],
 		async call() {
 			dispatches += 1;
 			return {content: []};
 		},
-	}, async (_route, _key, messages) => {
+	}, async (_r, _k, messages) => {
 		histories.push(JSON.stringify(messages));
 		return messages.at(-1)?.role === 'tool' ? {content: 'verified group result', calls: []} : {content: '', calls: [{id: 'write', name: 'windows', args: {action: 'set_value', text: 'fixture draft'}}]};
 	});
-	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
-	let approvalCode = '';
+	await store.register('77', '1', '-1001');
+	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1', '2']), undefined, new Set(['-1001', '-1002']));
+	let data = '';
+	let cleaned = false;
 	gateway.send = async (chat, text) => {
 		output.push({chat, text});
-		const code = /\/allow ([a-f0-9]+)/.exec(text)?.[1];
-		if (!code) {
-			return;
-		}
-
-		approvalCode = code;
-		expect(chat).toBe(1);
-		expect(dispatches).toBe(0);
-		await gateway.handle({update_id: 2, message: {text: `/allow ${code}`, from: {id: 2}, chat: {id: 2, type: 'private'}}}, '77', 'fixture_bot');
-		expect(dispatches).toBe(0);
-		await gateway.handle({update_id: 3, message: {text: `/allow ${code}`, from: {id: 1}, chat: {id: 1, type: 'private'}}}, '77', 'fixture_bot');
 	};
 
-	await gateway.handle({update_id: 1, message: {text: '/task@fixture_bot fill the fixture', from: {id: 1}, chat: {id: -1001, type: 'supergroup'}}}, '77', 'fixture_bot');
+	gateway.api = async (method, args) => {
+		if (method === 'sendMessage') {
+			expect(args.chat_id).toBe(1);
+			expect(args.text).toContain('fixture draft');
+			expect(args.text).not.toContain('/allow');
+			data = (args.reply_markup as {inline_keyboard: {callback_data: string}[][]}).inline_keyboard[0]![0]!.callback_data;
+			return {message_id: 91};
+		}
+
+		if (method === 'editMessageReplyMarkup') {
+			cleaned = true;
+		}
+
+		return true;
+	};
+
+	const work = gateway.handle({update_id: 1, message: {text: 'fill the fixture', from: {id: 1}, chat: {id: 1, type: 'private'}}}, '77', 'fixture_bot');
+	await vi.waitFor(() => {
+		expect(data).not.toBe('');
+	});
+	const click = async (update_id: number, owner: number, chat = 1, message_id = 91, sender = 77) => gateway.handle({
+		update_id, callback_query: {
+			id: `click-${update_id}`, data, from: {id: owner}, message: {message_id, from: {id: sender, is_bot: true}, chat: {id: chat, type: chat > 0 ? 'private' : 'group'}},
+		},
+	}, '77', 'fixture_bot');
+	await click(2, 2);
+	await click(3, 1, -1002);
+	await click(4, 1, 1, 92);
+	await click(5, 1, 1, 91, 88);
+	const code = data.slice(5);
+	await gateway.handle({update_id: 6, message: {text: `/allow ${code}`, from: {id: 1}, chat: {id: 1, type: 'private'}}}, '77', 'fixture_bot');
+	expect(dispatches).toBe(0);
+	await click(7, 1);
+	await work;
+	await click(8, 1);
 	expect(dispatches).toBe(1);
-	expect(approvalCode).not.toBe('');
-	expect(output.filter((item) => item.chat === -1001).map((item) => item.text)).toEqual(['verified group result']);
-	expect(histories.join('')).not.toContain(approvalCode);
+	expect(cleaned).toBe(true);
+	expect(output.filter((item) => item.chat === 1).map((item) => item.text)).toEqual(['Bạn dùng nút Cho phép hoặc Từ chối trên yêu cầu duyệt nhé.', 'verified group result']);
+	expect(histories.join('')).not.toContain(code);
+}));
+
+it('expires private approval buttons and never dispatches after timeout', async () => fixture(async (store) => {
+	let dispatches = 0;
+	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(20), {
+		list: async () => [{name: 'windows', inputSchema: {type: 'object'}}], async call() {
+			dispatches += 1;
+			return {content: []};
+		},
+	}, async () => ({content: '', calls: [{id: 'write', name: 'windows', args: {action: 'set_value'}}]}));
+	await store.register('77', '1', '-1001');
+	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
+	let data = '';
+	let removed = false;
+	gateway.send = async () => {/* Discard fixture result. */};
+	gateway.api = async (method, args) => {
+		if (method === 'sendMessage') {
+			data = (args.reply_markup as {inline_keyboard: {callback_data: string}[][]}).inline_keyboard[0]![0]!.callback_data;
+			return {message_id: 51};
+		}
+
+		if (method === 'editMessageReplyMarkup') {
+			removed = true;
+		}
+
+		return true;
+	};
+
+	await gateway.handle({update_id: 1, message: {text: 'write', from: {id: 1}, chat: {id: 1, type: 'private'}}}, '77', 'fixture_bot');
+	await gateway.handle({
+		update_id: 2, callback_query: {
+			id: 'late', data, from: {id: 1}, message: {message_id: 51, from: {id: 77, is_bot: true}, chat: {id: 1, type: 'private'}},
+		},
+	}, '77', 'fixture_bot');
+	expect(removed).toBe(true);
+	expect(dispatches).toBe(0);
+}));
+
+it.each(['deny', 'stop'])('removes private buttons after %s and rejects a later allow', async (decision) => fixture(async (store) => {
+	let dispatches = 0;
+	const engine = new HarnessEngine(structuredClone(defaultConfig), store, new GatewayApprovals(5000), {
+		list: async () => [{name: 'windows', inputSchema: {type: 'object'}}],
+		async call() {
+			dispatches += 1;
+			return {content: []};
+		},
+	}, async () => ({content: '', calls: [{id: 'w', name: 'windows', args: {action: 'set_value', text: 'fixture'}}]}));
+	await store.register('77', '1', '-1001');
+	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
+	let data = '';
+	let removed = false;
+	gateway.send = async () => {/* No external fixture messages. */};
+	gateway.api = async (method, args) => {
+		if (method === 'sendMessage') {
+			data = (args.reply_markup as {inline_keyboard: {callback_data: string}[][]}).inline_keyboard[0]![0]!.callback_data;
+			return {message_id: 55};
+		}
+
+		if (method === 'editMessageReplyMarkup') {
+			removed = true;
+		}
+
+		return true;
+	};
+
+	const group = {id: 1, type: 'private'};
+	const work = gateway.handle({update_id: 1, message: {text: 'write', from: {id: 1}, chat: group}}, '77', 'fixture_bot');
+	await vi.waitFor(() => {
+		expect(data).not.toBe('');
+	});
+	const callback = {
+		id: 'decision', data: data.replace('pk:a:', 'pk:d:'), from: {id: 1}, message: {message_id: 55, from: {id: 77, is_bot: true}, chat: group},
+	};
+	if (decision === 'deny') {
+		await gateway.handle({update_id: 2, callback_query: callback}, '77', 'fixture_bot');
+	} else {
+		await gateway.handle({update_id: 2, message: {text: '/stop@fixture_bot', from: {id: 1}, chat: group}}, '77', 'fixture_bot');
+	}
+
+	await work;
+	await gateway.handle({update_id: 3, callback_query: {...callback, data}}, '77', 'fixture_bot');
+	expect(dispatches).toBe(0);
+	expect(removed).toBe(true);
+	expect(engine.busy).toBe(false);
 }));
 
 it('authenticates setup, encrypts saved keys, returns no secrets, and refuses changes while work is active', async () => fixture(async (store, home) => {

@@ -243,7 +243,9 @@ public static partial class PokemonWindowsAutomation {
         ShowWindow(handle, 9);
         try { CheckWindow(windowId, windowRef); }
         catch (Exception error) { throw new Exception("Window identity changed after the restore attempt. Inspect the window before continuing. " + error.Message); }
-        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle && GetAncestor(GetForegroundWindow(), 3) != handle) throw new Exception("Windows blocked foreground activation. Retry once; get_ui/invoke/set_value often work in the background. Re-read its UI and use windows focus on a known control when available.");
+        if (!SetForegroundWindow(handle) && GetForegroundWindow() != handle && GetAncestor(GetForegroundWindow(), 3) != handle)
+            return Obj("ok", false, "activated", false, "code", "FOREGROUND_BLOCKED", "foreground", Foreground(),
+                "error", "Windows blocked foreground activation. Read get_ui in the background using the observed window identity. Do not send physical keyboard input until foreground is verified.");
         return Obj("ok", true);
     }
     public static object Foreground() {

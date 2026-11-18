@@ -125,6 +125,21 @@ describe('Windows batch execution', () => {
 		expect(request.mock.calls.filter(([args]) => args.action === 'set_value')).toHaveLength(1);
 	});
 
+	it('stops a blocked activation before later input and permits a fresh background read', async () => {
+		const {runtime, request} = fixture();
+		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce({
+			ok: false, activated: false, code: 'FOREGROUND_BLOCKED', error: 'Read the UI in the background.',
+		});
+		const result = await runWindowsBatch(runtime, steps([{action: 'get_windows'}, {action: 'activate', window_step: 0}, {action: 'get_ui', window_step: 0}]), 2000);
+		expect(parse(result)).toMatchObject({
+			completed: 1, stopped_step: 1, error_details: {code: 'FOREGROUND_BLOCKED', disposition: {delivery: 'not_delivered'}}, result: {activated: false},
+		});
+		expect(request).toHaveBeenCalledTimes(2);
+		request.mockResolvedValueOnce(control);
+		const read = await runWindowsBatch(runtime, steps([{action: 'get_ui', window_id: listed.windows[0]!.id}]), 2000);
+		expect(parse(read)).toMatchObject({ok: true});
+	});
+
 	it('stops on a failed expectation and retains the observed value', async () => {
 		const {runtime, request} = fixture();
 		request.mockReset().mockResolvedValueOnce(listed).mockResolvedValueOnce(control).mockResolvedValueOnce({ok: true}).mockResolvedValue(control);

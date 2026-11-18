@@ -1,5 +1,7 @@
 import {execFile} from 'node:child_process';
 import {join} from 'node:path';
+import {readFile} from 'node:fs/promises';
+import {homedir} from 'node:os';
 import {LocalJournal} from '../learning/privacy.js';
 import {harnessHome, loadConfig} from './config.js';
 import {HarnessStore} from './store.js';
@@ -10,8 +12,26 @@ import {TelegramGateway} from './telegram.js';
 import {setupApp} from './setup-server.js';
 
 export async function main(mode: string, root: string) {
+	let deepSeekOnly = false;
+	try {
+		const profile = JSON.parse(await readFile(join(root, 'agent-profile.json'), 'utf8')) as {id: string};
+		if (profile.id !== 'deepseek-telegram') {
+			throw new Error('Unknown agent deployment profile.');
+		}
+
+		deepSeekOnly = true;
+	} catch (error) {
+		if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+			throw error;
+		}
+	}
+
+	if (deepSeekOnly && !process.env.POKEMON_HARNESS_HOME) {
+		process.env.POKEMON_HARNESS_HOME = join(process.env.LOCALAPPDATA || homedir(), 'pokemon-companion', 'harness-deepseek');
+	}
+
 	const home = harnessHome();
-	const config = await loadConfig(home);
+	const config = await loadConfig(home, deepSeekOnly);
 	if (mode === 'init') {
 		console.log(`Pokémon Agent configuration: ${join(home, 'config.json')}\nRun npm run agent -- setup to enter provider keys and connect Telegram.`);
 		return;
@@ -67,6 +87,7 @@ export async function main(mode: string, root: string) {
 
 	await connect();
 	const {app, token, settled} = setupApp({
+		deepSeekOnly,
 		inspectDesktop: async (current) => tools.call('assistant', {action: 'inspect', ...(current ? {} : {conversation: config.desktopRelay?.conversation})}, AbortSignal.timeout(30000)),
 		home, config, store, busy: () => engine.busy, telegramStatus: () => gateway?.connected ? 'connected' : (config.telegram.enabled ? 'connecting or unavailable' : 'not connected'), changed: connect,
 		setConfiguring(value) {

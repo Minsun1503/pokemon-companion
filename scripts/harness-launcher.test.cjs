@@ -36,6 +36,22 @@ for (const platform of ['win32', 'darwin', 'linux']) {
   });
 }
 
+test('DeepSeek portable includes the installer interview and single-provider profile', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'pokemon-launcher-test-'));
+  const checked = path.relative(path.resolve(os.tmpdir()), path.resolve(root));
+  assert(checked.startsWith('pokemon-launcher-test-') && !checked.startsWith('..'));
+  try {
+    addAgentLauncher(root, root, 'win32', {deepSeekOnly: true});
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'agent-profile.json'))).id, 'deepseek-telegram');
+    for (const file of ['AGENTS.md', 'START-HERE.md', 'AGENT-SETUP.md', 'GROUP-WELCOME.vi.md']) assert(fs.statSync(path.join(root, file)).size > 100);
+    const guide = fs.readFileSync(path.join(root, 'AGENT-SETUP.md'), 'utf8');
+    assert(guide.includes('Tên bot:') && guide.includes('Bạn xác nhận các lựa chọn này chứ?'));
+    assert(guide.includes('Không yêu cầu người dùng gửi key/token vào chat'));
+  } finally {
+    fs.rmSync(root, {recursive: true, force: true});
+  }
+});
+
 test('gateway exits through its shutdown handler when its service owner disappears', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'pokemon-launcher-test-'));
   const checked = path.relative(path.resolve(os.tmpdir()), path.resolve(root));
