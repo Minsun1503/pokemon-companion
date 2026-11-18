@@ -29,6 +29,8 @@
     "agent": "node scripts/harness.cjs",
     "test:agent": "npm --prefix backend test -- --run src/harness && node --test scripts/harness-launcher.test.cjs",
     "test:agent:smoke": "node scripts/harness-smoke.mjs",
+    "test:team": "npm --prefix backend test -- --run src/harness/team.test.ts",
+    "test:team:smoke": "node scripts/team-smoke.mjs",
     "test:input": "node scripts/input-smoke.mjs",
     "test:windows": "node scripts/windows-smoke.mjs && node scripts/windows-fast-path-smoke.mjs && node scripts/keyboard-guard-smoke.mjs && node scripts/companion-focus-smoke.mjs",
     "test:windows:contract": "node scripts/windows-contract-smoke.mjs",
@@ -68,6 +70,8 @@
     "test:installers": "node scripts/installer-smoke.cjs",
     "test:marketplace": "node scripts/marketplace-smoke.mjs",
     "browser:install": "node scripts/ensure-browser.cjs",
-    "test:browser:bundle": "node scripts/browser-bundle-smoke.mjs"
+    "test:browser:bundle": "node scripts/browser-bundle-smoke.mjs",
+    "package:telegram": "npm run build && node scripts/package-telegram.cjs",
+    "test:telegram-package": "node scripts/telegram-package-smoke.cjs"
   }
 }

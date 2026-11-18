@@ -22,7 +22,7 @@ Object.assign(process.env, {
   POKEMON_ACTIONS_DIR: resolve(home, 'actions'),
 });
 const output = [], modelRequests = [], approvalCodes = [];
-const updates = [{update_id: 1, message: {text: '/task@fixture_bot Fill Fixture note with hello from Telegram and verify it.', from: {id: 1}, chat: {id: -1001, type: 'supergroup'}}}];
+const updates = [{update_id: 1, message: {text: '/task@fixture_bot Fill Fixture note with hello from Telegram and verify it.', from: {id: 1}, chat: {id: 1, type: 'private'}}}];
 let nextUpdate = 2, modelStep = 0, pageId, filled = false;
 let finish;
 const completed = new Promise(resolve => {finish = resolve;});
@@ -75,13 +75,16 @@ const fixture = createServer(async (request, response) => {
     }
     if (request.url.endsWith('/sendMessage')) {
       output.push(body.text);
-      const code = body.text.match(/\/allow ([a-f0-9]{32})/)?.[1];
-      if (code) {
-        assert.equal(body.chat_id, 1, 'Approval code must be delivered privately.');
-        approvalCodes.push(code);
-        updates.push({update_id: nextUpdate++, message: {text: `/allow ${code}`, from: {id: 1}, chat: {id: 1, type: 'private'}}});
+      const callbackData = body.reply_markup?.inline_keyboard?.[0]?.[0]?.callback_data;
+      const messageId = 1000 + output.length;
+      result = {message_id: messageId};
+      if (callbackData) {
+        assert.equal(body.chat_id, 1, 'Approval stays in the private session.');
+        assert(!body.text.includes('/allow'), 'The approval code is not exposed in message text.');
+        approvalCodes.push(callbackData.slice(5));
+        updates.push({update_id: nextUpdate++, callback_query: {id: 'fixture-' + nextUpdate, data: callbackData, from: {id: 1}, message: {message_id: messageId, from: {id: 77, is_bot: true}, chat: {id: 1, type: 'private'}}}});
       }
-      if (body.text === 'Verified fixture completion.') {assert.equal(body.chat_id, -1001); finish();}
+      if (body.text === 'Verified fixture completion.') {assert.equal(body.chat_id, 1); finish();}
       if (body.text.startsWith('Task stopped:')) finish();
     }
     response.end(JSON.stringify({ok: true, result}));
@@ -96,6 +99,7 @@ const store = new HarnessStore(new LocalJournal(resolve(home, 'store')));
 let tools, gateway, polling, ui, setupServer, timer;
 try {
   await store.open();
+  const registration = await store.register('77', '1', '-1001');
   await store.putSecrets({FIXTURE_API_KEY: 'fixture-secret'});
   const config = structuredClone(defaultConfig);
   config.routes.fixture = {...config.routes.deepseek, label: 'Fixture API', model: 'fixture-model', baseUrl: `${base}/v1`, keyEnv: 'FIXTURE_API_KEY'};
@@ -150,7 +154,7 @@ try {
   await page.screenshot({path: resolve('output/harness/setup.png'), fullPage: true});
   const disk = await readFile(resolve(home, 'store/events.enc'), 'utf8');
   assert(!disk.includes('private-ui-fixture'));
-  const report = {created_at: new Date().toISOString(), status: 'pass', group_task: 'addressed task from allowed user/group', approval_channel: 'owning user private chat', model_tool_steps: modelStep, private_approvals: approvalCodes.length, dom_fill_verified: filled, setup: 'saved custom route, selected default, reload authenticated', storage: 'AES-GCM journal with OS user key protection', limits: ['Telegram and provider endpoints were local fixtures; no live accounts or provider billing used.', 'Actual bundled Chromium, DOM references, MCP tools and approval path executed.']};
+  const report = {created_at: new Date().toISOString(), status: 'pass', group_task: 'private task from group-registered user', approval_channel: 'private session, requester-bound buttons', model_tool_steps: modelStep, private_approvals: approvalCodes.length, dom_fill_verified: filled, setup: 'saved custom route, selected default, reload authenticated', storage: 'AES-GCM journal with OS user key protection', limits: ['Telegram and provider endpoints were local fixtures; no live accounts or provider billing used.', 'Actual bundled Chromium, DOM references, MCP tools and approval path executed.']};
   await mkdir(resolve('benchmarks/results'), {recursive: true});
   await writeFile(resolve('benchmarks/results/harness-smoke-2026-11-15.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));

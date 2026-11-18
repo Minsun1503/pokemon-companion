@@ -1,12 +1,16 @@
 import express from 'express';
 import {randomBytes, timingSafeEqual} from 'node:crypto';
 import {z} from 'zod';
-import {configSchema, saveConfig, type HarnessConfig} from './config.js';
+import {
+	configSchema, saveConfig, validateDeepSeekConfig, type HarnessConfig,
+} from './config.js';
 import type {HarnessStore} from './store.js';
 import {setupPage} from './setup-page.js';
+import {checkModelConnection, checkTelegramConnection, setTelegramDisplayName} from './connections.js';
 
 export function setupApp(options: {
 	home: string; config: HarnessConfig; store: HarnessStore;
+	deepSeekOnly?: boolean;
 	busy: () => boolean; telegramStatus: () => string; changed: () => Promise<void>;
 	setConfiguring?: (value: boolean) => void;
 	inspectDesktop?: (current: boolean) => Promise<unknown>;
@@ -35,9 +39,35 @@ export function setupApp(options: {
 	});
 	app.use(express.json({limit: '64kb'}));
 	app.get('/api/status', (_request, response) => response.json({
+		deepSeekOnly: Boolean(options.deepSeekOnly),
 		config, keys: Object.fromEntries(Object.values(config.routes).map((route) => [route.keyEnv, Boolean(store.secret(route.keyEnv))])),
 		telegram: options.telegramStatus(), botTokenConfigured: Boolean(store.secret('TELEGRAM_BOT_TOKEN')),
+		busy: options.busy(),
 	}));
+	app.get('/api/tasks', (_request, response) => response.json({tasks: store.recentTaskStatus()}));
+	app.post('/api/check-model', async (request, response) => {
+		try {
+			const {route} = z.object({route: z.string().regex(/^[a-z0-9_-]{1,100}$/)}).strict().parse(request.body);
+			response.json(await checkModelConnection(config, store, route));
+		} catch (error) {
+			response.status(400).json({error: error instanceof Error && /^Connection check returned HTTP \d+\.$/.test(error.message) ? error.message : 'Model check failed. Save the key and route, then check the endpoint and model. No model generation was requested.'});
+		}
+	});
+	app.post('/api/check-telegram', async (_request, response) => {
+		try {
+			response.json(await checkTelegramConnection(config, store));
+		} catch {
+			response.status(400).json({error: 'Telegram check failed. Verify the saved bot token and that the bot belongs to the allowed group. No messages were sent.'});
+		}
+	});
+	app.post('/api/telegram-name', async (request, response) => {
+		try {
+			const {name} = z.object({name: z.string().trim().min(1).max(64)}).strict().parse(request.body);
+			response.json(await setTelegramDisplayName(store, name));
+		} catch {
+			response.status(400).json({error: 'Display-name change was not verified. Check the saved bot token and Telegram before retrying.'});
+		}
+	});
 	app.get('/api/desktop-relay', async (request, response) => {
 		try {
 			response.json(await options.inspectDesktop?.(request.query.current === '1') ?? {ready: false, error: 'Desktop relay is unavailable.'});
@@ -54,6 +84,10 @@ export function setupApp(options: {
 			}
 
 			const next = schema.parse(request.body);
+			if (options.deepSeekOnly) {
+				validateDeepSeekConfig(next.config, next.secrets);
+			}
+
 			if (next.config.telegram.enabled && (!next.config.telegram.allowedUsers.length || !(next.secrets.TELEGRAM_BOT_TOKEN || store.secret('TELEGRAM_BOT_TOKEN')))) {
 				throw new Error('Enter the bot token and allowed Telegram user IDs.');
 			}

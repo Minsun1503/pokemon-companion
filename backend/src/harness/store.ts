@@ -1,8 +1,11 @@
 import {type LocalJournal} from '../learning/privacy.js';
 import type {Message} from './models.js';
+import {newTask, type TaskRecord} from './task.js';
+import {randomBytes} from 'node:crypto';
 
-type Session = {route: string; messages: Message[]};
-type Snapshot = {secrets: Record<string, string>; sessions: Record<string, Session>; admitted: string[]; telegramOffsets?: Record<string, number>};
+type Session = {route: string; messages: Message[]; taskContextAfter?: number; taskContextBoundary?: string | undefined};
+type Registration = {group: string; session: string};
+type Snapshot = {secrets: Record<string, string>; sessions: Record<string, Session>; admitted: string[]; telegramOffsets?: Record<string, number>; tasks?: TaskRecord[]; memories?: Record<string, string[]>; registrations?: Record<string, Registration>};
 /** One encrypted, single-owner store. Credentials never live in repository config or logs. */
 export class HarnessStore {
 	private data: Snapshot = {secrets: {}, sessions: {}, admitted: []};
@@ -16,6 +19,96 @@ export class HarnessStore {
 		if (!this.data.secrets || !this.data.sessions || !Array.isArray(this.data.admitted)) {
 			throw new Error('Invalid harness store; preserve it for recovery.');
 		}
+
+		let interrupted = false;
+		for (const task of this.data.tasks ?? []) {
+			if (task.status === 'queued' || task.status === 'running') {
+				task.status = 'interrupted';
+				task.updatedAt = Date.now();
+				task.events.push({at: Date.now(), message: 'Process restarted. Observe previous actions before starting a new task; no automatic replay.'});
+				interrupted = true;
+			}
+		}
+
+		if (interrupted) {
+			await this.save();
+		}
+	}
+
+	createTask(owner: string, request: string) {
+		const task = newTask(owner, request);
+		this.data.tasks ||= [];
+		this.data.tasks = this.data.tasks.filter((item) => item.status === 'queued' || item.status === 'running').concat(this.data.tasks.filter((item) => item.status !== 'queued' && item.status !== 'running').slice(-15));
+		this.data.tasks.push(task);
+		return task;
+	}
+
+	tasks(owner: string) {
+		return (this.data.tasks ?? []).filter((task) => task.owner === owner);
+	}
+
+	registration(bot: string, user: string) {
+		return this.data.registrations?.[`${bot}:${user}`];
+	}
+
+	async register(bot: string, user: string, group: string) {
+		this.data.registrations ??= {};
+		const key = `${bot}:${user}`;
+		const previous = this.data.registrations[key];
+		if (previous?.group === group) {
+			return previous;
+		}
+
+		const registration = {group, session: randomBytes(16).toString('hex')};
+		this.data.registrations[key] = registration;
+		await this.save();
+		return registration;
+	}
+
+	taskContext(owner: string, currentId: string) {
+		const after = this.data.sessions[owner]?.taskContextAfter ?? 0;
+		const tasks = this.data.tasks ?? [];
+		const index = tasks.findIndex((task) => task.id === currentId);
+		const boundary = tasks.findIndex((task) => task.id === this.data.sessions[owner]?.taskContextBoundary);
+		return tasks.slice(boundary + 1, Math.max(0, index)).filter((task) => task.owner === owner && task.createdAt >= after
+			&& !['queued', 'running'].includes(task.status)).slice(-4).map((task, index, records) => ({
+			id: task.id, status: task.status, request: task.request.slice(0, 2000), result: task.result?.slice(0, index === records.length - 1 ? 4000 : 1000),
+			requestTruncated: task.request.length > 2000, resultTruncated: (task.result?.length ?? 0) > (index === records.length - 1 ? 4000 : 1000),
+		}));
+	}
+
+	recentTaskStatus() {
+		return (this.data.tasks ?? []).slice(-8).map((task) => ({
+			id: task.id, status: task.status, createdAt: task.createdAt, updatedAt: task.updatedAt,
+			modelCalls: task.modelCalls, inputTokens: task.inputTokens, outputTokens: task.outputTokens,
+			unknownUsage: task.unknownUsage, result: task.result,
+			toolEvents: task.events.filter((event) => /^(coordinator|researcher|analyst) (dispatching|received) \w+/.test(event.message)).map((event) => event.message),
+		}));
+	}
+
+	async checkpoint(task: TaskRecord, message: string) {
+		task.updatedAt = Date.now();
+		task.events.push({at: task.updatedAt, message: message.slice(0, 1200)});
+		task.events = task.events.slice(-80);
+		await this.save();
+	}
+
+	memories(owner: string) {
+		return [...(this.data.memories?.[owner] ?? [])];
+	}
+
+	async remember(owner: string, note: string) {
+		this.data.memories ||= {};
+		this.data.memories[owner] = [...(this.data.memories[owner] ?? []), note].slice(-20);
+		await this.save();
+	}
+
+	async clearMemories(owner: string) {
+		if (this.data.memories) {
+			Reflect.deleteProperty(this.data.memories, owner);
+		}
+
+		await this.save();
 	}
 
 	secret(name: string) {

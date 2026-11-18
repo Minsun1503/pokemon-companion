@@ -4,6 +4,13 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $agentHome = Join-Path $env:LOCALAPPDATA 'pokemon-companion/harness'
+$profileFile = Join-Path $Checkout 'agent-profile.json'
+if (Test-Path -LiteralPath $profileFile) {
+    $profile = Get-Content -LiteralPath $profileFile -Raw | ConvertFrom-Json
+    if ($profile.id -ne 'deepseek-telegram') { throw 'Unknown agent deployment profile.' }
+    $agentHome = Join-Path $env:LOCALAPPDATA 'pokemon-companion/harness-deepseek'
+}
+$env:POKEMON_HARNESS_HOME = $agentHome
 New-Item -ItemType Directory -Force -Path $agentHome | Out-Null
 $entry = Join-Path $Checkout 'scripts/harness.cjs'
 if (!(Test-Path -LiteralPath $entry) -or !(Test-Path -LiteralPath $Node)) {

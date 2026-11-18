@@ -1,11 +1,13 @@
 /* eslint-disable no-await-in-loop -- Provider failover and desktop actions must execute sequentially. */
 import type {CallToolResult, Tool} from '@modelcontextprotocol/sdk/types.js';
 import {approvalIntent, hashState} from '../security/approval.js';
-import type {HarnessConfig} from './config.js';
+import {defaultTeam, type HarnessConfig} from './config.js';
+import {TeamRunner, specialists} from './team.js';
+import {TaskGate} from './task.js';
 import {
 	callModel, type ModelClient, type Message, type ModelReply,
 } from './models.js';
-import {type GatewayApprovals, type TurnContext} from './approvals.js';
+import {type GatewayApprovals, type TurnContext, type ApprovalChannel} from './approvals.js';
 import {type HarnessStore} from './store.js';
 
 export type HarnessTools = {list: () => Promise<Tool[]>; call: (name: string, args: Record<string, unknown>, signal: AbortSignal) => Promise<CallToolResult>};
@@ -51,6 +53,9 @@ export class HarnessEngine {
 	private queue: Promise<unknown> = Promise.resolve();
 	private readonly running = new Map<string, AbortController>();
 	private queued = 0;
+	private readonly desktop = new TaskGate();
+	private readonly teamSlots = new TaskGate(4);
+	private readonly teamWork = new Set<Promise<unknown>>();
 	get busy() {
 		return this.queued > 0;
 	}
@@ -60,7 +65,7 @@ export class HarnessEngine {
 		this.running.get(principal)?.abort();
 	}
 
-	async receive(principal: string, text: string, send: TurnContext['send'], privateApprovals?: {principal: string; send: TurnContext['send']}) {
+	async receive(principal: string, text: string, send: TurnContext['send'], approvalChannel?: ApprovalChannel) {
 		if (!text.trim() || text.length > 8000) {
 			await send('Send text of up to 8,000 characters.');
 			return;
@@ -68,7 +73,7 @@ export class HarnessEngine {
 
 		const command = text.trim().split(/\s+/);
 		if (command[0] === '/allow' || command[0] === '/deny') {
-			await send(this.approvals.decide(privateApprovals?.principal ?? principal, command[1] || '', command[0] === '/allow') ? 'Decision recorded.' : 'Approval expired or belongs to another chat.');
+			await send(this.approvals.decide(approvalChannel?.principal ?? principal, command[1] || '', command[0] === '/allow') ? 'Decision recorded.' : 'Approval expired or belongs to another chat.');
 			return;
 		}
 
@@ -79,7 +84,47 @@ export class HarnessEngine {
 		}
 
 		if (command[0] === '/help' || command[0] === '/start') {
-			await send('Pokémon Agent\nIn a group, mention this bot, reply to its message, or use /ask@bot_username your question. In private, send your question directly. When desktop relay is enabled, questions go to the configured desktop chat. /api your instruction uses a configured provider key. Use /model [route], /status, /new, /stop. Approvals use /allow <code> or /deny <code> in the private bot chat.');
+			await send('Pokémon Agent\nIn a group, mention this bot, reply to its message, or use /task@bot_username your question. /ask uses desktop relay; /api uses a provider key. /team your task uses the bounded specialist team and configured API keys. /tasks, /taskstatus <id>, /budget show your team work. /remember <preference>, /memory, /forgetmemory manage your saved preferences. Use /model [route], /status, /new, /stop. Approvals appear in this chat with Allow / Deny buttons; only the requester can decide.');
+			return;
+		}
+
+		if (['/tasks', '/taskstatus', '/budget'].includes(command[0] ?? '')) {
+			const tasks = this.store.tasks(principal);
+			if (command[0] === '/taskstatus') {
+				const task = tasks.find((item) => item.id === command[1]);
+				await send(task ? `${task.id}: ${task.status}\n${task.events.slice(-8).map((event) => event.message).join('\n')}\n${task.result ?? ''}` : 'Task not found in this chat.');
+			} else if (command[0] === '/budget') {
+				const settings = this.config.team ?? defaultTeam;
+				await send(`Team limits per task: ${settings.maxModelCalls} model requests; ${settings.maxTokens} reserved/used tokens; ${settings.maxDelegations} assignments; configured-price USD limit: ${settings.maxCostUsd || 'off'}.\nRecent retained tasks: ${tasks.reduce((sum, task) => sum + task.modelCalls, 0)} requests; configured-price estimate $${tasks.reduce((sum, task) => sum + task.estimatedCostUsd, 0).toFixed(4)}; ${tasks.reduce((sum, task) => sum + task.unknownUsage, 0)} requests without usage; ${tasks.reduce((sum, task) => sum + task.unpricedCalls, 0)} unpriced requests. Estimates exclude tool fees and are not provider billing guarantees.`);
+			} else {
+				await send(tasks.slice(-10).reverse().map((task) => `${task.id}: ${task.status} — ${task.request.slice(0, 100)}`).join('\n') || 'No team tasks in this chat.');
+			}
+
+			return;
+		}
+
+		if (['/remember', '/memory', '/forgetmemory'].includes(command[0] ?? '')) {
+			if (command[0] === '/remember') {
+				const note = text.replace(/^\/remember\s*/, '').trim();
+				if (!note || note.length > 500) {
+					await send('Use /remember followed by a preference of up to 500 characters.');
+					return;
+				}
+
+				await this.store.remember(principal, note);
+				await send('Preference saved for this chat. It is context, not permission to act.');
+			} else if (command[0] === '/forgetmemory') {
+				await this.store.clearMemories(principal);
+				await send('Saved preferences cleared for this chat.');
+			} else {
+				await send(this.store.memories(principal).join('\n') || 'No saved preferences in this chat.');
+			}
+
+			return;
+		}
+
+		if (command[0] === '/team' && command.length === 1) {
+			await send(`Pokémon team: coordinator + ${Object.keys(specialists).join(', ')}. Specialists run only when useful, share one budget, and cannot delegate recursively. Use /team your task. API key/model required; desktop relay is separate.`);
 			return;
 		}
 
@@ -109,7 +154,7 @@ export class HarnessEngine {
 		}
 
 		if (this.running.has(principal)) {
-			await send('This chat has a running or queued task. Use /stop first.');
+			await send(approvalChannel?.conversational ? 'Mình đang xử lý việc trước. Bạn có thể nói “dừng lại” nếu muốn đổi việc.' : 'This chat has a running or queued task. Use /stop first.');
 			return;
 		}
 
@@ -134,8 +179,10 @@ export class HarnessEngine {
 
 		if (command[0] === '/new') {
 			session.messages = [];
+			session.taskContextAfter = Date.now();
+			session.taskContextBoundary = this.store.tasks(principal).at(-1)?.id;
 			await this.store.save();
-			await send(this.config.desktopRelay?.enabled ? 'Cleared the API task history. Desktop questions still use the configured conversation.' : 'Started a fresh conversation.');
+			await send(approvalChannel?.conversational ? 'Đã bắt đầu phiên mới. Bạn muốn làm gì?' : this.config.desktopRelay?.enabled ? 'Cleared the API task history. Desktop questions still use the configured conversation.' : 'Started a fresh conversation.');
 			return;
 		}
 
@@ -147,18 +194,42 @@ export class HarnessEngine {
 		const abort = new AbortController();
 		this.running.set(principal, abort);
 		this.queued += 1;
+		const settings = this.config.team ?? defaultTeam;
+		const teamTask = command[0] === '/team' || (settings.enabled && settings.auto && command[0] !== '/ask' && (!this.config.desktopRelay?.enabled || command[0] === '/api'));
+		if (teamTask) {
+			const work = this.runTeam(principal, text.replace(/^\/(?:team|api)\s*/, ''), session.route, send, abort.signal, approvalChannel).finally(() => {
+				this.running.delete(principal);
+				this.queued -= 1;
+			});
+			this.teamWork.add(work);
+			try {
+				await work;
+			} finally {
+				this.teamWork.delete(work);
+			}
+
+			return;
+		}
+
 		const work = this.queue.catch(() => undefined).then(async () => {
 			if (abort.signal.aborted) {
 				return;
 			}
 
-			await this.approvals.context.run({principal: privateApprovals?.principal ?? principal, send: privateApprovals?.send ?? send, signal: abort.signal}, async () => {
-				try {
-					await this.turn(session, text, send, abort.signal);
-				} catch (error) {
-					await send(abort.signal.aborted ? 'Task stopped.' : `Task stopped: ${error instanceof Error ? error.message : 'unexpected failure'}`);
-				}
-			});
+			const release = await this.desktop.acquire(abort.signal);
+			try {
+				await this.approvals.context.run({
+					principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal: abort.signal, ...(approvalChannel?.sendApproval ? {sendApproval: approvalChannel.sendApproval} : {}),
+				}, async () => {
+					try {
+						await this.turn(session, text, send, abort.signal, approvalChannel?.conversational);
+					} catch (error) {
+						await send(abort.signal.aborted ? 'Task stopped.' : `Task stopped: ${error instanceof Error ? error.message : 'unexpected failure'}`);
+					}
+				});
+			} finally {
+				release();
+			}
 		}).finally(() => {
 			this.running.delete(principal);
 			this.queued -= 1;
@@ -173,9 +244,102 @@ export class HarnessEngine {
 		}
 
 		await this.queue.catch(() => undefined);
+		await Promise.allSettled([...this.teamWork]);
 	}
 
-	private async turn(session: {route: string; messages: Message[]}, text: string, send: TurnContext['send'], signal: AbortSignal) {
+	private async runTeam(principal: string, request: string, route: string, send: TurnContext['send'], signal: AbortSignal, approvalChannel?: ApprovalChannel) {
+		const task = this.store.createTask(principal, request);
+		let release: (() => void) | undefined;
+		let completedSaved = false;
+		try {
+			await this.store.checkpoint(task, 'Accepted. No actions replay automatically after restart.');
+			if (!request.trim()) {
+				throw new Error('Include an instruction after /team or /api.');
+			}
+
+			if (!(this.config.team ?? defaultTeam).enabled) {
+				throw new Error('Team mode is disabled in local setup.');
+			}
+
+			if (!approvalChannel?.conversational) {
+				await send(`Task ${task.id} accepted. Use /taskstatus ${task.id}, /budget or /stop.`);
+			}
+
+			release = await this.teamSlots.acquire(signal);
+			task.status = 'running';
+			await this.store.checkpoint(task, 'Coordinator started.');
+			const dispatched = new Set<string>();
+			const result = await this.approvals.context.run({
+				principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal, ...(approvalChannel?.sendApproval ? {sendApproval: approvalChannel.sendApproval} : {}),
+			}, async () => {
+				const runner = new TeamRunner({
+					config: this.config, store: this.store, task, route, model: this.model, tools: await this.tools.list(), signal, desktop: this.desktop,
+					send: approvalChannel?.conversational ? async () => {/* Internal progress stays in the task ledger. */} : send,
+					call: async (name, args, toolSignal) => this.approvals.context.run({
+						principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal: toolSignal, ...(approvalChannel?.sendApproval ? {sendApproval: approvalChannel.sendApproval} : {}),
+					}, async () => this.executeTool(name, args, toolSignal, dispatched)),
+				});
+				return runner.run(request);
+			});
+			signal.throwIfAborted();
+			task.result = result;
+			task.status = 'completed';
+			await this.store.checkpoint(task, 'Coordinator result saved.');
+			completedSaved = true;
+			await send(approvalChannel?.conversational ? result : `Task ${task.id} completed\n\n${result}`);
+		} catch (error) {
+			// Preserve a completed result if Telegram delivery fails; /taskstatus can retrieve it.
+			if (!completedSaved) {
+				task.status = signal.aborted ? 'stopped' : 'failed';
+				task.result = error instanceof Error ? error.message : 'Unexpected team failure.';
+				await this.store.checkpoint(task, task.result);
+			}
+
+			const failure = signal.aborted
+				? 'Đã dừng việc này. Mình sẽ không tự gửi lại thao tác đã chạy.'
+				: /token budget|configured estimate/.test(task.result ?? '')
+					? 'Mình đã chạm giới hạn xử lý của lượt này nên chưa hoàn thành. Mình sẽ không tự chạy lại các thao tác đã gửi.'
+					: `Mình chưa hoàn thành được việc này. ${task.result}`;
+			await send(approvalChannel?.conversational ? failure : `Task ${task.id}: ${task.status}. ${task.result}`).catch(() => undefined);
+		} finally {
+			release?.();
+		}
+	}
+
+	private async executeTool(name: string, args: Record<string, unknown>, signal: AbortSignal, dispatched: Set<string>) {
+		signal.throwIfAborted();
+		if (!args || Array.isArray(args) || typeof args !== 'object') {
+			throw new Error('Invalid tool arguments.');
+		}
+
+		if (name === 'learning' && args.action === 'run') {
+			throw new Error('Workflow replay is unavailable through Telegram.');
+		}
+
+		const steps = name === 'windows' ? (Array.isArray(args.steps) ? args.steps : [args]) : [];
+		if (steps.some((step) => step && typeof step === 'object' && step.action === 'launch' && /^https?:/i.test(String(step.text)))) {
+			throw new Error('Use browser DOM tools to open URLs.');
+		}
+
+		const digest = hashState({name, args});
+		if (needsNativeApproval(name, args)) {
+			if (dispatched.has(digest)) {
+				throw new Error('Repeated mutation stopped. Observe the result before requesting another action.');
+			}
+
+			const intent = approvalIntent('native', name, `${name}: ${typeof args.action === 'string' ? args.action : 'batch'}`, 'https://local.pokemon.invalid/native', JSON.stringify(args), {}, {digest});
+			if (!(await this.approvals.ask(intent)).authorized) {
+				throw new Error('Action was not approved. No input was sent.');
+			}
+
+			signal.throwIfAborted();
+			dispatched.add(digest);
+		}
+
+		return this.tools.call(name, args, signal);
+	}
+
+	private async turn(session: {route: string; messages: Message[]}, text: string, send: TurnContext['send'], signal: AbortSignal, conversational = false) {
 		const apiTask = /^\/api(?:\s|$)/.test(text);
 		const explicitAsk = /^\/ask(?:\s|$)/.test(text);
 		if ((this.config.desktopRelay?.enabled && !apiTask) || explicitAsk) {
@@ -188,7 +352,10 @@ export class HarnessEngine {
 				throw new Error('Use /ask followed by your question.');
 			}
 
-			await send('Question queued for the current ChatGPT desktop conversation. I’ll wait if it is busy and return the completed answer here.');
+			if (!conversational) {
+				await send('Question queued for the current ChatGPT desktop conversation. I’ll wait if it is busy and return the completed answer here.');
+			}
+
 			const result = this.relayResult(await this.tools.call('assistant', {action: 'ask', conversation: this.config.desktopRelay.conversation, question}, signal));
 			if (!result.completed || typeof result.answer !== 'string' || !result.answer.trim()) {
 				throw new Error(typeof result.error === 'string' ? result.error : 'Desktop relay did not return a completed answer. No automatic resend was attempted.');

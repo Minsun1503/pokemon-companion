@@ -278,6 +278,10 @@ export async function runWindowsBatch(runtime: PokemonRuntime, steps: WindowsSte
 					started = true;
 					let result = await runWindowsRequest(runtime, request, signal);
 					results.push(result);
+					if (step.action === 'activate' && result.activated === false && result.code === 'FOREGROUND_BLOCKED') {
+						throw new BatchReferenceError(String(result.error), result, index, 'FOREGROUND_BLOCKED');
+					}
+
 					const matchesExpectation = () => {
 						const node = single(result, 'nodes', index);
 						return !node.value_clipped && node.value === step.expect_value;
