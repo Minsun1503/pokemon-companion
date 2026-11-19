@@ -14,3 +14,6 @@ workflow-jobs/
 .venv-api/
 **/__pycache__/
 *.pyc
+
+# Machine-specific MCP config, written by npm run install:local / update
+.mcp.json

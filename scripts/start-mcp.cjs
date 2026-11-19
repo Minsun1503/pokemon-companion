@@ -9,7 +9,26 @@ function configuration(root = path.resolve(__dirname, '..')) {
   for (const file of [backend, frontendEntry, path.join(frontend, 'package.json')]) {
     if (!fs.existsSync(file)) throw new Error(`Missing ${file}. Run npm run setup and npm run build in ${root}.`);
   }
+  warnIfStale(path.join(root, 'backend/src'), backend);
+  warnIfStale(path.join(frontend, 'src'), frontendEntry);
   return {root, backend, frontend, frontendEntry};
+}
+
+function newestMtime(dir) {
+  let newest = 0;
+  for (const entry of fs.readdirSync(dir, {withFileTypes: true})) {
+    const full = path.join(dir, entry.name);
+    newest = Math.max(newest, entry.isDirectory() ? newestMtime(full) : fs.statSync(full).mtimeMs);
+  }
+  return newest;
+}
+
+function warnIfStale(sourceDir, builtFile) {
+  try {
+    if (newestMtime(sourceDir) > fs.statSync(builtFile).mtimeMs) {
+      process.stderr.write(`Warning: ${path.relative(path.resolve(__dirname, '..'), sourceDir)} is newer than its build. Run npm run build (or npm run update).\n`);
+    }
+  } catch {}
 }
 
 async function launch(root) {

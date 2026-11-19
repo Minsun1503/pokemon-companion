@@ -5,6 +5,8 @@
   "description": "An animated Pokémon desktop companion for AI computer use through MCP",
   "scripts": {
     "setup": "node scripts/repos.cjs install",
+    "install:local": "node scripts/update.cjs",
+    "update": "node scripts/update.cjs --pull",
     "setup:ci": "node scripts/repos.cjs ci",
     "build": "node scripts/repos.cjs run build",
     "check": "node scripts/repos.cjs check",

@@ -38,6 +38,19 @@ The included `AGENT_GUIDE.md` describes native discovery, verification, recovery
 
 The bundled Chromium browser exposes the DOM through Playwright automatically. Sign in to a site once when required; its dedicated profile retains the session. Web browsing needs no separate Edge/Chrome installation or CDP setup.
 
+## Clone and use on another machine (source)
+
+Requires Git and Node.js 22.12+ (`winget install OpenJS.NodeJS.LTS`). In PowerShell use `npm.cmd` if script execution is disabled.
+
+```powershell
+git clone https://github.com/Minsun1503/pokemon-companion.git
+cd pokemon-companion
+npm.cmd run install:local
+npm.cmd run agent -- setup
+```
+
+`install:local` installs dependencies (including the bundled Chromium), builds, and writes a machine-specific `.mcp.json` so Claude Code in this folder can use the Pokémon MCP. `agent -- setup` configures the Telegram bot (see [TELEGRAM-SETUP-VI.md](TELEGRAM-SETUP-VI.md)). Later, `npm.cmd run update` pulls, reinstalls and rebuilds; restart a running gateway afterwards with `npm.cmd run agent -- gateway stop` then `gateway start`.
+
 ## Build and verify releases from source
 
 Pokémon's own API agent (Telegram) is set up with [TELEGRAM-SETUP-VI.md](TELEGRAM-SETUP-VI.md): one bot per computer, a terminal wizard for the provider key and bot token, then DM pairing. It requires a provider API key; the MCP-client installation paths above use the AI client's model instead. Portable packages include **Start Pokemon Agent.cmd** (Windows) or **Start Pokemon Agent.command** (macOS/Linux), which run the same wizard with bundled runtimes. See [Pokémon Agent](docs/pokemon-agent.md).

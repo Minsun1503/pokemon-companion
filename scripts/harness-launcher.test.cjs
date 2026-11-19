@@ -45,8 +45,8 @@ test('DeepSeek portable includes the installer interview and single-provider pro
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'agent-profile.json'))).id, 'deepseek-telegram');
     for (const file of ['AGENTS.md', 'START-HERE.md', 'AGENT-SETUP.md', 'GROUP-WELCOME.vi.md']) assert(fs.statSync(path.join(root, file)).size > 100);
     const guide = fs.readFileSync(path.join(root, 'AGENT-SETUP.md'), 'utf8');
-    assert(guide.includes('Tên bot:') && guide.includes('Bạn xác nhận các lựa chọn này chứ?'));
-    assert(guide.includes('Không yêu cầu người dùng gửi key/token vào chat'));
+    assert(guide.includes('pairing approve') && guide.includes('npm run agent -- setup'));
+    assert(guide.includes('Không tự nhập key/token'));
   } finally {
     fs.rmSync(root, {recursive: true, force: true});
   }
