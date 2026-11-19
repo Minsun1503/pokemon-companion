@@ -59,7 +59,7 @@ export function harnessHome() {
 export function deepSeekConfig(): HarnessConfig {
 	return {
 		...structuredClone(defaultConfig),
-		team: {...structuredClone(defaultTeam), auto: true, routes: {}},
+		team: {...structuredClone(defaultTeam), auto: false, routes: {}}, // /team stays available; ordinary tasks avoid the team token budget.
 		routes: {deepseek: {...defaultConfig.routes.deepseek!, model: 'deepseek-flash'}},
 	};
 }

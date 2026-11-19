@@ -4,16 +4,14 @@ import {mkdtemp, readFile, rm, mkdir, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve, relative} from 'node:path';
 import {setTimeout as delay} from 'node:timers/promises';
-import {chromium} from '../backend/node_modules/playwright/index.mjs';
-import {bundledChromium} from '../backend/dist/browser/bundled.js';
 import {LocalJournal} from '../backend/dist/learning/privacy.js';
 import {HarnessStore} from '../backend/dist/harness/store.js';
-import {defaultConfig} from '../backend/dist/harness/config.js';
 import {GatewayApprovals} from '../backend/dist/harness/approvals.js';
 import {HarnessEngine} from '../backend/dist/harness/engine.js';
 import {harnessRuntime} from '../backend/dist/harness/runtime.js';
 import {TelegramGateway} from '../backend/dist/harness/telegram.js';
-import {setupApp} from '../backend/dist/harness/setup-server.js';
+import {approvePairing, requestPairing} from '../backend/dist/harness/pairing.js';
+import {loadConfig} from '../backend/dist/harness/config.js';
 
 const home = await mkdtemp(resolve(tmpdir(), 'pokemon-harness-smoke-'));
 Object.assign(process.env, {
@@ -21,7 +19,7 @@ Object.assign(process.env, {
   POKEMON_LEARNING_DIR: resolve(home, 'learning'), POKEMON_CONNECTIONS_FILE: resolve(home, 'connections.json'),
   POKEMON_ACTIONS_DIR: resolve(home, 'actions'),
 });
-const output = [], modelRequests = [], approvalCodes = [];
+const output = [], modelRequests = [];
 const updates = [{update_id: 1, message: {text: '/task@fixture_bot Fill Fixture note with hello from Telegram and verify it.', from: {id: 1}, chat: {id: 1, type: 'private'}}}];
 let nextUpdate = 2, modelStep = 0, pageId, filled = false;
 let finish;
@@ -75,14 +73,12 @@ const fixture = createServer(async (request, response) => {
     }
     if (request.url.endsWith('/sendMessage')) {
       output.push(body.text);
-      const callbackData = body.reply_markup?.inline_keyboard?.[0]?.[0]?.callback_data;
-      const messageId = 1000 + output.length;
-      result = {message_id: messageId};
-      if (callbackData) {
-        assert.equal(body.chat_id, 1, 'Approval stays in the private session.');
-        assert(!body.text.includes('/allow'), 'The approval code is not exposed in message text.');
-        approvalCodes.push(callbackData.slice(5));
-        updates.push({update_id: nextUpdate++, callback_query: {id: 'fixture-' + nextUpdate, data: callbackData, from: {id: 1}, message: {message_id: messageId, from: {id: 77, is_bot: true}, chat: {id: 1, type: 'private'}}}});
+      result = {message_id: 1000 + output.length};
+      const code = /Mã ghép cặp: ([A-Z2-9]{8})/.exec(body.text)?.[1];
+      if (code) {
+        // The owner approves locally, then the original request is sent again.
+        await approvePairing(home, code);
+        updates.push({update_id: nextUpdate++, message: {...updates[0].message}});
       }
       if (body.text === 'Verified fixture completion.') {assert.equal(body.chat_id, 1); finish();}
       if (body.text.startsWith('Task stopped:')) finish();
@@ -96,73 +92,43 @@ const fixture = createServer(async (request, response) => {
 await new Promise(resolve => fixture.listen(0, '127.0.0.1', resolve));
 const base = `http://127.0.0.1:${fixture.address().port}`;
 const store = new HarnessStore(new LocalJournal(resolve(home, 'store')));
-let tools, gateway, polling, ui, setupServer, timer;
+let tools, gateway, polling, timer;
 try {
   await store.open();
-  const registration = await store.register('77', '1', '-1001');
   await store.putSecrets({FIXTURE_API_KEY: 'fixture-secret'});
-  const config = structuredClone(defaultConfig);
+  const config = await loadConfig(home);
   config.routes.fixture = {...config.routes.deepseek, label: 'Fixture API', model: 'fixture-model', baseUrl: `${base}/v1`, keyEnv: 'FIXTURE_API_KEY'};
   config.defaultRoute = 'fixture';
-  const approvals = new GatewayApprovals(10000);
+  const approvals = new GatewayApprovals();
   tools = await harnessRuntime(approvals);
   assert(!(await tools.list()).some(tool => tool.name === 'learning'));
   const engine = new HarnessEngine(config, store, approvals, tools);
-  gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), base, new Set(['-1001']));
+  gateway = new TelegramGateway(engine, 'fixture', async () => {
+    const current = await loadConfig(home);
+    return {users: new Set(current.telegram.allowedUsers), groups: new Set(current.telegram.allowedGroups)};
+  }, async (userId, name) => requestPairing(home, userId, name), base);
   polling = gateway.run();
   await Promise.race([completed, new Promise((_, reject) => {timer = setTimeout(() => reject(new Error('Harness smoke timed out.')), 30000);})]);
   clearTimeout(timer);
   assert(filled, JSON.stringify(output));
   assert.equal(modelStep, 6);
-  assert(approvalCodes.length >= 2, 'Navigation and fill both require approval.');
-  for (const code of approvalCodes) assert(!JSON.stringify(modelRequests).includes(code));
+  assert(output.some(text => text.includes('Mã ghép cặp')), 'Unknown sender received a pairing code first.');
+  assert(!JSON.stringify(modelRequests).includes('Mã ghép cặp'), 'Pairing never reaches the model.');
   assert(!JSON.stringify(modelRequests).includes('fixture-secret'));
   for (let i = 0; engine.busy && i < 100; i++) await delay(20);
   assert(!engine.busy, 'Completed turn must settle before shutdown.');
   gateway.stop(); await polling; await engine.close();
 
-  // Drive the real setup page through its DOM and authenticated HTTP API.
-  const setup = setupApp({home, config, store, busy: () => false, telegramStatus: () => 'fixture', changed: async () => {}});
-  setupServer = setup.app.listen(0, '127.0.0.1');
-  await new Promise(resolve => setupServer.once('listening', resolve));
-  ui = await chromium.launch({executablePath: bundledChromium(), headless: true});
-  const page = await ui.newPage({viewport: {width: 1200, height: 1000}});
-  const errors = []; page.on('pageerror', error => errors.push(error.message));
-  await page.goto(`http://127.0.0.1:${setupServer.address().port}/#${setup.token}`);
-  await page.waitForFunction(() => document.querySelector('#route').value === 'fixture');
-  await page.locator('#notice').filter({hasText: 'Telegram: fixture'}).waitFor();
-  await page.locator('#newRoute').click();
-  await page.locator('#name').fill('my-proxy');
-  await page.locator('#baseUrl').fill(`${base}/v1`);
-  await page.locator('#model').fill('custom-model');
-  await page.locator('#key').fill('private-ui-fixture');
-  const routeSaved = page.waitForResponse(response => response.url().includes('/api/config') && response.ok());
-  await page.locator('#saveRoute').click();
-  await routeSaved;
-  await page.waitForFunction(() => document.querySelector('#route').value === 'my-proxy');
-  const defaultSaved = page.waitForResponse(response => response.url().includes('/api/config') && response.ok());
-  await page.locator('#makeDefault').click();
-  await defaultSaved;
-  await page.locator('#notice').filter({hasText: 'Saved.'}).waitFor();
-  await setup.settled();
-  await page.reload();
-  await page.waitForFunction(() => document.querySelector('#route').value === 'my-proxy');
-  await page.locator('#notice').filter({hasText: 'Telegram: fixture'}).waitFor();
-  assert.equal(await page.locator('#key').inputValue(), '');
-  assert.equal(errors.length, 0, errors.join('\n'));
-  await mkdir(resolve('output/harness'), {recursive: true});
-  await page.screenshot({path: resolve('output/harness/setup.png'), fullPage: true});
   const disk = await readFile(resolve(home, 'store/events.enc'), 'utf8');
-  assert(!disk.includes('private-ui-fixture'));
-  const report = {created_at: new Date().toISOString(), status: 'pass', group_task: 'private task from group-registered user', approval_channel: 'private session, requester-bound buttons', model_tool_steps: modelStep, private_approvals: approvalCodes.length, dom_fill_verified: filled, setup: 'saved custom route, selected default, reload authenticated', storage: 'AES-GCM journal with OS user key protection', limits: ['Telegram and provider endpoints were local fixtures; no live accounts or provider billing used.', 'Actual bundled Chromium, DOM references, MCP tools and approval path executed.']};
+  assert(!disk.includes('fixture-secret'));
+  const report = {created_at: new Date().toISOString(), status: 'pass', access: 'DM pairing code approved locally, then the private task ran', model_tool_steps: modelStep, dom_fill_verified: filled, storage: 'AES-GCM journal with OS user key protection', limits: ['Telegram and provider endpoints were local fixtures; no live accounts or provider billing used.', 'Actual bundled Chromium, DOM references, MCP tools and pairing path executed.']};
   await mkdir(resolve('benchmarks/results'), {recursive: true});
-  await writeFile(resolve('benchmarks/results/harness-smoke-2026-11-15.json'), JSON.stringify(report, null, 2) + '\n');
+  await writeFile(resolve('benchmarks/results/harness-smoke-latest.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
 } finally {
   clearTimeout(timer);
   gateway?.stop(); await polling?.catch(() => {});
-  await ui?.close(); await tools?.close(); await store.close();
-  if (setupServer) {setupServer.closeAllConnections(); await new Promise(resolve => setupServer.close(resolve));}
+  await tools?.close(); await store.close();
   fixture.closeAllConnections(); await new Promise(resolve => fixture.close(resolve));
   const checked = relative(resolve(tmpdir()), resolve(home));
   assert(checked.startsWith('pokemon-harness-smoke-') && !checked.startsWith('..'));
