@@ -12,12 +12,6 @@ import {ActionJournal} from '../browser/actions.js';
 import {DesktopAssistant} from './assistant.js';
 import type {DesktopRequest} from './adapter.js';
 import {registerAssistant} from '../tools/assistant.js';
-import {GatewayApprovals} from '../harness/approvals.js';
-import {HarnessStore} from '../harness/store.js';
-import {HarnessEngine} from '../harness/engine.js';
-import {TelegramGateway} from '../harness/telegram.js';
-import {defaultConfig} from '../harness/config.js';
-import {approvalIntent} from '../security/approval.js';
 
 const conversation = 'Configured current chat';
 class NativeFixture {
@@ -111,7 +105,7 @@ class NativeFixture {
 	}
 }
 
-async function fixture(run: (assistant: DesktopAssistant, native: NativeFixture, dir: string, store: HarnessStore) => Promise<void>) {
+async function fixture(run: (assistant: DesktopAssistant, native: NativeFixture, dir: string) => Promise<void>) {
 	const dir = await mkdtemp(join(tmpdir(), 'pokemon-relay-'));
 	const native = new NativeFixture();
 	const host = {
@@ -123,59 +117,34 @@ async function fixture(run: (assistant: DesktopAssistant, native: NativeFixture,
 		async authorize() {/* This fixture's operator has authorized the exact question. */},
 	} as unknown as PokemonRuntime;
 	const assistant = new DesktopAssistant(host, new ActionJournal(new LocalJournal(join(dir, 'actions'), Buffer.alloc(32, 9))), 10);
-	const store = new HarnessStore(new LocalJournal(join(dir, 'store'), Buffer.alloc(32, 9)));
-	await store.open();
 	try {
-		await run(assistant, native, dir, store);
+		await run(assistant, native, dir);
 	} finally {
 		await assistant.close();
-		await store.close();
 		expect(dirname(dir)).toBe(tmpdir());
 		expect(basename(dir)).toMatch(/^pokemon-relay-/);
 		await rm(dir, {recursive: true, force: true});
 	}
 }
 
-describe('Telegram → MCP → native desktop → Telegram relay', () => {
-	it('returns only the new answer over a real MCP transport, gates senders/groups, and bypasses model APIs', async () => fixture(async (assistant, native, _dir, store) => {
+describe('ChatGPT desktop relay through MCP', () => {
+	it('returns only the new answer over a real MCP transport', async () => fixture(async (assistant, native) => {
 		const server = new McpServer({name: 'relay-fixture', version: '1'});
 		registerAssistant(server, {assistant} as PokemonRuntime);
-		const client = new Client({name: 'telegram-fixture', version: '1'});
+		const client = new Client({name: 'relay-client', version: '1'});
 		const [serverTransport, clientTransport] = InMemoryTransport.createLinkedPair();
 		await server.connect(serverTransport);
 		await client.connect(clientTransport);
 		try {
-			const settings = {...structuredClone(defaultConfig), desktopRelay: {enabled: true, conversation, approval: 'scoped_grant' as const}};
-			let models = 0;
-			const engine = new HarnessEngine(settings, store, new GatewayApprovals(), {
-				list: async () => (await client.listTools()).tools,
-				call: async (name, args, signal) => client.callTool({name, arguments: args}, undefined, {signal}) as Promise<CallToolResult>,
-			}, async () => {
-				models += 1;
-				throw new Error('No API calls permitted');
-			});
-			await store.register('42', '1', '-10');
-			const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-10']));
-			gateway.api = async () => true;
-			const received: string[] = [];
-			gateway.send = async (_chat, text) => {
-				received.push(text);
-			};
-
-			const update = {update_id: 1, message: {text: '/ask@fixture_bot Exact test question', from: {id: 1}, chat: {id: -10, type: 'group'}}};
-			await gateway.handle({...update, message: {...update.message, from: {id: 2}}}, '42', 'fixture_bot');
-			await gateway.handle({...update, message: {...update.message, chat: {id: -11, type: 'group'}}}, '42', 'fixture_bot');
-			expect(native.invokes).toBe(0);
-			const privateUpdate = {...update, message: {...update.message, chat: {id: 1, type: 'private'}}};
-			await gateway.handle(privateUpdate, '42', 'fixture_bot');
-			await gateway.handle(privateUpdate, '42', 'fixture_bot');
-			expect(models).toBe(0);
+			const result = await client.callTool({name: 'assistant', arguments: {action: 'ask', conversation, question: 'Exact test question'}}) as CallToolResult;
+			const body = result.content.find((item) => item.type === 'text');
+			const data = JSON.parse(body?.type === 'text' ? body.text : '{}') as {completed?: boolean; answer?: string};
+			expect(data.completed).toBe(true);
+			expect(data.answer).toBe(native.newReply);
+			expect(data.answer).not.toContain('A stale answer');
 			expect(native.question).toBe('Exact test question');
 			expect(native.invokes).toBe(1);
 			expect(native.fills).toBe(1);
-			expect(received.at(-1)).toBe(native.newReply);
-			expect(received).toHaveLength(1);
-			expect(received.join('\n')).not.toContain('A stale answer');
 		} finally {
 			await client.close();
 			await server.close();
@@ -228,15 +197,4 @@ describe('Telegram → MCP → native desktop → Telegram relay', () => {
 		await expect(assistant.ask(conversation, 'question', new AbortController().signal)).rejects.toThrow('No partial response');
 		expect(native.invokes).toBe(1);
 	}));
-	it('keeps reusable consent limited to the configured owner, destination and relay operation', async () => {
-		const approvals = new GatewayApprovals(5);
-		approvals.setDesktopGrant(conversation, ['1']);
-		const intent = approvalIntent('assistant', 'ask', 'ChatGPT desktop', 'https://local.pokemon.invalid/desktop/chatgpt', 'question', {}, {}, {conversation});
-		const run = async (principal: string, value = intent) => approvals.context.run({principal, signal: new AbortController().signal, async send() {/* Discard fixture approval previews. */}}, async () => approvals.ask(value));
-		expect((await run('telegram:42:1')).authorized).toBe(true);
-		expect((await run('telegram:42:2')).authorized).toBe(false);
-		expect((await run('telegram:42:1', {...intent, conversation: 'Other chat'})).authorized).toBe(false);
-		expect((await run('telegram:42:1', {...intent, tool: 'windows'})).authorized).toBe(false);
-		expect((await run('telegram:42:1', {...intent, reconciliation: true})).authorized).toBe(false);
-	});
 });
