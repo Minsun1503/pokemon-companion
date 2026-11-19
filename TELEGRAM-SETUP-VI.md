@@ -1,16 +1,55 @@
 # Bắt đầu: Pokémon điều khiển máy qua Telegram
 
-**Mỗi máy một bot riêng. Nhóm chỉ đăng ký phiên; công việc trao đổi trong chat riêng.** Bản Telegram portable dùng duy nhất một API DeepSeek cho mọi agent; không cần mở ChatGPT desktop cho chế độ này.
+Cách cài giống Hermes Agent: **3 lệnh trên terminal, không cần trang web, không cần nhóm, không cần tự tìm user ID.** Mỗi máy dùng một bot riêng.
 
-Nếu nhờ agent cài giúp, đưa họ [AGENT-SETUP.md](AGENT-SETUP.md) trong bản portable: agent sẽ hỏi tên bot và các lựa chọn cần thiết, đưa bản xác nhận rồi mới setup. Gói không chứa key/token thật.
+## 1. Cài đặt (một lần)
 
-1. Giải nén đầy đủ bản portable và chạy **Start Pokemon Agent.cmd** trên Windows. Trang setup cục bộ sẽ mở. Với checkout source, xem lệnh cài trong hướng dẫn đầy đủ bên dưới.
-2. Giữ route DeepSeek và model được tài khoản hỗ trợ, nhập một API key DeepSeek → **Save route** → **Check model connection** → **Use as default**.
-3. Tạo bot bằng **@BotFather → /newbot**, đặt tên hiển thị ngắn như **Pikachu**, rồi thêm bot vào nhóm.
-4. Nhập bot token và user ID được phép vào Pokémon. Mở chat riêng với bot, gửi `/start`. Dùng `/whereami@username_cua_bot` trong nhóm để nhận group ID riêng, rồi lưu group ID vào setup.
-5. Bật **Connect Telegram**, **Enable /team**, **Also use the team for ordinary API tasks**; tắt **Desktop chat relay**. Bấm **Check bot and group**.
-6. Để gọi bằng mention thường, dùng **@BotFather → /setprivacy → chọn bot → Disable**, rồi xóa bot khỏi nhóm và thêm lại. Có thể đặt lại tên hiển thị qua **Short display name → Save bot display name**.
-7. Trong nhóm, gõ `@`, chọn bot và nhắn “đăng ký phiên” (hoặc gửi `/session@username_cua_bot`). Nhóm chỉ đăng ký, không chạy yêu cầu điều khiển máy.
-8. Mở liên kết chat riêng bot trả về; bấm **Bắt đầu** nếu Telegram yêu cầu. Từ đây cứ nhắn việc bình thường, không cần @ hoặc lệnh.
+```powershell
+npm run agent -- setup
+```
 
-Kết quả và nút **Cho phép / Từ chối** nằm trong chat riêng. Bot dùng “đang nhập”, không tự gửi mã task hay các dòng lệnh trạng thái. Bạn có thể nói “dừng lại”, “bắt đầu phiên mới”, “làm tiếp đi”. Phiên được lưu mã hóa theo bot/người dùng; không mang lịch sử nhóm sang. Người dùng và nhóm đăng ký vẫn phải nằm trong allowlist của máy. Máy cần bật, có mạng và mở khóa khi thao tác desktop.
+Wizard hỏi lần lượt:
+
+1. **API key** (DeepSeek mặc định) → kiểm tra key và liệt kê model → chọn model (Enter = gợi ý).
+2. **Bot token**: mở **@BotFather → /newbot**, đặt tên (ví dụ *Antwork*), copy token, dán vào. Wizard kiểm tra bằng `getMe`.
+3. Hỏi có cài **chạy nền khi đăng nhập Windows** không (Enter = có). Có thì bot khởi động ngay.
+
+Key và token không hiện trên màn hình khi gõ và được mã hóa trên máy; không lưu trong repo hay config.
+
+## 2. Ghép cặp (pairing)
+
+1. Mở Telegram, nhắn **riêng** cho bot bất kỳ câu gì.
+2. Bot trả về **mã ghép cặp** 8 ký tự.
+3. Trên máy, chạy:
+
+```powershell
+npm run agent -- pairing approve MÃ
+```
+
+Xong. Nhắn việc cho bot như chat bình thường. Mã hết hạn sau 1 giờ; người lạ không có mã được duyệt thì bot không làm gì.
+
+## 3. Dùng hằng ngày
+
+- Nhắn việc bình thường: “đếm số cửa sổ đang mở”, “mở Notepad và gõ …”.
+- “dừng lại” hoặc `/stop`: dừng việc đang chạy. “bắt đầu phiên mới” hoặc `/new`: bỏ ngữ cảnh cũ.
+- `/team <việc>`: dùng nhóm chuyên gia. `/status`, `/help`.
+- Bot làm luôn, **không hỏi duyệt từng thao tác** (giống Hermes). Chỉ ghép cặp người bạn tin tưởng.
+
+## Lệnh quản lý
+
+| Lệnh | Việc |
+| --- | --- |
+| `npm run agent -- gateway` | Chạy bot trong cửa sổ hiện tại |
+| `npm run agent -- gateway install` / `uninstall` | Cài/gỡ chạy nền khi đăng nhập Windows |
+| `npm run agent -- gateway start` / `stop` / `status` | Điều khiển bản chạy nền |
+| `npm run agent -- pairing list` | Xem người được phép và mã đang chờ |
+| `npm run agent -- pairing revoke USER_ID` | Thu hồi quyền |
+| `npm run agent -- status` | Trạng thái cấu hình (không lộ key) |
+
+Muốn chạy lại `setup` khi bot đang chạy nền: `npm run agent -- gateway stop` trước, setup xong thì `gateway start`.
+
+## Nhóm (tùy chọn)
+
+Không cần nhóm. Nếu muốn gọi bot trong nhóm: thêm group ID (số âm) vào `telegram.allowedGroups` trong `config.json` của agent; chỉ người đã ghép cặp, khi @mention hoặc reply bot, mới được trả lời. Bot có privacy mode thì cần @mention hoặc reply.
+
+Máy cần bật, có mạng và **mở khóa** khi thao tác desktop.

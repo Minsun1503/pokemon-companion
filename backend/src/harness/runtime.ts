@@ -21,7 +21,7 @@ class TelegramCompanion extends DesktopCompanion {
 	}
 
 	override async revokeScope(scope: string) {
-		this.remote.revokeScope(scope);
+		this.remote.revokeScope();
 		await super.revokeScope(scope);
 	}
 }

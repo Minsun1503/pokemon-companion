@@ -82,8 +82,7 @@ it('runs Telegram coordinator → isolated writer/reviewer in parallel → final
 
 	const engine = new HarnessEngine(config, store, new GatewayApprovals(), tools, model);
 	store.session('telegram:77:1:-1001', 'deepseek').messages.push({role: 'user', content: 'PRIVATE_OLD_HISTORY'});
-	const registration = await store.register('77', '1', '-1001');
-	const gateway = new TelegramGateway(engine, 'fixture', new Set(['1']), undefined, new Set(['-1001']));
+	const gateway = new TelegramGateway(engine, 'fixture', async () => ({users: new Set(['1']), groups: new Set<string>()}), async () => undefined);
 	gateway.api = async () => true;
 	const replies: string[] = [];
 	gateway.send = async (_chat, text) => {
@@ -98,7 +97,7 @@ it('runs Telegram coordinator → isolated writer/reviewer in parallel → final
 	expect(childRoutes).toContain('Cheap specialist');
 	expect(replies.at(-1)).toContain('Final corrected recommendation');
 	expect(replies.join('\n')).not.toMatch(/Task [a-f0-9]+|accepted|working\./);
-	const task = store.tasks(`telegram:77:1:session:${registration.session}`)[0]!;
+	const task = store.tasks('telegram:77:1')[0]!;
 	expect(task.status).toBe('completed');
 	expect(task.modelCalls).toBe(4);
 	expect(task.inputTokens).toBe(480);
@@ -215,7 +214,7 @@ it('retains reservations for failed or usage-less provider requests instead of r
 	expect(task.reservedTokens).toBeGreaterThan(4096);
 }));
 
-it('keeps native approvals private and stops a delegated tool before dispatch', async () => fixture(async (store, config) => {
+it('stops a delegated native tool before dispatch when the owner says stop', async () => fixture(async (store, config) => {
 	const approvals = new GatewayApprovals();
 	let dispatched = 0;
 	const modelInputs: string[] = [];
@@ -226,23 +225,16 @@ it('keeps native approvals private and stops a delegated tool before dispatch', 
 		},
 	}, async (_r, _k, messages, _d, _s, options) => {
 		modelInputs.push(JSON.stringify(messages));
+		if (options!.instructions!.includes('analyst specialist')) {
+			engine.stop('group');
+		}
+
 		return options!.instructions!.includes('analyst specialist')
 			? {content: '', calls: [{id: 'write', name: 'excel', args: {action: 'write_range', values: [['draft']]}}], usage}
 			: {content: '', calls: [{id: 'd', name: 'delegate', args: {tasks: [{role: 'analyst', instruction: 'Fill the requested workbook'}]}}], usage};
 	});
-	let code = '';
-	await engine.receive('group', '/team Fill workbook', async (text) => {
-		expect(text).not.toMatch(/\/allow [a-f0-9]+/);
-	}, {
-		principal: 'owner', async send(text) {
-			code = /\/allow ([a-f0-9]+)/.exec(text)?.[1] ?? '';
-			if (code) {
-				engine.stop('group');
-			}
-		},
-	});
-	expect(code).not.toBe('');
-	expect(modelInputs.join('')).not.toContain(code);
+	await engine.receive('group', '/team Fill workbook', async () => {/* Discard notifications. */});
+	expect(modelInputs.length).toBeGreaterThan(0);
 	expect(dispatched).toBe(0);
 	expect(store.tasks('group')[0]!.status).toBe('stopped');
 	expect(engine.busy).toBe(false);
@@ -390,7 +382,7 @@ it('does not let a specialist waiting for tools occupy a model-only specialist s
 	expect(store.tasks('owner')[0]!.artifacts).toHaveLength(3);
 }));
 
-it('auto-routes API work through the team while keeping explicit desktop relay separate', async () => fixture(async (store, config) => {
+it('auto-routes ordinary work through the team', async () => fixture(async (store, config) => {
 	config.team!.auto = true;
 	let modelCalls = 0;
 	let relayCalls = 0;
@@ -406,11 +398,9 @@ it('auto-routes API work through the team while keeping explicit desktop relay s
 		return {content: 'Team answer', calls: [], usage};
 	});
 	await engine.receive('owner', 'Ordinary task', async () => {/* Discard notifications. */});
-	config.desktopRelay = {enabled: true, conversation: 'fixture chat', approval: 'per_message'};
-	await engine.receive('owner', '/api API task', async () => {/* Discard notifications. */});
-	await engine.receive('owner', '/ask Explicit desktop question', async () => {/* Discard notifications. */});
+	await engine.receive('owner', 'Second ordinary task', async () => {/* Discard notifications. */});
 	expect(modelCalls).toBe(2);
-	expect(relayCalls).toBe(1);
+	expect(relayCalls).toBe(0);
 	expect(store.tasks('owner')).toHaveLength(2);
 }));
 

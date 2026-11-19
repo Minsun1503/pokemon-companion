@@ -53,44 +53,30 @@ describe('Pokémon harness trust, routing and durable admission', () => {
 			await reopened.close();
 		}
 	}));
-	it('shows a complete native action, accepts only the owning chat, consumes once and dispatches once', async () => fixture(async (store) => {
-		const approvals = new GatewayApprovals(2000);
+	it('runs a paired owner\'s native action once without a per-action prompt', async () => fixture(async (store) => {
 		let dispatched = 0;
 		const received: string[] = [];
 		const model: ModelClient = async (_route, _key, messages) => messages.at(-1)?.role === 'tool' ? {content: 'verified fixture result', calls: []} : {content: '', calls: [{id: 'one', name: 'windows', args: {action: 'set_value', text: 'full draft', window_id: '1'}}]};
-		const engine = new HarnessEngine(config(), store, approvals, {
+		const engine = new HarnessEngine(config(), store, new GatewayApprovals(), {
 			list: async () => [definition], async call() {
 				dispatched += 1;
 				return {content: [{type: 'text', text: 'verified'}]};
 			},
 		}, model);
-		let decided = false;
 		await engine.receive('owner', 'Fill the fixture', async (text) => {
 			received.push(text);
-			const code = (/\/allow ([a-f0-9]+)/.exec(text))?.[1];
-			if (code) {
-				expect(text).toContain('full draft');
-				expect(approvals.decide('attacker', code, true)).toBe(false);
-				expect(dispatched).toBe(0);
-				expect(approvals.decide('owner', code, true)).toBe(true);
-				expect(approvals.decide('owner', code, true)).toBe(false);
-				decided = true;
-			}
 		});
-		expect(decided).toBe(true);
 		expect(dispatched).toBe(1);
-		expect(received.at(-1)).toBe('verified fixture result');
+		expect(received).toEqual(['verified fixture result']);
 	}));
-	it('expires approvals and never dispatches after /stop', async () => {
-		const approvals = new GatewayApprovals(5);
+	it('authorizes only inside a live turn and never after /stop', async () => {
+		const approvals = new GatewayApprovals();
 		const intent = approvalIntent('native', 'click', 'fixture', 'https://fixture.test/', '', {}, {});
-		expect((await approvals.context.run({principal: 'one', async send() {/* Discard fixture message. */}, signal: new AbortController().signal}, async () => approvals.ask(intent))).authorized).toBe(false);
+		expect((await approvals.ask(intent)).authorized).toBe(false);
+		expect((await approvals.context.run({principal: 'one', async send() {/* Discard fixture message. */}, signal: new AbortController().signal}, async () => approvals.ask(intent))).authorized).toBe(true);
 		const abort = new AbortController();
-		expect((await approvals.context.run({
-			principal: 'one', async send() {
-				abort.abort();
-			}, signal: abort.signal,
-		}, async () => approvals.ask(intent))).authorized).toBe(false);
+		abort.abort();
+		expect((await approvals.context.run({principal: 'one', async send() {/* Discard fixture message. */}, signal: abort.signal}, async () => approvals.ask(intent))).authorized).toBe(false);
 	});
 	it('never retries an uncertain tool delivery and keeps other sessions separate', async () => fixture(async (store) => {
 		let dispatches = 0;
@@ -143,15 +129,14 @@ describe('Pokémon harness trust, routing and durable admission', () => {
 			turns += 1;
 			return {content: 'fixture reply', calls: []};
 		});
-		await store.register('bot', '1', '-1001');
-		const telegram = new TelegramGateway(engine, 'fixture-token', new Set(['1']), undefined, new Set(['-1001']));
+		const telegram = new TelegramGateway(engine, 'fixture-token', async () => ({users: new Set(['1']), groups: new Set(['-1001'])}), async () => ({code: 'ABCDEFGH', created: true}));
 		telegram.api = async () => true;
 		telegram.send = async () => {/* Discard fixture replies. */};
 		const update = {update_id: 1, message: {text: 'inspect the desktop', from: {id: 2}, chat: {id: 2, type: 'private'}}};
 		await telegram.handle(update, 'bot');
-		await telegram.handle({...update, message: {...update.message, from: {id: 1}, chat: {id: 1, type: 'group'}}}, 'bot');
+		await telegram.handle({update_id: 2, message: {...update.message, from: {id: 1}, chat: {id: -5, type: 'group'}}}, 'bot', 'fixture_bot');
 		expect(turns).toBe(0);
-		const admitted = {...update, message: {...update.message, from: {id: 1}, chat: {id: 1, type: 'private'}}};
+		const admitted = {update_id: 3, message: {...update.message, from: {id: 1}, chat: {id: 1, type: 'private'}}};
 		await telegram.handle(admitted, 'bot');
 		await telegram.handle(admitted, 'bot');
 		expect(turns).toBe(1);
@@ -217,5 +202,28 @@ describe('provider wire adapters', () => {
 				});
 			});
 		}
+	});
+});
+
+describe('tool results for text-only models', () => {
+	it('replaces screenshot image payloads with a short note', async () => {
+		const {toolResultText} = await import('./models.js');
+		const text = toolResultText({content: [{type: 'text', text: 'ok'}, {type: 'image', data: 'A'.repeat(200000), mimeType: 'image/png'}]});
+		expect(text.length).toBeLessThan(1000);
+		expect(text).toContain('Screenshot omitted');
+		expect(text).toContain('"ok"');
+	});
+});
+
+describe('built-in skills', () => {
+	it('attaches human-style playbooks by request and keeps the send rule', async () => {
+		const {skillsFor, withSkills} = await import('./skills.js');
+		expect(skillsFor('mở Teams tìm anh Hùng rồi nhắn hẹn họp').map((skill) => skill.id)).toEqual(['open-app', 'teams']);
+		expect(skillsFor('đọc mail mới trong Outlook').map((skill) => skill.id)).toContain('outlook-read');
+		expect(skillsFor('gửi mail cho chị Lan').map((skill) => skill.id)).toContain('outlook-send');
+		expect(skillsFor('mở zalo').map((skill) => skill.id)).toEqual(['open-app', 'zalo']);
+		expect(skillsFor('vào google.com đọc tin').map((skill) => skill.id)).toContain('web');
+		expect(withSkills('2 + 2 bằng mấy')).toBe('2 + 2 bằng mấy');
+		expect(withSkills('nhắn Teams cho Hùng')).toContain('SEND RULE');
 	});
 });

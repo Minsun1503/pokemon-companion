@@ -1,6 +1,6 @@
 # Install Pokémon Companion
 
-**Using Pokémon from a Telegram group? Start with [TELEGRAM-SETUP-VI.md](TELEGRAM-SETUP-VI.md)**: one computer, one bot, short display names, natural @mentions, API credentials and the first test. The full Vietnamese guide is included in newly built portable packages.
+**Using Pokémon from Telegram? Start with [TELEGRAM-SETUP-VI.md](TELEGRAM-SETUP-VI.md)**: a Hermes-style terminal wizard (`npm run agent -- setup`), DM pairing (`npm run agent -- pairing approve CODE`) and an optional Windows logon service. No web page, group or user-ID lookup is required.
 
 Client packages include Node, Electron, Chromium, all seven Pokémon, and native computer-control tools. Users need their AI desktop client and normal OS permissions. No additional developer tools, model API key, GitHub login, or manual MCP configuration are required.
 
@@ -40,9 +40,7 @@ The bundled Chromium browser exposes the DOM through Playwright automatically. S
 
 ## Build and verify releases from source
 
-For **one personal computer → one bot → one fixed Telegram group**, follow the [Vietnamese setup guide](docs/telegram-personal-pc-setup.vi.md). Each computer gets its own bot token and encrypted local API credentials. New portable packages include `TELEGRAM-SETUP-VI.md`, connection-check buttons and the `/whereami@your_bot` owner-only group-ID helper. This API-agent mode requires a provider API key; the MCP-client installation paths above use the AI client's model instead.
-
-To use Pokémon's own API agent from Telegram, newly built standalone portable packages include **Start Pokemon Agent.cmd** (Windows) or **Start Pokemon Agent.command** (macOS/Linux). These open local setup using the bundled runtimes. Configure provider API keys, model IDs, a Telegram bot token and allowed user IDs once. Source users can run `npm run agent -- setup` in the active checkout. See [Pokémon Agent](docs/pokemon-agent.md).
+Pokémon's own API agent (Telegram) is set up with [TELEGRAM-SETUP-VI.md](TELEGRAM-SETUP-VI.md): one bot per computer, a terminal wizard for the provider key and bot token, then DM pairing. It requires a provider API key; the MCP-client installation paths above use the AI client's model instead. Portable packages include **Start Pokemon Agent.cmd** (Windows) or **Start Pokemon Agent.command** (macOS/Linux), which run the same wizard with bundled runtimes. See [Pokémon Agent](docs/pokemon-agent.md).
 
 For developers with Node 22.12+ and npm on each target OS:
 
