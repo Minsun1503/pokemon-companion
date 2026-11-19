@@ -7,7 +7,6 @@ import {LocalJournal} from '../learning/privacy.js';
 import {defaultConfig} from './config.js';
 import {HarnessStore} from './store.js';
 import {checkModelConnection, checkTelegramConnection, setTelegramDisplayName} from './connections.js';
-import {setupApp} from './setup-server.js';
 
 it('checks saved model credentials and the fixed Telegram group without generation, polling or messages', async () => {
 	const home = await mkdtemp(join(tmpdir(), 'pokemon-connections-'));
@@ -71,7 +70,6 @@ it('checks saved model credentials and the fixed Telegram group without generati
 	};
 	config.telegram.allowedGroups = ['-1001'];
 	config.telegram.allowedUsers = ['1'];
-	let setupServer: ReturnType<typeof createServer> | undefined;
 	try {
 		await store.open();
 		await store.putSecrets({CHECK_FIXTURE_KEY: 'PRIVATE_API_KEY', TELEGRAM_BOT_TOKEN: 'PRIVATE_BOT_TOKEN'});
@@ -89,40 +87,12 @@ it('checks saved model credentials and the fixed Telegram group without generati
 		expect(telegram.displayName).toBe('Long original name');
 		expect(await setTelegramDisplayName(store, 'Pikachu', fetch, origin)).toEqual({saved: true, displayName: 'Pikachu'});
 		expect(paths.some((path) => /getUpdates|sendMessage|chat\/completions/.test(path))).toBe(false);
-		const setup = setupApp({
-			home, config, store, busy: () => false, telegramStatus: () => 'fixture', async changed() {/* No external gateway. */},
-		}, 'fixture-auth');
-		setupServer = createServer(setup.app);
-		await new Promise<void>((done) => {
-			setupServer!.listen(0, '127.0.0.1', done);
-		});
-		const setupAddress = setupServer.address();
-		if (!setupAddress || typeof setupAddress === 'string') {
-			throw new Error('No setup fixture port.');
-		}
-
-		const base = `http://127.0.0.1:${setupAddress.port}`;
-		expect((await fetch(`${base}/api/check-model`, {method: 'POST'})).status).toBe(401);
-		const result = await fetch(`${base}/api/check-model`, {method: 'POST', headers: {Authorization: 'Bearer fixture-auth', 'Content-Type': 'application/json'}, body: JSON.stringify({route: 'deepseek'})});
-		expect(result.status).toBe(200);
-		const text = await result.text();
-		expect(text).not.toContain('PRIVATE_API_KEY');
-		expect(text).not.toContain('PRIVATE_DO_NOT_RETURN');
 		config.routes.deepseek.baseUrl = `${origin}/failed`;
-		const failure = await fetch(`${base}/api/check-model`, {method: 'POST', headers: {Authorization: 'Bearer fixture-auth', 'Content-Type': 'application/json'}, body: JSON.stringify({route: 'deepseek'})});
-		expect(failure.status).toBe(400);
-		expect(await failure.text()).not.toContain('PRIVATE_REMOTE_ERROR');
+		const failure = await checkModelConnection(config, store, 'deepseek').then(() => '', (error: unknown) => String(error));
+		expect(failure).toContain('HTTP 500');
+		expect(failure).not.toContain('PRIVATE_REMOTE_ERROR');
 	} finally {
 		await store.close();
-		if (setupServer) {
-			setupServer.closeAllConnections();
-			await new Promise<void>((done) => {
-				setupServer!.close(() => {
-					done();
-				});
-			});
-		}
-
 		provider.closeAllConnections();
 		await new Promise<void>((done) => {
 			provider.close(() => {

@@ -4,10 +4,11 @@ import {approvalIntent, hashState} from '../security/approval.js';
 import {defaultTeam, type HarnessConfig} from './config.js';
 import {TeamRunner, specialists} from './team.js';
 import {TaskGate} from './task.js';
+import {skills, withSkills} from './skills.js';
 import {
-	callModel, type ModelClient, type Message, type ModelReply,
+	callModel, toolResultText, type ModelClient, type Message, type ModelReply,
 } from './models.js';
-import {type GatewayApprovals, type TurnContext, type ApprovalChannel} from './approvals.js';
+import {type GatewayApprovals, type TurnContext, type ReplyChannel} from './approvals.js';
 import {type HarnessStore} from './store.js';
 
 export type HarnessTools = {list: () => Promise<Tool[]>; call: (name: string, args: Record<string, unknown>, signal: AbortSignal) => Promise<CallToolResult>};
@@ -65,18 +66,13 @@ export class HarnessEngine {
 		this.running.get(principal)?.abort();
 	}
 
-	async receive(principal: string, text: string, send: TurnContext['send'], approvalChannel?: ApprovalChannel) {
+	async receive(principal: string, text: string, send: TurnContext['send'], approvalChannel?: ReplyChannel) {
 		if (!text.trim() || text.length > 8000) {
 			await send('Send text of up to 8,000 characters.');
 			return;
 		}
 
 		const command = text.trim().split(/\s+/);
-		if (command[0] === '/allow' || command[0] === '/deny') {
-			await send(this.approvals.decide(approvalChannel?.principal ?? principal, command[1] || '', command[0] === '/allow') ? 'Decision recorded.' : 'Approval expired or belongs to another chat.');
-			return;
-		}
-
 		if (command[0] === '/stop') {
 			this.stop(principal);
 			await send('Stopped this chat. Verify any action already dispatched before retrying.');
@@ -84,7 +80,7 @@ export class HarnessEngine {
 		}
 
 		if (command[0] === '/help' || command[0] === '/start') {
-			await send('Pokémon Agent\nIn a group, mention this bot, reply to its message, or use /task@bot_username your question. /ask uses desktop relay; /api uses a provider key. /team your task uses the bounded specialist team and configured API keys. /tasks, /taskstatus <id>, /budget show your team work. /remember <preference>, /memory, /forgetmemory manage your saved preferences. Use /model [route], /status, /new, /stop. Approvals appear in this chat with Allow / Deny buttons; only the requester can decide.');
+			await send('Pokémon Agent — cứ nhắn việc cần làm trên máy, mình làm và báo kết quả.\n/team <việc>: dùng nhóm chuyên gia. /tasks, /taskstatus <id>, /budget: xem việc. /remember <ghi chú>, /memory, /forgetmemory: ghi nhớ sở thích. /model [route], /status, /new (phiên mới), /stop (dừng).');
 			return;
 		}
 
@@ -123,6 +119,11 @@ export class HarnessEngine {
 			return;
 		}
 
+		if (command[0] === '/skills') {
+			await send(`Kỹ năng có sẵn (tự áp dụng theo yêu cầu):\n${skills.map((skill) => `• ${skill.title}`).join('\n')}`);
+			return;
+		}
+
 		if (command[0] === '/team' && command.length === 1) {
 			await send(`Pokémon team: coordinator + ${Object.keys(specialists).join(', ')}. Specialists run only when useful, share one budget, and cannot delegate recursively. Use /team your task. API key/model required; desktop relay is separate.`);
 			return;
@@ -130,21 +131,9 @@ export class HarnessEngine {
 
 		const greeting = /^(?:hi|hello|hey|xin chào|chào)[!.?\s]*$/i.test(text.trim());
 		if (command[0] === '/status' || greeting) {
-			if (this.config.desktopRelay?.enabled) {
-				let data: Record<string, unknown>;
-				try {
-					data = this.relayResult(await this.tools.call('assistant', {action: 'inspect', conversation: this.config.desktopRelay.conversation}, AbortSignal.timeout(30000)));
-				} catch {
-					data = {error: 'Desktop inspection timed out or failed. Check Pokémon control and the desktop conversation.'};
-				}
-
-				await send(`${greeting ? 'Hi! ' : ''}Pokémon gateway running. Desktop relay: ${data.ready ? (data.busy ? 'connected; chat is busy' : 'ready') : 'unavailable'}.\nTarget: current ChatGPT desktop conversation. No provider API key is needed. Send /ask your question.${typeof data.error === 'string' ? `\n${data.error}` : ''}`);
-				return;
-			}
-
 			const route = this.config.routes[this.config.defaultRoute];
 			const configured = route?.model && this.store.secret(route.keyEnv);
-			await send(`${greeting ? 'Hi! I’m connected to your Pokémon gateway.' : 'Pokémon gateway running.'} Default route: ${this.config.defaultRoute}. Routes: ${Object.keys(this.config.routes).join(', ')}.\n${configured ? 'Provider key and model saved; API access is verified when a task runs.' : 'Task execution is waiting for a provider key and model in local setup.'}`);
+			await send(`${greeting ? 'Chào bạn! Mình đã kết nối với máy.' : 'Pokémon gateway đang chạy.'} Model: ${this.config.defaultRoute}${route?.model ? ` (${route.model})` : ''}.\n${configured ? 'Cứ nhắn việc cần làm.' : 'Chưa có API key/model. Chạy npm run agent -- setup trên máy.'}`);
 			return;
 		}
 
@@ -173,7 +162,7 @@ export class HarnessEngine {
 
 			session.route = route;
 			await this.store.save();
-			await send(`Model route: ${route}${this.config.desktopRelay?.enabled ? ' (for /api tasks; desktop questions use the current desktop chat).' : ''}`);
+			await send(`Model route: ${route}`);
 			return;
 		}
 
@@ -182,7 +171,7 @@ export class HarnessEngine {
 			session.taskContextAfter = Date.now();
 			session.taskContextBoundary = this.store.tasks(principal).at(-1)?.id;
 			await this.store.save();
-			await send(approvalChannel?.conversational ? 'Đã bắt đầu phiên mới. Bạn muốn làm gì?' : this.config.desktopRelay?.enabled ? 'Cleared the API task history. Desktop questions still use the configured conversation.' : 'Started a fresh conversation.');
+			await send(approvalChannel?.conversational ? 'Đã bắt đầu phiên mới. Bạn muốn làm gì?' : 'Started a fresh conversation.');
 			return;
 		}
 
@@ -195,9 +184,9 @@ export class HarnessEngine {
 		this.running.set(principal, abort);
 		this.queued += 1;
 		const settings = this.config.team ?? defaultTeam;
-		const teamTask = command[0] === '/team' || (settings.enabled && settings.auto && command[0] !== '/ask' && (!this.config.desktopRelay?.enabled || command[0] === '/api'));
+		const teamTask = command[0] === '/team' || (settings.enabled && settings.auto);
 		if (teamTask) {
-			const work = this.runTeam(principal, text.replace(/^\/(?:team|api)\s*/, ''), session.route, send, abort.signal, approvalChannel).finally(() => {
+			const work = this.runTeam(principal, text.replace(/^\/team\s*/, ''), session.route, send, abort.signal, approvalChannel).finally(() => {
 				this.running.delete(principal);
 				this.queued -= 1;
 			});
@@ -219,10 +208,10 @@ export class HarnessEngine {
 			const release = await this.desktop.acquire(abort.signal);
 			try {
 				await this.approvals.context.run({
-					principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal: abort.signal, ...(approvalChannel?.sendApproval ? {sendApproval: approvalChannel.sendApproval} : {}),
+					principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal: abort.signal,
 				}, async () => {
 					try {
-						await this.turn(session, text, send, abort.signal, approvalChannel?.conversational);
+						await this.turn(session, text, send, abort.signal);
 					} catch (error) {
 						await send(abort.signal.aborted ? 'Task stopped.' : `Task stopped: ${error instanceof Error ? error.message : 'unexpected failure'}`);
 					}
@@ -247,14 +236,14 @@ export class HarnessEngine {
 		await Promise.allSettled([...this.teamWork]);
 	}
 
-	private async runTeam(principal: string, request: string, route: string, send: TurnContext['send'], signal: AbortSignal, approvalChannel?: ApprovalChannel) {
+	private async runTeam(principal: string, request: string, route: string, send: TurnContext['send'], signal: AbortSignal, approvalChannel?: ReplyChannel) {
 		const task = this.store.createTask(principal, request);
 		let release: (() => void) | undefined;
 		let completedSaved = false;
 		try {
 			await this.store.checkpoint(task, 'Accepted. No actions replay automatically after restart.');
 			if (!request.trim()) {
-				throw new Error('Include an instruction after /team or /api.');
+				throw new Error('Include an instruction after /team.');
 			}
 
 			if (!(this.config.team ?? defaultTeam).enabled) {
@@ -270,16 +259,16 @@ export class HarnessEngine {
 			await this.store.checkpoint(task, 'Coordinator started.');
 			const dispatched = new Set<string>();
 			const result = await this.approvals.context.run({
-				principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal, ...(approvalChannel?.sendApproval ? {sendApproval: approvalChannel.sendApproval} : {}),
+				principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal,
 			}, async () => {
 				const runner = new TeamRunner({
 					config: this.config, store: this.store, task, route, model: this.model, tools: await this.tools.list(), signal, desktop: this.desktop,
 					send: approvalChannel?.conversational ? async () => {/* Internal progress stays in the task ledger. */} : send,
 					call: async (name, args, toolSignal) => this.approvals.context.run({
-						principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal: toolSignal, ...(approvalChannel?.sendApproval ? {sendApproval: approvalChannel.sendApproval} : {}),
+						principal: approvalChannel?.principal ?? principal, send: approvalChannel?.send ?? send, signal: toolSignal,
 					}, async () => this.executeTool(name, args, toolSignal, dispatched)),
 				});
-				return runner.run(request);
+				return runner.run(withSkills(request));
 			});
 			signal.throwIfAborted();
 			task.result = result;
@@ -339,41 +328,9 @@ export class HarnessEngine {
 		return this.tools.call(name, args, signal);
 	}
 
-	private async turn(session: {route: string; messages: Message[]}, text: string, send: TurnContext['send'], signal: AbortSignal, conversational = false) {
-		const apiTask = /^\/api(?:\s|$)/.test(text);
-		const explicitAsk = /^\/ask(?:\s|$)/.test(text);
-		if ((this.config.desktopRelay?.enabled && !apiTask) || explicitAsk) {
-			if (!this.config.desktopRelay?.enabled || !this.config.desktopRelay.conversation) {
-				throw new Error('Desktop relay is not configured.');
-			}
-
-			const question = explicitAsk ? text.replace(/^\/ask\s*/, '') : text;
-			if (!question.trim()) {
-				throw new Error('Use /ask followed by your question.');
-			}
-
-			if (!conversational) {
-				await send('Question queued for the current ChatGPT desktop conversation. I’ll wait if it is busy and return the completed answer here.');
-			}
-
-			const result = this.relayResult(await this.tools.call('assistant', {action: 'ask', conversation: this.config.desktopRelay.conversation, question}, signal));
-			if (!result.completed || typeof result.answer !== 'string' || !result.answer.trim()) {
-				throw new Error(typeof result.error === 'string' ? result.error : 'Desktop relay did not return a completed answer. No automatic resend was attempted.');
-			}
-
-			await send(result.answer);
-			return;
-		}
-
-		if (apiTask) {
-			text = text.replace(/^\/api\s*/, '');
-			if (!text.trim()) {
-				throw new Error('Use /api followed by your instruction.');
-			}
-		}
-
+	private async turn(session: {route: string; messages: Message[]}, text: string, send: TurnContext['send'], signal: AbortSignal) {
 		const definitions = await this.tools.list();
-		const transcript: Message[] = [...session.messages, {role: 'user', content: text}];
+		const transcript: Message[] = [...session.messages, {role: 'user', content: withSkills(text)}];
 		if (JSON.stringify(transcript).length > 160000) {
 			throw new Error('Conversation is full. Use /new to begin a fresh task.');
 		}
@@ -454,7 +411,7 @@ export class HarnessEngine {
 				}
 
 				const result = await this.tools.call(call.name, call.args, signal);
-				const content = JSON.stringify(result);
+				const content = toolResultText(result);
 				if (/ACTION_OUTCOME_UNKNOWN|REPLAY_BLOCKED|delivery_uncertain|"outcome":"unknown"/.test(content)) {
 					throw new Error('Action outcome is uncertain. Read the target and reconcile with the operator before retrying.');
 				}
@@ -468,19 +425,5 @@ export class HarnessEngine {
 		}
 
 		throw new Error('Task reached its step limit. Inspect the current result before continuing.');
-	}
-
-	private relayResult(result: CallToolResult): Record<string, unknown> {
-		const body = result.content.find((item) => item.type === 'text');
-		if (body?.type !== 'text') {
-			return {error: 'Desktop relay returned no readable result.'};
-		}
-
-		try {
-			const parsed: unknown = JSON.parse(body.text);
-			return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed as Record<string, unknown> : {error: 'Desktop relay returned an invalid result.'};
-		} catch {
-			return {error: 'Desktop relay returned an invalid result.'};
-		}
 	}
 }

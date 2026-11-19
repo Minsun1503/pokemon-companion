@@ -3,7 +3,7 @@ import type {Tool, CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import {z} from 'zod';
 import {defaultTeam, type HarnessConfig, type Route} from './config.js';
 import {
-	instructions, type Message, type ModelClient, type ModelReply,
+	instructions, toolResultText, type Message, type ModelClient, type ModelReply,
 } from './models.js';
 import {TaskGate, type TaskRecord} from './task.js';
 import type {HarnessStore} from './store.js';
@@ -212,7 +212,7 @@ export class TeamRunner {
 		await this.desktop();
 		await this.checkpoint(`${role ?? 'coordinator'} dispatching ${name}.`);
 		const result = await this.options.call(name, args, this.signal);
-		const content = JSON.stringify(result);
+		const content = toolResultText(result);
 		if (/ACTION_OUTCOME_UNKNOWN|REPLAY_BLOCKED|delivery_uncertain|"outcome":"unknown"/.test(content)) {
 			this.abort.abort(new Error('Uncertain action outcome. Observe and reconcile before another task.'));
 			this.signal.throwIfAborted();

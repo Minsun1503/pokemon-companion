@@ -24,10 +24,8 @@ public static class PokemonAgentPower {
     public static extern uint SetThreadExecutionState(uint flags);
 }
 '@
-$env:POKEMON_AGENT_NO_OPEN = '1'
-$env:POKEMON_HARNESS_PORT = '56727'
 $env:POKEMON_AGENT_PARENT_PID = [string]$PID
-$agentProcess = Start-Process -FilePath $Node -ArgumentList @(('"' + $entry + '"'), 'run') -WorkingDirectory $Checkout -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $agentHome 'agent.stdout.log') -RedirectStandardError (Join-Path $agentHome 'agent.stderr.log')
+$agentProcess = Start-Process -FilePath $Node -ArgumentList @(('"' + $entry + '"'), 'gateway') -WorkingDirectory $Checkout -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $agentHome 'agent.stdout.log') -RedirectStandardError (Join-Path $agentHome 'agent.stderr.log')
 try {
     # Keep the system awake while the remote gateway runs. Display sleep and lock remain available.
     do {

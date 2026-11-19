@@ -30,7 +30,6 @@ export const teamSchema = z.object({
 export const defaultTeam = teamSchema.parse({});
 export const configSchema = z.object({
 	team: teamSchema.optional(),
-	desktopRelay: z.object({enabled: z.boolean(), conversation: z.string().max(160), approval: z.enum(['per_message', 'scoped_grant']).default('per_message')}).strict().optional(),
 	defaultRoute: z.string().max(100), routes: z.record(z.string().regex(/^[a-z0-9_-]{1,100}$/), routeSchema),
 	fallbacks: z.array(z.string()).max(8).default([]), maxSteps: z.number().int().min(1).max(40).default(20),
 	telegram: z.object({enabled: z.boolean().default(false), allowedUsers: z.array(z.string().regex(/^\d+$/)).max(20).default([]), allowedGroups: z.array(z.string().regex(/^-[1-9]\d*$/)).max(20).default([])}).strict(),
@@ -62,7 +61,6 @@ export function deepSeekConfig(): HarnessConfig {
 		...structuredClone(defaultConfig),
 		team: {...structuredClone(defaultTeam), auto: true, routes: {}},
 		routes: {deepseek: {...defaultConfig.routes.deepseek!, model: 'deepseek-flash'}},
-		desktopRelay: {enabled: false, conversation: '', approval: 'per_message'},
 	};
 }
 
@@ -70,7 +68,7 @@ export function validateDeepSeekConfig(config: HarnessConfig, secrets: Record<st
 	const route = config.routes.deepseek;
 	if (Object.keys(config.routes).length !== 1 || !route || config.defaultRoute !== 'deepseek'
 		|| route.baseUrl !== 'https://api.deepseek.com' || route.transport !== 'openai' || route.keyEnv !== 'DEEPSEEK_API_KEY'
-		|| config.fallbacks.length || config.desktopRelay?.enabled
+		|| config.fallbacks.length
 		|| Object.values(config.team?.routes ?? {}).some((name) => name && name !== 'deepseek')
 		|| Object.keys(secrets).some((name) => !['DEEPSEEK_API_KEY', 'TELEGRAM_BOT_TOKEN'].includes(name))) {
 		throw new Error('This Telegram package uses one DeepSeek API route and credential only.');
@@ -87,7 +85,9 @@ export async function loadConfig(home: string, deepSeekOnly = false): Promise<Ha
 	await mkdir(home, {recursive: true, mode: 0o700});
 	const file = join(home, 'config.json');
 	try {
-		const config = configSchema.parse(JSON.parse(await readFile(file, 'utf8')));
+		const raw = JSON.parse(await readFile(file, 'utf8')) as Record<string, unknown>;
+		Reflect.deleteProperty(raw, 'desktopRelay'); // Removed with the web setup; older files stay loadable.
+		const config = configSchema.parse(raw);
 		if (deepSeekOnly) {
 			validateDeepSeekConfig(config);
 		}

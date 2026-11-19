@@ -1,11 +1,9 @@
 import {type LocalJournal} from '../learning/privacy.js';
 import type {Message} from './models.js';
 import {newTask, type TaskRecord} from './task.js';
-import {randomBytes} from 'node:crypto';
 
 type Session = {route: string; messages: Message[]; taskContextAfter?: number; taskContextBoundary?: string | undefined};
-type Registration = {group: string; session: string};
-type Snapshot = {secrets: Record<string, string>; sessions: Record<string, Session>; admitted: string[]; telegramOffsets?: Record<string, number>; tasks?: TaskRecord[]; memories?: Record<string, string[]>; registrations?: Record<string, Registration>};
+type Snapshot = {secrets: Record<string, string>; sessions: Record<string, Session>; admitted: string[]; telegramOffsets?: Record<string, number>; tasks?: TaskRecord[]; memories?: Record<string, string[]>};
 /** One encrypted, single-owner store. Credentials never live in repository config or logs. */
 export class HarnessStore {
 	private data: Snapshot = {secrets: {}, sessions: {}, admitted: []};
@@ -45,24 +43,6 @@ export class HarnessStore {
 
 	tasks(owner: string) {
 		return (this.data.tasks ?? []).filter((task) => task.owner === owner);
-	}
-
-	registration(bot: string, user: string) {
-		return this.data.registrations?.[`${bot}:${user}`];
-	}
-
-	async register(bot: string, user: string, group: string) {
-		this.data.registrations ??= {};
-		const key = `${bot}:${user}`;
-		const previous = this.data.registrations[key];
-		if (previous?.group === group) {
-			return previous;
-		}
-
-		const registration = {group, session: randomBytes(16).toString('hex')};
-		this.data.registrations[key] = registration;
-		await this.save();
-		return registration;
 	}
 
 	taskContext(owner: string, currentId: string) {
