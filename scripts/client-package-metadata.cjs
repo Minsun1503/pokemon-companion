@@ -30,7 +30,7 @@ function addClientMetadata(root, appRoot, platform, version, serverEntry = 'back
   write(root, 'plugin.json', {
     $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...identity, license: 'MIT',
     homepage: 'https://github.com/Minsun1503/pokemon-companion',
-    extensions: {'com.openai': {requires_local_executor: true, interface}},
+    extensions: {'com.openai': {requires_local_executor: true, ...(fs.existsSync(path.join(root, 'hooks/codex-hooks.json')) ? {hooks: './hooks/codex-hooks.json'} : {}), interface}},
   });
   write(root, 'mcp.json', {$schema: 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json', mcpServers: {'pokemon-companion': {type: 'stdio', ...config('${PLUGIN_ROOT}'), cwd: '${PLUGIN_ROOT}'}}});
   write(root, '.claude-plugin/plugin.json', {...identity, mcpServers: {'pokemon-companion': config('${CLAUDE_PLUGIN_ROOT}')}});
