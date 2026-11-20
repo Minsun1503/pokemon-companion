@@ -77,12 +77,14 @@ async function main() {
   const server = (variable) => ({command: `${variable}/runtime/node.exe`, args: [`${variable}/backend/dist/main.js`], env: {MCP_TRANSPORT: 'stdio', POKEMON_FRONTEND_DIR: `${variable}/frontend`}});
   json(path.join(stage, '.claude-plugin/plugin.json'), {...basePlugin, mcpServers: {'pokemon-companion': server('${CLAUDE_PLUGIN_ROOT}')}});
   json(path.join(stage, 'plugin.json'), {$schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...basePlugin, license: 'MIT'});
-  json(path.join(stage, '.codex-plugin/plugin.json'), {...basePlugin, interface: {displayName: 'Pokémon Companion', shortDescription: 'Nine companions for Windows computer control', developerName: manifest.author.name, category: 'Productivity', capabilities: ['Read', 'Write'], logo: './icon.png'}});
+  json(path.join(stage, '.codex-plugin/plugin.json'), {...basePlugin, skills: './skills/', hooks: './hooks/codex-hooks.json', interface: {displayName: 'Pokémon Companion', shortDescription: 'Nine companions for Windows computer control', developerName: manifest.author.name, category: 'Productivity', capabilities: ['Read', 'Write'], logo: './icon.png'}});
   json(path.join(stage, 'mcp.json'), {$schema: 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json', mcpServers: {'pokemon-companion': {...server('${PLUGIN_ROOT}'), type: 'stdio', command: './runtime/node.exe'}}});
   const claudeMarketplace = require('../.claude-plugin/marketplace.json');
   json(path.join(stage, '.claude-plugin/marketplace.json'), {...claudeMarketplace, plugins: claudeMarketplace.plugins.map((plugin) => ({...plugin, source: './'}))});
   const codexMarketplace = require('../.agents/plugins/marketplace.json');
   json(path.join(stage, '.agents/plugins/marketplace.json'), {...codexMarketplace, plugins: codexMarketplace.plugins.map((plugin) => ({...plugin, source: {source: 'local', path: './'}}))});
+  // Agent guidance (skill, SessionStart hooks, AGENTS.md template) ships with the bundle too.
+  for (const item of ['skills', 'hooks', 'AGENTS.md']) copy(path.join(root, 'plugins/pokemon-companion', item), path.join(stage, item));
   copy(path.join(root, 'packaging/install-client.ps1'), path.join(stage, 'install-client.ps1'));
   for (const [client, label] of [['Codex', 'Codex'], ['ClaudeCode', 'Claude Code']]) {
     fs.writeFileSync(path.join(stage, `Install ${label}.cmd`), `@echo off\r\npowershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0install-client.ps1" -Client ${client}\r\npause\r\n`);

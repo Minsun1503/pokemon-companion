@@ -27,9 +27,14 @@ async function main() {
   fs.mkdirSync(dist, {recursive: true});
   let extracted;
   if (process.platform === 'win32') {
-    const quote = (value) => "'" + value.replace(/'/g, "''") + "'";
-    const command = `Expand-Archive -LiteralPath ${quote(archive)} -DestinationPath ${quote(dist)} -Force`;
-    extracted = spawnSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-EncodedCommand', Buffer.from(command, 'utf16le').toString('base64')], {windowsHide: true, stdio: 'inherit'});
+    // Windows ships bsdtar, which reads ZIP files. Expand-Archive is only a fallback:
+    // on CI runners powershell.exe can load PowerShell 7's Archive module and fail.
+    extracted = spawnSync(path.join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'tar.exe'), ['-xf', archive, '-C', dist], {windowsHide: true, stdio: 'inherit'});
+    if (extracted.status !== 0 || !complete()) {
+      const quote = (value) => "'" + value.replace(/'/g, "''") + "'";
+      const command = `Expand-Archive -LiteralPath ${quote(archive)} -DestinationPath ${quote(dist)} -Force`;
+      extracted = spawnSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-EncodedCommand', Buffer.from(command, 'utf16le').toString('base64')], {windowsHide: true, stdio: 'inherit'});
+    }
   } else {
     extracted = spawnSync('unzip', ['-oq', archive, '-d', dist], {stdio: 'inherit'});
   }

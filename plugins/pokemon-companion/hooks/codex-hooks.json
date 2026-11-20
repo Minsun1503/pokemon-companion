@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}/hooks/session-start.ps1\"",
+            "statusMessage": "Loading Pokémon Companion guidance"
+          }
+        ]
+      }
+    ]
+  }
+}
