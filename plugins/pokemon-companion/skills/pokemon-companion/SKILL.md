@@ -26,17 +26,31 @@ scripts, APIs) when they are clearly better; do not do GUI work just to look hum
 ## Input habits
 - Prefer `set_value` over typing. A Vietnamese/IME layout (Telex) changes typed
   letters, so read the field back after `computer type`.
+- Some web apps (React search boxes) ignore `set_value`. If the page puts the search
+  in its URL (for example `?q=`), set the URL in the address bar instead of typing.
+- Popup windows often have a read-only address bar; open the link in a main tab.
+- On-screen fields can be cut off (a long code shown only partly). Read the
+  full value with `get_ui`/`read_text` before using it.
+- Pages that change while you read (a chat assistant still answering) fail versioned
+  reads; use `research find_many` on the question text, then read again.
 - If Windows blocks `activate`, click a visible part of the target window.
 - Refresh with `get_windows` after `STALE_REF`; never guess element ids.
 - Long pages: use `course read_lesson` with offset/version, or Ctrl+F like a person.
 
 ## When information is missing, search like a person
 Work through this order before asking the user:
-1. The screen, open windows, recent files and project notes.
-2. Mail and chats (Outlook, Teams, Telegram, Zalo, WhatsApp). Read only and keep
-   read/unread state.
-3. When the app is not named, check every chat app for the exact name before
+1. The screen first: take a screenshot and read what is open now. When the user says
+   they opened or prepared something ("the chat I have open", "I left it ready"),
+   read that exact window before searching anywhere else.
+2. Open windows, recent files and project notes.
+3. Mail and chats (Outlook, Teams, Telegram, Zalo, WhatsApp). Read only and keep
+   read/unread state: if you open an unread chat or mail, mark it unread again
+   (right-click > Mark as unread).
+4. When the app is not named, check every chat app for the exact name before
    guessing initials or nicknames.
+5. A request that is not in the user's mailbox was often sent to a shared mailbox
+   and forwarded: look in team group chats, the ticket system (origin Email) and
+   SharePoint links colleagues posted, following the trail from the ticket or chat.
 4. A colleague who would know: draft the question, but send it only after the user
    approves the exact recipient and text.
 5. The internet, in the browser that is already open.
@@ -60,3 +74,16 @@ the answer.
    Claude or Telegram window), so they notice you are done or waiting.
 3. `pokemon done` (finished) or `pokemon think` (waiting for the user) with a short
    message, then reply.
+
+## Learn from the task
+Before the final reply, look back at the task:
+- Signals worth keeping: the user corrected you or showed the answer, the user
+  approved a way of working, or you needed several attempts or a detour before
+  something worked.
+- Reusable how-to for operating apps (a route, an input trick, a search order) goes
+  into the relevant skill file. Preferences and rules about the user's own work go
+  into your memory. One-off facts of this task are not saved.
+- Save only clear lessons, update an existing entry instead of duplicating it, and
+  never save credentials, private message content or customer data into a shared
+  skill or repository.
+- Say in one line of the reply what you saved and where, so the user can correct it.

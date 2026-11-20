@@ -7,6 +7,7 @@ If its tools are deferred, load them with tool search ("pokemon-companion").
 Reuse open windows first, open apps through the taskbar Search button, and use the dedicated browser only as a last resort.
 Send, post, delete or submit only with the user's explicit approval.
 When done or waiting for the user, bring their chat window back to the front and update the pet with pokemon done/think.
+Before the final reply, review the task for lessons (corrections, approved ways of working, repeated attempts) and save clear ones as the skill describes.
 '@
 $payload = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $context } }
 [Console]::Out.Write(($payload | ConvertTo-Json -Compress -Depth 4))
