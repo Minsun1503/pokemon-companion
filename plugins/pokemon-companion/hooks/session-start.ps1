@@ -6,6 +6,7 @@ Load and follow the pokemon-companion skill for tasks that need real apps or web
 If its tools are deferred, load them with tool search ("pokemon-companion").
 Reuse open windows first, open apps through the taskbar Search button, and use the dedicated browser only as a last resort.
 Send, post, delete or submit only with the user's explicit approval.
+Move large text (code files, messages) with the clipboard and paste, then verify by reading back or exporting; never read, copy or enter tokens or passwords.
 When done or waiting for the user, bring their chat window back to the front and update the pet with pokemon done/think.
 Before the final reply, review the task for lessons (corrections, approved ways of working, repeated attempts) and save clear ones as the skill describes.
 '@
